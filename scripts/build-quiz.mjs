@@ -74,7 +74,7 @@ function simplifyPolygonal(geometry) {
   return { type: 'MultiPolygon', coordinates: roundCoords(geometry.coordinates.map((p) => p.map(ring))) };
 }
 
-const text = (entry) => ({ about: entry?.text ?? entry?.description ?? null, source: entry?.source ?? null });
+const text = (entry) => ({ about: entry?.text ?? null, source: entry?.source ?? null });
 
 const delomraden = districts.features.filter((f) => f.properties.admin_level === 10);
 const areaItems = delomraden.map((f) => {
