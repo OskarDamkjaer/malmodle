@@ -1,15 +1,20 @@
-const square = (x, y, size = 0.01) => ({
+import { neighbourhood } from '../scripts/lib/adjacency.mjs';
+
+const WIDE = 0.0177;
+const TALL = 0.01;
+
+const square = (x, y) => ({
   type: 'Polygon',
-  coordinates: [[[x, y], [x + size, y], [x + size, y + size], [x, y + size], [x, y]]],
+  coordinates: [[[x, y], [x + WIDE, y], [x + WIDE, y + TALL], [x, y + TALL], [x, y]]],
 });
 
 export function fixture() {
   const items = [];
   for (let i = 0; i < 6; i++) {
     for (let j = 0; j < 6; j++) {
-      const x = 12.95 + i * 0.01;
-      const y = 55.57 + j * 0.01;
-      items.push({ name: `Område ${i}-${j}`, kind: 'area', label: 'Delområde', point: [x + 0.005, y + 0.005], geometry: square(x, y) });
+      const x = 12.95 + i * WIDE;
+      const y = 55.57 + j * TALL;
+      items.push({ name: `Område ${i}-${j}`, kind: 'area', label: 'Delområde', point: [x + WIDE / 2, y + TALL / 2], geometry: square(x, y) });
     }
   }
   for (let i = 0; i < 12; i++) {
@@ -23,6 +28,9 @@ export function fixture() {
     const p = [12.952 + (i % 4) * 0.015, 55.571 + Math.floor(i / 4) * 0.015];
     items.push({ name: `Plats ${i}`, kind: 'landmark', label: 'Sevärdhet', point: p, geometry: { type: 'Point', coordinates: p } });
   }
+  const areas = items.filter((it) => it.kind === 'area');
+  const around = neighbourhood(areas, new Set(areas.map((it) => it.name)));
+  for (const it of areas) Object.assign(it, around.get(it.name));
   for (let i = 0; i < 5; i++) {
     const p = [12.955 + i * 0.012, 55.6];
     items.push({ name: `Bro ${i}`, kind: 'bridge', label: 'Bro', point: p, geometry: { type: 'Point', coordinates: p } });

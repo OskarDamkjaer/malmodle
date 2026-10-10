@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { bboxGap, bboxOf, distance, interiorPoint } from './lib/geo.mjs';
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
+import { neighbourhood } from './lib/adjacency.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -224,6 +225,9 @@ if (problems.length) {
 }
 
 const chosen = everything ? items : items.filter((it) => core.has(it.name));
+const kept = new Set(chosen.map((it) => it.name));
+const around = neighbourhood(items.filter((it) => it.kind === 'area'), kept);
+for (const it of chosen) if (around.has(it.name)) Object.assign(it, around.get(it.name));
 const out = { items: chosen };
 await mkdir(dirname(outFile), { recursive: true });
 await writeFile(outFile, JSON.stringify(out));

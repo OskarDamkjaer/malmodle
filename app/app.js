@@ -1,7 +1,7 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { dailySet, dateKey, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
-import { metersBetween, offset } from './geo.mjs';
+import { metersBetween } from './geo.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
   applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap,
@@ -220,12 +220,16 @@ function revealChoice(q, result) {
       text += ` ${wrong.name} ligger ${formatDistance(metersBetween(q.anchor.point, wrong.point))} bort.`;
     }
     el('explain').textContent = text;
-  } else if (q.type === 'compass') {
-    add(q.reference, 'context');
+  } else if (q.type === 'neighbour') {
+    add(q.from, 'context');
     add(q.target, 'answer');
-    const { east, north } = offset(q.reference.point, q.target.point);
-    const along = Math.abs(q.axis === 'north' ? north : east);
-    el('explain').textContent = `${q.target.name} ligger ${formatDistance(along)} ${q.answer} om ${q.reference.name}.`;
+    let text = `Direkt ${q.side} om ${q.from.name} ligger ${q.target.name}.`;
+    if (!right) {
+      add(byName.get(result.choice), 'hit');
+      const side = Object.entries(q.from.beside ?? {}).find(([, n]) => n === result.choice)?.[0];
+      text += side ? ` ${result.choice} ligger ${side} om ${q.from.name}.` : '';
+    }
+    el('explain').textContent = text;
   }
 
   show(marks);
@@ -240,7 +244,7 @@ function next() {
 }
 
 function outcome({ q, result }) {
-  if (q.type === 'point') {
+  if (typeOf(q).input === 'map') {
     return result.score === MAX_SCORE ? 'Mitt i prick.' : `${formatDistance(result.distance)} bort.`;
   }
   return result.score === MAX_SCORE ? 'Rätt.' : `Du svarade ${result.choice}.`;

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { MIX, dailySet, dateKey, hash, random, shareText, square } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
-import { metersBetween, offset } from '../app/geo.mjs';
+import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
 
 const items = fixture();
@@ -31,15 +31,27 @@ test('different days give different sets', () => {
   assert.equal(firsts.size, days.length);
 });
 
-test('a set has the full mix, pointing first', () => {
+test('a set is mostly pointing, starts with it, and has one special', () => {
   for (const day of days) {
     const set = dailySet(items, day);
     assert.equal(set.length, MIX.length);
-    assert.equal(set[0].type, 'point');
-    const count = (t) => set.filter((q) => q.type === t).length;
-    assert.ok(count('point') > count('identify'));
-    assert.ok(count('identify') >= count('nearest'));
+    assert.equal(TYPES[set[0].type].input, 'map');
+    const count = (...types) => set.filter((q) => types.includes(q.type)).length;
+    assert.ok(count('point', 'area') > count('identify'));
+    assert.equal(count('nearest', 'neighbour'), 1);
   }
+});
+
+test('every day asks to point at at least two areas', () => {
+  for (const day of days) {
+    const pointing = dailySet(items, day).filter((q) => TYPES[q.type].input === 'map');
+    assert.ok(pointing.filter((q) => q.target.kind === 'area').length >= 2, day);
+  }
+});
+
+test('both specials turn up', () => {
+  const seen = new Set(days.flatMap((d) => dailySet(items, d).map((q) => q.type)));
+  assert.ok(seen.has('nearest') && seen.has('neighbour'));
 });
 
 test('no target is asked twice in a day', () => {
@@ -53,7 +65,7 @@ test('choice questions offer the answer once', () => {
   for (const day of days) {
     for (const q of dailySet(items, day)) {
       if (TYPES[q.type].input !== 'choice') continue;
-      const right = q.type === 'compass' ? q.answer : q.target.name;
+      const right = q.target.name;
       assert.equal(q.options.filter((o) => o === right).length, 1);
       assert.equal(new Set(q.options).size, q.options.length);
     }
@@ -78,14 +90,15 @@ test('the nearest answer is clearly the nearest', () => {
   }
 });
 
-test('compass questions are not close calls', () => {
+test('the neighbour answer is the one area on that side, and no decoy is on that side', () => {
   for (const day of days) {
-    for (const q of dailySet(items, day).filter((x) => x.type === 'compass')) {
-      const { east, north } = offset(q.reference.point, q.target.point);
-      const along = q.axis === 'north' ? north : east;
-      assert.ok(Math.abs(along) >= 800);
-      const expected = q.axis === 'north' ? (north > 0 ? 'norr' : 'söder') : (east > 0 ? 'öster' : 'väster');
-      assert.equal(q.answer, expected);
+    for (const q of dailySet(items, day).filter((x) => x.type === 'neighbour')) {
+      assert.equal(q.from.beside[q.side], q.target.name);
+      for (const name of q.options) {
+        if (name === q.target.name) continue;
+        assert.notEqual(q.from.beside[q.side], name);
+        assert.notEqual(name, q.from.name);
+      }
     }
   }
 });

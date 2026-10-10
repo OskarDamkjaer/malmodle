@@ -59,8 +59,18 @@ test('choice questions are all or nothing', () => {
     assert.equal(TYPES[type].grade({ target }, 'Plats 5').score, MAX_SCORE);
     assert.equal(TYPES[type].grade({ target }, 'Plats 6').score, 0);
   }
-  assert.equal(TYPES.compass.grade({ answer: 'norr' }, 'norr').score, MAX_SCORE);
-  assert.equal(TYPES.compass.grade({ answer: 'norr' }, 'söder').score, 0);
+  const target = byName('Område 1-1');
+  assert.equal(TYPES.neighbour.grade({ target }, 'Område 1-1').score, MAX_SCORE);
+  assert.equal(TYPES.neighbour.grade({ target }, 'Område 1-2').score, 0);
+});
+
+test('areas know who borders them, and in which direction', () => {
+  const middle = byName('Område 2-2');
+  assert.equal(middle.beside.norr, 'Område 2-3');
+  assert.equal(middle.beside['söder'], 'Område 2-1');
+  assert.equal(middle.beside['öster'], 'Område 3-2');
+  assert.equal(middle.beside['väster'], 'Område 1-2');
+  assert.equal(byName('Område 0-0').beside['väster'], undefined);
 });
 
 test('every type can describe itself', () => {

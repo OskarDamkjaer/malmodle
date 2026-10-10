@@ -124,44 +124,59 @@ const nearest = {
   },
 };
 
-const AXES = {
-  north: { words: ['norr', 'söder'], question: 'norr eller söder' },
-  east: { words: ['öster', 'väster'], question: 'öster eller väster' },
+const area = {
+  ...point,
+  build({ pick }) {
+    const target = pick((it) => it.kind === 'area');
+    return target && { target };
+  },
 };
 
-const compass = {
+const SIDES = { norr: [0, 1], söder: [0, -1], öster: [1, 0], väster: [-1, 0] };
+
+function towards(from, to, side) {
+  const { east, north } = offset(from.point, to.point);
+  const [x, y] = SIDES[side];
+  const along = east * x + north * y;
+  return along > 0.5 * Math.hypot(east, north);
+}
+
+const neighbour = {
   input: 'choice',
-  build({ pick, items, rng }) {
-    const places = items.filter((it) => PLACES.includes(it.kind));
-    for (let attempt = 0; attempt < 40; attempt++) {
-      const target = pick((it) => PLACES.includes(it.kind), { peek: true });
-      if (!target) return null;
-      const reference = places[Math.floor(rng() * places.length)];
-      if (reference.name === target.name) continue;
-      if (contains(reference.geometry, target.point) || contains(target.geometry, reference.point)) continue;
-      const { east, north } = offset(reference.point, target.point);
-      const axis = Math.abs(north) >= Math.abs(east) ? 'north' : 'east';
-      const along = axis === 'north' ? north : east;
-      const across = axis === 'north' ? east : north;
-      if (Math.abs(along) < 800 || Math.abs(along) < 1.5 * Math.abs(across)) continue;
-      pick((it) => it === target);
-      const [positive, negative] = AXES[axis].words;
+  build({ pick, items, rng, used }) {
+    const byName = new Map(items.map((it) => [it.name, it]));
+    for (let attempt = 0; attempt < 30; attempt++) {
+      const from = pick((it) => it.kind === 'area' && Object.keys(it.beside ?? {}).length > 0, { peek: true });
+      if (!from) return null;
+      const open = Object.entries(from.beside).filter(([, name]) => byName.has(name) && !used.has(name));
+      if (!open.length) continue;
+      const [side, name] = open[Math.floor(rng() * open.length)];
+      const answer = byName.get(name);
+      const adjacent = (from.neighbours ?? []).filter((n) => n !== name && byName.has(n)).map((n) => byName.get(n));
+      const nearby = items
+        .filter((it) => it.kind === 'area' && it.name !== from.name && it.name !== name && !adjacent.includes(it))
+        .sort((a, b) => metersBetween(a.point, from.point) - metersBetween(b.point, from.point));
+      const decoys = [...shuffle(adjacent, rng), ...nearby]
+        .filter((it) => !towards(from, it, side))
+        .slice(0, 3);
+      if (decoys.length < 3) continue;
+      pick((it) => it === from);
+      used.add(name);
       return {
-        target,
-        reference,
-        axis,
-        options: [positive, negative],
-        answer: along > 0 ? positive : negative,
+        target: answer,
+        from,
+        side,
+        options: shuffle([answer, ...decoys], rng).map((it) => it.name),
       };
     }
     return null;
   },
-  prompt: (q) => ({ title: `Ligger ${q.target.name} ${AXES[q.axis].question} om ${q.reference.name}?` }),
-  showing: (q) => [{ item: q.reference, named: true }],
-  view: (q) => ({ items: [q.reference], context: 3000 }),
+  prompt: (q) => ({ title: `Vilket område ligger direkt ${q.side} om ${q.from.name}?`, detail: q.target.label }),
+  showing: (q) => [{ item: q.from, named: true }],
+  view: (q) => ({ items: [q.from], context: 1200 }),
   grade(q, choice) {
-    return { score: choice === q.answer ? MAX_SCORE : 0, choice, answer: q.answer };
+    return { score: choice === q.target.name ? MAX_SCORE : 0, choice, answer: q.target.name };
   },
 };
 
-export const TYPES = { point, identify, nearest, compass };
+export const TYPES = { point, area, identify, nearest, neighbour };
