@@ -47,8 +47,8 @@ java -Xmx4g -jar "$JAR" \
   --osm-path="$CLIP" \
   --bounds="$WEST,$SOUTH,$EAST,$NORTH" \
   --minzoom="$MINZ" --maxzoom="$MAXZ" --download --force \
-  --output="$OUT.tmp"
-mv "$OUT.tmp" "$OUT"
+  --output="$CACHE/malmo.tmp.pmtiles"
+mv "$CACHE/malmo.tmp.pmtiles" "$OUT"
 
 SIZE=$(ls -l "$OUT" | awk '{printf "%.1f MB", $5/1024/1024}')
 echo "OK: $OUT ($SIZE)"
