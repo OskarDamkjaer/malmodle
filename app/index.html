@@ -5,31 +5,33 @@
 <title>Lär dig Malmö</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
 <meta name="description" content="Tio platser i Malmö om dagen. Hitta dem på kartan.">
-<meta name="theme-color" content="#f8f4f0">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f3eee7">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="stylesheet" href="/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/app.css">
+<script src="/theme.js"></script>
 </head>
 <body>
 <div id="map"></div>
 
 <section id="question" class="panel" data-edge="top" hidden>
   <div class="row">
-    <span id="progress"></span>
+    <ol id="dots"></ol>
     <span id="detail"></span>
   </div>
   <h1 id="prompt"></h1>
 </section>
 
+<p id="hint" class="panel pill" data-edge="bottom" hidden>Tryck på kartan där du tror att det ligger</p>
+
 <section id="choices" class="panel" data-edge="bottom" hidden></section>
 
 <section id="result" class="panel" data-edge="bottom" role="status" hidden>
   <div class="row">
-    <strong id="points"></strong>
-    <span id="verdict"></span>
+    <p class="score"><strong id="points"></strong><span>poäng</span></p>
+    <p id="verdict"></p>
   </div>
   <p id="explain"></p>
   <button id="next" type="button" class="primary">Nästa</button>
@@ -39,7 +41,8 @@
   <div class="sheet">
     <header>
       <p id="enddate"></p>
-      <h1 id="endscore"></h1>
+      <p class="total"><strong id="endscore"></strong><span id="endmax"></span></p>
+      <p id="endverdict"></p>
       <p id="endsquares" aria-hidden="true"></p>
     </header>
     <div class="actions">
@@ -47,20 +50,35 @@
       <button id="openmap" type="button">Utforska kartan</button>
       <button id="again" type="button">Spela igen</button>
     </div>
+    <h2>Dagens platser</h2>
     <ol id="endlist"></ol>
+    <footer>
+      <p>Stil</p>
+      <nav id="themes" aria-label="Stil"></nav>
+    </footer>
   </div>
 </section>
 
 <button id="back" type="button" class="panel" data-edge="top" hidden>Dagens resultat</button>
+<p id="freehint" class="panel pill" data-edge="bottom" hidden>Tryck på en plats för att se vad den heter</p>
 
 <section id="card" class="panel" data-edge="bottom" hidden>
+  <button id="cardclose" type="button" aria-label="Stäng">×</button>
   <h2 id="cardname"></h2>
   <p id="cardlabel"></p>
   <p id="cardabout"></p>
-  <a id="cardsource" target="_blank" rel="noopener" hidden>Källa</a>
+  <a id="cardsource" target="_blank" rel="noopener" hidden>Läs mer</a>
 </section>
 
-<div id="boot"><p id="bootmsg">Laddar kartan…</p></div>
+<div id="boot">
+  <div class="brand">
+    <div class="mark" aria-hidden="true"></div>
+    <h1>Lär dig Malmö</h1>
+    <p>Tio platser om dagen</p>
+  </div>
+  <div class="bar"><i id="bootbar"></i></div>
+  <p id="bootmsg" role="status"></p>
+</div>
 
 <script src="/vendor/pmtiles.js"></script>
 <script type="module" src="/app.js"></script>

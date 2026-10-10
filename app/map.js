@@ -1,12 +1,8 @@
 import { around, bounds, union } from './geo.mjs';
+import { paintFor } from './themes.mjs';
 
-const COLOR = {
-  answer: '#1f6f5c',
-  context: '#2f5f9a',
-  hit: '#b4442a',
-  tap: '#201d19',
-  outline: '#8a7a68',
-};
+let COLOR = {};
+let HALO = '#ffffff';
 
 const EMPTY = { type: 'FeatureCollection', features: [] };
 
@@ -35,11 +31,22 @@ function labelsOf(items, extra = () => ({})) {
 const isPolygon = ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]];
 const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineString']]];
 const isPoint = ['==', ['geometry-type'], 'Point'];
-const roleColor = ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
+const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
 function addFree(layer) {
   map.addLayer({ ...layer, layout: { ...layer.layout, visibility: 'none' } });
   freeLayers.push(layer.id);
+}
+
+export function applyTheme(mapInstance, theme) {
+  map = mapInstance;
+  COLOR = theme.marks;
+  HALO = theme.map.halo;
+  for (const layer of map.getStyle().layers) {
+    for (const [property, value] of Object.entries(paintFor(layer, theme.map))) {
+      map.setPaintProperty(layer.id, property, value);
+    }
+  }
 }
 
 export function setupLayers(mapInstance, items) {
@@ -78,12 +85,12 @@ export function setupLayers(mapInstance, items) {
 
   map.addLayer({
     id: 'focus-fill', type: 'fill', source: 'focus', filter: isPolygon,
-    paint: { 'fill-color': roleColor, 'fill-opacity': 0.22 },
+    paint: { 'fill-color': roleColor(), 'fill-opacity': 0.22 },
   });
   map.addLayer({
     id: 'focus-line', type: 'line', source: 'focus', filter: ['!', isPoint],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': roleColor, 'line-width': ['case', isPolygon, 2.5, 6] },
+    paint: { 'line-color': roleColor(), 'line-width': ['case', isPolygon, 2.5, 6] },
   });
   map.addLayer({
     id: 'tap-line', type: 'line', source: 'tap', filter: isLine,
@@ -94,14 +101,14 @@ export function setupLayers(mapInstance, items) {
     id: 'all-points', type: 'circle', source: 'quiz-shapes', filter: isPoint,
     paint: {
       'circle-radius': 5,
-      'circle-color': '#fff',
+      'circle-color': HALO,
       'circle-stroke-color': ['match', ['get', 'kind'], 'bridge', COLOR.context, COLOR.answer],
       'circle-stroke-width': 2,
     },
   });
   addFree({
     id: 'today-points', type: 'circle', source: 'today', filter: isPoint,
-    paint: { 'circle-radius': 7, 'circle-color': COLOR.answer, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 },
+    paint: { 'circle-radius': 7, 'circle-color': COLOR.answer, 'circle-stroke-color': HALO, 'circle-stroke-width': 2 },
   });
   addFree({
     id: 'all-labels', type: 'symbol', source: 'quiz-labels',
@@ -116,19 +123,19 @@ export function setupLayers(mapInstance, items) {
       'text-max-width': 8,
     },
     paint: {
-      'text-color': ['case', ['==', ['get', 'kind'], 'area'], '#5c4f42', '#201d19'],
-      'text-halo-color': 'rgba(255,255,255,0.9)',
+      'text-color': ['case', ['==', ['get', 'kind'], 'area'], COLOR.outline, COLOR.tap],
+      'text-halo-color': HALO,
       'text-halo-width': 1.4,
     },
   });
 
   map.addLayer({
     id: 'focus-circle', type: 'circle', source: 'focus', filter: isPoint,
-    paint: { 'circle-radius': 8, 'circle-color': roleColor, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2.5 },
+    paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
   });
   map.addLayer({
     id: 'tap-point', type: 'circle', source: 'tap', filter: isPoint,
-    paint: { 'circle-radius': 6, 'circle-color': COLOR.tap, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 },
+    paint: { 'circle-radius': 6, 'circle-color': COLOR.tap, 'circle-stroke-color': HALO, 'circle-stroke-width': 2 },
   });
   map.addLayer({
     id: 'focus-label', type: 'symbol', source: 'focus-labels',
@@ -141,7 +148,7 @@ export function setupLayers(mapInstance, items) {
       'text-max-width': 10,
       'text-allow-overlap': true,
     },
-    paint: { 'text-color': roleColor, 'text-halo-color': '#fff', 'text-halo-width': 2 },
+    paint: { 'text-color': roleColor(), 'text-halo-color': HALO, 'text-halo-width': 2 },
   });
 }
 
@@ -213,21 +220,21 @@ export function frameItems(items, context, extra = []) {
   frame(box);
 }
 
-export function frameAll(items) {
-  frame(bounds(items.map((it) => ({ coordinates: it.point }))), { maxZoom: 14 });
+function quantile(values, q) {
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))))];
 }
 
-export function ensureVisible(points) {
-  const pad = padding();
-  const canvas = map.getContainer();
-  const fits = points.every((p) => {
-    const { x, y } = map.project(p);
-    return x >= pad.left && x <= canvas.clientWidth - pad.right && y >= pad.top && y <= canvas.clientHeight - pad.bottom;
-  });
-  if (fits) return;
-  let box = null;
-  for (const p of points) box = box ? union(box, around(p, 120)) : around(p, 120);
-  frame(box, { maxZoom: map.getZoom() });
+export function frameHome(items) {
+  const lng = items.map((it) => it.point[0]);
+  const lat = items.map((it) => it.point[1]);
+  frame([[quantile(lng, 0.1), quantile(lat, 0.1)], [quantile(lng, 0.9), quantile(lat, 0.9)]], { maxZoom: 13.5 });
+}
+
+export function frameReveal(geometries, points) {
+  let box = bounds(geometries);
+  for (const p of points) box = union(box, around(p, 150));
+  frame(box, { maxZoom: 15 });
 }
 
 export function pick(point) {

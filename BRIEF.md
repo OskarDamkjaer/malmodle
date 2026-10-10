@@ -48,6 +48,13 @@ Every question scores 0–100. A day scores out of 1000.
   what it is; today's names are marked.
 - No memory between days. Nothing is stored.
 
+## Styles
+
+The app comes in several styles, each served at its own path from the same
+code: Papper at the root, and Natt, Tidning and Klar under their own names. A
+style changes colours, type and the basemap palette, never the game. The end
+screen links to all of them.
+
 ## Constraints
 
 - Static files, no backend, no accounts, no analytics.

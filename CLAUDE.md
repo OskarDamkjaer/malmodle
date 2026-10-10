@@ -26,6 +26,9 @@ the sandbox cannot reach.
 - `app/daily.mjs`: the day's set, seeded from the local date, and the share text.
 - `app/geo.mjs`: distances and containment.
 - `app/map.js`: map layers, hiding labels, framing.
+- `app/themes.mjs`: the styles. Each has a path, UI colours in `app.css` under
+  `[data-theme]`, and a basemap palette applied at load. A new style needs all
+  three plus its path in `app/sw.js`; `test/themes.test.mjs` checks them.
 - `app/app.js`: boot and the screens.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
 

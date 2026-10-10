@@ -2,19 +2,30 @@ import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { dailySet, dateKey, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { metersBetween, offset } from './geo.mjs';
+import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  clear, ensureVisible, frameAll, frameItems, markToday, pick, setLabels, setupLayers, show, showTap,
+  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
 const boot = el('boot');
 const bootmsg = el('bootmsg');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const themeName = themeFromPath(location.pathname);
+const theme = THEMES[themeName];
+document.documentElement.dataset.theme = themeName;
+document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme.themeColor);
 
 function fail(what, err) {
   console.error(what, err);
   boot.classList.add('failed');
   boot.classList.remove('done');
   bootmsg.textContent = `${what}. ${err?.message ?? ''}`.trim();
+}
+
+function progress(fraction) {
+  el('bootbar').style.transform = `scaleX(${Math.max(0.04, Math.min(1, fraction))})`;
 }
 
 async function loadArchive(url) {
@@ -29,9 +40,7 @@ async function loadArchive(url) {
     if (done) break;
     chunks.push(value);
     got += value.length;
-    bootmsg.textContent = total
-      ? `Laddar kartan… ${Math.round((got / total) * 100)} %`
-      : `Laddar kartan… ${(got / 1048576).toFixed(1)} MB`;
+    if (total) progress((got / total) * 0.9);
   }
   return new File(chunks, url.split('/').pop());
 }
@@ -91,12 +100,30 @@ const sum = (list) => list.reduce((a, b) => a + b, 0);
 function hide(...ids) { for (const id of ids) el(id).hidden = true; }
 function reveal(...ids) { for (const id of ids) el(id).hidden = false; }
 
+function tone(score) {
+  if (score >= 80) return 'right';
+  if (score >= 40) return 'mid';
+  return 'wrong';
+}
+
+function renderDots() {
+  const dots = el('dots');
+  dots.replaceChildren();
+  set.forEach((_, i) => {
+    const li = document.createElement('li');
+    if (results[i]) li.dataset.tone = tone(results[i].result.score);
+    if (i === index && phase !== 'end') li.dataset.current = '';
+    dots.append(li);
+  });
+  dots.setAttribute('aria-label', `Fråga ${index + 1} av ${set.length}`);
+}
+
 function start() {
   key = dateKey();
   set = dailySet(items, key);
   index = 0;
   results = [];
-  hide('end', 'back', 'card', 'result');
+  hide('end', 'back', 'card', 'result', 'freehint');
   setLabels(false);
   ask();
 }
@@ -107,7 +134,7 @@ function ask() {
   const { title, detail } = type.prompt(q);
   phase = 'asking';
   clear();
-  el('progress').textContent = `${index + 1} / ${set.length}`;
+  renderDots();
   el('detail').textContent = detail ?? '';
   el('prompt').textContent = title;
   hide('result');
@@ -116,22 +143,26 @@ function ask() {
   const choices = el('choices');
   choices.replaceChildren();
   if (type.input === 'choice') {
-    for (const option of q.options) {
+    q.options.forEach((option, i) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = option[0].toUpperCase() + option.slice(1);
+      b.setAttribute('aria-keyshortcuts', String(i + 1));
       b.addEventListener('click', () => answer(option));
       choices.append(b);
-    }
+    });
+    choices.dataset.count = q.options.length;
+    hide('hint');
     reveal('choices');
   } else {
     hide('choices');
+    reveal('hint');
   }
 
   show(type.showing(q).map(({ item, named }) => ({ item, named, role: 'context' })));
   const view = type.view(q);
   requestAnimationFrame(() => {
-    if (view === 'home') frameAll(items);
+    if (view === 'home') frameHome(items);
     else frameItems(view.items, view.context);
   });
 }
@@ -143,17 +174,18 @@ function answer(value) {
   const result = type.grade(q, value, items);
   results.push({ q, result });
   phase = 'answered';
+  navigator.vibrate?.(result.score === MAX_SCORE ? 15 : [10, 60, 10]);
 
-  const right = result.score === MAX_SCORE;
-  el('points').textContent = `${result.score} p`;
-  el('result').dataset.tone = right ? 'right' : result.score >= 40 ? 'mid' : 'wrong';
+  el('points').textContent = `${result.score}`;
+  el('result').dataset.tone = tone(result.score);
 
   if (type.input === 'map') revealPoint(q, result);
   else revealChoice(q, result);
 
-  hide('choices');
+  renderDots();
+  hide('choices', 'hint');
   reveal('result');
-  el('next').textContent = index + 1 < set.length ? 'Nästa' : 'Se resultatet';
+  el('next').textContent = index + 1 < set.length ? 'Nästa' : 'Se dagens resultat';
   el('next').focus({ preventScroll: true });
 }
 
@@ -162,21 +194,16 @@ function revealPoint(q, result) {
   if (result.hit) marks.push({ item: result.hit, role: 'hit', named: true });
   show(marks);
   showTap(result.tap, result.near);
-  el('verdict').textContent = result.score === MAX_SCORE ? 'Rätt' : `${formatDistance(result.distance)} bort`;
+  el('verdict').textContent = result.score === MAX_SCORE ? 'Mitt i prick' : `${formatDistance(result.distance)} bort`;
   el('explain').textContent = result.hit ? `Du tryckte på ${result.hit.name}.` : '';
-  requestAnimationFrame(() => ensureVisible([result.tap, result.near, q.target.point]));
+  requestAnimationFrame(() => frameReveal([q.target.geometry], [result.tap]));
 }
 
 function revealChoice(q, result) {
   const right = result.score === MAX_SCORE;
   el('verdict').textContent = right ? 'Rätt' : 'Fel';
   const marks = [];
-  const points = [];
-  const add = (item, role) => {
-    if (!item) return;
-    marks.push({ item, role, named: true });
-    points.push(item.point);
-  };
+  const add = (item, role) => { if (item) marks.push({ item, role, named: true }); };
 
   if (q.type === 'identify') {
     add(q.target, 'answer');
@@ -202,7 +229,7 @@ function revealChoice(q, result) {
   }
 
   show(marks);
-  requestAnimationFrame(() => ensureVisible(points));
+  requestAnimationFrame(() => frameReveal(marks.map((m) => m.item.geometry), []));
 }
 
 function next() {
@@ -212,26 +239,44 @@ function next() {
   else finish();
 }
 
-function scoreTone(score) {
-  if (score >= 80) return 'right';
-  if (score >= 40) return 'mid';
-  return 'wrong';
-}
-
 function outcome({ q, result }) {
   if (q.type === 'point') {
-    return result.score === MAX_SCORE ? 'Rätt' : `${formatDistance(result.distance)} bort`;
+    return result.score === MAX_SCORE ? 'Mitt i prick.' : `${formatDistance(result.distance)} bort.`;
   }
-  return result.score === MAX_SCORE ? 'Rätt' : `Du svarade ${result.choice}`;
+  return result.score === MAX_SCORE ? 'Rätt.' : `Du svarade ${result.choice}.`;
+}
+
+function countUp(node, total) {
+  if (reducedMotion) { node.textContent = String(total); return; }
+  const startAt = performance.now();
+  const step = (now) => {
+    const t = Math.min(1, (now - startAt) / 900);
+    node.textContent = String(Math.round(total * (1 - (1 - t) ** 3)));
+    if (t < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function verdictFor(total, max) {
+  const share = total / max;
+  if (share >= 0.9) return 'Du hittar i Malmö.';
+  if (share >= 0.7) return 'Riktigt bra.';
+  if (share >= 0.5) return 'Bra jobbat.';
+  if (share >= 0.3) return 'På god väg.';
+  return 'Imorgon blir det bättre.';
 }
 
 function finish() {
   phase = 'end';
   clear();
-  hide('question', 'result', 'choices');
+  hide('question', 'result', 'choices', 'hint');
   const scores = results.map((r) => r.result.score);
+  const total = sum(scores);
+  const max = set.length * MAX_SCORE;
   el('enddate').textContent = new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
-  el('endscore').textContent = `${sum(scores)} / ${set.length * MAX_SCORE}`;
+  countUp(el('endscore'), total);
+  el('endmax').textContent = `av ${max}`;
+  el('endverdict').textContent = verdictFor(total, max);
   el('endsquares').textContent = scores.map(square).join('');
 
   const list = el('endlist');
@@ -239,48 +284,52 @@ function finish() {
   for (const r of results) {
     const { q, result } = r;
     const li = document.createElement('li');
+    const details = document.createElement('details');
+    const summary = document.createElement('summary');
 
-    const row = document.createElement('div');
-    row.className = 'row';
-    const name = document.createElement('strong');
+    const name = document.createElement('span');
+    name.className = 'name';
     name.textContent = q.target.name;
-    const score = document.createElement('span');
-    score.className = 'score';
-    score.dataset.tone = scoreTone(result.score);
-    score.textContent = `${result.score} p`;
-    row.append(name, score);
-
-    const meta = document.createElement('p');
+    const meta = document.createElement('span');
     meta.className = 'meta';
     meta.textContent = q.target.label;
+    const score = document.createElement('span');
+    score.className = 'score';
+    score.dataset.tone = tone(result.score);
+    score.textContent = String(result.score);
+    summary.append(name, meta, score);
 
+    const body = document.createElement('div');
+    body.className = 'body';
     const asked = document.createElement('p');
     asked.className = 'asked';
-    asked.textContent = `${typeOf(q).prompt(q).title} ${outcome(r)}.`;
-
-    li.append(row, meta, asked);
-
+    asked.textContent = `${typeOf(q).prompt(q).title} ${outcome(r)}`;
+    body.append(asked);
     if (q.target.about) {
       const about = document.createElement('p');
       about.className = 'about';
       about.textContent = q.target.about;
-      li.append(about);
+      body.append(about);
     }
+    const links = document.createElement('div');
+    links.className = 'links';
+    const onMap = document.createElement('button');
+    onMap.type = 'button';
+    onMap.textContent = 'Visa på kartan';
+    onMap.addEventListener('click', () => openMap(q.target));
+    links.append(onMap);
     if (q.target.source) {
       const a = document.createElement('a');
       a.href = q.target.source;
       a.target = '_blank';
       a.rel = 'noopener';
-      a.textContent = 'Källa';
-      li.append(a, document.createTextNode(' '));
+      a.textContent = 'Läs mer';
+      links.append(a);
     }
-    const onMap = document.createElement('button');
-    onMap.type = 'button';
-    onMap.className = 'onmap';
-    onMap.textContent = 'Visa på kartan';
-    onMap.addEventListener('click', () => openMap(q.target));
-    li.append(onMap);
+    body.append(links);
 
+    details.append(summary, body);
+    li.append(details);
     list.append(li);
   }
 
@@ -290,7 +339,11 @@ function finish() {
 }
 
 async function share() {
-  const text = shareText({ key, scores: results.map((r) => r.result.score), url: location.origin });
+  const text = shareText({
+    key,
+    scores: results.map((r) => r.result.score),
+    url: location.origin + themePath(themeName),
+  });
   const button = el('share');
   try {
     await navigator.clipboard.writeText(text);
@@ -310,7 +363,7 @@ async function share() {
 function openMap(focus = null) {
   phase = 'free';
   hide('end', 'card');
-  reveal('back');
+  reveal('back', 'freehint');
   setLabels(true);
   markToday(results.map((r) => r.q.target));
   clear();
@@ -318,7 +371,7 @@ function openMap(focus = null) {
     select(focus);
     requestAnimationFrame(() => frameItems([focus], 600));
   } else {
-    requestAnimationFrame(() => frameAll(items));
+    requestAnimationFrame(() => frameHome(items));
   }
 }
 
@@ -330,20 +383,34 @@ function select(item) {
   const src = el('cardsource');
   src.hidden = !item.source;
   if (item.source) src.href = item.source;
+  hide('freehint');
   reveal('card');
 }
 
 function deselect() {
   clear();
   hide('card');
+  if (phase === 'free') reveal('freehint');
 }
 
 function backToEnd() {
   deselect();
-  hide('back');
+  hide('back', 'freehint');
   setLabels(false);
   phase = 'end';
   reveal('end');
+}
+
+function renderThemes() {
+  const nav = el('themes');
+  nav.replaceChildren();
+  for (const [name, t] of Object.entries(THEMES)) {
+    const a = document.createElement('a');
+    a.href = themePath(name);
+    a.textContent = t.label;
+    if (name === themeName) a.setAttribute('aria-current', 'page');
+    nav.append(a);
+  }
 }
 
 map.on('click', (e) => {
@@ -361,10 +428,17 @@ el('share').addEventListener('click', share);
 el('openmap').addEventListener('click', () => openMap());
 el('again').addEventListener('click', start);
 el('back').addEventListener('click', backToEnd);
+el('cardclose').addEventListener('click', deselect);
 
 document.addEventListener('keydown', (e) => {
-  if (e.key !== 'Escape') return;
-  if (phase === 'free') {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (phase === 'asking' && /^[1-9]$/.test(e.key)) {
+    const button = el('choices').children[Number(e.key) - 1];
+    if (button && !el('choices').hidden) { e.preventDefault(); button.click(); }
+  } else if (phase === 'answered' && e.key === 'Enter' && document.activeElement !== el('next')) {
+    e.preventDefault();
+    next();
+  } else if (phase === 'free' && e.key === 'Escape') {
     if (!el('card').hidden) deselect();
     else backToEnd();
   }
@@ -372,6 +446,7 @@ document.addEventListener('keydown', (e) => {
 
 map.on('load', async () => {
   try {
+    applyTheme(map, theme);
     items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
     byName = new globalThis.Map(items.map((it) => [it.name, it]));
     setupLayers(map, items);
@@ -379,10 +454,12 @@ map.on('load', async () => {
     fail('Frågorna kunde inte laddas', err);
     return;
   }
-  boot.classList.add('done');
+  progress(1);
+  renderThemes();
   start();
+  setTimeout(() => boot.classList.add('done'), reducedMotion ? 0 : 250);
 });
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
-  navigator.serviceWorker.register('/sw.js').catch((err) => console.warn('sw:', err));
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch((err) => console.warn('sw:', err));
 }

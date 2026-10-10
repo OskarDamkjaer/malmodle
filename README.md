@@ -11,6 +11,11 @@ around on your own.
 It runs in the browser, works offline once loaded, and stores nothing about
 you.
 
+The same app comes in a few styles, each at its own address:
+[Papper](https://malmoe.damk.eu/), [Natt](https://malmoe.damk.eu/natt/),
+[Tidning](https://malmoe.damk.eu/tidning/) and
+[Klar](https://malmoe.damk.eu/klar/).
+
 ## Running it locally
 
 Needs Node. There is nothing to install.

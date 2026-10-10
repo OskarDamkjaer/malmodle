@@ -4,6 +4,7 @@ import { createRequire } from 'node:module';
 import { execSync, spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { THEMES, themePath } from '../app/themes.mjs';
 
 const require = createRequire(import.meta.url);
 
@@ -44,14 +45,14 @@ after(async () => {
   server?.kill();
 });
 
-async function open(viewport) {
+async function open(viewport, path = '/') {
   const context = await browser.newContext({ viewport, serviceWorkers: 'block', permissions: ['clipboard-read', 'clipboard-write'] });
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
-  await page.goto(URL);
-  await page.waitForSelector('#boot.done', { timeout: 60000 });
+  await page.goto(new globalThis.URL(path, URL).href);
+  await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
   await page.waitForSelector('#question:not([hidden])');
   return { page, context, errors };
 }
@@ -73,7 +74,7 @@ async function playThrough(page, viewport) {
       await page.mouse.click(viewport.width / 2, viewport.height / 2);
     }
     await page.waitForSelector('#result:not([hidden])');
-    assert.match(await page.textContent('#points'), /^\d+ p$/);
+    assert.match(await page.textContent('#points'), /^\d+$/);
     await page.click('#next');
   }
   return prompts;
@@ -86,8 +87,8 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
 
     await page.waitForSelector('#end:not([hidden])');
     assert.equal(await page.locator('#endlist li').count(), 10);
-    const score = await page.textContent('#endscore');
-    assert.match(score, /^\d+ \/ 1000$/);
+    assert.match(await page.textContent('#endscore'), /^\d+$/);
+    assert.equal(await page.textContent('#endmax'), 'av 1000');
 
     await page.click('#share');
     const shared = await page.evaluate(() => navigator.clipboard.readText());
@@ -107,3 +108,13 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     await context.close();
   });
 }
+
+test('every style boots at its own path', { skip }, async () => {
+  for (const [name, theme] of Object.entries(THEMES)) {
+    const { page, context, errors } = await open({ width: 390, height: 844 }, themePath(name));
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), name);
+    assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), theme.map.background);
+    assert.deepEqual(errors, [], name);
+    await context.close();
+  }
+});

@@ -21,7 +21,10 @@ mkdirSync(tmp, { recursive: true });
 for (const m of MOUNTS) {
   const rel = m.url.replace(/^\/+/, '').replace(/\/+$/, '');
   const dest = rel ? join(tmp, rel) : tmp;
-  if (m.file) {
+  if (m.page) {
+    mkdirSync(dest, { recursive: true });
+    cpSync(m.file, join(dest, 'index.html'));
+  } else if (m.file) {
     mkdirSync(resolve(dest, '..'), { recursive: true });
     cpSync(m.file, dest);
   } else {
