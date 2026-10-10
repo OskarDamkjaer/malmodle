@@ -1,0 +1,63 @@
+# Brief
+
+The agreed shape of the app. Written as guidance for whoever works on it next;
+the README is the short public version.
+
+## Purpose
+
+Get familiar with Malmö through a short daily quiz.
+
+## The daily set
+
+- One set a day, the same for everyone. It is derived from today's date in the
+  browser's local time, through a hash. No day number is shown.
+- Ten questions, mixed across the kinds in the data. The mix follows how much
+  there is of each kind, so rare kinds (bridges, sights) do not appear every day.
+- Only names in Grunden (`learn/core.json`, as it is) are used by the app. The
+  full curated data stays in the repo and in the build.
+- The set can be replayed. Replaying gives the same set, never a new one.
+
+## Questions
+
+The code supports many question types. Pointing is the vast majority, then
+"what is this", then the rest.
+
+- **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
+  Afterwards: how far off you were, and what you actually tapped if it was
+  something else.
+- **Vad är det här?** Something is highlighted on the map; pick its name from a
+  list of nearby things of the same kind.
+- **Närmast.** "Vilken ligger närmast X?" Pick one of four.
+- **Norr eller söder.** "Ligger A norr eller söder om B?" Two buttons.
+
+Every question scores 0–100. A day scores out of 1000.
+
+## The map
+
+- No labels on the map while a question is open. Pan and zoom are allowed.
+- Always north-up.
+
+## After the set
+
+- An end screen with the score, today's names, how each went, and the
+  descriptions. Descriptions are only shown here.
+- A button that copies the result as text (score and one square per question),
+  like other daily games. If the set is replayed, the latest result is shared.
+- A way to open the full labelled map for free practice. Tapping a thing says
+  what it is; today's names are marked.
+- No memory between days. Nothing is stored.
+
+## Constraints
+
+- Static files, no backend, no accounts, no analytics.
+- Offline PWA.
+- No framework, no bundler, no dependencies.
+- The UI is in Swedish.
+- Phone and desktop matter equally.
+
+## Repo
+
+- Keep the curated sources and the build that turns them into app data.
+- No code comments. Short README for humans. Focused CLAUDE.md with no counts.
+  No decision log.
+- Nothing in the repo describes earlier versions of the app.
