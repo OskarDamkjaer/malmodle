@@ -43,7 +43,8 @@ only the ones in `core.json`.
 
 ## Rebuilding the map data
 
-Needs `osmium` and Java 21.
+Needs `osmium` and Java 21. The Map data workflow on GitHub runs the same steps
+and publishes the result as the release that `fetch-dev-assets.mjs` downloads.
 
 ```
 scripts/build-basemap.sh             # OpenStreetMap → data/cache/malmo.pmtiles
