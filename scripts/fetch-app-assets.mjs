@@ -1,15 +1,3 @@
-// Phase 3 — vendor everything the app loads at runtime.
-//
-// "No external calls at runtime" means the map engine, the pmtiles reader, the
-// label glyphs and the icon sprite all have to come off my own origin. They are
-// third-party build outputs, not source: fetched here at pinned versions,
-// gitignored, and re-fetchable on any machine.
-//
-// Glyph ranges are fetched selectively — a full font is ~250 ranges, of which a
-// Swedish city map uses three: Latin (åäö live in 0-255), Latin Extended, and
-// General Punctuation for the dashes and quotes in street names.
-//
-// Usage: node scripts/fetch-app-assets.mjs [--refresh]
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, cpSync, writeFileSync, existsSync, rmSync, statSync } from 'node:fs';
 
@@ -35,8 +23,6 @@ async function download(url, dest) {
   fetched++;
 }
 
-// npm tarballs, unpacked for their dist/ only. Both packages ship browser-ready
-// bundles, so there is no build step and no node_modules in this project.
 async function npmPackage(name, version, files) {
   const need = files.filter(([, dest]) => refresh || !existsSync(dest));
   if (!need.length) { skipped += files.length; return; }
@@ -60,8 +46,6 @@ mkdirSync(tmp, { recursive: true });
 
 console.log(`maplibre-gl ${MAPLIBRE} …`);
 await npmPackage('maplibre-gl', MAPLIBRE, [
-  // The main bundle imports the shared chunk and spawns the worker by relative
-  // URL, so all three must sit in the same directory.
   ['dist/maplibre-gl.mjs', 'app/vendor/maplibre-gl.mjs'],
   ['dist/maplibre-gl-shared.mjs', 'app/vendor/maplibre-gl-shared.mjs'],
   ['dist/maplibre-gl-worker.mjs', 'app/vendor/maplibre-gl-worker.mjs'],
@@ -69,8 +53,6 @@ await npmPackage('maplibre-gl', MAPLIBRE, [
 ]);
 
 console.log(`pmtiles ${PMTILES} …`);
-// The ESM build imports fflate by bare specifier; the browser bundle inlines it
-// and exposes window.pmtiles, which is one script tag instead of an import map.
 await npmPackage('pmtiles', PMTILES, [['dist/pmtiles.js', 'app/vendor/pmtiles.js']]);
 
 console.log(`glyphs: ${FONTS.length} fonts × ${RANGES.length} ranges …`);

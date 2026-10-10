@@ -1,225 +1,120 @@
-// A browser smoke test — the four things nobody looked at in the sandbox.
-//
-// The deletion pass (Förr, search, the layer menu, POI overlays, mode tabs) was
-// written and merged without ever booting the app, because the sandbox could
-// not. This test boots it headless and checks the things that would have shown
-// up on screen:
-//
-//   1. The quiz front door, with no mode tabs above the heading.
-//   2. "Utforska kartan" → labelled map, no search bar, no Lager button, no POI
-//      dots at any zoom.
-//   3. Tapping a landmark, a delområde name and a street each opens the card;
-//      tapping empty water closes it.
-//   4. Starting a round blinds the map (no text), the card can't be opened,
-//      Escape backs out, and "Öva" returns from the map.
-//
-// It uses playwright-core (no `playwright install` — it drives the system
-// Chrome) so it runs in a sandbox that has Chrome but not the Playwright
-// browser bundle. The dev server is started as a subprocess and killed on exit.
-//
-// Run: node --test test/smoke.test.mjs
-import { test } from 'node:test';
+import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawn } from 'node:child_process';
-import { existsSync } from 'node:fs';
-
-// playwright-core is the no-browsers package: it drives an existing Chrome
-// rather than downloading one. The sandbox has Chrome at the standard macOS
-// path; a local checkout has it there too. The repo has no package.json (by
-// convention), so the module is resolved from a temp install via createRequire
-// rather than from node_modules alongside the test.
 import { createRequire } from 'node:module';
+import { execSync, spawn } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { THEMES, themePath } from '../app/themes.mjs';
 
-// Try a few places: a temp install (sandbox), a local node_modules (if
-// somebody added one), and the global resolution. If none has it, the test
-// skips — it needs a browser, and a machine without playwright-core almost
-// certainly does not have one rigged for headless use.
-const TMP_DIR = '/var/folders/05/g2cfvd6x56z78g49y0jc4kt00000gn/T/opencode';
-let chromium = null;
-let skipReason = null;
-for (const base of [`${TMP_DIR}/node_modules/_.js`, import.meta.url]) {
-  try {
-    const req = createRequire(base);
-    chromium = req('playwright-core').chromium;
-    break;
-  } catch { /* try next */ }
-}
-if (!chromium) {
-  skipReason = 'playwright-core is not installed — run `npm i playwright-core` in a temp dir';
-}
+const require = createRequire(import.meta.url);
 
-// The app and its data have to be built, or there is nothing to boot.
-if (!skipReason) {
-  for (const p of ['build/style.json', 'build/data/learn.json', 'data/cache/malmo.pmtiles']) {
-    if (!existsSync(p)) {
-      skipReason = `${p} is gitignored — run the build pipeline or fetch-dev-assets.mjs first`;
-      break;
+function loadChromium() {
+  const roots = [];
+  try { roots.push(execSync('npm root -g', { encoding: 'utf8' }).trim()); } catch {}
+  for (const name of ['playwright-core', 'playwright']) {
+    for (const from of [name, ...roots.map((r) => join(r, name))]) {
+      try { return require(from).chromium; } catch {}
     }
   }
+  return null;
 }
 
-const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const EXECUTABLE = existsSync(CHROME_PATH) ? CHROME_PATH : undefined;
+const NEEDED = ['build/style.json', 'build/data/quiz.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
+const chromium = loadChromium();
+const missing = NEEDED.filter((p) => !existsSync(p));
+const skip = !chromium ? 'playwright is not installed'
+  : missing.length ? `missing: ${missing.join(', ')}` : false;
 
-// The dev server. Started once for the whole file, killed when the process
-// exits. A random port avoids clashing with anything already running.
-const PORT = 9123;
+const PORT = 8000 + Math.floor(Math.random() * 900);
+const URL = `http://127.0.0.1:${PORT}/`;
 let server;
+let browser;
 
-async function startServer() {
-  server = spawn('node', ['scripts/serve.mjs', '--port', String(PORT)], {
-    stdio: ['pipe', 'pipe', 'pipe'],
-  });
-  // Wait for "serving on" so we don't race the listen.
-  await new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('server did not start')), 5000);
-    server.stdout.on('data', (d) => {
-      if (d.toString().includes('serving on')) { clearTimeout(timer); resolve(); }
-    });
-    server.on('error', (err) => { clearTimeout(timer); reject(err); });
-  });
-}
+before(async () => {
+  if (skip) return;
+  server = spawn(process.execPath, ['scripts/serve.mjs', '--port', String(PORT)], { stdio: 'ignore' });
+  for (let i = 0; i < 50; i++) {
+    try { if ((await fetch(URL)).ok) break; } catch {}
+    await new Promise((r) => setTimeout(r, 100));
+  }
+  browser = await chromium.launch();
+});
 
-async function stopServer() {
-  if (server) server.kill('SIGTERM');
-}
+after(async () => {
+  await browser?.close();
+  server?.kill();
+});
 
-// A browser page at the app, with console errors collected. The map takes a
-// few seconds to load (13 MB pmtiles), so each test waits for #boot to be done.
-async function openPage(browser) {
-  const page = await browser.newPage();
+async function open(viewport, path = '/') {
+  const context = await browser.newContext({ viewport, serviceWorkers: 'block', permissions: ['clipboard-read', 'clipboard-write'] });
+  const page = await context.newPage();
   const errors = [];
-  page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()); });
-  page.on('pageerror', (err) => errors.push(err.message));
-  await page.goto(`http://127.0.0.1:${PORT}/`, { waitUntil: 'domcontentloaded' });
-  // Wait for the app to boot: #boot gets .done, and the front door (#learn)
-  // becomes visible.
-  await page.waitForSelector('#boot.done', { timeout: 15000 });
-  await page.waitForSelector('#learn:not([hidden])', { timeout: 5000 });
-  return { page, errors };
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  await page.goto(new globalThis.URL(path, URL).href);
+  await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
+  await page.waitForSelector('#question:not([hidden])');
+  return { page, context, errors };
 }
 
-// The four checks, as one test so the browser launches once. Splitting them
-// would mean four loads of a 13 MB archive, which is slow without buying
-// anything — the checks are independent assertions, not independent setups.
-test('the app after the focusing pass', { skip: skipReason ?? undefined }, async () => {
-  const browser = await chromium.launch({
-    executablePath: EXECUTABLE,
-    headless: true,
-    args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
+const visibleText = (page) => page.evaluate(() => window.map.getStyle().layers
+  .filter((l) => l.type === 'symbol' && l.id !== 'focus-label')
+  .filter((l) => (window.map.getLayoutProperty(l.id, 'visibility') ?? 'visible') !== 'none')
+  .map((l) => l.id));
+
+async function playThrough(page, viewport) {
+  const prompts = [];
+  for (let i = 0; i < 10; i++) {
+    await page.waitForSelector('#question:not([hidden])');
+    prompts.push(await page.textContent('#prompt'));
+    assert.deepEqual(await visibleText(page), [], 'a label is visible during a question');
+    if (await page.isVisible('#choices')) {
+      await page.locator('#choices button').first().click();
+    } else {
+      await page.mouse.click(viewport.width / 2, viewport.height / 2);
+    }
+    await page.waitForSelector('#result:not([hidden])');
+    assert.match(await page.textContent('#points'), /^\d+$/);
+    await page.click('#next');
+  }
+  return prompts;
+}
+
+for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1280, height: 800 }]]) {
+  test(`a day can be played start to finish on ${name}`, { skip }, async () => {
+    const { page, context, errors } = await open(viewport);
+    const prompts = await playThrough(page, viewport);
+
+    await page.waitForSelector('#end:not([hidden])');
+    assert.equal(await page.locator('#endlist li').count(), 10);
+    assert.match(await page.textContent('#endscore'), /^\d+$/);
+    assert.equal(await page.textContent('#endmax'), 'av 1000');
+
+    await page.click('#share');
+    const shared = await page.evaluate(() => navigator.clipboard.readText());
+    assert.match(shared, /^Lär dig Malmö \d{4}-\d{2}-\d{2}\n\d+\/1000\n/);
+    assert.equal([...shared.split('\n')[2]].length, 10);
+
+    await page.click('#openmap');
+    await page.waitForSelector('#back:not([hidden])');
+    assert.ok((await visibleText(page)).length > 0, 'the free map has no labels');
+
+    await page.click('#back');
+    await page.click('#again');
+    await page.waitForSelector('#question:not([hidden])');
+    assert.equal(await page.textContent('#prompt'), prompts[0]);
+
+    assert.deepEqual(errors, []);
+    await context.close();
   });
+}
 
-  try {
-    await startServer();
-    const { page, errors } = await openPage(browser);
-
-    // 1. The front door is the quiz, with no mode tabs.
-    const heading = await page.locator('#learn h1').textContent();
-    assert.equal(heading, 'Lär dig Malmö', 'the heading is the quiz heading');
-    assert.equal(await page.locator('.modetab').count(), 0,
-      'no mode tabs above the heading');
-
-    // 2. "Utforska kartan" → labelled map, no search bar, no Lager button.
-    await page.click('#toexplore');
-    await page.waitForFunction(() => !document.getElementById('tolearn').hidden, { timeout: 3000 });
-    assert.ok(await page.locator('#searchbar').isHidden(),
-      'no search bar in explore mode');
-    // The layer menu (#layers) was removed from the HTML entirely.
-    assert.equal(await page.locator('#layers').count(), 0,
-      'no layer menu element in the DOM');
-    // No POI dots: the style drops poi_z14/z15/z16, and the category layers are
-    // gone. Check that no circle layer named cat-* exists on the map.
-    const catLayers = await page.evaluate(() =>
-      window.map.getStyle().layers.filter((l) => l.id.startsWith('cat-')).length);
-    assert.equal(catLayers, 0, 'no category (POI) layers on the map');
-
-    // 3. Tapping things opens the card; tapping empty water closes it.
-    // A landmark: the Turning Torso is at roughly [13.014, 55.607]. Pan there
-    // and tap. (The exact pixel depends on the viewport, so we use a known
-    // map center and zoom to a level where landmarks are drawn.)
-    await page.evaluate(() => {
-      window.map.setCenter([13.014, 55.607]);
-      window.map.setZoom(14);
-    });
-    await page.waitForTimeout(1000);
-    // Tap the centre — a landmark or a delområde name should be there.
-    await page.mouse.click(400, 300);
-    await page.waitForFunction(() => !document.getElementById('card').hidden, { timeout: 3000 })
-      .catch(() => {});
-    const cardHidden = await page.evaluate(() => document.getElementById('card').hidden);
-    assert.ok(!cardHidden, 'tapping a feature opens the card');
-
-    // Tap empty water (Öresund, west of the city) to close the card.
-    await page.evaluate(() => {
-      window.map.setCenter([12.95, 55.57]); // out in the sound
-      window.map.setZoom(11);
-    });
-    await page.waitForTimeout(500);
-    await page.mouse.click(400, 300);
-    await page.waitForTimeout(500);
-    const cardHiddenAfter = await page.evaluate(() => document.getElementById('card').hidden);
-    assert.ok(cardHiddenAfter, 'tapping empty water closes the card');
-
-    // 4. Starting a round blinds the map.
-    // Go back to the quiz and start a round.
-    await page.click('#tolearn');
-    await page.waitForFunction(() => !document.getElementById('learn').hidden, { timeout: 3000 });
-    // Click the first "Peka ut" button — it starts the round synchronously,
-    // but the map's blinding and framing are async, so wait for #play.
-    await page.click('.chunk .start');
-    await page.waitForFunction(() => !document.getElementById('play').hidden, { timeout: 5000 });
-
-    // No text on the map: every symbol layer should be hidden.
-    const visibleSymbols = await page.evaluate(() => {
-      const style = window.map.getStyle();
-      return style.layers.filter((l) => {
-        if (l.type !== 'symbol') return false;
-        const vis = window.map.getLayoutProperty(l.id, 'visibility') ?? 'visible';
-        return vis === 'visible';
-      }).map((l) => l.id);
-    });
-    // The outline layers are kept (they are line, not symbol), so any surviving
-    // symbol layer is a label that should have been blinded.
-    const outlines = await page.evaluate(() => {
-      // The quiz's outline layers — these are the only non-basemap layers
-      // that stay visible during a round, and they are all line/fill.
-      return window.map.getStyle().layers
-        .filter((l) => l.metadata?.role === 'outline')
-        .map((l) => l.id);
-    });
-    // Filter out any symbol layers that are the outline layers (there shouldn't
-    // be any, but be precise).
-    const leakingLabels = visibleSymbols.filter((id) => !outlines.includes(id));
-    assert.deepEqual(leakingLabels, [],
-      `a round leaves these labels visible: ${leakingLabels.join(', ')}`);
-
-    // The card can't be opened during a round.
-    await page.mouse.click(400, 300);
-    await page.waitForTimeout(500);
-    const cardHiddenInRound = await page.evaluate(() => document.getElementById('card').hidden);
-    assert.ok(cardHiddenInRound, 'the explore card cannot be opened during a round');
-
-    // Escape backs out of the round.
-    await page.keyboard.press('Escape');
-    await page.waitForFunction(() => document.getElementById('play').hidden, { timeout: 3000 });
-    const learnVisibleAfterEsc = await page.evaluate(() => !document.getElementById('learn').hidden);
-    assert.ok(learnVisibleAfterEsc, 'Escape returns to the front door');
-
-    // "Öva" returns from the explore map.
-    await page.click('#toexplore');
-    await page.waitForFunction(() => !document.getElementById('tolearn').hidden, { timeout: 3000 });
-    await page.click('#tolearn');
-    await page.waitForFunction(() => !document.getElementById('learn').hidden, { timeout: 3000 });
-    const learnVisibleAfterOva = await page.evaluate(() => !document.getElementById('learn').hidden);
-    assert.ok(learnVisibleAfterOva, '"Öva" returns from the explore map');
-
-    // Console must be clean.
-    assert.deepEqual(errors, [],
-      `console errors: ${errors.join('; ')}`);
-
-    await page.close();
-  } finally {
-    await stopServer();
-    await browser.close();
+test('every style boots at its own path', { skip }, async () => {
+  for (const [name, theme] of Object.entries(THEMES)) {
+    const { page, context, errors } = await open({ width: 390, height: 844 }, themePath(name));
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), name);
+    assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), theme.map.background);
+    assert.deepEqual(errors, [], name);
+    await context.close();
   }
 });

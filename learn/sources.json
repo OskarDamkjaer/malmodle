@@ -1,5 +1,4 @@
 {
-  "_doc": "Where a name's text came from, when the name has no source of its own.\nDerived once from Swedish Wikipedia by the photograph pipeline that used to\nlive here (scripts/build-images.mjs): an article was only accepted if its own\ncoordinates landed near the point the quiz grades against, so a link here is a\nlink to an article about the right place, not merely a matching title. The\nphotographs are gone; the links they were found through are worth keeping, and\nare now a frozen hand-maintainable table rather than build output.",
   "sources": {
     "Adelgatan": "https://sv.wikipedia.org/wiki/Adelgatan%2C%20Malm%C3%B6",
     "Almgården": "https://sv.wikipedia.org/wiki/Almg%C3%A5rden",

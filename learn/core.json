@@ -1,24 +1,4 @@
 {
-  "_doc": {
-    "purpose": "The half of the quiz Malmö expects you to know. 384 names is the whole city; this is the part someone who has lived here a few years would be caught out not placing. scripts/build-learn.mjs stamps `core: true` on these and nothing else, and app/rounds.mjs cuts the front door on it: Grunden, and Resten.",
-    "bar": "If someone said \"jag bor i X\" or \"vi ses vid X\" on the phone, would you have to ask where that is? If yes, it is not in here. Same shape as the *var bor du?* test areas/areas.json uses for its promotions, and deliberately a claim about people rather than about data — which is why this file is written by hand and no script may add to it.",
-    "shape": [
-      "Not the top third of the city but the *first* third, read outward from Stortorget. What thins with distance is not the category but the grain: how fine a thing you are expected to be able to name out there.",
-      "≲1 km, inside the canal ring: nearly everything. One square kilometre, and the part of town everybody shares.",
-      "≲2.5 km, the inner city out to Inre Ringvägen: every area name that is its own, the through-roads but not the residential grid, the landmarks that are destinations.",
-      "≲6 km, the rest of the built city: only names that are their own — a delområde no grouping speaks for — and the arteries that reach them.",
-      "Beyond: the place, and the road that gets you there. Nothing inside it."
-    ],
-    "howItWasDecided": "node scripts/propose-core.mjs writes learn/core-candidates.md: every name with its band, its distance from Stortorget and its own kind's evidence, pre-sorted ja / ? / nej by that rule. The rule shortlists; the sentence above decides. Rerunning the script after editing this file marks every row where the two disagree, which is the only interesting column in the table.",
-    "whereTheRuleLost": [
-      "Broar. The band rule says the old town is 'nearly everything', and there are fifteen named crossings of the canal ring inside that one kilometre. Nobody knows fifteen bridge names. Six are in here; the other thirteen are a thing you walk over, not a thing you can place.",
-      "Delområden under a grouping. areas.json ruled once that Ribersborg is not what anyone answers *var bor du?* with, and for the map that is right — Slottsstaden is the name that ground has. But 'do you know where Ribersborg is' is a different question with a different answer, so Ribersborg, Rönneholm, Kronprinsen, Fågelbacken and Hästhagen are in here anyway.",
-      "Landmärken out at the edge. Eleda Stadion, Emporia, Malmö Arena, Hyllie station and Limhamns kalkbrott are all past 2.5 km and all things nobody has to be told the way to. Tier in landmarks.json is about how prominently the map draws an icon, which is a different axis and was not reused as this one.",
-      "Split names. Västra, Norra and Östra Sorgenfri are three delområden and one name people say. The name people say — Sorgenfri — is a grouping in areas.json and therefore not in the quiz at all, so rather than pick a third of it arbitrarily, none of the three are core. Same for the two Sofielund and the two Söderkulla."
-    ],
-    "share": "139 of 384, a little over a third. build-learn.mjs fails below 25 % or above 45 %: the split only means anything while Grunden stays something you could finish."
-  },
-
   "core": {
     "areas": [
       "Gamla Staden", "Lugnet", "Davidshall", "Inre Hamnen", "Malmö Hus",

@@ -4,95 +4,81 @@
 <meta charset="utf-8">
 <title>Lär dig Malmö</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
-<meta name="description" content="Lär dig var Malmös namn ligger. Fungerar offline.">
-<meta name="theme-color" content="#f8f4f0">
-<meta name="color-scheme" content="light">
+<meta name="description" content="Tio platser i Malmö om dagen. Hitta dem på kartan.">
+<meta name="theme-color" content="#f3eee7">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="stylesheet" href="/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/app.css">
+<script src="/theme.js"></script>
 </head>
 <body>
 <div id="map"></div>
 
-<!-- The front door, and the only one: the city in two halves — the names Malmö
-     expects of you and everything else — and a row per kind inside each, with a
-     bar saying how much of it you can already place. Everything else on this
-     page is either a round in progress or the map you go and study on. -->
-<div id="learn" hidden>
-  <header id="learnhead">
-    <div>
-      <h1>Lär dig Malmö</h1>
-      <p>Placera namnen på kartan. Kartan är avskalad från text medan du gissar —
-         annars vore det ett lästest.</p>
-      <p id="learnsub"></p>
+<section id="question" class="panel" data-edge="top" hidden>
+  <div class="row">
+    <ol id="dots"></ol>
+    <span id="detail"></span>
+  </div>
+  <h1 id="prompt"></h1>
+</section>
+
+<p id="hint" class="panel pill" data-edge="bottom" hidden>Tryck på kartan där du tror att det ligger</p>
+
+<section id="choices" class="panel" data-edge="bottom" hidden></section>
+
+<section id="result" class="panel" data-edge="bottom" role="status" hidden>
+  <div class="row">
+    <p class="score"><strong id="points"></strong><span>poäng</span></p>
+    <p id="verdict"></p>
+  </div>
+  <p id="explain"></p>
+  <button id="next" type="button" class="primary">Nästa</button>
+</section>
+
+<section id="end" hidden>
+  <div class="sheet">
+    <header>
+      <p id="enddate"></p>
+      <p class="total"><strong id="endscore"></strong><span id="endmax"></span></p>
+      <p id="endverdict"></p>
+      <p id="endsquares" aria-hidden="true"></p>
+    </header>
+    <div class="actions">
+      <button id="share" type="button" class="primary">Kopiera resultat</button>
+      <button id="openmap" type="button">Utforska kartan</button>
+      <button id="again" type="button">Spela igen</button>
     </div>
-    <button id="toexplore" type="button">Utforska kartan</button>
-  </header>
-  <div id="roundlist"></div>
-  <footer id="learnfoot">
-    <button id="forget" type="button">Glöm allt jag lärt mig</button>
-  </footer>
-</div>
-
-<!-- A round in progress. The map underneath is blind: no labels anywhere, only
-     the outlines of whatever is being asked about. -->
-<div id="play" hidden>
-  <div id="playbar">
-    <button id="quit" type="button" aria-label="Avsluta rundan">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <p id="prompt"></p>
-    <span id="tally"></span>
+    <h2>Dagens platser</h2>
+    <ol id="endlist"></ol>
+    <footer>
+      <p>Stil</p>
+      <nav id="themes" aria-label="Stil"></nav>
+    </footer>
   </div>
+</section>
 
-  <p id="verdict" role="status" hidden></p>
+<button id="back" type="button" class="panel" data-edge="top" hidden>Dagens resultat</button>
+<p id="freehint" class="panel pill" data-edge="bottom" hidden>Tryck på en plats för att se vad den heter</p>
 
-  <!-- The point of the app: the name has just become a place, so say something
-       about the place, and show it. A panel down the right on anything wide
-       enough to spare the room, a sheet along the bottom on a phone — the map
-       is the thing being learned, so the card takes an edge rather than the
-       middle. -->
-  <div id="factcard" hidden>
-    <p id="factverdict"></p>
-    <h2 id="factname"></h2>
-    <p id="factmeta"></p>
-    <!-- Hidden unless the item actually has a picture, which most do not; an
-         empty frame says "missing" where nothing should be said at all. -->
-    <p id="facttext"></p>
-    <a id="factsource" target="_blank" rel="noopener" hidden>Källa</a>
-    <button id="next" type="button">Nästa</button>
-  </div>
-
-  <div id="summary" hidden>
-    <h2 id="summaryhead"></h2>
-    <p id="summarysub"></p>
-    <ul id="summarylist"></ul>
-    <div class="summaryactions">
-      <button id="summaryagain" type="button">En gång till</button>
-      <button id="summarydone" type="button">Klart</button>
-    </div>
-  </div>
-</div>
-
-<!-- Selected feature: name, what it is, which district. Nothing actionable. -->
-<div id="card" hidden>
-  <button id="cardclose" aria-label="Stäng">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-  </button>
+<section id="card" class="panel" data-edge="bottom" hidden>
+  <button id="cardclose" type="button" aria-label="Stäng">×</button>
   <h2 id="cardname"></h2>
-  <p id="cardmeta"></p>
-  <p id="carddesc"></p>
+  <p id="cardlabel"></p>
+  <p id="cardabout"></p>
+  <a id="cardsource" target="_blank" rel="noopener" hidden>Läs mer</a>
+</section>
+
+<div id="boot">
+  <div class="brand">
+    <div class="mark" aria-hidden="true"></div>
+    <h1>Lär dig Malmö</h1>
+    <p>Tio platser om dagen</p>
+  </div>
+  <div class="bar"><i id="bootbar"></i></div>
+  <p id="bootmsg" role="status"></p>
 </div>
-
-<!-- The way back from studying to being asked. -->
-<button id="tolearn" type="button" hidden>
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h6a2 2 0 0 1 2 2v11a2 2 0 0 0-2-2H4zM20 5.5h-6a2 2 0 0 0-2 2v11a2 2 0 0 1 2-2h6z"/></svg>
-  <span>Öva</span>
-</button>
-
-<div id="boot"><p id="bootmsg">Laddar kartan…</p></div>
 
 <script src="/vendor/pmtiles.js"></script>
 <script type="module" src="/app.js"></script>

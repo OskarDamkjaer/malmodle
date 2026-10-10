@@ -1,89 +1,5 @@
 {
-  "_doc": {
-    "purpose": "What to say about an area once you have placed it. Keyed by name, hand-written, and the only file in this repo whose contents are claims about the world rather than about the map.",
-    "why": [
-      "Placing a name correctly and learning nothing is a game. The card that follows a right answer is the reason the app exists, so the text has to be worth the interruption: what the place is, what happened there, what it is known for.",
-      "Areas needed a file of their own because their names come from datasets — Malmö stad's stadsdelar, OSM's delområden, areas.json's groupings — and none of those datasets has a place to put a sentence. Landmarks, bridges and streets keep their text in their own curated files, next to the name. This is the exception, not a second home for everything."
-    ],
-    "coverage": "Deliberately partial, and that is the honest part. There are 243 area names across the three levels; there is real text here for the ones I actually know something about. The rest place perfectly well and their card falls back on what the data can prove — which stadsdel a delområde is in, which delområden a name gathers. An area with nothing to say says nothing rather than something invented.",
-    "twoMaps": "`stadsdelar` and `areas` are separate because five names are on both levels and mean different sizes of thing: Kirseberg the stadsdel is ten times Kirseberg the neighbourhood, and Hyllie, Rosengård, Oxie and Husie do the same. One flat map keyed by name would silently give the big one the little one's text — the kind of bug that is invisible until you read a card and it is subtly wrong. `areas` covers levels 3 and 4 together, where a repeated name really is the same place.",
-    "status": "Every entry is a draft: written from what I know, marked verified:false, with a source only where the claim came from one. Checking them is the standing job this file exists to make visible — the same bargain landmarks.json makes about coordinates.",
-    "fields": {
-      "text": "Swedish, one to three sentences, shown on the card while the name is being asked for.",
-      "source": "Where it came from, when it came from anywhere.",
-      "verified": "Set true once checked against a source."
-    },
-    "noLocation": "Says what the thing is, not where it is. The panel is the question now — name, kind, picture and text are all on screen while you are still looking for the place — so a line like \"öster om Möllevången\" or \"vid Sankt Petri kyrka\" hands over the answer with the question. No compass directions, no \"mellan X och Y\", no neighbouring or containing place used as a marker. What the name itself already carries is allowed: Limhamns kyrka may say Limhamn, and a bridge may say who or what it is named after. Where nothing was left but the position, the line is gone rather than reworded into something that says nothing."
-  },
-  "stadsdelar": {
-    "Centrum": {
-      "text": "Innerstaden innanför kanalen, plus hamnen norr om den. Här ligger Gamla Staden med Stortorget och Lilla Torg, Centralstationen, och Västra Hamnen där varvet låg.",
-      "source": null,
-      "verified": false
-    },
-    "Södra Innerstaden": {
-      "text": "Söder om kanalen: Möllevången, Sofielund och kvarteren däromkring. Malmös tätast bebodda del, byggd för arbetarna i industristaden och sedan dess stadens mest blandade.",
-      "source": null,
-      "verified": false
-    },
-    "Västra Innerstaden": {
-      "text": "Mellan staden och sundet — Slottsstaden, Ribersborg, Rönneholm, Fridhem. Sekelskiftets och 1930-talets Malmö, med Ribersborgsstranden som baksida mot havet.",
-      "source": null,
-      "verified": false
-    },
-    "Limhamn-Bunkeflo": {
-      "text": "Hela kusten söderut: Limhamns gamla hamn- och kalkbrottssamhälle, villamattan i Bunkeflostrand, och landsbygden ner mot Klagshamn och Tygelsjö. Malmös största stadsdel till ytan.",
-      "source": null,
-      "verified": false
-    },
-    "Hyllie": {
-      "text": "Åkermark ända in på 2000-talet, och sedan Citytunnelns södra station: Malmö Arena 2008, Hyllie station 2010, Emporia 2012. Här ligger också Kroksbäck och Holma från miljonprogrammet.",
-      "source": null,
-      "verified": false
-    },
-    "Fosie": {
-      "text": "Den stora stadsdelen i söder — Augustenborg, Lindängen, Hermodsdal, Nydala, Almhög — där 1950- till 70-talens bostadsbyggande syns tydligast.",
-      "source": null,
-      "verified": false
-    },
-    "Rosengård": {
-      "text": "Byggt inom miljonprogrammet på 1960- och 70-talen: Herrgården, Törnrosen, Örtagården, Almgården. Namnet är känt långt utanför Malmö, ofta för allt annat än vad det är att bo där.",
-      "source": null,
-      "verified": false
-    },
-    "Husie": {
-      "text": "Östra Malmö, där staden tar slut: Videdal, Riseberga, Toftanäs våtmark och byn Södra Sallerup med sina gamla kalkbrott.",
-      "source": null,
-      "verified": false
-    },
-    "Kirseberg": {
-      "text": "Nordost om spåren, på höjden som gett stadsdelen smeknamnet Backarna. Här låg Bulltofta flygplats fram till 1972 — området är i dag Malmös största rekreationsområde.",
-      "source": null,
-      "verified": false
-    },
-    "Oxie": {
-      "text": "Egen kommun ända till kommunreformen, och fortfarande en by som råkar ligga i Malmö: kyrkbyn i mitten, villakvarter runt om, åkrar utanför.",
-      "source": null,
-      "verified": false
-    }
-  },
-
   "areas": {
-    "Hyllie": {
-      "text": "Den nya stadsdelskärnan kring stationen — arena, mässa och köpcentrum på mark som var åker in på 2000-talet. Mindre än stadsdelen med samma namn.",
-      "source": null,
-      "verified": false
-    },
-    "Rosengård": {
-      "text": "Bostadsområdena från miljonprogrammet. Namnet används både om dem och om hela stadsdelen omkring.",
-      "source": null,
-      "verified": false
-    },
-    "Oxie": {
-      "text": "Själva Oxie: kyrkbyn och villakvarteren, den bebyggda kärnan i den stadsdel som annars mest är åker.",
-      "source": null,
-      "verified": false
-    },
     "Gamla Staden": {
       "text": "Den medeltida staden innanför vallarna, och Malmös kärna sedan 1200-talet. Gatunätet är i stora drag det som lades ut då.",
       "source": null,
@@ -99,33 +15,8 @@
       "source": null,
       "verified": false
     },
-    "Slottsstaden": {
-      "text": "Namnet finns i inget register men används av alla: kvarter byggda kring sekelskiftet 1900 och framåt.",
-      "source": "https://sv.wikipedia.org/wiki/Slottsstaden",
-      "verified": false
-    },
-    "Limhamn": {
-      "text": "Eget samhälle innan Malmö växte ihop med det: kalkbrottet, cementfabriken och hamnen med färjan till Dragør. Kalkbrottet är i dag naturreservat och stadens djupaste hål.",
-      "source": null,
-      "verified": false
-    },
-    "Sofielund": {
-      "text": "Verkstäder, lager och bostäder om vartannat. Delas i Norra och Södra Sofielund.",
-      "source": null,
-      "verified": false
-    },
-    "Sorgenfri": {
-      "text": "Gammalt industriområde under långsam omvandling till bostäder.",
-      "source": null,
-      "verified": false
-    },
     "Davidshall": {
       "text": "Kvarteren kring Davidshallstorg, med 1930-talets funkis som tydligaste årsring.",
-      "source": null,
-      "verified": false
-    },
-    "Kirseberg": {
-      "text": "Backarna: den gamla arbetarstadsdelen på höjden, med låg trähusbebyggelse kvar.",
       "source": null,
       "verified": false
     },
@@ -144,23 +35,8 @@
       "source": null,
       "verified": false
     },
-    "Tygelsjö": {
-      "text": "By med kyrkan kvar i mitten, numera med villakvarter runt sig.",
-      "source": null,
-      "verified": false
-    },
     "Jägersro": {
       "text": "Travbanan och galoppfältet, med köpcentrum och handelsområde intill.",
-      "source": null,
-      "verified": false
-    },
-    "Hamnen": {
-      "text": "Malmös arbetande hamn — Frihamnen, Norra hamnen, oljehamnen. Nästan ingen bor här, vilket är varför namnet sällan syns på en karta över stadsdelar.",
-      "source": null,
-      "verified": false
-    },
-    "Stadionområdet": {
-      "text": "Stadens samlade idrottsanläggningar: Malmö Stadion från fotbolls-VM 1958, Baltiska hallen, och Eleda Stadion från 2009.",
       "source": null,
       "verified": false
     },
@@ -176,11 +52,6 @@
     },
     "Fosieby": {
       "text": "Den gamla byn Fosie plus industriområdet som växt upp omkring den.",
-      "source": null,
-      "verified": false
-    },
-    "Söderkulla": {
-      "text": "Bostadsområde från miljonprogrammet.",
       "source": null,
       "verified": false
     },
@@ -204,17 +75,6 @@
       "source": null,
       "verified": false
     },
-    "Sege": {
-      "text": "Industri- och verksamhetsområde vid Sege å.",
-      "source": null,
-      "verified": false
-    },
-    "Husie": {
-      "text": "Byn som gett hela stadsdelen sitt namn.",
-      "source": null,
-      "verified": false
-    },
-
     "Rörsjöstaden": {
       "text": "Rutnätsstaden som byggdes från slutet av 1800-talet, när Malmö växte ur sina vallar.",
       "source": null,

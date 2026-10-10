@@ -1,12 +1,3 @@
-// App icons — the home-screen mark, drawn in code.
-//
-// Installing to a home screen needs real PNGs at real sizes (iOS ignores SVG
-// entirely), and rasterising an SVG needs a toolchain this project does not
-// have. So the mark is simple enough to draw directly: the Turning Torso's
-// twist, in white, on the map's own paper colour. ~80 lines of scanline fill
-// and a zlib-deflated PNG beats adding a rendering dependency for one asset.
-//
-// Usage: node scripts/build-icons.mjs
 import { deflateSync } from 'node:zlib';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
@@ -14,7 +5,6 @@ const PAPER = [0xf8, 0xf4, 0xf0];
 const INK = [0x1f, 0x6f, 0x5c];
 const WHITE = [0xff, 0xff, 0xff];
 
-// ---- a very small raster --------------------------------------------------
 function canvas(size, bg) {
   const px = Buffer.alloc(size * size * 4);
   for (let i = 0; i < size * size; i++) {
@@ -29,8 +19,6 @@ function blend(c, x, y, rgb, a) {
   for (let k = 0; k < 3; k++) c.px[i + k] = Math.round(c.px[i + k] * (1 - a) + rgb[k] * a);
 }
 
-// Supersampled coverage: 3×3 samples per pixel is enough antialiasing for a
-// shape this simple, and keeps the code to one predicate per primitive.
 function fill(c, rgb, inside) {
   const S = 3;
   for (let y = 0; y < c.size; y++) {
@@ -48,7 +36,6 @@ function fill(c, rgb, inside) {
 
 const disc = (cx, cy, r) => (x, y) => (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
 
-// A thick line segment: distance to the segment, capped round.
 function bar(x1, y1, x2, y2, w) {
   const dx = x2 - x1;
   const dy = y2 - y1;
@@ -59,7 +46,6 @@ function bar(x1, y1, x2, y2, w) {
   };
 }
 
-// ---- PNG ------------------------------------------------------------------
 const CRC = Int32Array.from({ length: 256 }, (_, n) => {
   let c = n;
   for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
@@ -85,10 +71,8 @@ function png({ size, px }) {
   const ihdr = Buffer.alloc(13);
   ihdr.writeUInt32BE(size, 0);
   ihdr.writeUInt32BE(size, 4);
-  ihdr[8] = 8;    // bit depth
-  ihdr[9] = 6;    // truecolour with alpha
-  // Each scanline is prefixed with filter type 0 (none) — the shapes are flat,
-  // so deflate does the compressing.
+  ihdr[8] = 8;
+  ihdr[9] = 6;
   const raw = Buffer.alloc((size * 4 + 1) * size);
   for (let y = 0; y < size; y++) {
     raw[y * (size * 4 + 1)] = 0;
@@ -102,18 +86,14 @@ function png({ size, px }) {
   ]);
 }
 
-// ---- the mark -------------------------------------------------------------
-// `inset` leaves room for the safe zone maskable icons are cropped to.
 function mark(size, { maskable = false } = {}) {
   const c = canvas(size, maskable ? INK : PAPER);
-  const u = size / 24; // draw in the same 24-unit grid as the landmark icons
+  const u = size / 24;
   const scale = maskable ? 0.78 : 1;
   const at = (n) => (n - 12) * u * scale + size / 2;
 
   if (!maskable) fill(c, INK, disc(size / 2, size / 2, 10.5 * u));
 
-  // The twist: five floors of the same slab, each turned a little further than
-  // the one below. No spine — the rotation is the whole idea.
   const floors = 5;
   for (let i = 0; i < floors; i++) {
     const angle = -0.5 + i * (1 / (floors - 1));
@@ -130,7 +110,7 @@ function mark(size, { maskable = false } = {}) {
 
 mkdirSync('app/icons', { recursive: true });
 const out = [
-  ['app/icons/icon-180.png', mark(180)],       // iOS home screen
+  ['app/icons/icon-180.png', mark(180)],
   ['app/icons/icon-192.png', mark(192)],
   ['app/icons/icon-512.png', mark(512)],
   ['app/icons/icon-maskable-512.png', mark(512, { maskable: true })],
