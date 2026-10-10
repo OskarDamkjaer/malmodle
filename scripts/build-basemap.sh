@@ -13,7 +13,7 @@ mkdir -p "$CACHE" tools
 
 read -r WEST SOUTH EAST NORTH < <(node -e '
   const b=require("./config/bbox.json").bbox;
-  process.stdout.write(`${b.west} ${b.south} ${b.east} ${b.north}`);')
+  console.log(`${b.west} ${b.south} ${b.east} ${b.north}`);')
 echo "bbox: W$WEST S$SOUTH E$EAST N$NORTH"
 
 if [ -x /opt/homebrew/opt/openjdk@21/bin/java ]; then
