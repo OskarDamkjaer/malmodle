@@ -28,7 +28,8 @@ The code supports many question types. Pointing is the vast majority, then
 - **Vad är det här?** Something is highlighted on the map; pick its name from a
   list of nearby things of the same kind.
 - **Närmast.** "Vilken ligger närmast X?" Pick one of four.
-- **Norr eller söder.** "Ligger A norr eller söder om B?" Two buttons.
+- **Norr eller söder.** "Ligger A norr eller söder om B?" Two buttons. Asked
+  as öster eller väster when that is the clearer axis.
 
 Every question scores 0–100. A day scores out of 1000.
 

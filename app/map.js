@@ -14,7 +14,7 @@ const feature = (geometry, properties) => ({ type: 'Feature', geometry, properti
 
 let map = null;
 let labelLayers = [];
-const exploreLayers = [];
+const freeLayers = [];
 
 function shapesOf(items, extra = () => ({})) {
   return {
@@ -37,9 +37,9 @@ const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineSt
 const isPoint = ['==', ['geometry-type'], 'Point'];
 const roleColor = ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
-function addExplore(layer) {
+function addFree(layer) {
   map.addLayer({ ...layer, layout: { ...layer.layout, visibility: 'none' } });
-  exploreLayers.push(layer.id);
+  freeLayers.push(layer.id);
 }
 
 export function setupLayers(mapInstance, items) {
@@ -53,24 +53,24 @@ export function setupLayers(mapInstance, items) {
   map.addSource('focus-labels', { type: 'geojson', data: EMPTY });
   map.addSource('tap', { type: 'geojson', data: EMPTY });
 
-  addExplore({
-    id: 'explore-area-fill', type: 'fill', source: 'quiz-shapes', filter: isPolygon,
+  addFree({
+    id: 'all-area-fill', type: 'fill', source: 'quiz-shapes', filter: isPolygon,
     paint: { 'fill-color': COLOR.outline, 'fill-opacity': 0.03 },
   });
-  addExplore({
-    id: 'explore-area-line', type: 'line', source: 'quiz-shapes', filter: isPolygon,
+  addFree({
+    id: 'all-area-line', type: 'line', source: 'quiz-shapes', filter: isPolygon,
     paint: { 'line-color': COLOR.outline, 'line-width': 1.2, 'line-opacity': 0.8 },
   });
-  addExplore({
-    id: 'explore-street', type: 'line', source: 'quiz-shapes', filter: isLine,
+  addFree({
+    id: 'all-street', type: 'line', source: 'quiz-shapes', filter: isLine,
     layout: { 'line-cap': 'round' },
     paint: { 'line-color': COLOR.answer, 'line-width': 14, 'line-opacity': 0.01 },
   });
-  addExplore({
+  addFree({
     id: 'today-fill', type: 'fill', source: 'today', filter: isPolygon,
     paint: { 'fill-color': COLOR.answer, 'fill-opacity': 0.12 },
   });
-  addExplore({
+  addFree({
     id: 'today-line', type: 'line', source: 'today', filter: ['!', isPoint],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-color': COLOR.answer, 'line-width': 3, 'line-opacity': 0.8 },
@@ -90,8 +90,8 @@ export function setupLayers(mapInstance, items) {
     paint: { 'line-color': COLOR.tap, 'line-width': 1.5, 'line-dasharray': [2, 2] },
   });
 
-  addExplore({
-    id: 'explore-points', type: 'circle', source: 'quiz-shapes', filter: isPoint,
+  addFree({
+    id: 'all-points', type: 'circle', source: 'quiz-shapes', filter: isPoint,
     paint: {
       'circle-radius': 5,
       'circle-color': '#fff',
@@ -99,12 +99,12 @@ export function setupLayers(mapInstance, items) {
       'circle-stroke-width': 2,
     },
   });
-  addExplore({
+  addFree({
     id: 'today-points', type: 'circle', source: 'today', filter: isPoint,
     paint: { 'circle-radius': 7, 'circle-color': COLOR.answer, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 },
   });
-  addExplore({
-    id: 'explore-labels', type: 'symbol', source: 'quiz-labels',
+  addFree({
+    id: 'all-labels', type: 'symbol', source: 'quiz-labels',
     layout: {
       'text-field': ['get', 'name'],
       'text-font': ['Roboto Medium'],
@@ -147,7 +147,7 @@ export function setupLayers(mapInstance, items) {
 
 export function setLabels(on) {
   const visibility = on ? 'visible' : 'none';
-  for (const id of [...labelLayers, ...exploreLayers]) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visibility);
+  for (const id of [...labelLayers, ...freeLayers]) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visibility);
 }
 
 export function show(marks) {
@@ -199,7 +199,7 @@ function padding() {
   };
 }
 
-export function frame(box, { duration = 500, maxZoom = 15.5 } = {}) {
+function frame(box, { duration = 500, maxZoom = 15.5 } = {}) {
   map.fitBounds(box, { padding: padding(), maxZoom, duration });
 }
 
@@ -231,7 +231,7 @@ export function ensureVisible(points) {
 }
 
 export function pick(point) {
-  const layers = ['explore-points', 'explore-street', 'explore-area-fill'];
+  const layers = ['all-points', 'all-street', 'all-area-fill'];
   const hits = map.queryRenderedFeatures(point, { layers });
   for (const id of layers) {
     const hit = hits.find((h) => h.layer.id === id);

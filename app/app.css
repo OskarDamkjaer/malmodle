@@ -3,13 +3,9 @@
   --panel: #fffefc;
   --ink: #201d19;
   --ink-soft: #6d665e;
-  --line: #e2dbd2;
   --chip: #f2ede6;
   --accent: #1f6f5c;
-  --accent-soft: #e4efe9;
   --wrong: #b4442a;
-  --wrong-soft: #f7e4de;
-  --context: #2f5f9a;
   --shadow: 0 1px 2px rgb(32 29 25 / 12%), 0 6px 20px rgb(32 29 25 / 10%);
   --radius: 14px;
   --gap: 12px;
@@ -83,10 +79,6 @@ button.primary { background: var(--accent); color: #fff; }
   padding: 12px;
 }
 #choices button { text-align: center; line-height: 1.2; }
-#choices button[data-state="right"] { background: var(--accent); color: #fff; }
-#choices button[data-state="wrong"] { background: var(--wrong); color: #fff; }
-#choices button:disabled { cursor: default; }
-#choices button:disabled:not([data-state]) { opacity: .55; }
 
 #result { padding: 14px 16px 12px; }
 #points { font-size: 28px; font-variant-numeric: tabular-nums; }

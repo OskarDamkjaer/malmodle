@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { bboxOf, distance, flatCoords, interiorPoint } from './lib/geo.mjs';
+import { bboxGap, bboxOf, distance, interiorPoint } from './lib/geo.mjs';
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
 
 const args = process.argv.slice(2);
@@ -99,7 +99,6 @@ const landmarkItems = landmarksDoc.landmarks
     name: lm.name,
     kind: 'landmark',
     label: LANDMARK_LABEL[lm.icon] ?? 'Sevärdhet',
-    icon: lm.icon ?? null,
     point: roundCoords([lm.lon, lm.lat]),
     geometry: { type: 'Point', coordinates: roundCoords([lm.lon, lm.lat]) },
     about: lm.description ?? null,
@@ -133,13 +132,6 @@ for (const tile of tiles(archive, { zoom: STREET_ZOOM })) {
   }
 }
 
-function gap(a, b) {
-  const kx = 111320 * Math.cos((a[1] * Math.PI) / 180);
-  const dx = Math.max(0, a[0] - b[2], b[0] - a[2]) * kx;
-  const dy = Math.max(0, a[1] - b[3], b[1] - a[3]) * 111320;
-  return Math.hypot(dx, dy);
-}
-
 function streetGeometry(name, near) {
   const pieces = (streetPieces.get(name) ?? []).map((line) => ({ line, box: bboxOf(line) }));
   if (!pieces.length) return null;
@@ -153,7 +145,7 @@ function streetGeometry(name, near) {
   while (queue.length) {
     const i = queue.pop();
     for (let j = 0; j < pieces.length; j++) {
-      if (keep.has(j) || gap(pieces[i].box, pieces[j].box) > STREET_LINK_M) continue;
+      if (keep.has(j) || bboxGap(pieces[i].box, pieces[j].box) > STREET_LINK_M) continue;
       keep.add(j);
       queue.push(j);
     }

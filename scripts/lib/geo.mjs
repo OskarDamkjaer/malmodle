@@ -31,7 +31,7 @@ export function bboxGap(a, b) {
   return Math.hypot(dx, dy);
 }
 
-export function bboxContains(bb, [x, y]) {
+function bboxContains(bb, [x, y]) {
   return x >= bb[0] && x <= bb[2] && y >= bb[1] && y <= bb[3];
 }
 
@@ -47,7 +47,7 @@ function crossings(ring, x, y) {
   return inside;
 }
 
-export function pointInGeometry(geometry, point) {
+function pointInGeometry(geometry, point) {
   const [x, y] = point;
   const polys = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
   for (const rings of polys) {

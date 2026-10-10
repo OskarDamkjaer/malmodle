@@ -120,7 +120,6 @@ function ask() {
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = option[0].toUpperCase() + option.slice(1);
-      b.dataset.value = option;
       b.addEventListener('click', () => answer(option));
       choices.append(b);
     }
@@ -279,7 +278,7 @@ function finish() {
     onMap.type = 'button';
     onMap.className = 'onmap';
     onMap.textContent = 'Visa på kartan';
-    onMap.addEventListener('click', () => explore(q.target));
+    onMap.addEventListener('click', () => openMap(q.target));
     li.append(onMap);
 
     list.append(li);
@@ -308,8 +307,8 @@ async function share() {
   setTimeout(() => { button.textContent = 'Kopiera resultat'; }, 2000);
 }
 
-function explore(focus = null) {
-  phase = 'explore';
+function openMap(focus = null) {
+  phase = 'free';
   hide('end', 'card');
   reveal('back');
   setLabels(true);
@@ -350,7 +349,7 @@ function backToEnd() {
 map.on('click', (e) => {
   if (phase === 'asking' && typeOf(current()).input === 'map') {
     answer([e.lngLat.lng, e.lngLat.lat]);
-  } else if (phase === 'explore') {
+  } else if (phase === 'free') {
     const name = pick(e.point);
     if (name) select(byName.get(name));
     else deselect();
@@ -359,13 +358,13 @@ map.on('click', (e) => {
 
 el('next').addEventListener('click', next);
 el('share').addEventListener('click', share);
-el('explore').addEventListener('click', () => explore());
+el('openmap').addEventListener('click', () => openMap());
 el('again').addEventListener('click', start);
 el('back').addEventListener('click', backToEnd);
 
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
-  if (phase === 'explore') {
+  if (phase === 'free') {
     if (!el('card').hidden) deselect();
     else backToEnd();
   }

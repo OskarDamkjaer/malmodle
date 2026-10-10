@@ -94,7 +94,7 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     assert.match(shared, /^Lär dig Malmö \d{4}-\d{2}-\d{2}\n\d+\/1000\n/);
     assert.equal([...shared.split('\n')[2]].length, 10);
 
-    await page.click('#explore');
+    await page.click('#openmap');
     await page.waitForSelector('#back:not([hidden])');
     assert.ok((await visibleText(page)).length > 0, 'the free map has no labels');
 

@@ -31,7 +31,6 @@ rebuild it (below) or fetch a prebuilt copy with
 - `learn/core.json`: which places the app asks about.
 - `learn/`: bridges, streets, descriptions and sources.
 - `landmarks/landmarks.json`: sights and parks.
-- `areas/areas.json`: area names people use that no official dataset has.
 - `config/bbox.json`: the part of the world the map covers.
 
 Everything is hand-edited. `build-quiz.mjs --all` builds every place rather than

@@ -2,9 +2,7 @@
   "landmarks": [
     {
       "name": "Turning Torso",
-      "tier": 1,
       "icon": "tower",
-      "min_zoom": 11,
       "description": "Santiago Calatravas vridna torn, 190 meter och 54 våningar, klart 2005. Nio kuber som vrider sig 90 grader från botten till topp — stadens siluett sedan dess.",
       "query": "Turning Torso, Malmö",
       "lat": 55.61333,
@@ -18,9 +16,7 @@
     },
     {
       "name": "Öresundsbron",
-      "tier": 1,
       "icon": "bridge",
-      "min_zoom": 11,
       "description": "Bro, konstgjord ö och tunnel till Köpenhamn, öppnad 2000. Bara halva vägen är bro: vid Peberholm dyker banan ner i Drogdentunneln.",
       "query": "Öresundsbron, Malmö",
       "lat": 55.56947,
@@ -34,9 +30,7 @@
     },
     {
       "name": "Malmöhus slott",
-      "tier": 1,
       "icon": "castle",
-      "min_zoom": 12,
       "description": "Byggt på 1530-talet av Christian III och Nordens äldsta bevarade renässansslott. Fängelse i nästan hela 1800-talet, i dag Malmö Museer.",
       "query": "Malmöhus slott, Malmö",
       "lat": 55.60477,
@@ -50,9 +44,7 @@
     },
     {
       "name": "Malmö Centralstation",
-      "tier": 1,
       "icon": "station",
-      "min_zoom": 12,
       "description": "Stationen från 1856. Byggdes om när Citytunneln öppnade 2010 och fick underjordiska spår.",
       "query": "Malmö Centralstation",
       "lat": 55.60917,
@@ -66,9 +58,7 @@
     },
     {
       "name": "Stortorget",
-      "tier": 1,
       "icon": "square",
-      "min_zoom": 12,
       "description": "Anlagt på 1530-talet och då Nordens största torg. Rådhuset står på östra sidan, Karl X Gustav till häst i mitten.",
       "query": "Stortorget, Malmö",
       "lat": 55.60612,
@@ -82,9 +72,7 @@
     },
     {
       "name": "Lilla Torg",
-      "tier": 1,
       "icon": "square",
-      "min_zoom": 12,
       "description": "Blev till på 1590-talet när Stortorget visade sig vara för stort. Korsvirkeshusen runt om är stadens bäst bevarade, och uteserveringarna Malmös tätaste.",
       "query": "Lilla Torg, Malmö",
       "lat": 55.60509,
@@ -98,9 +86,7 @@
     },
     {
       "name": "Gustav Adolfs torg",
-      "tier": 1,
       "icon": "square",
-      "min_zoom": 12,
       "description": "Det stora torget i 1800-talets stadsplan, anlagt när staden växte ur sina vallar.",
       "query": "Gustav Adolfs torg, Malmö",
       "lat": 55.6027,
@@ -114,9 +100,7 @@
     },
     {
       "name": "Möllevångstorget",
-      "tier": 1,
       "icon": "square",
-      "min_zoom": 12,
       "description": "Torghandel sedan tidigt 1900-tal. Monumentet Arbetets ära står mitt på torget.",
       "query": "Möllevångstorget, Malmö",
       "lat": 55.59166,
@@ -130,9 +114,7 @@
     },
     {
       "name": "Sankt Petri kyrka",
-      "tier": 1,
       "icon": "church",
-      "min_zoom": 12,
       "description": "Malmös äldsta byggnad, tegelgotik från 1300-talet efter mönster från Lübeck. Krämarkapellet har kvar sina medeltida målningar.",
       "query": "Sankt Petri kyrka, Malmö",
       "lat": 55.60695,
@@ -146,9 +128,7 @@
     },
     {
       "name": "Malmö Live",
-      "tier": 1,
       "icon": "concert",
-      "min_zoom": 12,
       "description": "Konserthus, kongress och hotell, öppnat 2015. Hem för Malmö SymfoniOrkester.",
       "query": "Malmö Live",
       "lat": 55.6073,
@@ -162,9 +142,7 @@
     },
     {
       "name": "Slottsparken",
-      "tier": 1,
       "icon": "park",
-      "min_zoom": 12,
       "description": "En av de fyra parkerna som bildar det gröna stråket genom staden.",
       "query": "Slottsparken, Malmö",
       "lat": 55.6013,
@@ -178,9 +156,7 @@
     },
     {
       "name": "Pildammsparken",
-      "tier": 1,
       "icon": "park",
-      "min_zoom": 12,
       "description": "Kring de gamla vattendammarna, formad av Baltiska utställningen 1914. Tallriken — den runda gräsytan — är utställningens kvarleva.",
       "query": "Pildammsparken, Malmö",
       "lat": 55.59059,
@@ -194,9 +170,7 @@
     },
     {
       "name": "Kungsparken",
-      "tier": 1,
       "icon": "park",
-      "min_zoom": 12,
       "description": "Malmös äldsta anlagda park, från 1870-talet.",
       "query": "Kungsparken, Malmö",
       "lat": 55.60368,
@@ -210,9 +184,7 @@
     },
     {
       "name": "Folkets Park",
-      "tier": 1,
       "icon": "amusement",
-      "min_zoom": 12,
       "description": "Sveriges äldsta folkets park, grundad 1891 av arbetarrörelsen. Moriskan i mitten är parkens signatur.",
       "query": "Folkets Park, Malmö",
       "lat": 55.59337,
@@ -226,9 +198,7 @@
     },
     {
       "name": "Ribersborgsstranden",
-      "tier": 1,
       "icon": "beach",
-      "min_zoom": 12,
       "description": "Ribban: två och en halv kilometer anlagd strand mot Öresund.",
       "query": "Ribersborgsstranden, Malmö",
       "lat": 55.60207,
@@ -242,9 +212,7 @@
     },
     {
       "name": "Malmö Arena",
-      "tier": 1,
       "icon": "stadium",
-      "min_zoom": 12,
       "description": "Inomhusarena från 2008, hemmaplan för Malmö Redhawks. Här hölls Eurovision 2013.",
       "query": "Malmö Arena",
       "lat": 55.56439,
@@ -258,9 +226,7 @@
     },
     {
       "name": "Emporia",
-      "tier": 1,
       "icon": "shopping",
-      "min_zoom": 12,
       "description": "Köpcentrum från 2012, med Wingårdhs böljande gula glasfasad.",
       "query": "Emporia, Malmö",
       "lat": 55.56428,
@@ -274,9 +240,7 @@
     },
     {
       "name": "Malmö Konsthall",
-      "tier": 2,
       "icon": "museum",
-      "min_zoom": 13,
       "description": "Klas Anshelms byggnad från 1975, en av Europas största utställningshallar. Ljuset uppifrån genom taket är hela poängen med huset.",
       "query": "Malmö Konsthall",
       "lat": 55.59527,
@@ -290,9 +254,7 @@
     },
     {
       "name": "Moderna Museet Malmö",
-      "tier": 2,
       "icon": "museum",
-      "min_zoom": 13,
       "description": "Modern konst i det gamla Elverket sedan 2009, med en orange perforerad tillbyggnad som syns långt.",
       "query": "Moderna Museet Malmö",
       "lat": 55.60463,
@@ -306,9 +268,7 @@
     },
     {
       "name": "Malmö Museer",
-      "tier": 2,
       "icon": "museum",
-      "min_zoom": 13,
       "description": "Stadens museer inne på Malmöhus: historia, natur och konst under samma tak.",
       "query": "Malmö Museer",
       "lat": 55.60475,
@@ -322,9 +282,7 @@
     },
     {
       "name": "Form/Design Center",
-      "tier": 2,
       "icon": "museum",
-      "min_zoom": 13,
       "description": "Form och arkitektur i Hedmanska gården, ett korsvirkeskvarter från 1500-talet.",
       "query": "Form Design Center, Malmö",
       "lat": 55.6045,
@@ -338,9 +296,7 @@
     },
     {
       "name": "Teknikens och sjöfartens hus",
-      "tier": 2,
       "icon": "museum",
-      "min_zoom": 13,
       "description": "Teknik- och sjöfartsmuseum, med ubåten U3 uppdragen på land.",
       "query": "Teknikens och sjöfartens hus, Malmö",
       "lat": 55.60484,
@@ -354,9 +310,7 @@
     },
     {
       "name": "Disgusting Food Museum",
-      "tier": 2,
       "icon": "museum",
-      "min_zoom": 13,
       "description": "Museum om mat som väcker avsky — och om varför avsky är kulturellt inlärt.",
       "query": "Disgusting Food Museum, Malmö",
       "lat": 55.60089,
@@ -370,9 +324,7 @@
     },
     {
       "name": "Malmö Opera",
-      "tier": 2,
       "icon": "theatre",
-      "min_zoom": 13,
       "description": "Operahuset från 1944, med en av Europas största scener när det byggdes.",
       "query": "Malmö Opera",
       "lat": 55.59613,
@@ -386,9 +338,7 @@
     },
     {
       "name": "Malmö Stadsteater",
-      "tier": 2,
       "icon": "theatre",
-      "min_zoom": 13,
       "description": "Stadens talscen, med Hipp som huvudscen.",
       "query": "Malmö Stadsteater",
       "lat": 55.60572,
@@ -402,9 +352,7 @@
     },
     {
       "name": "Malmö Stadsbibliotek",
-      "tier": 2,
       "icon": "library",
-      "min_zoom": 13,
       "description": "Henning Larsens Ljusets kalender från 1997, byggd ihop med det gamla biblioteksslottet från 1946.",
       "query": "Malmö Stadsbibliotek",
       "lat": 55.60047,
@@ -418,9 +366,7 @@
     },
     {
       "name": "Malmö Saluhall",
-      "tier": 2,
       "icon": "market",
-      "min_zoom": 13,
       "description": "Mathall i ett gammalt godsmagasin, öppnad 2016.",
       "query": "Malmö Saluhall",
       "lat": 55.60786,
@@ -434,9 +380,7 @@
     },
     {
       "name": "Sankt Johannes kyrka",
-      "tier": 2,
       "icon": "church",
-      "min_zoom": 13,
       "description": "Jugendkyrka från 1907.",
       "query": "Sankt Johannes kyrka, Malmö",
       "lat": 55.5942,
@@ -450,9 +394,7 @@
     },
     {
       "name": "Sankt Pauli kyrka",
-      "tier": 2,
       "icon": "church",
-      "min_zoom": 13,
       "description": "Nygotisk tegelkyrka från 1880-talet.",
       "query": "Sankt Pauli kyrka, Malmö",
       "lat": 55.60299,
@@ -466,9 +408,7 @@
     },
     {
       "name": "Caroli kyrka",
-      "tier": 2,
       "icon": "church",
-      "min_zoom": 13,
       "description": "Nygotisk kyrka från 1880-talet, byggd där den äldre tyska församlingskyrkan stod.",
       "query": "Caroli kyrka, Malmö",
       "lat": 55.60743,
@@ -482,9 +422,7 @@
     },
     {
       "name": "Limhamns kyrka",
-      "tier": 2,
       "icon": "church",
-      "min_zoom": 13,
       "description": "Limhamns församlingskyrka, från tiden då Limhamn var ett eget samhälle.",
       "query": "Limhamns kyrka, Malmö",
       "lat": 55.57483,
@@ -498,9 +436,7 @@
     },
     {
       "name": "Malmö synagoga",
-      "tier": 2,
       "icon": "synagogue",
-      "min_zoom": 13,
       "description": "Invigd 1903, byggd i morisk stil.",
       "query": "Malmö synagoga",
       "lat": 55.59953,
@@ -514,9 +450,7 @@
     },
     {
       "name": "Malmö moské",
-      "tier": 2,
       "icon": "mosque",
-      "min_zoom": 13,
       "description": "Sveriges första byggda moské, öppnad 1984. Utsatt för mordbrand 2003 och återuppbyggd.",
       "query": "Malmö Islamic Center",
       "lat": 55.57501,
@@ -530,9 +464,7 @@
     },
     {
       "name": "Ribersborgs Kallbadhus",
-      "tier": 2,
       "icon": "bath",
-      "min_zoom": 13,
       "description": "Kallbadhus ute i vattnet, från 1898. Bastu och havsbad året om.",
       "query": "Ribersborgs Kallbadhus",
       "lat": 55.60522,
@@ -546,9 +478,7 @@
     },
     {
       "name": "Limhamns kalkbrott",
-      "tier": 2,
       "icon": "quarry",
-      "min_zoom": 13,
       "description": "Hålet efter kalkbrytningen som byggde Limhamn — 65 meter djupt och 1,5 kilometer brett. I dag naturreservat med pilgrimsfalk.",
       "query": "Limhamns kalkbrott",
       "lat": 55.56763,
@@ -562,17 +492,13 @@
     },
     {
       "name": "Klagshamns udde",
-      "tier": 2,
       "icon": "nature",
-      "min_zoom": 13,
       "description": "Udden byggd av restmassor från Klagshamns kalkbruk, nu naturområde och fågellokal.",
       "query": "Klagshamns udde"
     },
     {
       "name": "Sibbarps badplats",
-      "tier": 2,
       "icon": "beach",
-      "min_zoom": 13,
       "description": "Badplats vid Öresund, långgrund och grillbar.",
       "query": "Sibbarp, Malmö",
       "lat": 55.57451,
@@ -586,9 +512,7 @@
     },
     {
       "name": "Scaniaparken",
-      "tier": 2,
       "icon": "park",
-      "min_zoom": 13,
       "description": "Anlagd där varvets Scaniaplan låg, med utsikt över sundet.",
       "query": "Scaniaparken, Malmö",
       "lat": 55.6177,
@@ -602,9 +526,7 @@
     },
     {
       "name": "Daniaparken",
-      "tier": 2,
       "icon": "park",
-      "min_zoom": 13,
       "description": "Havspark med betongterrasser ner mot vattnet och stadens mest använda hoppkajer.",
       "query": "Daniaparken, Malmö",
       "lat": 55.61395,
@@ -618,9 +540,7 @@
     },
     {
       "name": "Öresundsparken",
-      "tier": 2,
       "icon": "park",
-      "min_zoom": 13,
       "description": "Strandpark mot Öresund.",
       "query": "Öresundsparken, Malmö",
       "lat": 55.60323,
@@ -634,9 +554,7 @@
     },
     {
       "name": "Rörsjöparken",
-      "tier": 2,
       "icon": "park",
-      "min_zoom": 13,
       "description": "Kvarterspark från 1800-talets stadsutvidgning.",
       "query": "Rörsjöparken, Malmö",
       "lat": 55.60514,
@@ -650,9 +568,7 @@
     },
     {
       "name": "Beijers park",
-      "tier": 2,
       "icon": "park",
-      "min_zoom": 13,
       "description": "Uppkallad efter industrimannen Gottfrid Beijer.",
       "query": "Beijers park, Malmö",
       "lat": 55.61046,
@@ -666,9 +582,7 @@
     },
     {
       "name": "Bulltofta rekreationsområde",
-      "tier": 2,
       "icon": "park",
-      "min_zoom": 13,
       "description": "Malmös största rekreationsområde, anlagt på det som var Bulltofta flygplats fram till 1972.",
       "query": "Bulltofta rekreationsområde",
       "lat": 55.60154,
@@ -682,17 +596,13 @@
     },
     {
       "name": "Toftanäs våtmarkspark",
-      "tier": 2,
       "icon": "nature",
-      "min_zoom": 13,
       "description": "Anlagd våtmark som renar dagvatten och samtidigt blivit en av stadens bästa fågellokaler.",
       "query": "Toftanäs våtmarkspark"
     },
     {
       "name": "Katrinetorp",
-      "tier": 2,
       "icon": "castle",
-      "min_zoom": 13,
       "description": "Herrgård från tidigt 1800-tal, med bevarad trädgård i empirstil.",
       "query": "Katrinetorp, Malmö",
       "lat": 55.55079,
@@ -706,9 +616,7 @@
     },
     {
       "name": "Eleda Stadion",
-      "tier": 2,
       "icon": "stadium",
-      "min_zoom": 13,
       "description": "Malmö FF:s arena från 2009.",
       "query": "Eleda Stadion, Malmö",
       "lat": 55.58373,
@@ -722,9 +630,7 @@
     },
     {
       "name": "Malmö Stadion",
-      "tier": 2,
       "icon": "stadium",
-      "min_zoom": 13,
       "description": "Byggt till fotbolls-VM 1958, då Malmös stora arena. I dag friidrott och träning.",
       "query": "Malmö Stadion",
       "lat": 55.58585,
@@ -738,9 +644,7 @@
     },
     {
       "name": "Baltiska hallen",
-      "tier": 2,
       "icon": "stadium",
-      "min_zoom": 13,
       "description": "Handbollens och gymnastikens hemmaplan i Malmö.",
       "query": "Baltiska hallen, Malmö",
       "lat": 55.58361,
@@ -754,9 +658,7 @@
     },
     {
       "name": "Jägersro travbana",
-      "tier": 2,
       "icon": "stadium",
-      "min_zoom": 13,
       "description": "Trav- och galoppbana, en av Sveriges största.",
       "query": "Travbanan, Malmö",
       "lat": 55.57252,
@@ -770,9 +672,7 @@
     },
     {
       "name": "Malmö universitet",
-      "tier": 2,
       "icon": "university",
-      "min_zoom": 13,
       "description": "Grundat som högskola 1998 på gammal varvsmark, universitet sedan 2018.",
       "query": "Malmö universitet",
       "lat": 55.60889,
@@ -786,9 +686,7 @@
     },
     {
       "name": "Orkanen",
-      "tier": 2,
       "icon": "library",
-      "min_zoom": 13,
       "description": "Universitetets bibliotek och lärarutbildning, invigt 2005.",
       "query": "Orkanen, Malmö",
       "lat": 55.61079,
@@ -802,9 +700,7 @@
     },
     {
       "name": "Triangeln station",
-      "tier": 2,
       "icon": "station",
-      "min_zoom": 13,
       "description": "Underjordisk station från Citytunneln 2010, mitt under Triangeln.",
       "query": "Triangeln station, Malmö",
       "lat": 55.59329,
@@ -818,9 +714,7 @@
     },
     {
       "name": "Hyllie station",
-      "tier": 2,
       "icon": "station",
-      "min_zoom": 13,
       "description": "Station på Citytunneln, öppnad 2010.",
       "query": "Hyllie station",
       "lat": 55.56275,
@@ -834,9 +728,7 @@
     },
     {
       "name": "Värnhemstorget",
-      "tier": 2,
       "icon": "square",
-      "min_zoom": 13,
       "description": "Bytespunkt där många av stadens busslinjer möts.",
       "query": "Värnhemstorget, Malmö",
       "lat": 55.60553,
@@ -850,9 +742,7 @@
     },
     {
       "name": "Drottningtorget",
-      "tier": 2,
       "icon": "square",
-      "min_zoom": 13,
       "description": null,
       "query": "Drottningtorget, Malmö",
       "lat": 55.6082,
@@ -866,9 +756,7 @@
     },
     {
       "name": "Davidshallstorg",
-      "tier": 2,
       "icon": "square",
-      "min_zoom": 13,
       "description": "Torget mitt i Davidshalls funkiskvarter.",
       "query": "Davidshallstorg, Malmö",
       "lat": 55.59936,
@@ -882,9 +770,7 @@
     },
     {
       "name": "Södervärn",
-      "tier": 2,
       "icon": "square",
-      "min_zoom": 13,
       "description": "Knutpunkt med busstation, där många av stadens linjer möts.",
       "query": "Södervärn, Malmö",
       "lat": 55.5868,
@@ -898,9 +784,7 @@
     },
     {
       "name": "Rosengård Centrum",
-      "tier": 2,
       "icon": "shopping",
-      "min_zoom": 13,
       "description": "Rosengårds centrum med torg, butiker och stadsdelens mötesplats.",
       "query": "Rosengård Centrum",
       "lat": 55.58603,
@@ -914,9 +798,7 @@
     },
     {
       "name": "Mobilia",
-      "tier": 2,
       "icon": "shopping",
-      "min_zoom": 13,
       "description": "Köpcentrum i det som var Malmö Yllefabrik — fabriksbyggnaderna står kvar runt gallerian.",
       "query": "Mobilia, Malmö",
       "lat": 55.58182,
@@ -930,9 +812,7 @@
     },
     {
       "name": "Kv. Caroli",
-      "tier": 2,
       "icon": "shopping",
-      "min_zoom": 13,
       "description": "Kvarteret vid Caroli kyrka, byggt om från galleria till bostäder och kontor.",
       "query": "Kv. Caroli, Malmö",
       "lat": 55.60767,
@@ -946,9 +826,7 @@
     },
     {
       "name": "Hansacompagniet",
-      "tier": 2,
       "icon": "shopping",
-      "min_zoom": 13,
       "description": null,
       "query": "Hansacompagniet, Malmö",
       "lat": 55.60317,
@@ -962,9 +840,7 @@
     },
     {
       "name": "Augustenborg",
-      "tier": 2,
       "icon": "nature",
-      "min_zoom": 13,
       "description": "Ekostaden Augustenborg: 1950-talsområde ombyggt med öppen dagvattenhantering och gröna tak, internationellt känt.",
       "query": "Augustenborg, Malmö",
       "lat": 55.57956,
@@ -978,9 +854,7 @@
     },
     {
       "name": "Kockum Fritid",
-      "tier": 2,
       "icon": "stadium",
-      "min_zoom": 13,
       "description": "Sim- och ishall, uppkallad efter varvet Kockums.",
       "query": "Kockum Fritid, Malmö",
       "lat": 55.60822,

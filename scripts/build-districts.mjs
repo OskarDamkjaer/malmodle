@@ -26,7 +26,6 @@ for (const f of raw.features) {
     geometry: f.geometry,
     properties: {
       name: p.name,
-      osm_id: p['@id'] ?? p.id ?? null,
       admin_level: Number(p.admin_level),
     },
   });

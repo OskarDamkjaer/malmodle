@@ -101,7 +101,7 @@ style.layers = style.layers.filter((l) => {
 
 for (const [id, patch] of Object.entries(OVERRIDE)) {
   const layer = style.layers.find((l) => l.id === id);
-  if (!layer) throw new Error(`OVERRIDE targets a layer that no longer exists: ${id}`);
+  if (!layer) throw new Error(`OVERRIDE targets a layer upstream does not have: ${id}`);
   Object.assign(layer, patch);
   if (patch.maxzoom === undefined && layer.maxzoom !== undefined && patch.minzoom !== undefined
       && layer.maxzoom <= patch.minzoom) {
@@ -122,7 +122,7 @@ for (const spec of CLONE) {
 }
 
 const missing = DROP.filter((id) => !seen.has(id));
-if (missing.length) throw new Error(`DROP lists layers upstream no longer has: ${missing.join(', ')}`);
+if (missing.length) throw new Error(`DROP lists layers upstream does not have: ${missing.join(', ')}`);
 
 for (const l of style.layers) {
   if (l.source && !style.sources[l.source]) throw new Error(`${l.id}: unknown source ${l.source}`);

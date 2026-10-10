@@ -79,7 +79,6 @@ for (const [name, ways] of byName) {
     streets.push({
       name,
       point: roundPoint(point),
-      highway,
       rank: rankOf(highway),
     });
   }
