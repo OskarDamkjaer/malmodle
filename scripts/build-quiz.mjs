@@ -76,7 +76,7 @@ function simplifyPolygonal(geometry) {
 
 const text = (entry) => ({ about: entry?.text ?? null, source: entry?.source ?? null });
 
-const delomraden = districts.features.filter((f) => f.properties.admin_level === 10);
+const delomraden = districts.features;
 const areaItems = delomraden.map((f) => {
   const { name } = f.properties;
   const point = interiorPoint(f.geometry);

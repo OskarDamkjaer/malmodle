@@ -26,7 +26,6 @@ for (const f of raw.features) {
     geometry: f.geometry,
     properties: {
       name: p.name,
-      admin_level: Number(p.admin_level),
     },
   });
 }

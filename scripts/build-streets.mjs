@@ -36,9 +36,8 @@ execFileSync('osmium', ['export', `${tmp}/streets.osm.pbf`,
 const raw = JSON.parse(readFileSync(`${tmp}/streets-raw.geojson`, 'utf8'));
 
 const districts = JSON.parse(readFileSync(districtsFile, 'utf8'));
-const al10 = districts.features.filter((f) => f.properties.admin_level === 10);
-if (!al10.length) throw new Error(`no admin_level 10 features in ${districtsFile}`);
-const index = new PolygonIndex(al10);
+if (!districts.features.length) throw new Error(`no delområden in ${districtsFile}`);
+const index = new PolygonIndex(districts.features);
 
 const kept = [];
 let named = 0, outside = 0;
