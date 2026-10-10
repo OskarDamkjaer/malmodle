@@ -19,8 +19,9 @@ Get familiar with Malmö through a short daily quiz.
 
 ## Questions
 
-The code supports many question types. Pointing is the vast majority, then
-"what is this", then the rest.
+The code supports many question types. Pointing is the vast majority, and
+every day asks to point at at least two areas; then "what is this", then one
+of the rest.
 
 - **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
   Afterwards: how far off you were, and what you actually tapped if it was
@@ -28,8 +29,10 @@ The code supports many question types. Pointing is the vast majority, then
 - **Vad är det här?** Something is highlighted on the map; pick its name from a
   list of nearby things of the same kind.
 - **Närmast.** "Vilken ligger närmast X?" Pick one of four.
-- **Norr eller söder.** "Ligger A norr eller söder om B?" Two buttons. Asked
-  as öster eller väster when that is the clearer axis.
+- **Direkt söder om.** "Vilket område ligger direkt söder om X?" Pick one of
+  four. X is highlighted; the decoys are its other neighbours and nearby areas,
+  never one that also lies on that side. Asked for any of the four directions,
+  only where exactly one area borders X on that side.
 
 Every question scores 0–100. A day scores out of 1000.
 

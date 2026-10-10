@@ -1,6 +1,8 @@
 import { MAX_SCORE, TYPES } from './questions.mjs';
 
-export const MIX = ['point', 'point', 'point', 'point', 'point', 'point', 'identify', 'identify', 'nearest', 'compass'];
+export const MIX = ['area', 'area', 'point', 'point', 'point', 'point', 'point', 'identify', 'identify', 'special'];
+
+export const SPECIALS = ['nearest', 'neighbour'];
 
 export function dateKey(date = new Date()) {
   const pad = (n) => String(n).padStart(2, '0');
@@ -33,9 +35,9 @@ function order(mix, rng) {
     const j = Math.floor(rng() * (i + 1));
     [out[i], out[j]] = [out[j], out[i]];
   }
-  const first = out.indexOf('point');
+  const first = out.findIndex((type) => TYPES[type]?.input === 'map');
   if (first > 0) [out[0], out[first]] = [out[first], out[0]];
-  return out;
+  return out.map((type) => (type === 'special' ? SPECIALS[Math.floor(rng() * SPECIALS.length)] : type));
 }
 
 export function dailySet(items, key, mix = MIX) {
