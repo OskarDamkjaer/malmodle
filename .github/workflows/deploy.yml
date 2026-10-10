@@ -7,15 +7,71 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
+  map-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    concurrency:
+      group: map-data
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find the pinned release
+        id: release
+        run: |
+          tag=$(sed -n "s/^const TAG = '\(.*\)';$/\1/p" scripts/fetch-dev-assets.mjs)
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - if: steps.release.outputs.exists == 'false'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - if: steps.release.outputs.exists == 'false'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install osmium
+        if: steps.release.outputs.exists == 'false'
+        run: sudo apt-get update && sudo apt-get install -y osmium-tool
+
+      - name: Build the map data
+        if: steps.release.outputs.exists == 'false'
+        run: |
+          scripts/build-basemap.sh
+          node scripts/build-districts.mjs
+          node scripts/build-streets.mjs
+          node scripts/build-quiz.mjs
+
+      - name: Publish the map data
+        if: steps.release.outputs.exists == 'false'
+        run: |
+          tar --sort=name --owner=0 --group=0 --numeric-owner -czf dev-assets.tar.gz \
+            build/data/districts.geojson data/cache/malmo.pmtiles data/cache/streets.json
+          sha256sum dev-assets.tar.gz | cut -d' ' -f1 > dev-assets.tar.gz.sha256
+          gh release create "${{ steps.release.outputs.tag }}" dev-assets.tar.gz dev-assets.tar.gz.sha256 \
+            --prerelease --title "${{ steps.release.outputs.tag }}" \
+            --notes "Map data for the quiz build: delområde polygons, the basemap archive and the street index."
+
   build:
+    needs: map-data
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -56,6 +112,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

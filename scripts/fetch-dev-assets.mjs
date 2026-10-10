@@ -1,19 +1,15 @@
-import { existsSync, rmSync, readFileSync } from 'node:fs';
+import { existsSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execSync } from 'node:child_process';
 
-const TAG = 'dev-assets-v2';
+const TAG = 'dev-assets-v3';
 const FILE = 'dev-assets.tar.gz';
-
-const SHA256 = '0c05575eb26495147d5ffe8ed37fb375773fe41c96d9db956cfb270136bebd08';
 
 const CHECKS = [
   'build/data/districts.geojson',
   'data/cache/malmo.pmtiles',
   'data/cache/streets.json',
-  'app/glyphs/Roboto Regular',
-  'app/sprite/osm-liberty.json',
 ];
 
 function allPresent() {
@@ -35,27 +31,30 @@ function repository() {
   return match[1];
 }
 
+function asset(repo, name) {
+  const id = execSync(
+    `gh api "repos/${repo}/releases/tags/${TAG}" --jq '.assets[] | select(.name == "${name}") | .id'`,
+    { encoding: 'utf8' },
+  ).trim();
+  if (!id) throw new Error(`${name} is not attached to ${TAG}`);
+  return execSync(`gh api -H "Accept: application/octet-stream" "repos/${repo}/releases/assets/${id}"`, { maxBuffer: 1 << 30 });
+}
+
+let expected = '';
+
 function download() {
   console.log(`fetch-dev-assets: downloading ${TAG}/${FILE} …`);
   const repo = repository();
-  const id = execSync(
-    `gh api "repos/${repo}/releases/tags/${TAG}" --jq '.assets[] | select(.name == "${FILE}") | .id'`,
-    { encoding: 'utf8' },
-  ).trim();
-  if (!id) throw new Error(`${FILE} is not attached to ${TAG}`);
-  execSync(
-    `gh api -H "Accept: application/octet-stream" "repos/${repo}/releases/assets/${id}" > "${tmp}"`,
-    { stdio: ['ignore', 'ignore', 'pipe'] },
-  );
-  if (!existsSync(tmp)) throw new Error('download produced no file');
+  expected = asset(repo, `${FILE}.sha256`).toString().trim();
+  writeFileSync(tmp, asset(repo, FILE));
 }
 
 function verify() {
   const hash = createHash('sha256');
   hash.update(readFileSync(tmp));
   const got = hash.digest('hex');
-  if (got !== SHA256) {
-    throw new Error(`checksum mismatch: expected ${SHA256}, got ${got}`);
+  if (got !== expected) {
+    throw new Error(`checksum mismatch: expected ${expected}, got ${got}`);
   }
   console.log('fetch-dev-assets: checksum ok');
 }
