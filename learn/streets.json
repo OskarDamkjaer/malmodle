@@ -1,19 +1,4 @@
 {
-  "_doc": {
-    "purpose": "The streets worth knowing — 174 of the 2 737 in Malmö. Hand-picked; scripts/build-learn.mjs resolves each against data/cache/streets.json and refuses to build if a name is not there.",
-    "why": [
-      "Every street in Malmö is already in the search index, and quizzing all of them would be a test of endurance rather than of knowing the place. The set that is worth learning has a shape: the ring roads that bound the city, the arteries that cross it, the old streets inside the canal, and the handful of addresses people arrange to meet on.",
-      "The second half of the list is a rule rather than a taste: every road the basemap paints yellow. Yellow is #fea in the style, which road_trunk_primary and road_secondary_tertiary share — in Malmö that comes out as secondary and tertiary, since the trunk-and-above network here is motorway (#fc8, and already listed). It is the right rule because it is the same one your eye uses: the yellow lines are the through-roads, the ones a part of town is navigated by, and they are legible on a blinded map when the white residential grid around them is not. Roughly a hundred names, which is a lot to add at once and still five per cent of the streets in the city.",
-      "A street is a line, not a spot, so it is graded by which street you are standing on rather than by how near you got."
-    ],
-    "descriptions": "Optional and honest. Where I know why a street matters, it says so. Says what the thing is, not where it is. The panel is the question now — name, kind, picture and text are all on screen while you are still looking for the place — so a line like \"öster om Möllevången\" or \"vid Sankt Petri kyrka\" hands over the answer with the question. No compass directions, no \"mellan X och Y\", no neighbouring or containing place used as a marker. What the name itself already carries is allowed: Limhamns kyrka may say Limhamn, and a bridge may say who or what it is named after. Where nothing was left but the position, the line is gone rather than reworded into something that says nothing. That emptied fourteen of the thirty-six: a street described only by the two streets it runs between is a description of the answer.",
-    "fields": {
-      "name": "Exactly as in data/cache/streets.json, which is exactly as in OSM.",
-      "description": "One line, shown while the street is being asked for. Optional, and never a position.",
-      "source": "Where that line came from, when it came from anywhere.",
-      "verified": "Set true once the description has been checked."
-    }
-  },
   "streets": [
     { "name": "Södergatan", "description": "Gågata, och Malmös affärsstråk sedan medeltiden.", "source": null, "verified": false },
     { "name": "Västergatan", "description": "En av Malmös äldsta gator, med kvarter av korsvirke kvar längs delar av den.", "source": null, "verified": false },

@@ -1,20 +1,3 @@
-# Build the site and publish it to GitHub Pages.
-#
-# This is the whole deploy. There is no build server and no laptop in the loop:
-# push to main, or run this workflow by hand, and the published site is what
-# main says it should be.
-#
-# The heavy half of the data pipeline (a 772 MB OSM extract, osmium, Planetiler)
-# does not run here and never will — it produces the basemap, which changes
-# about as often as Malmö does. What it produces is carried by the release asset
-# that scripts/fetch-dev-assets.mjs unpacks, the same asset a web sandbox uses.
-# Everything downstream of that is rebuilt here, so nothing derived is trusted
-# from the asset.
-#
-# Pages serves the site at the root of a custom domain rather than at
-# /malmoemaps/, because the app addresses itself with root-absolute paths
-# (/app.css, /style.json, /malmo.pmtiles). A project path would 404 on all of
-# them. The domain is set in the repo's Pages settings, not here.
 name: Deploy
 
 on:
@@ -22,13 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Read the repo and the release asset; mint the token deploy-pages needs.
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# A deploy that is already running is a deploy of older code.
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -43,14 +24,11 @@ jobs:
         with:
           node-version: '22'
 
-      # Generated data, the basemap, glyphs and sprite: the four things that
-      # cannot be rebuilt without the heavy pipeline. Checksum-verified.
-      - name: Fetch the assets the pipeline cannot rebuild here
+      - name: Fetch the prebuilt map data
         run: node scripts/fetch-dev-assets.mjs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # maplibre + pmtiles, at the versions the repo pins.
       - name: Fetch vendored runtime assets
         run: node scripts/fetch-app-assets.mjs
 
@@ -60,14 +38,9 @@ jobs:
       - name: Build the map style
         run: node scripts/build-style.mjs
 
-      # Rebuilt rather than taken from the asset: learn.json is derived, and a
-      # derived file shipped in an asset is a copy that can fall behind the
-      # sources it came from. Rebuilding here means the deployed quiz is what
-      # this commit's data says it is.
-      - name: Rebuild the derived quiz data
-        run: node scripts/build-learn.mjs
+      - name: Build the quiz data
+        run: node scripts/build-quiz.mjs
 
-      # Nothing else runs these, so they gate the deploy.
       - name: Test
         run: node --test 'test/*.test.mjs'
 

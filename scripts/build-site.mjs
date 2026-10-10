@@ -1,14 +1,3 @@
-// The deployable folder.
-//
-// Hosting is "a folder of files on a static host" (see README), and this is the
-// folder: the same URL layout the dev server serves, materialised into
-// build/site so it can be uploaded with anything that copies files.
-//
-// It copies rather than symlinks, and it refuses to produce a half-built site:
-// a missing basemap or data file is a failed build, not a folder that 404s in
-// production.
-//
-// Usage: node scripts/build-site.mjs [--out DIR]
 import { cpSync, existsSync, mkdirSync, rmSync, statSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { MOUNTS } from './lib/site.mjs';
@@ -25,8 +14,6 @@ if (missing.length) {
   process.exit(1);
 }
 
-// Build beside the target and swap, so an interrupted run cannot leave a
-// partly-copied site where the last good one was.
 const tmp = `${out}.tmp`;
 rmSync(tmp, { recursive: true, force: true });
 mkdirSync(tmp, { recursive: true });

@@ -60,4 +60,4 @@ Every question scores 0–100. A day scores out of 1000.
 - Keep the curated sources and the build that turns them into app data.
 - No code comments. Short README for humans. Focused CLAUDE.md with no counts.
   No decision log.
-- Nothing in the repo describes earlier versions of the app.
+- Docs and code describe the app as it is.

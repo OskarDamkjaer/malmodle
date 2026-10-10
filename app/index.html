@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Lär dig Malmö</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
-<meta name="description" content="Lär dig var Malmös namn ligger. Fungerar offline.">
+<meta name="description" content="Tio platser i Malmö om dagen. Hitta dem på kartan.">
 <meta name="theme-color" content="#f8f4f0">
 <meta name="color-scheme" content="light">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -16,81 +16,49 @@
 <body>
 <div id="map"></div>
 
-<!-- The front door, and the only one: the city in two halves — the names Malmö
-     expects of you and everything else — and a row per kind inside each, with a
-     bar saying how much of it you can already place. Everything else on this
-     page is either a round in progress or the map you go and study on. -->
-<div id="learn" hidden>
-  <header id="learnhead">
-    <div>
-      <h1>Lär dig Malmö</h1>
-      <p>Placera namnen på kartan. Kartan är avskalad från text medan du gissar —
-         annars vore det ett lästest.</p>
-      <p id="learnsub"></p>
+<section id="question" class="panel" data-edge="top" hidden>
+  <div class="row">
+    <span id="progress"></span>
+    <span id="detail"></span>
+  </div>
+  <h1 id="prompt"></h1>
+</section>
+
+<section id="choices" class="panel" data-edge="bottom" hidden></section>
+
+<section id="result" class="panel" data-edge="bottom" role="status" hidden>
+  <div class="row">
+    <strong id="points"></strong>
+    <span id="verdict"></span>
+  </div>
+  <p id="explain"></p>
+  <button id="next" type="button" class="primary">Nästa</button>
+</section>
+
+<section id="end" hidden>
+  <div class="sheet">
+    <header>
+      <p id="enddate"></p>
+      <h1 id="endscore"></h1>
+      <p id="endsquares" aria-hidden="true"></p>
+    </header>
+    <div class="actions">
+      <button id="share" type="button" class="primary">Kopiera resultat</button>
+      <button id="explore" type="button">Utforska kartan</button>
+      <button id="again" type="button">Spela igen</button>
     </div>
-    <button id="toexplore" type="button">Utforska kartan</button>
-  </header>
-  <div id="roundlist"></div>
-  <footer id="learnfoot">
-    <button id="forget" type="button">Glöm allt jag lärt mig</button>
-  </footer>
-</div>
-
-<!-- A round in progress. The map underneath is blind: no labels anywhere, only
-     the outlines of whatever is being asked about. -->
-<div id="play" hidden>
-  <div id="playbar">
-    <button id="quit" type="button" aria-label="Avsluta rundan">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <p id="prompt"></p>
-    <span id="tally"></span>
+    <ol id="endlist"></ol>
   </div>
+</section>
 
-  <p id="verdict" role="status" hidden></p>
+<button id="back" type="button" class="panel" data-edge="top" hidden>Dagens resultat</button>
 
-  <!-- The point of the app: the name has just become a place, so say something
-       about the place, and show it. A panel down the right on anything wide
-       enough to spare the room, a sheet along the bottom on a phone — the map
-       is the thing being learned, so the card takes an edge rather than the
-       middle. -->
-  <div id="factcard" hidden>
-    <p id="factverdict"></p>
-    <h2 id="factname"></h2>
-    <p id="factmeta"></p>
-    <!-- Hidden unless the item actually has a picture, which most do not; an
-         empty frame says "missing" where nothing should be said at all. -->
-    <p id="facttext"></p>
-    <a id="factsource" target="_blank" rel="noopener" hidden>Källa</a>
-    <button id="next" type="button">Nästa</button>
-  </div>
-
-  <div id="summary" hidden>
-    <h2 id="summaryhead"></h2>
-    <p id="summarysub"></p>
-    <ul id="summarylist"></ul>
-    <div class="summaryactions">
-      <button id="summaryagain" type="button">En gång till</button>
-      <button id="summarydone" type="button">Klart</button>
-    </div>
-  </div>
-</div>
-
-<!-- Selected feature: name, what it is, which district. Nothing actionable. -->
-<div id="card" hidden>
-  <button id="cardclose" aria-label="Stäng">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-  </button>
+<section id="card" class="panel" data-edge="bottom" hidden>
   <h2 id="cardname"></h2>
-  <p id="cardmeta"></p>
-  <p id="carddesc"></p>
-</div>
-
-<!-- The way back from studying to being asked. -->
-<button id="tolearn" type="button" hidden>
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h6a2 2 0 0 1 2 2v11a2 2 0 0 0-2-2H4zM20 5.5h-6a2 2 0 0 0-2 2v11a2 2 0 0 1 2-2h6z"/></svg>
-  <span>Öva</span>
-</button>
+  <p id="cardlabel"></p>
+  <p id="cardabout"></p>
+  <a id="cardsource" target="_blank" rel="noopener" hidden>Källa</a>
+</section>
 
 <div id="boot"><p id="bootmsg">Laddar kartan…</p></div>
 

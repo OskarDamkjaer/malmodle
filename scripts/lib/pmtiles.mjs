@@ -1,18 +1,6 @@
-// Reading the tileset back, in Node.
-//
-// The app makes claims about what is inside malmo.pmtiles — which streets are
-// named, and from which zoom. Believing the OpenMapTiles schema instead of
-// checking would be believing a document about someone else's planet extract,
-// so this reads the archive itself, and test/streets.test.mjs asks it.
-//
-// Two formats, both only as far as this needs them: the PMTiles v3 directory
-// (to find every tile) and Mapbox Vector Tile (to read one layer's feature
-// properties — geometry is skipped entirely). ~120 lines beats a dependency for
-// something used by one script and one test.
 import { openSync, readSync, closeSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 
-// ---- protobuf ---------------------------------------------------------------
 function reader(buf) {
   let p = 0;
   const varint = () => {
@@ -31,8 +19,6 @@ function reader(buf) {
     bytes: () => { const n = varint(); const b = buf.subarray(p, p + n); p += n; return b; },
     skip: (wire) => {
       if (wire === 0) varint();
-      // Two statements, not `p += varint()`: the read advances p itself, and a
-      // compound assignment would write back the position it started from.
       else if (wire === 2) { const n = varint(); p += n; }
       else if (wire === 5) p += 4;
       else if (wire === 1) p += 8;
@@ -41,7 +27,6 @@ function reader(buf) {
   };
 }
 
-/** Walk a message's fields; `fn` returns true when it consumed the value. */
 function fields(buf, fn) {
   const r = reader(buf);
   while (!r.done) {
@@ -60,10 +45,6 @@ function tileValue(buf) {
   return out;
 }
 
-// The geometry column: a run of commands (MoveTo, LineTo, ClosePath), each
-// followed by zigzagged deltas from the cursor. Decoded into rings of tile
-// coordinates; whether those rings are a line or a polygon is the caller's
-// business, because MVT stores that as a separate field.
 function rings(buf) {
   const r = reader(buf);
   const out = [];
@@ -74,30 +55,18 @@ function rings(buf) {
     const header = r.varint();
     const command = header & 7;
     const count = header >> 3;
-    // ClosePath carries no parameters and, for the lines this is used on,
-    // never appears.
     if (command === 7) continue;
     for (let i = 0; i < count; i++) {
       const dx = r.varint();
       const dy = r.varint();
       x += (dx >> 1) ^ -(dx & 1);
       y += (dy >> 1) ^ -(dy & 1);
-      // A MoveTo starts a new ring; a LineTo continues the one in hand.
       if (command === 1) { ring = [[x, y]]; out.push(ring); } else ring?.push([x, y]);
     }
   }
   return out;
 }
 
-/**
- * One layer of one tile, decoded.
- *
- * With no `at`, properties only — MVT stores those as indexes into per-layer
- * key and value tables, which is what makes reading every tile in the archive
- * cheap, and geometry is not even walked. Given `at` (the tile's own z/x/y),
- * each feature also gets a GeoJSON geometry in lng/lat, which is what the
- * browser's `querySourceFeatures` hands the app.
- */
 function layerOf(tile, wanted, at = null) {
   const out = [];
   fields(tile, (num, wire, r) => {
@@ -139,8 +108,6 @@ function layerOf(tile, wanted, at = null) {
   return out;
 }
 
-// Tile coordinates to lng/lat, the same conversion vector-tile-js does on the
-// way to `toGeoJSON` — so what a test sees is what the app sees.
 function geoJSON({ type, geometry }, extent, { z, x, y }) {
   const size = extent * 2 ** z;
   const project = ([px, py]) => {
@@ -157,13 +124,9 @@ function geoJSON({ type, geometry }, extent, { z, x, y }) {
     : { type: 'MultiLineString', coordinates: lines };
 }
 
-/** The properties of every feature in one layer of a tile. */
-export const layerProperties = (tile, wanted) => layerOf(tile, wanted);
 
-/** The same, with geometry, given where the tile sits. */
 export const layerFeatures = (tile, wanted, at) => layerOf(tile, wanted, at);
 
-// ---- pmtiles ----------------------------------------------------------------
 function directory(buf) {
   const r = reader(buf);
   const n = r.varint();
@@ -177,14 +140,11 @@ function directory(buf) {
   for (let i = 0; i < n; i++) lengths[i] = r.varint();
   for (let i = 0; i < n; i++) {
     const v = r.varint();
-    // 0 is the format's "runs on from the previous entry".
     offsets[i] = v === 0 && i > 0 ? offsets[i - 1] + lengths[i - 1] : v - 1;
   }
   return ids.map((tileId, i) => ({ tileId, run: runs[i], length: lengths[i], offset: offsets[i] }));
 }
 
-// Tile ids are one Hilbert curve per zoom, laid end to end, so the zoom is
-// recoverable from the id alone.
 function zoomOf(tileId) {
   let z = 0;
   let base = 0;
@@ -192,12 +152,6 @@ function zoomOf(tileId) {
   return z;
 }
 
-/**
- * Where a tile is: the id's position along its zoom's Hilbert curve, undone.
- *
- * The textbook d2xy. Needed only because geometry has to come out in lng/lat,
- * and a tile's coordinates are half of that conversion.
- */
 function xyOf(tileId, z) {
   let base = 0;
   for (let i = 0; i < z; i++) base += 4 ** i;
@@ -218,7 +172,6 @@ function xyOf(tileId, z) {
   return [x, y];
 }
 
-/** Every tile in the archive, as `{ z, x, y, zoom, data }`, decompressed. */
 export function* tiles(file, { minZoom = 0, zoom: only = null } = {}) {
   const fd = openSync(file, 'r');
   try {
@@ -234,7 +187,6 @@ export function* tiles(file, { minZoom = 0, zoom: only = null } = {}) {
 
     const entries = [];
     for (const e of directory(decompress(read(rootOff, rootLen), internal))) {
-      // run === 0 means the entry points at a leaf directory, not a tile.
       if (e.run === 0) entries.push(...directory(decompress(read(leafOff + e.offset, e.length), internal)));
       else entries.push(e);
     }
@@ -248,31 +200,4 @@ export function* tiles(file, { minZoom = 0, zoom: only = null } = {}) {
   } finally {
     closeSync(fd);
   }
-}
-
-/**
- * What POIs the archive actually holds: one entry per OpenMapTiles `class`,
- * with its subclasses, how many are named, and the lowest zoom it appears at.
- *
- * A POI is repeated in every zoom's tile that covers it, so places are counted
- * by name+class+subclass rather than by feature — an approximation that can
- * merge two unnamed benches, and never merges anything you could look up.
- */
-export function poiInventory(file) {
-  const classes = new Map();
-  const seen = new Set();
-  for (const { zoom, data } of tiles(file, { minZoom: 12 })) {
-    for (const p of layerProperties(data, 'poi')) {
-      const key = `${p.name ?? ''}|${p.class}|${p.subclass}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      if (!classes.has(p.class)) classes.set(p.class, { total: 0, named: 0, minzoom: Infinity, subclasses: new Map() });
-      const c = classes.get(p.class);
-      c.total++;
-      if (p.name) c.named++;
-      c.minzoom = Math.min(c.minzoom, zoom);
-      c.subclasses.set(p.subclass, (c.subclasses.get(p.subclass) ?? 0) + 1);
-    }
-  }
-  return classes;
 }

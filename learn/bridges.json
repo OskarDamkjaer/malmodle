@@ -1,22 +1,4 @@
 {
-  "_doc": {
-    "purpose": "The bridges worth knowing, hand-curated. This file is the source of truth; scripts/build-learn.mjs only places and validates — it never adds a bridge or writes a description.",
-    "why": [
-      "Malmö's centre is an island. The canal ring is the one piece of the city's shape that explains every other piece — where the old town ends, why the streets bend where they bend — and it is crossed at eighteen named points inside one square kilometre. Learning them is learning the ring.",
-      "Nothing in the pipeline had them: the basemap draws bridges but does not name them, landmarks.json holds only Öresundsbron. So this is the one quizzable category that needed a list of its own."
-    ],
-    "sourcing": "Every name here was read off OSM (man_made=bridge or a named bridge way inside config/bbox.json), never off memory — see scripts/build-learn.mjs --bridges, which re-runs that query and fails if a name has stopped existing. Coordinates come from the same query.",
-    "descriptions": "Swedish, drafted by hand, and deliberately uneven. Says what the thing is, not where it is. The panel is the question now — name, kind, picture and text are all on screen while you are still looking for the place — so a line like \"öster om Möllevången\" or \"vid Sankt Petri kyrka\" hands over the answer with the question. No compass directions, no \"mellan X och Y\", no neighbouring or containing place used as a marker. What the name itself already carries is allowed: Limhamns kyrka may say Limhamn, and a bridge may say who or what it is named after. Where nothing was left but the position, the line is gone rather than reworded into something that says nothing. Six of the nineteen say nothing at all now: all they had was which corner of the canal ring they sit in.",
-    "fields": {
-      "name": "As OSM has it, which is also what the round asks for.",
-      "over": "What it crosses. Malmö kanal unless said otherwise.",
-      "carries": "The street or path across it, where it has one.",
-      "lat/lon": "From the OSM element's centre.",
-      "description": "One or two lines, shown while the bridge is being asked for. Optional, and never a position.",
-      "source": "Where the description came from, when it came from anywhere.",
-      "verified": "Set true once the description has been checked."
-    }
-  },
   "bridges": [
     {
       "name": "Öresundsbron",

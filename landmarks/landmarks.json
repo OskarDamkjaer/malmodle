@@ -1,25 +1,4 @@
 {
-  "_doc": {
-    "purpose": "Hand-curated landmark list. This file is the source of truth and is meant to be edited by hand — build-landmarks.mjs only fills in coordinates, it never rewrites your entries.",
-    "workflow": [
-      "1. Edit this list: add/remove landmarks, fix names, set tier/icon/min_zoom.",
-      "2. Run: node scripts/build-landmarks.mjs",
-      "3. It resolves any entry missing lat/lon via Nominatim and writes them back here, marked \"verified\": false.",
-      "4. Check each unverified coordinate on the map, correct it if wrong, set \"verified\": true.",
-      "5. Re-run to emit build/data/landmarks.geojson. Unverified entries are still emitted but reported."
-    ],
-    "fields": {
-      "name": "Display name, as shown in search and on the map.",
-      "tier": "1 = drawn custom icon, most prominent. 2 = generic icon.",
-      "icon": "Sprite id in landmarks/icons/. Several landmarks may share one.",
-      "min_zoom": "Zoom at which the icon starts appearing.",
-      "description": "One short line. Says what the thing is, not where it is. The panel is the question now — name, kind, picture and text are all on screen while you are still looking for the place — so a line like \"öster om Möllevången\" or \"vid Sankt Petri kyrka\" hands over the answer with the question. No compass directions, no \"mellan X och Y\", no neighbouring or containing place used as a marker. What the name itself already carries is allowed: Limhamns kyrka may say Limhamn, and a bridge may say who or what it is named after. Where nothing was left but the position, the line is gone rather than reworded into something that says nothing.",
-      "query": "Optional Nominatim search string, when the display name alone is ambiguous.",
-      "lat/lon": "Filled by the resolver; edit freely. null = unresolved.",
-      "verified": "Set true once you have eyeballed the coordinate on the map."
-    },
-    "min_zoom_note": "Defaults follow DECISIONS/STATUS: only Turning Torso and Öresundsbron at z11 (the spec's z11–12 is 'district names, almost nothing else'), other Tier-1 at z12, Tier-2 at z13. Tune with the map visible."
-  },
   "landmarks": [
     {
       "name": "Turning Torso",

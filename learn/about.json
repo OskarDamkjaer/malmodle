@@ -1,20 +1,4 @@
 {
-  "_doc": {
-    "purpose": "What to say about an area once you have placed it. Keyed by name, hand-written, and the only file in this repo whose contents are claims about the world rather than about the map.",
-    "why": [
-      "Placing a name correctly and learning nothing is a game. The card that follows a right answer is the reason the app exists, so the text has to be worth the interruption: what the place is, what happened there, what it is known for.",
-      "Areas needed a file of their own because their names come from datasets — Malmö stad's stadsdelar, OSM's delområden, areas.json's groupings — and none of those datasets has a place to put a sentence. Landmarks, bridges and streets keep their text in their own curated files, next to the name. This is the exception, not a second home for everything."
-    ],
-    "coverage": "Deliberately partial, and that is the honest part. There are 243 area names across the three levels; there is real text here for the ones I actually know something about. The rest place perfectly well and their card falls back on what the data can prove — which stadsdel a delområde is in, which delområden a name gathers. An area with nothing to say says nothing rather than something invented.",
-    "twoMaps": "`stadsdelar` and `areas` are separate because five names are on both levels and mean different sizes of thing: Kirseberg the stadsdel is ten times Kirseberg the neighbourhood, and Hyllie, Rosengård, Oxie and Husie do the same. One flat map keyed by name would silently give the big one the little one's text — the kind of bug that is invisible until you read a card and it is subtly wrong. `areas` covers levels 3 and 4 together, where a repeated name really is the same place.",
-    "status": "Every entry is a draft: written from what I know, marked verified:false, with a source only where the claim came from one. Checking them is the standing job this file exists to make visible — the same bargain landmarks.json makes about coordinates.",
-    "fields": {
-      "text": "Swedish, one to three sentences, shown on the card while the name is being asked for.",
-      "source": "Where it came from, when it came from anywhere.",
-      "verified": "Set true once checked against a source."
-    },
-    "noLocation": "Says what the thing is, not where it is. The panel is the question now — name, kind, picture and text are all on screen while you are still looking for the place — so a line like \"öster om Möllevången\" or \"vid Sankt Petri kyrka\" hands over the answer with the question. No compass directions, no \"mellan X och Y\", no neighbouring or containing place used as a marker. What the name itself already carries is allowed: Limhamns kyrka may say Limhamn, and a bridge may say who or what it is named after. Where nothing was left but the position, the line is gone rather than reworded into something that says nothing."
-  },
   "stadsdelar": {
     "Centrum": {
       "text": "Innerstaden innanför kanalen, plus hamnen norr om den. Här ligger Gamla Staden med Stortorget och Lilla Torg, Centralstationen, och Västra Hamnen där varvet låg.",
