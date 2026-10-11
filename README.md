@@ -11,10 +11,10 @@ around on your own.
 It runs in the browser, works offline once loaded, and stores nothing about
 you.
 
-The same app comes in a few styles, each at its own address:
-[Papper](https://malmoe.damk.eu/), [Natt](https://malmoe.damk.eu/natt/),
-[Tidning](https://malmoe.damk.eu/tidning/) and
-[Klar](https://malmoe.damk.eu/klar/).
+Other styles are kept for trying out at their own addresses:
+[Papper](https://malmoe.damk.eu/papper/), [Natt](https://malmoe.damk.eu/natt/)
+and [Klar](https://malmoe.damk.eu/klar/). Running locally, a switcher on the
+left edge moves between them.
 
 ## Running it locally
 

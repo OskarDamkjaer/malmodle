@@ -406,8 +406,8 @@ function backToEnd() {
 }
 
 function renderThemes() {
-  const nav = el('themes');
-  nav.replaceChildren();
+  const nav = el('devthemes');
+  nav.hidden = !['localhost', '127.0.0.1'].includes(location.hostname);
   for (const [name, t] of Object.entries(THEMES)) {
     const a = document.createElement('a');
     a.href = themePath(name);

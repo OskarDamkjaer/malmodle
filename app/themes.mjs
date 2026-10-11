@@ -85,7 +85,7 @@ export const THEMES = {
   },
 };
 
-export const DEFAULT_THEME = 'papper';
+export const DEFAULT_THEME = 'tidning';
 
 export function themeFromPath(pathname) {
   const first = pathname.split('/').filter(Boolean)[0];
