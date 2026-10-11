@@ -38,10 +38,12 @@
 </section>
 
 <aside id="info" class="panel" data-edge="side" hidden>
+  <button id="infoclose" type="button" aria-label="Stäng">×</button>
   <figure id="infophoto"></figure>
   <div class="text">
     <p id="infolabel"></p>
     <h2 id="infoname"></h2>
+    <p id="infoscore" hidden><span id="infopoints" class="band"></span><span id="infooutcome"></span></p>
     <p id="infoabout"></p>
     <a id="infosource" target="_blank" rel="noopener">Läs mer</a>
   </div>
@@ -62,27 +64,15 @@
         <button id="sharenative" type="button" hidden>Dela</button>
       </div>
     </div>
-    <p id="tomorrow">Kom tillbaka imorgon för en ny omgång.<span id="countdown"></span></p>
     <div class="actions">
       <button id="practise" type="button" aria-expanded="false" aria-controls="kinds">Öva mer</button>
       <button id="again" type="button">Spela igen</button>
     </div>
     <div id="kinds" class="kinds" hidden></div>
-    <h2 id="endtitle">Dagens platser</h2>
-    <ol id="endlist"></ol>
+    <p id="maphint">Tryck på en plats på kartan för att läsa om den.</p>
+    <button id="endmap" type="button">Visa på kartan</button>
     <footer><a id="report" href="https://github.com/OskarDamkjaer/malmoemaps/issues/new" target="_blank" rel="noopener">Rapportera ett fel</a></footer>
   </div>
-</section>
-
-<button id="back" type="button" class="panel" data-edge="top" hidden>Dagens resultat</button>
-<p id="freehint" class="panel pill" data-edge="bottom" hidden>Tryck på en plats för att se vad den heter</p>
-
-<section id="card" class="panel" data-edge="bottom" hidden>
-  <button id="cardclose" type="button" aria-label="Stäng">×</button>
-  <h2 id="cardname"></h2>
-  <p id="cardlabel"></p>
-  <p id="cardabout"></p>
-  <a id="cardsource" target="_blank" rel="noopener" hidden>Läs mer</a>
 </section>
 
 <div id="boot">

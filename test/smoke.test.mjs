@@ -86,7 +86,8 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     const prompts = await playThrough(page, viewport);
 
     await page.waitForSelector('#end:not([hidden])');
-    assert.equal(await page.locator('#endlist li').count(), 10);
+    assert.equal(await page.evaluate(() => window.map.getSource('scored-labels').serialize().data.features.length), 10);
+    assert.match(await page.textContent('#endverdict'), /^Ny omgång om /);
     assert.match(await page.textContent('#endscore'), /^\d+$/);
     assert.equal(await page.textContent('#endmax'), 'av 1000');
 
@@ -95,12 +96,20 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     assert.match(shared, /^Malmökoll \d{4}-\d{2}-\d{2}\n\d+\/1000\n/);
     assert.equal([...shared.split('\n')[2]].length, 10);
 
-    await page.click('#endlist summary');
-    await page.click('#endlist .links button');
-    await page.waitForSelector('#back:not([hidden])');
-    assert.ok((await visibleText(page)).length > 0, 'the free map has no labels');
+    await page.waitForTimeout(800);
+    const spot = await page.evaluate(() => {
+      const [first] = window.map.getSource('scored-labels').serialize().data.features;
+      const { x, y } = window.map.project(first.geometry.coordinates);
+      return { x, y, name: first.properties.name };
+    });
+    await page.evaluate(() => { document.querySelector('#end .sheet').style.visibility = 'hidden'; });
+    await page.mouse.click(spot.x, spot.y);
+    await page.evaluate(() => { document.querySelector('#end .sheet').style.visibility = ''; });
+    await page.waitForSelector('#info:not([hidden])');
+    assert.ok(await page.isVisible('#infoscore'));
+    await page.click('#infoclose');
+    assert.ok(await page.isHidden('#info'));
 
-    await page.click('#back');
     await page.click('#again');
     await page.waitForSelector('#question:not([hidden])');
     assert.equal(await page.textContent('#prompt'), prompts[0]);
