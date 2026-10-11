@@ -170,11 +170,13 @@ function padding() {
   const above = Math.max(0, ...columns.filter((r) => r.right >= w * 0.6).map((r) => r.bottom));
   const sides = shown('[data-edge="side"]');
   const right = Math.max(0, ...sides.filter((r) => r.left > w * 0.4).map((r) => w - r.left));
-  const under = Math.max(top, ...sides.filter((r) => r.left <= w * 0.4).map((r) => r.bottom));
+  const across = sides.filter((r) => r.left <= w * 0.4);
+  const under = Math.max(top, ...across.filter((r) => r.top < h / 2).map((r) => r.bottom));
+  const over = Math.max(bottom, ...across.filter((r) => r.top >= h / 2).map((r) => h - r.top));
   return {
     top: above ? Math.min(above + gap, h * 0.7) : Math.min(under + gap, h * 0.45),
-    bottom: Math.min(bottom + gap, h * 0.45),
-    left: beside && beside < w * 0.6 ? beside + gap * 2 : side,
+    bottom: Math.min(over + gap, h * 0.45),
+    left: beside && beside < w * 0.6 ? beside + gap * 5 : side,
     right: right ? right + gap : side,
   };
 }
