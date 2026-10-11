@@ -52,6 +52,14 @@ test('pointing at the answer scores full marks', () => {
   assert.equal(r.hit, null);
 });
 
+test('a tap within the grace of a point names nothing else', () => {
+  const target = { name: 'Krog', kind: 'landmark', geometry: { type: 'Point', coordinates: [12.9525, 55.5711] } };
+  const r = TYPES.point.grade({ target }, [12.952, 55.5711], items);
+  assert.equal(r.score, MAX_SCORE);
+  assert.equal(tappedOn(items, [12.952, 55.5711], 'landmark').name, 'Plats 0');
+  assert.equal(r.hit, null);
+});
+
 test('pointing elsewhere reports the distance and what was hit', () => {
   const target = byName('Område 0-0');
   const r = TYPES.point.grade({ target }, byName('Område 3-0').point, items);

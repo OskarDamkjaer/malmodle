@@ -62,7 +62,7 @@ const point = {
       tap,
       near,
       distance,
-      hit: hit && hit.name !== q.target.name ? hit : null,
+      hit: score < MAX_SCORE && hit && hit.name !== q.target.name ? hit : null,
     };
   },
 };
