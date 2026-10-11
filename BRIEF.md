@@ -62,6 +62,7 @@ the answer: an area that borders it, a street that meets it, or a place within
   descriptions. Descriptions are only shown here.
 - A button that copies the result as text (score and one square per question),
   like other daily games. If the set is replayed, the latest result is shared.
+- Practice by kind: a set of "Var ligger X?" for one kind, never shared.
 - A way to open the full labelled map for free practice. Tapping a thing says
   what it is; today's names are marked.
 - No memory between days. Nothing is stored.

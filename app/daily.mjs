@@ -220,9 +220,7 @@ export function practiceSet(items, { key, category, seed }) {
   const later = shuffle(pool.filter((it) => !soon.has(it.name) && !today.has(it.name)), rng);
   const rest = shuffle(pool.filter((it) => !coming.includes(it) && !later.includes(it)), rng);
   const targets = shuffle([...coming, ...later, ...rest].slice(0, PRACTICE_SIZE), rng);
-  const half = Math.ceil(targets.length / 2);
-  const mix = [...mixFor(kind.group, half, rng), ...mixFor(kind.group, targets.length - half, rng)];
-  const slots = shuffle(mix, rng).map((type) => ({ group: kind.group, type }));
+  const slots = targets.map(() => ({ group: kind.group, type: 'point' }));
   return assemble(slots, targets, items, rng, new Set(targets.map((it) => it.name)));
 }
 

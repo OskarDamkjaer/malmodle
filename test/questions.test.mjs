@@ -14,9 +14,9 @@ test('a tap on the target or within ten metres scores full marks', () => {
 
 test('a place known only by a point gets a wider grace', () => {
   const point = { type: 'Point', coordinates: [13, 55.6] };
-  assert.equal(distanceScore(90, point), MAX_SCORE);
-  assert.ok(distanceScore(90) < MAX_SCORE);
-  assert.ok(distanceScore(150, point) < MAX_SCORE);
+  assert.equal(distanceScore(20, point), MAX_SCORE);
+  assert.ok(distanceScore(20) < MAX_SCORE);
+  assert.ok(distanceScore(40, point) < MAX_SCORE);
 });
 
 test('the wrong end of town scores nothing', () => {
@@ -53,7 +53,7 @@ test('pointing at the answer scores full marks', () => {
 });
 
 test('a tap within the grace of a point names nothing else', () => {
-  const target = { name: 'Krog', kind: 'landmark', geometry: { type: 'Point', coordinates: [12.9525, 55.5711] } };
+  const target = { name: 'Krog', kind: 'landmark', geometry: { type: 'Point', coordinates: [12.9522, 55.5711] } };
   const r = TYPES.point.grade({ target }, [12.952, 55.5711], items);
   assert.equal(r.score, MAX_SCORE);
   assert.equal(tappedOn(items, [12.952, 55.5711], 'landmark').name, 'Plats 0');

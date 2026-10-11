@@ -3,7 +3,7 @@ import { closest, contains, distanceTo, gap, metersBetween, offset } from './geo
 export const MAX_SCORE = 100;
 export const CLOSE_SCORE = 25;
 
-const GRACE = { shape: 10, point: 100 };
+const GRACE = { shape: 10, point: 20 };
 const FALLOFF = 900;
 
 export function distanceScore(meters, geometry) {

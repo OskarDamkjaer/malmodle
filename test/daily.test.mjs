@@ -182,7 +182,10 @@ test('practice asks ten of one kind, two of them coming this week', () => {
   }
 });
 
-test('practice mixes in the other question types', () => {
-  const types = new Set(practiceSet(items, { key: '2026-10-10', category: 'area', seed: 1 }).map((q) => q.type));
-  assert.ok(types.has('point') && types.has('identify'));
+test('practice only asks where things are', () => {
+  for (const category of ['area', 'street']) {
+    const set = practiceSet(items, { key: '2026-10-10', category, seed: 1 });
+    assert.ok(set.length > 0);
+    for (const q of set) assert.equal(q.type, 'point', category);
+  }
 });
