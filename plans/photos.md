@@ -138,7 +138,19 @@ reviewed by hand before the next.
    - Krogar, kaféer: Commons, then Mapillary of the frontage facing the
      entrance, 2021 or later only.
    - Areas: Commons photos inside the polygon.
-2. **Pick by hand.** `node scripts/photos-review.mjs` serves a page on
+   - Streets with no usable Mapillary photo: `node scripts/photos-commons.mjs
+     --only <street>,<street> gata`, Commons photos within 15 m of the line.
+2. **Vision pre-review.** Sonnet agents look at each street candidate at
+   640 px and write `data/cache/photos/verdicts/streets.json` (git-ignored):
+   per Mapillary id whether it is sharp, how the road is framed (centred,
+   offset, crossing, sideways, blocked, other), a score from 1 to 5 and a
+   short note. Agents must pair each verdict with the path they read, not the
+   order of results, or ids slip. A photo is a suggestion when it is sharp,
+   centred, scores 4 or more and has at least 60 m of the street ahead. Of
+   the 54 streets, 51 have a suggestion; bike-basket and dashboard shots are
+   the most common reason a photo fails. Deep-pass streets are capped at 60
+   reviewed photos each.
+3. **Pick by hand.** `node scripts/photos-review.mjs` serves a page on
    http://127.0.0.1:8081 that shows one item at a time: a sketch with the
    sample points and where each photo was taken and which way it faces, then
    the candidates per point and direction. Click to keep, ⤢ to see it large,
@@ -148,7 +160,7 @@ reviewed by hand before the next.
    kept photos with source, id, camera point, heading, date, licence, author
    and source URL, and whether the item is reviewed. A reviewed item with no
    photo needs another source.
-3. **Fetch and resize** (in `scripts/build-quiz.mjs` or its own script):
+4. **Fetch and resize** (in `scripts/build-quiz.mjs` or its own script):
    download each picked photo, resize to WebP at a phone-friendly width, and
    put it under `build/`. Add each item's photos to `quiz.json` with the
    credit.

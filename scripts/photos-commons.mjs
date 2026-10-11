@@ -1,12 +1,13 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { osmWikidata, wikipediaQid, wikidataClaims, categoryFiles, files, filesNear, toPhoto, usable, rank } from './lib/commons.mjs';
 import { distanceTo, metersBetween, bounds } from '../app/geo.mjs';
+import { alongEvery } from './lib/photos.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const placesFile = arg('--places', 'places/places.json');
-const categories = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--places');
-const NEAR_M = 50;
+const only = arg('--only', '').split(',').filter(Boolean);
+const categories = args.filter((a, i) => !a.startsWith('--') && !['--places', '--only'].includes(args[i - 1]));
 const PER_GROUP = 12;
 
 if (!categories.length) {
@@ -19,7 +20,9 @@ const { places } = JSON.parse(await readFile(placesFile, 'utf8'));
 const byName = new Map(places.map((p) => [p.name, p]));
 
 for (const category of categories) {
-  const chosen = items.filter((i) => (category === 'bro' ? i.kind === 'bridge' : i.kind === 'landmark' && byName.get(i.name)?.category === category));
+  const NEAR_M = category === 'gata' ? 15 : 50;
+  const kind = { bro: 'bridge', gata: 'street' }[category] ?? 'landmark';
+  const chosen = items.filter((i) => i.kind === kind && (kind !== 'landmark' || byName.get(i.name)?.category === category) && (!only.length || only.includes(i.name)));
   const qids = {};
   for (const item of chosen) {
     let qid = null;
@@ -47,9 +50,16 @@ for (const category of categories) {
       const pages = await categoryFiles(cat);
       addGroup(`Kategori: ${cat}`, pages, pages.length);
     }
-    const [sw, ne] = bounds([item.geometry]);
-    const radius = Math.min(2000, Math.round(metersBetween(sw, ne) / 2 + NEAR_M));
-    const near = await filesNear(item.point, radius, (p) => distanceTo(item.geometry, p) <= NEAR_M);
+    const keep = (p) => distanceTo(item.geometry, p) <= NEAR_M;
+    let near;
+    if (kind === 'street') {
+      const byTitle = new Map();
+      for (const p of [item.point, ...alongEvery(item.geometry, 100)]) for (const f of await filesNear(p, 60, keep)) byTitle.set(f.title, f);
+      near = [...byTitle.values()];
+    } else {
+      const [sw, ne] = bounds([item.geometry]);
+      near = await filesNear(item.point, Math.min(2000, Math.round(metersBetween(sw, ne) / 2 + NEAR_M)), keep);
+    }
     addGroup(`Tagna på platsen (inom ${NEAR_M} m)`, near, near.length);
 
     const n = groups.reduce((s, g) => s + g.directions[0].images.length, 0);
