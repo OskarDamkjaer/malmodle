@@ -12,7 +12,9 @@ const PICKS = 'photos/photos.json';
 
 async function jsonFiles(dir) {
   try {
-    return (await readdir(dir)).filter((f) => f.endsWith('.json')).sort();
+    const first = ['streets.json', 'gata.json'];
+    const rank = (f) => (first.includes(f) ? first.indexOf(f) : first.length);
+    return (await readdir(dir)).filter((f) => f.endsWith('.json')).sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
   } catch {
     return [];
   }

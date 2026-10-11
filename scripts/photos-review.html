@@ -104,7 +104,8 @@ function renderProgress() {
   const reviewed = items.filter((i) => picks[i.key]?.reviewed).length;
   const withPhoto = items.filter((i) => picks[i.key]?.photos?.length).length;
   $('progress').textContent = `${reviewed} av ${items.length} granskade · ${withPhoto} med minst en bild`;
-  for (const [i, opt] of [...$('pick').options].entries()) {
+  for (const opt of $('pick').options) {
+    const i = Number(opt.value);
     const p = picks[items[i].key];
     opt.textContent = `${p?.reviewed ? '✓' : '·'} ${items[i].name}${p?.photos?.length ? ` (${p.photos.length})` : ''}`;
   }
@@ -215,7 +216,8 @@ function go(i) {
   render();
 }
 
-$('pick').innerHTML = items.map((it, i) => `<option value="${i}">${it.name}</option>`).join('');
+const GROUPS = { streets: 'Gator (Mapillary)', gata: 'Gator (Commons)', bro: 'Broar' };
+$('pick').innerHTML = [...new Set(items.map((it) => it.group))].map((g) => `<optgroup label="${GROUPS[g] ?? g[0].toUpperCase() + g.slice(1)}">${items.map((it, i) => (it.group === g ? `<option value="${i}">${it.name}</option>` : '')).join('')}</optgroup>`).join('');
 $('pick').addEventListener('change', (e) => go(Number(e.target.value)));
 $('prev').addEventListener('click', () => go(index - 1));
 $('next').addEventListener('click', () => go(index + 1));
