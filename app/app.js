@@ -169,11 +169,9 @@ function ask() {
       choices.append(b);
     });
     choices.dataset.count = q.options.length;
-    hide('hint');
     reveal('choices');
   } else {
     hide('choices');
-    reveal('hint');
   }
 
   show(type.showing(q).map(({ item, named }) => ({ item, named, role: 'context' })));
@@ -219,7 +217,7 @@ async function answer(value) {
   else revealChoice(q, result);
 
   renderDots();
-  hide('choices', 'hint');
+  hide('choices');
   showInfo(q.target);
   reveal('result');
   el('next').textContent = index + 1 < set.length ? 'Nästa' : practicing ? 'Se resultat' : 'Se dagens resultat';
@@ -353,7 +351,7 @@ function verdictFor(total, max, daily) {
 function finish() {
   phase = 'end';
   clear();
-  hide('question', 'result', 'info', 'choices', 'hint');
+  hide('question', 'result', 'info', 'choices');
   delete document.body.dataset.answered;
   document.body.dataset.ended = '';
   const scores = results.map((r) => r.result.score);

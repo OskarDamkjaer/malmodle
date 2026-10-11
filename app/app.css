@@ -158,7 +158,7 @@ button.primary:hover { filter: brightness(1.06); }
 
 .row { display: flex; justify-content: space-between; align-items: center; gap: var(--gap); }
 
-#question { padding: 12px 18px 16px; }
+#question { padding: 10px 16px 12px; pointer-events: none; }
 #dots { display: flex; gap: 5px; margin: 0; padding: 0; list-style: none; }
 #dots li { width: 9px; height: 9px; border-radius: 50%; background: var(--dot); transition: background-color .2s ease, transform .2s ease; }
 [data-theme="tidning"] #dots li { border-radius: 0; }
@@ -180,19 +180,6 @@ button.primary:hover { filter: brightness(1.06); }
   line-height: 1.2;
   letter-spacing: var(--display-tracking);
   text-wrap: balance;
-}
-
-.pill {
-  width: auto;
-  max-width: calc(100% - 2 * var(--gap));
-  padding: 10px 16px;
-  font-size: 14px;
-  color: var(--ink-soft);
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: var(--radius-button);
 }
 
 #choices {
@@ -347,6 +334,27 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 @media (min-width: 760px) {
   #question { padding: 16px 22px 20px; }
   #result, #choices { padding: 16px 18px; }
+}
+
+@media (max-width: 599px) {
+  #sharetext { display: none; }
+  .sharecard { padding: 0; background: none; border: 0; box-shadow: none; }
+}
+
+@media (max-height: 520px) and (min-width: 600px) {
+  #question { padding: 8px 16px 10px; }
+  #prompt { margin-top: 4px; font-size: 20px; }
+  #choices { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 8px; }
+  #choices button { min-height: 38px; padding: 6px 8px; font-size: 14px; }
+  #choices[data-count="2"] button { min-height: 44px; }
+  #result { padding: 8px 14px; }
+  #points { font-size: 26px; }
+  #explain { margin-top: 2px; font-size: 14px; }
+  #next { margin-top: 6px; min-height: 40px; }
+  #info { grid-template-columns: 1fr; padding: 8px 14px; }
+  #infophoto, #infophoto[data-empty] { display: none; }
+  #infoname { font-size: 16px; }
+  #infoabout { -webkit-line-clamp: 1; font-size: 13px; }
 }
 
 @media (min-width: 1000px) {
