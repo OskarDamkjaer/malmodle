@@ -22,6 +22,10 @@ cannot reach the sources below.
   Buildings and streets are fine. Statues and sculptures whose artist died
   less than 70 years ago are out, even when Commons hosts them.
 - **No identifiable person as the subject.** Mapillary blurs faces and plates.
+- **Recent enough to look like today.** 2021 or later where there is one,
+  2018 or later otherwise, nothing older. Before 2018 the cars look dated and
+  Hyllie, Västra Hamnen, Nyhavn and Dalaplan have changed. Krogar and kaféer
+  need 2021 or later: signs, terraces and tenants change.
 
 ## Sources per kind
 
@@ -35,6 +39,7 @@ Each kind gets the source that fits what its photo has to show.
 | Street | Mapillary, one image each way at the street's middle, plus each crossing with another street in the quiz | Commons photos within 15 m of the line | Coverage follows the streets the cars drive, and the image direction picks both ways |
 | Area | Commons photos taken inside the area, picked for typical buildings | Mapillary for the thin outer areas | Commons already covers every area, thinly at the edges |
 | Places from `plans/places.md` | Commons or Wikidata when they have one | Mapillary of the frontage from the street | Small places rarely have a category, but are visible from the street |
+| Krog, kafé | Commons for the classics that have a category | Mapillary of the frontage, 2021 or later, facing the entrance | Their own photos and Google's are not free; the frontage is what people recognise |
 | Then and now (special) | Malmö Museer via Europeana | | Free and official, but located only by title, so for curated questions |
 
 Leave out Malmö stad's and Visit Malmö's image banks: their terms are for
@@ -64,8 +69,16 @@ Measured against the 139 items in `quiz.json` (48 areas, 30 landmarks,
     Stadiongatan, Stockholmsvägen, Agnesfridsvägen, Dalaplan and Jägersrovägen
     have none. About ten thoroughfares have one or two.
 - **Mapillary.** CC BY-SA 4.0, a camera point and a compass angle per image,
-  faces and plates blurred. Not yet measured. Needs a free client token
-  (mapillary.com → Developers → register an app).
+  faces and plates blurred. Needs a free client token (mapillary.com →
+  Developers → register an app, Read scope only) in `MAPILLARY_TOKEN`, from
+  the environment or `.env`. Within 40 m of the point: 93% of quiz streets,
+  85% of torg and 81% of krogar have a 2021 or later image. Parks, stadiums
+  and large buildings look worse from their centroid, but 36 of 44 such
+  places have 2021 or later images within 150 m, so sample around the
+  outline. Nothing at all near Jägersro and Limhamns kalkbrott; only 2014 to
+  2020 at Ribersborgs Kallbadhus. A bbox much over 300 m in the centre fails
+  with "reduce the amount of data", and the same small query can come back
+  empty once and full the next time.
 - **Flickr.** The public search page gives 5,522 photos of "malmö" with a free
   licence (4, 5, 7, 9, 10) and a geotag. Mostly modern and much of it already
   imported to Commons. The API needs a free key.
@@ -104,28 +117,38 @@ Measured against the 139 items in `quiz.json` (48 areas, 30 landmarks,
 
 ## Pipeline
 
-All build-time, plain Node, no dependencies, same style as
-`scripts/resolve-landmarks.mjs`.
+All build-time, plain Node, no dependencies. One kind at a time, each
+reviewed by hand before the next.
 
-1. **Collect** (`scripts/photos-collect.mjs`): fetch each source into
-   `data/cache/photos/<source>.json` (git-ignored), throttled, with the same
-   User-Agent and cache pattern as `scripts/lib/nominatim.mjs`. One record per
-   photo: source, id, camera point, heading if any, width, height, licence,
-   author, source URL, image URL, title, categories.
-2. **Suggest** (`scripts/photos-suggest.mjs`): for each item, list candidates
-   by its kind's rule above. Inside the polygon for areas and squares, within
-   15 m of the line for streets, in the category or named and within 100 m
-   for landmarks and bridges. For streets, sample the line's midpoint and the
-   crossings with other quiz streets, and take the Mapillary image closest to
-   each, one per direction. Drop the generic points, small files, NC/ND, and
-   titles that look like products, events or portraits. Write
-   `data/cache/photos/candidates.json`.
-3. **Pick by hand.** Go through each item's candidates and keep one to three.
-   A small local page that shows the candidates per item with keep buttons
-   makes this an evening, not a week. Write the picks to `photos/photos.json`
-   (committed): item name, then per photo the source, id, camera point,
-   heading, licence, author and source URL.
-4. **Fetch and resize** (in `scripts/build-quiz.mjs` or its own script):
+1. **Candidates per kind.** One script per kind writes
+   `data/cache/photos/candidates/<kind>.json` (git-ignored): per item its
+   sample points, and per point the candidate photos with id, camera point,
+   heading, date and author. Source responses are cached under
+   `data/cache/photos/<source>/`.
+   - Streets: `node scripts/photos-streets.mjs [name]`. Samples the line's
+     midpoint and its crossings with other quiz streets (merged within 60 m).
+     At each point it takes Mapillary images within 25 m, on the street
+     (12 m from the line), not panoramas, 2018 or later, facing along the
+     street within 30°, up to three per direction from different sequences,
+     2021 or later first. The rules are in `scripts/lib/photos.mjs` and tested.
+   - Landmarks, bridges, buildings, scener, museer, kyrkor: Commons category
+     and Wikidata image, Flickr and Mapillary as fallback.
+   - Parks, bad, idrott: Commons inside, then Mapillary sampled around the
+     outline facing in.
+   - Krogar, kaféer: Commons, then Mapillary of the frontage facing the
+     entrance, 2021 or later only.
+   - Areas: Commons photos inside the polygon.
+2. **Pick by hand.** `node scripts/photos-review.mjs` serves a page on
+   http://127.0.0.1:8081 that shows one item at a time: a sketch with the
+   sample points and where each photo was taken and which way it faces, then
+   the candidates per point and direction. Click to keep, ⤢ to see it large,
+   Klar (Enter) for the next unreviewed item, arrows to step. Thumbnails are
+   fetched on view and cached. Picks are saved on every click to
+   `photos/photos.json` (committed): per item key (`street:Södergatan`) the
+   kept photos with source, id, camera point, heading, date, licence, author
+   and source URL, and whether the item is reviewed. A reviewed item with no
+   photo needs another source.
+3. **Fetch and resize** (in `scripts/build-quiz.mjs` or its own script):
    download each picked photo, resize to WebP at a phone-friendly width, and
    put it under `build/`. Add each item's photos to `quiz.json` with the
    credit.

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Granska bilder</title>
+<style>
+  :root {
+    --bg: #f6f5f2; --fg: #1d1d1b; --muted: #6b6a66; --card: #fff; --line: #dcdad4;
+    --keep: #1f7a4d; --accent: #2b5fb4; --street: #9a9890;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #171716; --fg: #ecebe7; --muted: #9b9a95; --card: #232321; --line: #3a3936; --keep: #4cc38a; --accent: #7aa7f0; --street: #6d6c67; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  header h1 { font-size: 18px; margin: 0 auto 0 0; }
+  header .progress { color: var(--muted); font-size: 13px; width: 100%; }
+  select, button { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+  button.primary { background: var(--keep); border-color: var(--keep); color: #fff; }
+  main { padding: 16px; max-width: 1200px; margin: 0 auto; }
+  .top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  @media (min-width: 800px) { .top { grid-template-columns: 320px minmax(0, 1fr); } }
+  svg.sketch { width: 100%; height: auto; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+  .kept-strip { display: flex; gap: 6px; flex-wrap: wrap; align-content: flex-start; }
+  .kept-strip img { height: 72px; border-radius: 4px; outline: 2px solid var(--keep); }
+  .muted { color: var(--muted); }
+  section.sample { margin-top: 20px; }
+  section.sample h2 { font-size: 16px; margin: 0 0 6px; }
+  .dir { margin: 8px 0 14px; }
+  .dir h3 { font-size: 13px; font-weight: 500; color: var(--muted); margin: 0 0 6px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; }
+  .card { background: var(--card); border: 2px solid var(--line); border-radius: 8px; overflow: hidden; cursor: pointer; }
+  .card.kept { border-color: var(--keep); }
+  .card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--line); }
+  .card .meta { display: flex; gap: 8px; align-items: center; padding: 6px 8px; font-size: 13px; }
+  .card .meta .tag { margin-left: auto; font-weight: 600; color: var(--keep); }
+  .card .meta a { color: var(--accent); }
+  .empty { color: var(--muted); font-size: 13px; }
+  dialog { padding: 0; border: 0; background: transparent; max-width: 96vw; }
+  dialog img { max-width: 96vw; max-height: 90vh; display: block; }
+  dialog::backdrop { background: rgb(0 0 0 / 0.8); }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Granska bilder</h1>
+  <select id="pick" aria-label="Plats"></select>
+  <button id="prev" title="Föregående (←)">←</button>
+  <button id="next" title="Nästa (→)">→</button>
+  <button id="done" class="primary" title="Klar, till nästa ogranskade (Enter)">Klar</button>
+  <div class="progress" id="progress"></div>
+</header>
+<main id="main"></main>
+<dialog id="big"><img alt=""></dialog>
+<script type="module">
+const items = await (await fetch('/candidates')).json();
+let picks = await (await fetch('/picks')).json();
+let index = Math.max(0, items.findIndex((i) => !picks[i.key]?.reviewed));
+
+const $ = (id) => document.getElementById(id);
+const compass = (h) => ['nord', 'nordost', 'ost', 'sydost', 'syd', 'sydväst', 'väst', 'nordväst'][Math.round(h / 45) % 8];
+const thumb = (item, id) => `/thumb/${item.source}/${id}`;
+
+async function save() {
+  await fetch('/picks', { method: 'POST', body: JSON.stringify(picks) });
+  renderProgress();
+}
+
+function entry(item) {
+  return picks[item.key] ??= { photos: [], reviewed: false };
+}
+
+function isKept(item, id) {
+  return entry(item).photos.some((p) => p.id === id);
+}
+
+function toggle(item, sample, img) {
+  const e = entry(item);
+  if (isKept(item, img.id)) e.photos = e.photos.filter((p) => p.id !== img.id);
+  else e.photos.push({
+    source: item.source, id: img.id, point: img.point, heading: img.heading, captured: img.captured,
+    licence: item.licence, author: img.author, url: `https://www.mapillary.com/app/?pKey=${img.id}`, at: sample.label,
+  });
+  save();
+  render();
+}
+
+function renderProgress() {
+  const reviewed = items.filter((i) => picks[i.key]?.reviewed).length;
+  const withPhoto = items.filter((i) => picks[i.key]?.photos?.length).length;
+  $('progress').textContent = `${reviewed} av ${items.length} granskade · ${withPhoto} med minst en bild`;
+  for (const [i, opt] of [...$('pick').options].entries()) {
+    const p = picks[items[i].key];
+    opt.textContent = `${p?.reviewed ? '✓' : '·'} ${items[i].name}${p?.photos?.length ? ` (${p.photos.length})` : ''}`;
+  }
+}
+
+function sketch(item, hover) {
+  const lines = item.geometry.type === 'LineString' ? [item.geometry.coordinates] : item.geometry.coordinates;
+  const all = [...lines.flat(), ...item.samples.map((s) => s.point)];
+  const k = Math.cos((55.6 * Math.PI) / 180);
+  const xs = all.map((p) => p[0] * k), ys = all.map((p) => p[1]);
+  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  const span = Math.max(x1 - x0, y1 - y0) || 1e-4;
+  const W = 300, pad = 24, s = (W - 2 * pad) / span;
+  const H = Math.round((y1 - y0) * s + 2 * pad);
+  const P = ([lon, lat]) => [pad + (lon * k - x0) * s + ((W - 2 * pad) - (x1 - x0) * s) / 2, H - pad - (lat - y0) * s];
+  const path = lines.map((l) => 'M' + l.map((p) => P(p).map((v) => v.toFixed(1)).join(',')).join('L')).join('');
+  const dots = item.samples.map((smp, i) => {
+    const [x, y] = P(smp.point);
+    return `<circle cx="${x}" cy="${y}" r="5" fill="var(--accent)"/><text x="${x + 8}" y="${y + 4}" font-size="11" fill="var(--fg)">${i + 1}</text>`;
+  }).join('');
+  const kept = entry(item).photos.map((p) => arrow(P(p.point), p.heading, 'var(--keep)')).join('');
+  const hov = hover ? arrow(P(hover.point), hover.heading, 'var(--fg)') : '';
+  return `<svg class="sketch" viewBox="0 0 ${W} ${H}"><path d="${path}" fill="none" stroke="var(--street)" stroke-width="4" stroke-linecap="round"/>${dots}${kept}${hov}</svg>`;
+}
+
+function arrow([x, y], heading, color) {
+  const r = (heading * Math.PI) / 180, L = 16;
+  const tx = x + Math.sin(r) * L, ty = y - Math.cos(r) * L;
+  return `<circle cx="${x}" cy="${y}" r="3.5" fill="${color}"/><line x1="${x}" y1="${y}" x2="${tx}" y2="${ty}" stroke="${color}" stroke-width="2.5"/>`;
+}
+
+function render() {
+  const item = items[index];
+  $('pick').value = String(index);
+  $('title').textContent = item.name;
+  const e = entry(item);
+  const main = $('main');
+  main.innerHTML = `
+    <div class="top">
+      <div id="sketch">${sketch(item)}</div>
+      <div>
+        <div class="muted">${item.label ?? item.kind} · ${item.source} · ${item.licence}${e.reviewed ? ' · granskad' : ''}</div>
+        <p class="muted">Klicka på en bild för att behålla den. ⤢ visar den stor. Behåll en till tre som visar gatan tydligt.</p>
+        <div class="kept-strip">${e.photos.map((p) => `<img src="${thumb(item, p.id)}" alt="">`).join('') || '<span class="empty">Inga valda ännu.</span>'}</div>
+      </div>
+    </div>`;
+  item.samples.forEach((smp, si) => {
+    const sec = document.createElement('section');
+    sec.className = 'sample';
+    sec.innerHTML = `<h2>${si + 1}. ${smp.label} <span class="muted">(${smp.found} bilder i närheten)</span></h2>`;
+    for (const dir of smp.directions) {
+      const d = document.createElement('div');
+      d.className = 'dir';
+      d.innerHTML = `<h3>Mot ${compass(dir.heading)} (${dir.heading}°)</h3>`;
+      const cards = document.createElement('div');
+      cards.className = 'cards';
+      if (!dir.images.length) cards.innerHTML = '<div class="empty">Inga bilder åt det här hållet.</div>';
+      for (const img of dir.images) {
+        const c = document.createElement('div');
+        c.className = `card${isKept(item, img.id) ? ' kept' : ''}`;
+        c.innerHTML = `<img loading="lazy" src="${thumb(item, img.id)}" alt="">
+          <div class="meta"><span>${img.captured}</span><span class="muted">${img.author ?? ''}</span>
+          <a href="https://www.mapillary.com/app/?pKey=${img.id}" target="_blank" rel="noopener" title="Öppna i Mapillary">↗</a>
+          <a href="#" data-big title="Visa stor">⤢</a>
+          <span class="tag">${isKept(item, img.id) ? 'Behålls' : ''}</span></div>`;
+        c.addEventListener('click', (ev) => {
+          if (ev.target.closest('a[href^="http"]')) return;
+          ev.preventDefault();
+          if (ev.target.closest('[data-big]')) {
+            $('big').querySelector('img').src = thumb(item, img.id);
+            $('big').showModal();
+            return;
+          }
+          toggle(item, smp, img);
+        });
+        c.addEventListener('mouseenter', () => { $('sketch').innerHTML = sketch(item, img); });
+        c.addEventListener('mouseleave', () => { $('sketch').innerHTML = sketch(item); });
+        cards.append(c);
+      }
+      d.append(cards);
+      sec.append(d);
+    }
+    main.append(sec);
+  });
+  window.scrollTo(0, 0);
+}
+
+function go(i) {
+  index = (i + items.length) % items.length;
+  render();
+}
+
+$('pick').innerHTML = items.map((it, i) => `<option value="${i}">${it.name}</option>`).join('');
+$('pick').addEventListener('change', (e) => go(Number(e.target.value)));
+$('prev').addEventListener('click', () => go(index - 1));
+$('next').addEventListener('click', () => go(index + 1));
+$('done').addEventListener('click', async () => {
+  entry(items[index]).reviewed = true;
+  await save();
+  const next = items.findIndex((it, i) => i > index && !picks[it.key]?.reviewed);
+  const wrap = items.findIndex((it) => !picks[it.key]?.reviewed);
+  go(next >= 0 ? next : wrap >= 0 ? wrap : index);
+});
+$('big').addEventListener('click', () => $('big').close());
+document.addEventListener('keydown', (e) => {
+  if ($('big').open || e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowRight') go(index + 1);
+  if (e.key === 'ArrowLeft') go(index - 1);
+  if (e.key === 'Enter') $('done').click();
+});
+renderProgress();
+render();
+</script>
+</body>
+</html>
