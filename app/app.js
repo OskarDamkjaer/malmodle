@@ -4,7 +4,7 @@ import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { metersBetween } from './geo.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap,
+  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap, streetAt,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -167,11 +167,17 @@ function ask() {
   });
 }
 
+function clickedStreet(tap) {
+  const street = streetAt(tap);
+  return street && (byName.get(street.name)?.kind === 'street' ? byName.get(street.name) : street);
+}
+
 function answer(value) {
   if (phase !== 'asking') return;
   const q = current();
   const type = typeOf(q);
-  const result = type.grade(q, value, items);
+  const street = type.input === 'map' && q.target.kind === 'street' ? clickedStreet(value) : undefined;
+  const result = type.grade(q, value, items, street);
   results.push({ q, result });
   phase = 'answered';
   navigator.vibrate?.(result.score === MAX_SCORE ? 15 : [10, 60, 10]);

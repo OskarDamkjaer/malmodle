@@ -54,10 +54,10 @@ const point = {
   prompt: (q) => ({ title: `Var ligger ${q.target.name}?`, detail: q.target.label }),
   showing: () => [],
   view: () => 'home',
-  grade(q, tap, items) {
+  grade(q, tap, items, street) {
     const { distance, point: near } = closest(q.target.geometry, tap);
     const score = distanceScore(distance, q.target.geometry);
-    const hit = tappedOn(items, tap, q.target.kind);
+    const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street ?? tappedOn(items, tap, 'area');
     return {
       score,
       tap,
