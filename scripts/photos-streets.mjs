@@ -8,15 +8,19 @@ const OUT = 'data/cache/photos/candidates/streets.json';
 
 const { items } = JSON.parse(await readFile('build/data/quiz.json', 'utf8'));
 const streets = items.filter((i) => i.kind === 'street');
-const only = process.argv[2];
+const args = process.argv.slice(2);
+const deep = args.includes('--deep');
+const names = new Set(args.filter((a) => !a.startsWith('--')));
+const SPACING = deep ? 120 : 0;
+const PER_DIRECTION = deep ? 6 : 3;
 
 const out = [];
 for (const street of streets) {
-  if (only && street.name !== only) continue;
+  if (names.size && !names.has(street.name)) continue;
   const samples = [];
-  for (const s of samplePoints(street, streets)) {
+  for (const s of samplePoints(street, streets, 60, SPACING)) {
     const images = (await imagesNear(s.point, RADIUS)).filter((img) => !SKIP_AUTHORS.has(img.creator?.username));
-    const directions = pickAlong(images, street, s.point, { radius: RADIUS }).map((d) => ({
+    const directions = pickAlong(images, street, s.point, { radius: RADIUS, perDirection: PER_DIRECTION }).map((d) => ({
       heading: d.heading,
       images: d.images.map((img) => ({
         id: img.id,
@@ -36,6 +40,12 @@ for (const street of streets) {
   out.push({ key: `street:${street.name}`, kind: 'street', name: street.name, label: street.label, geometry: street.geometry, samples });
 }
 
+let all = out;
+if (names.size) {
+  const previous = JSON.parse(await readFile(OUT, 'utf8').catch(() => '{"items":[]}')).items;
+  const fresh = new Map(out.map((i) => [i.key, i]));
+  all = streets.map((s) => fresh.get(`street:${s.name}`) ?? previous.find((p) => p.key === `street:${s.name}`)).filter(Boolean);
+}
 await mkdir('data/cache/photos/candidates', { recursive: true });
-await writeFile(OUT, JSON.stringify({ source: 'mapillary', licence: 'CC BY-SA 4.0', items: out }));
+await writeFile(OUT, JSON.stringify({ source: 'mapillary', licence: 'CC BY-SA 4.0', items: all }));
 console.log(`wrote ${OUT}`);

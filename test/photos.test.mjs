@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { angleGap, bearing, midpoint, pickAlong, samplePoints, streetAhead } from '../scripts/lib/photos.mjs';
+import { alongEvery, angleGap, bearing, midpoint, pickAlong, samplePoints, streetAhead } from '../scripts/lib/photos.mjs';
 
 const ns = { name: 'Nord', geometry: { type: 'LineString', coordinates: [[13, 55.60], [13, 55.61]] } };
 const ew = { name: 'Väst', geometry: { type: 'LineString', coordinates: [[12.99, 55.608], [13.01, 55.608]] } };
@@ -49,4 +49,9 @@ test('street ahead is how far the street runs where the camera looks', () => {
   assert.ok(Math.abs(fromMiddle - 557) < 5);
   assert.ok(streetAhead(ns.geometry, [13, 55.6098], 0) < 40);
   assert.equal(streetAhead(ns.geometry, [13, 55.605], 90), 0);
+});
+
+test('a deep pass also samples the street at a fixed spacing', () => {
+  assert.equal(alongEvery(ns.geometry, 200).length, 6);
+  assert.ok(samplePoints(ns, [ns], 60, 200).length > samplePoints(ns, [ns]).length);
 });

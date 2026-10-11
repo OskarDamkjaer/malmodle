@@ -83,8 +83,32 @@ export function crossings(geometry, other, mergeM = 60) {
   return out;
 }
 
-export function samplePoints(street, others, mergeM = 60) {
+export function alongEvery(geometry, spacingM) {
+  const out = [];
+  for (const line of lines(geometry)) {
+    let next = spacingM / 2;
+    let walked = 0;
+    for (let i = 1; i < line.length; i++) {
+      const a = line[i - 1], b = line[i];
+      const d = distance(a, b);
+      while (d && next <= walked + d) {
+        const t = (next - walked) / d;
+        out.push([a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])]);
+        next += spacingM;
+      }
+      walked += d;
+    }
+  }
+  return out;
+}
+
+export function samplePoints(street, others, mergeM = 60, spacingM = 0) {
   const points = [{ label: 'mitten', point: midpoint(street.geometry) }];
+  if (spacingM) {
+    for (const p of alongEvery(street.geometry, spacingM)) {
+      if (!points.some((q) => distance(p, q.point) < mergeM)) points.push({ label: `längs gatan ${points.length}`, point: p });
+    }
+  }
   for (const o of others) {
     if (o.name === street.name) continue;
     for (const p of crossings(street.geometry, o.geometry, mergeM)) {
