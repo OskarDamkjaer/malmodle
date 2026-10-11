@@ -66,8 +66,7 @@ test('a street question names the street the map shows under the tap', () => {
   const seen = { name: 'Okänd gata', kind: 'street', point: tap, geometry: { type: 'Point', coordinates: tap } };
   assert.equal(TYPES.point.grade({ target }, tap, items).hit.name, 'Gata 0');
   assert.equal(TYPES.point.grade({ target }, tap, items, seen).hit.name, 'Okänd gata');
-  const between = TYPES.point.grade({ target }, tap, items, null).hit;
-  assert.notEqual(between?.kind, 'street');
+  assert.equal(TYPES.point.grade({ target }, tap, items, null).hit, null);
 });
 
 test('choice questions are all or nothing', () => {

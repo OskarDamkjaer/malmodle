@@ -201,7 +201,7 @@ function revealPoint(q, result) {
   show(marks);
   showTap(result.tap, result.near);
   el('verdict').textContent = result.score === MAX_SCORE ? 'Mitt i prick' : `${formatDistance(result.distance)} bort`;
-  el('explain').textContent = result.hit ? `Du tryckte på ${result.hit.name}.` : '';
+  el('explain').textContent = result.hit ? `Det där var ${result.hit.name}.` : '';
   requestAnimationFrame(() => frameReveal([q.target.geometry], [result.tap]));
 }
 

@@ -20,18 +20,13 @@ const REACH = { street: 60, bridge: 200, landmark: 200 };
 
 export function tappedOn(items, point, kind) {
   const sameKind = items.filter((it) => it.kind === kind);
-  if (kind === 'area') {
-    const area = sameKind.find((it) => contains(it.geometry, point));
-    if (area) return area;
-  } else {
-    let best = null;
-    for (const it of sameKind) {
-      const d = distanceTo(it.geometry, point);
-      if (d <= REACH[kind] && (!best || d < best.d)) best = { it, d };
-    }
-    if (best) return best.it;
+  if (kind === 'area') return sameKind.find((it) => contains(it.geometry, point)) ?? null;
+  let best = null;
+  for (const it of sameKind) {
+    const d = distanceTo(it.geometry, point);
+    if (d <= REACH[kind] && (!best || d < best.d)) best = { it, d };
   }
-  return items.find((it) => it.kind === 'area' && contains(it.geometry, point)) ?? null;
+  return best?.it ?? null;
 }
 
 const PLACES = ['area', 'landmark', 'bridge'];
@@ -57,7 +52,7 @@ const point = {
   grade(q, tap, items, street) {
     const { distance, point: near } = closest(q.target.geometry, tap);
     const score = distanceScore(distance, q.target.geometry);
-    const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street ?? tappedOn(items, tap, 'area');
+    const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
     return {
       score,
       tap,
