@@ -1,0 +1,605 @@
+{
+ "category": "krog",
+ "core": [
+  {
+   "name": "Fagans",
+   "osm": "node/444864214",
+   "lat": 55.6037,
+   "lon": 13.00032,
+   "kind": "pub",
+   "since": "≤2009",
+   "why": "Irish pub at Per Weijersgatan/Stora Nygatan by Gustav Adolfs torg, a meeting-point name; already described as a lively Irish pub in 2011.",
+   "evidence": [
+    "https://www.thelocal.se/20110317/32648/"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Mello Yello",
+   "osm": "node/444868367",
+   "lat": 55.6055,
+   "lon": 12.99893,
+   "kind": "bar",
+   "since": "1990s",
+   "why": "Bar-restaurant at Lilla Torg 1, one of the square's best-known anchors (OSM spells it Mellow Yellow).",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/mello-yello/"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Mando Steakhouse",
+   "osm": "node/625987396",
+   "lat": 55.60458,
+   "lon": 13.00049,
+   "kind": "steakhouse",
+   "since": "1966",
+   "why": "Skomakaregatan steakhouse since 1966, famous for its plankstek.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Bullen",
+   "osm": "way/1036504137",
+   "lat": 55.6,
+   "lon": 13.00143,
+   "kind": "pub",
+   "since": "1897",
+   "why": "Storgatan beer hall with a pub on the site since 1897 and an English-style 1960s interior; Malmö's archetypal old pub.",
+   "evidence": [
+    "https://theeuropeanbarguide.com/bullen-tva-krogare-malmo-%f0%9f%87%b8%f0%9f%87%aa/"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Pickwick",
+   "osm": "node/417994871",
+   "lat": 55.60288,
+   "lon": 13.00317,
+   "kind": "pub",
+   "since": "≤2009",
+   "why": "English pub on Stadt Hamburgsgatan in Malmborgen, decades old, known for its Wednesday quiz.",
+   "evidence": [
+    "https://www.arrivalguides.com/sv/Travelguide/MALMO/barsandnightlife/pickwick-pub-12803"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Moosehead",
+   "osm": "node/444868365",
+   "lat": 55.60545,
+   "lon": 12.99867,
+   "kind": "bar",
+   "since": "≤2009",
+   "why": "Sports bar and burger place at Lilla Torg, one of the square's long-running names.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Nyhavn",
+   "osm": "node/536828523",
+   "lat": 55.59196,
+   "lon": 13.00847,
+   "kind": "pub",
+   "since": "≤2009",
+   "why": "Beer bar with the big outdoor serving on Möllevångstorget 8.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/nyhavn/"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Restaurang Möllan",
+   "osm": "node/534572236",
+   "lat": 55.59273,
+   "lon": 13.00722,
+   "kind": "restaurant",
+   "since": "≤2009",
+   "why": "Bergsgatan restaurant and bar with a big terrace, a Möllan classic.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Jalla Jalla",
+   "osm": "node/1012287166",
+   "lat": 55.59484,
+   "lon": 13.00885,
+   "kind": "falafel",
+   "since": "~2000",
+   "why": "Falafel stand on Bergsgatan at Möllan, named after the 2000 film and tied to the nightlife; the best-known falafel name in town.",
+   "evidence": [
+    "https://www.dagensps.se/weekend/mat-vin/topplistan-malmos-basta-falafel/"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Krua Thai",
+   "osm": "node/536826013",
+   "lat": 55.59133,
+   "lon": 13.00894,
+   "kind": "restaurant",
+   "since": "≤2009",
+   "why": "Thai restaurant on Möllevångstorget, a Möllan fixture for decades.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Vegegården",
+   "osm": "node/445332875",
+   "lat": 55.604,
+   "lon": 13.0083,
+   "kind": "restaurant",
+   "since": "≤2009",
+   "why": "All-vegan Asian buffet on Rörsjögatan, a long-running staple.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Johan P",
+   "osm": "node/2293728955",
+   "lat": 55.60416,
+   "lon": 12.99887,
+   "kind": "restaurant",
+   "since": "1981",
+   "why": "Fish and seafood restaurant by Saluhallen off Lilla Torg since 1981.",
+   "evidence": [
+    "https://www.falstaff.com/en/restaurants/johan-p-grossraum-malmoe"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Årstiderna i Kockska huset",
+   "osm": "node/625987394",
+   "lat": 55.60673,
+   "lon": 12.99897,
+   "kind": "restaurant",
+   "since": "1990s",
+   "why": "Traditional Swedish restaurant in the vaulted cellars of the 1520s Kockska huset by Stortorget.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Saltimporten",
+   "osm": "node/2943366166",
+   "lat": 55.61607,
+   "lon": 12.99712,
+   "kind": "restaurant",
+   "since": "2012",
+   "why": "Lunch-only canteen in Frihamnen since 2012, famous far beyond its size.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Far i Hatten",
+   "osm": "way/1346394429",
+   "lat": 55.59259,
+   "lon": 13.01424,
+   "kind": "restaurant",
+   "since": "1892 (building)",
+   "why": "Folkets Park's original park restaurant: restaurant, beer garden and dance floor.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Malmö Brewing Co & Taproom",
+   "osm": "node/1387412579",
+   "lat": 55.59341,
+   "lon": 13.00762,
+   "kind": "pub",
+   "since": "2010",
+   "why": "Brewery taproom on Bergsgatan since 2010.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "high",
+   "owner": "keep"
+  },
+  {
+   "name": "Grand",
+   "osm": "node/2549896881",
+   "lat": 55.5949,
+   "lon": 13.0098,
+   "kind": "bar",
+   "since": "~2013",
+   "why": "Grand Öl & Mat on Monbijougatan, a big beer hall and restaurant by Folkets Park.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "medium",
+   "owner": "keep"
+  },
+  {
+   "name": "Mrs Brown",
+   "osm": "node/658707737",
+   "lat": 55.59967,
+   "lon": 12.99893,
+   "kind": "bar",
+   "since": "≤2010",
+   "why": "Bar-restaurant on Storgatan, a long-running after-work and nightlife name.",
+   "evidence": [
+    "places/research/krog.json"
+   ],
+   "confidence": "medium",
+   "owner": "keep"
+  },
+  {
+   "name": "Kin Long",
+   "osm": "node/3402678115",
+   "lat": 55.59647,
+   "lon": 13.00067,
+   "kind": "restaurant",
+   "since": "1964",
+   "why": "Malmö's oldest Chinese restaurant still running, on Rådmansgatan since 1964.",
+   "evidence": [
+    "https://visitsweden.com/where-to-go/southern-sweden/malmo/top-5-malmo-restaurants",
+    "https://www.falstaff.com/en/restaurants/kin-long-1"
+   ],
+   "confidence": "high",
+   "owner": "undecided"
+  },
+  {
+   "name": "Rådhuskällaren",
+   "osm": "node/444857255",
+   "lat": 55.6063,
+   "lon": 13.0014,
+   "kind": "restaurant",
+   "since": "old",
+   "why": "Restaurant in the cellar of the town hall on Stortorget (Kompanigatan 5), the traditional venue for dinners, julbord and parties; open as of Dec 2024.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/radhuskallaren/",
+    "https://www.flashback.org/t3653604"
+   ],
+   "confidence": "high",
+   "owner": "undecided"
+  },
+  {
+   "name": "Ölkaféet",
+   "osm": "node/445844567",
+   "lat": 55.59236,
+   "lon": 13.00642,
+   "kind": "pub",
+   "since": "≤2009",
+   "why": "Cheap-pint beer bar on Södra Skolgatan at Möllan, the unofficial supporters' bar of Malmö FF.",
+   "evidence": [
+    "https://www.thelocal.se/20240322/five-budget-friendly-bars-for-a-night-out-in-malmo"
+   ],
+   "confidence": "high",
+   "owner": "undecided"
+  },
+  {
+   "name": "Steakhouse Lilla Torg",
+   "osm": "way/1091108901",
+   "lat": 55.60494,
+   "lon": 12.99839,
+   "kind": "steakhouse",
+   "since": "1990s?",
+   "why": "Steakhouse with a heated terrace at Lilla Torg 5, long a fixture of the square; already in the game.",
+   "evidence": [
+    "https://www.reco.se/restaurang-steakhouse-ab"
+   ],
+   "confidence": "medium",
+   "owner": "undecided"
+  },
+  {
+   "name": "Victors",
+   "osm": "node/2293729033",
+   "lat": 55.60539,
+   "lon": 12.99839,
+   "kind": "bar",
+   "since": "≤2009",
+   "why": "Bar-restaurant with the big terrace on Lilla Torg 1, one of the square's anchors with Mello Yello and Moosehead.",
+   "evidence": [
+    "https://www.reco.se/victors-restaurang-bar-cafe"
+   ],
+   "confidence": "medium",
+   "owner": "undecided"
+  },
+  {
+   "name": "Falafel No 1",
+   "osm": "way/159635009",
+   "lat": 55.57088,
+   "lon": 13.0424,
+   "kind": "falafel",
+   "since": "late 1980s",
+   "why": "The original Falafel No 1 by Jägersro, from Youssif Iskandarani, who opened one of Malmö's first falafel places in the late 1980s.",
+   "evidence": [
+    "https://www.thelocal.se/20181025/introducing-malm-lunch-exploring-swedens-international-food-capital",
+    "https://www.falstaff.com/nordics/streetfood/falafel-nr1-vagnen"
+   ],
+   "confidence": "medium",
+   "owner": "undecided"
+  },
+  {
+   "name": "Falafel Baghdad",
+   "osm": "node/3486009995",
+   "lat": 55.58832,
+   "lon": 13.02687,
+   "kind": "falafel",
+   "since": "1990s",
+   "why": "One of Malmö's original falafel places, started as a cart, now a corner building on Annelundsgatan (OSM: Falafel Bagdad).",
+   "evidence": [
+    "https://www.thelocal.se/20190808/expats-decide-these-are-the-best-falafel-joints-in-malm",
+    "https://www.dagensps.se/weekend/mat-vin/topplistan-malmos-basta-falafel/"
+   ],
+   "confidence": "medium",
+   "owner": "undecided"
+  },
+  {
+   "name": "Syltan",
+   "osm": "node/4037719302",
+   "lat": 55.60809,
+   "lon": 13.01444,
+   "kind": "pub",
+   "since": "1970s",
+   "why": "Pub at Östra Förstadsgatan 2 by Värnhem, with a pub on the site since the 1970s.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/syltan-kök-bar/"
+   ],
+   "confidence": "medium",
+   "owner": "undecided"
+  },
+  {
+   "name": "Limhamns Fiskrökeri",
+   "osm": "node/2279592697",
+   "lat": 55.58512,
+   "lon": 12.92494,
+   "kind": "restaurant",
+   "since": "~1940s",
+   "why": "Smokehouse, fish shop and restaurant in Limhamn's fishing harbour, reportedly around 80 years old.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/limhamns-fiskrökeri/"
+   ],
+   "confidence": "medium",
+   "owner": "undecided"
+  },
+  {
+   "name": "Nobes",
+   "osm": "node/2261944164",
+   "lat": 55.5912,
+   "lon": 13.01686,
+   "kind": "pub",
+   "since": "1937",
+   "why": "Gamle Nobes Bodega on Kristianstadsgatan, a neighbourhood pub since 1937 that everyone calls Nobes; known for kålpudding.",
+   "evidence": [
+    "https://www.thelocal.se/20240322/five-budget-friendly-bars-for-a-night-out-in-malmo",
+    "https://theeuropeanbarguide.com/gamla-nobes-bodega-malmo-%f0%9f%87%b8%f0%9f%87%aa/"
+   ],
+   "confidence": "high",
+   "owner": "new"
+  },
+  {
+   "name": "Korvhuset",
+   "osm": "node/6301876265",
+   "lat": 55.60081,
+   "lon": 13.00235,
+   "kind": "korv",
+   "since": "1998",
+   "why": "Sausage kiosk at Västra Kanalgatan 1 by the canal, run by the same couple since 1998 with 100+ sausages; called an institution.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/korvhuset-vastra-kanalgatan/"
+   ],
+   "confidence": "medium",
+   "owner": "new"
+  },
+  {
+   "name": "Värnhems Falafel",
+   "osm": "node/4037719307",
+   "lat": 55.6057,
+   "lon": 13.02479,
+   "kind": "falafel",
+   "since": "≤2016",
+   "why": "Falafel place on Lundavägen at Värnhem with its own bread and a queue out the door; won The Local's 2019 survey and called 'almost legendary' in 2024.",
+   "evidence": [
+    "https://www.thelocal.se/20190808/expats-decide-these-are-the-best-falafel-joints-in-malm",
+    "https://www.dagensps.se/weekend/mat-vin/topplistan-malmos-basta-falafel/"
+   ],
+   "confidence": "medium",
+   "owner": "new"
+  },
+  {
+   "name": "Paddy's",
+   "osm": "node/1460876011",
+   "lat": 55.60571,
+   "lon": 13.0028,
+   "kind": "pub",
+   "since": "≤2011",
+   "why": "Irish pub on Kalendegatan off Stortorget, already established in 2011, with a wine and gin bar opposite since 2016.",
+   "evidence": [
+    "https://www.thelocal.se/20110317/32648/",
+    "https://thatsup.co.uk/malmo/restaurant/paddy-s/"
+   ],
+   "confidence": "medium",
+   "owner": "new"
+  }
+ ],
+ "closeCuts": [
+  {
+   "name": "Brasserie Sture",
+   "osm": "node/3359248859",
+   "lat": 55.60731,
+   "lon": 13.00043,
+   "why": "The Sture/Sturehof name on Adelgatan goes back to 1912 and is widely known, but today's brasserie (2015) is Michelin-listed and upscale; owner was undecided."
+  },
+  {
+   "name": "Mässingshornet",
+   "osm": "node/7442016894",
+   "lat": 55.60911,
+   "lon": 13.03733,
+   "why": "Kirseberg's 'sunkhak king', interior untouched since 1981; a real institution but mostly known locally in Kirseberg."
+  },
+  {
+   "name": "Lemongrass",
+   "osm": "way/30407210",
+   "lat": 55.60372,
+   "lon": 12.99632,
+   "why": "Asian restaurant on Grynbodgatan near Stortorget since about 1995–98; long-lived but not a reference point."
+  },
+  {
+   "name": "Quan",
+   "osm": "node/2278405464",
+   "lat": 55.60552,
+   "lon": 12.99809,
+   "why": "Asian restaurant at Mäster Johansgatan 15 by Lilla Torg, reportedly since 1993, run by a former Izakaya Koi waiter; well regarded rather than famous."
+  },
+  {
+   "name": "Rex",
+   "osm": "node/4396255810",
+   "lat": 55.59365,
+   "lon": 13.02093,
+   "why": "Nobelvägen pizzeria-pub called the best example of a classic Swedish pizzeria in Malmö (Tropicana pizza); no age found."
+  },
+  {
+   "name": "Fregatten",
+   "osm": "node/1279343571",
+   "lat": 55.60503,
+   "lon": 13.02319,
+   "why": "Seafaring-themed neighbourhood pub on Föreningsgatan, a sunkhak crawl stop; local only."
+  },
+  {
+   "name": "Sankt Markus Vinkällare",
+   "osm": "node/444845108",
+   "lat": 55.60285,
+   "lon": 13.00275,
+   "why": "Old candlelit wine cellar on Stadt Hamburgsgatan known for julbord; reviews poor, recent activity only to 2023."
+  },
+  {
+   "name": "Centiliter & Gram",
+   "osm": "node/2293728911",
+   "lat": 55.60561,
+   "lon": 12.99899,
+   "why": "Lilla Torg restaurant-club from the 2000s; known but more hype than classic."
+  },
+  {
+   "name": "Möllans Falafel",
+   "osm": "node/5763513671",
+   "lat": 55.59541,
+   "lon": 13.00909,
+   "why": "Bergsgatan falafel ranked 2nd in Dagens PS 2024; newer than Jalla Jalla."
+  },
+  {
+   "name": "Kölsch",
+   "osm": "node/536821189",
+   "lat": 55.59147,
+   "lon": 13.01006,
+   "why": "German-style pub on Simrishamnsgatan at Möllan; no evidence found on age or fame."
+  },
+  {
+   "name": "Luftkastellet",
+   "osm": "way/99519490",
+   "lat": 55.56938,
+   "lon": 12.89682,
+   "why": "Summer restaurant at Limhamn harbour by the old ferry area; no evidence gathered."
+  },
+  {
+   "name": "Kvarnby Byakrog",
+   "osm": "way/211973103",
+   "lat": 55.5859,
+   "lon": 13.11172,
+   "why": "Village inn in Kvarnby; in OSM but no web evidence found, open status unknown."
+  },
+  {
+   "name": "Restaurang T-Bone",
+   "osm": "node/1295856364",
+   "lat": 55.6026,
+   "lon": 13.01433,
+   "why": "Steakhouse on Sankt Pauli kyrkogata in OSM since 2011; no evidence of fame."
+  },
+  {
+   "name": "Gustav Adolf restaurant & café",
+   "osm": "way/1092638238",
+   "lat": 55.60334,
+   "lon": 13.00066,
+   "why": "Café-restaurant on Gustav Adolfs torg; the square is a reference point but the restaurant less so."
+  }
+ ],
+ "rejected": [
+  {
+   "name": "Kulturbolaget (KB)",
+   "why": "Closed for good in 2023 (club on Bergsgatan since 1993, founded 1982) though still in OSM; also a venue, belongs to scen if anywhere."
+  },
+  {
+   "name": "Babel, Etage, Moriska Paviljongen, Inkonst, Plan B",
+   "why": "Nightclubs/venues, already in the scen category."
+  },
+  {
+   "name": "Pølsemannen",
+   "why": "Chain with many stands; Malmö C stand has no separate fame."
+  },
+  {
+   "name": "The Bishops Arms",
+   "why": "Chain."
+  },
+  {
+   "name": "Bastard Burgers",
+   "why": "Chain (and unrelated to the closed Bastard restaurant, now Ruths)."
+  },
+  {
+   "name": "Tempel",
+   "why": "No bar by that name found at Möllan; the nearest match, Tempo Bar & Kök on Södra Skolgatan, is reported permanently closed."
+  },
+  {
+   "name": "Kao's",
+   "why": "No evidence it still exists on Lilla Torg; not in OSM."
+  },
+  {
+   "name": "Bryggeriet (Ystadvägen)",
+   "why": "Not in OSM; likely closed."
+  },
+  {
+   "name": "Stippe's ungersk korv",
+   "why": "Hot-dog institution whose owner retired around 2014."
+  },
+  {
+   "name": "Falafel Mästaren, Koi, Restaurang Ribersborg, Spot, Bloom, Operagrillen, Atmosfär, Vollmers",
+   "why": "Owner removed from core; not re-proposed (Falafel Mästaren is arguably Malmö's first falafel place, 1988, if the owner wants a falafel origin story)."
+  },
+  {
+   "name": "Piccolo Mondo, La Grappa, Basta (Lilla Torg)",
+   "why": "No evidence of age or fame; Basta is a 2025 opening by Urban Italian Group."
+  },
+  {
+   "name": "Shiraz",
+   "why": "Persian restaurant on Möllevångstorget; no evidence of age or fame."
+  },
+  {
+   "name": "Mamma Mia / Ramona (Östra Förstadsgatan area)",
+   "why": "Old OSM nodes but no evidence of fame."
+  },
+  {
+   "name": "Allans korv",
+   "why": "Traditional kiosk at Arkitektgatan, but local only."
+  }
+ ],
+ "notes": "Core is 31, short of the 40–50 aim. Past the obvious names the evidence runs thin: web search reached little Sydsvenskan/Kvällsposten coverage, so opening years are often only 'in OSM by 2009'. I would rather the owner promote from closeCuts than pad. Strongest promotions: Mässingshornet (if a Kirseberg pub counts), Brasserie Sture (the name is a classic even if the brasserie is upscale), Rex (the classic Swedish pizzeria the list otherwise lacks). Nightclubs and venues (Etage, Babel, Moriska Paviljongen, Inkonst) are in the scen category, not here; Kulturbolaget closed in 2023 but is still in OSM and in scen.json, so it should be dropped there. Izakaya Koi still runs (now part of Etagegruppen) though the owner removed it. The 'since' field is approximate; '≤2009' means first mapped in OSM in 2009. Steakhouse Lilla Torg and Victors are kept on the strength of being Lilla Torg anchors; no opening year was found for either. Falafel No 1's location: the original is by Jägersro (kept), not the Rosengård 'Falafel N.1' at Västra Kattarpsvägen, which is a separate entry. Korvhuset: use the Västra Kanalgatan kiosk (node/6301876265), not the Gyllenpalmsgatan branch."
+}

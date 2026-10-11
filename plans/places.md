@@ -29,22 +29,58 @@ current landmarks.
 
 | Source | Track | Gives | How |
 | --- | --- | --- | --- |
-| White Guide | krogar | listed + level | site, Malmö filter |
-| Michelin Guide | krogar | listed + distinction | site, Malmö page |
-| Wikivoyage (sv, en) | both | listed under Äta, Dricka, Se, Göra | MediaWiki API, wikitext |
-| Visit Malmö | both | listed | site |
+| White Guide | krogar | listed + level, coordinates | JSON API, see below |
+| Michelin Guide | krogar | listed + distinction, coordinates | HTML, see below |
+| Wikivoyage (en) | both | listed under Eat, Drink, See, Do, with coordinates | MediaWiki API, wikitext |
+| Visit Malmö | both | listed, name and website only | HTML, see below |
 | Wikipedia / Wikidata | both | has article, sitelinks, inception (P571), dissolved (P576), Commons category (P373) | SPARQL, items within the bbox |
 | Wikipedia page views | both | monthly views, last 12 months | Wikimedia REST pageviews API |
 | Wikimedia Commons | both | geotagged files within 50 m | API `list=geosearch`, `gsnamespace=6` |
 | OpenStreetMap | both | candidates, `wikidata`, `start_date`, `brand`, edit count | Overpass, bbox from `config/bbox.json` |
 | Overture Places | krogar | `confidence` that the place still exists | GeoParquet on S3, via the DuckDB CLI |
-| Malmö stad open data | kultur | public art, culture venues, if published | check what exists first |
+| Malmö stad open data | kultur | public art, parks and squares, leisure venues | CKAN, see below |
 
 Skip Google, Tripadvisor and other commercial map APIs: their terms forbid
 storing the data, which is what a static build does.
 
-If a guide's site renders with JavaScript and cannot be fetched, copy the
-names by hand into its source file. A one-off copy of ~50 names is fine.
+### Access
+
+All of these respond from a normal connection.
+
+- **White Guide.** The site is Next.js and loads its list from a public JSON
+  API. Sweden is release 58, Malmö is city 30. One request returns the whole
+  current Malmö list, 25 restaurants, each with `place-attributes.lat`/`lng`,
+  address and `classification.total.label` (Global Mästarklass, Mästarklass,
+  Mycket god klass, God klass, Rekommenderad). Bars and cafés return nothing
+  for Malmö. Pass `curl -g` because of the brackets:
+  `https://admin.whiteguide.com/api/reviews?filter[][by]=release_id&filter[][with]=58&filter[][by]=city_id&filter[][with]=30&filter[][by]=type&filter[][with]=Content::Reviews::Restaurant&locale=sv&limit=100`
+- **Michelin.** `https://guide.michelin.com/se/en/skane/malmo/restaurants` and
+  `/page/2`. The site answers 202 with an empty body to the build User-Agent,
+  so send a browser User-Agent. Each card has `data-lat`, `data-lng` and the
+  name in `h3.card__menu-content--title`. The page covers much of Skåne: of
+  78 cards only 13 are inside the bbox, so filter by it.
+- **Wikivoyage.** `en` has about 125 `{{eat}}`, `{{drink}}`, `{{see}}`,
+  `{{do}}` listings with `lat`/`long`. `sv` is prose without listing
+  templates, so it only helps as names to match by hand.
+- **Visit Malmö.** Server-rendered ASP.NET. `/ata/` lists about 43 places,
+  `/se-gora/` the sights. Each item has a name and an outbound link to the
+  place's own site, no coordinates, so match by name.
+- **Malmö stad.** CKAN at `https://opendata-api.malmo.se/api/3/action/`
+  (`package_list`, `package_show?id=…`), free to reuse. Useful datasets:
+  `offentlig-konst` (231 works with title, artist, year and a point, in
+  GeoJSON or CSV), `parker-och-torg` (polygons) and `fritidsanlaggningar`.
+  No dataset for culture venues or buildings.
+- **Wikidata.** About 1,500 items with coordinates inside the bbox.
+- **Commons.** Many Flickr imports carry the generic city point
+  55.604981, 13.003822 instead of a real location. Drop files at exactly that
+  point, and in general any point shared by many unrelated files, before
+  counting photos.
+- **Overpass.** About 820 restaurants, pubs, bars, cafés and nightclubs in the
+  bbox.
+- **Overture.** `s3://overturemaps-us-west-2/release/<latest>/theme=places/type=place/*.parquet`,
+  readable anonymously. List `release/` to find the latest. The files are
+  about 700 MB each, so query with DuckDB and a bbox filter rather than
+  downloading them. DuckDB is not installed here (`brew install duckdb`).
 
 ## Pipeline
 

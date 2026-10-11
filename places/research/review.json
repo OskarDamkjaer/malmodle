@@ -1,0 +1,2025 @@
+[
+ {
+  "id": "torg:way/28411525_way/52039363_way/161775537_way/161775538_way/186634124_relation/3614792",
+  "name": "Stortorget",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/28411525,way/52039363,way/161775537,way/161775538,way/186634124,relation/3614792",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/4640835_way/191082405_way/191082408_way/1037153384_way/1037913216_relation/2577882",
+  "name": "Lilla Torg",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/4640835,way/191082405,way/191082408,way/1037153384,way/1037913216,relation/2577882",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/22948607_way/1123355062_relation/2086362",
+  "name": "Gustav Adolfs torg",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/22948607,way/1123355062,relation/2086362",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/10498368_way/10498370_way/28414966_relation/2148806",
+  "name": "Möllevångstorget",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/10498368,way/10498370,way/28414966,relation/2148806",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/226876674_way/1039326780",
+  "name": "Drottningtorget",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/226876674,way/1039326780",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/28481975_way/49186988_way/1530557086",
+  "name": "Värnhemstorget",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/28481975,way/49186988,way/1530557086",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/1448378680_relation/3851569",
+  "name": "Davidshallstorg",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/1448378680,relation/3851569",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/28417278_way/191964989_way/783286979_relation/3015094",
+  "name": "Nobeltorget",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/28417278,way/191964989,way/783286979,relation/3015094",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/390183387",
+  "name": "Dalaplan",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/390183387",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/28792961",
+  "name": "Fridhemstorget",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/28792961",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/28417806_way/295558477_relation/3015095",
+  "name": "Sankt Knuts torg",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/28417806,way/295558477,relation/3015095",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:relation/2556730",
+  "name": "Triangeln",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "relation/2556730",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:node/328989280",
+  "name": "Södervärn",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "node/328989280",
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/12887996",
+  "name": "Kungsparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/12887996",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/22953383",
+  "name": "Pildammsparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/22953383",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/28417392",
+  "name": "Folkets park",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/28417392",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/30025167",
+  "name": "Slottsparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/30025167",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/30053816",
+  "name": "Scaniaparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/30053816",
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/10344681",
+  "name": "Beijers park",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/10344681",
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/13509464",
+  "name": "Slottsträdgården",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/13509464",
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/11076658",
+  "name": "Bulltofta rekreationsområde",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/11076658",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/28461042",
+  "name": "Rörsjöparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/28461042",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/28553117",
+  "name": "Kroksbäcksparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/28553117",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/28809216",
+  "name": "Jesusparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/28809216",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/43137702",
+  "name": "Rönneholmsparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/43137702",
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/21515373",
+  "name": "Klagshamnsuddens naturreservat",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/21515373",
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/19412138",
+  "name": "Daniaparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/19412138",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/282208650",
+  "name": "Hyllie vattenpark",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/282208650",
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/24215163",
+  "name": "Limhamns kalkbrott",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/24215163",
+  "decision": "keep"
+ },
+ {
+  "id": "park:node/1435542275",
+  "name": "Öresundsparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "node/1435542275",
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/3050089",
+  "name": "Sibbarp (Sibbarps badpark)",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/3050089",
+  "decision": "keep"
+ },
+ {
+  "id": "park:node/3880896094",
+  "name": "Katrinetorp",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "node/3880896094",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:way/41173569",
+  "name": "Ribersborgsstranden",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "way/41173569",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:relation/5698988",
+  "name": "Ribersborgs Kallbadhus",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "relation/5698988",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:way/335899280",
+  "name": "Hylliebadet",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "way/335899280",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:way/37892937",
+  "name": "Simhallsbadet",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "way/37892937",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:node/3794911366",
+  "name": "Scaniabadet",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "node/3794911366",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:node/12135479815",
+  "name": "Klagshamnstranden",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "node/12135479815",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:node/7500712661",
+  "name": "Sibbarpsstranden",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "node/7500712661",
+  "decision": "keep"
+ },
+ {
+  "id": "bad:way/348735683",
+  "name": "Sibbarps kallbadhus (Sibbarps saltsjöbad)",
+  "categories": [
+   "Bad och strand"
+  ],
+  "osm": "way/348735683",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:way/28414605",
+  "name": "Malmö Opera",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "way/28414605",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/4392221169",
+  "name": "Malmö Live Konserthus",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/4392221169",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/9937628281",
+  "name": "Malmö Stadsteater (Hipp)",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/9937628281",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/12532773279_relation/10719436",
+  "name": "Moriska Paviljongen",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/12532773279,relation/10719436",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:way/1091108912",
+  "name": "Spegeln",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "way/1091108912",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:way/1036504120",
+  "name": "Royal",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "way/1036504120",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/417994869",
+  "name": "Filmstaden Storgatan",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/417994869",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/417994868",
+  "name": "Victoriateatern",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/417994868",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/417994879",
+  "name": "Palladium",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/417994879",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/10754158007",
+  "name": "Nöjesteatern",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/10754158007",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/2266097331",
+  "name": "Babel",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/2266097331",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/2511321069",
+  "name": "Inkonst",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/2511321069",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:way/96200140",
+  "name": "Pildammsteatern",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "way/96200140",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:way/28482240",
+  "name": "Malmö konsthall",
+  "categories": [
+   "Scener och nöje",
+   "Museer och bibliotek"
+  ],
+  "osm": "way/28482240",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/3946144179",
+  "name": "Panora",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/3946144179",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/13433135707",
+  "name": "Etage",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/13433135707",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:node/2850202405",
+  "name": "Skånes Dansteater",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "osm": "node/2850202405",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:way/52243640",
+  "name": "Slagthuset",
+  "categories": [
+   "Scener och nöje",
+   "Byggnader och platser"
+  ],
+  "osm": "way/52243640",
+  "decision": "keep"
+ },
+ {
+  "id": "scen:Amiralen",
+  "name": "Amiralen",
+  "categories": [
+   "Scener och nöje"
+  ],
+  "decision": "keep"
+ },
+ {
+  "id": "museum:way/37892687",
+  "name": "Malmö Stadsbibliotek",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "way/37892687",
+  "decision": "keep"
+ },
+ {
+  "id": "museum:node/4895458698",
+  "name": "Malmö museum (Slottsholmen / Malmöhus)",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "node/4895458698",
+  "decision": "keep"
+ },
+ {
+  "id": "museum:way/50139701",
+  "name": "Teknikens och sjöfartens hus",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "way/50139701",
+  "decision": "keep"
+ },
+ {
+  "id": "museum:way/35724417",
+  "name": "Moderna Museet Malmö",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "way/35724417",
+  "decision": "keep"
+ },
+ {
+  "id": "museum:node/6797013185",
+  "name": "Form/Design Center",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "node/6797013185",
+  "decision": "keep"
+ },
+ {
+  "id": "museum:node/12123899982",
+  "name": "Orkanenbiblioteket",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "node/12123899982",
+  "decision": "keep"
+ },
+ {
+  "id": "museum:way/51451685",
+  "name": "Malmö Konstmuseum",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "way/51451685",
+  "decision": "keep"
+ },
+ {
+  "id": "kyrka:way/28415187",
+  "name": "Sankt Petri kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/28415187",
+  "decision": "keep"
+ },
+ {
+  "id": "kyrka:way/28482245",
+  "name": "Sankt Johannes kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/28482245",
+  "decision": "keep"
+ },
+ {
+  "id": "kyrka:way/28481855",
+  "name": "Sankt Pauli kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/28481855",
+  "decision": "keep"
+ },
+ {
+  "id": "kyrka:way/37253592",
+  "name": "Malmö synagoga",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/37253592",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:relation/2835333",
+  "name": "Malmö moské",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "relation/2835333",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/28576312",
+  "name": "Limhamns kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/28576312",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/638684255",
+  "name": "Umm Al-Mu'minin Khadijah-moskén",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/638684255",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/806337057",
+  "name": "Mahmoodmoskén",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/806337057",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/45706659",
+  "name": "Sankt Andreas kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/45706659",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/117742397",
+  "name": "Hyllie kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/117742397",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/82312304",
+  "name": "Sankt Matteus kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/82312304",
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/250774470",
+  "name": "Kirsebergs kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/250774470",
+  "decision": "remove"
+ },
+ {
+  "id": "byggnad:way/30926877",
+  "name": "Turning Torso",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/30926877",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:relation/282978",
+  "name": "Malmöhus slott",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "relation/282978",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/330653386",
+  "name": "Malmö centralstation",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/330653386",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:node/8559657094",
+  "name": "Triangeln",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "node/8559657094",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:node/12839729423",
+  "name": "Hyllie",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "node/12839729423",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:relation/2220493",
+  "name": "Malmö universitet",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "relation/2220493",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/332179782",
+  "name": "Malmö Live",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/332179782",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:node/328997830",
+  "name": "Rådhuset",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "node/328997830",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/99363139",
+  "name": "Slottsmöllan",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/99363139",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/28654906",
+  "name": "Hyllie vattentorn",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/28654906",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:relation/446664",
+  "name": "Hotel Kramer",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "relation/446664",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/332190868",
+  "name": "Point Hyllie",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/332190868",
+  "decision": "remove"
+ },
+ {
+  "id": "byggnad:way/81309994",
+  "name": "Södervärnstornet",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/81309994",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/28807180",
+  "name": "Skånes universitetssjukhus (SUS Malmö)",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/28807180",
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/29711745",
+  "name": "Kronprinsen",
+  "categories": [
+   "Byggnader och platser",
+   "Handel och marknad"
+  ],
+  "osm": "way/29711745",
+  "decision": "keep"
+ },
+ {
+  "id": "konst:node/2016689391",
+  "name": "Karl X Gustav (Stortorget)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/2016689391",
+  "decision": "keep"
+ },
+ {
+  "id": "konst:node/2293729248",
+  "name": "Optimistorkestern",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/2293729248",
+  "decision": "keep"
+ },
+ {
+  "id": "konst:node/2409108105",
+  "name": "Arbetets ära (Möllevångstorget)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/2409108105",
+  "decision": "keep"
+ },
+ {
+  "id": "konst:node/12811999511_relation/14125695",
+  "name": "Fontänerna på Gustav Adolfs torg (Fem fontäner och ett klot)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/12811999511,relation/14125695",
+  "decision": "keep"
+ },
+ {
+  "id": "konst:way/220018226",
+  "name": "Torgbrunn (fontänen på Stortorget)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "way/220018226",
+  "decision": "keep"
+ },
+ {
+  "id": "konst:node/1179411764",
+  "name": "Människan och Pegasus",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/1179411764",
+  "decision": "keep"
+ },
+ {
+  "id": "konst:node/8818335518",
+  "name": "Rubato (Malmö Live)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/8818335518",
+  "decision": "remove"
+ },
+ {
+  "id": "konst:Way_to_Go__skorna_p__Davidshallsbron_",
+  "name": "Way to Go (skorna på Davidshallsbron)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "decision": "remove"
+ },
+ {
+  "id": "konst:node/12982975441",
+  "name": "Ekotemplet (Pildammsparken)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/12982975441",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:relation/2348113",
+  "name": "Jägersro",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "relation/2348113",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:way/175446799",
+  "name": "Eleda Stadion",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/175446799",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:way/30651501",
+  "name": "Malmö Arena",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/30651501",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:way/28654785",
+  "name": "Baltiska Hallen",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/28654785",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:way/28654834",
+  "name": "Malmö Isstadion",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/28654834",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:way/307111555",
+  "name": "Malmö Idrottsplats",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/307111555",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:way/96744343",
+  "name": "Stapelbäddsparken",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/96744343",
+  "decision": "keep"
+ },
+ {
+  "id": "idrott:way/28937823",
+  "name": "Kockum Fritid",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/28937823",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/147530612",
+  "name": "Emporia",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/147530612",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/219950736",
+  "name": "Triangeln",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/219950736",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/591084148",
+  "name": "Mobilia",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/591084148",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/28414267",
+  "name": "Hansa",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/28414267",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/187072516",
+  "name": "Malmö Saluhall",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/187072516",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:node/1309301894",
+  "name": "Möllevångstorget",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "node/1309301894",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:node/2293729283",
+  "name": "Åhléns City",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "node/2293729283",
+  "decision": "remove"
+ },
+ {
+  "id": "handel:way/40664131",
+  "name": "Jägersro Center",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/40664131",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/41172181",
+  "name": "Svågertorp",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/41172181",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:node/4397767524",
+  "name": "Kv. Caroli",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "node/4397767524",
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/89611697",
+  "name": "Burlöv Center",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/89611697",
+  "decision": "remove"
+ },
+ {
+  "id": "handel:way/40663102",
+  "name": "Rosengård Centrum",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/40663102",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/1668865664_way/635556649",
+  "name": "Bloom in the Park",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/1668865664,way/635556649",
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/1179544295",
+  "name": "Malmö Opera Grill",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/1179544295",
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/444864214",
+  "name": "Fagans",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/444864214",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/2293728955",
+  "name": "Johan P",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2293728955",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/534572236",
+  "name": "Restaurang Möllan",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/534572236",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/4456630006",
+  "name": "Atmosfär",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/4456630006",
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/3357955290",
+  "name": "Vollmers",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/3357955290",
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/1012287166",
+  "name": "Jalla Jalla",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/1012287166",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/536826013",
+  "name": "Krua Thai",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/536826013",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/444868365",
+  "name": "Moosehead",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/444868365",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/445332875",
+  "name": "Vegegården",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/445332875",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/625987394",
+  "name": "Årstiderna i Kockska huset",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/625987394",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/3359248859",
+  "name": "Brasserie Sture",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/3359248859",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/2943366166",
+  "name": "Saltimporten",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2943366166",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:way/1036504137",
+  "name": "Bullen",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/1036504137",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:way/1346394429",
+  "name": "Far i Hatten",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/1346394429",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:way/1091108901",
+  "name": "Steakhouse Lilla Torg",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/1091108901",
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/2279592697",
+  "name": "Limhamns Fiskrökeri",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2279592697",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/1387412579",
+  "name": "Malmö Brewing Co & Taproom",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/1387412579",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/625987396",
+  "name": "Mando Steakhouse",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/625987396",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/444868367",
+  "name": "Mello Yello",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/444868367",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/536828523",
+  "name": "Nyhavn",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/536828523",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/417994871",
+  "name": "Pickwick",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/417994871",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/444857255",
+  "name": "Rådhuskällaren",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/444857255",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/2293729033",
+  "name": "Victors",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2293729033",
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/445844567",
+  "name": "Ölkaféet",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/445844567",
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/3486009995",
+  "name": "Falafel Baghdad",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/3486009995",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/3402678115",
+  "name": "Kin Long",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/3402678115",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:node/4037719302",
+  "name": "Syltan",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/4037719302",
+  "decision": "keep"
+ },
+ {
+  "id": "krog:way/159635009",
+  "name": "Falafel No 1",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/159635009",
+  "decision": "remove"
+ },
+ {
+  "id": "kafe:way/1036504141",
+  "name": "Konditori Hollandia",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "way/1036504141",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:way/99835705",
+  "name": "Slottsträdgårdens Kafé",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "way/99835705",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:way/220245481",
+  "name": "Lilla Kafferosteriet",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "way/220245481",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/536833709",
+  "name": "Kaffebaren på Möllan",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/536833709",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/3400216789",
+  "name": "Solde",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/3400216789",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/444870966",
+  "name": "Pâtisserie David",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/444870966",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/6804927072",
+  "name": "Atrium",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/6804927072",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/1669563673",
+  "name": "Systrar & Bröder",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/1669563673",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/2958276010",
+  "name": "Regement Konditori",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/2958276010",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/3580863602",
+  "name": "Söderberg & Sara",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/3580863602",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/3051074416",
+  "name": "Lilla Glassfabriken",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/3051074416",
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/3051074368",
+  "name": "Konditori Katarina",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/3051074368",
+  "decision": "keep"
+ },
+ {
+  "id": "torg:relation/2343599",
+  "name": "Limhamns torg",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "relation/2343599",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "torg:way/41111503_way/250771678_way/250771732",
+  "name": "Kirsebergs torg",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "way/41111503,way/250771678,way/250771732",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "torg:relation/1992390",
+  "name": "Anna Lindhs plats",
+  "categories": [
+   "Torg"
+  ],
+  "osm": "relation/1992390",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/74990273",
+  "name": "Garnisonsplanteringen",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/74990273",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "park:way/583266278",
+  "name": "Gyllins trädgård",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/583266278",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "park:relation/5724673",
+  "name": "Käglinge naturområde",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/5724673",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "park:relation/55430",
+  "name": "Ögårdsparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "relation/55430",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "park:way/28482241",
+  "name": "Magistratsparken",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/28482241",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/52403704",
+  "name": "Raoul Wallenbergs park",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/52403704",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "park:way/102925067",
+  "name": "Bunkeflo strandängars naturreservat",
+  "categories": [
+   "Parker och natur"
+  ],
+  "osm": "way/102925067",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "museum:way/933496567",
+  "name": "Ubåten U3",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "way/933496567",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "museum:node/1860964339",
+  "name": "Stadsarkivet",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "node/1860964339",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "museum:way/1036504155",
+  "name": "Disgusting Food Museum",
+  "categories": [
+   "Museer och bibliotek"
+  ],
+  "osm": "way/1036504155",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "kyrka:way/28757719",
+  "name": "Västra Skrävlinge kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/28757719",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "kyrka:way/81310001",
+  "name": "Sankta Maria kyrka",
+  "categories": [
+   "Kyrkor och gudshus"
+  ],
+  "osm": "way/81310001",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "byggnad:way/51334963",
+  "name": "Malmö Studenthus",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/51334963",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/52037555",
+  "name": "Teschska palatset",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/52037555",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/52200890",
+  "name": "Orkanen",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/52200890",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "byggnad:way/34732336",
+  "name": "Caroli kyrka",
+  "categories": [
+   "Byggnader och platser"
+  ],
+  "osm": "way/34732336",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "konst:node/10992882424",
+  "name": "Elma Danielsson",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/10992882424",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "konst:node/12450874787",
+  "name": "Trumslagaren (elefanten i Folkets park)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/12450874787",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "konst:node/2715094114",
+  "name": "Frans Suell",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/2715094114",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "konst:node/10063344306",
+  "name": "Points of View",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/10063344306",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "konst:node/4993171102",
+  "name": "Flyktingmonumentet",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "osm": "node/4993171102",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "konst:Drottningtorgets_font_n__Brunnskar_",
+  "name": "Drottningtorgets fontän (Brunnskar)",
+  "categories": [
+   "Konst och minnesmärken"
+  ],
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "idrott:node/12187527449",
+  "name": "Bryggeriet",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "node/12187527449",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "idrott:way/29880617",
+  "name": "Hyllie Sportcenter",
+  "categories": [
+   "Idrott"
+  ],
+  "osm": "way/29880617",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "handel:way/41241895",
+  "name": "IKEA Malmö",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/41241895",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "handel:way/35672296_way/231960894",
+  "name": "Entré",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "way/35672296,way/231960894",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "handel:node/12320276874",
+  "name": "Marknadsbörsen",
+  "categories": [
+   "Handel och marknad"
+  ],
+  "osm": "node/12320276874",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/2549896881",
+  "name": "Grand Malmö",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2549896881",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "krog:way/1091108937",
+  "name": "Koi",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/1091108937",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog:way/99364980",
+  "name": "Falafel Mästaren Restaurang",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/99364980",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog:way/100074952",
+  "name": "Restaurang Ribersborg",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/100074952",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/560967014",
+  "name": "Spot",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/560967014",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog:node/658707737",
+  "name": "Mrs Brown",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/658707737",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "kafe:node/7282929878",
+  "name": "Siri's Conditori & Café",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/7282929878",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "kafe:node/11763806803",
+  "name": "Mormors Bageri",
+  "categories": [
+   "Kaféer"
+  ],
+  "osm": "node/11763806803",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:node/2261944164",
+  "name": "Nobes",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2261944164",
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:node/6301876265",
+  "name": "Korvhuset",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/6301876265",
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:node/4037719307",
+  "name": "Värnhems Falafel",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/4037719307",
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:node/1460876011",
+  "name": "Paddy's",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/1460876011",
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:node/7442016894",
+  "name": "Mässingshornet",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/7442016894",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:way/30407210",
+  "name": "Lemongrass",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/30407210",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:node/2278405464",
+  "name": "Quan",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2278405464",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:node/4396255810",
+  "name": "Rex",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/4396255810",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:node/1279343571",
+  "name": "Fregatten",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/1279343571",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:node/444845108",
+  "name": "Sankt Markus Vinkällare",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/444845108",
+  "closeCut": true,
+  "decision": "keep"
+ },
+ {
+  "id": "krog2:node/2293728911",
+  "name": "Centiliter & Gram",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/2293728911",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:node/5763513671",
+  "name": "Möllans Falafel",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/5763513671",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:node/536821189",
+  "name": "Kölsch",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/536821189",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:way/99519490",
+  "name": "Luftkastellet",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/99519490",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:way/211973103",
+  "name": "Kvarnby Byakrog",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/211973103",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:node/1295856364",
+  "name": "Restaurang T-Bone",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "node/1295856364",
+  "closeCut": true,
+  "decision": "remove"
+ },
+ {
+  "id": "krog2:way/1092638238",
+  "name": "Gustav Adolf restaurant & café",
+  "categories": [
+   "Krogar"
+  ],
+  "osm": "way/1092638238",
+  "closeCut": true,
+  "decision": "remove"
+ }
+]

@@ -421,48 +421,6 @@
       }
     },
     {
-      "name": "Limhamns kyrka",
-      "icon": "church",
-      "description": "Limhamns församlingskyrka, från tiden då Limhamn var ett eget samhälle.",
-      "query": "Limhamns kyrka, Malmö",
-      "lat": 55.57483,
-      "lon": 12.94474,
-      "verified": false,
-      "_resolved": {
-        "display_name": "Limhamns kyrka, Norra Hyllievägen, Djupadal, Väster, Malmö, Malmö kommun, Skåne län, 216 17, Sverige",
-        "type": "place_of_worship",
-        "osm": "way/28576312"
-      }
-    },
-    {
-      "name": "Malmö synagoga",
-      "icon": "synagogue",
-      "description": "Invigd 1903, byggd i morisk stil.",
-      "query": "Malmö synagoga",
-      "lat": 55.59953,
-      "lon": 13.01082,
-      "verified": false,
-      "_resolved": {
-        "display_name": "Malmö synagoga, Föreningsgatan, Rörsjöstaden, Norr, Malmö, Malmö kommun, Skåne län, 211 56, Sverige",
-        "type": "place_of_worship",
-        "osm": "way/37253592"
-      }
-    },
-    {
-      "name": "Malmö moské",
-      "icon": "mosque",
-      "description": "Sveriges första byggda moské, öppnad 1984. Utsatt för mordbrand 2003 och återuppbyggd.",
-      "query": "Malmö Islamic Center",
-      "lat": 55.57501,
-      "lon": 13.05127,
-      "verified": false,
-      "_resolved": {
-        "display_name": "Malmö Islamic Center, 1, Västra Skrävlinge kyrkoväg, Jägersro, Öster, Malmö, Malmö kommun, Skåne län, 213 69, Sverige",
-        "type": "place_of_worship",
-        "osm": "relation/2835333"
-      }
-    },
-    {
       "name": "Ribersborgs Kallbadhus",
       "icon": "bath",
       "description": "Kallbadhus ute i vattnet, från 1898. Bastu och havsbad året om.",

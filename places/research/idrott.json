@@ -1,0 +1,470 @@
+{
+ "category": "idrott",
+ "core": [
+  {
+   "name": "Jägersro",
+   "osm": "relation/2348113",
+   "lat": 55.57307,
+   "lon": 13.0662,
+   "why": "Sweden's only combined trot and gallop track, a large landmark that names a whole district and a common reference point in eastern Malmö.",
+   "evidence": [
+    "sources: wikivoyage, wikivoyage-sv, visitmalmo, wikipedia",
+    "views12m 2509",
+    "Jägersro travbana already in landmarks.json"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Eleda Stadion",
+   "osm": "way/175446799",
+   "lat": 55.5837,
+   "lon": 12.98772,
+   "why": "Malmö FF's home arena (formerly Swedbank Stadion), the city's football stadium and the most-viewed article in the category.",
+   "evidence": [
+    "wikipedia; sitelinks 27; views12m 10505",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Malmö Arena",
+   "osm": "way/30651501",
+   "lat": 55.5647,
+   "lon": 12.97633,
+   "why": "The big indoor arena at Hyllie (Redhawks, Eurovision 2013/2024), next to Hyllie station and a standard reference point there.",
+   "evidence": [
+    "visitmalmo; wikipedia; sitelinks 38; views12m 9423",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Baltiska Hallen",
+   "osm": "way/28654785",
+   "lat": 55.58361,
+   "lon": 12.99165,
+   "why": "The 1964 sports and event hall on Stadionområdet with the Idrottsmuseet, long the home of handball in Malmö.",
+   "evidence": [
+    "wikivoyage, wikivoyage-sv, wikipedia; sitelinks 5; views12m 1442",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Malmö Isstadion",
+   "osm": "way/28654834",
+   "lat": 55.58249,
+   "lon": 12.99114,
+   "why": "The 1968 ice stadium on Stadionområdet, Redhawks' old home and Eurovision 1992 venue, still in use (IK Pantern).",
+   "evidence": [
+    "wikivoyage, wikipedia; sitelinks 18; views12m 1552"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Malmö Idrottsplats",
+   "osm": "way/307111555",
+   "lat": 55.59395,
+   "lon": 12.99583,
+   "why": "'Gamla idrottsplatsen' from 1896 by Pildammsparken/Fersens väg, a central, historic venue everyone passes.",
+   "evidence": [
+    "wikivoyage-sv, wikipedia; sitelinks 6; views12m 2592"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Stapelbäddsparken",
+   "osm": "way/96744343",
+   "lat": 55.61336,
+   "lon": 12.98402,
+   "why": "The concrete skatepark and STPLN culture house in Västra hamnen, a well-known feature of the waterfront since 2005/06.",
+   "evidence": [
+    "wikivoyage (do), wikipedia; views12m 477",
+    "https://malmo.se/Aktuellt/Artiklar-Malmo-stad/2026-09-10-20-ar-av-skateboardkultur-firas-i-Stapelbaddsparken.html"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "everything": [
+  {
+   "name": "Kombihallen",
+   "osm": "way/28654765"
+  },
+  {
+   "name": "Hästhagens Idrottsplats",
+   "osm": "way/149060037"
+  },
+  {
+   "name": "Limhamns idrottsplats",
+   "osm": "way/174915394"
+  },
+  {
+   "name": "Atleticum",
+   "osm": "way/28654782"
+  },
+  {
+   "name": "Hyllie Sportcenter",
+   "osm": "way/29880617"
+  },
+  {
+   "name": "FlyTribe Indoor Skydiving",
+   "osm": "node/13666467502"
+  },
+  {
+   "name": "Malmö Burlöv Golfklubb",
+   "osm": "way/73898411"
+  },
+  {
+   "name": "Bunkeflo Idrottsplats",
+   "osm": "way/42467419"
+  },
+  {
+   "name": "Fair Play Stadion",
+   "osm": "way/39609087"
+  },
+  {
+   "name": "Heleneholms Idrottsplats",
+   "osm": "way/28535421"
+  },
+  {
+   "name": "Hylliekrokens Golfcenter",
+   "osm": "way/29869313"
+  },
+  {
+   "name": "Kirsebergs ishall",
+   "osm": "way/187972020"
+  },
+  {
+   "name": "Limhamns ishall",
+   "osm": "way/28577212"
+  },
+  {
+   "name": "Limhamnsfältet",
+   "osm": "way/342930787"
+  },
+  {
+   "name": "Malmö Badmintoncenter",
+   "osm": "way/39609172"
+  },
+  {
+   "name": "Malmö City GK, Kvarnbybanan",
+   "osm": "relation/3049188"
+  },
+  {
+   "name": "Malmö Motorstadion",
+   "osm": "way/51767169"
+  },
+  {
+   "name": "Mariedals idrottsplats",
+   "osm": "way/1123967173"
+  },
+  {
+   "name": "Oxie GK",
+   "osm": "way/154513069"
+  },
+  {
+   "name": "Rosengård norra idrottsplats",
+   "osm": "way/945818599"
+  },
+  {
+   "name": "Rosengårds ishall",
+   "osm": "way/41778032"
+  }
+ ],
+ "drop": [
+  {
+   "name": "Malmö Roddklubb",
+   "osm": "node/7541789974",
+   "why": "club boathouse"
+  },
+  {
+   "name": "Stadions sporthall",
+   "osm": "way/947030323",
+   "why": "school sports hall"
+  },
+  {
+   "name": "Arenan",
+   "osm": "way/196194635",
+   "why": "riding hall inside Malmö Ridklubb"
+  },
+  {
+   "name": "Baltiska träningshallen",
+   "osm": "way/1516441489",
+   "why": "training hall annex of Baltiska hallen"
+  },
+  {
+   "name": "BMX-bana",
+   "osm": "way/51767170",
+   "why": "generic name"
+  },
+  {
+   "name": "Bounce",
+   "osm": "node/6018419968",
+   "why": "trampoline chain venue"
+  },
+  {
+   "name": "Burlövshallen",
+   "osm": "way/544425728",
+   "why": "Burlöv municipal hall, not known in Malmö"
+  },
+  {
+   "name": "Bäckagårdens sporthall",
+   "osm": "way/211955091",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Djupadalshallen Idrottshall",
+   "osm": "way/1165094766",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Elinelundshallen",
+   "osm": "way/727255764",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Fabriken",
+   "osm": "node/3794911365",
+   "why": "room inside STPLN, duplicate of Stapelbäddsparken"
+  },
+  {
+   "name": "Gessie Padel Center",
+   "osm": "node/11063843540",
+   "why": "padel business"
+  },
+  {
+   "name": "Gokart City Malmö",
+   "osm": "way/1350495161",
+   "why": "commercial go-kart business"
+  },
+  {
+   "name": "Herrgårdens sporthall",
+   "osm": "way/41778099",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Husie Skjutbana",
+   "osm": "way/496888436",
+   "why": "shooting range"
+  },
+  {
+   "name": "Improv!",
+   "osm": "node/3402729552",
+   "why": "gym/business"
+  },
+  {
+   "name": "itrim",
+   "osm": "node/3402729558",
+   "why": "gym chain"
+  },
+  {
+   "name": "Johanneslust Friskis & Svettis",
+   "osm": "node/1804187176",
+   "why": "gym chain"
+  },
+  {
+   "name": "Kampen – sport- och kulturcenter",
+   "osm": "node/12118885220",
+   "why": "local activity centre"
+  },
+  {
+   "name": "Kanotföreningen Öresund",
+   "osm": "way/100076166",
+   "why": "club boathouse"
+  },
+  {
+   "name": "Kirsebergs sporthall",
+   "osm": "way/187972370",
+   "why": "local sports hall"
+  },
+  {
+   "name": "KunskapsPorten Arena",
+   "osm": "way/211713845",
+   "why": "school sports hall"
+  },
+  {
+   "name": "Laserdome",
+   "osm": "node/5207987704",
+   "why": "commercial laser tag"
+  },
+  {
+   "name": "Logen",
+   "osm": "way/923344015",
+   "why": "generic name"
+  },
+  {
+   "name": "Malmö Indoor Golf",
+   "osm": "node/13666462908",
+   "why": "indoor golf business (probably the 'Malmö Golfhall' in Wikivoyage)"
+  },
+  {
+   "name": "Malmö Jaktskyttecenter",
+   "osm": "node/4866580215",
+   "why": "shooting club"
+  },
+  {
+   "name": "Malmö Padel",
+   "osm": "node/12609852983",
+   "why": "padel business"
+  },
+  {
+   "name": "Malmö Parkourklubb",
+   "osm": "node/13921133004",
+   "why": "club room"
+  },
+  {
+   "name": "Malmö pistolklubb",
+   "osm": "way/158492398",
+   "why": "shooting club"
+  },
+  {
+   "name": "Malmö Skyttegille",
+   "osm": "node/4861223927",
+   "why": "shooting club"
+  },
+  {
+   "name": "Malmöflickorna",
+   "osm": "node/8622668875",
+   "why": "club gym"
+  },
+  {
+   "name": "Manegen",
+   "osm": "way/196194634",
+   "why": "riding hall inside Malmö Ridklubb"
+  },
+  {
+   "name": "Oxievångshallen",
+   "osm": "node/1495930459",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Padel Center",
+   "osm": "node/7618347077",
+   "why": "padel business"
+  },
+  {
+   "name": "Pilbäcks Idrottsplats",
+   "osm": "node/13410384599",
+   "why": "small local pitch"
+  },
+  {
+   "name": "Rockbiljard Malmö",
+   "osm": "node/12043759121",
+   "why": "commercial venue"
+  },
+  {
+   "name": "Rönnebäcks golfbana",
+   "osm": "relation/5708972",
+   "why": "Vellinge, not widely known in Malmö"
+  },
+  {
+   "name": "Rönnens sporthall",
+   "osm": "way/231512008",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Sofiedals golfbana",
+   "osm": "relation/5708973",
+   "why": "outside Malmö, not widely known"
+  },
+  {
+   "name": "Stadions klätterhall",
+   "osm": "node/10273890327",
+   "why": "climbing gym inside a sports hall"
+  },
+  {
+   "name": "Stapelbäddshallen",
+   "osm": "node/9286214300",
+   "why": "part of Stapelbäddsparken, duplicate"
+  },
+  {
+   "name": "Sundsbrohallen",
+   "osm": "way/211713834",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Vallgårdens Golfklubb",
+   "osm": "way/42052245",
+   "why": "Burlöv golf club, not widely known"
+  },
+  {
+   "name": "Vellinge GK",
+   "osm": "way/28586572",
+   "why": "Vellinge golf club, outside"
+  },
+  {
+   "name": "Videdals sporthall",
+   "osm": "way/126210124",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Vintrie Sporthall",
+   "osm": "way/1389486679",
+   "why": "local sports hall"
+  },
+  {
+   "name": "Åkarpshallen",
+   "osm": "way/89976247",
+   "why": "Burlöv sports hall"
+  }
+ ],
+ "missing": [
+  {
+   "name": "Kockum Fritid",
+   "osm": "way/28937823",
+   "lat": 55.60859,
+   "lon": 12.97599,
+   "why": "The big sports and swimming centre in Kockums old industrial building in Västra hamnen; already in the game but missing from the long list (OSM tags it building=sports_centre with no leisure tag).",
+   "core": true
+  },
+  {
+   "name": "Bryggeriet",
+   "osm": "node/12187527449",
+   "lat": 55.58049,
+   "lon": 13.0173,
+   "why": "Indoor skatepark and skate high school at Ystadvägen 44 since 1998, internationally known and in Wikivoyage ('Bryggeriet Malmö Skatepark'); OSM has only a node.",
+   "core": false
+  },
+  {
+   "name": "Kroksbäck Skatepark",
+   "osm": "way/133255792",
+   "lat": 55.57204,
+   "lon": 12.97589,
+   "why": "Large outdoor park in Kroksbäcksparken, Vans Park Series world final 2016.",
+   "core": false
+  },
+  {
+   "name": "Baltiska bowlinghallen",
+   "osm": "node/13845857121",
+   "lat": 55.58121,
+   "lon": 12.99167,
+   "why": "Bowling hall on Stadionområdet listed in Wikivoyage.",
+   "core": false
+  },
+  {
+   "name": "Malmö Ridklubb",
+   "osm": "way/197062981",
+   "lat": 55.56631,
+   "lon": 12.9642,
+   "why": "The riding club at Bellevue/Hyllie; parent of the dropped halls Arenan and Manegen.",
+   "core": false
+  },
+  {
+   "name": "Ribban Green Golf",
+   "osm": "way/1097395924",
+   "lat": 55.60007,
+   "lon": 12.96029,
+   "why": "Mini golf by Ribersborg, well known in summer; the long list put it under kafe/krog instead.",
+   "core": false
+  },
+  {
+   "name": "Zlatan Court",
+   "osm": "",
+   "lat": 55.5866,
+   "lon": 13.0435,
+   "why": "Five-a-side pitch at Cronmans väg in Rosengård opened by Zlatan in 2007 (Wikidata Q4992453, 4 sitelinks); no named OSM feature found, and the coordinates are approximate.",
+   "core": false
+  }
+ ],
+ "notes": "Malmö stadion (relation/53037, in landmarks.json) has been demolished: demolition began Nov 2025 and malmo.se says it is finished, with a new 8,000-seat athletics/football stadium being built on the site, due around 2028/29 (https://malmo.se/stadion). Remove it from the game or rename it when the new one opens. Stadionområdet (Wikidata Q7596359) is the cluster that Eleda Stadion, Isstadion, Baltiska hallen, Kombihallen and Atleticum all sit in; residents say 'vid Stadion', so you could treat it as an area instead. Eleda Stadion is the same place as Wikivoyage's 'Swedbank Stadion'. Jägersro is in the game as 'Jägersro travbana' but the long list does not flag it inGame. No 'Malmö Golfhall' exists in OSM; Malmö Indoor Golf in Hyllie is probably it. Malmö Burlöv GK sits on the Malmö/Burlöv border and Malmö City GK Kvarnbybanan is in Malmö (Kvarnby). The other golf clubs (Vallgården, Vellinge, Rönnebäck, Sofiedal) are outside Malmö and dropped. Heleneholms IP and Rosengård norra IP are real but neighbourhood-level, so they are in everything. Bryggeriet and Hyllie Sportcenter are borderline core."
+}
