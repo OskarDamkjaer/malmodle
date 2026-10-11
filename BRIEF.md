@@ -28,15 +28,15 @@ Get familiar with Malmö through a short daily quiz.
 
 Pointing is the most common. Per kind:
 
-- Areas: "Var ligger X?" 1–3, "Vad är det här?" 1–2, "Direkt söder om" 0–1.
-- Streets: "Var ligger X?" 1–3, "Vad är det här?" 0–2, "Från A till B" 0–1.
-- Places: "Var ligger X?", with "Vad är det här?" for about a quarter to a
+- Areas: "Var ligger X?" 1–3, "Vad ligger här?" 1–2, "Direkt söder om" 0–1.
+- Streets: "Var ligger X?" 1–3, "Vad ligger här?" 0–2, "Från A till B" 0–1.
+- Places: "Var ligger X?", with "Vad ligger här?" for about a quarter to a
   third of them.
 
 - **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
   Afterwards: how far off you were, and what you actually tapped if it was
   something else.
-- **Vad är det här?** Something is highlighted on the map; pick its name from a
+- **Vad ligger här?** Something is highlighted on the map; pick its name from a
   list of nearby things of the same kind.
 - **Direkt söder om.** "Vilket område ligger direkt söder om X?" Pick one of
   four. X is highlighted; the decoys are its other neighbours and nearby areas,

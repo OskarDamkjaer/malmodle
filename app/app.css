@@ -286,7 +286,12 @@ body[data-answered] #question { display: none; }
 #practise[aria-expanded="true"]::after { content: " ▴"; }
 #end footer { margin-top: 28px; text-align: center; }
 #report { font-size: 14px; color: var(--ink-soft); }
-#maphint { display: none; margin: 0; text-align: center; font-size: 14px; color: var(--ink-soft); }
+#maptip { display: none; position: absolute; z-index: 6; right: var(--gap); bottom: calc(var(--safe-bottom) + var(--attribution) + 6px); }
+body[data-ended] #maptip { display: block; }
+#info:not([hidden]) ~ #maptip { display: none; }
+#maptipbutton { width: 36px; min-height: 36px; padding: 0; border-radius: 50%; font: 600 italic 18px/1 var(--font-display); background: var(--panel); color: var(--ink); box-shadow: 0 1px 4px rgb(0 0 0 / 20%); }
+#maptiptext { display: none; position: absolute; right: 0; bottom: 44px; width: max-content; max-width: min(260px, calc(100vw - 2 * var(--gap))); padding: 8px 12px; font-size: 14px; line-height: 1.4; color: var(--ink); background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: 0 2px 8px rgb(0 0 0 / 15%); }
+#maptip:hover #maptiptext, #maptip:focus-within #maptiptext, #maptipbutton[aria-expanded="true"] + #maptiptext { display: block; }
 #endmap { width: 100%; font-weight: 600; }
 #endmap::after { content: " ↓"; }
 body[data-mapview] #endmap::after { content: " ↑"; }
@@ -350,7 +355,6 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
   }
   #end .sheet { height: 100%; margin: 0 0 0 32px; padding-top: calc(var(--safe-top) + 32px); background: none; border-bottom: 0; }
   body[data-ended] #info { top: var(--gap); bottom: auto; animation: slide .28s ease-out; }
-  #maphint { display: block; }
   #endmap { display: none; }
 
   body[data-answered] #question { display: block; }

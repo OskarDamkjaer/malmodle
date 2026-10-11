@@ -87,7 +87,7 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
 
     await page.waitForSelector('#end:not([hidden])');
     assert.equal(await page.evaluate(() => window.map.getSource('scored-labels').serialize().data.features.length), 10);
-    assert.match(await page.textContent('#endverdict'), /^Ny omgång om /);
+    assert.match(await page.textContent('#endverdict'), /imorgon\.$/);
     assert.match(await page.textContent('#endscore'), /^\d+$/);
     assert.equal(await page.textContent('#endmax'), 'av 1000');
 
