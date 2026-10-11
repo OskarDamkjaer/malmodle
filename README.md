@@ -9,7 +9,8 @@ about each, can copy your result to share it, and can open the full map to look
 around on your own.
 
 It runs in the browser, works offline once loaded, and stores nothing about
-you.
+you. Your first total of the day is sent, with nothing else, to draw how
+everyone scored.
 
 Other styles are kept for trying out at their own addresses:
 [Papper](https://malmoe.damk.eu/papper/), [Natt](https://malmoe.damk.eu/natt/)
@@ -56,6 +57,23 @@ node scripts/build-streets.mjs       # → data/cache/streets.json
 node scripts/build-shapes.mjs        # → data/cache/shapes.json, outlines of places and bridges
 node scripts/places-shapes.mjs       # → places/shapes.json, an outline for everything in the long list
 ```
+
+## The score spread
+
+`worker/` is a Cloudflare Worker with a D1 database that counts the day's
+totals. `POST /scores {day, total}` adds one and `GET /scores?day=` reads them;
+both answer with `{day, counts: [[total, players], …]}`. The app sends nothing
+while `SCORES_URL` in `app/scores.mjs` is empty. To set it up, from `worker/`:
+
+```
+npx wrangler login
+npx wrangler d1 create malmo-scores           # put the id in wrangler.toml
+npx wrangler d1 execute malmo-scores --remote --file schema.sql
+npx wrangler deploy                           # prints the workers.dev address
+```
+
+Then set `SCORES_URL` to that address followed by `/scores`. `ORIGINS` in
+`wrangler.toml` lists the sites allowed to call it.
 
 ## Tests
 

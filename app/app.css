@@ -243,6 +243,12 @@ button.primary:hover { filter: brightness(1.06); }
 .total span { font-size: 16px; color: var(--ink-soft); }
 #endverdict { margin: 8px 0 0; font-size: 18px; font-family: var(--font-display); }
 #endsquares { margin: 12px 0 0; font-size: 22px; letter-spacing: 3px; }
+#endspread { margin: 20px 0 0; }
+#spreadbars { display: flex; align-items: flex-end; gap: 2px; height: 56px; border-bottom: 1px solid var(--ink-soft); }
+#spreadbars span { flex: 1; background: var(--dot); border-radius: 1px 1px 0 0; }
+#spreadbars span[data-you] { background: var(--accent); }
+#endspread .axis { display: flex; justify-content: space-between; margin-top: 4px; font-size: 11px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+#spreadtext { margin-top: 6px; font-size: 14px; color: var(--ink-soft); }
 #end .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 24px 0 28px; }
 #end .actions .primary { grid-column: 1 / -1; min-height: 52px; font-size: 17px; }
 #end h2 { margin: 0 0 10px; font-size: 13px; font-family: var(--font); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }

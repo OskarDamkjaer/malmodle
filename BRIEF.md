@@ -64,7 +64,11 @@ the answer: an area that borders it, a street that meets it, or a place within
   like other daily games. If the set is replayed, the latest result is shared.
 - A way to open the full labelled map for free practice. Tapping a thing says
   what it is; today's names are marked.
-- No memory between days. Nothing is stored.
+- The spread of the day's totals as a bar chart, with your bar marked and the
+  share of players you beat. Only the first finished set of the day counts;
+  a replay is placed among them but not added. The chart shows once at least
+  ten others have played, and is left out when offline.
+- No memory between days. The only thing kept is which day was last counted.
 
 ## Styles
 
@@ -75,7 +79,9 @@ colours, type and the basemap palette, never the game.
 
 ## Constraints
 
-- Static files, no backend, no accounts, no analytics.
+- Static files, no accounts, no analytics. The one backend is a Cloudflare
+  Worker (`worker/`) that counts how many players got each total on each day;
+  it receives the day and the total and nothing else.
 - Offline PWA.
 - No framework, no bundler, no dependencies.
 - The UI is in Swedish.

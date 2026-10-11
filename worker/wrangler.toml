@@ -1,0 +1,11 @@
+name = "malmo-scores"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+ORIGINS = "https://malmoe.damk.eu,http://127.0.0.1:8080,http://localhost:8080"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "malmo-scores"
+database_id = "REPLACE_WITH_ID_FROM_WRANGLER_D1_CREATE"

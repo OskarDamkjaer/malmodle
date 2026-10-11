@@ -29,7 +29,9 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/themes.mjs`: the styles. Each has a path, UI colours in `app.css` under
   `[data-theme]`, and a basemap palette applied at load. A new style needs all
   three plus its path in `app/sw.js`; `test/themes.test.mjs` checks them.
+- `app/scores.mjs`: sending the day's first total and placing it in the spread.
 - `app/app.js`: boot and the screens.
+- `worker/`: the Cloudflare Worker and D1 schema that count totals per day.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
 
 `questions.mjs`, `daily.mjs` and `geo.mjs` are pure and tested without a

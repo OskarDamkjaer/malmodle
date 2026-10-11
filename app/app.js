@@ -3,6 +3,7 @@ import { dailySet, dateKey, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
+import { MIN_OTHERS, binOf, bins, placing, spread } from './scores.mjs';
 import {
   applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap,
 } from './map.js';
@@ -298,6 +299,7 @@ function finish() {
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdictFor(total, max);
   el('endsquares').textContent = scores.map(square).join('');
+  showSpread(total, max);
 
   const list = el('endlist');
   list.replaceChildren();
@@ -356,6 +358,33 @@ function finish() {
   reveal('end');
   el('end').scrollTop = 0;
   el('share').focus({ preventScroll: true });
+}
+
+let spreadRun = 0;
+
+async function showSpread(total, max) {
+  const figure = el('endspread');
+  figure.hidden = true;
+  const run = ++spreadRun;
+  const got = await spread(key, total);
+  if (run !== spreadRun || !got) return;
+  const { others, beaten } = placing(got.counts, total, got.counted);
+  if (others < MIN_OTHERS) return;
+
+  const counts = bins(got.counts, max);
+  const tallest = Math.max(...counts, 1);
+  const you = binOf(total, max);
+  el('spreadbars').replaceChildren(...counts.map((n, i) => {
+    const bar = document.createElement('span');
+    bar.style.height = n ? `max(3px, ${(100 * n) / tallest}%)` : '0';
+    if (i === you) bar.dataset.you = '';
+    return bar;
+  }));
+  el('spreadmax').textContent = String(max);
+  el('spreadtext').textContent = got.counted
+    ? `Bättre än ${beaten} % av de ${others} andra som spelat idag.`
+    : `Bättre än ${beaten} % av dagens ${others} spelare. Bara första rundan räknas.`;
+  figure.hidden = false;
 }
 
 async function share() {

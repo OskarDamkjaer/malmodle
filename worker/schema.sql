@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS scores (
+  day TEXT NOT NULL,
+  total INTEGER NOT NULL,
+  n INTEGER NOT NULL,
+  PRIMARY KEY (day, total)
+);
