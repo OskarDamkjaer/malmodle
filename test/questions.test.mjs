@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { MAX_SCORE, TYPES, distanceScore, formatDistance, tappedOn } from '../app/questions.mjs';
+import { CLOSE_SCORE, MAX_SCORE, TYPES, closeTo, distanceScore, formatDistance, tappedOn } from '../app/questions.mjs';
 import { fixture } from './fixture.mjs';
 
 const items = fixture();
@@ -69,15 +69,35 @@ test('a street question names the street the map shows under the tap', () => {
   assert.equal(TYPES.point.grade({ target }, tap, items, null).hit, null);
 });
 
-test('choice questions are all or nothing', () => {
-  for (const type of ['identify', 'nearest']) {
-    const target = byName('Plats 5');
-    assert.equal(TYPES[type].grade({ target }, 'Plats 5').score, MAX_SCORE);
-    assert.equal(TYPES[type].grade({ target }, 'Plats 6').score, 0);
-  }
-  const target = byName('Område 1-1');
-  assert.equal(TYPES.neighbour.grade({ target }, 'Område 1-1').score, MAX_SCORE);
-  assert.equal(TYPES.neighbour.grade({ target }, 'Område 1-2').score, 0);
+test('a wrong pick that is close to the answer scores a little', () => {
+  const plats = byName('Plats 5');
+  assert.equal(TYPES.identify.grade({ target: plats }, 'Plats 5', items).score, MAX_SCORE);
+  assert.equal(TYPES.identify.grade({ target: plats }, 'Plats 15', items).score, 0);
+  const area = byName('Område 2-2');
+  assert.equal(TYPES.identify.grade({ target: area }, 'Område 2-3', items).score, CLOSE_SCORE);
+  assert.equal(TYPES.identify.grade({ target: area }, 'Område 5-5', items).score, 0);
+  const street = byName('Gata 3');
+  assert.equal(TYPES.identify.grade({ target: street }, 'Gata 4', items).score, 0);
+});
+
+test('streets that cross are close even with no corner near the crossing', () => {
+  const across = { name: 'Tvärgata', kind: 'street', geometry: { type: 'LineString', coordinates: [[12.98, 55.57], [12.98, 55.6]] } };
+  assert.ok(closeTo(byName('Gata 3'), across));
+});
+
+test('nearest is all or nothing', () => {
+  const target = byName('Plats 5');
+  assert.equal(TYPES.nearest.grade({ target }, 'Plats 5').score, MAX_SCORE);
+  assert.equal(TYPES.nearest.grade({ target }, 'Plats 6').score, 0);
+});
+
+test('a neighbour that also borders the answer scores a little', () => {
+  const from = byName('Område 2-2');
+  const target = byName(from.beside.norr);
+  const grade = (name) => TYPES.neighbour.grade({ from, target }, name, items).score;
+  assert.equal(grade(target.name), MAX_SCORE);
+  assert.equal(grade('Område 1-3'), CLOSE_SCORE);
+  assert.equal(grade(from.beside.söder), 0);
 });
 
 test('areas know who borders them, and in which direction', () => {

@@ -207,7 +207,7 @@ function revealPoint(q, result) {
 
 function revealChoice(q, result) {
   const right = result.score === MAX_SCORE;
-  el('verdict').textContent = right ? 'Rätt' : 'Fel';
+  el('verdict').textContent = right ? 'Rätt' : result.score > 0 ? 'Nära' : 'Fel';
   const marks = [];
   const add = (item, role) => { if (item) marks.push({ item, role, named: true }); };
 

@@ -1,6 +1,7 @@
-import { closest, contains, distanceTo, metersBetween, offset } from './geo.mjs';
+import { closest, contains, distanceTo, gap, metersBetween, offset } from './geo.mjs';
 
 export const MAX_SCORE = 100;
+export const CLOSE_SCORE = 25;
 
 const GRACE = { shape: 10, point: 100 };
 const FALLOFF = 900;
@@ -27,6 +28,14 @@ export function tappedOn(items, point, kind) {
     if (d <= REACH[kind] && (!best || d < best.d)) best = { it, d };
   }
   return best?.it ?? null;
+}
+
+const CLOSE_M = { street: 20, landmark: 300, bridge: 300 };
+
+export function closeTo(target, other) {
+  if (!other || other.kind !== target.kind) return false;
+  if (target.kind === 'area') return (target.neighbours ?? []).includes(other.name);
+  return gap(target.geometry, other.geometry) <= (CLOSE_M[target.kind] ?? 0);
 }
 
 const PLACES = ['area', 'landmark', 'bridge'];
@@ -77,8 +86,10 @@ const identify = {
   prompt: (q) => ({ title: 'Vad är det här?', detail: q.target.label }),
   showing: (q) => [{ item: q.target, named: false }],
   view: (q) => ({ items: [q.target], context: 1500 }),
-  grade(q, choice) {
-    return { score: choice === q.target.name ? MAX_SCORE : 0, choice, answer: q.target.name };
+  grade(q, choice, items) {
+    const picked = items?.find((it) => it.name === choice);
+    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    return { score, choice, answer: q.target.name };
   },
 };
 
@@ -169,8 +180,10 @@ const neighbour = {
   prompt: (q) => ({ title: `Vilket område ligger direkt ${q.side} om ${q.from.name}?`, detail: q.target.label }),
   showing: (q) => [{ item: q.from, named: true }],
   view: (q) => ({ items: [q.from], context: 1200 }),
-  grade(q, choice) {
-    return { score: choice === q.target.name ? MAX_SCORE : 0, choice, answer: q.target.name };
+  grade(q, choice, items) {
+    const picked = items?.find((it) => it.name === choice);
+    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    return { score, choice, answer: q.target.name };
   },
 };
 

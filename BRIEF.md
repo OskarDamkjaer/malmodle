@@ -34,7 +34,10 @@ of the rest.
   never one that also lies on that side. Asked for any of the four directions,
   only where exactly one area borders X on that side.
 
-Every question scores 0–100. A day scores out of 1000.
+Every question scores 0–100. A day scores out of 1000. A wrong pick in "Vad är
+det här?" or "Direkt söder om" scores 25 when it is close to the answer: an
+area that borders it, a street that meets it, or a place within 300 m.
+"Närmast" is right or wrong.
 
 ## The map
 
