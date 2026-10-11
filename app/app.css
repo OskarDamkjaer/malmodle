@@ -284,8 +284,9 @@ body[data-answered] #question { display: none; }
 #practise[aria-expanded="true"] { background: var(--ink); color: var(--bg); }
 #practise::after { content: " ▾"; }
 #practise[aria-expanded="true"]::after { content: " ▴"; }
-#end footer { margin-top: 28px; text-align: center; }
-#report { font-size: 14px; color: var(--ink-soft); }
+#report { display: none; position: absolute; z-index: 6; left: var(--gap); bottom: calc(var(--safe-bottom) + var(--attribution) + 6px); padding: 4px 10px; font-size: 13px; color: var(--ink-soft); background: color-mix(in srgb, var(--panel) 85%, transparent); border-radius: var(--radius-button); }
+body[data-ended] #report { display: block; }
+#info:not([hidden]) ~ #report { display: none; }
 #maptip { display: none; position: absolute; z-index: 6; right: var(--gap); bottom: calc(var(--safe-bottom) + var(--attribution) + 6px); }
 body[data-ended] #maptip { display: block; }
 #info:not([hidden]) ~ #maptip { display: none; }
@@ -351,7 +352,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 @media (min-width: 1000px) {
   #end {
     background: linear-gradient(to right,
-      var(--veil-strong) calc(var(--width) + 64px), var(--veil-light) calc(var(--width) + 220px));
+      var(--veil-strong) calc(var(--width) + 64px), var(--veil-light) calc(var(--width) + 130px));
   }
   #end .sheet { height: 100%; margin: 0 0 0 32px; padding-top: calc(var(--safe-top) + 32px); background: none; border-bottom: 0; }
   body[data-ended] #info { top: var(--gap); bottom: auto; animation: slide .28s ease-out; }

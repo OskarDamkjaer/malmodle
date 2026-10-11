@@ -470,6 +470,7 @@ function spreadOut() {
 
 function showPlace(r) {
   showInfo(r.q.target, r);
+  requestAnimationFrame(() => frameItems(results.map((x) => x.q.target), 300));
 }
 
 function toggleMapView() {
