@@ -172,3 +172,45 @@ export function pickAlong(images, street, sample, { radius = 25, offLine = 12, m
     return { heading: Math.round(dir), images: picked };
   });
 }
+
+const FRAMINGS = ['centred', 'offset'];
+
+export function eligible(c) {
+  const r = c.review;
+  return !!r && r.sharp && r.score >= 3 && FRAMINGS.includes(r.framing)
+    && (c.ahead ?? Infinity) >= 40 && Number(c.captured?.slice(0, 4)) >= MIN_YEAR;
+}
+
+export function rankScore(c) {
+  return c.review.score * 100
+    + (c.review.framing === 'centred' ? 40 : 0)
+    + (Number(c.captured.slice(0, 4)) >= GOOD_YEAR ? 20 : 0)
+    + Math.min(c.ahead ?? 0, 300) / 30
+    - (c.offLine ?? 0) / 2;
+}
+
+function mainBearing(geometry) {
+  const longest = lines(geometry).reduce((a, b) => (lineLength(b) > lineLength(a) ? b : a));
+  return bearing(longest[0], longest.at(-1));
+}
+
+export function pickBest(candidates, geometry, { max = 4, nearM = 30 } = {}) {
+  const main = mainBearing(geometry);
+  const way = (c) => (angleGap(c.heading, main) < 90 ? 0 : 1);
+  const seen = new Set();
+  const ranked = candidates
+    .filter((c) => !seen.has(c.id) && seen.add(c.id) && eligible(c))
+    .sort((a, b) => rankScore(b) - rankScore(a));
+  const picked = [];
+  const fits = (c) => picked.length < max
+    && !picked.some((p) => p.id === c.id || p.sequence === c.sequence
+      || (way(p) === way(c) && distance(p.point, c.point) < nearM));
+  for (const w of [0, 1]) {
+    const best = ranked.find((c) => way(c) === w && fits(c));
+    if (best) picked.push(best);
+  }
+  const strong = ranked.filter((c) => c.review.score >= 4);
+  for (const c of strong) if (fits(c) && !picked.some((p) => p.at === c.at)) picked.push(c);
+  for (const c of strong) if (fits(c)) picked.push(c);
+  return picked;
+}

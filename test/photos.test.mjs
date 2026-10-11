@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { alongEvery, angleGap, bearing, midpoint, pickAlong, samplePoints, streetAhead } from '../scripts/lib/photos.mjs';
+import { alongEvery, angleGap, bearing, midpoint, pickAlong, pickBest, samplePoints, streetAhead } from '../scripts/lib/photos.mjs';
 
 const ns = { name: 'Nord', geometry: { type: 'LineString', coordinates: [[13, 55.60], [13, 55.61]] } };
 const ew = { name: 'Väst', geometry: { type: 'LineString', coordinates: [[12.99, 55.608], [13.01, 55.608]] } };
@@ -54,4 +54,22 @@ test('street ahead is how far the street runs where the camera looks', () => {
 test('a deep pass also samples the street at a fixed spacing', () => {
   assert.equal(alongEvery(ns.geometry, 200).length, 6);
   assert.ok(samplePoints(ns, [ns], 60, 200).length > samplePoints(ns, [ns]).length);
+});
+
+test('the best photos cover both ways, then only strong ones fill up', () => {
+  const photo = (id, lat, heading, score, extra = {}) => ({
+    id, sequence: id, point: [13, lat], heading, captured: '2024-05-01', ahead: 200, offLine: 2, at: 'mitten',
+    review: { sharp: true, framing: 'centred', score }, ...extra,
+  });
+  const picked = pickBest([
+    photo('north-5', 55.603, 0, 5),
+    photo('north-4-near', 55.6031, 0, 4),
+    photo('north-4-far', 55.607, 2, 4, { at: 'vid Väst' }),
+    photo('south-3', 55.606, 180, 3),
+    photo('north-3', 55.608, 0, 3),
+    photo('blurry', 55.604, 0, 5, { review: { sharp: false, framing: 'centred', score: 5 } }),
+    photo('short', 55.604, 0, 5, { ahead: 20 }),
+    photo('basket', 55.604, 0, 5, { review: { sharp: true, framing: 'blocked', score: 5 } }),
+  ], ns.geometry);
+  assert.deepEqual(picked.map((p) => p.id), ['north-5', 'south-3', 'north-4-far']);
 });

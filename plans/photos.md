@@ -150,7 +150,18 @@ reviewed by hand before the next.
    the 54 streets, 51 have a suggestion; bike-basket and dashboard shots are
    the most common reason a photo fails. Deep-pass streets are capped at 60
    reviewed photos each.
-3. **Pick by hand.** `node scripts/photos-review.mjs` serves a page on
+3. **Pick the best street photos.** `node scripts/photos-pick-streets.mjs
+   [id...]` rewrites the street entries in `photos/photos.json`; the ids
+   given are hand picks and always stay. A photo is eligible when it is
+   sharp, scores 3 or more, shows the road centred or offset (not blocked,
+   a crossing, sideways or other), has at least 40 m of street ahead and is
+   from 2018 or later. Ranked by score, then centred, then 2021 or later,
+   then street ahead, then closeness to the centre line. Up to four per
+   street: first the best looking each way along the street, then score 4
+   or more only, new stretches of the street first, never two from one
+   sequence or two the same way within 30 m. That gives 130 photos for 52
+   streets.
+4. **Pick by hand.** `node scripts/photos-review.mjs` serves a page on
    http://127.0.0.1:8081 that shows one item at a time: a sketch with the
    sample points and where each photo was taken and which way it faces, then
    the candidates per point and direction. Click to keep, ⤢ to see it large,
@@ -160,7 +171,7 @@ reviewed by hand before the next.
    kept photos with source, id, camera point, heading, date, licence, author
    and source URL, and whether the item is reviewed. A reviewed item with no
    photo needs another source.
-4. **Fetch and resize** (in `scripts/build-quiz.mjs` or its own script):
+5. **Fetch and resize** (in `scripts/build-quiz.mjs` or its own script):
    download each picked photo, resize to WebP at a phone-friendly width, and
    put it under `build/`. Add each item's photos to `quiz.json` with the
    credit.

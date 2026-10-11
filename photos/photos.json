@@ -3,38 +3,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1954980398590379",
-    "point": [
-     13.001678,
-     55.60744
-    ],
-    "heading": 80,
-    "captured": "2025-08-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1954980398590379",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1305953131132717",
-    "point": [
-     12.998892,
-     55.607114
-    ],
-    "heading": 71,
-    "captured": "2025-08-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1305953131132717",
-    "thumb": null,
-    "title": null,
-    "at": "vid Västergatan"
-   },
-   {
-    "source": "mapillary",
     "id": "120411734267209",
     "point": [
      12.99886,
@@ -48,6 +16,22 @@
     "thumb": null,
     "title": null,
     "at": "vid Västergatan"
+   },
+   {
+    "source": "mapillary",
+    "id": "1954980398590379",
+    "point": [
+     13.001678,
+     55.60744
+    ],
+    "heading": 80,
+    "captured": "2025-08-14",
+    "licence": "CC BY-SA 4.0",
+    "author": "fa30",
+    "url": "https://www.mapillary.com/app/?pKey=1954980398590379",
+    "thumb": null,
+    "title": null,
+    "at": "mitten"
    }
   ],
   "reviewed": false
@@ -56,211 +40,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1645875809210858",
+    "id": "747226307078380",
     "point": [
-     13.037402,
-     55.560867
+     13.059069,
+     55.573101
     ],
-    "heading": 53,
+    "heading": 32,
     "captured": "2023-02-25",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1645875809210858",
+    "url": "https://www.mapillary.com/app/?pKey=747226307078380",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "894333161773784",
-    "point": [
-     13.038918,
-     55.561459
-    ],
-    "heading": 52,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=894333161773784",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "536113961837555",
-    "point": [
-     13.040524,
-     55.562092
-    ],
-    "heading": 54,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=536113961837555",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "1576483622856409",
-    "point": [
-     13.043697,
-     55.563346
-    ],
-    "heading": 46,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1576483622856409",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "189183403732045",
-    "point": [
-     13.045265,
-     55.563923
-    ],
-    "heading": 40,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=189183403732045",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "1389086621860278",
-    "point": [
-     13.046848,
-     55.564631
-    ],
-    "heading": 28,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1389086621860278",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 11"
-   },
-   {
-    "source": "mapillary",
-    "id": "6003459349747986",
-    "point": [
-     13.04795,
-     55.565442
-    ],
-    "heading": 33,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=6003459349747986",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 12"
-   },
-   {
-    "source": "mapillary",
-    "id": "2455997694555688",
-    "point": [
-     13.049182,
-     55.566255
-    ],
-    "heading": 33,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2455997694555688",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 13"
-   },
-   {
-    "source": "mapillary",
-    "id": "2371211369713167",
-    "point": [
-     13.056155,
-     55.570979
-    ],
-    "heading": 33,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2371211369713167",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 14"
-   },
-   {
-    "source": "mapillary",
-    "id": "1598656693894517",
-    "point": [
-     13.055139,
-     55.570226
-    ],
-    "heading": 34,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1598656693894517",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 15"
-   },
-   {
-    "source": "mapillary",
-    "id": "749846259860909",
-    "point": [
-     13.052918,
-     55.568723
-    ],
-    "heading": 38,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=749846259860909",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 16"
-   },
-   {
-    "source": "mapillary",
-    "id": "1564391504058065",
-    "point": [
-     13.054214,
-     55.56957
-    ],
-    "heading": 30,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1564391504058065",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 17"
-   },
-   {
-    "source": "mapillary",
-    "id": "1280895846165382",
-    "point": [
-     13.049953,
-     55.566802
-    ],
-    "heading": 40,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1280895846165382",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 18"
+    "at": "längs gatan 28"
    },
    {
     "source": "mapillary",
@@ -280,118 +72,6 @@
    },
    {
     "source": "mapillary",
-    "id": "156122763914375",
-    "point": [
-     13.061276,
-     55.577211
-    ],
-    "heading": 2,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=156122763914375",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 24"
-   },
-   {
-    "source": "mapillary",
-    "id": "722376429331769",
-    "point": [
-     13.061118,
-     55.576256
-    ],
-    "heading": 355,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=722376429331769",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 25"
-   },
-   {
-    "source": "mapillary",
-    "id": "576982284339706",
-    "point": [
-     13.06017,
-     55.574004
-    ],
-    "heading": 21,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=576982284339706",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 27"
-   },
-   {
-    "source": "mapillary",
-    "id": "747226307078380",
-    "point": [
-     13.059069,
-     55.573101
-    ],
-    "heading": 32,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=747226307078380",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 28"
-   },
-   {
-    "source": "mapillary",
-    "id": "1313999573464320",
-    "point": [
-     13.063863,
-     55.58012
-    ],
-    "heading": 227,
-    "captured": "2025-08-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1313999573464320",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 30"
-   },
-   {
-    "source": "mapillary",
-    "id": "755595912446786",
-    "point": [
-     13.066045,
-     55.581923
-    ],
-    "heading": 32,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=755595912446786",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 32"
-   },
-   {
-    "source": "mapillary",
-    "id": "903904227481591",
-    "point": [
-     13.066911,
-     55.582811
-    ],
-    "heading": 205,
-    "captured": "2023-03-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=903904227481591",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 33"
-   },
-   {
-    "source": "mapillary",
     "id": "1112365786694109",
     "point": [
      13.067634,
@@ -405,140 +85,12 @@
     "thumb": null,
     "title": null,
     "at": "längs gatan 34"
-   },
-   {
-    "source": "mapillary",
-    "id": "106603849035890",
-    "point": [
-     13.06763,
-     55.583869
-    ],
-    "heading": 13,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=106603849035890",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 34"
-   },
-   {
-    "source": "mapillary",
-    "id": "155748997298957",
-    "point": [
-     13.068,
-     55.585145
-    ],
-    "heading": 39,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=155748997298957",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 35"
    }
   ],
   "reviewed": false
  },
  "street:Amiralsgatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1028815937820463",
-    "point": [
-     13.051395,
-     55.584286
-    ],
-    "heading": 307,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1028815937820463",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "638496890876729",
-    "point": [
-     13.009281,
-     55.598289
-    ],
-    "heading": 342,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=638496890876729",
-    "thumb": null,
-    "title": null,
-    "at": "vid Bergsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "178161691216686",
-    "point": [
-     13.019636,
-     55.59242
-    ],
-    "heading": 301,
-    "captured": "2022-04-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=178161691216686",
-    "thumb": null,
-    "title": null,
-    "at": "vid Nobelvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "369925981212538",
-    "point": [
-     13.008472,
-     55.59911
-    ],
-    "heading": 149,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=369925981212538",
-    "thumb": null,
-    "title": null,
-    "at": "vid Föreningsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1096029331317937",
-    "point": [
-     13.008676,
-     55.599
-    ],
-    "heading": 158,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1096029331317937",
-    "thumb": null,
-    "title": null,
-    "at": "vid Föreningsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "637432821690122",
-    "point": [
-     13.008538,
-     55.598998
-    ],
-    "heading": 332,
-    "captured": "2023-08-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=637432821690122",
-    "thumb": null,
-    "title": null,
-    "at": "vid Föreningsgatan"
-   },
    {
     "source": "mapillary",
     "id": "924885704839263",
@@ -557,169 +109,25 @@
    },
    {
     "source": "mapillary",
-    "id": "283351783502213",
+    "id": "1028815937820463",
     "point": [
-     13.005854,
-     55.601793
+     13.051395,
+     55.584286
     ],
-    "heading": 152,
-    "captured": "2018-01-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "mkw",
-    "url": "https://www.mapillary.com/app/?pKey=283351783502213",
-    "thumb": null,
-    "title": null,
-    "at": "vid Drottninggatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "625047755468023",
-    "point": [
-     13.063063,
-     55.579764
-    ],
-    "heading": 285,
+    "heading": 307,
     "captured": "2022-08-03",
     "licence": "CC BY-SA 4.0",
     "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=625047755468023",
+    "url": "https://www.mapillary.com/app/?pKey=1028815937820463",
     "thumb": null,
     "title": null,
-    "at": "vid Agnesfridsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "603821421179795",
-    "point": [
-     13.020974,
-     55.591623
-    ],
-    "heading": 321,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=603821421179795",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lantmannagatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "602445037904049",
-    "point": [
-     13.02795,
-     55.590435
-    ],
-    "heading": 283,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=602445037904049",
-    "thumb": null,
-    "title": null,
-    "at": "vid Norra Grängesbergsgatan"
+    "at": "mitten"
    }
   ],
   "reviewed": false
  },
  "street:Annetorpsvägen": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "524125345562869",
-    "point": [
-     12.970226,
-     55.565953
-    ],
-    "heading": 270,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=524125345562869",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1100326567271196",
-    "point": [
-     12.970307,
-     55.565849
-    ],
-    "heading": 83,
-    "captured": "2022-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1100326567271196",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1032522791601859",
-    "point": [
-     12.98697,
-     55.567476
-    ],
-    "heading": 77,
-    "captured": "2024-05-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "the_wheel_henry",
-    "url": "https://www.mapillary.com/app/?pKey=1032522791601859",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1204037376766225",
-    "point": [
-     12.968506,
-     55.566255
-    ],
-    "heading": 234,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=1204037376766225",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "773823617100815",
-    "point": [
-     12.969012,
-     55.565606
-    ],
-    "heading": 86,
-    "captured": "2022-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=773823617100815",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "651334281318654",
-    "point": [
-     12.969171,
-     55.565637
-    ],
-    "heading": 54,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=651334281318654",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
    {
     "source": "mapillary",
     "id": "501061845608546",
@@ -732,38 +140,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "the_wheel_henry",
     "url": "https://www.mapillary.com/app/?pKey=501061845608546",
-    "thumb": null,
-    "title": null,
-    "at": "vid Per Albin Hanssons väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "1055287005127439",
-    "point": [
-     12.995308,
-     55.566044
-    ],
-    "heading": 113,
-    "captured": "2022-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1055287005127439",
-    "thumb": null,
-    "title": null,
-    "at": "vid Per Albin Hanssons väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "490564732380321",
-    "point": [
-     12.995401,
-     55.565973
-    ],
-    "heading": 110,
-    "captured": "2020-09-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "krz",
-    "url": "https://www.mapillary.com/app/?pKey=490564732380321",
     "thumb": null,
     "title": null,
     "at": "vid Per Albin Hanssons väg"
@@ -791,22 +167,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "3876932765856443",
-    "point": [
-     13.003094,
-     55.604625
-    ],
-    "heading": 249,
-    "captured": "2024-08-20",
-    "licence": "CC BY-SA 4.0",
-    "author": "balys",
-    "url": "https://www.mapillary.com/app/?pKey=3876932765856443",
-    "thumb": null,
-    "title": null,
-    "at": "vid Kalendegatan"
-   },
-   {
-    "source": "mapillary",
     "id": "1669610397134079",
     "point": [
      13.003122,
@@ -828,38 +188,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1036038067105477",
-    "point": [
-     13.00928,
-     55.597135
-    ],
-    "heading": 187,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1036038067105477",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "639122680756584",
-    "point": [
-     13.009308,
-     55.597166
-    ],
-    "heading": 185,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=639122680756584",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "478932750390253",
     "point": [
      13.009407,
@@ -876,54 +204,6 @@
    },
    {
     "source": "mapillary",
-    "id": "632388524691425",
-    "point": [
-     13.005742,
-     55.590509
-    ],
-    "heading": 215,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=632388524691425",
-    "thumb": null,
-    "title": null,
-    "at": "vid Södra Förstadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "2935810733474782",
-    "point": [
-     13.005612,
-     55.590502
-    ],
-    "heading": 214,
-    "captured": "2025-09-10",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2935810733474782",
-    "thumb": null,
-    "title": null,
-    "at": "vid Södra Förstadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "486055673358062",
-    "point": [
-     13.007689,
-     55.593271
-    ],
-    "heading": 192,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=486055673358062",
-    "thumb": null,
-    "title": null,
-    "at": "vid Möllevångsgatan"
-   },
-   {
-    "source": "mapillary",
     "id": "327874262444709",
     "point": [
      13.007723,
@@ -937,102 +217,6 @@
     "thumb": null,
     "title": null,
     "at": "vid Möllevångsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "395031022758570",
-    "point": [
-     13.007986,
-     55.593347
-    ],
-    "heading": 41,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=395031022758570",
-    "thumb": null,
-    "title": null,
-    "at": "vid Möllevångsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "310647074245781",
-    "point": [
-     13.008309,
-     55.594513
-    ],
-    "heading": 194,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=310647074245781",
-    "thumb": null,
-    "title": null,
-    "at": "vid Friisgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "783821309327169",
-    "point": [
-     13.008544,
-     55.594485
-    ],
-    "heading": 17,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=783821309327169",
-    "thumb": null,
-    "title": null,
-    "at": "vid Friisgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "518691236229816",
-    "point": [
-     13.006802,
-     55.591561
-    ],
-    "heading": 198,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=518691236229816",
-    "thumb": null,
-    "title": null,
-    "at": "vid Ystadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1726841688597563",
-    "point": [
-     13.006676,
-     55.591516
-    ],
-    "heading": 201,
-    "captured": "2026-07-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1726841688597563",
-    "thumb": null,
-    "title": null,
-    "at": "vid Ystadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "24492234617070924",
-    "point": [
-     13.006663,
-     55.591505
-    ],
-    "heading": 197,
-    "captured": "2025-09-10",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=24492234617070924",
-    "thumb": null,
-    "title": null,
-    "at": "vid Ystadsgatan"
    }
   ],
   "reviewed": false
@@ -1041,35 +225,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "24143873408637731",
+    "id": "4174847316134076",
     "point": [
-     13.001793,
-     55.590527
+     12.998782,
+     55.59187
     ],
-    "heading": 305,
+    "heading": 325,
     "captured": "2025-08-18",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=24143873408637731",
+    "url": "https://www.mapillary.com/app/?pKey=4174847316134076",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "169508042298052",
-    "point": [
-     13.001738,
-     55.590549
-    ],
-    "heading": 301,
-    "captured": "2022-09-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=169508042298052",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
+    "at": "längs gatan 3"
    },
    {
     "source": "mapillary",
@@ -1083,22 +251,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
     "url": "https://www.mapillary.com/app/?pKey=457849383019693",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "422530859071917",
-    "point": [
-     13.001748,
-     55.590545
-    ],
-    "heading": 113,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=422530859071917",
     "thumb": null,
     "title": null,
     "at": "längs gatan 1"
@@ -1121,166 +273,6 @@
    },
    {
     "source": "mapillary",
-    "id": "744486882901065",
-    "point": [
-     13.000288,
-     55.591108
-    ],
-    "heading": 119,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=744486882901065",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "1141932431391250",
-    "point": [
-     12.998829,
-     55.591859
-    ],
-    "heading": 325,
-    "captured": "2025-11-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1141932431391250",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "4174847316134076",
-    "point": [
-     12.998782,
-     55.59187
-    ],
-    "heading": 325,
-    "captured": "2025-08-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=4174847316134076",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "1498992551528536",
-    "point": [
-     12.998663,
-     55.591925
-    ],
-    "heading": 339,
-    "captured": "2025-08-08",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1498992551528536",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "800039819039715",
-    "point": [
-     12.998679,
-     55.591829
-    ],
-    "heading": 142,
-    "captured": "2025-09-10",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=800039819039715",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "234859745073534",
-    "point": [
-     12.998607,
-     55.591909
-    ],
-    "heading": 136,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=234859745073534",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "2761695084082448",
-    "point": [
-     12.997122,
-     55.592348
-    ],
-    "heading": 110,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=2761695084082448",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 4"
-   },
-   {
-    "source": "mapillary",
-    "id": "300329058389588",
-    "point": [
-     12.995748,
-     55.593075
-    ],
-    "heading": 126,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=300329058389588",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "399718214460930",
-    "point": [
-     12.994399,
-     55.593807
-    ],
-    "heading": 120,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=399718214460930",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "883064262249475",
-    "point": [
-     12.993082,
-     55.594541
-    ],
-    "heading": 116,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=883064262249475",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
     "id": "466076304460789",
     "point": [
      12.990628,
@@ -1294,86 +286,6 @@
     "thumb": null,
     "title": null,
     "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "4410051415725619",
-    "point": [
-     13.002767,
-     55.590198
-    ],
-    "heading": 109,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=4410051415725619",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 12"
-   },
-   {
-    "source": "mapillary",
-    "id": "1515340355568631",
-    "point": [
-     13.002809,
-     55.590201
-    ],
-    "heading": 301,
-    "captured": "2022-08-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1515340355568631",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 12"
-   },
-   {
-    "source": "mapillary",
-    "id": "539170854645965",
-    "point": [
-     13.004312,
-     55.589587
-    ],
-    "heading": 119,
-    "captured": "2022-08-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=539170854645965",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 13"
-   },
-   {
-    "source": "mapillary",
-    "id": "674317693367338",
-    "point": [
-     13.004299,
-     55.589623
-    ],
-    "heading": 115,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=674317693367338",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 13"
-   },
-   {
-    "source": "mapillary",
-    "id": "257780622703647",
-    "point": [
-     13.004527,
-     55.589781
-    ],
-    "heading": 115,
-    "captured": "2019-07-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=257780622703647",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 13"
    }
   ],
   "reviewed": false
@@ -1382,19 +294,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1241413230797550",
+    "id": "1152224126167186",
     "point": [
-     13.015794,
-     55.611732
+     13.009963,
+     55.611314
     ],
-    "heading": 91,
-    "captured": "2025-07-09",
+    "heading": 259,
+    "captured": "2023-06-28",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1241413230797550",
+    "url": "https://www.mapillary.com/app/?pKey=1152224126167186",
     "thumb": null,
     "title": null,
-    "at": "mitten"
+    "at": "längs gatan 9"
    },
    {
     "source": "mapillary",
@@ -1414,310 +326,6 @@
    },
    {
     "source": "mapillary",
-    "id": "588066143065948",
-    "point": [
-     13.015496,
-     55.61171
-    ],
-    "heading": 264,
-    "captured": "2022-10-11",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=588066143065948",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1110400419452479",
-    "point": [
-     13.01553,
-     55.611786
-    ],
-    "heading": 271,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=1110400419452479",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "4501065676588043",
-    "point": [
-     13.015624,
-     55.611814
-    ],
-    "heading": 278,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=4501065676588043",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "285802533853179",
-    "point": [
-     13.007554,
-     55.611122
-    ],
-    "heading": 261,
-    "captured": "2023-06-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=285802533853179",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "377552040244141",
-    "point": [
-     13.007545,
-     55.611192
-    ],
-    "heading": 266,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=377552040244141",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "2905528459715688",
-    "point": [
-     13.007642,
-     55.611201
-    ],
-    "heading": 266,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=2905528459715688",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "550418789282350",
-    "point": [
-     13.00757,
-     55.611096
-    ],
-    "heading": 76,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=550418789282350",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "473957890374128",
-    "point": [
-     13.005578,
-     55.611042
-    ],
-    "heading": 267,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=473957890374128",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "218082056458677",
-    "point": [
-     13.006053,
-     55.611039
-    ],
-    "heading": 271,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=218082056458677",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "1943291019839716",
-    "point": [
-     13.005404,
-     55.611019
-    ],
-    "heading": 59,
-    "captured": "2025-07-09",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1943291019839716",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "243869734165464",
-    "point": [
-     13.005673,
-     55.610933
-    ],
-    "heading": 75,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=243869734165464",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "212446910445630",
-    "point": [
-     13.00376,
-     55.610853
-    ],
-    "heading": 269,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=212446910445630",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "1245939619142424",
-    "point": [
-     13.00367,
-     55.610888
-    ],
-    "heading": 267,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=1245939619142424",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "608824251866943",
-    "point": [
-     13.003618,
-     55.610805
-    ],
-    "heading": 83,
-    "captured": "2025-07-09",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=608824251866943",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "221720962712578",
-    "point": [
-     13.004093,
-     55.610846
-    ],
-    "heading": 81,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=221720962712578",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "972132083536279",
-    "point": [
-     13.001911,
-     55.610749
-    ],
-    "heading": 273,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=972132083536279",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 4"
-   },
-   {
-    "source": "mapillary",
-    "id": "771573404391203",
-    "point": [
-     12.999981,
-     55.610632
-    ],
-    "heading": 264,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=771573404391203",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "514738509906387",
-    "point": [
-     12.999931,
-     55.61058
-    ],
-    "heading": 267,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=514738509906387",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "288129892854689",
-    "point": [
-     12.999954,
-     55.61065
-    ],
-    "heading": 81,
-    "captured": "2019-03-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "neogeografen",
-    "url": "https://www.mapillary.com/app/?pKey=288129892854689",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
     "id": "471717894929044",
     "point": [
      13.013611,
@@ -1734,281 +342,25 @@
    },
    {
     "source": "mapillary",
-    "id": "568285267481816",
+    "id": "218082056458677",
     "point": [
-     13.013733,
-     55.611656
-    ],
-    "heading": 267,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=568285267481816",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "139200914860984",
-    "point": [
-     13.013623,
-     55.611722
-    ],
-    "heading": 269,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=139200914860984",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "941380520028804",
-    "point": [
-     13.013616,
-     55.611606
-    ],
-    "heading": 79,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=941380520028804",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "803008817675158",
-    "point": [
-     13.017642,
-     55.611588
+     13.006053,
+     55.611039
     ],
     "heading": 271,
-    "captured": "2022-10-11",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=803008817675158",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "798130597799515",
-    "point": [
-     13.017646,
-     55.611792
-    ],
-    "heading": 274,
     "captured": "2019-04-01",
     "licence": "CC BY-SA 4.0",
     "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=798130597799515",
+    "url": "https://www.mapillary.com/app/?pKey=218082056458677",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "197448682047875",
-    "point": [
-     13.017692,
-     55.611775
-    ],
-    "heading": 278,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=197448682047875",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "520556749257404",
-    "point": [
-     13.01002,
-     55.611302
-    ],
-    "heading": 74,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=520556749257404",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "1152224126167186",
-    "point": [
-     13.009963,
-     55.611314
-    ],
-    "heading": 259,
-    "captured": "2023-06-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1152224126167186",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "348575746601360",
-    "point": [
-     13.009956,
-     55.611387
-    ],
-    "heading": 266,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=348575746601360",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "560921314874358",
-    "point": [
-     13.009859,
-     55.611384
-    ],
-    "heading": 266,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=560921314874358",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "313969136913462",
-    "point": [
-     13.011858,
-     55.611461
-    ],
-    "heading": 74,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=313969136913462",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "525834425079704",
-    "point": [
-     13.011843,
-     55.61154
-    ],
-    "heading": 268,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=525834425079704",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
+    "at": "längs gatan 2"
    }
   ],
   "reviewed": false
  },
  "street:Citadellsvägen": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "948638729235409",
-    "point": [
-     12.980503,
-     55.604931
-    ],
-    "heading": 236,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=948638729235409",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "523954692110981",
-    "point": [
-     12.980663,
-     55.604863
-    ],
-    "heading": 221,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=523954692110981",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1261670577903300",
-    "point": [
-     12.980608,
-     55.604861
-    ],
-    "heading": 53,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1261670577903300",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "871723924077984",
-    "point": [
-     12.980626,
-     55.604826
-    ],
-    "heading": 52,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=871723924077984",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "184577090096564",
-    "point": [
-     12.983019,
-     55.605875
-    ],
-    "heading": 235,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=184577090096564",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
    {
     "source": "mapillary",
     "id": "221747412676997",
@@ -2027,70 +379,6 @@
    },
    {
     "source": "mapillary",
-    "id": "353483126988948",
-    "point": [
-     12.983012,
-     55.605917
-    ],
-    "heading": 65,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=353483126988948",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "5919036848189323",
-    "point": [
-     12.98298,
-     55.605836
-    ],
-    "heading": 65,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=5919036848189323",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "243495354200731",
-    "point": [
-     12.983025,
-     55.605831
-    ],
-    "heading": 64,
-    "captured": "2019-06-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=243495354200731",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "957705358313340",
-    "point": [
-     12.981539,
-     55.605353
-    ],
-    "heading": 233,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=957705358313340",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
     "id": "1616959778699150",
     "point": [
      12.981422,
@@ -2101,22 +389,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "jopparn",
     "url": "https://www.mapillary.com/app/?pKey=1616959778699150",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "857035428915710",
-    "point": [
-     12.981486,
-     55.605221
-    ],
-    "heading": 51,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=857035428915710",
     "thumb": null,
     "title": null,
     "at": "längs gatan 3"
@@ -2147,22 +419,6 @@
  },
  "street:Djäknegatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "815387039394989",
-    "point": [
-     13.004624,
-     55.605073
-    ],
-    "heading": 2,
-    "captured": "2019-05-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=815387039394989",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "925923858191876",
@@ -2202,38 +458,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1184958422358977",
-    "point": [
-     13.004172,
-     55.601437
-    ],
-    "heading": 250,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1184958422358977",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "185350287189253",
-    "point": [
-     13.004172,
-     55.601436
-    ],
-    "heading": 250,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=185350287189253",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "123391713597115",
     "point": [
      13.004322,
@@ -2250,51 +474,19 @@
    },
    {
     "source": "mapillary",
-    "id": "545155246864756",
+    "id": "1184958422358977",
     "point": [
-     13.004266,
-     55.601389
+     13.004172,
+     55.601437
     ],
-    "heading": 62,
-    "captured": "2020-09-16",
+    "heading": 250,
+    "captured": "2022-08-01",
     "licence": "CC BY-SA 4.0",
-    "author": "krz",
-    "url": "https://www.mapillary.com/app/?pKey=545155246864756",
+    "author": "jopparn",
+    "url": "https://www.mapillary.com/app/?pKey=1184958422358977",
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "520995873116329",
-    "point": [
-     13.005946,
-     55.601935
-    ],
-    "heading": 48,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=520995873116329",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "6129615717052534",
-    "point": [
-     13.000992,
-     55.600967
-    ],
-    "heading": 80,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=6129615717052534",
-    "thumb": null,
-    "title": null,
-    "at": "vid Regementsgatan"
    },
    {
     "source": "mapillary",
@@ -2315,40 +507,12 @@
   ],
   "reviewed": false
  },
+ "street:Engelbrektsgatan": {
+  "photos": [],
+  "reviewed": false
+ },
  "street:Fersens väg": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1596862174122091",
-    "point": [
-     12.995603,
-     55.600138
-    ],
-    "heading": 354,
-    "captured": "2023-03-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1596862174122091",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "2173723539478265",
-    "point": [
-     12.995594,
-     55.600049
-    ],
-    "heading": 173,
-    "captured": "2023-03-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=2173723539478265",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "177456080948574",
@@ -2367,19 +531,19 @@
    },
    {
     "source": "mapillary",
-    "id": "207016362272856",
+    "id": "2173723539478265",
     "point": [
-     12.996184,
-     55.59715
+     12.995594,
+     55.600049
     ],
-    "heading": 162,
-    "captured": "2023-09-21",
+    "heading": 173,
+    "captured": "2023-03-12",
     "licence": "CC BY-SA 4.0",
-    "author": "VIA_KK",
-    "url": "https://www.mapillary.com/app/?pKey=207016362272856",
+    "author": "approksimator",
+    "url": "https://www.mapillary.com/app/?pKey=2173723539478265",
     "thumb": null,
     "title": null,
-    "at": "vid Pildammsvägen"
+    "at": "mitten"
    }
   ],
   "reviewed": false
@@ -2388,48 +552,16 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "340541438350409",
+    "id": "1337567520691086",
     "point": [
-     13.003693,
-     55.594645
+     13.005303,
+     55.594874
     ],
-    "heading": 53,
-    "captured": "2023-09-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "VIA_KK",
-    "url": "https://www.mapillary.com/app/?pKey=340541438350409",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "4167263450224922",
-    "point": [
-     13.006856,
-     55.594752
-    ],
-    "heading": 92,
-    "captured": "2025-05-20",
+    "heading": 99,
+    "captured": "2025-04-30",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=4167263450224922",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "4193595974239159",
-    "point": [
-     13.005435,
-     55.594917
-    ],
-    "heading": 285,
-    "captured": "2025-11-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=4193595974239159",
+    "url": "https://www.mapillary.com/app/?pKey=1337567520691086",
     "thumb": null,
     "title": null,
     "at": "längs gatan 2"
@@ -2449,54 +581,6 @@
     "thumb": null,
     "title": null,
     "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "1337567520691086",
-    "point": [
-     13.005303,
-     55.594874
-    ],
-    "heading": 99,
-    "captured": "2025-04-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1337567520691086",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "4123235474590936",
-    "point": [
-     13.009798,
-     55.594302
-    ],
-    "heading": 109,
-    "captured": "2025-09-17",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=4123235474590936",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "1405747190577336",
-    "point": [
-     13.009884,
-     55.594376
-    ],
-    "heading": 102,
-    "captured": "2025-05-20",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1405747190577336",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
    },
    {
     "source": "mapillary",
@@ -2534,70 +618,6 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1280803537069468",
-    "point": [
-     13.00849,
-     55.59903
-    ],
-    "heading": 52,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=1280803537069468",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "524686812574389",
-    "point": [
-     13.024171,
-     55.605632
-    ],
-    "heading": 219,
-    "captured": "2022-04-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=524686812574389",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lundavägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "130303736249656",
-    "point": [
-     13.024076,
-     55.605509
-    ],
-    "heading": 38,
-    "captured": "2022-04-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=130303736249656",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lundavägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1048026640831308",
-    "point": [
-     13.024212,
-     55.605546
-    ],
-    "heading": 34,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=1048026640831308",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lundavägen"
    }
   ],
   "reviewed": false
@@ -2606,99 +626,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "160324036117027",
+    "id": "1309063647782793",
     "point": [
-     13.062477,
-     55.616971
+     13.049051,
+     55.574228
     ],
-    "heading": 331,
-    "captured": "2021-05-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=160324036117027",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "134446262615677",
-    "point": [
-     13.062436,
-     55.616905
-    ],
-    "heading": 342,
-    "captured": "2022-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=134446262615677",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "498248389444259",
-    "point": [
-     13.062543,
-     55.61691
-    ],
-    "heading": 335,
-    "captured": "2024-05-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "the_wheel_henry",
-    "url": "https://www.mapillary.com/app/?pKey=498248389444259",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "2026702134643591",
-    "point": [
-     13.056232,
-     55.582832
-    ],
-    "heading": 195,
+    "heading": 201,
     "captured": "2026-08-07",
     "licence": "CC BY-SA 4.0",
     "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=2026702134643591",
+    "url": "https://www.mapillary.com/app/?pKey=1309063647782793",
     "thumb": null,
     "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "4657892267792165",
-    "point": [
-     13.0562,
-     55.582843
-    ],
-    "heading": 15,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=4657892267792165",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "556854239455011",
-    "point": [
-     13.056228,
-     55.582889
-    ],
-    "heading": 16,
-    "captured": "2022-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=556854239455011",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
+    "at": "vid Jägersrovägen"
    },
    {
     "source": "mapillary",
@@ -2712,38 +652,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "the_wheel_henry",
     "url": "https://www.mapillary.com/app/?pKey=1620180732135356",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1045484921733116",
-    "point": [
-     13.055409,
-     55.58175
-    ],
-    "heading": 214,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1045484921733116",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1012961995108964",
-    "point": [
-     13.055414,
-     55.581685
-    ],
-    "heading": 26,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1012961995108964",
     "thumb": null,
     "title": null,
     "at": "vid Amiralsgatan"
@@ -2766,147 +674,19 @@
    },
    {
     "source": "mapillary",
-    "id": "2256412618525848",
+    "id": "498248389444259",
     "point": [
-     13.054156,
-     55.596663
+     13.062543,
+     55.61691
     ],
-    "heading": 13,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=2256412618525848",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "2317246802426503",
-    "point": [
-     13.054144,
-     55.596665
-    ],
-    "heading": 15,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=2317246802426503",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1106856094998773",
-    "point": [
-     13.054111,
-     55.596669
-    ],
-    "heading": 195,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1106856094998773",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "2571382643282038",
-    "point": [
-     13.054118,
-     55.596663
-    ],
-    "heading": 194,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=2571382643282038",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "8350503651638633",
-    "point": [
-     13.049078,
-     55.574301
-    ],
-    "heading": 18,
+    "heading": 335,
     "captured": "2024-05-18",
     "licence": "CC BY-SA 4.0",
     "author": "the_wheel_henry",
-    "url": "https://www.mapillary.com/app/?pKey=8350503651638633",
+    "url": "https://www.mapillary.com/app/?pKey=498248389444259",
     "thumb": null,
     "title": null,
-    "at": "vid Jägersrovägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "27933795889612228",
-    "point": [
-     13.049087,
-     55.574315
-    ],
-    "heading": 16,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=27933795889612228",
-    "thumb": null,
-    "title": null,
-    "at": "vid Jägersrovägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "2471125313412164",
-    "point": [
-     13.049117,
-     55.574314
-    ],
-    "heading": 22,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=2471125313412164",
-    "thumb": null,
-    "title": null,
-    "at": "vid Jägersrovägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "4402403556699964",
-    "point": [
-     13.049115,
-     55.574315
-    ],
-    "heading": 203,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=4402403556699964",
-    "thumb": null,
-    "title": null,
-    "at": "vid Jägersrovägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1309063647782793",
-    "point": [
-     13.049051,
-     55.574228
-    ],
-    "heading": 201,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1309063647782793",
-    "thumb": null,
-    "title": null,
-    "at": "vid Jägersrovägen"
+    "at": "mitten"
    }
   ],
   "reviewed": false
@@ -2915,35 +695,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "338333664387829",
+    "id": "302740121513782",
     "point": [
-     13.004009,
-     55.585157
+     12.983511,
+     55.588999
     ],
-    "heading": 127,
-    "captured": "2019-04-01",
+    "heading": 100,
+    "captured": "2018-09-13",
     "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=338333664387829",
+    "author": "cscafemmx",
+    "url": "https://www.mapillary.com/app/?pKey=302740121513782",
     "thumb": null,
     "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "141987661230505",
-    "point": [
-     13.00403,
-     55.585168
-    ],
-    "heading": 125,
-    "captured": "2018-11-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=141987661230505",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
+    "at": "vid Mariedalsvägen"
    },
    {
     "source": "mapillary",
@@ -2963,201 +727,25 @@
    },
    {
     "source": "mapillary",
-    "id": "469177404652148",
+    "id": "141987661230505",
     "point": [
-     13.005375,
-     55.584882
+     13.00403,
+     55.585168
     ],
-    "heading": 292,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=469177404652148",
-    "thumb": null,
-    "title": null,
-    "at": "vid Södra Förstadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "519884719431189",
-    "point": [
-     13.005261,
-     55.584898
-    ],
-    "heading": 296,
-    "captured": "2021-06-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=519884719431189",
-    "thumb": null,
-    "title": null,
-    "at": "vid Södra Förstadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "531738771286339",
-    "point": [
-     13.005038,
-     55.584842
-    ],
-    "heading": 118,
-    "captured": "2021-06-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=531738771286339",
-    "thumb": null,
-    "title": null,
-    "at": "vid Södra Förstadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "256441116169241",
-    "point": [
-     13.005344,
-     55.584766
-    ],
-    "heading": 119,
+    "heading": 125,
     "captured": "2018-11-13",
     "licence": "CC BY-SA 4.0",
     "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=256441116169241",
+    "url": "https://www.mapillary.com/app/?pKey=141987661230505",
     "thumb": null,
     "title": null,
-    "at": "vid Södra Förstadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "302740121513782",
-    "point": [
-     12.983511,
-     55.588999
-    ],
-    "heading": 100,
-    "captured": "2018-09-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "cscafemmx",
-    "url": "https://www.mapillary.com/app/?pKey=302740121513782",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "574576800977897",
-    "point": [
-     12.998655,
-     55.586355
-    ],
-    "heading": 151,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=574576800977897",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1184539628681864",
-    "point": [
-     12.999729,
-     55.586548
-    ],
-    "heading": 324,
-    "captured": "2021-06-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=1184539628681864",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "3050056935233527",
-    "point": [
-     12.999803,
-     55.586565
-    ],
-    "heading": 320,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=3050056935233527",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1751060459166122",
-    "point": [
-     12.967543,
-     55.594026
-    ],
-    "heading": 353,
-    "captured": "2025-05-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1751060459166122",
-    "thumb": null,
-    "title": null,
-    "at": "vid Köpenhamnsvägen"
+    "at": "mitten"
    }
   ],
   "reviewed": false
  },
  "street:Jägersrovägen": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1550999202299942",
-    "point": [
-     13.037504,
-     55.577858
-    ],
-    "heading": 297,
-    "captured": "2024-03-22",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1550999202299942",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "509122938055357",
-    "point": [
-     13.037443,
-     55.577877
-    ],
-    "heading": 299,
-    "captured": "2023-07-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=509122938055357",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "224124126675911",
-    "point": [
-     13.037269,
-     55.577851
-    ],
-    "heading": 305,
-    "captured": "2023-03-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=224124126675911",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "445213640135563",
@@ -3176,19 +764,19 @@
    },
    {
     "source": "mapillary",
-    "id": "1081847080593487",
+    "id": "1550999202299942",
     "point": [
-     13.049112,
-     55.57428
+     13.037504,
+     55.577858
     ],
-    "heading": 315,
-    "captured": "2025-08-05",
+    "heading": 297,
+    "captured": "2024-03-22",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1081847080593487",
+    "url": "https://www.mapillary.com/app/?pKey=1550999202299942",
     "thumb": null,
     "title": null,
-    "at": "vid Inre Ringvägen"
+    "at": "mitten"
    }
   ],
   "reviewed": false
@@ -3226,44 +814,12 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1699332234013869",
-    "point": [
-     13.003027,
-     55.605238
-    ],
-    "heading": 358,
-    "captured": "2025-05-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1699332234013869",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
    }
   ],
   "reviewed": false
  },
  "street:Kungsgatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1360980261394216",
-    "point": [
-     13.018397,
-     55.604571
-    ],
-    "heading": 239,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1360980261394216",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "159539140206186",
@@ -3287,22 +843,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "3104524586372663",
-    "point": [
-     12.98489,
-     55.593589
-    ],
-    "heading": 82,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=3104524586372663",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "1048204874340045",
     "point": [
      12.984766,
@@ -3319,19 +859,19 @@
    },
    {
     "source": "mapillary",
-    "id": "1588943316178423",
+    "id": "492826982029846",
     "point": [
-     12.983519,
-     55.593452
+     12.967402,
+     55.593999
     ],
-    "heading": 93,
-    "captured": "2026-07-21",
+    "heading": 279,
+    "captured": "2018-09-13",
     "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1588943316178423",
+    "author": "cscafemmx",
+    "url": "https://www.mapillary.com/app/?pKey=492826982029846",
     "thumb": null,
     "title": null,
-    "at": "vid Mariedalsvägen"
+    "at": "vid John Ericssons väg"
    },
    {
     "source": "mapillary",
@@ -3348,60 +888,12 @@
     "thumb": null,
     "title": null,
     "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "725744386779090",
-    "point": [
-     12.967627,
-     55.594023
-    ],
-    "heading": 286,
-    "captured": "2025-05-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=725744386779090",
-    "thumb": null,
-    "title": null,
-    "at": "vid John Ericssons väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "492826982029846",
-    "point": [
-     12.967402,
-     55.593999
-    ],
-    "heading": 279,
-    "captured": "2018-09-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "cscafemmx",
-    "url": "https://www.mapillary.com/app/?pKey=492826982029846",
-    "thumb": null,
-    "title": null,
-    "at": "vid John Ericssons väg"
    }
   ],
   "reviewed": false
  },
  "street:Lantmannagatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "620963436326468",
-    "point": [
-     13.020167,
-     55.590699
-    ],
-    "heading": 187,
-    "captured": "2022-08-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=620963436326468",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
    {
     "source": "mapillary",
     "id": "614720353612024",
@@ -3417,22 +909,6 @@
     "thumb": null,
     "title": null,
     "at": "längs gatan 11"
-   },
-   {
-    "source": "mapillary",
-    "id": "1634041623700999",
-    "point": [
-     13.021097,
-     55.591571
-    ],
-    "heading": 46,
-    "captured": "2023-03-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1634041623700999",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
    }
   ],
   "reviewed": false
@@ -3454,60 +930,12 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "654721012917019",
-    "point": [
-     12.973942,
-     55.603121
-    ],
-    "heading": 62,
-    "captured": "2022-11-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=654721012917019",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1748733835301770",
-    "point": [
-     12.980189,
-     55.604807
-    ],
-    "heading": 231,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=1748733835301770",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
    }
   ],
   "reviewed": false
  },
  "street:Lorensborgsgatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1091616919565186",
-    "point": [
-     12.974961,
-     55.578464
-    ],
-    "heading": 24,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=1091616919565186",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "205333418494683",
@@ -3526,169 +954,25 @@
    },
    {
     "source": "mapillary",
-    "id": "581965856978986",
+    "id": "1091616919565186",
     "point": [
-     12.974815,
-     55.57862
+     12.974961,
+     55.578464
     ],
-    "heading": 217,
-    "captured": "2022-08-03",
+    "heading": 24,
+    "captured": "2025-07-23",
     "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=581965856978986",
+    "author": "fod",
+    "url": "https://www.mapillary.com/app/?pKey=1091616919565186",
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "4126453604078028",
-    "point": [
-     12.983277,
-     55.5892
-    ],
-    "heading": 193,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=4126453604078028",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "478189648721825",
-    "point": [
-     12.98339,
-     55.58917
-    ],
-    "heading": 13,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=478189648721825",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "979965551726462",
-    "point": [
-     12.98023,
-     55.583426
-    ],
-    "heading": 135,
-    "captured": "2026-07-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=979965551726462",
-    "thumb": null,
-    "title": null,
-    "at": "vid Stadiongatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1458690532112883",
-    "point": [
-     12.96948,
-     55.566269
-    ],
-    "heading": 320,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=1458690532112883",
-    "thumb": null,
-    "title": null,
-    "at": "vid Annetorpsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "520188672725216",
-    "point": [
-     12.969428,
-     55.566203
-    ],
-    "heading": 322,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=520188672725216",
-    "thumb": null,
-    "title": null,
-    "at": "vid Annetorpsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "773823617100815",
-    "point": [
-     12.969012,
-     55.565606
-    ],
-    "heading": 86,
-    "captured": "2022-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=773823617100815",
-    "thumb": null,
-    "title": null,
-    "at": "vid Annetorpsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1185761221844263",
-    "point": [
-     12.969103,
-     55.565534
-    ],
-    "heading": 67,
-    "captured": "2018-09-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=1185761221844263",
-    "thumb": null,
-    "title": null,
-    "at": "vid Annetorpsvägen"
    }
   ],
   "reviewed": false
  },
  "street:Lundavägen": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1606552373642873",
-    "point": [
-     13.0693,
-     55.630373
-    ],
-    "heading": 216,
-    "captured": "2025-08-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1606552373642873",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "157379287075464",
-    "point": [
-     13.069058,
-     55.630343
-    ],
-    "heading": 218,
-    "captured": "2023-01-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=157379287075464",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "1261417508438006",
@@ -3720,172 +1004,12 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "3946739732302826",
-    "point": [
-     13.069341,
-     55.630274
-    ],
-    "heading": 42,
-    "captured": "2025-07-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=3946739732302826",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "748871150241241",
-    "point": [
-     13.069093,
-     55.630376
-    ],
-    "heading": 31,
-    "captured": "2023-01-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=748871150241241",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "115794431082915",
-    "point": [
-     13.024236,
-     55.605458
-    ],
-    "heading": 37,
-    "captured": "2022-04-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=115794431082915",
-    "thumb": null,
-    "title": null,
-    "at": "vid Föreningsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1048026640831308",
-    "point": [
-     13.024212,
-     55.605546
-    ],
-    "heading": 34,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=1048026640831308",
-    "thumb": null,
-    "title": null,
-    "at": "vid Föreningsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "368668811855949",
-    "point": [
-     13.024347,
-     55.605545
-    ],
-    "heading": 219,
-    "captured": "2022-04-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=368668811855949",
-    "thumb": null,
-    "title": null,
-    "at": "vid Föreningsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "218400407273178",
-    "point": [
-     13.057753,
-     55.622524
-    ],
-    "heading": 225,
-    "captured": "2023-01-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=218400407273178",
-    "thumb": null,
-    "title": null,
-    "at": "vid Inre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "589944162556073",
-    "point": [
-     13.057751,
-     55.622565
-    ],
-    "heading": 46,
-    "captured": "2023-01-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=589944162556073",
-    "thumb": null,
-    "title": null,
-    "at": "vid Inre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1381628745935131",
-    "point": [
-     13.057455,
-     55.622609
-    ],
-    "heading": 63,
-    "captured": "2023-03-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1381628745935131",
-    "thumb": null,
-    "title": null,
-    "at": "vid Inre Ringvägen"
    }
   ],
   "reviewed": false
  },
  "street:Malmöhusvägen": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "278015450702373",
-    "point": [
-     12.986515,
-     55.605454
-    ],
-    "heading": 243,
-    "captured": "2019-05-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "krm",
-    "url": "https://www.mapillary.com/app/?pKey=278015450702373",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "894735011656258",
-    "point": [
-     12.986139,
-     55.605457
-    ],
-    "heading": 70,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=894735011656258",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "3566437216794188",
@@ -3901,70 +1025,6 @@
     "thumb": null,
     "title": null,
     "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "718761626635438",
-    "point": [
-     12.989872,
-     55.60516
-    ],
-    "heading": 63,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=718761626635438",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "575923560615862",
-    "point": [
-     12.988523,
-     55.605918
-    ],
-    "heading": 84,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=575923560615862",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "694394344941536",
-    "point": [
-     12.982572,
-     55.604074
-    ],
-    "heading": 42,
-    "captured": "2022-04-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=694394344941536",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 4"
-   },
-   {
-    "source": "mapillary",
-    "id": "3284590041864808",
-    "point": [
-     12.983896,
-     55.60485
-    ],
-    "heading": 73,
-    "captured": "2022-04-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=3284590041864808",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
    },
    {
     "source": "mapillary",
@@ -3989,54 +1049,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "296656435278737",
-    "point": [
-     12.983366,
-     55.597367
-    ],
-    "heading": 178,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=296656435278737",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "485683879916371",
-    "point": [
-     12.983225,
-     55.598828
-    ],
-    "heading": 168,
-    "captured": "2022-04-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=485683879916371",
-    "thumb": null,
-    "title": null,
-    "at": "vid Regementsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1778618309013671",
-    "point": [
-     12.983257,
-     55.598806
-    ],
-    "heading": 181,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=1778618309013671",
-    "thumb": null,
-    "title": null,
-    "at": "vid Regementsgatan"
-   },
-   {
-    "source": "mapillary",
     "id": "478189648721825",
     "point": [
      12.98339,
@@ -4053,153 +1065,25 @@
    },
    {
     "source": "mapillary",
-    "id": "4126453604078028",
+    "id": "296656435278737",
     "point": [
-     12.983277,
-     55.5892
+     12.983366,
+     55.597367
     ],
-    "heading": 193,
+    "heading": 178,
     "captured": "2018-09-27",
     "licence": "CC BY-SA 4.0",
     "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=4126453604078028",
+    "url": "https://www.mapillary.com/app/?pKey=296656435278737",
     "thumb": null,
     "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "3153025421510770",
-    "point": [
-     12.979984,
-     55.604722
-    ],
-    "heading": 327,
-    "captured": "2023-03-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=3153025421510770",
-    "thumb": null,
-    "title": null,
-    "at": "vid Limhamnsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "838533651296868",
-    "point": [
-     12.97997,
-     55.604735
-    ],
-    "heading": 137,
-    "captured": "2023-09-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "VIA_KK",
-    "url": "https://www.mapillary.com/app/?pKey=838533651296868",
-    "thumb": null,
-    "title": null,
-    "at": "vid Limhamnsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1094192809429151",
-    "point": [
-     12.980107,
-     55.604633
-    ],
-    "heading": 142,
-    "captured": "2025-05-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1094192809429151",
-    "thumb": null,
-    "title": null,
-    "at": "vid Limhamnsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1254467469459120",
-    "point": [
-     12.983621,
-     55.593398
-    ],
-    "heading": 0,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=1254467469459120",
-    "thumb": null,
-    "title": null,
-    "at": "vid Köpenhamnsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "925585728199618",
-    "point": [
-     12.983429,
-     55.593541
-    ],
-    "heading": 180,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=925585728199618",
-    "thumb": null,
-    "title": null,
-    "at": "vid Köpenhamnsvägen"
+    "at": "mitten"
    }
   ],
   "reviewed": false
  },
  "street:Möllevångsgatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "4269700463250098",
-    "point": [
-     13.003708,
-     55.59325
-    ],
-    "heading": 281,
-    "captured": "2025-08-08",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=4269700463250098",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "772375117439106",
-    "point": [
-     13.003671,
-     55.593257
-    ],
-    "heading": 287,
-    "captured": "2022-08-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=772375117439106",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "2070377346828759",
-    "point": [
-     13.005531,
-     55.593409
-    ],
-    "heading": 81,
-    "captured": "2025-09-10",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2070377346828759",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
    {
     "source": "mapillary",
     "id": "583767240107053",
@@ -4218,41 +1102,25 @@
    },
    {
     "source": "mapillary",
-    "id": "1086326593116960",
+    "id": "772375117439106",
     "point": [
-     13.005362,
-     55.593421
+     13.003671,
+     55.593257
     ],
-    "heading": 258,
-    "captured": "2025-08-08",
+    "heading": 287,
+    "captured": "2022-08-18",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1086326593116960",
+    "url": "https://www.mapillary.com/app/?pKey=772375117439106",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 2"
+    "at": "längs gatan 1"
    }
   ],
   "reviewed": false
  },
  "street:Neptunigatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "564139145112576",
-    "point": [
-     12.985138,
-     55.607298
-    ],
-    "heading": 97,
-    "captured": "2022-06-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=564139145112576",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "215293350852024",
@@ -4265,38 +1133,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "peterneubauer",
     "url": "https://www.mapillary.com/app/?pKey=215293350852024",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "3575911299358537",
-    "point": [
-     12.985013,
-     55.607589
-    ],
-    "heading": 78,
-    "captured": "2023-06-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=3575911299358537",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "756811088783554",
-    "point": [
-     12.985126,
-     55.607287
-    ],
-    "heading": 270,
-    "captured": "2022-06-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=756811088783554",
     "thumb": null,
     "title": null,
     "at": "mitten"
@@ -4319,22 +1155,6 @@
    },
    {
     "source": "mapillary",
-    "id": "289993585929379",
-    "point": [
-     12.999285,
-     55.610295
-    ],
-    "heading": 182,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=289993585929379",
-    "thumb": null,
-    "title": null,
-    "at": "vid Carlsgatan"
-   },
-   {
-    "source": "mapillary",
     "id": "1116219192222551",
     "point": [
      12.995305,
@@ -4351,121 +1171,25 @@
    },
    {
     "source": "mapillary",
-    "id": "2356786834454062",
+    "id": "289993585929379",
     "point": [
-     12.995251,
-     55.608398
+     12.999285,
+     55.610295
     ],
-    "heading": 257,
-    "captured": "2019-07-15",
+    "heading": 182,
+    "captured": "2018-09-30",
     "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=2356786834454062",
+    "author": "mszilas",
+    "url": "https://www.mapillary.com/app/?pKey=289993585929379",
     "thumb": null,
     "title": null,
-    "at": "vid Nordenskiöldsgatan"
+    "at": "vid Carlsgatan"
    }
   ],
   "reviewed": false
  },
  "street:Nobelvägen": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1573263733119433",
-    "point": [
-     13.024503,
-     55.598521
-    ],
-    "heading": 198,
-    "captured": "2023-01-22",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1573263733119433",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "673735145731380",
-    "point": [
-     13.024418,
-     55.598486
-    ],
-    "heading": 202,
-    "captured": "2025-08-17",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=673735145731380",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "219500371087161",
-    "point": [
-     13.024368,
-     55.59847
-    ],
-    "heading": 200,
-    "captured": "2023-07-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=219500371087161",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "5179755318748845",
-    "point": [
-     13.024573,
-     55.598454
-    ],
-    "heading": 20,
-    "captured": "2022-04-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=5179755318748845",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1112745763946169",
-    "point": [
-     13.024567,
-     55.598487
-    ],
-    "heading": 17,
-    "captured": "2025-05-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1112745763946169",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1024002399710486",
-    "point": [
-     13.024562,
-     55.598492
-    ],
-    "heading": 15,
-    "captured": "2025-05-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1024002399710486",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "570046581280370",
@@ -4484,35 +1208,19 @@
    },
    {
     "source": "mapillary",
-    "id": "735581231257828",
+    "id": "5103422763060262",
     "point": [
-     13.015263,
-     55.589843
+     13.007015,
+     55.584324
     ],
-    "heading": 217,
-    "captured": "2023-01-22",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=735581231257828",
-    "thumb": null,
-    "title": null,
-    "at": "vid Ystadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1116167358949012",
-    "point": [
-     13.015397,
-     55.589817
-    ],
-    "heading": 36,
+    "heading": 29,
     "captured": "2022-04-16",
     "licence": "CC BY-SA 4.0",
     "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1116167358949012",
+    "url": "https://www.mapillary.com/app/?pKey=5103422763060262",
     "thumb": null,
     "title": null,
-    "at": "vid Ystadsgatan"
+    "at": "vid Ystadvägen"
    },
    {
     "source": "mapillary",
@@ -4532,67 +1240,19 @@
    },
    {
     "source": "mapillary",
-    "id": "5167550876629416",
+    "id": "219500371087161",
     "point": [
-     13.019789,
-     55.592419
+     13.024368,
+     55.59847
     ],
-    "heading": 33,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=5167550876629416",
-    "thumb": null,
-    "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "656319536380666",
-    "point": [
-     13.01971,
-     55.592399
-    ],
-    "heading": 222,
+    "heading": 200,
     "captured": "2023-07-25",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=656319536380666",
+    "url": "https://www.mapillary.com/app/?pKey=219500371087161",
     "thumb": null,
     "title": null,
-    "at": "vid Amiralsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "475736231431193",
-    "point": [
-     13.027997,
-     55.60362
-    ],
-    "heading": 200,
-    "captured": "2023-01-22",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=475736231431193",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "5103422763060262",
-    "point": [
-     13.007015,
-     55.584324
-    ],
-    "heading": 29,
-    "captured": "2022-04-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=5103422763060262",
-    "thumb": null,
-    "title": null,
-    "at": "vid Ystadvägen"
+    "at": "mitten"
    }
   ],
   "reviewed": false
@@ -4638,19 +1298,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1037790920494037",
+    "id": "1236240270490584",
     "point": [
-     13.026613,
-     55.585078
+     13.027877,
+     55.58981
     ],
-    "heading": 189,
-    "captured": "2022-04-23",
+    "heading": 182,
+    "captured": "2022-09-04",
     "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1037790920494037",
+    "author": "fa30",
+    "url": "https://www.mapillary.com/app/?pKey=1236240270490584",
     "thumb": null,
     "title": null,
-    "at": "mitten"
+    "at": "längs gatan 1"
    },
    {
     "source": "mapillary",
@@ -4670,54 +1330,6 @@
    },
    {
     "source": "mapillary",
-    "id": "712174734446627",
-    "point": [
-     13.0264,
-     55.585109
-    ],
-    "heading": 23,
-    "captured": "2024-03-22",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=712174734446627",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "2046848572150057",
-    "point": [
-     13.027942,
-     55.589852
-    ],
-    "heading": 187,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=2046848572150057",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "1236240270490584",
-    "point": [
-     13.027877,
-     55.58981
-    ],
-    "heading": 182,
-    "captured": "2022-09-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1236240270490584",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
     "id": "1132819157483481",
     "point": [
      13.027624,
@@ -4734,118 +1346,6 @@
    },
    {
     "source": "mapillary",
-    "id": "581032750605931",
-    "point": [
-     13.027602,
-     55.588864
-    ],
-    "heading": 197,
-    "captured": "2023-03-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=581032750605931",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "5469661083052241",
-    "point": [
-     13.027312,
-     55.587546
-    ],
-    "heading": 189,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=5469661083052241",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "1435965426747424",
-    "point": [
-     13.027327,
-     55.587635
-    ],
-    "heading": 190,
-    "captured": "2018-05-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "eme",
-    "url": "https://www.mapillary.com/app/?pKey=1435965426747424",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "106137718207537",
-    "point": [
-     13.027101,
-     55.586719
-    ],
-    "heading": 194,
-    "captured": "2018-05-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "eme",
-    "url": "https://www.mapillary.com/app/?pKey=106137718207537",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 4"
-   },
-   {
-    "source": "mapillary",
-    "id": "1885858124943298",
-    "point": [
-     13.026751,
-     55.585586
-    ],
-    "heading": 188,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1885858124943298",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "509015130103129",
-    "point": [
-     13.026712,
-     55.585578
-    ],
-    "heading": 195,
-    "captured": "2018-05-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "eme",
-    "url": "https://www.mapillary.com/app/?pKey=509015130103129",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "120597333930396",
-    "point": [
-     13.026143,
-     55.583478
-    ],
-    "heading": 188,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=120597333930396",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
     "id": "756041035277483",
     "point": [
      13.026148,
@@ -4859,70 +1359,6 @@
     "thumb": null,
     "title": null,
     "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "734394324257761",
-    "point": [
-     13.025812,
-     55.582402
-    ],
-    "heading": 189,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=734394324257761",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "313102917006360",
-    "point": [
-     13.025767,
-     55.582393
-    ],
-    "heading": 192,
-    "captured": "2018-05-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "eme",
-    "url": "https://www.mapillary.com/app/?pKey=313102917006360",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "338588891588855",
-    "point": [
-     13.025401,
-     55.58124
-    ],
-    "heading": 190,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=338588891588855",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "471860678375828",
-    "point": [
-     13.02524,
-     55.581217
-    ],
-    "heading": 185,
-    "captured": "2023-03-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=471860678375828",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
    }
   ],
   "reviewed": false
@@ -4931,67 +1367,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "257609322813812",
+    "id": "325617295664432",
     "point": [
-     12.993051,
-     55.606221
+     13.007472,
+     55.608636
     ],
-    "heading": 250,
-    "captured": "2019-04-01",
+    "heading": 86,
+    "captured": "2018-09-30",
     "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=257609322813812",
+    "author": "mszilas",
+    "url": "https://www.mapillary.com/app/?pKey=325617295664432",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "785591142350621",
-    "point": [
-     12.994879,
-     55.606569
-    ],
-    "heading": 263,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=785591142350621",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "137245461779389",
-    "point": [
-     13.000062,
-     55.607846
-    ],
-    "heading": 251,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=137245461779389",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 4"
-   },
-   {
-    "source": "mapillary",
-    "id": "202862101677146",
-    "point": [
-     13.002017,
-     55.6081
-    ],
-    "heading": 256,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=202862101677146",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
+    "at": "längs gatan 7"
    },
    {
     "source": "mapillary",
@@ -5011,214 +1399,6 @@
    },
    {
     "source": "mapillary",
-    "id": "296178821983522",
-    "point": [
-     13.003825,
-     55.608233
-    ],
-    "heading": 259,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=296178821983522",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "450690079364567",
-    "point": [
-     13.004254,
-     55.608183
-    ],
-    "heading": 232,
-    "captured": "2018-01-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "mkw",
-    "url": "https://www.mapillary.com/app/?pKey=450690079364567",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "310538917314043",
-    "point": [
-     13.007395,
-     55.60871
-    ],
-    "heading": 260,
-    "captured": "2018-01-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "mkw",
-    "url": "https://www.mapillary.com/app/?pKey=310538917314043",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "524140475267938",
-    "point": [
-     13.007459,
-     55.608718
-    ],
-    "heading": 257,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=524140475267938",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "511849219948969",
-    "point": [
-     13.007584,
-     55.608463
-    ],
-    "heading": 88,
-    "captured": "2019-05-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=511849219948969",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "325617295664432",
-    "point": [
-     13.007472,
-     55.608636
-    ],
-    "heading": 86,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=325617295664432",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "226493092176693",
-    "point": [
-     13.007501,
-     55.6087
-    ],
-    "heading": 77,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=226493092176693",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "957351378364669",
-    "point": [
-     13.005603,
-     55.608387
-    ],
-    "heading": 57,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=957351378364669",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "757181754996400",
-    "point": [
-     13.005607,
-     55.608407
-    ],
-    "heading": 242,
-    "captured": "2018-01-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "mkw",
-    "url": "https://www.mapillary.com/app/?pKey=757181754996400",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "267083088449191",
-    "point": [
-     13.005523,
-     55.608397
-    ],
-    "heading": 242,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=267083088449191",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "197591345532718",
-    "point": [
-     13.010012,
-     55.608863
-    ],
-    "heading": 85,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=197591345532718",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "329453285406804",
-    "point": [
-     13.010107,
-     55.608682
-    ],
-    "heading": 87,
-    "captured": "2019-05-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=329453285406804",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "314576816791897",
-    "point": [
-     13.01006,
-     55.608918
-    ],
-    "heading": 78,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=314576816791897",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
     "id": "362355255196684",
     "point": [
      13.010019,
@@ -5235,51 +1415,19 @@
    },
    {
     "source": "mapillary",
-    "id": "246120407290589",
+    "id": "785591142350621",
     "point": [
-     13.010029,
-     55.608974
-    ],
-    "heading": 256,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=246120407290589",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "369763347713903",
-    "point": [
-     13.01175,
-     55.609106
+     12.994879,
+     55.606569
     ],
     "heading": 263,
-    "captured": "2018-01-27",
+    "captured": "2019-04-01",
     "licence": "CC BY-SA 4.0",
-    "author": "mkw",
-    "url": "https://www.mapillary.com/app/?pKey=369763347713903",
+    "author": "brenna",
+    "url": "https://www.mapillary.com/app/?pKey=785591142350621",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "484209139560594",
-    "point": [
-     13.011802,
-     55.609151
-    ],
-    "heading": 256,
-    "captured": "2020-02-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "bvfrmtest030220",
-    "url": "https://www.mapillary.com/app/?pKey=484209139560594",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
+    "at": "längs gatan 2"
    }
   ],
   "reviewed": false
@@ -5304,22 +1452,6 @@
    },
    {
     "source": "mapillary",
-    "id": "1003610637114072",
-    "point": [
-     12.995339,
-     55.565895
-    ],
-    "heading": 190,
-    "captured": "2019-07-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=1003610637114072",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "787661570207312",
     "point": [
      12.995407,
@@ -5333,38 +1465,6 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1758264335087690",
-    "point": [
-     13.005528,
-     55.584691
-    ],
-    "heading": 197,
-    "captured": "2025-06-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1758264335087690",
-    "thumb": null,
-    "title": null,
-    "at": "vid Södra Förstadsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "395993172149782",
-    "point": [
-     13.001324,
-     55.579627
-    ],
-    "heading": 25,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=395993172149782",
-    "thumb": null,
-    "title": null,
-    "at": "vid Stadiongatan"
    }
   ],
   "reviewed": false
@@ -5373,163 +1473,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "761127781198143",
+    "id": "178734681303962",
     "point": [
-     12.997008,
-     55.580391
+     12.999744,
+     55.586625
     ],
-    "heading": 33,
-    "captured": "2018-11-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=761127781198143",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "460438038971096",
-    "point": [
-     12.996793,
-     55.580451
-    ],
-    "heading": 208,
+    "heading": 335,
     "captured": "2022-08-03",
     "licence": "CC BY-SA 4.0",
     "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=460438038971096",
+    "url": "https://www.mapillary.com/app/?pKey=178734681303962",
     "thumb": null,
     "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "177456080948574",
-    "point": [
-     12.996419,
-     55.597125
-    ],
-    "heading": 349,
-    "captured": "2020-09-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "krz",
-    "url": "https://www.mapillary.com/app/?pKey=177456080948574",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "348837180944246",
-    "point": [
-     12.996203,
-     55.597105
-    ],
-    "heading": 145,
-    "captured": "2023-09-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "VIA_KK",
-    "url": "https://www.mapillary.com/app/?pKey=348837180944246",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "1203927814707679",
-    "point": [
-     12.997514,
-     55.592423
-    ],
-    "heading": 6,
-    "captured": "2025-04-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1203927814707679",
-    "thumb": null,
-    "title": null,
-    "at": "vid Carl Gustafs väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "860154663842677",
-    "point": [
-     12.997554,
-     55.592167
-    ],
-    "heading": 176,
-    "captured": "2026-07-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=860154663842677",
-    "thumb": null,
-    "title": null,
-    "at": "vid Carl Gustafs väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "1032522791601859",
-    "point": [
-     12.98697,
-     55.567476
-    ],
-    "heading": 77,
-    "captured": "2024-05-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "the_wheel_henry",
-    "url": "https://www.mapillary.com/app/?pKey=1032522791601859",
-    "thumb": null,
-    "title": null,
-    "at": "vid Annetorpsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1041101499926839",
-    "point": [
-     12.981525,
-     55.546558
-    ],
-    "heading": 191,
-    "captured": "2022-08-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1041101499926839",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "549270946523224",
-    "point": [
-     12.981868,
-     55.547257
-    ],
-    "heading": 11,
-    "captured": "2021-06-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=549270946523224",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "968022577348988",
-    "point": [
-     12.981756,
-     55.547277
-    ],
-    "heading": 186,
-    "captured": "2021-06-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=968022577348988",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
+    "at": "vid John Ericssons väg"
    },
    {
     "source": "mapillary",
@@ -5549,89 +1505,25 @@
    },
    {
     "source": "mapillary",
-    "id": "1184539628681864",
+    "id": "761127781198143",
     "point": [
-     12.999729,
-     55.586548
+     12.997008,
+     55.580391
     ],
-    "heading": 324,
-    "captured": "2021-06-07",
+    "heading": 33,
+    "captured": "2018-11-13",
     "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=1184539628681864",
+    "author": "mszilas",
+    "url": "https://www.mapillary.com/app/?pKey=761127781198143",
     "thumb": null,
     "title": null,
-    "at": "vid John Ericssons väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "178734681303962",
-    "point": [
-     12.999744,
-     55.586625
-    ],
-    "heading": 335,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=178734681303962",
-    "thumb": null,
-    "title": null,
-    "at": "vid John Ericssons väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "574169984408345",
-    "point": [
-     12.998577,
-     55.586429
-    ],
-    "heading": 160,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=574169984408345",
-    "thumb": null,
-    "title": null,
-    "at": "vid John Ericssons väg"
+    "at": "mitten"
    }
   ],
   "reviewed": false
  },
  "street:Regementsgatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "590714655763406",
-    "point": [
-     12.986226,
-     55.599115
-    ],
-    "heading": 260,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=590714655763406",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1353584389531970",
-    "point": [
-     12.986113,
-     55.599168
-    ],
-    "heading": 257,
-    "captured": "2026-07-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1353584389531970",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "436406905083281",
@@ -5647,166 +1539,6 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "6129615717052534",
-    "point": [
-     13.000992,
-     55.600967
-    ],
-    "heading": 80,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=6129615717052534",
-    "thumb": null,
-    "title": null,
-    "at": "vid Drottninggatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "381024623162072",
-    "point": [
-     13.00099,
-     55.60094
-    ],
-    "heading": 77,
-    "captured": "2020-09-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "krz",
-    "url": "https://www.mapillary.com/app/?pKey=381024623162072",
-    "thumb": null,
-    "title": null,
-    "at": "vid Drottninggatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "129227646276841",
-    "point": [
-     12.995692,
-     55.600268
-    ],
-    "heading": 78,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=129227646276841",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "813433259578196",
-    "point": [
-     12.995966,
-     55.600285
-    ],
-    "heading": 60,
-    "captured": "2020-09-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "krz",
-    "url": "https://www.mapillary.com/app/?pKey=813433259578196",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "581569680334412",
-    "point": [
-     12.995642,
-     55.600311
-    ],
-    "heading": 258,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=581569680334412",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "1106477650216603",
-    "point": [
-     12.983344,
-     55.598808
-    ],
-    "heading": 262,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1106477650216603",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1286851536657383",
-    "point": [
-     12.983252,
-     55.598839
-    ],
-    "heading": 257,
-    "captured": "2026-07-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1286851536657383",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "3523569621240366",
-    "point": [
-     12.983576,
-     55.598778
-    ],
-    "heading": 258,
-    "captured": "2023-09-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "VIA_KK",
-    "url": "https://www.mapillary.com/app/?pKey=3523569621240366",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1246198806129787",
-    "point": [
-     12.983291,
-     55.598831
-    ],
-    "heading": 84,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=1246198806129787",
-    "thumb": null,
-    "title": null,
-    "at": "vid Mariedalsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "484776866984829",
-    "point": [
-     12.98845,
-     55.599337
-    ],
-    "heading": 81,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=484776866984829",
-    "thumb": null,
-    "title": null,
-    "at": "vid Carl Gustafs väg"
    },
    {
     "source": "mapillary",
@@ -5826,41 +1558,25 @@
    },
    {
     "source": "mapillary",
-    "id": "1958017928230812",
+    "id": "1286851536657383",
     "point": [
-     12.988308,
-     55.599456
+     12.983252,
+     55.598839
     ],
-    "heading": 258,
+    "heading": 257,
     "captured": "2026-07-18",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1958017928230812",
+    "url": "https://www.mapillary.com/app/?pKey=1286851536657383",
     "thumb": null,
     "title": null,
-    "at": "vid Carl Gustafs väg"
+    "at": "vid Mariedalsvägen"
    }
   ],
   "reviewed": false
  },
  "street:Sallerupsvägen": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1331155897397271",
-    "point": [
-     13.090432,
-     55.595383
-    ],
-    "heading": 79,
-    "captured": "2022-04-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1331155897397271",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
    {
     "source": "mapillary",
     "id": "1079509842637816",
@@ -5876,22 +1592,6 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "479146847261970",
-    "point": [
-     13.028184,
-     55.60354
-    ],
-    "heading": 120,
-    "captured": "2022-03-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=479146847261970",
-    "thumb": null,
-    "title": null,
-    "at": "vid Nobelvägen"
    },
    {
     "source": "mapillary",
@@ -5924,140 +1624,16 @@
     "thumb": null,
     "title": null,
     "at": "vid Föreningsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "500267101113750",
-    "point": [
-     13.024227,
-     55.605642
-    ],
-    "heading": 325,
-    "captured": "2018-04-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "larrymappengauer",
-    "url": "https://www.mapillary.com/app/?pKey=500267101113750",
-    "thumb": null,
-    "title": null,
-    "at": "vid Föreningsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "365808088821883",
-    "point": [
-     13.054136,
-     55.596829
-    ],
-    "heading": 278,
-    "captured": "2022-04-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=365808088821883",
-    "thumb": null,
-    "title": null,
-    "at": "vid Inre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "981552342382103",
-    "point": [
-     13.054093,
-     55.596847
-    ],
-    "heading": 283,
-    "captured": "2018-11-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=981552342382103",
-    "thumb": null,
-    "title": null,
-    "at": "vid Inre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "800798591052569",
-    "point": [
-     13.054195,
-     55.59667
-    ],
-    "heading": 99,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=800798591052569",
-    "thumb": null,
-    "title": null,
-    "at": "vid Inre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "146224494588275",
-    "point": [
-     13.115317,
-     55.588815
-    ],
-    "heading": 293,
-    "captured": "2022-04-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=146224494588275",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
    }
   ],
   "reviewed": false
  },
+ "street:Skomakaregatan": {
+  "photos": [],
+  "reviewed": false
+ },
  "street:Slottsgatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "802962103677928",
-    "point": [
-     12.993592,
-     55.604145
-    ],
-    "heading": 337,
-    "captured": "2019-12-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=802962103677928",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "326982652158081",
-    "point": [
-     12.992422,
-     55.605728
-    ],
-    "heading": 340,
-    "captured": "2019-12-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=326982652158081",
-    "thumb": null,
-    "title": null,
-    "at": "vid Västergatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "319454366363744",
-    "point": [
-     12.992545,
-     55.605554
-    ],
-    "heading": 340,
-    "captured": "2019-12-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=319454366363744",
-    "thumb": null,
-    "title": null,
-    "at": "vid Västergatan"
-   },
    {
     "source": "mapillary",
     "id": "329514765486318",
@@ -6076,51 +1652,19 @@
    },
    {
     "source": "mapillary",
-    "id": "924221565026276",
+    "id": "802962103677928",
     "point": [
-     12.995943,
-     55.600304
+     12.993592,
+     55.604145
     ],
-    "heading": 359,
+    "heading": 337,
     "captured": "2019-12-27",
     "licence": "CC BY-SA 4.0",
     "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=924221565026276",
+    "url": "https://www.mapillary.com/app/?pKey=802962103677928",
     "thumb": null,
     "title": null,
-    "at": "vid Regementsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "503049697804243",
-    "point": [
-     12.995925,
-     55.600375
-    ],
-    "heading": 356,
-    "captured": "2019-12-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=503049697804243",
-    "thumb": null,
-    "title": null,
-    "at": "vid Regementsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "464116891324735",
-    "point": [
-     12.995775,
-     55.600115
-    ],
-    "heading": 354,
-    "captured": "2020-09-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "krz",
-    "url": "https://www.mapillary.com/app/?pKey=464116891324735",
-    "thumb": null,
-    "title": null,
-    "at": "vid Regementsgatan"
+    "at": "mitten"
    },
    {
     "source": "mapillary",
@@ -6137,38 +1681,6 @@
     "thumb": null,
     "title": null,
     "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "476906543515879",
-    "point": [
-     12.996036,
-     55.599707
-    ],
-    "heading": 355,
-    "captured": "2019-12-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=476906543515879",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "205140741431318",
-    "point": [
-     12.996038,
-     55.599775
-    ],
-    "heading": 354,
-    "captured": "2019-12-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=205140741431318",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
    }
   ],
   "reviewed": false
@@ -6177,48 +1689,16 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1531431555133921",
+    "id": "2837434013301017",
     "point": [
-     12.980306,
-     55.583391
+     12.976823,
+     55.584205
     ],
-    "heading": 126,
-    "captured": "2026-07-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1531431555133921",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1757986245512255",
-    "point": [
-     12.980272,
-     55.583197
-    ],
-    "heading": 116,
-    "captured": "2026-07-18",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1757986245512255",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "929173826869101",
-    "point": [
-     12.98021,
-     55.58319
-    ],
-    "heading": 302,
+    "heading": 300,
     "captured": "2026-07-21",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=929173826869101",
+    "url": "https://www.mapillary.com/app/?pKey=2837434013301017",
     "thumb": null,
     "title": null,
     "at": "vid Lorensborgsgatan"
@@ -6238,54 +1718,6 @@
     "thumb": null,
     "title": null,
     "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "223671369256412",
-    "point": [
-     12.976826,
-     55.584115
-    ],
-    "heading": 120,
-    "captured": "2018-09-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "cscafemmx",
-    "url": "https://www.mapillary.com/app/?pKey=223671369256412",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "2837434013301017",
-    "point": [
-     12.976823,
-     55.584205
-    ],
-    "heading": 300,
-    "captured": "2026-07-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2837434013301017",
-    "thumb": null,
-    "title": null,
-    "at": "vid Lorensborgsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "143881938550309",
-    "point": [
-     13.005078,
-     55.57885
-    ],
-    "heading": 277,
-    "captured": "2023-02-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=143881938550309",
-    "thumb": null,
-    "title": null,
-    "at": "vid Trelleborgsvägen"
    }
   ],
   "reviewed": false
@@ -6304,54 +1736,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "approksimator",
     "url": "https://www.mapillary.com/app/?pKey=5982249205223594",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1512602349720987",
-    "point": [
-     13.042994,
-     55.61563
-    ],
-    "heading": 58,
-    "captured": "2025-06-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1512602349720987",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "760439365107946",
-    "point": [
-     13.042904,
-     55.615689
-    ],
-    "heading": 58,
-    "captured": "2022-08-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=760439365107946",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "377388121183089",
-    "point": [
-     13.043064,
-     55.615744
-    ],
-    "heading": 240,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=377388121183089",
     "thumb": null,
     "title": null,
     "at": "mitten"
@@ -6379,22 +1763,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "395046272990299",
-    "point": [
-     12.995025,
-     55.602442
-    ],
-    "heading": 75,
-    "captured": "2024-01-11",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=395046272990299",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "970061724918981",
     "point": [
      13.001382,
@@ -6411,22 +1779,6 @@
    },
    {
     "source": "mapillary",
-    "id": "1753858748868897",
-    "point": [
-     13.004691,
-     55.603679
-    ],
-    "heading": 78,
-    "captured": "2025-04-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1753858748868897",
-    "thumb": null,
-    "title": null,
-    "at": "vid Djäknegatan"
-   },
-   {
-    "source": "mapillary",
     "id": "1177446016497665",
     "point": [
      13.004593,
@@ -6440,38 +1792,6 @@
     "thumb": null,
     "title": null,
     "at": "vid Djäknegatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "750915950193965",
-    "point": [
-     13.004606,
-     55.603766
-    ],
-    "heading": 285,
-    "captured": "2023-11-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=750915950193965",
-    "thumb": null,
-    "title": null,
-    "at": "vid Djäknegatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "702028721295663",
-    "point": [
-     13.010148,
-     55.604389
-    ],
-    "heading": 257,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=702028721295663",
-    "thumb": null,
-    "title": null,
-    "at": "vid Södra Promenaden"
    }
   ],
   "reviewed": false
@@ -6480,243 +1800,35 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "2965207210414881",
+    "id": "2134917783567701",
     "point": [
-     12.987998,
-     55.611902
+     12.997202,
+     55.612411
     ],
-    "heading": 43,
-    "captured": "2019-07-09",
-    "licence": "CC BY-SA 4.0",
-    "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=2965207210414881",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "945075930655538",
-    "point": [
-     12.987881,
-     55.612119
-    ],
-    "heading": 252,
+    "heading": 92,
     "captured": "2024-01-19",
     "licence": "CC BY-SA 4.0",
     "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=945075930655538",
+    "url": "https://www.mapillary.com/app/?pKey=2134917783567701",
     "thumb": null,
     "title": null,
-    "at": "mitten"
+    "at": "längs gatan 11"
    },
    {
     "source": "mapillary",
-    "id": "1246088245852245",
+    "id": "502007404876477",
     "point": [
-     12.983797,
-     55.611057
+     12.989302,
+     55.612391
     ],
-    "heading": 256,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=1246088245852245",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "267579721730812",
-    "point": [
-     12.98582,
-     55.611523
-    ],
-    "heading": 66,
-    "captured": "2019-07-09",
-    "licence": "CC BY-SA 4.0",
-    "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=267579721730812",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "480373510500276",
-    "point": [
-     12.985862,
-     55.611313
-    ],
-    "heading": 241,
+    "heading": 245,
     "captured": "2022-03-27",
     "licence": "CC BY-SA 4.0",
     "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=480373510500276",
+    "url": "https://www.mapillary.com/app/?pKey=502007404876477",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "1235392336978662",
-    "point": [
-     12.98574,
-     55.611394
-    ],
-    "heading": 242,
-    "captured": "2023-06-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1235392336978662",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "516490552721650",
-    "point": [
-     12.985733,
-     55.611425
-    ],
-    "heading": 237,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=516490552721650",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "912853136114603",
-    "point": [
-     12.982075,
-     55.610506
-    ],
-    "heading": 250,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=912853136114603",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "164571176108420",
-    "point": [
-     12.978117,
-     55.60986
-    ],
-    "heading": 82,
-    "captured": "2022-08-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "jopparn",
-    "url": "https://www.mapillary.com/app/?pKey=164571176108420",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "135721752686094",
-    "point": [
-     12.994801,
-     55.612445
-    ],
-    "heading": 293,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=135721752686094",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "3213382582238167",
-    "point": [
-     12.994889,
-     55.612418
-    ],
-    "heading": 291,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=3213382582238167",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "135330608587104",
-    "point": [
-     12.990527,
-     55.612477
-    ],
-    "heading": 78,
-    "captured": "2019-07-09",
-    "licence": "CC BY-SA 4.0",
-    "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=135330608587104",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "1855012381616305",
-    "point": [
-     12.990492,
-     55.612585
-    ],
-    "heading": 267,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=1855012381616305",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "237283358642297",
-    "point": [
-     12.990467,
-     55.612619
-    ],
-    "heading": 250,
-    "captured": "2023-02-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=237283358642297",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "1237360976950313",
-    "point": [
-     12.990531,
-     55.612667
-    ],
-    "heading": 264,
-    "captured": "2023-06-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1237360976950313",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
+    "at": "längs gatan 9"
    },
    {
     "source": "mapillary",
@@ -6749,198 +1861,6 @@
     "thumb": null,
     "title": null,
     "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "2967741656816088",
-    "point": [
-     12.992442,
-     55.612781
-    ],
-    "heading": 98,
-    "captured": "2020-04-11",
-    "licence": "CC BY-SA 4.0",
-    "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=2967741656816088",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "314241886739420",
-    "point": [
-     12.992272,
-     55.612738
-    ],
-    "heading": 266,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=314241886739420",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "918963805553451",
-    "point": [
-     12.98933,
-     55.612304
-    ],
-    "heading": 69,
-    "captured": "2019-07-09",
-    "licence": "CC BY-SA 4.0",
-    "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=918963805553451",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "502007404876477",
-    "point": [
-     12.989302,
-     55.612391
-    ],
-    "heading": 245,
-    "captured": "2022-03-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "peterneubauer",
-    "url": "https://www.mapillary.com/app/?pKey=502007404876477",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "1569406186867209",
-    "point": [
-     12.989345,
-     55.612412
-    ],
-    "heading": 236,
-    "captured": "2023-02-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1569406186867209",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "1497861500951467",
-    "point": [
-     12.989229,
-     55.612521
-    ],
-    "heading": 252,
-    "captured": "2023-06-28",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1497861500951467",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "384860842711171",
-    "point": [
-     12.989419,
-     55.612419
-    ],
-    "heading": 253,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=384860842711171",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "3860628867369543",
-    "point": [
-     12.998957,
-     55.612572
-    ],
-    "heading": 262,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=3860628867369543",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "257477220790085",
-    "point": [
-     12.998933,
-     55.612492
-    ],
-    "heading": 91,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=257477220790085",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "2134917783567701",
-    "point": [
-     12.997202,
-     55.612411
-    ],
-    "heading": 92,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=2134917783567701",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 11"
-   },
-   {
-    "source": "mapillary",
-    "id": "1488987071682732",
-    "point": [
-     12.997189,
-     55.612465
-    ],
-    "heading": 269,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=1488987071682732",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 11"
-   },
-   {
-    "source": "mapillary",
-    "id": "1029977647410342",
-    "point": [
-     12.997043,
-     55.612418
-    ],
-    "heading": 264,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=1029977647410342",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 11"
    }
   ],
   "reviewed": false
@@ -6982,211 +1902,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "922622328336521",
+    "id": "1428142149156306",
     "point": [
-     13.005936,
-     55.588165
+     13.006076,
+     55.587252
     ],
-    "heading": 173,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=922622328336521",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1287423599290826",
-    "point": [
-     13.005766,
-     55.588161
-    ],
-    "heading": 169,
-    "captured": "2025-09-10",
+    "heading": 170,
+    "captured": "2026-07-21",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1287423599290826",
+    "url": "https://www.mapillary.com/app/?pKey=1428142149156306",
     "thumb": null,
     "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "162488655815102",
-    "point": [
-     13.005793,
-     55.588127
-    ],
-    "heading": 162,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=162488655815102",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "866283891341800",
-    "point": [
-     13.003414,
-     55.595206
-    ],
-    "heading": 143,
-    "captured": "2023-02-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=866283891341800",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "2029695630897163",
-    "point": [
-     13.005017,
-     55.593309
-    ],
-    "heading": 333,
-    "captured": "2025-08-08",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2029695630897163",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 4"
-   },
-   {
-    "source": "mapillary",
-    "id": "4267267723537377",
-    "point": [
-     13.005587,
-     55.592307
-    ],
-    "heading": 4,
-    "captured": "2025-10-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=4267267723537377",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "2890106594628938",
-    "point": [
-     13.005601,
-     55.591167
-    ],
-    "heading": 182,
-    "captured": "2022-08-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2890106594628938",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "616126842864522",
-    "point": [
-     13.005687,
-     55.591296
-    ],
-    "heading": 0,
-    "captured": "2021-11-29",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=616126842864522",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "110572531888157",
-    "point": [
-     13.005572,
-     55.590548
-    ],
-    "heading": 203,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=110572531888157",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "1850131842584633",
-    "point": [
-     13.005534,
-     55.590412
-    ],
-    "heading": 195,
-    "captured": "2025-09-10",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1850131842584633",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "472690064389483",
-    "point": [
-     13.005676,
-     55.590444
-    ],
-    "heading": 208,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=472690064389483",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "278971020831136",
-    "point": [
-     13.005489,
-     55.590592
-    ],
-    "heading": 0,
-    "captured": "2021-11-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=278971020831136",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "1149868427088933",
-    "point": [
-     13.005573,
-     55.590542
-    ],
-    "heading": 3,
-    "captured": "2025-10-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1149868427088933",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
+    "at": "längs gatan 10"
    },
    {
     "source": "mapillary",
@@ -7206,179 +1934,19 @@
    },
    {
     "source": "mapillary",
-    "id": "161790869229797",
+    "id": "866283891341800",
     "point": [
-     13.005866,
-     55.585209
+     13.003414,
+     55.595206
     ],
-    "heading": 205,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=161790869229797",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
-   },
-   {
-    "source": "mapillary",
-    "id": "311192577810699",
-    "point": [
-     13.00607,
-     55.586169
-    ],
-    "heading": 359,
-    "captured": "2022-04-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=311192577810699",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "3463597983918779",
-    "point": [
-     13.006102,
-     55.586138
-    ],
-    "heading": 176,
-    "captured": "2023-02-25",
+    "heading": 143,
+    "captured": "2023-02-23",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=3463597983918779",
+    "url": "https://www.mapillary.com/app/?pKey=866283891341800",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "1310261186105341",
-    "point": [
-     13.006257,
-     55.586203
-    ],
-    "heading": 179,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=1310261186105341",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "517443159281660",
-    "point": [
-     13.006208,
-     55.586145
-    ],
-    "heading": 169,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=517443159281660",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 9"
-   },
-   {
-    "source": "mapillary",
-    "id": "275951351308560",
-    "point": [
-     13.006097,
-     55.587262
-    ],
-    "heading": 176,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=275951351308560",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "166288022859721",
-    "point": [
-     13.006015,
-     55.587228
-    ],
-    "heading": 174,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=166288022859721",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "1428142149156306",
-    "point": [
-     13.006076,
-     55.587252
-    ],
-    "heading": 170,
-    "captured": "2026-07-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1428142149156306",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "390836395407300",
-    "point": [
-     13.006073,
-     55.587221
-    ],
-    "heading": 162,
-    "captured": "2019-07-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=390836395407300",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 10"
-   },
-   {
-    "source": "mapillary",
-    "id": "454839953009879",
-    "point": [
-     13.005686,
-     55.589341
-    ],
-    "heading": 173,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=454839953009879",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 11"
-   },
-   {
-    "source": "mapillary",
-    "id": "974088862253125",
-    "point": [
-     13.00548,
-     55.589966
-    ],
-    "heading": 181,
-    "captured": "2026-07-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=974088862253125",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 12"
+    "at": "längs gatan 2"
    },
    {
     "source": "mapillary",
@@ -7392,54 +1960,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "jrc21",
     "url": "https://www.mapillary.com/app/?pKey=1635766773431353",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 12"
-   },
-   {
-    "source": "mapillary",
-    "id": "658673643456952",
-    "point": [
-     13.005447,
-     55.589944
-    ],
-    "heading": 174,
-    "captured": "2025-09-10",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=658673643456952",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 12"
-   },
-   {
-    "source": "mapillary",
-    "id": "846878803078035",
-    "point": [
-     13.005416,
-     55.589906
-    ],
-    "heading": 174,
-    "captured": "2023-02-25",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=846878803078035",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 12"
-   },
-   {
-    "source": "mapillary",
-    "id": "2438627813201268",
-    "point": [
-     13.00539,
-     55.589839
-    ],
-    "heading": 157,
-    "captured": "2025-10-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=2438627813201268",
     "thumb": null,
     "title": null,
     "at": "längs gatan 12"
@@ -7472,22 +1992,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1004826950390879",
-    "point": [
-     13.003814,
-     55.570479
-    ],
-    "heading": 189,
-    "captured": "2021-09-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "jrc21",
-    "url": "https://www.mapillary.com/app/?pKey=1004826950390879",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "2647080018765165",
     "point": [
      13.004192,
@@ -7501,166 +2005,6 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1366527704115548",
-    "point": [
-     13.004216,
-     55.570524
-    ],
-    "heading": 184,
-    "captured": "2023-01-22",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1366527704115548",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "669286974375683",
-    "point": [
-     13.0041,
-     55.570463
-    ],
-    "heading": 8,
-    "captured": "2022-04-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=669286974375683",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "313891100285509",
-    "point": [
-     13.004184,
-     55.570413
-    ],
-    "heading": 9,
-    "captured": "2021-06-06",
-    "licence": "CC BY-SA 4.0",
-    "author": "cnbg",
-    "url": "https://www.mapillary.com/app/?pKey=313891100285509",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "220197042933213",
-    "point": [
-     13.004007,
-     55.570466
-    ],
-    "heading": 11,
-    "captured": "2019-12-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "fredillary",
-    "url": "https://www.mapillary.com/app/?pKey=220197042933213",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "766686998362616",
-    "point": [
-     13.006749,
-     55.584397
-    ],
-    "heading": 208,
-    "captured": "2023-03-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=766686998362616",
-    "thumb": null,
-    "title": null,
-    "at": "vid Nobelvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "693662022482797",
-    "point": [
-     13.006727,
-     55.584374
-    ],
-    "heading": 207,
-    "captured": "2023-01-22",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=693662022482797",
-    "thumb": null,
-    "title": null,
-    "at": "vid Nobelvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1451952578557547",
-    "point": [
-     13.006969,
-     55.584281
-    ],
-    "heading": 27,
-    "captured": "2022-04-16",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1451952578557547",
-    "thumb": null,
-    "title": null,
-    "at": "vid Nobelvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "839158276680127",
-    "point": [
-     13.005088,
-     55.578711
-    ],
-    "heading": 197,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=839158276680127",
-    "thumb": null,
-    "title": null,
-    "at": "vid Stadiongatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "370445794409850",
-    "point": [
-     13.004958,
-     55.578669
-    ],
-    "heading": 198,
-    "captured": "2020-10-04",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=370445794409850",
-    "thumb": null,
-    "title": null,
-    "at": "vid Stadiongatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "209551021019700",
-    "point": [
-     13.005138,
-     55.578687
-    ],
-    "heading": 4,
-    "captured": "2021-06-06",
-    "licence": "CC BY-SA 4.0",
-    "author": "cnbg",
-    "url": "https://www.mapillary.com/app/?pKey=209551021019700",
-    "thumb": null,
-    "title": null,
-    "at": "vid Stadiongatan"
    },
    {
     "source": "mapillary",
@@ -7680,38 +2024,6 @@
    },
    {
     "source": "mapillary",
-    "id": "4364307260498457",
-    "point": [
-     13.002889,
-     55.547142
-    ],
-    "heading": 340,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=4364307260498457",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "793968907142157",
-    "point": [
-     13.002485,
-     55.547836
-    ],
-    "heading": 345,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=793968907142157",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
-   },
-   {
-    "source": "mapillary",
     "id": "211378897380635",
     "point": [
      13.002389,
@@ -7728,19 +2040,19 @@
    },
    {
     "source": "mapillary",
-    "id": "2404934986702819",
+    "id": "220197042933213",
     "point": [
-     13.002546,
-     55.547867
+     13.004007,
+     55.570466
     ],
-    "heading": 160,
-    "captured": "2026-08-07",
+    "heading": 11,
+    "captured": "2019-12-27",
     "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=2404934986702819",
+    "author": "fredillary",
+    "url": "https://www.mapillary.com/app/?pKey=220197042933213",
     "thumb": null,
     "title": null,
-    "at": "vid Yttre Ringvägen"
+    "at": "mitten"
    }
   ],
   "reviewed": false
@@ -7765,22 +2077,6 @@
    },
    {
     "source": "mapillary",
-    "id": "577241523805460",
-    "point": [
-     12.995432,
-     55.606325
-    ],
-    "heading": 71,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=577241523805460",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "208945388336418",
     "point": [
      12.995813,
@@ -7794,38 +2090,6 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1275999803461507",
-    "point": [
-     12.998946,
-     55.607123
-    ],
-    "heading": 70,
-    "captured": "2025-08-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1275999803461507",
-    "thumb": null,
-    "title": null,
-    "at": "vid Adelgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "1232278197647462",
-    "point": [
-     12.998954,
-     55.607124
-    ],
-    "heading": 70,
-    "captured": "2023-01-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=1232278197647462",
-    "thumb": null,
-    "title": null,
-    "at": "vid Adelgatan"
    }
   ],
   "reviewed": false
@@ -7834,147 +2098,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "776144910810683",
+    "id": "917809069062749",
     "point": [
-     13.049547,
-     55.624625
+     13.054225,
+     55.629588
     ],
-    "heading": 206,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=776144910810683",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1248445812257959",
-    "point": [
-     13.04944,
-     55.624504
-    ],
-    "heading": 216,
+    "heading": 203,
     "captured": "2018-09-27",
     "licence": "CC BY-SA 4.0",
     "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=1248445812257959",
+    "url": "https://www.mapillary.com/app/?pKey=917809069062749",
     "thumb": null,
     "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "322418892716934",
-    "point": [
-     13.049585,
-     55.624385
-    ],
-    "heading": 39,
-    "captured": "2021-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=322418892716934",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "889796248233793",
-    "point": [
-     13.036934,
-     55.615521
-    ],
-    "heading": 61,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=889796248233793",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "354072643420745",
-    "point": [
-     13.042151,
-     55.61964
-    ],
-    "heading": 18,
-    "captured": "2022-04-24",
-    "licence": "CC BY-SA 4.0",
-    "author": "approksimator",
-    "url": "https://www.mapillary.com/app/?pKey=354072643420745",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "1527102587622684",
-    "point": [
-     13.052016,
-     55.626239
-    ],
-    "heading": 212,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=1527102587622684",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 13"
-   },
-   {
-    "source": "mapillary",
-    "id": "298450761766210",
-    "point": [
-     13.057459,
-     55.638062
-    ],
-    "heading": 199,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=298450761766210",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 15"
-   },
-   {
-    "source": "mapillary",
-    "id": "822916181933629",
-    "point": [
-     13.057169,
-     55.637027
-    ],
-    "heading": 190,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=822916181933629",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 16"
-   },
-   {
-    "source": "mapillary",
-    "id": "259470505869071",
-    "point": [
-     13.056789,
-     55.635937
-    ],
-    "heading": 191,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=259470505869071",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 17"
+    "at": "längs gatan 23"
    },
    {
     "source": "mapillary",
@@ -7994,38 +2130,6 @@
    },
    {
     "source": "mapillary",
-    "id": "291142289274016",
-    "point": [
-     13.056,
-     55.633926
-    ],
-    "heading": 192,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=291142289274016",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 19"
-   },
-   {
-    "source": "mapillary",
-    "id": "1576177119239678",
-    "point": [
-     13.055134,
-     55.631803
-    ],
-    "heading": 194,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=1576177119239678",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 21"
-   },
-   {
-    "source": "mapillary",
     "id": "3547526332072727",
     "point": [
      13.054955,
@@ -8042,345 +2146,25 @@
    },
    {
     "source": "mapillary",
-    "id": "917809069062749",
+    "id": "354072643420745",
     "point": [
-     13.054225,
-     55.629588
+     13.042151,
+     55.61964
     ],
-    "heading": 203,
-    "captured": "2018-09-27",
+    "heading": 18,
+    "captured": "2022-04-24",
     "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=917809069062749",
+    "author": "approksimator",
+    "url": "https://www.mapillary.com/app/?pKey=354072643420745",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 23"
-   },
-   {
-    "source": "mapillary",
-    "id": "323626632518696",
-    "point": [
-     13.035387,
-     55.615247
-    ],
-    "heading": 282,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=323626632518696",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 28"
-   },
-   {
-    "source": "mapillary",
-    "id": "206694632045807",
-    "point": [
-     13.030076,
-     55.614874
-    ],
-    "heading": 259,
-    "captured": "2023-03-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=206694632045807",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 30"
-   },
-   {
-    "source": "mapillary",
-    "id": "403047289016912",
-    "point": [
-     13.031925,
-     55.614881
-    ],
-    "heading": 90,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=403047289016912",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 31"
-   },
-   {
-    "source": "mapillary",
-    "id": "406514928666018",
-    "point": [
-     13.020431,
-     55.614434
-    ],
-    "heading": 39,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=406514928666018",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 33"
-   },
-   {
-    "source": "mapillary",
-    "id": "929851974519581",
-    "point": [
-     13.021915,
-     55.615123
-    ],
-    "heading": 265,
-    "captured": "2018-09-27",
-    "licence": "CC BY-SA 4.0",
-    "author": "stefan",
-    "url": "https://www.mapillary.com/app/?pKey=929851974519581",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 34"
-   },
-   {
-    "source": "mapillary",
-    "id": "3888957684518706",
-    "point": [
-     13.023839,
-     55.614934
-    ],
-    "heading": 300,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=3888957684518706",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 35"
-   },
-   {
-    "source": "mapillary",
-    "id": "1462515578009986",
-    "point": [
-     13.027441,
-     55.614543
-    ],
-    "heading": 93,
-    "captured": "2024-01-19",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=1462515578009986",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 37"
-   },
-   {
-    "source": "mapillary",
-    "id": "251523053327924",
-    "point": [
-     13.027264,
-     55.614649
-    ],
-    "heading": 267,
-    "captured": "2018-09-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=251523053327924",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 37"
-   },
-   {
-    "source": "mapillary",
-    "id": "934762427312219",
-    "point": [
-     13.019401,
-     55.613856
-    ],
-    "heading": 220,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=934762427312219",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 38"
-   },
-   {
-    "source": "mapillary",
-    "id": "1410978769261076",
-    "point": [
-     13.018282,
-     55.61298
-    ],
-    "heading": 210,
-    "captured": "2019-04-01",
-    "licence": "CC BY-SA 4.0",
-    "author": "brenna",
-    "url": "https://www.mapillary.com/app/?pKey=1410978769261076",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 39"
-   },
-   {
-    "source": "mapillary",
-    "id": "686404905658542",
-    "point": [
-     13.018574,
-     55.612053
-    ],
-    "heading": 353,
-    "captured": "2022-10-02",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=686404905658542",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 43"
-   },
-   {
-    "source": "mapillary",
-    "id": "1201238327163808",
-    "point": [
-     13.018561,
-     55.61208
-    ],
-    "heading": 351,
-    "captured": "2023-02-17",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1201238327163808",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 43"
-   },
-   {
-    "source": "mapillary",
-    "id": "4086064824773514",
-    "point": [
-     13.018111,
-     55.611989
-    ],
-    "heading": 354,
-    "captured": "2019-06-03",
-    "licence": "CC BY-SA 4.0",
-    "author": "larshelmin",
-    "url": "https://www.mapillary.com/app/?pKey=4086064824773514",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 43"
+    "at": "längs gatan 6"
    }
   ],
   "reviewed": false
  },
  "street:Ystadsgatan": {
   "photos": [
-   {
-    "source": "mapillary",
-    "id": "1258241844986583",
-    "point": [
-     13.009926,
-     55.591025
-    ],
-    "heading": 106,
-    "captured": "2022-08-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1258241844986583",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "452603870432327",
-    "point": [
-     13.009929,
-     55.591034
-    ],
-    "heading": 112,
-    "captured": "2024-03-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=452603870432327",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 1"
-   },
-   {
-    "source": "mapillary",
-    "id": "433915975705958",
-    "point": [
-     13.011732,
-     55.590663
-    ],
-    "heading": 110,
-    "captured": "2024-03-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=433915975705958",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "113117754853795",
-    "point": [
-     13.011711,
-     55.59066
-    ],
-    "heading": 104,
-    "captured": "2022-08-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=113117754853795",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 2"
-   },
-   {
-    "source": "mapillary",
-    "id": "660950569445408",
-    "point": [
-     13.013478,
-     55.590307
-    ],
-    "heading": 111,
-    "captured": "2024-03-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=660950569445408",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "629550718583191",
-    "point": [
-     13.013434,
-     55.590311
-    ],
-    "heading": 100,
-    "captured": "2022-08-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=629550718583191",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 3"
-   },
-   {
-    "source": "mapillary",
-    "id": "1437605357285246",
-    "point": [
-     13.016989,
-     55.58948
-    ],
-    "heading": 111,
-    "captured": "2025-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1437605357285246",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
    {
     "source": "mapillary",
     "id": "960096672320480",
@@ -8399,83 +2183,19 @@
    },
    {
     "source": "mapillary",
-    "id": "675499641937015",
+    "id": "113117754853795",
     "point": [
-     13.017369,
-     55.589452
+     13.011711,
+     55.59066
     ],
-    "heading": 120,
-    "captured": "2025-05-20",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=675499641937015",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 5"
-   },
-   {
-    "source": "mapillary",
-    "id": "1556973955144989",
-    "point": [
-     13.018725,
-     55.589094
-    ],
-    "heading": 118,
-    "captured": "2024-03-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=1556973955144989",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 6"
-   },
-   {
-    "source": "mapillary",
-    "id": "735187475351664",
-    "point": [
-     13.007718,
-     55.591484
-    ],
-    "heading": 109,
-    "captured": "2024-03-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=735187475351664",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "436702498492044",
-    "point": [
-     13.007738,
-     55.591477
-    ],
-    "heading": 103,
+    "heading": 104,
     "captured": "2022-08-30",
     "licence": "CC BY-SA 4.0",
     "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=436702498492044",
+    "url": "https://www.mapillary.com/app/?pKey=113117754853795",
     "thumb": null,
     "title": null,
-    "at": "längs gatan 7"
-   },
-   {
-    "source": "mapillary",
-    "id": "749927321114071",
-    "point": [
-     13.022201,
-     55.588543
-    ],
-    "heading": 94,
-    "captured": "2025-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=749927321114071",
-    "thumb": null,
-    "title": null,
-    "at": "längs gatan 8"
+    "at": "längs gatan 2"
    }
   ],
   "reviewed": false
@@ -8500,22 +2220,6 @@
    },
    {
     "source": "mapillary",
-    "id": "1293606431036334",
-    "point": [
-     13.0236,
-     55.577861
-    ],
-    "heading": 305,
-    "captured": "2021-06-14",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=1293606431036334",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
     "id": "335631974736853",
     "point": [
      13.023603,
@@ -8529,70 +2233,6 @@
     "thumb": null,
     "title": null,
     "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "226886303130448",
-    "point": [
-     13.006884,
-     55.584366
-    ],
-    "heading": 302,
-    "captured": "2023-02-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "fa30",
-    "url": "https://www.mapillary.com/app/?pKey=226886303130448",
-    "thumb": null,
-    "title": null,
-    "at": "vid Nobelvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "751353152167626",
-    "point": [
-     13.006864,
-     55.584343
-    ],
-    "heading": 108,
-    "captured": "2018-11-13",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=751353152167626",
-    "thumb": null,
-    "title": null,
-    "at": "vid Nobelvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "329629845479513",
-    "point": [
-     13.078604,
-     55.55985
-    ],
-    "heading": 119,
-    "captured": "2021-06-15",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=329629845479513",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "225997402815483",
-    "point": [
-     13.078388,
-     55.559926
-    ],
-    "heading": 323,
-    "captured": "2021-10-30",
-    "licence": "CC BY-SA 4.0",
-    "author": "mszilas",
-    "url": "https://www.mapillary.com/app/?pKey=225997402815483",
-    "thumb": null,
-    "title": null,
-    "at": "vid Yttre Ringvägen"
    },
    {
     "source": "mapillary",
@@ -8617,163 +2257,19 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "3116578631902938",
+    "id": "4476331849179435",
     "point": [
-     13.085811,
-     55.565667
+     13.115324,
+     55.58878
     ],
-    "heading": 225,
-    "captured": "2021-06-06",
-    "licence": "CC BY-SA 4.0",
-    "author": "cnbg",
-    "url": "https://www.mapillary.com/app/?pKey=3116578631902938",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1280659203024595",
-    "point": [
-     13.085803,
-     55.565659
-    ],
-    "heading": 226,
-    "captured": "2025-03-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "bct",
-    "url": "https://www.mapillary.com/app/?pKey=1280659203024595",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "967335577857573",
-    "point": [
-     13.0858,
-     55.565633
-    ],
-    "heading": 220,
-    "captured": "2023-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "alexander2010",
-    "url": "https://www.mapillary.com/app/?pKey=967335577857573",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1578926393824809",
-    "point": [
-     13.085791,
-     55.565655
-    ],
-    "heading": 44,
+    "heading": 191,
     "captured": "2026-08-21",
     "licence": "CC BY-SA 4.0",
     "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1578926393824809",
+    "url": "https://www.mapillary.com/app/?pKey=4476331849179435",
     "thumb": null,
     "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "616951457915372",
-    "point": [
-     13.085882,
-     55.565623
-    ],
-    "heading": 46,
-    "captured": "2025-08-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=616951457915372",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "1666694631453166",
-    "point": [
-     13.085781,
-     55.565677
-    ],
-    "heading": 46,
-    "captured": "2026-08-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1666694631453166",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "28653117304293726",
-    "point": [
-     12.981657,
-     55.546627
-    ],
-    "heading": 87,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=28653117304293726",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1106961478089920",
-    "point": [
-     12.981638,
-     55.54666
-    ],
-    "heading": 86,
-    "captured": "2025-12-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1106961478089920",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "509863168168684",
-    "point": [
-     12.981672,
-     55.546593
-    ],
-    "heading": 85,
-    "captured": "2024-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=509863168168684",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "2268031917292529",
-    "point": [
-     12.98164,
-     55.546638
-    ],
-    "heading": 268,
-    "captured": "2026-08-07",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=2268031917292529",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
+    "at": "vid Sallerupsvägen"
    },
    {
     "source": "mapillary",
@@ -8793,198 +2289,6 @@
    },
    {
     "source": "mapillary",
-    "id": "1788624268422168",
-    "point": [
-     12.981664,
-     55.546614
-    ],
-    "heading": 272,
-    "captured": "2025-08-08",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1788624268422168",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "754122350553965",
-    "point": [
-     12.98183,
-     55.547287
-    ],
-    "heading": 267,
-    "captured": "2025-08-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=754122350553965",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "911898791453322",
-    "point": [
-     12.981787,
-     55.547313
-    ],
-    "heading": 269,
-    "captured": "2026-02-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "bct",
-    "url": "https://www.mapillary.com/app/?pKey=911898791453322",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "769700158986932",
-    "point": [
-     12.981851,
-     55.547275
-    ],
-    "heading": 90,
-    "captured": "2025-08-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=769700158986932",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1377574013829618",
-    "point": [
-     12.981812,
-     55.547245
-    ],
-    "heading": 89,
-    "captured": "2026-08-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1377574013829618",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1834469363949521",
-    "point": [
-     12.981844,
-     55.54736
-    ],
-    "heading": 99,
-    "captured": "2025-08-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1834469363949521",
-    "thumb": null,
-    "title": null,
-    "at": "vid Pildammsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "4476331849179435",
-    "point": [
-     13.115324,
-     55.58878
-    ],
-    "heading": 191,
-    "captured": "2026-08-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=4476331849179435",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "3992301007667783",
-    "point": [
-     13.115307,
-     55.588778
-    ],
-    "heading": 191,
-    "captured": "2024-08-17",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=3992301007667783",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1394236351577198",
-    "point": [
-     13.1153,
-     55.588803
-    ],
-    "heading": 194,
-    "captured": "2025-03-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "bct",
-    "url": "https://www.mapillary.com/app/?pKey=1394236351577198",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1284710643663635",
-    "point": [
-     13.11524,
-     55.588779
-    ],
-    "heading": 16,
-    "captured": "2026-08-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1284710643663635",
-    "thumb": null,
-    "title": null,
-    "at": "vid Sallerupsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "3405165379836065",
-    "point": [
-     13.078331,
-     55.559894
-    ],
-    "heading": 219,
-    "captured": "2025-12-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=3405165379836065",
-    "thumb": null,
-    "title": null,
-    "at": "vid Ystadvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1715913812606142",
-    "point": [
-     13.078347,
-     55.559896
-    ],
-    "heading": 219,
-    "captured": "2025-08-08",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1715913812606142",
-    "thumb": null,
-    "title": null,
-    "at": "vid Ystadvägen"
-   },
-   {
-    "source": "mapillary",
     "id": "24683421184654402",
     "point": [
      13.07833,
@@ -8998,102 +2302,6 @@
     "thumb": null,
     "title": null,
     "at": "vid Ystadvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1096743355317791",
-    "point": [
-     13.00284,
-     55.547193
-    ],
-    "heading": 87,
-    "captured": "2025-08-08",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1096743355317791",
-    "thumb": null,
-    "title": null,
-    "at": "vid Trelleborgsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "26241100095493030",
-    "point": [
-     13.002838,
-     55.547185
-    ],
-    "heading": 84,
-    "captured": "2025-12-26",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=26241100095493030",
-    "thumb": null,
-    "title": null,
-    "at": "vid Trelleborgsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1184273855955318",
-    "point": [
-     13.002652,
-     55.547152
-    ],
-    "heading": 87,
-    "captured": "2024-08-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1184273855955318",
-    "thumb": null,
-    "title": null,
-    "at": "vid Trelleborgsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "1938852553466148",
-    "point": [
-     13.00253,
-     55.547797
-    ],
-    "heading": 268,
-    "captured": "2026-08-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=1938852553466148",
-    "thumb": null,
-    "title": null,
-    "at": "vid Trelleborgsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "900057706254975",
-    "point": [
-     13.002516,
-     55.547802
-    ],
-    "heading": 268,
-    "captured": "2026-02-12",
-    "licence": "CC BY-SA 4.0",
-    "author": "bct",
-    "url": "https://www.mapillary.com/app/?pKey=900057706254975",
-    "thumb": null,
-    "title": null,
-    "at": "vid Trelleborgsvägen"
-   },
-   {
-    "source": "mapillary",
-    "id": "801677222545451",
-    "point": [
-     13.002515,
-     55.547754
-    ],
-    "heading": 89,
-    "captured": "2025-08-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "thewizard",
-    "url": "https://www.mapillary.com/app/?pKey=801677222545451",
-    "thumb": null,
-    "title": null,
-    "at": "vid Trelleborgsvägen"
    },
    {
     "source": "mapillary",
@@ -9118,54 +2326,6 @@
   "photos": [
    {
     "source": "mapillary",
-    "id": "1279649743940984",
-    "point": [
-     12.99836,
-     55.596926
-    ],
-    "heading": 94,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=1279649743940984",
-    "thumb": null,
-    "title": null,
-    "at": "mitten"
-   },
-   {
-    "source": "mapillary",
-    "id": "4232188673724693",
-    "point": [
-     13.000741,
-     55.59672
-    ],
-    "heading": 92,
-    "captured": "2025-07-23",
-    "licence": "CC BY-SA 4.0",
-    "author": "fod",
-    "url": "https://www.mapillary.com/app/?pKey=4232188673724693",
-    "thumb": null,
-    "title": null,
-    "at": "vid Davidshallsgatan"
-   },
-   {
-    "source": "mapillary",
-    "id": "179402217397081",
-    "point": [
-     13.000881,
-     55.596642
-    ],
-    "heading": 107,
-    "captured": "2020-10-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=179402217397081",
-    "thumb": null,
-    "title": null,
-    "at": "vid Davidshallsgatan"
-   },
-   {
-    "source": "mapillary",
     "id": "1424388755441924",
     "point": [
      12.996312,
@@ -9176,38 +2336,6 @@
     "licence": "CC BY-SA 4.0",
     "author": "fod",
     "url": "https://www.mapillary.com/app/?pKey=1424388755441924",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "348837180944246",
-    "point": [
-     12.996203,
-     55.597105
-    ],
-    "heading": 145,
-    "captured": "2023-09-21",
-    "licence": "CC BY-SA 4.0",
-    "author": "VIA_KK",
-    "url": "https://www.mapillary.com/app/?pKey=348837180944246",
-    "thumb": null,
-    "title": null,
-    "at": "vid Fersens väg"
-   },
-   {
-    "source": "mapillary",
-    "id": "308530304051386",
-    "point": [
-     12.996082,
-     55.597045
-    ],
-    "heading": 96,
-    "captured": "2020-10-05",
-    "licence": "CC BY-SA 4.0",
-    "author": "roadroid",
-    "url": "https://www.mapillary.com/app/?pKey=308530304051386",
     "thumb": null,
     "title": null,
     "at": "vid Fersens väg"
