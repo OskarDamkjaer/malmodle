@@ -353,21 +353,32 @@ function finish() {
     list.append(li);
   }
 
+  el('sharetext').textContent = resultText();
+  el('sharenative').hidden = !navigator.share;
+  el('report').href = reportLink();
+  el('tomorrow').firstChild.textContent = 'Kom tillbaka imorgon för en ny omgång.';
+  el('again').textContent = 'Spela igen';
+  clearInterval(countdownTimer);
+  tickCountdown();
+  countdownTimer = setInterval(tickCountdown, 30000);
+
   reveal('end');
   el('end').scrollTop = 0;
   el('share').focus({ preventScroll: true });
 }
 
-async function share() {
-  const text = shareText({
+function resultText() {
+  return shareText({
     key,
     scores: results.map((r) => r.result.score),
     url: location.origin + themePath(themeName),
   });
-  const button = el('share');
+}
+
+async function copy(text) {
   try {
     await navigator.clipboard.writeText(text);
-    button.textContent = 'Kopierat';
+    return true;
   } catch {
     const area = document.createElement('textarea');
     area.value = text;
@@ -375,9 +386,71 @@ async function share() {
     area.select();
     const ok = document.execCommand('copy');
     area.remove();
-    button.textContent = ok ? 'Kopierat' : 'Kunde inte kopiera';
+    return ok;
   }
-  setTimeout(() => { button.textContent = 'Kopiera resultat'; }, 2000);
+}
+
+let copiedTimer;
+async function share() {
+  const ok = await copy(resultText());
+  const button = el('share');
+  button.textContent = ok ? 'Kopierat ✓' : 'Kunde inte kopiera';
+  button.dataset.state = ok ? 'done' : 'failed';
+  if (ok) selectText(el('sharetext'));
+  clearTimeout(copiedTimer);
+  copiedTimer = setTimeout(() => {
+    button.textContent = 'Kopiera resultat';
+    delete button.dataset.state;
+  }, 2500);
+}
+
+function selectText(node) {
+  const range = document.createRange();
+  range.selectNodeContents(node);
+  getSelection().removeAllRanges();
+  getSelection().addRange(range);
+}
+
+async function shareNative() {
+  try {
+    await navigator.share({ text: resultText() });
+  } catch (err) {
+    if (err.name !== 'AbortError') share();
+  }
+}
+
+function untilTomorrow() {
+  const now = new Date();
+  const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  const minutes = Math.ceil((next - now) / 60000);
+  const hours = Math.floor(minutes / 60);
+  return hours ? `${hours} tim ${minutes % 60} min` : `${minutes} min`;
+}
+
+let countdownTimer;
+function tickCountdown() {
+  if (dateKey() !== key) {
+    el('tomorrow').firstChild.textContent = 'En ny omgång väntar.';
+    el('countdown').textContent = '';
+    el('again').textContent = 'Spela dagens';
+    clearInterval(countdownTimer);
+    return;
+  }
+  el('countdown').textContent = ` Nästa om ${untilTomorrow()}.`;
+}
+
+function reportLink() {
+  const body = [
+    `Datum: ${key}`,
+    `Stil: ${themeName}`,
+    `Webbläsare: ${navigator.userAgent}`,
+    '',
+    'Vad blev fel?',
+    '',
+  ].join('\n');
+  const url = new URL('https://github.com/OskarDamkjaer/malmoemaps/issues/new');
+  url.searchParams.set('body', body);
+  return url.href;
 }
 
 function openMap(focus = null) {
@@ -445,6 +518,8 @@ map.on('click', (e) => {
 
 el('next').addEventListener('click', next);
 el('share').addEventListener('click', share);
+el('sharenative').addEventListener('click', shareNative);
+el('sharetext').addEventListener('click', share);
 el('openmap').addEventListener('click', () => openMap());
 el('again').addEventListener('click', start);
 el('back').addEventListener('click', backToEnd);

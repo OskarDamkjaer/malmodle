@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<title>Lär dig Malmö</title>
+<title>Malmökoll</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
 <meta name="description" content="Tio platser i Malmö om dagen. Hitta dem på kartan.">
 <meta name="theme-color" content="#f4f1ea">
@@ -45,13 +45,21 @@
       <p id="endverdict"></p>
       <p id="endsquares" aria-hidden="true"></p>
     </header>
+    <div class="sharecard">
+      <pre id="sharetext"></pre>
+      <div class="shareactions">
+        <button id="share" type="button" class="primary">Kopiera resultat</button>
+        <button id="sharenative" type="button" hidden>Dela</button>
+      </div>
+    </div>
+    <p id="tomorrow">Kom tillbaka imorgon för en ny omgång.<span id="countdown"></span></p>
     <div class="actions">
-      <button id="share" type="button" class="primary">Kopiera resultat</button>
       <button id="openmap" type="button">Utforska kartan</button>
       <button id="again" type="button">Spela igen</button>
     </div>
     <h2>Dagens platser</h2>
     <ol id="endlist"></ol>
+    <footer><a id="report" href="https://github.com/OskarDamkjaer/malmoemaps/issues/new" target="_blank" rel="noopener">Rapportera ett fel</a></footer>
   </div>
 </section>
 
@@ -70,9 +78,9 @@
 
 <div id="boot">
   <div class="brand">
-    <div class="mark" aria-hidden="true"></div>
-    <h1>Lär dig Malmö</h1>
-    <p>Hur bra kan du Malmö?</p>
+    <img class="mark" src="/icons/icon.svg" alt="" width="64" height="64">
+    <h1>Malmökoll</h1>
+    <p>Kan du Malmö?</p>
   </div>
   <div class="bar"><i id="bootbar"></i></div>
   <p id="bootmsg" role="status"></p>

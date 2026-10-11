@@ -188,7 +188,7 @@ export function square(score) {
 export function shareText({ key, scores, url }) {
   const total = scores.reduce((sum, s) => sum + s, 0);
   return [
-    `Lär dig Malmö ${key}`,
+    `Malmökoll ${key}`,
     `${total}/${scores.length * MAX_SCORE}`,
     scores.map(square).join(''),
     url,
