@@ -23,7 +23,7 @@ Needs Node. There is nothing to install.
 ```
 node scripts/fetch-app-assets.mjs    # map library, fonts and icons
 node scripts/build-style.mjs         # the map style
-node scripts/build-quiz.mjs          # the places, from learn/, landmarks/ and the map data
+node scripts/build-quiz.mjs          # the quiz, from learn/, places/ and the map data
 node scripts/serve.mjs               # http://127.0.0.1:8080
 ```
 
@@ -35,7 +35,9 @@ rebuild it (below) or fetch a prebuilt copy with
 
 - `learn/core.json`: which places the app asks about.
 - `learn/`: bridges, streets, descriptions and sources.
-- `landmarks/landmarks.json`: sights and parks.
+- `places/places.json`: the places the game asks about, by category, with their
+  OpenStreetMap ids. `places/longlist.json` is the wider pool they came from,
+  and `places/parked.json` holds art kept for a later picture question.
 - `config/bbox.json`: the part of the world the map covers.
 
 Everything is hand-edited. `build-quiz.mjs --all` builds every place rather than
@@ -51,8 +53,8 @@ publishes it, so bumping that tag is how the map data gets rebuilt.
 scripts/build-basemap.sh             # OpenStreetMap → data/cache/malmo.pmtiles
 node scripts/build-districts.mjs     # → build/data/districts.geojson
 node scripts/build-streets.mjs       # → data/cache/streets.json
-node scripts/build-shapes.mjs        # → data/cache/shapes.json, outlines of landmarks and bridges
-node scripts/resolve-landmarks.mjs   # fills in missing coordinates in landmarks.json
+node scripts/build-shapes.mjs        # → data/cache/shapes.json, outlines of places and bridges
+node scripts/places-shapes.mjs       # → places/shapes.json, an outline for everything in the long list
 ```
 
 ## Tests

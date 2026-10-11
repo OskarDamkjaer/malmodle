@@ -1,0 +1,60 @@
+{
+ "note": "Art whose name gives away where it is. Kept for a later question that shows a picture and asks where it is.",
+ "places": [
+  {
+   "name": "Karl X Gustav (Stortorget)",
+   "osm": [
+    "node/2016689391"
+   ],
+   "lat": 55.60614,
+   "lon": 13.00022,
+   "why": "Equestrian statue in the middle of Stortorget since 1896; the city's best-known monument and most-read art article on sv Wikipedia."
+  },
+  {
+   "name": "Optimistorkestern",
+   "osm": [
+    "node/2293729248"
+   ],
+   "lat": 55.60549,
+   "lon": 13.00125,
+   "why": "Lundell's bronze marching band on Södergatan (not Stortorget or Lilla torg), a standard meeting point on the main pedestrian street."
+  },
+  {
+   "name": "Arbetets ära (Möllevångstorget)",
+   "osm": [
+    "node/2409108105"
+   ],
+   "lat": 55.59174,
+   "lon": 13.0075,
+   "why": "Axel Ebbe's group of naked workers lifting a granite block, the landmark of Möllevångstorget."
+  },
+  {
+   "name": "Fontänerna på Gustav Adolfs torg (Fem fontäner och ett klot)",
+   "osm": [
+    "node/12811999511",
+    "relation/14125695"
+   ],
+   "lat": 55.6028,
+   "lon": 13.00121,
+   "why": "Sivert Lindblom's five bronze fountains and granite sphere on Gustav Adolfs torg, burning fire in winter; the square's focal point."
+  },
+  {
+   "name": "Torgbrunn (fontänen på Stortorget)",
+   "osm": [
+    "way/220018226"
+   ],
+   "lat": 55.60644,
+   "lon": 13.00066,
+   "why": "Stig Blomberg's 1964 bronze fountain on Stortorget, the second fixed point on the main square after the statue."
+  },
+  {
+   "name": "Ekotemplet (Pildammsparken)",
+   "osm": [
+    "node/12982975441"
+   ],
+   "lat": 55.59102,
+   "lon": 12.99088,
+   "why": "The round columned temple from the 1914 Baltic Exhibition in Pildammsparken, a well-known meeting and photo spot."
+  }
+ ]
+}

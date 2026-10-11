@@ -1,8 +1,35 @@
 import { MAX_SCORE, TYPES } from './questions.mjs';
 
-export const MIX = ['area', 'area', 'point', 'point', 'point', 'point', 'point', 'identify', 'identify', 'special'];
+export const SPLITS = [
+  { area: 4, street: 2, place: 4, weight: 4 },
+  { area: 3, street: 2, place: 5, weight: 1 },
+  { area: 3, street: 3, place: 4, weight: 1 },
+  { area: 4, street: 1, place: 5, weight: 1 },
+  { area: 4, street: 3, place: 3, weight: 1 },
+  { area: 5, street: 1, place: 4, weight: 1 },
+  { area: 5, street: 2, place: 3, weight: 1 },
+];
 
-export const SPECIALS = ['nearest', 'neighbour'];
+export const SET_SIZE = 10;
+
+export const EPOCH = '2026-01-01';
+
+export const GROUP = { area: 'area', street: 'street', landmark: 'place', bridge: 'place' };
+
+export const DECKS = {
+  area: (it) => it.kind === 'area',
+  street: (it) => it.kind === 'street',
+  food: (it) => it.kind === 'landmark' && it.category === 'krog',
+  place: (it) => GROUP[it.kind] === 'place' && it.category !== 'krog',
+};
+
+const FOOD_SHARE = 0.2;
+const APART_GAP = 6;
+
+const MIXES = {
+  area: { point: [1, 3], identify: [1, 2], special: [0, 1], type: 'neighbour' },
+  street: { point: [1, 3], identify: [0, 2], special: [0, 1], type: 'route' },
+};
 
 export function dateKey(date = new Date()) {
   const pad = (n) => String(n).padStart(2, '0');
@@ -29,37 +56,126 @@ export function random(seed) {
   };
 }
 
-function order(mix, rng) {
-  const out = [...mix];
+function shuffle(list, rng) {
+  const out = [...list];
   for (let i = out.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
     [out[i], out[j]] = [out[j], out[i]];
   }
-  const first = out.findIndex((type) => TYPES[type]?.input === 'map');
-  if (first > 0) [out[0], out[first]] = [out[first], out[0]];
-  return out.map((type) => (type === 'special' ? SPECIALS[Math.floor(rng() * SPECIALS.length)] : type));
+  return out;
 }
 
-export function dailySet(items, key, mix = MIX) {
-  const rng = random(hash(`malmo:${key}`));
-  const used = new Set();
-  const pick = (filter, { peek = false } = {}) => {
-    const pool = items.filter((it) => !used.has(it.name) && filter(it));
-    if (!pool.length) return null;
-    const it = pool[Math.floor(rng() * pool.length)];
-    if (!peek) used.add(it.name);
-    return it;
-  };
-  const questions = [];
-  for (const wanted of order(mix, rng)) {
-    let type = wanted;
-    let q = TYPES[type].build({ pick, items, rng, used });
-    if (!q) {
-      type = 'point';
-      q = TYPES.point.build({ pick, items, rng, used });
-    }
-    if (q) questions.push({ type, ...q });
+function weighted(list, rng) {
+  let roll = rng() * list.reduce((sum, x) => sum + (x.weight ?? 1), 0);
+  for (const x of list) {
+    roll -= x.weight ?? 1;
+    if (roll < 0) return x;
   }
+  return list[0];
+}
+
+function mixFor(group, n, rng) {
+  if (group === 'place') {
+    const identify = n >= 5 && rng() < 0.5 ? 2 : 1;
+    return [...Array(n - identify).fill('point'), ...Array(identify).fill('identify')];
+  }
+  const m = MIXES[group];
+  const options = [];
+  for (let p = m.point[0]; p <= m.point[1]; p++) {
+    for (let i = m.identify[0]; i <= m.identify[1]; i++) {
+      const sp = n - p - i;
+      if (sp >= m.special[0] && sp <= m.special[1]) options.push({ p, i, sp });
+    }
+  }
+  const { p, i, sp } = options.length ? options[Math.floor(rng() * options.length)] : { p: n, i: 0, sp: 0 };
+  return [...Array(p).fill('point'), ...Array(i).fill('identify'), ...Array(sp).fill(m.type)];
+}
+
+export function plan(rng) {
+  const split = weighted(SPLITS, rng);
+  const slots = [];
+  for (const group of ['area', 'street', 'place']) {
+    for (const type of shuffle(mixFor(group, split[group], rng), rng)) {
+      const deck = group === 'place' ? (rng() < FOOD_SHARE ? 'food' : 'place') : group;
+      slots.push({ group, deck, type });
+    }
+  }
+  const first = slots.findIndex((x) => x.group === 'area' && x.type === 'point');
+  const [lead] = slots.splice(first, 1);
+  return [lead, ...shuffle(slots, rng)];
+}
+
+const dayRandom = (key) => random(hash(`malmo:plan:${key}`));
+
+function daysBetween(from, to) {
+  const utc = (k) => { const [y, m, d] = k.split('-').map(Number); return Date.UTC(y, m - 1, d); };
+  const out = [];
+  for (let t = utc(from); t < utc(to); t += 86400000) out.push(new Date(t).toISOString().slice(0, 10));
+  return out;
+}
+
+export function dealt(key) {
+  const count = Object.fromEntries(Object.keys(DECKS).map((d) => [d, 0]));
+  for (const day of daysBetween(EPOCH, key)) for (const slot of plan(dayRandom(day))) count[slot.deck] += 1;
+  return count;
+}
+
+function deck(items, name) {
+  const cards = items.filter(DECKS[name]).sort((a, b) => (a.name < b.name ? -1 : 1));
+  const rounds = new Map();
+  const round = (r) => {
+    if (!rounds.has(r)) {
+      const order = shuffle(cards, random(hash(`malmo:deck:${name}:${r}`)));
+      for (let i = 0; i < order.length; i++) {
+        const clash = (it) => order.slice(Math.max(0, i - APART_GAP + 1), i).some((o) => o.apart && o.apart === it.apart);
+        if (!order[i].apart || !clash(order[i])) continue;
+        const j = order.findIndex((it, k) => k > i && (!it.apart || !clash(it)));
+        if (j > 0) [order[i], order[j]] = [order[j], order[i]];
+      }
+      rounds.set(r, order);
+    }
+    return rounds.get(r);
+  };
+  return { size: cards.length, at: (n) => round(Math.floor(n / cards.length))[n % cards.length] };
+}
+
+export function dailySet(items, key) {
+  const slots = plan(dayRandom(key));
+  const decks = Object.fromEntries(Object.keys(DECKS).map((d) => [d, deck(items, d)]));
+  const next = dealt(key);
+  const taken = new Set();
+  const apartTaken = new Set();
+  const fits = (it) => it && !taken.has(it.name) && !(it.apart && apartTaken.has(it.apart));
+  const draw = (name) => {
+    const d = decks[name].size ? decks[name] : decks.place;
+    const from = d === decks[name] ? name : 'place';
+    for (let tries = 0; tries < d.size * 2; tries++) {
+      const it = d.at(next[from]++);
+      if (fits(it)) return it;
+    }
+    return null;
+  };
+  const targets = slots.map((slot) => {
+    const it = draw(slot.deck);
+    if (it) { taken.add(it.name); if (it.apart) apartTaken.add(it.apart); }
+    return it;
+  });
+  const rng = random(hash(`malmo:${key}`));
+  const avoid = new Set(taken);
+  const questions = [];
+  slots.forEach((slot, i) => {
+    if (!targets[i]) return;
+    let q = TYPES[slot.type].build({ target: targets[i], items, rng, avoid });
+    for (let j = i + 1; !q && j < slots.length; j++) {
+      if (slots[j].group !== slot.group || !targets[j]) continue;
+      q = TYPES[slot.type].build({ target: targets[j], items, rng, avoid });
+      if (q) [targets[i], targets[j]] = [targets[j], targets[i]];
+    }
+    const type = q ? slot.type : 'point';
+    q ??= TYPES.point.build({ target: targets[i] });
+    for (const shown of [q.from, q.to]) if (shown) avoid.add(shown.name);
+    questions.push({ type, ...q });
+  });
   return questions;
 }
 

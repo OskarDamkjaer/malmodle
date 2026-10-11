@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { dailySet, dateKey } from '../app/daily.mjs';
+import { GROUP, dailySet, dateKey } from '../app/daily.mjs';
 import { contains, distanceTo } from '../app/geo.mjs';
 
 const QUIZ = 'build/data/quiz.json';
@@ -44,6 +44,11 @@ test('a year of daily sets can be built from the real data', { skip }, () => {
     const set = dailySet(items, dateKey(new Date(2027, 0, 1 + i)));
     assert.equal(set.length, 10);
     assert.equal(new Set(set.map((q) => q.target.name)).size, 10);
+    assert.equal(set[0].target.kind, 'area');
+    const apart = set.map((q) => q.target.apart).filter(Boolean);
+    assert.equal(new Set(apart).size, apart.length);
+    const count = (g) => set.filter((q) => GROUP[q.target.kind] === g).length;
+    assert.ok(count('area') >= 3 && count('area') <= 5 && count('street') >= 1 && count('street') <= 3 && count('place') >= 3 && count('place') <= 5);
   }
 });
 

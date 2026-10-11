@@ -38,8 +38,6 @@ export function closeTo(target, other) {
   return gap(target.geometry, other.geometry) <= (CLOSE_M[target.kind] ?? 0);
 }
 
-const PLACES = ['area', 'landmark', 'bridge'];
-
 function shuffle(list, rng) {
   const out = [...list];
   for (let i = out.length - 1; i > 0; i--) {
@@ -51,10 +49,7 @@ function shuffle(list, rng) {
 
 const point = {
   input: 'map',
-  build({ pick }) {
-    const target = pick(() => true);
-    return target && { target };
-  },
+  build: ({ target }) => ({ target }),
   prompt: (q) => ({ title: `Var ligger ${q.target.name}?`, detail: q.target.label }),
   showing: () => [],
   view: () => 'home',
@@ -74,13 +69,12 @@ const point = {
 
 const identify = {
   input: 'choice',
-  build({ pick, items, rng }) {
-    const target = pick((it) => items.filter((o) => o.kind === it.kind).length >= 4);
-    if (!target) return null;
+  build({ target, items, rng }) {
     const others = items
       .filter((it) => it.kind === target.kind && it.name !== target.name)
       .sort((a, b) => metersBetween(a.point, target.point) - metersBetween(b.point, target.point))
       .slice(0, 7);
+    if (others.length < 3) return null;
     return { target, options: shuffle([target, ...others], rng).map((it) => it.name) };
   },
   prompt: (q) => ({ title: 'Vad är det här?', detail: q.target.label }),
@@ -90,51 +84,6 @@ const identify = {
     const picked = items?.find((it) => it.name === choice);
     const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
     return { score, choice, answer: q.target.name };
-  },
-};
-
-const nearest = {
-  input: 'choice',
-  build({ pick, items, rng, used }) {
-    for (let attempt = 0; attempt < 20; attempt++) {
-      const anchor = pick((it) => PLACES.includes(it.kind), { peek: true });
-      if (!anchor) return null;
-      const kind = rng() < 0.5 ? 'landmark' : 'area';
-      const ranked = items
-        .filter((it) => it.kind === kind && it.name !== anchor.name)
-        .filter((it) => !contains(it.geometry, anchor.point) && !contains(anchor.geometry, it.point))
-        .map((it) => ({ it, d: metersBetween(it.point, anchor.point) }))
-        .sort((a, b) => a.d - b.d);
-      if (ranked.length < 6) continue;
-      const open = ranked.filter((r) => !used.has(r.it.name));
-      if (!open.length) continue;
-      const answer = open[Math.floor(rng() * Math.min(3, open.length))];
-      const decoys = ranked.filter((r) => r.d >= answer.d * 1.6 + 300 && r.d <= 6000);
-      if (decoys.length < 3) continue;
-      pick((it) => it === anchor);
-      used.add(answer.it.name);
-      const chosen = shuffle(decoys, rng).slice(0, 3);
-      return {
-        target: answer.it,
-        anchor,
-        options: shuffle([answer, ...chosen], rng).map((r) => r.it.name),
-      };
-    }
-    return null;
-  },
-  prompt: (q) => ({ title: `Vad ligger närmast ${q.anchor.name}?`, detail: q.target.label }),
-  showing: (q) => [{ item: q.anchor, named: true }],
-  view: (q) => ({ items: [q.anchor], context: 2500 }),
-  grade(q, choice) {
-    return { score: choice === q.target.name ? MAX_SCORE : 0, choice, answer: q.target.name };
-  },
-};
-
-const area = {
-  ...point,
-  build({ pick }) {
-    const target = pick((it) => it.kind === 'area');
-    return target && { target };
   },
 };
 
@@ -149,31 +98,21 @@ function towards(from, to, side) {
 
 const neighbour = {
   input: 'choice',
-  build({ pick, items, rng, used }) {
+  build({ target, items, rng, avoid }) {
     const byName = new Map(items.map((it) => [it.name, it]));
-    for (let attempt = 0; attempt < 30; attempt++) {
-      const from = pick((it) => it.kind === 'area' && Object.keys(it.beside ?? {}).length > 0, { peek: true });
-      if (!from) return null;
-      const open = Object.entries(from.beside).filter(([, name]) => byName.has(name) && !used.has(name));
-      if (!open.length) continue;
-      const [side, name] = open[Math.floor(rng() * open.length)];
-      const answer = byName.get(name);
-      const adjacent = (from.neighbours ?? []).filter((n) => n !== name && byName.has(n)).map((n) => byName.get(n));
+    const sources = items.flatMap((from) => Object.entries(from.beside ?? {})
+      .filter(([, name]) => name === target.name && !avoid.has(from.name))
+      .map(([side]) => ({ from, side })));
+    for (const { from, side } of shuffle(sources, rng)) {
+      const adjacent = (from.neighbours ?? []).filter((n) => n !== target.name && byName.has(n)).map((n) => byName.get(n));
       const nearby = items
-        .filter((it) => it.kind === 'area' && it.name !== from.name && it.name !== name && !adjacent.includes(it))
+        .filter((it) => it.kind === 'area' && it.name !== from.name && it.name !== target.name && !adjacent.includes(it))
         .sort((a, b) => metersBetween(a.point, from.point) - metersBetween(b.point, from.point));
       const decoys = [...shuffle(adjacent, rng), ...nearby]
         .filter((it) => !towards(from, it, side))
         .slice(0, 3);
       if (decoys.length < 3) continue;
-      pick((it) => it === from);
-      used.add(name);
-      return {
-        target: answer,
-        from,
-        side,
-        options: shuffle([answer, ...decoys], rng).map((it) => it.name),
-      };
+      return { target, from, side, options: shuffle([target, ...decoys], rng).map((it) => it.name) };
     }
     return null;
   },
@@ -187,4 +126,65 @@ const neighbour = {
   },
 };
 
-export const TYPES = { point, area, identify, nearest, neighbour };
+const END_REACH = 150;
+const ROUTE_MIN = 250;
+const ROUTE_NEAR = END_REACH;
+const END_RANK = ['torg', 'park', 'byggnad', 'scen', 'idrott', 'handel', 'bad', 'kyrka', 'museum'];
+
+function ends(geometry) {
+  const tips = (geometry.type === 'LineString' ? [geometry.coordinates] : geometry.coordinates)
+    .flatMap((line) => [line[0], line[line.length - 1]]);
+  let best = null;
+  for (let i = 0; i < tips.length; i++) {
+    for (let j = i + 1; j < tips.length; j++) {
+      const d = metersBetween(tips[i], tips[j]);
+      if (!best || d > best.d) best = { a: tips[i], b: tips[j], d };
+    }
+  }
+  return best;
+}
+
+function landmarkAt(end, items, avoid) {
+  const rank = (it) => END_RANK.indexOf(it.category);
+  const near = items
+    .filter((it) => it.kind === 'landmark' && rank(it) >= 0 && !avoid.has(it.name))
+    .map((it) => ({ it, d: distanceTo(it.geometry, end) }))
+    .filter((x) => x.d <= END_REACH)
+    .sort((a, b) => rank(a.it) - rank(b.it) || a.d - b.d)[0];
+  if (near) return near.it;
+  return items.find((it) => it.kind === 'area' && !avoid.has(it.name) && contains(it.geometry, end)) ?? null;
+}
+
+const route = {
+  input: 'choice',
+  build({ target, items, rng, avoid }) {
+    const tips = ends(target.geometry);
+    if (!tips || tips.d < ROUTE_MIN) return null;
+    const from = landmarkAt(tips.a, items, avoid);
+    const to = landmarkAt(tips.b, items, avoid);
+    if (!from || !to || from === to || metersBetween(from.point, to.point) < ROUTE_MIN) return null;
+    const fit = (it) => gap(it.geometry, from.geometry) + gap(it.geometry, to.geometry);
+    const own = fit(target);
+    const joins = (it) => gap(it.geometry, from.geometry) <= ROUTE_NEAR && gap(it.geometry, to.geometry) <= ROUTE_NEAR;
+    if (items.some((it) => it.kind === 'street' && it !== target && joins(it) && fit(it) < own)) return null;
+    const middle = [(tips.a[0] + tips.b[0]) / 2, (tips.a[1] + tips.b[1]) / 2];
+    const decoys = items
+      .filter((it) => it.kind === 'street' && it.name !== target.name)
+      .filter((it) => !joins(it))
+      .sort((a, b) => distanceTo(a.geometry, middle) - distanceTo(b.geometry, middle))
+      .slice(0, 3);
+    if (decoys.length < 3) return null;
+    const [a, b] = rng() < 0.5 ? [from, to] : [to, from];
+    return { target, from: a, to: b, options: shuffle([target, ...decoys], rng).map((it) => it.name) };
+  },
+  prompt: (q) => ({ title: `Vilken gata går från ${q.from.name} till ${q.to.name}?`, detail: q.target.label }),
+  showing: (q) => [{ item: q.from, named: true }, { item: q.to, named: true }],
+  view: (q) => ({ items: [q.from, q.to], context: 400 }),
+  grade(q, choice, items) {
+    const picked = items?.find((it) => it.name === choice);
+    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    return { score, choice, answer: q.target.name };
+  },
+};
+
+export const TYPES = { point, identify, neighbour, route };

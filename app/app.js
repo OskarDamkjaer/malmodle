@@ -1,7 +1,6 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { dailySet, dateKey, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
-import { metersBetween } from './geo.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
@@ -229,17 +228,14 @@ function revealChoice(q, result) {
     add(q.target, 'answer');
     if (!right) add(byName.get(result.choice), 'hit');
     el('explain').textContent = right ? `Det är ${q.target.name}.` : `Det är ${q.target.name}, inte ${result.choice}.`;
-  } else if (q.type === 'nearest') {
-    add(q.anchor, 'context');
+  } else if (q.type === 'route') {
+    add(q.from, 'context');
+    add(q.to, 'context');
     add(q.target, 'answer');
-    const d = formatDistance(metersBetween(q.anchor.point, q.target.point));
-    let text = `${q.target.name} ligger ${d} från ${q.anchor.name}.`;
-    if (!right) {
-      const wrong = byName.get(result.choice);
-      add(wrong, 'hit');
-      text += ` ${wrong.name} ligger ${formatDistance(metersBetween(q.anchor.point, wrong.point))} bort.`;
-    }
-    el('explain').textContent = text;
+    if (!right) add(byName.get(result.choice), 'hit');
+    el('explain').textContent = right
+      ? `${q.target.name} går från ${q.from.name} till ${q.to.name}.`
+      : `Det är ${q.target.name}, inte ${result.choice}.`;
   } else if (q.type === 'neighbour') {
     add(q.from, 'context');
     add(q.target, 'answer');

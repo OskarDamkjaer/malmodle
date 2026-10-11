@@ -85,10 +85,14 @@ test('streets that cross are close even with no corner near the crossing', () =>
   assert.ok(closeTo(byName('Gata 3'), across));
 });
 
-test('nearest is all or nothing', () => {
-  const target = byName('Plats 5');
-  assert.equal(TYPES.nearest.grade({ target }, 'Plats 5').score, MAX_SCORE);
-  assert.equal(TYPES.nearest.grade({ target }, 'Plats 6').score, 0);
+test('a street from A to B is named by what lies at its ends, and no decoy runs between them', () => {
+  const target = byName('Gata 3');
+  const q = TYPES.route.build({ target, items, rng: () => 0.3, avoid: new Set() });
+  assert.ok(q);
+  assert.notEqual(q.from.name, q.to.name);
+  assert.equal(q.options.length, 4);
+  assert.equal(q.options.filter((o) => o === target.name).length, 1);
+  assert.equal(TYPES.route.grade(q, target.name, items).score, MAX_SCORE);
 });
 
 test('a neighbour that also borders the answer scores a little', () => {
