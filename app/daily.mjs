@@ -233,6 +233,8 @@ export function band(score) {
   return 'red';
 }
 
+export const BAND_COLORS = { green: '#2e9e4f', yellow: '#f2c230', orange: '#f08a24', red: '#db3a2f' };
+
 const SQUARES = { green: '🟩', yellow: '🟨', orange: '🟧', red: '🟥' };
 
 export function square(score) {

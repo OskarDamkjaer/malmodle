@@ -11,7 +11,6 @@
   --mid: #8a6a12;
   --wrong: #111111;
   --dot: #cfc9bd;
-  --scrim: rgb(244 241 234 / 80%);
   --shadow: 4px 4px 0 #111111;
   --border: 1.5px solid #111111;
   --radius: 2px;
@@ -42,7 +41,6 @@
   --mid: #f2c14e;
   --wrong: #ff7a59;
   --dot: #343a45;
-  --scrim: rgb(18 21 26 / 80%);
   --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 10px 30px rgb(0 0 0 / 45%);
   --border: 1px solid #2a3039;
   color-scheme: dark;
@@ -61,7 +59,6 @@
   --mid: #9a6f0e;
   --wrong: #b4442a;
   --dot: #ddd4c7;
-  --scrim: rgb(243 238 231 / 80%);
   --shadow: 0 1px 2px rgb(32 29 25 / 10%), 0 8px 24px rgb(32 29 25 / 10%);
   --border: 0 solid transparent;
   --radius: 16px;
@@ -85,7 +82,6 @@
   --mid: #c27c00;
   --wrong: #e8462f;
   --dot: #dfe3f0;
-  --scrim: rgb(247 244 236 / 80%);
   --shadow: 0 2px 0 rgb(27 27 31 / 8%), 0 12px 28px rgb(43 89 255 / 14%);
   --radius: 22px;
   --radius-button: 16px;
@@ -224,9 +220,10 @@ button.primary:hover { filter: brightness(1.06); }
   inset: 0;
   z-index: 5;
   overflow-y: auto;
-  background: var(--scrim);
-  backdrop-filter: blur(1.5px) saturate(.7);
-  -webkit-backdrop-filter: blur(1.5px) saturate(.7);
+  --veil: color-mix(in srgb, var(--bg) 72%, transparent);
+  --veil-strong: color-mix(in srgb, var(--bg) 90%, transparent);
+  --veil-light: color-mix(in srgb, var(--bg) 20%, transparent);
+  background: var(--veil);
   -webkit-overflow-scrolling: touch;
   animation: fade .3s ease-out;
 }
@@ -337,6 +334,14 @@ button.primary:hover { filter: brightness(1.06); }
 @media (min-width: 760px) {
   #question { padding: 16px 22px 20px; }
   #result, #choices { padding: 16px 18px; }
+}
+
+@media (min-width: 1000px) {
+  #end {
+    background: linear-gradient(to right,
+      var(--veil-strong) calc(var(--width) + 64px), var(--veil-light) calc(var(--width) + 220px));
+  }
+  #end .sheet { margin: 0 0 0 32px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
