@@ -1,10 +1,10 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { PRACTICE, band, dailySet, dateKey, practiceSet, shareText, square } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, band, dailySet, dateKey, practiceSet, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap,
+  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -314,9 +314,7 @@ function finish() {
   el('tomorrow').hidden = Boolean(practicing);
   el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
   el('kinds').hidden = !practicing;
-  const targets = results.map((r) => r.q.target);
-  markToday(targets);
-  requestAnimationFrame(() => frameItems(targets, 300));
+  spreadOut();
   countUp(el('endscore'), total);
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdictFor(total, max);
@@ -484,6 +482,7 @@ function openMap(focus) {
   el('back').textContent = practicing ? 'Resultat' : 'Dagens resultat';
   reveal('back', 'freehint');
   setLabels(true);
+  showScored([]);
   markToday(results.map((r) => r.q.target));
   clear();
   select(focus);
@@ -531,6 +530,12 @@ function backToEnd() {
   setLabels(false);
   phase = 'end';
   reveal('end');
+  spreadOut();
+}
+
+function spreadOut() {
+  markToday([]);
+  showScored(results.map(({ q, result }) => ({ item: q.target, color: BAND_COLORS[band(result.score)] })));
   requestAnimationFrame(() => frameItems(results.map((r) => r.q.target), 300));
 }
 

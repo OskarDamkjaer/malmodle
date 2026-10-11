@@ -135,6 +135,34 @@ export function setupLayers(mapInstance, items) {
     },
   });
 
+  map.addSource('scored', { type: 'geojson', data: EMPTY });
+  map.addSource('scored-labels', { type: 'geojson', data: EMPTY });
+  addScored({
+    id: 'scored-fill', type: 'fill', source: 'scored', filter: isPolygon,
+    paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.28 },
+  });
+  addScored({
+    id: 'scored-line', type: 'line', source: 'scored', filter: ['!', isPoint],
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': ['get', 'color'], 'line-width': ['case', isPolygon, 2.5, 6] },
+  });
+  addScored({
+    id: 'scored-points', type: 'circle', source: 'scored-labels', filter: ['!=', ['get', 'kind'], 'area'],
+    paint: { 'circle-radius': 8, 'circle-color': ['get', 'color'], 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
+  });
+  addScored({
+    id: 'scored-labels', type: 'symbol', source: 'scored-labels',
+    layout: {
+      'text-field': ['get', 'name'],
+      'text-font': ['Roboto Medium'],
+      'text-size': 13,
+      'text-anchor': ['case', ['==', ['get', 'kind'], 'area'], 'center', 'top'],
+      'text-offset': ['case', ['==', ['get', 'kind'], 'area'], ['literal', [0, 0]], ['literal', [0, 0.9]]],
+      'text-max-width': 9,
+    },
+    paint: { 'text-color': COLOR.tap, 'text-halo-color': HALO, 'text-halo-width': 2 },
+  });
+
   map.addLayer({
     id: 'focus-circle', type: 'circle', source: 'focus', filter: isPoint,
     paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
@@ -156,6 +184,27 @@ export function setupLayers(mapInstance, items) {
     },
     paint: { 'text-color': roleColor(), 'text-halo-color': HALO, 'text-halo-width': 2 },
   });
+}
+
+const scoredLayers = [];
+
+function addScored(layer) {
+  map.addLayer({ ...layer, layout: { ...layer.layout, visibility: 'none' } });
+  scoredLayers.push(layer.id);
+}
+
+export function showScored(marks) {
+  const at = (item, color) => ({ name: item.name, kind: item.kind, color });
+  map.getSource('scored').setData({
+    type: 'FeatureCollection',
+    features: marks.map(({ item, color }) => feature(item.geometry, at(item, color))),
+  });
+  map.getSource('scored-labels').setData({
+    type: 'FeatureCollection',
+    features: marks.map(({ item, color }) => feature({ type: 'Point', coordinates: item.point }, at(item, color))),
+  });
+  const visibility = marks.length ? 'visible' : 'none';
+  for (const id of scoredLayers) map.setLayoutProperty(id, 'visibility', visibility);
 }
 
 export function setLabels(on) {
@@ -204,10 +253,13 @@ function padding() {
   const bottom = bottoms.length ? h - Math.min(...bottoms) : 0;
   const w = map.getContainer().clientWidth;
   const side = Math.min(gap * 2, w / 10);
+  const beside = Math.max(0, ...[...document.querySelectorAll('[data-edge="left"]')]
+    .filter((el) => el.getClientRects().length)
+    .map((el) => el.getBoundingClientRect().right));
   return {
     top: Math.min(top + gap, h * 0.45),
     bottom: Math.min(bottom + gap, h * 0.45),
-    left: side,
+    left: beside && beside < w * 0.6 ? beside + gap * 2 : side,
     right: side,
   };
 }
