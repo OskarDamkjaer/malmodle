@@ -1,5 +1,5 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { osmWikidata, wikipediaQid, wikidataClaims, categoryFiles, files, filesNear, toPhoto, usable, rank } from './lib/commons.mjs';
+import { osmWikidata, osmPhotos, searchFiles, wikipediaQid, wikidataClaims, categoryFiles, files, filesNear, toPhoto, usable, rank } from './lib/commons.mjs';
 import { distanceTo, metersBetween, bounds } from '../app/geo.mjs';
 import { alongEvery } from './lib/photos.mjs';
 
@@ -20,8 +20,8 @@ const { places } = JSON.parse(await readFile(placesFile, 'utf8'));
 const byName = new Map(places.map((p) => [p.name, p]));
 
 for (const category of categories) {
-  const NEAR_M = category === 'gata' ? 15 : 50;
-  const kind = { bro: 'bridge', gata: 'street' }[category] ?? 'landmark';
+  const NEAR_M = { gata: 15, omrade: 0 }[category] ?? 50;
+  const kind = { bro: 'bridge', gata: 'street', omrade: 'area' }[category] ?? 'landmark';
   const chosen = items.filter((i) => i.kind === kind && (kind !== 'landmark' || byName.get(i.name)?.category === category) && (!only.length || only.includes(i.name)));
   const qids = {};
   for (const item of chosen) {
@@ -45,7 +45,14 @@ for (const category of categories) {
     };
 
     if (c.image) addGroup('Wikidata-bild', await files([c.image]), 1);
-    const cat = c.category ?? c.commonswiki?.replace(/^Category:/, '');
+    const osm = { files: [], category: null };
+    for (const ref of byName.get(item.name)?.osm ?? []) {
+      const o = await osmPhotos(ref);
+      osm.files.push(...o.files);
+      osm.category ??= o.category;
+    }
+    if (osm.files.length) addGroup('OSM-bild', await files(osm.files), osm.files.length);
+    const cat = c.category ?? c.commonswiki?.replace(/^Category:/, '') ?? osm.category;
     if (cat) {
       const pages = await categoryFiles(cat);
       addGroup(`Kategori: ${cat}`, pages, pages.length);
@@ -58,9 +65,16 @@ for (const category of categories) {
       near = [...byTitle.values()];
     } else {
       const [sw, ne] = bounds([item.geometry]);
-      near = await filesNear(item.point, Math.min(2000, Math.round(metersBetween(sw, ne) / 2 + NEAR_M)), keep);
+      near = await filesNear(item.point, Math.min(10000, Math.round(metersBetween(sw, ne) / 2 + NEAR_M)), keep);
     }
-    addGroup(`Tagna på platsen (inom ${NEAR_M} m)`, near, near.length);
+    addGroup(NEAR_M ? `Tagna på platsen (inom ${NEAR_M} m)` : 'Tagna inom området', near, near.length);
+    if (kind !== 'street') {
+      const words = item.name.toLowerCase().split(/[^a-zåäöéü0-9]+/).filter((w) => w.length > 2 && w !== 'malmö');
+      const named = (p) => words.length && words.every((w) => p.title.toLowerCase().includes(w));
+      const close = (p) => p.coordinates?.[0] && distanceTo(item.geometry, [p.coordinates[0].lon, p.coordinates[0].lat]) <= 150;
+      const found = (await searchFiles(`"${item.name}" Malmö`)).filter((p) => named(p) || close(p));
+      addGroup(`Sök: ${item.name}`, found, found.length);
+    }
 
     const n = groups.reduce((s, g) => s + g.directions[0].images.length, 0);
     console.log(`${item.name.padEnd(30)} ${(qid ?? '-').padEnd(10)} ${cat ? 'kategori' : '        '} ${n} kandidater`);
@@ -72,6 +86,8 @@ for (const category of categories) {
 
   await mkdir('data/cache/photos/candidates', { recursive: true });
   const file = `data/cache/photos/candidates/${category}.json`;
-  await writeFile(file, JSON.stringify({ source: 'commons', items: out }));
+  const fresh = new Set(out.map((i) => i.key));
+  const previous = only.length ? JSON.parse(await readFile(file, 'utf8').catch(() => '{"items":[]}')).items.filter((i) => !fresh.has(i.key)) : [];
+  await writeFile(file, JSON.stringify({ source: 'commons', items: [...previous, ...out] }));
   console.log(`wrote ${file}`);
 }

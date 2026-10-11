@@ -3,245 +3,163 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Granska bilder</title>
+<title>Slutlig bild</title>
 <style>
-  :root {
-    --bg: #f6f5f2; --fg: #1d1d1b; --muted: #6b6a66; --card: #fff; --line: #dcdad4;
-    --keep: #1f7a4d; --accent: #2b5fb4; --street: #9a9890;
-  }
+  :root { --bg: #f6f5f2; --fg: #1d1d1b; --muted: #6b6a66; --card: #fff; --line: #dcdad4; --ok: #1f7a4d; --no: #b42318; --accent: #2b5fb4; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #171716; --fg: #ecebe7; --muted: #9b9a95; --card: #232321; --line: #3a3936; --keep: #4cc38a; --accent: #7aa7f0; --street: #6d6c67; }
+    :root { --bg: #171716; --fg: #ecebe7; --muted: #9b9a95; --card: #232321; --line: #3a3936; --ok: #4cc38a; --no: #f97066; --accent: #7aa7f0; }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, sans-serif; }
-  header { position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  header h1 { font-size: 18px; margin: 0 auto 0 0; }
-  header .progress { color: var(--muted); font-size: 13px; width: 100%; }
-  select, button { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
-  button.primary { background: var(--keep); border-color: var(--keep); color: #fff; }
-  main { padding: 16px; max-width: 1200px; margin: 0 auto; }
-  .top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  @media (min-width: 800px) { .top { grid-template-columns: 320px minmax(0, 1fr); } }
-  svg.sketch { width: 100%; height: auto; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
-  .kept-strip { display: flex; gap: 6px; flex-wrap: wrap; align-content: flex-start; }
-  .kept-strip img { height: 72px; border-radius: 4px; outline: 2px solid var(--keep); }
-  .muted { color: var(--muted); }
-  section.sample { margin-top: 20px; }
-  section.sample h2 { font-size: 16px; margin: 0 0 6px; }
-  .dir { margin: 8px 0 14px; }
-  .dir h3 { font-size: 13px; font-weight: 500; color: var(--muted); margin: 0 0 6px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; }
-  .card { background: var(--card); border: 2px solid var(--line); border-radius: 8px; overflow: hidden; cursor: pointer; }
-  .card.kept { border-color: var(--keep); }
-  .card.weak:not(.kept) { opacity: 0.45; }
-  body.hide-weak .card.weak:not(.kept) { display: none; }
-  .card.suggested:not(.kept) { border-color: var(--accent); }
-  .card .facts { padding: 0 8px 6px; font-size: 12px; color: var(--muted); }
-  .card .facts .bad { color: #c2410c; font-weight: 600; }
-  .card .facts .good { color: var(--accent); font-weight: 600; }
-  label.toggle { font-size: 13px; display: flex; gap: 4px; align-items: center; }
-  .card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--line); }
-  .card .meta { display: flex; gap: 8px; align-items: center; padding: 6px 8px; font-size: 13px; }
-  .card .meta .tag { margin-left: auto; font-weight: 600; color: var(--keep); }
-  .card .meta a { color: var(--accent); }
-  .empty { color: var(--muted); font-size: 13px; }
-  dialog { padding: 0; border: 0; background: transparent; max-width: 96vw; }
-  dialog img { max-width: 96vw; max-height: 90vh; display: block; }
-  dialog::backdrop { background: rgb(0 0 0 / 0.8); }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, sans-serif; display: flex; flex-direction: column; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0; font-size: 20px; }
+  header .label { color: var(--muted); }
+  header .progress { margin-left: auto; color: var(--muted); font-size: 13px; }
+  main { flex: 1; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+  .photo { position: relative; min-height: 0; display: flex; align-items: center; justify-content: center; background: #000; }
+  .photo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+  .photo .status { position: absolute; top: 12px; left: 12px; padding: 4px 10px; border-radius: 999px; font-weight: 600; color: #fff; }
+  .photo .status.ok { background: var(--ok); }
+  .photo .status.no { background: var(--no); }
+  .photo .alt { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 999px; background: rgb(0 0 0 / 0.6); color: #fff; font-size: 13px; }
+  .photo .empty { color: #ccc; padding: 24px; text-align: center; }
+  .info { padding: 10px 16px 12px; display: grid; gap: 6px; }
+  .about { max-width: 70ch; font-size: 17px; }
+  .about.missing { font-size: 14px; color: var(--muted); font-style: italic; }
+  .credit, .why { color: var(--muted); font-size: 13px; }
+  .credit a { color: var(--accent); }
+  .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+  button { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+  button.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+  button.no { border-color: var(--no); color: var(--no); }
+  kbd { font-size: 11px; opacity: 0.7; margin-left: 4px; }
 </style>
 </head>
 <body>
 <header>
-  <h1 id="title">Granska bilder</h1>
-  <select id="pick" aria-label="Plats"></select>
-  <button id="prev" title="Föregående (←)">←</button>
-  <button id="next" title="Nästa (→)">→</button>
-  <label class="toggle"><input type="checkbox" id="hideWeak"> Dölj svaga</label>
-  <button id="done" class="primary" title="Klar, till nästa ogranskade (Enter)">Klar</button>
-  <div class="progress" id="progress"></div>
+  <h1 id="name"></h1><span class="label" id="label"></span>
+  <span class="progress" id="progress"></span>
 </header>
-<main id="main"></main>
-<dialog id="big"><img alt=""></dialog>
+<main>
+  <div class="photo" id="photo"></div>
+  <div class="info">
+    <div class="about" id="about"></div>
+    <div class="credit" id="credit"></div>
+    <div class="why" id="why"></div>
+    <div class="buttons">
+      <button class="ok" id="ok">Godkänn<kbd>Enter</kbd></button>
+      <button id="prevAlt">Föregående<kbd>←</kbd></button>
+      <button id="nextAlt">Nästa förslag<kbd>→</kbd></button>
+      <button class="no" id="none">Ingen duger<kbd>X</kbd></button>
+      <button id="prevPlace">Förra platsen<kbd>↑</kbd></button>
+      <button id="nextPlace">Nästa plats<kbd>↓</kbd></button>
+    </div>
+  </div>
+</main>
 <script type="module">
-const items = await (await fetch('/candidates')).json();
+const queue = (await (await fetch('/queue')).json()).items;
 let picks = await (await fetch('/picks')).json();
-let index = Math.max(0, items.findIndex((i) => !picks[i.key]?.reviewed));
-
 const $ = (id) => document.getElementById(id);
-const compass = (h) => ['nord', 'nordost', 'ost', 'sydost', 'syd', 'sydväst', 'väst', 'nordväst'][Math.round(h / 45) % 8];
-const thumb = (item, img) => img.thumb ?? `/thumb/${item.source}/${img.id}`;
-const pageUrl = (img) => img.url ?? `https://www.mapillary.com/app/?pKey=${img.id}`;
-const FRAMING = { centred: 'gatan mitt i bild', offset: 'gatan åt sidan', crossing: 'korsning', sideways: 'tvärs', blocked: 'skymd', other: 'annat' };
-const weak = (img) => (img.review && (!img.review.sharp || img.review.score <= 2)) || (img.ahead != null && img.ahead < 40);
-const suggested = (img) => !!img.review && img.review.sharp && img.review.framing === 'centred' && img.review.score >= 4 && (img.ahead == null || img.ahead >= 60);
-const order = (img) => (suggested(img) ? 10 : 0) + (img.review?.score ?? 2.5) - (weak(img) ? 10 : 0);
+const decided = (q) => picks[q.key]?.approved === true || picks[q.key]?.approved === false;
+let index = Math.max(0, queue.findIndex((q) => !decided(q)));
+let alt = 0;
+
+const src = (p) => p.thumb ?? `/thumb/${p.source}/${p.id}`;
+const entry = (q) => (picks[q.key] ??= { photos: [], reviewed: false });
+
+function startAlt(q) {
+  const f = picks[q.key]?.final;
+  const i = q.alternatives.findIndex((a) => a.id === f);
+  return i >= 0 ? i : 0;
+}
+
+for (const q of queue) for (const a of q.alternatives.slice(0, 2)) new Image().src = src(a);
 
 async function save() {
   await fetch('/picks', { method: 'POST', body: JSON.stringify(picks) });
-  renderProgress();
-}
-
-function entry(item) {
-  return picks[item.key] ??= { photos: [], reviewed: false };
-}
-
-function isKept(item, id) {
-  return entry(item).photos.some((p) => p.id === id);
-}
-
-function toggle(item, sample, img) {
-  const e = entry(item);
-  if (isKept(item, img.id)) e.photos = e.photos.filter((p) => p.id !== img.id);
-  else e.photos.push({
-    source: item.source, id: img.id, point: img.point, heading: img.heading, captured: img.captured,
-    licence: img.licence ?? item.licence, author: img.author, url: pageUrl(img), thumb: img.thumb ?? null, title: img.title ?? null, at: sample.label,
-  });
-  save();
-  render();
-}
-
-function renderProgress() {
-  const reviewed = items.filter((i) => picks[i.key]?.reviewed).length;
-  const withPhoto = items.filter((i) => picks[i.key]?.photos?.length).length;
-  $('progress').textContent = `${reviewed} av ${items.length} granskade · ${withPhoto} med minst en bild`;
-  for (const opt of $('pick').options) {
-    const i = Number(opt.value);
-    const p = picks[items[i].key];
-    opt.textContent = `${p?.reviewed ? '✓' : '·'} ${items[i].name}${p?.photos?.length ? ` (${p.photos.length})` : ''}`;
-  }
-}
-
-function sketch(item, hover) {
-  const g = item.geometry;
-  const lines = g.type === 'Point' ? [[g.coordinates]] : g.type === 'LineString' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates.flat() : g.coordinates;
-  const all = [...lines.flat(), ...item.samples.map((s) => s.point)];
-  const k = Math.cos((55.6 * Math.PI) / 180);
-  const xs = all.map((p) => p[0] * k), ys = all.map((p) => p[1]);
-  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-  const span = Math.max(x1 - x0, y1 - y0) || 1e-4;
-  const W = 300, pad = 24, s = (W - 2 * pad) / span;
-  const H = Math.round((y1 - y0) * s + 2 * pad);
-  const P = ([lon, lat]) => [pad + (lon * k - x0) * s + ((W - 2 * pad) - (x1 - x0) * s) / 2, H - pad - (lat - y0) * s];
-  const path = lines.map((l) => 'M' + l.map((p) => P(p).map((v) => v.toFixed(1)).join(',')).join('L')).join('');
-  const dots = item.samples.map((smp, i) => {
-    const [x, y] = P(smp.point);
-    return `<circle cx="${x}" cy="${y}" r="5" fill="var(--accent)"/><text x="${x + 8}" y="${y + 4}" font-size="11" fill="var(--fg)">${i + 1}</text>`;
-  }).join('');
-  const kept = entry(item).photos.filter((p) => p.point).map((p) => arrow(P(p.point), p.heading, 'var(--keep)')).join('');
-  const hov = hover?.point ? arrow(P(hover.point), hover.heading, 'var(--fg)') : '';
-  return `<svg class="sketch" viewBox="0 0 ${W} ${H}"><path d="${path}" fill="none" stroke="var(--street)" stroke-width="4" stroke-linecap="round"/>${dots}${kept}${hov}</svg>`;
-}
-
-function facts(img) {
-  const out = [];
-  if (suggested(img)) out.push('<span class="good">Förslag</span>');
-  if (img.review) {
-    out.push(`★${img.review.score}`, FRAMING[img.review.framing] ?? img.review.framing);
-    if (!img.review.sharp) out.push('<span class="bad">suddig</span>');
-    if (img.review.note) out.push(img.review.note);
-  }
-  if (img.ahead != null) out.push(img.ahead < 40 ? `<span class="bad">${img.ahead} m gata framåt</span>` : `${img.ahead} m gata framåt`);
-  if (img.offLine != null) out.push(`${img.offLine} m från mittlinjen`);
-  if (img.title) out.push(img.title);
-  if (img.licence) out.push(img.licence);
-  return out.join(' · ');
-}
-
-function arrow([x, y], heading, color) {
-  if (heading == null) return `<circle cx="${x}" cy="${y}" r="3.5" fill="${color}"/>`;
-  const r = (heading * Math.PI) / 180, L = 16;
-  const tx = x + Math.sin(r) * L, ty = y - Math.cos(r) * L;
-  return `<circle cx="${x}" cy="${y}" r="3.5" fill="${color}"/><line x1="${x}" y1="${y}" x2="${tx}" y2="${ty}" stroke="${color}" stroke-width="2.5"/>`;
 }
 
 function render() {
-  const item = items[index];
-  $('pick').value = String(index);
-  $('title').textContent = item.name;
-  const e = entry(item);
-  const main = $('main');
-  main.innerHTML = `
-    <div class="top">
-      <div id="sketch">${sketch(item)}</div>
-      <div>
-        <div class="muted">${item.label ?? item.kind} · ${item.source} · ${item.licence}${e.reviewed ? ' · granskad' : ''}</div>
-        <p class="muted">Klicka på en bild för att behålla den. ⤢ visar den stor. Behåll en till tre som visar gatan tydligt.</p>
-        <div class="kept-strip">${e.photos.map((p) => `<img src="${thumb(item, p)}" alt="">`).join('') || '<span class="empty">Inga valda ännu.</span>'}</div>
-      </div>
-    </div>`;
-  item.samples.forEach((smp, si) => {
-    const sec = document.createElement('section');
-    sec.className = 'sample';
-    sec.innerHTML = `<h2>${si + 1}. ${smp.label} <span class="muted">(${smp.found} bilder i närheten)</span></h2>`;
-    for (const dir of smp.directions) {
-      const d = document.createElement('div');
-      d.className = 'dir';
-      if (dir.heading != null) d.innerHTML = `<h3>Mot ${compass(dir.heading)} (${dir.heading}°)</h3>`;
-      const cards = document.createElement('div');
-      cards.className = 'cards';
-      if (!dir.images.length) cards.innerHTML = '<div class="empty">Inga bilder åt det här hållet.</div>';
-      for (const img of [...dir.images].sort((a, b) => order(b) - order(a))) {
-        const c = document.createElement('div');
-        c.className = `card${isKept(item, img.id) ? ' kept' : ''}${weak(img) ? ' weak' : ''}${suggested(img) ? ' suggested' : ''}`;
-        c.innerHTML = `<img loading="lazy" src="${thumb(item, img)}" alt="${img.title ?? ''}">
-          <div class="meta"><span>${img.captured}</span><span class="muted">${img.author ?? ''}</span>
-          <a href="${pageUrl(img)}" target="_blank" rel="noopener" title="Öppna källan">↗</a>
-          <a href="#" data-big title="Visa stor">⤢</a>
-          <span class="tag">${isKept(item, img.id) ? 'Behålls' : ''}</span></div>
-          <div class="facts">${facts(img)}</div>`;
-        c.addEventListener('click', (ev) => {
-          if (ev.target.closest('a[href^="http"]')) return;
-          ev.preventDefault();
-          if (ev.target.closest('[data-big]')) {
-            $('big').querySelector('img').src = thumb(item, img);
-            $('big').showModal();
-            return;
-          }
-          toggle(item, smp, img);
-        });
-        c.addEventListener('mouseenter', () => { $('sketch').innerHTML = sketch(item, img); });
-        c.addEventListener('mouseleave', () => { $('sketch').innerHTML = sketch(item); });
-        cards.append(c);
-      }
-      d.append(cards);
-      sec.append(d);
-    }
-    main.append(sec);
-  });
-  window.scrollTo(0, 0);
+  const q = queue[index];
+  const a = q.alternatives[alt];
+  const e = picks[q.key];
+  $('name').textContent = q.name;
+  $('label').textContent = `${q.label ?? q.kind} · i spelet från ${q.first}`;
+  const done = queue.filter(decided).length;
+  const ok = queue.filter((x) => picks[x.key]?.approved === true).length;
+  $('progress').textContent = `${index + 1} av ${queue.length} · ${done} avgjorda · ${ok} godkända`;
+  const status = e?.approved === true && e.final === a?.id ? '<span class="status ok">Godkänd</span>'
+    : e?.approved === false ? '<span class="status no">Ingen duger</span>' : '';
+  $('photo').innerHTML = a
+    ? `<img src="${src(a)}" alt="">${status}<span class="alt">${alt + 1} / ${q.alternatives.length}</span>`
+    : `<div class="empty">Inga förslag för den här platsen.</div>${status}`;
+  $('about').textContent = q.about ?? (q.note ? `Ingen beskrivning än. Anteckning: ${q.note}` : 'Ingen beskrivning än.');
+  $('about').classList.toggle('missing', !q.about);
+  $('credit').innerHTML = a ? `Foto: ${a.author ?? 'okänd'}, ${a.licence} · ${a.captured ?? ''} · <a href="${a.url}" target="_blank" rel="noopener">källa</a>${a.title ? ` · ${a.title}` : ''}` : '';
+  $('why').textContent = a?.why ?? '';
+  for (const n of [1, 2]) { const next = q.alternatives[alt + n]; if (next) new Image().src = src(next); }
 }
 
 function go(i) {
-  index = (i + items.length) % items.length;
+  index = (i + queue.length) % queue.length;
+  alt = startAlt(queue[index]);
   render();
 }
 
-const GROUPS = { streets: 'Gator (Mapillary)', gata: 'Gator (Commons)', bro: 'Broar' };
-$('pick').innerHTML = [...new Set(items.map((it) => it.group))].map((g) => `<optgroup label="${GROUPS[g] ?? g[0].toUpperCase() + g.slice(1)}">${items.map((it, i) => (it.group === g ? `<option value="${i}">${it.name}</option>` : '')).join('')}</optgroup>`).join('');
-$('pick').addEventListener('change', (e) => go(Number(e.target.value)));
-$('prev').addEventListener('click', () => go(index - 1));
-$('next').addEventListener('click', () => go(index + 1));
-$('done').addEventListener('click', async () => {
-  entry(items[index]).reviewed = true;
+function nextUndecided() {
+  const after = queue.findIndex((q, i) => i > index && !decided(q));
+  const any = queue.findIndex((q) => !decided(q));
+  go(after >= 0 ? after : any >= 0 ? any : index);
+}
+
+async function approve() {
+  const q = queue[index];
+  const a = q.alternatives[alt];
+  if (!a) return;
+  const e = entry(q);
+  const { why, ...photo } = a;
+  if (!e.photos.some((p) => p.id === a.id)) e.photos.unshift(photo);
+  e.final = a.id;
+  e.approved = true;
   await save();
-  const next = items.findIndex((it, i) => i > index && !picks[it.key]?.reviewed);
-  const wrap = items.findIndex((it) => !picks[it.key]?.reviewed);
-  go(next >= 0 ? next : wrap >= 0 ? wrap : index);
+  nextUndecided();
+}
+
+async function none() {
+  const e = entry(queue[index]);
+  e.final = null;
+  e.approved = false;
+  await save();
+  nextUndecided();
+}
+
+function step(n) {
+  const q = queue[index];
+  if (!q.alternatives.length) return;
+  alt = (alt + n + q.alternatives.length) % q.alternatives.length;
+  render();
+}
+
+$('ok').addEventListener('click', approve);
+$('none').addEventListener('click', none);
+$('nextAlt').addEventListener('click', () => step(1));
+$('prevAlt').addEventListener('click', () => step(-1));
+$('nextPlace').addEventListener('click', () => go(index + 1));
+$('prevPlace').addEventListener('click', () => go(index - 1));
+document.addEventListener('keydown', (ev) => {
+  if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
+  const k = ev.key;
+  if (k === 'Enter') approve();
+  else if (k === 'ArrowRight' || k === ' ') step(1);
+  else if (k === 'ArrowLeft') step(-1);
+  else if (k === 'x' || k === 'X' || k === 'Backspace') none();
+  else if (k === 'ArrowDown') go(index + 1);
+  else if (k === 'ArrowUp') go(index - 1);
+  else return;
+  ev.preventDefault();
 });
-$('big').addEventListener('click', () => $('big').close());
-try { $('hideWeak').checked = localStorage.getItem('hideWeak') === '1'; } catch {  }
-document.body.classList.toggle('hide-weak', $('hideWeak').checked);
-$('hideWeak').addEventListener('change', (e) => {
-  document.body.classList.toggle('hide-weak', e.target.checked);
-  try { localStorage.setItem('hideWeak', e.target.checked ? '1' : '0'); } catch {  }
-});
-document.addEventListener('keydown', (e) => {
-  if ($('big').open || e.target.tagName === 'SELECT') return;
-  if (e.key === 'ArrowRight') go(index + 1);
-  if (e.key === 'ArrowLeft') go(index - 1);
-  if (e.key === 'Enter') $('done').click();
-});
-renderProgress();
+alt = startAlt(queue[index]);
 render();
 </script>
 </body>

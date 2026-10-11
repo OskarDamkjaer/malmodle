@@ -161,16 +161,22 @@ reviewed by hand before the next.
    or more only, new stretches of the street first, never two from one
    sequence or two the same way within 30 m. That gives 130 photos for 52
    streets.
-4. **Pick by hand.** `node scripts/photos-review.mjs` serves a page on
-   http://127.0.0.1:8081 that shows one item at a time: a sketch with the
-   sample points and where each photo was taken and which way it faces, then
-   the candidates per point and direction. Click to keep, ⤢ to see it large,
-   Klar (Enter) for the next unreviewed item, arrows to step. Thumbnails are
-   fetched on view and cached. Picks are saved on every click to
-   `photos/photos.json` (committed): per item key (`street:Södergatan`) the
-   kept photos with source, id, camera point, heading, date, licence, author
-   and source URL, and whether the item is reviewed. A reviewed item with no
-   photo needs another source.
+4. **One final photo per place, by hand.** The places come from the daily
+   sets of the coming days (`dailySet` over `quiz.json`): 103 targets for
+   the next 14 days. Places with picks use them; the rest get Commons
+   candidates (Wikidata image, category, OSM `image`/`wikimedia_commons`
+   tags, photos taken at the place, and a name search kept only when the
+   title names the place or it was taken within 150 m), and a Sonnet pass
+   orders them, best first. Mapillary is for streets only: photos taken near
+   a venue rarely show it. `data/cache/photos/final-queue.json` holds the
+   places with their ordered alternatives. `node scripts/photos-review.mjs`
+   serves http://127.0.0.1:8081: one place at a time, the photo large, the
+   description (or the research note when there is none) and the credit.
+   Enter approves, → and ← step through alternatives, X marks that none
+   will do, ↑ and ↓ move between places. Each decision is saved to
+   `photos/photos.json` as `final` (the photo id) and `approved`. Small
+   krogar and kaféer often have no free photo anywhere (Commons, Openverse);
+   they stay without one until someone takes it.
 5. **Fetch and resize** (in `scripts/build-quiz.mjs` or its own script):
    download each picked photo, resize to WebP at a phone-friendly width, and
    put it under `build/`. Add each item's photos to `quiz.json` with the

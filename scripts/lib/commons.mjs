@@ -40,10 +40,31 @@ async function cached(base, params) {
 
 const api = (base, params) => cached(base, `?${new URLSearchParams({ format: 'json', formatversion: '2', ...params })}`);
 
-export async function osmWikidata(ref) {
+export async function osmTags(ref) {
   const json = await cached(OSM, `/${ref}.json`);
-  const el = json?.elements?.find((e) => `${e.type}/${e.id}` === ref);
-  return el?.tags?.wikidata ?? null;
+  return json?.elements?.find((e) => `${e.type}/${e.id}` === ref)?.tags ?? {};
+}
+
+export async function osmWikidata(ref) {
+  return (await osmTags(ref)).wikidata ?? null;
+}
+
+export async function osmPhotos(ref) {
+  const tags = await osmTags(ref);
+  const out = { files: [], category: null };
+  for (const value of [tags.wikimedia_commons, tags.image]) {
+    if (!value) continue;
+    const file = /(?:^|\/wiki\/)(File:[^?#]+)/.exec(decodeURIComponent(value).replaceAll('_', ' '));
+    const category = /(?:^|\/wiki\/)Category:([^?#]+)/.exec(decodeURIComponent(value).replaceAll('_', ' '));
+    if (file) out.files.push(file[1]);
+    if (category) out.category ??= category[1];
+  }
+  return out;
+}
+
+export async function searchFiles(query, limit = 40) {
+  const json = await api(COMMONS, { action: 'query', list: 'search', srsearch: `${query} filetype:bitmap`, srnamespace: '6', srlimit: String(limit) });
+  return files((json?.query?.search ?? []).map((s) => s.title));
 }
 
 export async function wikipediaQid(pageUrl) {
