@@ -3,13 +3,14 @@ import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execSync } from 'node:child_process';
 
-const TAG = 'dev-assets-v3';
+const TAG = 'dev-assets-v4';
 const FILE = 'dev-assets.tar.gz';
 
 const CHECKS = [
   'build/data/districts.geojson',
   'data/cache/malmo.pmtiles',
   'data/cache/streets.json',
+  'data/cache/shapes.json',
 ];
 
 function allPresent() {

@@ -58,13 +58,15 @@ jobs:
           scripts/build-basemap.sh
           node scripts/build-districts.mjs
           node scripts/build-streets.mjs
+          node scripts/build-shapes.mjs
           node scripts/build-quiz.mjs
 
       - name: Publish the map data
         if: steps.release.outputs.exists == 'false'
         run: |
           tar --sort=name --owner=0 --group=0 --numeric-owner -czf dev-assets.tar.gz \
-            build/data/districts.geojson data/cache/malmo.pmtiles data/cache/streets.json
+            build/data/districts.geojson data/cache/malmo.pmtiles data/cache/streets.json \
+            data/cache/shapes.json
           sha256sum dev-assets.tar.gz | cut -d' ' -f1 > dev-assets.tar.gz.sha256
           gh release create "${{ steps.release.outputs.tag }}" dev-assets.tar.gz dev-assets.tar.gz.sha256 \
             --prerelease --title "${{ steps.release.outputs.tag }}" \

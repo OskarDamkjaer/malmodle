@@ -12,6 +12,13 @@ test('a tap on the target or within ten metres scores full marks', () => {
   assert.ok(distanceScore(50) < MAX_SCORE);
 });
 
+test('a place known only by a point gets a wider grace', () => {
+  const point = { type: 'Point', coordinates: [13, 55.6] };
+  assert.equal(distanceScore(90, point), MAX_SCORE);
+  assert.ok(distanceScore(90) < MAX_SCORE);
+  assert.ok(distanceScore(150, point) < MAX_SCORE);
+});
+
 test('the wrong end of town scores nothing', () => {
   assert.equal(distanceScore(8000), 0);
 });

@@ -15,7 +15,7 @@ const STREET_LINK_M = 500;
 
 const json = async (f) => JSON.parse(await readFile(f, 'utf8'));
 
-const [districts, landmarksDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, sourcesDoc] = await Promise.all([
+const [districts, landmarksDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, sourcesDoc, shapesDoc] = await Promise.all([
   json('build/data/districts.geojson'),
   json('landmarks/landmarks.json'),
   json('learn/bridges.json'),
@@ -24,6 +24,7 @@ const [districts, landmarksDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, c
   json('data/cache/streets.json'),
   json('learn/core.json'),
   json('learn/sources.json'),
+  json('data/cache/shapes.json'),
 ]);
 
 const problems = [];
@@ -75,6 +76,15 @@ function simplifyPolygonal(geometry) {
   return { type: 'MultiPolygon', coordinates: roundCoords(geometry.coordinates.map((p) => p.map(ring))) };
 }
 
+function shapeOr(kind, name, point) {
+  const shape = shapesDoc.shapes[`${kind}:${name}`];
+  if (!shape) return { type: 'Point', coordinates: roundCoords(point) };
+  if (shape.type === 'MultiLineString') {
+    return { type: 'MultiLineString', coordinates: shape.coordinates.map((line) => roundCoords(simplifyLine(line, 3))) };
+  }
+  return simplifyPolygonal(shape);
+}
+
 const text = (entry) => ({ about: entry?.text ?? null, source: entry?.source ?? null });
 
 const delomraden = districts.features;
@@ -101,7 +111,7 @@ const landmarkItems = landmarksDoc.landmarks
     kind: 'landmark',
     label: LANDMARK_LABEL[lm.icon] ?? 'Sevärdhet',
     point: roundCoords([lm.lon, lm.lat]),
-    geometry: { type: 'Point', coordinates: roundCoords([lm.lon, lm.lat]) },
+    geometry: shapeOr('landmark', lm.name, [lm.lon, lm.lat]),
     about: lm.description ?? null,
     source: lm.source ?? null,
   }));
@@ -113,7 +123,7 @@ const bridgeItems = bridgesDoc.bridges.map((b) => {
     kind: 'bridge',
     label: 'Bro',
     point: roundCoords([b.lon, b.lat]),
-    geometry: { type: 'Point', coordinates: roundCoords([b.lon, b.lat]) },
+    geometry: shapeOr('bridge', b.name, [b.lon, b.lat]),
     about: b.description ?? null,
     source: b.source ?? null,
   };

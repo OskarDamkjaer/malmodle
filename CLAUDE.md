@@ -16,8 +16,8 @@ or a browser skip instead of failing, so a green run can be an empty one.
 In a web session `.claude/hooks/session-start.sh` builds the style, fetches the
 prebuilt map data and app assets, and builds `quiz.json`, so nothing should
 skip. Do not run the heavy pipeline there (`build-basemap.sh`,
-`build-districts.mjs`, `build-streets.mjs`): it needs osmium, Java and hosts
-the sandbox cannot reach.
+`build-districts.mjs`, `build-streets.mjs`, `build-shapes.mjs`): it needs
+osmium, Java and hosts the sandbox cannot reach.
 
 ## Layout
 
