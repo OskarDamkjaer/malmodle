@@ -243,8 +243,20 @@ button.primary:hover { filter: brightness(1.06); }
 .total span { font-size: 16px; color: var(--ink-soft); }
 #endverdict { margin: 8px 0 0; font-size: 18px; font-family: var(--font-display); }
 #endsquares { margin: 12px 0 0; font-size: 22px; letter-spacing: 3px; }
-#end .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 24px 0 28px; }
-#end .actions .primary { grid-column: 1 / -1; min-height: 52px; font-size: 17px; }
+.sharecard { margin: 24px 0 0; padding: 14px; background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: 0 1px 2px rgb(0 0 0 / 6%); }
+[data-theme="tidning"] .sharecard { box-shadow: none; }
+#sharetext { margin: 0 0 12px; padding: 12px 14px; font: 15px/1.5 ui-monospace, "SF Mono", Menlo, monospace; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); border-radius: var(--radius); cursor: copy; user-select: all; -webkit-user-select: all; }
+.shareactions { display: flex; gap: 8px; }
+.shareactions button { min-height: 52px; font-size: 17px; }
+#share { flex: 1; }
+#share[data-state="done"] { background: var(--ink); color: var(--bg); }
+#share[data-state="failed"] { background: var(--chip); color: var(--wrong); }
+#sharenative { flex: 0 0 auto; padding: 10px 22px; font-weight: 600; }
+#tomorrow { margin: 18px 0 0; text-align: center; font-size: 16px; font-family: var(--font-display); }
+#countdown { display: block; margin-top: 2px; font-family: var(--font); font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+#end .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 28px; }
+#end footer { margin-top: 28px; text-align: center; }
+#report { font-size: 14px; color: var(--ink-soft); }
 #end h2 { margin: 0 0 10px; font-size: 13px; font-family: var(--font); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
 
 #endlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
@@ -304,9 +316,7 @@ button.primary:hover { filter: brightness(1.06); }
 }
 #boot.done { opacity: 0; visibility: hidden; pointer-events: none; }
 #boot .brand { text-align: center; }
-#boot .mark { width: 54px; height: 54px; margin: 0 auto 14px; border-radius: 50%; border: 3px solid var(--accent); position: relative; }
-#boot .mark::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--accent); }
-[data-theme="tidning"] #boot .mark, [data-theme="tidning"] #boot .mark::after { border-radius: 0; }
+#boot .mark { display: block; width: 64px; height: 64px; margin: 0 auto 14px; }
 #boot h1 { margin: 0; font-size: 30px; font-weight: var(--display-weight); letter-spacing: var(--display-tracking); }
 #boot .brand p { margin: 6px 0 0; color: var(--ink-soft); }
 #boot .bar { width: 180px; height: 4px; border-radius: 2px; background: var(--dot); overflow: hidden; }

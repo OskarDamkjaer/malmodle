@@ -7,7 +7,7 @@ const CACHE = 'data/cache/places';
 const OUT = 'places/longlist.json';
 const OUT_MD = 'places/longlist.md';
 
-const USER_AGENT = 'malmoemaps-build/1.0 (Lär dig Malmö, a daily map quiz; contact via repo)';
+const USER_AGENT = 'malmoemaps-build/1.0 (Malmökoll, a daily map quiz; contact via repo)';
 const BROWSER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36';
 
 const { bbox } = JSON.parse(await readFile('config/bbox.json', 'utf8'));
