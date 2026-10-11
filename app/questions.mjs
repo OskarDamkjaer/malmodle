@@ -77,7 +77,7 @@ const identify = {
     if (others.length < 3) return null;
     return { target, options: shuffle([target, ...others], rng).map((it) => it.name) };
   },
-  prompt: (q) => ({ title: 'Vad är det här?', detail: q.target.label }),
+  prompt: (q) => ({ title: 'Vad ligger här?', detail: q.target.label }),
   showing: (q) => [{ item: q.target, named: false }],
   view: (q) => ({ items: [q.target], context: 1500 }),
   grade(q, choice, items) {

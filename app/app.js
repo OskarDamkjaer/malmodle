@@ -336,13 +336,18 @@ function countUp(node, total) {
   requestAnimationFrame(step);
 }
 
-function verdictFor(total, max) {
-  const share = total / max;
-  if (share >= 0.9) return 'Du hittar i Malmö.';
-  if (share >= 0.7) return 'Riktigt bra.';
-  if (share >= 0.5) return 'Bra jobbat.';
-  if (share >= 0.3) return 'På god väg.';
-  return 'Imorgon blir det bättre.';
+const VERDICTS = [
+  [0.9, 'Snyggt!', 'Välkommen tillbaka imorgon.'],
+  [0.7, 'Riktigt bra!', 'Ses imorgon.'],
+  [0.5, 'Bra jobbat!', 'Ny omgång imorgon.'],
+  [0.3, 'På god väg.', 'Försök igen imorgon.'],
+  [0, 'Öva en gång till.', 'Försök igen imorgon.'],
+];
+
+function verdictFor(total, max, daily) {
+  const [share, praise, tomorrow] = VERDICTS.find(([least]) => total / max >= least);
+  if (!daily) return praise;
+  return share ? `${praise} ${tomorrow}` : tomorrow;
 }
 
 function finish() {
@@ -362,17 +367,12 @@ function finish() {
   el('kinds').hidden = !practicing;
   countUp(el('endscore'), total);
   el('endmax').textContent = `av ${max}`;
-  el('endverdict').textContent = verdictFor(total, max);
+  el('endverdict').textContent = verdictFor(total, max, !practicing);
   el('endsquares').textContent = scores.map(square).join('');
   el('sharetext').textContent = resultText();
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
-  clearInterval(countdownTimer);
-  if (!practicing) {
-    tickCountdown();
-    countdownTimer = setInterval(tickCountdown, 30000);
-  }
 
   reveal('end');
   el('end').scrollTop = 0;
@@ -430,25 +430,6 @@ async function shareNative() {
   } catch (err) {
     if (err.name !== 'AbortError') share();
   }
-}
-
-function untilTomorrow() {
-  const now = new Date();
-  const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-  const minutes = Math.ceil((next - now) / 60000);
-  const hours = Math.floor(minutes / 60);
-  return hours ? `${hours} tim ${minutes % 60} min` : `${minutes} min`;
-}
-
-let countdownTimer;
-function tickCountdown() {
-  if (dateKey() !== key) {
-    el('endverdict').textContent = 'En ny omgång väntar.';
-    el('again').textContent = 'Spela dagens';
-    clearInterval(countdownTimer);
-    return;
-  }
-  el('endverdict').textContent = `Ny omgång om ${untilTomorrow()}.`;
 }
 
 function reportLink() {
@@ -528,6 +509,10 @@ el('practise').addEventListener('click', toggleKinds);
 el('again').addEventListener('click', start);
 el('infoclose').addEventListener('click', closePlace);
 el('endmap').addEventListener('click', toggleMapView);
+el('maptipbutton').addEventListener('click', (e) => {
+  const open = e.currentTarget.getAttribute('aria-expanded') !== 'true';
+  e.currentTarget.setAttribute('aria-expanded', String(open));
+});
 
 document.addEventListener('keydown', (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
