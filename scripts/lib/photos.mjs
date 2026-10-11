@@ -95,6 +95,22 @@ export function samplePoints(street, others, mergeM = 60) {
   return points;
 }
 
+export function streetAhead(geometry, point, heading, cone = 25) {
+  let ahead = 0;
+  for (const line of lines(geometry)) {
+    for (let i = 1; i < line.length; i++) {
+      const a = line[i - 1], b = line[i];
+      const steps = Math.max(1, Math.ceil(distance(a, b) / 5));
+      for (let s = 0; s <= steps; s++) {
+        const p = [a[0] + ((b[0] - a[0]) * s) / steps, a[1] + ((b[1] - a[1]) * s) / steps];
+        const d = distance(point, p);
+        if (d > ahead && angleGap(bearing(point, p), heading) <= cone) ahead = d;
+      }
+    }
+  }
+  return Math.round(ahead);
+}
+
 export function imagePoint(img) {
   return (img.computed_geometry ?? img.geometry).coordinates;
 }

@@ -7,14 +7,27 @@ const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] :
 const port = Number(arg('--port', 8081));
 const host = arg('--host', '127.0.0.1');
 const CANDIDATES = 'data/cache/photos/candidates';
+const VERDICTS = 'data/cache/photos/verdicts';
 const PICKS = 'photos/photos.json';
 
+async function jsonFiles(dir) {
+  try {
+    return (await readdir(dir)).filter((f) => f.endsWith('.json')).sort();
+  } catch {
+    return [];
+  }
+}
+
 async function candidates() {
-  const files = (await readdir(CANDIDATES)).filter((f) => f.endsWith('.json')).sort();
+  const verdicts = {};
+  for (const f of await jsonFiles(VERDICTS)) Object.assign(verdicts, JSON.parse(await readFile(`${VERDICTS}/${f}`, 'utf8')));
   const out = [];
-  for (const f of files) {
+  for (const f of await jsonFiles(CANDIDATES)) {
     const { source, licence, items } = JSON.parse(await readFile(`${CANDIDATES}/${f}`, 'utf8'));
-    for (const item of items) out.push({ ...item, source, licence, group: f.replace(/\.json$/, '') });
+    for (const item of items) {
+      for (const s of item.samples) for (const d of s.directions) for (const img of d.images) if (verdicts[img.id]) img.review = verdicts[img.id];
+      out.push({ ...item, source, licence, group: f.replace(/\.json$/, '') });
+    }
   }
   return out;
 }

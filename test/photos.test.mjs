@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { angleGap, bearing, midpoint, pickAlong, samplePoints } from '../scripts/lib/photos.mjs';
+import { angleGap, bearing, midpoint, pickAlong, samplePoints, streetAhead } from '../scripts/lib/photos.mjs';
 
 const ns = { name: 'Nord', geometry: { type: 'LineString', coordinates: [[13, 55.60], [13, 55.61]] } };
 const ew = { name: 'Väst', geometry: { type: 'LineString', coordinates: [[12.99, 55.608], [13.01, 55.608]] } };
@@ -42,4 +42,11 @@ test('images are picked per direction, newest era first, one per sequence', () =
   const [north, south] = pickAlong(images, ns, p);
   assert.deepEqual(north.images.map((i) => i.id), ['north-new', 'north-old']);
   assert.deepEqual(south.images.map((i) => i.id), ['south']);
+});
+
+test('street ahead is how far the street runs where the camera looks', () => {
+  const fromMiddle = streetAhead(ns.geometry, [13, 55.605], 0);
+  assert.ok(Math.abs(fromMiddle - 557) < 5);
+  assert.ok(streetAhead(ns.geometry, [13, 55.6098], 0) < 40);
+  assert.equal(streetAhead(ns.geometry, [13, 55.605], 90), 0);
 });
