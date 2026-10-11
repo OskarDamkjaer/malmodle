@@ -45,7 +45,7 @@
       <p id="endverdict"></p>
       <p id="endsquares" aria-hidden="true"></p>
     </header>
-    <div class="sharecard">
+    <div id="sharecard" class="sharecard">
       <pre id="sharetext"></pre>
       <div class="shareactions">
         <button id="share" type="button" class="primary">Kopiera resultat</button>
@@ -54,10 +54,11 @@
     </div>
     <p id="tomorrow">Kom tillbaka imorgon för en ny omgång.<span id="countdown"></span></p>
     <div class="actions">
-      <button id="openmap" type="button">Utforska kartan</button>
+      <button id="practise" type="button" aria-expanded="false" aria-controls="kinds">Öva mer</button>
       <button id="again" type="button">Spela igen</button>
     </div>
-    <h2>Dagens platser</h2>
+    <div id="kinds" class="kinds" hidden></div>
+    <h2 id="endtitle">Dagens platser</h2>
     <ol id="endlist"></ol>
     <footer><a id="report" href="https://github.com/OskarDamkjaer/malmoemaps/issues/new" target="_blank" rel="noopener">Rapportera ett fel</a></footer>
   </div>
@@ -73,8 +74,6 @@
   <p id="cardabout"></p>
   <a id="cardsource" target="_blank" rel="noopener" hidden>Läs mer</a>
 </section>
-
-<nav id="devthemes" aria-label="Stil" hidden></nav>
 
 <div id="boot">
   <div class="brand">

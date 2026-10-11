@@ -1,5 +1,5 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { dailySet, dateKey, shareText, square } from './daily.mjs';
+import { PRACTICE, band, dailySet, dateKey, practiceSet, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
@@ -92,6 +92,7 @@ let set = [];
 let index = 0;
 let results = [];
 let phase = 'loading';
+let practicing = null;
 
 const current = () => set[index];
 const typeOf = (q) => TYPES[q.type];
@@ -120,11 +121,23 @@ function renderDots() {
 
 function start() {
   key = dateKey();
-  set = dailySet(items, key);
+  practicing = null;
+  play(dailySet(items, key));
+}
+
+function practise(kind) {
+  key = dateKey();
+  practicing = kind;
+  play(practiceSet(items, { key, category: kind.id, seed: Math.floor(Math.random() * 2 ** 32) }));
+}
+
+function play(questions) {
+  set = questions;
   index = 0;
   results = [];
   hide('end', 'back', 'card', 'result', 'freehint');
   setLabels(false);
+  markToday([]);
   ask();
 }
 
@@ -204,7 +217,7 @@ async function answer(value) {
   renderDots();
   hide('choices', 'hint');
   reveal('result');
-  el('next').textContent = index + 1 < set.length ? 'Nästa' : 'Se dagens resultat';
+  el('next').textContent = index + 1 < set.length ? 'Nästa' : practicing ? 'Se resultat' : 'Se dagens resultat';
   el('next').focus({ preventScroll: true });
 }
 
@@ -293,7 +306,17 @@ function finish() {
   const scores = results.map((r) => r.result.score);
   const total = sum(scores);
   const max = set.length * MAX_SCORE;
-  el('enddate').textContent = new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
+  el('enddate').textContent = practicing
+    ? `Övning · ${practicing.label}`
+    : new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
+  el('endtitle').textContent = practicing ? 'Platserna' : 'Dagens platser';
+  el('sharecard').hidden = Boolean(practicing);
+  el('tomorrow').hidden = Boolean(practicing);
+  el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
+  el('kinds').hidden = !practicing;
+  const targets = results.map((r) => r.q.target);
+  markToday(targets);
+  requestAnimationFrame(() => frameItems(targets, 300));
   countUp(el('endscore'), total);
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdictFor(total, max);
@@ -315,7 +338,7 @@ function finish() {
     meta.textContent = q.target.label;
     const score = document.createElement('span');
     score.className = 'score';
-    score.dataset.tone = tone(result.score);
+    score.dataset.band = band(result.score);
     score.textContent = String(result.score);
     summary.append(name, meta, score);
 
@@ -357,14 +380,16 @@ function finish() {
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
   el('tomorrow').firstChild.textContent = 'Kom tillbaka imorgon för en ny omgång.';
-  el('again').textContent = 'Spela igen';
+  el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
   clearInterval(countdownTimer);
-  tickCountdown();
-  countdownTimer = setInterval(tickCountdown, 30000);
+  if (!practicing) {
+    tickCountdown();
+    countdownTimer = setInterval(tickCountdown, 30000);
+  }
 
   reveal('end');
   el('end').scrollTop = 0;
-  el('share').focus({ preventScroll: true });
+  el(practicing ? 'again' : 'share').focus({ preventScroll: true });
 }
 
 function resultText() {
@@ -453,19 +478,33 @@ function reportLink() {
   return url.href;
 }
 
-function openMap(focus = null) {
+function openMap(focus) {
   phase = 'free';
   hide('end', 'card');
+  el('back').textContent = practicing ? 'Resultat' : 'Dagens resultat';
   reveal('back', 'freehint');
   setLabels(true);
   markToday(results.map((r) => r.q.target));
   clear();
-  if (focus) {
-    select(focus);
-    requestAnimationFrame(() => frameItems([focus], 600));
-  } else {
-    requestAnimationFrame(() => frameHome(items));
+  select(focus);
+  requestAnimationFrame(() => frameItems([focus], 600));
+}
+
+function renderKinds() {
+  const list = el('kinds');
+  for (const kind of PRACTICE) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = kind.label;
+    b.addEventListener('click', () => practise(kind));
+    list.append(b);
   }
+}
+
+function toggleKinds() {
+  const open = el('kinds').hidden;
+  el('kinds').hidden = !open;
+  el('practise').setAttribute('aria-expanded', String(open));
 }
 
 function select(item) {
@@ -492,18 +531,7 @@ function backToEnd() {
   setLabels(false);
   phase = 'end';
   reveal('end');
-}
-
-function renderThemes() {
-  const nav = el('devthemes');
-  nav.hidden = !['localhost', '127.0.0.1'].includes(location.hostname);
-  for (const [name, t] of Object.entries(THEMES)) {
-    const a = document.createElement('a');
-    a.href = themePath(name);
-    a.textContent = t.label;
-    if (name === themeName) a.setAttribute('aria-current', 'page');
-    nav.append(a);
-  }
+  requestAnimationFrame(() => frameItems(results.map((r) => r.q.target), 300));
 }
 
 map.on('click', (e) => {
@@ -520,7 +548,7 @@ el('next').addEventListener('click', next);
 el('share').addEventListener('click', share);
 el('sharenative').addEventListener('click', shareNative);
 el('sharetext').addEventListener('click', share);
-el('openmap').addEventListener('click', () => openMap());
+el('practise').addEventListener('click', toggleKinds);
 el('again').addEventListener('click', start);
 el('back').addEventListener('click', backToEnd);
 el('cardclose').addEventListener('click', deselect);
@@ -550,9 +578,9 @@ map.on('load', async () => {
     return;
   }
   progress(1);
-  renderThemes();
+  renderKinds();
   start();
-  setTimeout(() => boot.classList.add('done'), reducedMotion ? 0 : 250);
+  setTimeout(() => boot.classList.add('done'), Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
 });
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { GROUP, dailySet, dateKey } from '../app/daily.mjs';
+import { GROUP, PRACTICE, PRACTICE_SIZE, dailySet, dateKey, practiceSet } from '../app/daily.mjs';
 import { contains, distanceTo } from '../app/geo.mjs';
 
 const QUIZ = 'build/data/quiz.json';
@@ -56,4 +56,12 @@ test('every kind turns up over a month', { skip }, () => {
   const kinds = new Set();
   for (let i = 0; i < 30; i++) for (const q of dailySet(items, dateKey(new Date(2027, 0, 1 + i)))) kinds.add(q.target.kind);
   assert.deepEqual([...kinds].sort(), ['area', 'bridge', 'landmark', 'street']);
+});
+
+test('every item is in exactly one practice kind, and each kind fills a round', { skip }, () => {
+  for (const it of items) assert.equal(PRACTICE.filter((k) => k.has(it)).length, 1, it.name);
+  for (const kind of PRACTICE) {
+    assert.ok(items.filter(kind.has).length >= PRACTICE_SIZE, kind.label);
+    assert.equal(practiceSet(items, { key: dateKey(), category: kind.id, seed: 1 }).length, PRACTICE_SIZE, kind.label);
+  }
 });
