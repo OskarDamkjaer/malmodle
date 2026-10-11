@@ -54,15 +54,16 @@ const point = {
   showing: () => [],
   view: () => 'home',
   grade(q, tap, items, street) {
+    const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
+    if (street && street.name === q.target.name) return { score: MAX_SCORE, tap, near: tap, distance: 0, hit: null };
     const { distance, point: near } = closest(q.target.geometry, tap);
     const score = distanceScore(distance, q.target.geometry);
-    const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
     return {
       score,
       tap,
       near,
       distance,
-      hit: hit && hit.name !== q.target.name ? hit : null,
+      hit: hit && hit.name !== q.target.name && score < MAX_SCORE ? hit : null,
     };
   },
 };

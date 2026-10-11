@@ -45,6 +45,12 @@ async function loadArchive(url) {
   return new File(chunks, url.split('/').pop());
 }
 
+if (!document.createElement('canvas').getContext('webgl2')) {
+  const err = new Error('Webbläsaren saknar stöd för WebGL2.');
+  fail('Kartan kunde inte visas', err);
+  throw err;
+}
+
 let archive;
 try {
   const protocol = new pmtiles.Protocol();
@@ -204,7 +210,7 @@ async function answer(value) {
   phase = 'grading';
   const q = current();
   const type = typeOf(q);
-  const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value) : undefined;
+  const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value).catch(() => undefined) : undefined;
   const result = type.grade(q, value, items, street);
   results.push({ q, result });
   phase = 'answered';
