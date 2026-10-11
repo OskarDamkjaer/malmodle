@@ -95,7 +95,8 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     assert.match(shared, /^Malmökoll \d{4}-\d{2}-\d{2}\n\d+\/1000\n/);
     assert.equal([...shared.split('\n')[2]].length, 10);
 
-    await page.click('#openmap');
+    await page.click('#endlist summary');
+    await page.click('#endlist .links button');
     await page.waitForSelector('#back:not([hidden])');
     assert.ok((await visibleText(page)).length > 0, 'the free map has no labels');
 
@@ -103,6 +104,18 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     await page.click('#again');
     await page.waitForSelector('#question:not([hidden])');
     assert.equal(await page.textContent('#prompt'), prompts[0]);
+    await playThrough(page, viewport);
+
+    await page.waitForSelector('#end:not([hidden])');
+    await page.click('#practise');
+    assert.equal(await page.locator('#kinds button').count(), 9);
+    await page.locator('#kinds button').nth(2).click();
+    await page.waitForSelector('#question:not([hidden])');
+    assert.equal(await page.locator('#dots li').count(), 10);
+    await playThrough(page, viewport);
+    await page.waitForSelector('#end:not([hidden])');
+    assert.match(await page.textContent('#enddate'), /^Övning · /);
+    assert.ok(await page.isHidden('.sharecard'));
 
     assert.deepEqual(errors, []);
     await context.close();

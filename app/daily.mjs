@@ -160,8 +160,10 @@ export function dailySet(items, key) {
     if (it) { taken.add(it.name); if (it.apart) apartTaken.add(it.apart); }
     return it;
   });
-  const rng = random(hash(`malmo:${key}`));
-  const avoid = new Set(taken);
+  return assemble(slots, targets, items, random(hash(`malmo:${key}`)), new Set(taken));
+}
+
+function assemble(slots, targets, items, rng, avoid) {
   const questions = [];
   slots.forEach((slot, i) => {
     if (!targets[i]) return;
@@ -179,10 +181,62 @@ export function dailySet(items, key) {
   return questions;
 }
 
+const among = (...categories) => (it) => it.kind === 'landmark' && categories.includes(it.category);
+
+export const PRACTICE = [
+  { id: 'area', label: 'Stadsdelar', group: 'area', has: (it) => it.kind === 'area' },
+  { id: 'street', label: 'Gator', group: 'street', has: (it) => it.kind === 'street' },
+  { id: 'park', label: 'Parker', group: 'place', has: among('park') },
+  { id: 'krog', label: 'Krogar', group: 'place', has: among('krog') },
+  { id: 'kafe', label: 'Kaféer & handel', group: 'place', has: among('kafe', 'handel') },
+  { id: 'byggnad', label: 'Byggnader & kyrkor', group: 'place', has: among('byggnad', 'kyrka', 'museum', 'skola', 'konst') },
+  { id: 'scen', label: 'Scener', group: 'place', has: among('scen') },
+  { id: 'torg', label: 'Torg & broar', group: 'place', has: (it) => it.kind === 'bridge' || among('torg', 'vatten', 'omrade')(it) },
+  { id: 'idrott', label: 'Idrott & bad', group: 'place', has: among('idrott', 'bad') },
+];
+
+export const PRACTICE_SIZE = 10;
+export const SOON_DAYS = 7;
+export const SOON_SHARE = 2;
+
+export function laterKey(key, days) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
+}
+
+export function upcoming(items, key, days = SOON_DAYS) {
+  const names = new Set();
+  for (let n = 1; n <= days; n++) for (const q of dailySet(items, laterKey(key, n))) names.add(q.target.name);
+  return names;
+}
+
+export function practiceSet(items, { key, category, seed }) {
+  const kind = PRACTICE.find((c) => c.id === category);
+  const pool = items.filter(kind.has).sort((a, b) => (a.name < b.name ? -1 : 1));
+  const soon = upcoming(items, key);
+  const today = new Set(dailySet(items, key).map((q) => q.target.name));
+  const rng = random(seed);
+  const coming = shuffle(pool.filter((it) => soon.has(it.name)), rng).slice(0, SOON_SHARE);
+  const later = shuffle(pool.filter((it) => !soon.has(it.name) && !today.has(it.name)), rng);
+  const rest = shuffle(pool.filter((it) => !coming.includes(it) && !later.includes(it)), rng);
+  const targets = shuffle([...coming, ...later, ...rest].slice(0, PRACTICE_SIZE), rng);
+  const half = Math.ceil(targets.length / 2);
+  const mix = [...mixFor(kind.group, half, rng), ...mixFor(kind.group, targets.length - half, rng)];
+  const slots = shuffle(mix, rng).map((type) => ({ group: kind.group, type }));
+  return assemble(slots, targets, items, rng, new Set(targets.map((it) => it.name)));
+}
+
+export function band(score) {
+  if (score >= MAX_SCORE) return 'green';
+  if (score >= 80) return 'yellow';
+  if (score >= 40) return 'orange';
+  return 'red';
+}
+
+const SQUARES = { green: '🟩', yellow: '🟨', orange: '🟧', red: '🟥' };
+
 export function square(score) {
-  if (score >= 80) return '🟩';
-  if (score >= 40) return '🟨';
-  return '🟥';
+  return SQUARES[band(score)];
 }
 
 export function shareText({ key, scores, url }) {

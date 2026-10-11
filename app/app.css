@@ -11,7 +11,7 @@
   --mid: #8a6a12;
   --wrong: #111111;
   --dot: #cfc9bd;
-  --scrim: rgb(244 241 234 / 97%);
+  --scrim: rgb(244 241 234 / 80%);
   --shadow: 4px 4px 0 #111111;
   --border: 1.5px solid #111111;
   --radius: 2px;
@@ -42,7 +42,7 @@
   --mid: #f2c14e;
   --wrong: #ff7a59;
   --dot: #343a45;
-  --scrim: rgb(18 21 26 / 94%);
+  --scrim: rgb(18 21 26 / 80%);
   --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 10px 30px rgb(0 0 0 / 45%);
   --border: 1px solid #2a3039;
   color-scheme: dark;
@@ -61,7 +61,7 @@
   --mid: #9a6f0e;
   --wrong: #b4442a;
   --dot: #ddd4c7;
-  --scrim: rgb(243 238 231 / 92%);
+  --scrim: rgb(243 238 231 / 80%);
   --shadow: 0 1px 2px rgb(32 29 25 / 10%), 0 8px 24px rgb(32 29 25 / 10%);
   --border: 0 solid transparent;
   --radius: 16px;
@@ -85,7 +85,7 @@
   --mid: #c27c00;
   --wrong: #e8462f;
   --dot: #dfe3f0;
-  --scrim: rgb(247 244 236 / 94%);
+  --scrim: rgb(247 244 236 / 80%);
   --shadow: 0 2px 0 rgb(27 27 31 / 8%), 0 12px 28px rgb(43 89 255 / 14%);
   --radius: 22px;
   --radius-button: 16px;
@@ -225,8 +225,8 @@ button.primary:hover { filter: brightness(1.06); }
   z-index: 5;
   overflow-y: auto;
   background: var(--scrim);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(1.5px) saturate(.7);
+  -webkit-backdrop-filter: blur(1.5px) saturate(.7);
   -webkit-overflow-scrolling: touch;
   animation: fade .3s ease-out;
 }
@@ -255,6 +255,11 @@ button.primary:hover { filter: brightness(1.06); }
 #tomorrow { margin: 18px 0 0; text-align: center; font-size: 16px; font-family: var(--font-display); }
 #countdown { display: block; margin-top: 2px; font-family: var(--font); font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 #end .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 28px; }
+.kinds { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: -16px 0 28px; animation: fade .2s ease-out; }
+.kinds button { min-height: 44px; padding: 8px 12px; font-size: 15px; }
+#practise[aria-expanded="true"] { background: var(--ink); color: var(--bg); }
+#practise::after { content: " ▾"; }
+#practise[aria-expanded="true"]::after { content: " ▴"; }
 #end footer { margin-top: 28px; text-align: center; }
 #report { font-size: 14px; color: var(--ink-soft); }
 #end h2 { margin: 0 0 10px; font-size: 13px; font-family: var(--font); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
@@ -276,9 +281,10 @@ button.primary:hover { filter: brightness(1.06); }
 #endlist .name { grid-area: name; font-size: 16px; font-weight: 600; }
 #endlist .meta { grid-area: meta; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
 #endlist .score { grid-area: score; min-width: 44px; padding: 4px 10px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; border-radius: var(--radius-button); background: var(--chip); }
-#endlist .score[data-tone="right"] { color: var(--accent); }
-#endlist .score[data-tone="mid"] { color: var(--mid); }
-#endlist .score[data-tone="wrong"] { color: var(--wrong); }
+#endlist .score[data-band="green"] { background: #2e9e4f; color: #ffffff; }
+#endlist .score[data-band="yellow"] { background: #f2c230; color: #1a1a1a; }
+#endlist .score[data-band="orange"] { background: #f08a24; color: #1a1a1a; }
+#endlist .score[data-band="red"] { background: #db3a2f; color: #ffffff; }
 #endlist .body { padding: 0 16px 14px; }
 #endlist .asked { margin: 0; font-size: 14px; color: var(--ink-soft); }
 #endlist .about { margin: 8px 0 0; font-size: 15px; line-height: 1.5; }
@@ -286,10 +292,6 @@ button.primary:hover { filter: brightness(1.06); }
 #endlist .links button { min-height: 38px; padding: 6px 14px; font-size: 14px; }
 #endlist a, #cardsource { font-size: 14px; color: var(--ink-soft); }
 
-#devthemes { display: flex; gap: 6px; position: fixed; z-index: 7; left: var(--gap); top: 50%; transform: translateY(-50%); flex-direction: column; }
-#devthemes a { padding: 6px 12px; font-size: 14px; color: var(--ink); text-decoration: none; border-radius: var(--radius-button); background: var(--chip); box-shadow: 0 1px 4px rgba(0,0,0,.2); }
-#devthemes a[aria-current] { background: var(--ink); color: var(--bg); }
-#devthemes[hidden] { display: none; }
 
 #back { width: auto; left: var(--gap); transform: none; animation: none; padding: 10px 16px; font-weight: 600; }
 #back::before { content: "← "; }

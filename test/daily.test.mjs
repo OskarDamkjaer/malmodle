@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, SET_SIZE, SPLITS, dailySet, dateKey, hash, plan, random, shareText, square } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, shareText, square, upcoming } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -143,8 +143,46 @@ test('the neighbour answer is the one area on that side, and no decoy is on that
 
 test('the shared result is the day, the score and a square per question', () => {
   const text = shareText({ key: '2026-10-10', scores: [100, 50, 0], url: 'https://example.org' });
-  assert.equal(text, `Malmökoll 2026-10-10\n150/${3 * MAX_SCORE}\n🟩🟨🟥\nhttps://example.org`);
-  assert.equal(square(80), '🟩');
-  assert.equal(square(79), '🟨');
+  assert.equal(text, `Malmökoll 2026-10-10\n150/${3 * MAX_SCORE}\n🟩🟧🟥\nhttps://example.org`);
+  assert.equal(square(MAX_SCORE), '🟩');
+  assert.equal(square(99), '🟨');
+  assert.equal(square(80), '🟨');
+  assert.equal(square(79), '🟧');
+  assert.equal(square(40), '🟧');
   assert.equal(square(39), '🟥');
+  assert.equal(square(0), '🟥');
+});
+
+test('days count on across months and years', () => {
+  assert.equal(laterKey('2026-10-31', 1), '2026-11-01');
+  assert.equal(laterKey('2026-12-28', 7), '2027-01-04');
+});
+
+test('the coming week is the targets of the next seven days', () => {
+  const soon = upcoming(items, '2026-10-10');
+  for (let n = 1; n <= 7; n++) {
+    for (const q of dailySet(items, laterKey('2026-10-10', n))) assert.ok(soon.has(q.target.name));
+  }
+});
+
+test('practice asks ten of one kind, two of them coming this week', () => {
+  const soon = upcoming(items, '2026-10-10');
+  for (const kind of PRACTICE.filter((k) => ['area', 'street'].includes(k.id))) {
+    for (const seed of [1, 2, 3]) {
+      const set = practiceSet(items, { key: '2026-10-10', category: kind.id, seed });
+      assert.equal(set.length, PRACTICE_SIZE);
+      assert.equal(new Set(set.map((q) => q.target.name)).size, PRACTICE_SIZE);
+      for (const q of set) assert.ok(kind.has(q.target), q.target.name);
+      const today = new Set(dailySet(items, '2026-10-10').map((q) => q.target.name));
+      const later = items.filter((it) => kind.has(it) && !soon.has(it.name) && !today.has(it.name)).length;
+      const coming = set.filter((q) => soon.has(q.target.name)).length;
+      if (later >= PRACTICE_SIZE - SOON_SHARE) assert.equal(coming, SOON_SHARE, kind.id);
+      else assert.equal(coming, PRACTICE_SIZE - later, kind.id);
+    }
+  }
+});
+
+test('practice mixes in the other question types', () => {
+  const types = new Set(practiceSet(items, { key: '2026-10-10', category: 'area', seed: 1 }).map((q) => q.type));
+  assert.ok(types.has('point') && types.has('identify'));
 });
