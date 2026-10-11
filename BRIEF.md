@@ -24,6 +24,7 @@ every day asks to point at at least two areas; then "what is this", then one
 of the rest.
 
 - **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
+  A tap on another street scores at most 70, however close it is.
   Afterwards: how far off you were, and what you actually tapped if it was
   something else.
 - **Vad är det här?** Something is highlighted on the map; pick its name from a

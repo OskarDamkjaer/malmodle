@@ -2,6 +2,7 @@ import { closest, contains, distanceTo, gap, metersBetween, offset } from './geo
 
 export const MAX_SCORE = 100;
 export const CLOSE_SCORE = 25;
+export const WRONG_STREET_SCORE = 70;
 
 const GRACE = { shape: 10, point: 100 };
 const FALLOFF = 900;
@@ -60,15 +61,11 @@ const point = {
   view: () => 'home',
   grade(q, tap, items, street) {
     const { distance, point: near } = closest(q.target.geometry, tap);
-    const score = distanceScore(distance, q.target.geometry);
-    const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
-    return {
-      score,
-      tap,
-      near,
-      distance,
-      hit: hit && hit.name !== q.target.name ? hit : null,
-    };
+    const found = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
+    const hit = found && found.name !== q.target.name ? found : null;
+    let score = distanceScore(distance, q.target.geometry);
+    if (hit && q.target.kind === 'street' && distance > GRACE.shape) score = Math.min(score, WRONG_STREET_SCORE);
+    return { score, tap, near, distance, hit };
   },
 };
 

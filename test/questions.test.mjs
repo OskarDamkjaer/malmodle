@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CLOSE_SCORE, MAX_SCORE, TYPES, closeTo, distanceScore, formatDistance, tappedOn } from '../app/questions.mjs';
+import { CLOSE_SCORE, MAX_SCORE, WRONG_STREET_SCORE, TYPES, closeTo, distanceScore, formatDistance, tappedOn } from '../app/questions.mjs';
 import { fixture } from './fixture.mjs';
 
 const items = fixture();
@@ -67,6 +67,15 @@ test('a street question names the street the map shows under the tap', () => {
   assert.equal(TYPES.point.grade({ target }, tap, items).hit.name, 'Gata 0');
   assert.equal(TYPES.point.grade({ target }, tap, items, seen).hit.name, 'Okänd gata');
   assert.equal(TYPES.point.grade({ target }, tap, items, null).hit, null);
+});
+
+test('the wrong street scores no more than seventy however close it is', () => {
+  const target = byName('Gata 1');
+  const tap = [12.97, 55.5765];
+  const other = { name: 'Okänd gata', kind: 'street', point: tap, geometry: { type: 'Point', coordinates: tap } };
+  assert.ok(TYPES.point.grade({ target }, tap, items, null).score > WRONG_STREET_SCORE);
+  assert.equal(TYPES.point.grade({ target }, tap, items, other).score, WRONG_STREET_SCORE);
+  assert.equal(TYPES.point.grade({ target }, target.point, items, other).score, MAX_SCORE);
 });
 
 test('a wrong pick that is close to the answer scores a little', () => {
