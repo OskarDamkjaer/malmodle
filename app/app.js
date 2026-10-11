@@ -2,9 +2,10 @@ import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { dailySet, dateKey, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { metersBetween } from './geo.mjs';
+import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap, streetAt,
+  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -167,16 +168,29 @@ function ask() {
   });
 }
 
-function clickedStreet(tap) {
-  const street = streetAt(tap);
+async function clickedStreet(tap) {
+  const cos = Math.cos((tap[1] * Math.PI) / 180);
+  const reach = (12 * 40075016.686 * cos) / (512 * 2 ** map.getZoom());
+  const tiles = new globalThis.Map();
+  for (const [dx, dy] of [[-1, -1], [-1, 1], [1, -1], [1, 1]]) {
+    const tile = tileAt([tap[0] + (dx * reach) / (111320 * cos), tap[1] + (dy * reach) / 111320], header.maxZoom);
+    tiles.set(`${tile.x}/${tile.y}`, tile);
+  }
+  const lines = [];
+  for (const tile of tiles.values()) {
+    const found = await archive.getZxy(tile.z, tile.x, tile.y).catch(() => null);
+    if (found) lines.push(...namedLines(new Uint8Array(found.data), tile, 'transportation_name'));
+  }
+  const street = streetNear(lines, tap, reach);
   return street && (byName.get(street.name)?.kind === 'street' ? byName.get(street.name) : street);
 }
 
-function answer(value) {
+async function answer(value) {
   if (phase !== 'asking') return;
+  phase = 'grading';
   const q = current();
   const type = typeOf(q);
-  const street = type.input === 'map' && q.target.kind === 'street' ? clickedStreet(value) : undefined;
+  const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value) : undefined;
   const result = type.grade(q, value, items, street);
   results.push({ q, result });
   phase = 'answered';

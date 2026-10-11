@@ -1,4 +1,4 @@
-import { around, bounds, closest, union } from './geo.mjs';
+import { around, bounds, union } from './geo.mjs';
 import { paintFor } from './themes.mjs';
 
 let COLOR = {};
@@ -251,20 +251,4 @@ export function pick(point) {
     if (hit) return hit.properties.name;
   }
   return null;
-}
-
-export function streetAt(tap, pixels = 12) {
-  const reach = (pixels * 40075016.686 * Math.cos((tap[1] * Math.PI) / 180)) / (512 * 2 ** map.getZoom());
-  const pieces = map.querySourceFeatures('openmaptiles', { sourceLayer: 'transportation_name' })
-    .filter((f) => f.properties.name && ['LineString', 'MultiLineString'].includes(f.geometry.type));
-  let best = null;
-  for (const f of pieces) {
-    const { distance, point } = closest(f.geometry, tap);
-    if (distance <= reach && (!best || distance < best.distance)) best = { name: f.properties.name, distance, point };
-  }
-  if (!best) return null;
-  const coordinates = pieces
-    .filter((f) => f.properties.name === best.name)
-    .flatMap((f) => (f.geometry.type === 'LineString' ? [f.geometry.coordinates] : f.geometry.coordinates));
-  return { name: best.name, kind: 'street', point: best.point, geometry: { type: 'MultiLineString', coordinates } };
 }
