@@ -253,14 +253,18 @@ function padding() {
   const bottom = bottoms.length ? h - Math.min(...bottoms) : 0;
   const w = map.getContainer().clientWidth;
   const side = Math.min(gap * 2, w / 10);
-  const beside = Math.max(0, ...[...document.querySelectorAll('[data-edge="left"]')]
-    .filter((el) => el.getClientRects().length)
-    .map((el) => el.getBoundingClientRect().right));
+  const shown = (selector) => [...document.querySelectorAll(selector)]
+    .filter((el) => !el.hidden && el.getClientRects().length)
+    .map((el) => el.getBoundingClientRect());
+  const beside = Math.max(0, ...shown('[data-edge="left"]').map((r) => r.right));
+  const sides = shown('[data-edge="side"]');
+  const right = Math.max(0, ...sides.filter((r) => r.left > w * 0.4).map((r) => w - r.left));
+  const under = Math.max(top, ...sides.filter((r) => r.left <= w * 0.4).map((r) => r.bottom));
   return {
-    top: Math.min(top + gap, h * 0.45),
+    top: Math.min(under + gap, h * 0.45),
     bottom: Math.min(bottom + gap, h * 0.45),
     left: beside && beside < w * 0.6 ? beside + gap * 2 : side,
-    right: side,
+    right: right ? right + gap : side,
   };
 }
 
