@@ -2,12 +2,11 @@ import { closest, contains, distanceTo, metersBetween, offset } from './geo.mjs'
 
 export const MAX_SCORE = 100;
 
-const TOLERANCE = { area: 0, street: 40, bridge: 100, landmark: 150 };
+const TOLERANCE = 10;
 const FALLOFF = 900;
 
-export function distanceScore(meters, kind) {
-  const over = meters - (TOLERANCE[kind] ?? 0);
-  if (over <= 0) return MAX_SCORE;
+export function distanceScore(meters) {
+  const over = Math.max(0, meters - TOLERANCE);
   return Math.round(MAX_SCORE * Math.exp(-over / FALLOFF));
 }
 
@@ -56,7 +55,7 @@ const point = {
   view: () => 'home',
   grade(q, tap, items) {
     const { distance, point: near } = closest(q.target.geometry, tap);
-    const score = distanceScore(distance, q.target.kind);
+    const score = distanceScore(distance);
     const hit = tappedOn(items, tap, q.target.kind);
     return {
       score,

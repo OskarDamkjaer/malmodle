@@ -6,24 +6,24 @@ import { fixture } from './fixture.mjs';
 const items = fixture();
 const byName = (name) => items.find((it) => it.name === name);
 
-test('a tap inside an area scores full marks', () => {
-  assert.equal(distanceScore(0, 'area'), MAX_SCORE);
+test('a tap on the target or within ten metres scores full marks', () => {
+  assert.equal(distanceScore(0), MAX_SCORE);
+  assert.equal(distanceScore(10), MAX_SCORE);
+  assert.ok(distanceScore(50) < MAX_SCORE);
 });
 
-test('points and streets get a tolerance before the score falls', () => {
-  assert.equal(distanceScore(30, 'street'), MAX_SCORE);
-  assert.equal(distanceScore(140, 'landmark'), MAX_SCORE);
-  assert.ok(distanceScore(400, 'landmark') < MAX_SCORE);
+test('the wrong end of town scores nothing', () => {
+  assert.equal(distanceScore(8000), 0);
 });
 
 test('the score falls with distance and never goes below zero', () => {
   let previous = MAX_SCORE;
   for (let d = 0; d <= 20000; d += 250) {
-    const s = distanceScore(d, 'area');
+    const s = distanceScore(d);
     assert.ok(s <= previous && s >= 0);
     previous = s;
   }
-  assert.equal(distanceScore(20000, 'area'), 0);
+  assert.equal(distanceScore(20000), 0);
 });
 
 test('distances read as Swedish', () => {
