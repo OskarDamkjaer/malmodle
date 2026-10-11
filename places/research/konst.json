@@ -1,0 +1,1315 @@
+{
+ "category": "konst",
+ "core": [
+  {
+   "name": "Karl X Gustav (Stortorget)",
+   "osm": "node/2016689391",
+   "lat": 55.60614,
+   "lon": 13.00022,
+   "why": "Equestrian statue in the middle of Stortorget since 1896; the city's best-known monument and most-read art article on sv Wikipedia.",
+   "evidence": [
+    "views12m 2089, sitelinks 2",
+    "https://sv.wikipedia.org/wiki/Karl_X_Gustavs_ryttarstaty,_Malm%C3%B6",
+    "malmo-konst: John Börjeson 1896"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Optimistorkestern",
+   "osm": "node/2293729248",
+   "lat": 55.60549,
+   "lon": 13.00125,
+   "why": "Lundell's bronze marching band on Södergatan (not Stortorget or Lilla torg), a standard meeting point on the main pedestrian street.",
+   "evidence": [
+    "views12m 1283, sitelinks 3",
+    "https://sv.wikipedia.org/wiki/Optimistorkestern",
+    "https://www.komoot.com/highlight/974254"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Arbetets ära (Möllevångstorget)",
+   "osm": "node/2409108105",
+   "lat": 55.59174,
+   "lon": 13.0075,
+   "why": "Axel Ebbe's group of naked workers lifting a granite block, the landmark of Möllevångstorget.",
+   "evidence": [
+    "views12m 1740, sitelinks 3",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Torg-A-O/Mollevangstorget.html"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Fontänerna på Gustav Adolfs torg (Fem fontäner och ett klot)",
+   "osm": "node/12811999511,relation/14125695",
+   "lat": 55.6028,
+   "lon": 13.00121,
+   "why": "Sivert Lindblom's five bronze fountains and granite sphere on Gustav Adolfs torg, burning fire in winter; the square's focal point.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Torg-A-O/Gustav-Adolfs-torg.html",
+    "https://en.wikipedia.org/wiki/Gustav_Adolfs_torg,_Malm%C3%B6"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Torgbrunn (fontänen på Stortorget)",
+   "osm": "way/220018226",
+   "lat": 55.60644,
+   "lon": 13.00066,
+   "why": "Stig Blomberg's 1964 bronze fountain on Stortorget, the second fixed point on the main square after the statue.",
+   "evidence": [
+    "malmo-konst: Torgbrunn, Stig Blomberg 1964 (same point)",
+    "https://malmo.se/Sa-arbetar-vi-med.../Kultur---projekt-och-satsningar/Malmo-konst/Antirasistiskt-Monument/Hela-staden-ar-ett-monument/Uproot-Displace-2022---Hanni-Kamaly.html"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Människan och Pegasus",
+   "osm": "node/1179411764",
+   "lat": 55.60111,
+   "lon": 12.9871,
+   "why": "Carl Milles' winged horse on its tall column at Linnéplatsen by Slottsparken/Stadsbiblioteket, visible from far off and a classic Malmö image.",
+   "evidence": [
+    "malmo-konst: Carl Milles 1950",
+    "https://bukowskis.com/auctions/649/743-carl-milles-manniskan-och-pegasus"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Rubato (Malmö Live)",
+   "osm": "node/8818335518",
+   "lat": 55.6068,
+   "lon": 12.99378,
+   "why": "Eva Hild's six-metre white aluminium loop in front of Malmö Live, the most conspicuous recent work in the city centre.",
+   "evidence": [
+    "malmo-konst: Eva Hild 2015",
+    "https://bildarkivet.malmo.se/asset-bank/action/viewAsset?id=235953"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Way to Go (skorna på Davidshallsbron)",
+   "osm": "",
+   "lat": 55.60113,
+   "lon": 13.00084,
+   "why": "Bronze shoes of Malmö performers on a granite red carpet across Davidshallsbron, widely known as 'skorna på Davidshallsbron'.",
+   "evidence": [
+    "malmo-konst: Åsa Maria Bengtsson 2014",
+    "https://malmo.se/Om-Malmo-stad/Var-organisation/Forvaltningar/Kulturforvaltningen/KF-nyhetsarkiv/2017-10-24-Tio-nya-skor-pa-Davidshallsbron.html"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Ekotemplet (Pildammsparken)",
+   "osm": "node/12982975441",
+   "lat": 55.59102,
+   "lon": 12.99088,
+   "why": "The round columned temple from the 1914 Baltic Exhibition in Pildammsparken, a well-known meeting and photo spot.",
+   "evidence": [
+    "malmo-konst: Ferdinand Boberg 1914",
+    "https://sv.wikipedia.org/wiki/Pildammsparken"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "everything": [
+  {
+   "name": "Bobos hjärta",
+   "osm": "node/4366632535",
+   "outsideMalmo": true,
+   "note": "Alnarp (Lomma), SLU library; high wiki views but not a Malmö everyday reference"
+  },
+  {
+   "name": "Öresund",
+   "osm": "",
+   "source": "malmo-konst: Gerhard Henning, 1934;wikivoyage-sv"
+  },
+  {
+   "name": "Mosaik Folkets park",
+   "osm": "",
+   "source": "malmo-konst: Anna Wiklund, Anna Klara Åhrén, 2008"
+  },
+  {
+   "name": "Anna Lisa",
+   "osm": "node/9674528763"
+  },
+  {
+   "name": "Konsul Anders Caspar Holm",
+   "osm": "node/9674528761"
+  },
+  {
+   "name": "Gustaf Rydberg",
+   "osm": "node/8824319709"
+  },
+  {
+   "name": "Till krigsförlista sjömäns minne",
+   "osm": "node/9682712872"
+  },
+  {
+   "name": "Flickornas orm",
+   "osm": "node/10881627347"
+  },
+  {
+   "name": "Gycklaren",
+   "osm": "node/9674528756"
+  },
+  {
+   "name": "Vildsvinet",
+   "osm": "node/9730421193"
+  },
+  {
+   "name": "Vinden",
+   "osm": "node/4402794866"
+  },
+  {
+   "name": "Frihetsfågeln",
+   "osm": "node/9674528758"
+  },
+  {
+   "name": "Kollämpare under arbete",
+   "osm": "node/9663658079"
+  },
+  {
+   "name": "Odling-växande",
+   "osm": "node/12324034636"
+  },
+  {
+   "name": "Porten mot kontinenten",
+   "osm": "node/11453259932"
+  },
+  {
+   "name": "Ormet",
+   "osm": "node/9674528760"
+  },
+  {
+   "name": "Solens finger",
+   "osm": "node/9949647552"
+  },
+  {
+   "name": "Hartrappan",
+   "osm": "node/13784368886"
+  },
+  {
+   "name": "Kattarakt",
+   "osm": "node/12161696701"
+  },
+  {
+   "name": "The movement meter for Lernacken: The Lightpavillion",
+   "osm": "node/9750237338"
+  },
+  {
+   "name": "The movement meter for Lernacken: The Tower",
+   "osm": "node/3212371169"
+  },
+  {
+   "name": "Vattenfall",
+   "osm": "node/9464240424"
+  },
+  {
+   "name": "City Art Gym",
+   "osm": "node/9458824533"
+  },
+  {
+   "name": "Diana",
+   "osm": "node/6420405509"
+  },
+  {
+   "name": "Ekvlibrist",
+   "osm": "node/9556186794"
+  },
+  {
+   "name": "Ida hissar upp Emil i en flaggstång och visar honom världen",
+   "osm": "node/13471280235"
+  },
+  {
+   "name": "Pulserande koordinatsystem",
+   "osm": "node/11418190011"
+  },
+  {
+   "name": "Skeenden",
+   "osm": "node/9001468084"
+  },
+  {
+   "name": "Spectral self container",
+   "osm": "node/3402736380"
+  },
+  {
+   "name": "225088 Gonggong",
+   "osm": "node/11432419992",
+   "note": "part of the Sweden Solar System scale model"
+  },
+  {
+   "name": "Arvtagarna",
+   "osm": "node/11082909133"
+  },
+  {
+   "name": "Interdependens",
+   "osm": "node/13357428184"
+  },
+  {
+   "name": "Mother",
+   "osm": "way/339210308"
+  },
+  {
+   "name": "Passage",
+   "osm": "node/11453246651"
+  },
+  {
+   "name": "Points of View",
+   "osm": "node/10063344306"
+  },
+  {
+   "name": "Utblick / Insikt",
+   "osm": "node/9511315204"
+  },
+  {
+   "name": "Wind wall",
+   "osm": "node/9543493466"
+  },
+  {
+   "name": "Elma Danielsson",
+   "osm": "node/10992882424"
+  },
+  {
+   "name": "Rymdstenen",
+   "osm": "way/1456475952"
+  },
+  {
+   "name": "Snubbelstenarna (Posthusplatsen)",
+   "osm": "node/12212839193",
+   "listName": "SCHULIM BÜRGER"
+  },
+  {
+   "name": "&child",
+   "osm": "way/1193926070"
+  },
+  {
+   "name": "Aldrig Godnatt av Coco Moodysson",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Alla bor med varandra",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2005"
+  },
+  {
+   "name": "Amaltheadådet",
+   "osm": "node/11763290269"
+  },
+  {
+   "name": "Annorstädes",
+   "osm": "",
+   "source": "malmo-konst: Tania Ruiz Gutiérrez, 2010"
+  },
+  {
+   "name": "Arc",
+   "osm": "",
+   "source": "malmo-konst: Sten Ove Persson, 1993"
+  },
+  {
+   "name": "Arch",
+   "osm": "way/952726497"
+  },
+  {
+   "name": "Aurora",
+   "osm": "node/13111206949"
+  },
+  {
+   "name": "Axel Danielsson",
+   "osm": "node/12869580803"
+  },
+  {
+   "name": "Baden Baden",
+   "osm": "",
+   "source": "malmo-konst: Magnus Wallin, 2018"
+  },
+  {
+   "name": "Bladomlopp",
+   "osm": "",
+   "source": "malmo-konst: Vassil Simittchiev, 1985"
+  },
+  {
+   "name": "Blommor",
+   "osm": "",
+   "source": "malmo-konst: Eva Larsson, 2006"
+  },
+  {
+   "name": "Blue Tones",
+   "osm": "node/1738023705"
+  },
+  {
+   "name": "Brolyftaren",
+   "osm": "",
+   "source": "malmo-konst: Johan Lünnér, 1985"
+  },
+  {
+   "name": "Drottningtorgets fontän (Brunnskar)",
+   "osm": "",
+   "listName": "Brunnskar",
+   "source": "malmo-konst: Alfred Arwidius, 1914"
+  },
+  {
+   "name": "Bubbla",
+   "osm": "",
+   "source": "malmo-konst: Monica Gora, 2004"
+  },
+  {
+   "name": "Bänken på Möllan av Mikael Borg",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Carl Frick",
+   "osm": "node/12983155192"
+  },
+  {
+   "name": "Cirkuslekplats",
+   "osm": "",
+   "source": "malmo-konst: Bie Norling, 2000"
+  },
+  {
+   "name": "Cordes Vibrantes",
+   "osm": "node/12176753342"
+  },
+  {
+   "name": "Delfiner",
+   "osm": "",
+   "source": "malmo-konst: Sven Carlsson, 1973"
+  },
+  {
+   "name": "Den första flygningen över Öresund",
+   "osm": "",
+   "source": "malmo-konst: Okänd, 1970"
+  },
+  {
+   "name": "Den talande staden",
+   "osm": "node/8821461944"
+  },
+  {
+   "name": "Den trånga porten till friheten",
+   "osm": "node/9674528755"
+  },
+  {
+   "name": "Det Svenska Tungsinnet",
+   "osm": "node/4665273760"
+  },
+  {
+   "name": "Diamonds are Everywhere",
+   "osm": "",
+   "source": "malmo-konst: Sigurdúr Gudmunsson, 2001"
+  },
+  {
+   "name": "Drakrygg",
+   "osm": "node/8602286182"
+  },
+  {
+   "name": "Droppkrona",
+   "osm": "",
+   "source": "malmo-konst: Christian Partos, 1994"
+  },
+  {
+   "name": "Elementarer",
+   "osm": "node/12478576054"
+  },
+  {
+   "name": "Elvis av Tony Cronstam",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Emigranterna",
+   "osm": "node/10611710160"
+  },
+  {
+   "name": "Eric Sigfrid Persson",
+   "osm": "",
+   "source": "malmo-konst: H. C. Ericson, Jan Bergfelt, 2007"
+  },
+  {
+   "name": "Existens",
+   "osm": "",
+   "source": "malmo-konst: Maria Hellström, 1998"
+  },
+  {
+   "name": "Frans Henrik Kockum",
+   "osm": "node/9056986889",
+   "listName": "F. H. Kockum"
+  },
+  {
+   "name": "Familjen",
+   "osm": "",
+   "source": "malmo-konst: Thure Thörn, 1962"
+  },
+  {
+   "name": "Farväl till de sju haven",
+   "osm": "node/8602286181"
+  },
+  {
+   "name": "Filmen 100 år",
+   "osm": "node/12084917601"
+  },
+  {
+   "name": "Fiskegumma",
+   "osm": "node/3793755789"
+  },
+  {
+   "name": "Fjättrad i nuet",
+   "osm": "node/12310625003"
+  },
+  {
+   "name": "Flicka med fågel",
+   "osm": "node/5978209038"
+  },
+  {
+   "name": "Flora",
+   "osm": "node/3744635797"
+  },
+  {
+   "name": "Flygarmonument",
+   "osm": "",
+   "source": "malmo-konst: F10 Ängelholm, 1980"
+  },
+  {
+   "name": "Flyktingmonumentet",
+   "osm": "node/4993171102"
+  },
+  {
+   "name": "Frans Suell",
+   "osm": "node/2715094114"
+  },
+  {
+   "name": "Fritz Bauer",
+   "osm": "node/5978209042"
+  },
+  {
+   "name": "Från en plats till en annan",
+   "osm": "node/13397276553"
+  },
+  {
+   "name": "Fågelkärleken",
+   "osm": "",
+   "source": "malmo-konst: Lena Ignestam, Carina Zunino, 2019"
+  },
+  {
+   "name": "Fågelsadel",
+   "osm": "",
+   "source": "malmo-konst: Ulla och Gustav Kraitz, 2016"
+  },
+  {
+   "name": "Fåglar av Magda Lundberg",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Får",
+   "osm": "",
+   "source": "malmo-konst: Anne Smith, 2010"
+  },
+  {
+   "name": "Födelse i rymden",
+   "osm": "",
+   "source": "malmo-konst: Karin Norelius, 1974"
+  },
+  {
+   "name": "Galatea",
+   "osm": "node/12828684723"
+  },
+  {
+   "name": "GAP",
+   "osm": "node/5978232547"
+  },
+  {
+   "name": "Gemini",
+   "osm": "",
+   "source": "malmo-konst: Christos Gianakos, 1985"
+  },
+  {
+   "name": "Genius Loci",
+   "osm": "",
+   "source": "malmo-konst: Susann Rönnertz, 2013"
+  },
+  {
+   "name": "Gnista",
+   "osm": "",
+   "source": "malmo-konst: Ebba Matz, 2013"
+  },
+  {
+   "name": "Golden Spires",
+   "osm": "node/5992638764"
+  },
+  {
+   "name": "Grafittiplank",
+   "osm": "",
+   "source": "malmo-konst: Malmös grafittikonstnärer, 2010"
+  },
+  {
+   "name": "Granitblock med stålklot",
+   "osm": "",
+   "source": "malmo-konst: Tormod Sikkeland, Eivind Saxha, 2001"
+  },
+  {
+   "name": "Grundlagen",
+   "osm": "",
+   "source": "malmo-konst: 2023"
+  },
+  {
+   "name": "Gråsippa",
+   "osm": "",
+   "source": "malmo-konst: Signe Persson-Melin, 2016"
+  },
+  {
+   "name": "Guldslottet",
+   "osm": "",
+   "source": "malmo-konst: Magnus Wallin, 2020"
+  },
+  {
+   "name": "Gustav Möller",
+   "osm": "node/12860646565"
+  },
+  {
+   "name": "Gustav Möller",
+   "osm": "",
+   "source": "malmo-konst: Thure Thörn, 1955"
+  },
+  {
+   "name": "Gömstället",
+   "osm": "",
+   "source": "malmo-konst: Jakob Simonson, 2020"
+  },
+  {
+   "name": "Göta",
+   "osm": "",
+   "source": "malmo-konst: Olle Holmsten, 1950"
+  },
+  {
+   "name": "Havsprinsen",
+   "osm": "node/12298174195"
+  },
+  {
+   "name": "Hemligheten",
+   "osm": "",
+   "source": "malmo-konst: Richard Johansson, Mette Björn, 2019"
+  },
+  {
+   "name": "Hjalmar Branting",
+   "osm": "node/12316308951"
+  },
+  {
+   "name": "Hjortkällan",
+   "osm": "node/5978209041"
+  },
+  {
+   "name": "Hjärta",
+   "osm": "node/5978209043"
+  },
+  {
+   "name": "Hjärtblad",
+   "osm": "node/12122626526"
+  },
+  {
+   "name": "Human Nature",
+   "osm": "",
+   "source": "malmo-konst: Mikael Görnasson, 2009"
+  },
+  {
+   "name": "Hälsokällan",
+   "osm": "way/633296173"
+  },
+  {
+   "name": "Ignabergastenen",
+   "osm": "node/12983094367"
+  },
+  {
+   "name": "Imperfect Geometry for a Limestone Quarr",
+   "osm": "",
+   "source": "malmo-konst: Mike Nelson, 2016"
+  },
+  {
+   "name": "Inkaprinsessa",
+   "osm": "",
+   "source": "malmo-konst: Torsten Fridh, 1967"
+  },
+  {
+   "name": "Intervaller",
+   "osm": "",
+   "source": "malmo-konst: Carl Magnus, 1985"
+  },
+  {
+   "name": "Jimmis",
+   "osm": "",
+   "source": "malmo-konst: Monika Gora, 1997"
+  },
+  {
+   "name": "Kaninkärlek",
+   "osm": "",
+   "source": "malmo-konst: Ann-Katrin Braf, 2017"
+  },
+  {
+   "name": "Kanotisten",
+   "osm": "node/8818264710"
+  },
+  {
+   "name": "Kastanj",
+   "osm": "node/12828606275"
+  },
+  {
+   "name": "Katten Nils av Johanna Kristiansson, Joa",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Kulspel",
+   "osm": "node/13338905468"
+  },
+  {
+   "name": "Kungstornen",
+   "osm": "",
+   "source": "malmo-konst: Helge Röed, 1985"
+  },
+  {
+   "name": "Kärlek utan gräns",
+   "osm": "",
+   "source": "malmo-konst: Christian Sandell, 2011"
+  },
+  {
+   "name": "La Forza Vitale",
+   "osm": "node/8824444022"
+  },
+  {
+   "name": "Laglig Skulptur",
+   "osm": "",
+   "source": "malmo-konst: Oliver Morales Ericsson, 2013"
+  },
+  {
+   "name": "Le Fruit Rouge",
+   "osm": "",
+   "source": "malmo-konst: Axel Nordell, 1972"
+  },
+  {
+   "name": "Lekande barn",
+   "osm": "",
+   "source": "malmo-konst: Anders Jönsson, 1915"
+  },
+  {
+   "name": "Liggende pige",
+   "osm": "node/8824345473"
+  },
+  {
+   "name": "Liten blir stor",
+   "osm": "",
+   "source": "malmo-konst: Karin Schultz, 1975"
+  },
+  {
+   "name": "Ljudinstallation Mosaik",
+   "osm": "",
+   "source": "malmo-konst: Frida Axelsson, Fredrik Ed, 2013"
+  },
+  {
+   "name": "Ljudkullen",
+   "osm": "node/3794911358"
+  },
+  {
+   "name": "Ljusparasiter",
+   "osm": "",
+   "source": "malmo-konst: Susanne Rönnertz, 2004"
+  },
+  {
+   "name": "Ljusrugg",
+   "osm": "node/8818596316"
+  },
+  {
+   "name": "Lugnet",
+   "osm": "node/12986833418"
+  },
+  {
+   "name": "Lyftet",
+   "osm": "node/12255213374"
+  },
+  {
+   "name": "Margaretaflickan",
+   "osm": "",
+   "source": "malmo-konst: Greta von Braun-Giesenfeld, 1964"
+  },
+  {
+   "name": "Marmorlyran",
+   "osm": "node/8824374751"
+  },
+  {
+   "name": "Miko",
+   "osm": "node/12316344104"
+  },
+  {
+   "name": "Millennium",
+   "osm": "",
+   "source": "malmo-konst: Danny Lane, 2000"
+  },
+  {
+   "name": "Minnenas hav, hav av minnen",
+   "osm": "way/952720423"
+  },
+  {
+   "name": "Mjau! av Natalia Batista",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Mor och barn",
+   "osm": "node/4450541731"
+  },
+  {
+   "name": "Mor och barn",
+   "osm": "",
+   "source": "malmo-konst: Willy Gordon, 1964"
+  },
+  {
+   "name": "Munnar",
+   "osm": "",
+   "source": "malmo-konst: Birgitta Stenberg Hultén, 1970"
+  },
+  {
+   "name": "Mårten",
+   "osm": "",
+   "source": "malmo-konst: Liss Eriksson, 1970"
+  },
+  {
+   "name": "Människa och häst",
+   "osm": "",
+   "source": "malmo-konst: Asmund Arle, 1968"
+  },
+  {
+   "name": "Nadazero Echo Rendezvouz",
+   "osm": "",
+   "source": "malmo-konst: David Svensson, 2015"
+  },
+  {
+   "name": "Najaden",
+   "osm": "",
+   "source": "malmo-konst: Edvard Trulsson, 1938"
+  },
+  {
+   "name": "Non violence",
+   "osm": "node/3402736391"
+  },
+  {
+   "name": "Näckros",
+   "osm": "",
+   "source": "malmo-konst: Lage Pergon, 2010"
+  },
+  {
+   "name": "Olof Palme",
+   "osm": "node/12869566321"
+  },
+  {
+   "name": "Omtagning (4:3, 2.39:1, 16:9)",
+   "osm": "",
+   "source": "malmo-konst: Patrik Aarnivaara, 2024"
+  },
+  {
+   "name": "Paraply",
+   "osm": "node/11569837336"
+  },
+  {
+   "name": "Passage",
+   "osm": "",
+   "source": "malmo-konst: Kenneth Johansson, 2007"
+  },
+  {
+   "name": "Passionsblomma",
+   "osm": "",
+   "source": "malmo-konst: Thure Thörn, 1963"
+  },
+  {
+   "name": "Pehr Henrik Ling",
+   "osm": "node/12983123939"
+  },
+  {
+   "name": "Per Albin Hansson",
+   "osm": "node/12860793946"
+  },
+  {
+   "name": "Pienza",
+   "osm": "node/1399604118"
+  },
+  {
+   "name": "Polly av Mats Källblad",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Portfölj",
+   "osm": "",
+   "source": "malmo-konst: Ulla Kraitz, 2005"
+  },
+  {
+   "name": "Puckelboll",
+   "osm": "",
+   "source": "malmo-konst: Johan Ferner Ström, 2009"
+  },
+  {
+   "name": "På vakt",
+   "osm": "node/8602286183"
+  },
+  {
+   "name": "På väg",
+   "osm": "",
+   "source": "malmo-konst: Nicklas Hallberg, 1989"
+  },
+  {
+   "name": "Radooo",
+   "osm": "node/12829401167"
+  },
+  {
+   "name": "Relation",
+   "osm": "",
+   "source": "malmo-konst: Sten-Ove Persson, 1990"
+  },
+  {
+   "name": "Riksvapensten",
+   "osm": "",
+   "source": "malmo-konst: W. Weltz, 1980"
+  },
+  {
+   "name": "Rosen",
+   "osm": "node/5911536939"
+  },
+  {
+   "name": "Rudolf Fredrik Berg",
+   "osm": "",
+   "source": "malmo-konst: Edvard Trulsson, 1940"
+  },
+  {
+   "name": "Samling vid pumpen",
+   "osm": "",
+   "source": "malmo-konst: Thure Thörn, 1973"
+  },
+  {
+   "name": "Sarons lilja",
+   "osm": "",
+   "source": "malmo-konst: Annika Svenbro, 1999"
+  },
+  {
+   "name": "Serieteckningar",
+   "osm": "",
+   "source": "malmo-konst: Johanna Kristiansson, Jimmy Wa, 2013"
+  },
+  {
+   "name": "Sfärisk rörelse",
+   "osm": "",
+   "source": "malmo-konst: Folke Truedsson, 1982"
+  },
+  {
+   "name": "Sigvard Thurneman av Steve Nyberg",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Sillagumman",
+   "osm": "node/6063606630"
+  },
+  {
+   "name": "Skålgropsstenen från Fosie",
+   "osm": "node/3786516973"
+  },
+  {
+   "name": "Skörd",
+   "osm": "node/12677322915"
+  },
+  {
+   "name": "Snäckan",
+   "osm": "",
+   "source": "malmo-konst: Henning Malmström, 1956"
+  },
+  {
+   "name": "Solrosen",
+   "osm": "node/9693180996"
+  },
+  {
+   "name": "Spiraler",
+   "osm": "",
+   "source": "malmo-konst: Beatrice Hansson, 2003"
+  },
+  {
+   "name": "Spårsken",
+   "osm": "",
+   "source": "malmo-konst: Christian Partos, 2010"
+  },
+  {
+   "name": "Strykjärn",
+   "osm": "node/12828700719"
+  },
+  {
+   "name": "Sunes stenar",
+   "osm": "node/8824345187"
+  },
+  {
+   "name": "Superangst av Gunnar Krantz",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Sädeskornet minnessten",
+   "osm": "node/9762398220"
+  },
+  {
+   "name": "Tankekraften",
+   "osm": "",
+   "source": "malmo-konst: Jafer Taoun, 2019"
+  },
+  {
+   "name": "Tidens Genius",
+   "osm": "node/12976101226"
+  },
+  {
+   "name": "Tidsfördjupningar - ansikten",
+   "osm": "",
+   "source": "malmo-konst: Kristina Matousch, 2010"
+  },
+  {
+   "name": "Tidsfördjupningar - minuten",
+   "osm": "",
+   "source": "malmo-konst: Kristina Matousch, 2010"
+  },
+  {
+   "name": "Tidsförskjutningar - pelare",
+   "osm": "",
+   "source": "malmo-konst: Kristina Matousch, 2010"
+  },
+  {
+   "name": "Till Erinran",
+   "osm": "",
+   "source": "malmo-konst: Axel Wallenberg, 1951"
+  },
+  {
+   "name": "Tjenare David",
+   "osm": "",
+   "source": "malmo-konst: Mauri Knuuti, 1989"
+  },
+  {
+   "name": "Tragos - Tragediens födelse",
+   "osm": "node/7021766812"
+  },
+  {
+   "name": "Tre ingångar till Rosengård",
+   "osm": "",
+   "source": "malmo-konst: Per Hasselberg, 2003"
+  },
+  {
+   "name": "Treenighet",
+   "osm": "",
+   "source": "malmo-konst: Björn Nörgard, 1999"
+  },
+  {
+   "name": "Trumslagaren (elefanten i Folkets park)",
+   "osm": "node/12450874787",
+   "listName": "Trumslagaren",
+   "source": "malmo-konst: Yngve Lundell, 2020",
+   "note": "OSM statue node at the same point has no name"
+  },
+  {
+   "name": "Trädet",
+   "osm": "",
+   "source": "malmo-konst: Helene Edgren, 2009"
+  },
+  {
+   "name": "Tufsen",
+   "osm": "",
+   "source": "malmo-konst: Egon Möller Nielsen, 2002"
+  },
+  {
+   "name": "Törne",
+   "osm": "",
+   "source": "malmo-konst: Ebba Matz, 2014"
+  },
+  {
+   "name": "Ugglebo",
+   "osm": "",
+   "source": "malmo-konst: Boel Åsemo, 2010"
+  },
+  {
+   "name": "Vardags Livets Mönster",
+   "osm": "",
+   "source": "malmo-konst: Gunilla Klingberg, 2010"
+  },
+  {
+   "name": "Vattenkristaller",
+   "osm": "",
+   "source": "malmo-konst: Edvin Öhrström, 1970"
+  },
+  {
+   "name": "Vattentrappa",
+   "osm": "node/12942427293"
+  },
+  {
+   "name": "Vattentrappa",
+   "osm": "",
+   "source": "malmo-konst: Birre Skoglund Pråme, 1991"
+  },
+  {
+   "name": "Venus",
+   "osm": "node/13111206950"
+  },
+  {
+   "name": "Vi svampar",
+   "osm": "",
+   "source": "malmo-konst: Samaneh Reyhani, 2020"
+  },
+  {
+   "name": "Via",
+   "osm": "",
+   "source": "malmo-konst: Kim Hedås, 2015"
+  },
+  {
+   "name": "Vågen av Östersjön",
+   "osm": "node/8824268474"
+  },
+  {
+   "name": "Wave",
+   "osm": "way/952721007"
+  },
+  {
+   "name": "Zlatans leende",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2006"
+  },
+  {
+   "name": "Åke Jävel av Lars Sjunnesson",
+   "osm": "",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Ånghammaren",
+   "osm": "node/8610989226"
+  },
+  {
+   "name": "Ängeln S:t Mikael",
+   "osm": "node/12869645478"
+  },
+  {
+   "name": "Öfver • Djupen mot • Höjpen",
+   "osm": "way/1476332972"
+  },
+  {
+   "name": "Ögat",
+   "osm": "node/8622718609"
+  }
+ ],
+ "drop": [
+  {
+   "name": "Flicka med orm",
+   "osm": "",
+   "why": "duplicate of Flickornas orm (node/10881627347)",
+   "source": "malmo-konst: Anders Olsson, 1957"
+  },
+  {
+   "name": "Port mot kontinenten",
+   "osm": "",
+   "why": "duplicate of Porten mot kontinenten (node/11453259932)",
+   "source": "malmo-konst: Sven Carlsson, 1975"
+  },
+  {
+   "name": "Katarakt",
+   "osm": "",
+   "why": "duplicate of Kattarakt (node/12161696701)",
+   "source": "malmo-konst: Ulla & Gustav Kraitz, 2002"
+  },
+  {
+   "name": "Monument t. krigsförlista sjömäns minne",
+   "osm": "",
+   "why": "duplicate of node/9682712872",
+   "source": "malmo-konst: Eiler Graebe, Ivar Ålenius-Bjö, 1945"
+  },
+  {
+   "name": "Ljuspaviljong",
+   "osm": "",
+   "why": "duplicate of the Lernacken Lightpavillion (node/9750237338)",
+   "source": "malmo-konst: Olafur Eliasson, 2001"
+  },
+  {
+   "name": "Ida hissar Emil",
+   "osm": "",
+   "why": "duplicate of node/13471280235",
+   "source": "malmo-konst: Björn Carnemalm, 2009"
+  },
+  {
+   "name": "Interdependence",
+   "osm": "",
+   "why": "duplicate of Interdependens (node/13357428184)",
+   "source": "malmo-konst: Pontus Ikander, 2017"
+  },
+  {
+   "name": "Den trånga porten mot Friheten",
+   "osm": "",
+   "why": "duplicate of node/9674528755",
+   "source": "malmo-konst: Solveyg Schafferer, 2007"
+  },
+  {
+   "name": "Flyktingmonument",
+   "osm": "",
+   "why": "duplicate of Flyktingmonumentet (node/4993171102)",
+   "source": "malmo-konst: Bror Marklund, 1950"
+  },
+  {
+   "name": "Frans Kockum",
+   "osm": "",
+   "why": "duplicate of F. H. Kockum (node/9056986889)",
+   "source": "malmo-konst"
+  },
+  {
+   "name": "Per Henrik Ling",
+   "osm": "",
+   "why": "duplicate of Pehr Henrik Ling (node/12983123939)",
+   "source": "malmo-konst: Anders Jönsson, 1914"
+  },
+  {
+   "name": "Radoo av Henrik Möller",
+   "osm": "",
+   "why": "duplicate of Radooo (node/12829401167)",
+   "source": "malmo-konst: Björn Carnemalm, 2022"
+  },
+  {
+   "name": "Sillagumma",
+   "osm": "",
+   "why": "duplicate of Sillagumman (node/6063606630)",
+   "source": "malmo-konst: Gunnel Frieberg, 1980"
+  },
+  {
+   "name": "Strykjärnet",
+   "osm": "",
+   "why": "duplicate of Strykjärn (node/12828700719)",
+   "source": "malmo-konst: Hiroshi Koyama, 1988"
+  },
+  {
+   "name": "Sädeskorn",
+   "osm": "",
+   "why": "duplicate of Sädeskornet minnessten (node/9762398220)",
+   "source": "malmo-konst: Carl Bertil Widell, 2000"
+  },
+  {
+   "name": "Tacksamhetens manifest",
+   "osm": "",
+   "why": "same point and likely same work as La Forza Vitale (node/8824444022)",
+   "source": "malmo-konst: Antonio Pasquini, 2014"
+  },
+  {
+   "name": "Torgbrunn",
+   "osm": "",
+   "why": "duplicate of Springbrunnen/Torgbrunn on Stortorget (way/220018226)",
+   "source": "malmo-konst: Stig Blomberg, 1964"
+  },
+  {
+   "name": "Hommage á Axel Danielsson",
+   "osm": "",
+   "why": "same point as Fjättrad i nuet (node/12310625003); likely the same work under another name",
+   "source": "malmo-konst: Willy Gordon, 1973"
+  },
+  {
+   "name": "Den talande staden",
+   "osm": "",
+   "why": "second point of the same multi-site work as node/8821461944",
+   "source": "malmo-konst: Pontus Ikander, 2023"
+  },
+  {
+   "name": "Snubbelstenar",
+   "osm": "",
+   "why": "merged into the Snubbelstenar node (node/12212839193)",
+   "source": "malmo-konst: Gunter Demnig, 2022"
+  },
+  {
+   "name": "SIEGFRIED GUTMANN",
+   "osm": "node/12212839191",
+   "why": "one of the three Snubbelstenar; merged into node/12212839193"
+  },
+  {
+   "name": "WALTER GERSON",
+   "osm": "node/12212839192",
+   "why": "one of the three Snubbelstenar; merged into node/12212839193"
+  },
+  {
+   "name": "Brunnskar",
+   "osm": "",
+   "why": "generic garden urn; no identity as a quiz item",
+   "source": "malmo-konst: Ferdinand Boberg, 1914"
+  },
+  {
+   "name": "Brunnskar",
+   "osm": "node/12983158147",
+   "why": "generic garden urn in Pildammsparken; no identity"
+  },
+  {
+   "name": "Minnessten",
+   "osm": "node/9661532906",
+   "why": "anonymous memorial stone; its Wikipedia link and views belong to the park Garnisonsplanteringen"
+  },
+  {
+   "name": "Raoul Wallenbergs Park",
+   "osm": "node/13142494033",
+   "why": "a plaque naming the park; the park belongs to another category"
+  },
+  {
+   "name": "Utan Titel",
+   "osm": "node/12836544647,node/12836544648",
+   "why": "untitled, no identity"
+  },
+  {
+   "name": "Utan titel",
+   "osm": "node/5788485922",
+   "why": "untitled, no identity"
+  },
+  {
+   "name": "Untitled",
+   "osm": "",
+   "why": "untitled, unknown artist",
+   "source": "malmo-konst: Okänd"
+  },
+  {
+   "name": "Annelund",
+   "osm": "node/12298223445",
+   "why": "housing information plaque, not art"
+  },
+  {
+   "name": "Sankta Birgittas kapell",
+   "osm": "node/12969669197",
+   "why": "a building, not art"
+  },
+  {
+   "name": "Dringenbergska gården",
+   "osm": "node/13436730896",
+   "why": "a building, not art"
+  },
+  {
+   "name": "Sweden Solar System",
+   "osm": "relation/16842382",
+   "why": "national relation centred in central Sweden, not a Malmö place"
+  },
+  {
+   "name": "Wall with various artworks",
+   "osm": "way/1546690070",
+   "why": "generic wall, no title"
+  },
+  {
+   "name": "Mosaik",
+   "osm": "",
+   "why": "generic title (artist field just says Mosaik)",
+   "source": "malmo-konst: Mosaik, 2011"
+  },
+  {
+   "name": "Vattenho och pump",
+   "osm": "",
+   "why": "old water trough and pump, unknown maker, not art",
+   "source": "malmo-konst: Okänd"
+  },
+  {
+   "name": "Pojke med gäss",
+   "osm": "node/8824349035",
+   "why": "stolen (sawn off) from Slottsparken in April 2025; only one goose remains (TV4, 2025-04-25)"
+  },
+  {
+   "name": "Zlatan-statyn",
+   "osm": "",
+   "why": "not in the long list; toppled 2020, repaired 2023 but stored at an undisclosed place with no decided site (malmo.se, updated 2026-06-30)"
+  }
+ ],
+ "missing": [],
+ "notes": "The evidence supports a short core (9), not 25: only Karl X Gustav, Optimistorkestern and Arbetets ära have real public signal (Wikipedia views 1-2k); every other work in the list has zero views and almost no web presence. The other six are the fixed points of the main squares and the big centre works people actually point at. Borderline, left in everything: Elma Danielsson agiterar (Rörsjöparken 2023, Malmö's first statue of a named woman, well publicised), Trumslagaren (Lundell's elephant drummer in Folkets park, the 'fifth member' of Optimistorkestern), Frans Suell, Points of View (Tony Cragg at Triangeln), Flyktingmonumentet (Limhamn), Drottningtorgets fontän, Snubbelstenarna. Of the core picks, Människan och Pegasus, Rubato and Ekotemplet are the softest. Optimistorkestern stands on Södergatan near Stortorget, not on either square. Zlatan-statyn is not standing anywhere (stored since 2020). Pojke med gäss in Slottsparken was stolen in 2025. Bobos hjärta is in Alnarp (Lomma), kept in everything with outsideMalmo. Torgbrunn on Stortorget is the subject of an antiracist critique (Hanni Kamaly, 2022) proposing relocation; check before relying on it long-term. Same-name items without OSM ids (Gustav Möller, Mor och barn, Passage) are distinct works at different points and are told apart by their source field. Kärlek utan gräns and Ljusrugg sit at the same point and may be one work; both kept. The Carnemalm 2022 comic-figure bronzes on Möllan (Elvis, Polly, Mjau!, Åke Jävel, Superangst, etc.) are kept in everything but are small and weak quiz items. Gud Fader på himmelsbågen (Milles) is said by sv Wikipedia to be at Gamla begravningsplatsen but is not in OSM or the city dataset; not added. The Calatrava torso sculpture, Spiralen, Rörelse, Sju fästningar, Glasbruket, Vågen, Tycho Brahe and Ordet were not found as Malmö public works."
+}

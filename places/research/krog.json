@@ -1,0 +1,3548 @@
+{
+ "category": "krog",
+ "core": [
+  {
+   "name": "Bloom in the Park",
+   "osm": "node/1668865664,way/635556649",
+   "lat": 55.59065,
+   "lon": 12.99707,
+   "why": "Restaurant in the pavilion by the lake in Pildammsparken, open since about 2010; White Guide and Michelin listed.",
+   "evidence": [
+    "whiteguide: MYCKET GOD KLASS",
+    "michelin",
+    "wikivoyage"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Malmö Opera Grill",
+   "osm": "node/1179544295",
+   "lat": 55.59651,
+   "lon": 12.99595,
+   "why": "Operagrillen in the Malmö Opera house, open since the building in 1944; has its own Wikipedia article.",
+   "evidence": [
+    "wikipedia (13 sitelinks, 5.1k views/yr)"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Fagans",
+   "osm": "node/444864214",
+   "lat": 55.6037,
+   "lon": 13.00032,
+   "why": "Irish pub on Stora Nygatan by Gustav Adolfs torg.",
+   "evidence": [
+    "wikivoyage",
+    "visitmalmo",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Johan P",
+   "osm": "node/2293728955",
+   "lat": 55.60416,
+   "lon": 12.99887,
+   "why": "Classic fish and seafood restaurant founded 1981, by Saluhallen off Lilla Torg; White Guide listed.",
+   "evidence": [
+    "https://www.falstaff.com/en/restaurants/johan-p-grossraum-malmoe",
+    "whiteguide"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Restaurang Möllan",
+   "osm": "node/534572236",
+   "lat": 55.59273,
+   "lon": 13.00722,
+   "why": "Bergsgatan restaurant and bar with a big terrace, called a Malmö classic.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/restaurang-möllan/",
+    "wikivoyage",
+    "wikivoyage-sv"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Atmosfär",
+   "osm": "node/4456630006",
+   "lat": 55.59977,
+   "lon": 12.99615,
+   "why": "Bistro on Fersens väg by Magistratsparken, open since the 2000s; Michelin listed.",
+   "evidence": [
+    "michelin",
+    "wikivoyage"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Vollmers",
+   "osm": "node/3357955290",
+   "lat": 55.60466,
+   "lon": 12.99674,
+   "why": "Mats Vollmer's fine-dining restaurant on Tegelgårdsgatan, Malmö's best-known Michelin-starred restaurant.",
+   "evidence": [
+    "michelin",
+    "whiteguide"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Jalla Jalla",
+   "osm": "node/1012287166",
+   "lat": 55.59484,
+   "lon": 13.00885,
+   "why": "Falafel stand at Möllevången, described as a piece of Malmö legend and the best-known falafel in town.",
+   "evidence": [
+    "https://www.thelocal.se/20190204/why-malmo-mollevangen-is-a-paradise-for-curious-foodies",
+    "https://www.dagensps.se/weekend/mat-vin/topplistan-malmos-basta-falafel/",
+    "wikivoyage"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Krua Thai",
+   "osm": "node/536826013",
+   "lat": 55.59133,
+   "lon": 13.00894,
+   "why": "Thai restaurant on Möllevångstorget, a Möllan fixture for decades.",
+   "evidence": [
+    "wikivoyage",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Moosehead",
+   "osm": "node/444868365",
+   "lat": 55.60545,
+   "lon": 12.99867,
+   "why": "Sports bar and burger place at Lilla Torg 1, among the square's best-known bars.",
+   "evidence": [
+    "https://www.frommers.com/destinations/malmo/things-to-do/",
+    "visitmalmo",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Vegegården",
+   "osm": "node/445332875",
+   "lat": 55.604,
+   "lon": 13.0083,
+   "why": "All-vegan Asian buffet on Rörsjögatan, a long-running Malmö staple.",
+   "evidence": [
+    "https://www.spottedbylocals.com/malmo/vegegarden/",
+    "wikivoyage",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Årstiderna i Kockska huset",
+   "osm": "node/625987394",
+   "lat": 55.60673,
+   "lon": 12.99897,
+   "why": "Traditional Swedish fine dining in the vaulted cellars of the 1520s Kockska huset by Stortorget, open since the 1990s.",
+   "evidence": [
+    "https://starwinelist.com/wine-place/arstiderna-kockska-huset",
+    "wikivoyage-sv"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Brasserie Sture",
+   "osm": "node/3359248859",
+   "lat": 55.60731,
+   "lon": 13.00043,
+   "why": "Adelgatan brasserie with the Sture name going back to 1912, revived as a classic brasserie; Michelin listed.",
+   "evidence": [
+    "https://guide.michelin.com/en/skane/malmo/restaurant/brasserie-sture"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Saltimporten",
+   "osm": "node/2943366166",
+   "lat": 55.61607,
+   "lon": 12.99712,
+   "why": "Lunch-only canteen in the Frihamnen harbour since 2012, famous far beyond its size; White Guide listed.",
+   "evidence": [
+    "whiteguide",
+    "https://www.timeout.com/sv/sweden/restauranger/malmos-basta-restauranger"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Bullen",
+   "osm": "way/1036504137",
+   "lat": 55.6,
+   "lon": 13.00143,
+   "why": "Storgatan beer hall with a history on the site back to 1897 and a 1960s interior; Malmö's archetypal old pub.",
+   "evidence": [
+    "https://www.falstaff.com/en/restaurants/bullen",
+    "https://theeuropeanbarguide.com/bullen-tva-krogare-malmo-🇸🇪/"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Far i Hatten",
+   "osm": "way/1346394429",
+   "lat": 55.59259,
+   "lon": 13.01424,
+   "why": "Folkets Park's original park restaurant (building from 1892): restaurant, beer garden and dance floor.",
+   "evidence": [
+    "https://www.falstaff.com/en/restaurants/far-i-hatten",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Kulturarv-Malmo/Platser-och-byggnader/Folkets-Park.html",
+    "whiteguide"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Steakhouse Lilla Torg",
+   "osm": "way/1091108901",
+   "lat": 55.60494,
+   "lon": 12.99839,
+   "why": "Long-running steakhouse on Lilla Torg; already in the game.",
+   "evidence": [
+    "wikivoyage (unmatched, \"Steak House\")",
+    "inGame"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Limhamns Fiskrökeri",
+   "osm": "node/2279592697",
+   "lat": 55.58512,
+   "lon": 12.92494,
+   "why": "Smokehouse and fish restaurant by the harbour in Limhamn.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/limhamns-fiskrökeri/",
+    "osm 2013"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Malmö Brewing Co & Taproom",
+   "osm": "node/1387412579",
+   "lat": 55.59341,
+   "lon": 13.00762,
+   "why": "Brewery taproom on Bergsgatan since 2010, Malmö's best-known beer place.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/bar/malmo-brewing-co-taproom/",
+    "osm 2011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Mando Steakhouse",
+   "osm": "node/625987396",
+   "lat": 55.60458,
+   "lon": 13.00049,
+   "why": "Skomakaregatan steakhouse since 1966, famous for its plankstek (on the menu since 1975, well over a million served).",
+   "evidence": [
+    "https://scanmagazine.co.uk/mando-steakhouse-bar-classic-steakhouse-in-the-heart-of-malmo/"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Mello Yello",
+   "osm": "node/444868367",
+   "lat": 55.6055,
+   "lon": 12.99893,
+   "why": "Bar-restaurant on Lilla Torg (OSM spells it Mellow Yellow), one of the square's long-running anchors.",
+   "evidence": [
+    "https://www-lonelyplanet-com-57e2.imagizer.com/sweden/skane/malmo/nightlife/mello-yello/a/poi-dri/492858/360797",
+    "wikivoyage (unmatched)",
+    "osm 2009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Nyhavn",
+   "osm": "node/536828523",
+   "lat": 55.59196,
+   "lon": 13.00847,
+   "why": "Pub with the big outdoor serving on Möllevångstorget.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/nyhavn/",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Pickwick",
+   "osm": "node/417994871",
+   "lat": 55.60288,
+   "lon": 13.00317,
+   "why": "English pub on Stadt Hamburgsgatan by Malmborgen, decades old and a standard meeting point.",
+   "evidence": [
+    "https://theeuropeanbarguide.com/pickwick-pub-malmo-🇸🇪/",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Rådhuskällaren",
+   "osm": "node/444857255",
+   "lat": 55.6063,
+   "lon": 13.0014,
+   "why": "Restaurant in the cellar of the town hall on Stortorget, a long-standing venue for dinners, julbord and parties.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/restaurant/radhuskallaren/",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Victors",
+   "osm": "node/2293729033",
+   "lat": 55.60539,
+   "lon": 12.99839,
+   "why": "Bar and restaurant on Lilla Torg with the big terrace, a fixture since at least the early 2000s.",
+   "evidence": [
+    "https://edition.cnn.com/2009/TRAVEL/01/07/malmo.seen/index.html"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Ölkaféet",
+   "osm": "node/445844567",
+   "lat": 55.59236,
+   "lon": 13.00642,
+   "why": "Cheap-pint beer bar on Södra Skolgatan at Möllan with a busy terrace; a neighbourhood institution.",
+   "evidence": [
+    "https://www.spottedbylocals.com/malmo/olkafeet",
+    "osm 2009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Falafel Baghdad",
+   "osm": "node/3486009995",
+   "lat": 55.58832,
+   "lon": 13.02687,
+   "why": "One of Malmö's original falafel places (OSM spells it Falafel Bagdad).",
+   "evidence": [
+    "https://routesnorth.com/malmo/malmo-restaurants-bars/cheap-eats-malmo"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Kin Long",
+   "osm": "node/3402678115",
+   "lat": 55.59647,
+   "lon": 13.00067,
+   "why": "Malmö's oldest Chinese restaurant (since 1964), on Rådmansgatan; also White Guide listed.",
+   "evidence": [
+    "https://www.falstaff.com/en/restaurants/kin-long-1",
+    "whiteguide: GOD KLASS (unmatched list)"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Syltan",
+   "osm": "node/4037719302",
+   "lat": 55.60809,
+   "lon": 13.01444,
+   "why": "Pub at Östra Förstadsgatan by Värnhem, with a pub on the site since the 1970s.",
+   "evidence": [
+    "https://theculturetrip.com/europe/sweden/malmoe/articles/the-10-best-bars-in-malmo"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Falafel No 1",
+   "osm": "way/159635009",
+   "lat": 55.57088,
+   "lon": 13.0424,
+   "why": "The original Falafel No 1 stand by Jägersro, from the family that built Malmö's best-known falafel brand starting in the late 1980s.",
+   "evidence": [
+    "https://www.thelocal.se/20181025/introducing-malm-lunch-exploring-swedens-international-food-capital",
+    "https://www.falstaff.com/nordics/streetfood/falafel-nr1-vagnen"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "everything": [
+  {
+   "name": "Ruths",
+   "osm": "node/1947190977"
+  },
+  {
+   "name": "Lyran",
+   "osm": "node/4321180557"
+  },
+  {
+   "name": "Aster",
+   "osm": "node/9505901459"
+  },
+  {
+   "name": "Kockeriet",
+   "osm": "node/8069401268"
+  },
+  {
+   "name": "Mutantur",
+   "osm": "node/1239620654"
+  },
+  {
+   "name": "Namu",
+   "osm": "node/6401999011"
+  },
+  {
+   "name": "Västergatan",
+   "osm": "way/1091108939"
+  },
+  {
+   "name": "Västra station",
+   "osm": "way/52201006"
+  },
+  {
+   "name": "Mat&Vin Slottsparken",
+   "osm": "node/8867387741"
+  },
+  {
+   "name": "Aras",
+   "osm": "node/897775046"
+  },
+  {
+   "name": "Asien",
+   "osm": "node/536813370"
+  },
+  {
+   "name": "Centiliter & Gram",
+   "osm": "node/2293728911"
+  },
+  {
+   "name": "Grand Malmö",
+   "osm": "node/2549896881"
+  },
+  {
+   "name": "Metro",
+   "osm": "node/1015583552"
+  },
+  {
+   "name": "Paddy's",
+   "osm": "node/1460876011"
+  },
+  {
+   "name": "Yukai",
+   "osm": "node/536872774"
+  },
+  {
+   "name": "Bouchon",
+   "osm": "node/4738304721"
+  },
+  {
+   "name": "Elysée",
+   "osm": "node/3369322610"
+  },
+  {
+   "name": "Ganesha",
+   "osm": "node/4265654395"
+  },
+  {
+   "name": "Maguro",
+   "osm": "node/4037719312"
+  },
+  {
+   "name": "Smak",
+   "osm": "node/4418055890"
+  },
+  {
+   "name": "The Vegan Bar",
+   "osm": "node/2322901505"
+  },
+  {
+   "name": "thott's",
+   "osm": "node/3402678142"
+  },
+  {
+   "name": "Drumbar",
+   "osm": "way/1093128526"
+  },
+  {
+   "name": "Goose",
+   "osm": "node/445842675"
+  },
+  {
+   "name": "Karl-Mikael",
+   "osm": "node/10737968750"
+  },
+  {
+   "name": "Korvhuset",
+   "osm": "node/6301876265"
+  },
+  {
+   "name": "Lemongrass",
+   "osm": "way/30407210"
+  },
+  {
+   "name": "Malmö City Pizzeria",
+   "osm": "node/9199778107"
+  },
+  {
+   "name": "Marie Antoinette",
+   "osm": "node/444872124"
+  },
+  {
+   "name": "Mygel",
+   "osm": "node/8193728899"
+  },
+  {
+   "name": "Nguyen's Sandwiches",
+   "osm": "way/1092638256"
+  },
+  {
+   "name": "Occo",
+   "osm": "node/3385752437"
+  },
+  {
+   "name": "Quan",
+   "osm": "node/2278405464"
+  },
+  {
+   "name": "Rosegarden (Triangeln)",
+   "osm": "node/10129165434"
+  },
+  {
+   "name": "Scandwich",
+   "osm": "node/536836196"
+  },
+  {
+   "name": "SOHO",
+   "osm": "node/474727509"
+  },
+  {
+   "name": "Spill",
+   "osm": "node/8606570482"
+  },
+  {
+   "name": "Stormgatan - Taproom by Hyllie Bryggeri",
+   "osm": "node/10104474538"
+  },
+  {
+   "name": "Basta",
+   "osm": "node/444855944"
+  },
+  {
+   "name": "Folk Mat & Möten",
+   "osm": "node/7299749292"
+  },
+  {
+   "name": "La Fonderie",
+   "osm": "node/12608037460"
+  },
+  {
+   "name": "Matverkstaden på Lokstallarna",
+   "osm": "node/12118404427"
+  },
+  {
+   "name": "Zymologi",
+   "osm": "node/13930879379"
+  },
+  {
+   "name": "Stadscaféet i Slottsparken",
+   "osm": "way/336365538"
+  },
+  {
+   "name": "Amanos",
+   "osm": "node/444883982"
+  },
+  {
+   "name": "Asian- & Thai Fast Food",
+   "osm": "way/115613093"
+  },
+  {
+   "name": "Bakfickan",
+   "osm": "node/1668867727"
+  },
+  {
+   "name": "Balthazar",
+   "osm": "node/945421545"
+  },
+  {
+   "name": "Big Bowl",
+   "osm": "node/444881626"
+  },
+  {
+   "name": "Big Mamas",
+   "osm": "node/1012287179"
+  },
+  {
+   "name": "Brasserie Kungliga Posten",
+   "osm": "node/2478793715"
+  },
+  {
+   "name": "Broderstugan Kök & Bar",
+   "osm": "node/444879772"
+  },
+  {
+   "name": "C's krog",
+   "osm": "node/824124348"
+  },
+  {
+   "name": "Café Blå Kiosken",
+   "osm": "way/235026319"
+  },
+  {
+   "name": "Campus",
+   "osm": "node/1012287173"
+  },
+  {
+   "name": "Chao",
+   "osm": "node/1677336009"
+  },
+  {
+   "name": "Chaplin Grill",
+   "osm": "node/1812871205"
+  },
+  {
+   "name": "Corfitz Taverna",
+   "osm": "node/1780224911"
+  },
+  {
+   "name": "Cosmos",
+   "osm": "node/958718871"
+  },
+  {
+   "name": "Doc Piazza, Pizzeria Trattoria",
+   "osm": "node/729620563"
+  },
+  {
+   "name": "Element",
+   "osm": "node/417994872"
+  },
+  {
+   "name": "Ellstorps Kvarterskrog",
+   "osm": "way/231767388"
+  },
+  {
+   "name": "Fo restaurang & bar",
+   "osm": "node/2293728931"
+  },
+  {
+   "name": "Fosie",
+   "osm": "node/958715263"
+  },
+  {
+   "name": "Freda 49",
+   "osm": "node/1780224912"
+  },
+  {
+   "name": "Fregatten",
+   "osm": "node/1279343571"
+  },
+  {
+   "name": "Gamla Brogatan",
+   "osm": "node/417987302"
+  },
+  {
+   "name": "Glasklart",
+   "osm": "node/1677336044,node/2136411481"
+  },
+  {
+   "name": "Golden Crown",
+   "osm": "node/1309266389"
+  },
+  {
+   "name": "Gyros Pita",
+   "osm": "node/1726889267"
+  },
+  {
+   "name": "Hamnarätt",
+   "osm": "node/1780224913"
+  },
+  {
+   "name": "Husie pizzeria",
+   "osm": "node/1293121309"
+  },
+  {
+   "name": "Ice",
+   "osm": "node/1860964166"
+  },
+  {
+   "name": "Jannis Pizza",
+   "osm": "node/1623950685"
+  },
+  {
+   "name": "JP's Bar & Restaurang",
+   "osm": "node/1668870249"
+  },
+  {
+   "name": "Katarina-Grillen",
+   "osm": "node/2405585967"
+  },
+  {
+   "name": "La Trattoria",
+   "osm": "node/417994884"
+  },
+  {
+   "name": "Lazio",
+   "osm": "node/1399612006"
+  },
+  {
+   "name": "Luftkastellet",
+   "osm": "way/99519490"
+  },
+  {
+   "name": "Macau",
+   "osm": "node/444865280"
+  },
+  {
+   "name": "Mamma Mia",
+   "osm": "node/444874837"
+  },
+  {
+   "name": "Marias Gatukök",
+   "osm": "node/2595966920"
+  },
+  {
+   "name": "Mascot",
+   "osm": "node/536829711"
+  },
+  {
+   "name": "Matstugan",
+   "osm": "node/1691174377"
+  },
+  {
+   "name": "Mrs Brown",
+   "osm": "node/658707737"
+  },
+  {
+   "name": "Orvars Korvar",
+   "osm": "node/1769329975"
+  },
+  {
+   "name": "P2",
+   "osm": "node/1343662487"
+  },
+  {
+   "name": "Per Albins Krog",
+   "osm": "node/786403321"
+  },
+  {
+   "name": "Percys",
+   "osm": "node/1708914171"
+  },
+  {
+   "name": "Pizza and Pasta No. 1",
+   "osm": "node/1730564202"
+  },
+  {
+   "name": "Pizzeria Amore",
+   "osm": "node/1668871546"
+  },
+  {
+   "name": "Pizzeria Oden",
+   "osm": "node/1628413971"
+  },
+  {
+   "name": "Pizzeria Paulibron",
+   "osm": "node/1399605423"
+  },
+  {
+   "name": "Pizzeria Robertos",
+   "osm": "node/2405585970"
+  },
+  {
+   "name": "Popeye Grill",
+   "osm": "node/1855366439"
+  },
+  {
+   "name": "Pub & Pizzeria Pappagallo",
+   "osm": "node/1668752062"
+  },
+  {
+   "name": "Ramona Pizzeria och Restaurang",
+   "osm": "node/444874856"
+  },
+  {
+   "name": "Restaruang Tangjong",
+   "osm": "node/1685951928"
+  },
+  {
+   "name": "Restaurang Kina",
+   "osm": "node/444881619"
+  },
+  {
+   "name": "Restaurang Kolga",
+   "osm": "node/2308779892"
+  },
+  {
+   "name": "Restaurang T-BONE",
+   "osm": "node/1295856364"
+  },
+  {
+   "name": "Restaurant Kalk",
+   "osm": "node/2067185688"
+  },
+  {
+   "name": "Sachi Sushi",
+   "osm": "node/444883889"
+  },
+  {
+   "name": "Samurai",
+   "osm": "node/444879801"
+  },
+  {
+   "name": "Sankt Markus Vinkällare",
+   "osm": "node/444845108"
+  },
+  {
+   "name": "Scania",
+   "osm": "node/445847330"
+  },
+  {
+   "name": "Spot",
+   "osm": "node/560967014"
+  },
+  {
+   "name": "Strandkiosken",
+   "osm": "way/100074949"
+  },
+  {
+   "name": "Team Pizzeria",
+   "osm": "node/1495922940"
+  },
+  {
+   "name": "Torso Twisted",
+   "osm": "node/772486928"
+  },
+  {
+   "name": "Vinny's",
+   "osm": "node/1855449695"
+  },
+  {
+   "name": "Välfärden",
+   "osm": "node/625987389"
+  },
+  {
+   "name": "Värnhems pizzeria",
+   "osm": "node/1399608687"
+  },
+  {
+   "name": "Werners Café",
+   "osm": "node/1685942810"
+  },
+  {
+   "name": "You & Me restaurang",
+   "osm": "node/1670692604"
+  },
+  {
+   "name": "Akvariet",
+   "osm": "node/3815558172"
+  },
+  {
+   "name": "Alanya",
+   "osm": "node/4037719311"
+  },
+  {
+   "name": "Almtorget pizzabar",
+   "osm": "node/4356741061"
+  },
+  {
+   "name": "Alnarp 9",
+   "osm": "node/4366628715"
+  },
+  {
+   "name": "Ammo Falafel",
+   "osm": "way/289957233"
+  },
+  {
+   "name": "Ariana",
+   "osm": "node/3473354980"
+  },
+  {
+   "name": "Arlövs kebab",
+   "osm": "node/3693536962"
+  },
+  {
+   "name": "Bamboo City",
+   "osm": "node/3396655403"
+  },
+  {
+   "name": "Beer Ditch",
+   "osm": "node/1726889429"
+  },
+  {
+   "name": "Bistro Royal",
+   "osm": "node/3402678105"
+  },
+  {
+   "name": "Bright",
+   "osm": "node/1726889462"
+  },
+  {
+   "name": "Burek House",
+   "osm": "node/3402678106"
+  },
+  {
+   "name": "Carnivore",
+   "osm": "node/4037719314"
+  },
+  {
+   "name": "Casual Street Food",
+   "osm": "node/4788873930"
+  },
+  {
+   "name": "Chili hot masala",
+   "osm": "node/4037719308"
+  },
+  {
+   "name": "Curry Republik",
+   "osm": "node/4234162768"
+  },
+  {
+   "name": "Eva's",
+   "osm": "node/3786483531"
+  },
+  {
+   "name": "Fabriken Restaurang & Café",
+   "osm": "node/4367945997"
+  },
+  {
+   "name": "Falafel & Burgers",
+   "osm": "node/4496976894"
+  },
+  {
+   "name": "Family Pub",
+   "osm": "node/4738304722"
+  },
+  {
+   "name": "FKS",
+   "osm": "way/329127719"
+  },
+  {
+   "name": "Fredo's Pizzagastronomia",
+   "osm": "node/5608590075"
+  },
+  {
+   "name": "Gallia",
+   "osm": "node/3402678109"
+  },
+  {
+   "name": "GoGo Grill & Green",
+   "osm": "node/5643775271"
+  },
+  {
+   "name": "Grillspecialisten",
+   "osm": "node/3146053684"
+  },
+  {
+   "name": "Gränden",
+   "osm": "node/3369322609"
+  },
+  {
+   "name": "Heleneholms gatukök",
+   "osm": "way/230677614"
+  },
+  {
+   "name": "Högaholmsgrillen",
+   "osm": "way/230610888"
+  },
+  {
+   "name": "Interpool bar",
+   "osm": "node/5368752598"
+  },
+  {
+   "name": "Kockarna Bruse",
+   "osm": "node/4582777072"
+  },
+  {
+   "name": "Kohai",
+   "osm": "node/3402678116"
+  },
+  {
+   "name": "Kronborgs falafel",
+   "osm": "way/424484008"
+  },
+  {
+   "name": "L'Enoteca",
+   "osm": "node/3794979825"
+  },
+  {
+   "name": "La Soupe",
+   "osm": "node/3402678119"
+  },
+  {
+   "name": "Laziza",
+   "osm": "node/3734378354"
+  },
+  {
+   "name": "Lindängens thai food",
+   "osm": "node/3786483530"
+  },
+  {
+   "name": "Los Arcos",
+   "osm": "node/3051074384"
+  },
+  {
+   "name": "Lundavägens Grill AB",
+   "osm": "node/2830766601"
+  },
+  {
+   "name": "Lung Foon",
+   "osm": "node/1812899364"
+  },
+  {
+   "name": "Malmö Kebab",
+   "osm": "node/4523429890"
+  },
+  {
+   "name": "Malmö rökeri",
+   "osm": "node/2715064770"
+  },
+  {
+   "name": "Mariedalsgrillen",
+   "osm": "node/1669557637"
+  },
+  {
+   "name": "Marina",
+   "osm": "way/241782844"
+  },
+  {
+   "name": "Möllans Falafel",
+   "osm": "node/5763513671"
+  },
+  {
+   "name": "Nobelfalafel",
+   "osm": "node/1855380939"
+  },
+  {
+   "name": "Olivia",
+   "osm": "node/2745983720"
+  },
+  {
+   "name": "Orient restaurang & pizzeria",
+   "osm": "node/4037719320"
+  },
+  {
+   "name": "Palaza grill",
+   "osm": "node/4037719317"
+  },
+  {
+   "name": "Pastamannen",
+   "osm": "way/358542359"
+  },
+  {
+   "name": "Picco Bello",
+   "osm": "node/3745046908"
+  },
+  {
+   "name": "Pizzakväll",
+   "osm": "node/5598258933"
+  },
+  {
+   "name": "Pizzeria Algarve",
+   "osm": "node/4418105205"
+  },
+  {
+   "name": "Pizzeria Da Mary",
+   "osm": "node/4002032192"
+  },
+  {
+   "name": "Pizzeria Madonna",
+   "osm": "node/3492059568"
+  },
+  {
+   "name": "Pizzeria Marathon",
+   "osm": "node/3139892604"
+  },
+  {
+   "name": "Pizzeria Modena",
+   "osm": "node/4418105596"
+  },
+  {
+   "name": "Pizzeria Palermo",
+   "osm": "node/3625639565"
+  },
+  {
+   "name": "Pizzeria San Marco",
+   "osm": "node/4396309490"
+  },
+  {
+   "name": "Pizzeria Viking",
+   "osm": "node/4375327211"
+  },
+  {
+   "name": "Poms",
+   "osm": "node/4496976393"
+  },
+  {
+   "name": "Pub Kunze",
+   "osm": "node/4037719310"
+  },
+  {
+   "name": "Pub Vagabond",
+   "osm": "node/4353251575"
+  },
+  {
+   "name": "rbg bar & grill",
+   "osm": "node/3794911369"
+  },
+  {
+   "name": "Restaurang Hanö",
+   "osm": "node/2829534664"
+  },
+  {
+   "name": "Restaurang Niagara",
+   "osm": "node/4234162772"
+  },
+  {
+   "name": "Restaurang Postiljonen",
+   "osm": "node/5870093159"
+  },
+  {
+   "name": "Restaurang Special",
+   "osm": "node/4396260398"
+  },
+  {
+   "name": "Sajvva Indian Restaurant",
+   "osm": "node/444880324"
+  },
+  {
+   "name": "Samsara",
+   "osm": "node/3786483528"
+  },
+  {
+   "name": "Sara Restaurang & Pizzeria",
+   "osm": "node/4173295515"
+  },
+  {
+   "name": "Segevångs falafel och kebab",
+   "osm": "way/349933140"
+  },
+  {
+   "name": "Shmesani restaurang",
+   "osm": "node/4450105113"
+  },
+  {
+   "name": "Siesta",
+   "osm": "node/3357939783"
+  },
+  {
+   "name": "Square Side",
+   "osm": "node/5239326041"
+  },
+  {
+   "name": "Super Falafel",
+   "osm": "way/336366815"
+  },
+  {
+   "name": "Sushi Bar Kyoto",
+   "osm": "node/3414497904"
+  },
+  {
+   "name": "Sushi For You",
+   "osm": "node/4582777065"
+  },
+  {
+   "name": "Sushibaren",
+   "osm": "node/5378110863"
+  },
+  {
+   "name": "Södervärns krog",
+   "osm": "node/2715605826"
+  },
+  {
+   "name": "The Orient House of Falafel Nr. 1",
+   "osm": "node/3440862470"
+  },
+  {
+   "name": "Ti amo",
+   "osm": "node/4523411591"
+  },
+  {
+   "name": "Tre Vänner",
+   "osm": "node/4404354990"
+  },
+  {
+   "name": "Urma restaurang & catering",
+   "osm": "node/3786483523"
+  },
+  {
+   "name": "Vegenat",
+   "osm": "node/3402678137"
+  },
+  {
+   "name": "Veniz pizza",
+   "osm": "node/3357978976"
+  },
+  {
+   "name": "Via Napoli",
+   "osm": "node/4187613640"
+  },
+  {
+   "name": "Vindstilla",
+   "osm": "node/1780224915"
+  },
+  {
+   "name": "Värnhems falafel",
+   "osm": "node/4037719307"
+  },
+  {
+   "name": "Västergatans livs & pizzeria",
+   "osm": "node/3358041422"
+  },
+  {
+   "name": "Zen Thai",
+   "osm": "node/2718559019"
+  },
+  {
+   "name": "400 grader",
+   "osm": "node/7283459641"
+  },
+  {
+   "name": "7 Days pizza & Grill",
+   "osm": "node/10756703279"
+  },
+  {
+   "name": "About Beer",
+   "osm": "node/8622721631"
+  },
+  {
+   "name": "Acaí and Poké",
+   "osm": "node/1309298154"
+  },
+  {
+   "name": "Allans korv",
+   "osm": "way/955892332"
+  },
+  {
+   "name": "Aqua Sushi",
+   "osm": "node/10737934392"
+  },
+  {
+   "name": "Arous Damascus",
+   "osm": "node/9605413230"
+  },
+  {
+   "name": "Art of Spices",
+   "osm": "node/11179353225"
+  },
+  {
+   "name": "Asian Kingdom (Sri Lankan)",
+   "osm": "node/9199778106"
+  },
+  {
+   "name": "Asino",
+   "osm": "node/7283161483"
+  },
+  {
+   "name": "Ava Vinbar",
+   "osm": "node/11179344479"
+  },
+  {
+   "name": "Awad Pizzeria",
+   "osm": "node/10752148661"
+  },
+  {
+   "name": "Azalee Restaurang",
+   "osm": "node/7283161470"
+  },
+  {
+   "name": "Babas",
+   "osm": "node/9576546407"
+  },
+  {
+   "name": "Babylon Grill",
+   "osm": "way/288705825"
+  },
+  {
+   "name": "Baguette & Sallad Hörnan",
+   "osm": "node/7095824520"
+  },
+  {
+   "name": "Bao Bao",
+   "osm": "node/7283161476"
+  },
+  {
+   "name": "Bar Kiosko",
+   "osm": "node/1838820243"
+  },
+  {
+   "name": "Beachgarden",
+   "osm": "node/11128452905"
+  },
+  {
+   "name": "Bellevue Kebab & Falafel",
+   "osm": "way/926225600"
+  },
+  {
+   "name": "Bellezza Pizzeria",
+   "osm": "node/7114802934"
+  },
+  {
+   "name": "Benne Pastabar",
+   "osm": "node/11179296202"
+  },
+  {
+   "name": "Bhua Thai",
+   "osm": "node/10754116842"
+  },
+  {
+   "name": "BISe",
+   "osm": "node/10737921527"
+  },
+  {
+   "name": "Bistro Strandberg",
+   "osm": "node/10754157987"
+  },
+  {
+   "name": "Boru Bowl Bar",
+   "osm": "node/11109485805"
+  },
+  {
+   "name": "Bosniska Ćevapćići",
+   "osm": "node/3941412623"
+  },
+  {
+   "name": "Bosniska Köket",
+   "osm": "node/7283168686"
+  },
+  {
+   "name": "Bosphorus",
+   "osm": "node/9576567321"
+  },
+  {
+   "name": "Brunchoteket",
+   "osm": "way/1091108908"
+  },
+  {
+   "name": "Burek & Ćevapi Mästarna",
+   "osm": "node/2715612084"
+  },
+  {
+   "name": "Bürlovs-Rasten",
+   "osm": "way/365339612"
+  },
+  {
+   "name": "Cameron's pastastuga",
+   "osm": "node/9682624800"
+  },
+  {
+   "name": "Care of",
+   "osm": "node/10233009998"
+  },
+  {
+   "name": "Cataleya",
+   "osm": "node/10129165430"
+  },
+  {
+   "name": "Chaplin kebab & falafel",
+   "osm": "way/1038071927"
+  },
+  {
+   "name": "ChopChop Asian Express",
+   "osm": "way/684433881"
+  },
+  {
+   "name": "Ciao",
+   "osm": "node/7283459644"
+  },
+  {
+   "name": "Dal Sud",
+   "osm": "node/7005812153"
+  },
+  {
+   "name": "Dalaplans Grill",
+   "osm": "node/10754116894"
+  },
+  {
+   "name": "Dashi",
+   "osm": "node/6301869950"
+  },
+  {
+   "name": "Davidshalls Pizzeria",
+   "osm": "node/5318761148"
+  },
+  {
+   "name": "Delhi",
+   "osm": "node/3385991242"
+  },
+  {
+   "name": "Dhaba Indian Kitchen",
+   "osm": "node/10756727741"
+  },
+  {
+   "name": "DINÉ Burgers",
+   "osm": "node/7296715606"
+  },
+  {
+   "name": "Dockside Burgers",
+   "osm": "node/658079080"
+  },
+  {
+   "name": "Dosirak",
+   "osm": "node/10756703298"
+  },
+  {
+   "name": "Enjera",
+   "osm": "node/536831867"
+  },
+  {
+   "name": "Epicuré",
+   "osm": "way/1092638240"
+  },
+  {
+   "name": "Escama Gastrobar",
+   "osm": "node/9576546414"
+  },
+  {
+   "name": "Fahem & Lahem",
+   "osm": "node/6795172185"
+  },
+  {
+   "name": "Falafel City",
+   "osm": "node/10130500628"
+  },
+  {
+   "name": "Falafel Mästaren Restaurang",
+   "osm": "way/99364980"
+  },
+  {
+   "name": "Falafel N.1",
+   "osm": "node/10754116904"
+  },
+  {
+   "name": "Falafel Nydala",
+   "osm": "node/10754157914"
+  },
+  {
+   "name": "Falafel Triangeln N.1",
+   "osm": "node/5318761147"
+  },
+  {
+   "name": "Fat Daves",
+   "osm": "way/1092638242"
+  },
+  {
+   "name": "Fish & Shrimps",
+   "osm": "node/10754116868"
+  },
+  {
+   "name": "Frankful",
+   "osm": "node/1677336096"
+  },
+  {
+   "name": "Fratellis Pizza",
+   "osm": "node/6402015234"
+  },
+  {
+   "name": "Fridhems Falafel",
+   "osm": "way/867398946"
+  },
+  {
+   "name": "Friis 14",
+   "osm": "node/7283459646"
+  },
+  {
+   "name": "Fusion Sushi",
+   "osm": "node/10794121350"
+  },
+  {
+   "name": "G.R.A.N.D.E",
+   "osm": "node/2036316324"
+  },
+  {
+   "name": "Gamle Nobes Bodega",
+   "osm": "node/2261944164"
+  },
+  {
+   "name": "Genuin",
+   "osm": "node/10738188482"
+  },
+  {
+   "name": "Gerege",
+   "osm": "node/991719823"
+  },
+  {
+   "name": "Green Chili",
+   "osm": "way/1091108900"
+  },
+  {
+   "name": "Green Mango",
+   "osm": "node/6604886943"
+  },
+  {
+   "name": "Grekiska grill och bar",
+   "osm": "node/10729702099"
+  },
+  {
+   "name": "Grill Hörnan",
+   "osm": "node/10754116869"
+  },
+  {
+   "name": "Gröna Hörnan",
+   "osm": "node/11360176347"
+  },
+  {
+   "name": "grönt o’ gott",
+   "osm": "node/8072027423"
+  },
+  {
+   "name": "Gullviks Grill & Pizzeria",
+   "osm": "node/10754157910"
+  },
+  {
+   "name": "Gustav Adolf restaurant & café",
+   "osm": "way/1092638238"
+  },
+  {
+   "name": "Habayeb",
+   "osm": "node/7283438895"
+  },
+  {
+   "name": "Hang Zhou Restaurant",
+   "osm": "node/10754157979"
+  },
+  {
+   "name": "Haqvin",
+   "osm": "node/9576546412"
+  },
+  {
+   "name": "Hawii Poké",
+   "osm": "way/1036504127"
+  },
+  {
+   "name": "Henrik's House",
+   "osm": "node/7646453892"
+  },
+  {
+   "name": "Holma Pizzeria",
+   "osm": "node/10756703271"
+  },
+  {
+   "name": "HumYum",
+   "osm": "node/417994878"
+  },
+  {
+   "name": "Hörnet",
+   "osm": "node/8078205803"
+  },
+  {
+   "name": "Icha mochi",
+   "osm": "way/1092638236"
+  },
+  {
+   "name": "Indian Curry Hut",
+   "osm": "node/10756727705"
+  },
+  {
+   "name": "Indian Express 2",
+   "osm": "node/6479097885"
+  },
+  {
+   "name": "Indian Kashmir",
+   "osm": "node/8069401269"
+  },
+  {
+   "name": "Intergrill",
+   "osm": "node/7282929873"
+  },
+  {
+   "name": "Jack's Gatukök",
+   "osm": "node/10137504892"
+  },
+  {
+   "name": "Jiang Nan",
+   "osm": "node/10756703233"
+  },
+  {
+   "name": "Jouly Pizzeria & Grill",
+   "osm": "node/10754116877"
+  },
+  {
+   "name": "Julie Vinbar",
+   "osm": "node/7001369712"
+  },
+  {
+   "name": "Kaizen Sushi",
+   "osm": "node/10756703230"
+  },
+  {
+   "name": "Kastanjekiosken",
+   "osm": "node/9911494035"
+  },
+  {
+   "name": "Katarinalund Grill",
+   "osm": "node/7900258811"
+  },
+  {
+   "name": "Kazoku",
+   "osm": "node/9795594718,way/1093128535"
+  },
+  {
+   "name": "Khao Thai",
+   "osm": "node/10754116885"
+  },
+  {
+   "name": "Kiels Kök",
+   "osm": "node/10754677876"
+  },
+  {
+   "name": "Kinafloden",
+   "osm": "node/8214872542"
+  },
+  {
+   "name": "Kito Sushibar",
+   "osm": "node/10754158027"
+  },
+  {
+   "name": "Kniv & gaffel",
+   "osm": "node/10754157930"
+  },
+  {
+   "name": "Kontrast Ghee by the Sea",
+   "osm": "node/1677336189"
+  },
+  {
+   "name": "Kontrast Restaurang",
+   "osm": "node/7282929876"
+  },
+  {
+   "name": "Konya Grill",
+   "osm": "node/10754116882"
+  },
+  {
+   "name": "Kryddhyllan",
+   "osm": "node/6250400770"
+  },
+  {
+   "name": "Krøl Bar",
+   "osm": "node/1726889285"
+  },
+  {
+   "name": "Kung Fu Dumpling",
+   "osm": "node/10754158018"
+  },
+  {
+   "name": "Köpenhamns Falafel",
+   "osm": "node/10756703231"
+  },
+  {
+   "name": "L'Acquafarina",
+   "osm": "node/3933039638"
+  },
+  {
+   "name": "La Bonne Vie",
+   "osm": "node/6303839491"
+  },
+  {
+   "name": "La Caravelle",
+   "osm": "node/9458259466"
+  },
+  {
+   "name": "La Grappa",
+   "osm": "way/1091108903"
+  },
+  {
+   "name": "La Nonnina",
+   "osm": "node/9800695217"
+  },
+  {
+   "name": "La Passione",
+   "osm": "node/7295235698"
+  },
+  {
+   "name": "La Roche",
+   "osm": "way/1093128533"
+  },
+  {
+   "name": "Limhamns Kött & Vilt",
+   "osm": "node/10972606031"
+  },
+  {
+   "name": "Limhamns Pizzeria & Pub",
+   "osm": "node/7114802935"
+  },
+  {
+   "name": "Lindängens Pizzeria",
+   "osm": "node/10754116871"
+  },
+  {
+   "name": "Linnea & Basilika",
+   "osm": "node/8455401671"
+  },
+  {
+   "name": "Lion Bar",
+   "osm": "node/11464017069"
+  },
+  {
+   "name": "Little Italy",
+   "osm": "node/9576567320"
+  },
+  {
+   "name": "Locali",
+   "osm": "node/10754158025"
+  },
+  {
+   "name": "Lokal 17 - Pembert och Company",
+   "osm": "node/10130500629"
+  },
+  {
+   "name": "Lorensborgs Grillen",
+   "osm": "node/10756703243"
+  },
+  {
+   "name": "LU",
+   "osm": "node/6850907828"
+  },
+  {
+   "name": "Lundavägens Pizzeria",
+   "osm": "node/10752148631"
+  },
+  {
+   "name": "Mangal",
+   "osm": "node/10754157955"
+  },
+  {
+   "name": "Manto",
+   "osm": "node/10738019918"
+  },
+  {
+   "name": "Maria's Indian Kitchen",
+   "osm": "node/4396284990"
+  },
+  {
+   "name": "Marvin",
+   "osm": "node/6302279918"
+  },
+  {
+   "name": "Mastio",
+   "osm": "node/8536639082"
+  },
+  {
+   "name": "Matbyrån",
+   "osm": "node/1685948688"
+  },
+  {
+   "name": "Meet and Eat",
+   "osm": "node/10816172105"
+  },
+  {
+   "name": "Miamarias",
+   "osm": "node/7951164438"
+  },
+  {
+   "name": "Milano Pizzeria",
+   "osm": "node/8078194463"
+  },
+  {
+   "name": "Miso",
+   "osm": "way/1092638239"
+  },
+  {
+   "name": "Miss Vietnam",
+   "osm": "node/7283438893"
+  },
+  {
+   "name": "Mix & Eat",
+   "osm": "node/9976912495"
+  },
+  {
+   "name": "Mr Falafel",
+   "osm": "node/4254792462"
+  },
+  {
+   "name": "Mrs Saigon",
+   "osm": "way/1092638258"
+  },
+  {
+   "name": "Mässingshornet",
+   "osm": "node/7442016894"
+  },
+  {
+   "name": "Möllan Curry",
+   "osm": "node/7794349939"
+  },
+  {
+   "name": "Möllans pizzeria",
+   "osm": "node/7794349940"
+  },
+  {
+   "name": "Nam Do",
+   "osm": "way/680437995"
+  },
+  {
+   "name": "Nazar Restaurang Grill & Bar",
+   "osm": "node/7442076279"
+  },
+  {
+   "name": "Nem & Nori",
+   "osm": "node/6819587873"
+  },
+  {
+   "name": "Ngon",
+   "osm": "node/6487748346"
+  },
+  {
+   "name": "Nils",
+   "osm": "node/8078194464"
+  },
+  {
+   "name": "Oishi Sushi",
+   "osm": "node/445844340"
+  },
+  {
+   "name": "Ojisan Sushi Malmö",
+   "osm": "node/5378110862"
+  },
+  {
+   "name": "Oki Doki Sushi",
+   "osm": "node/10112480544"
+  },
+  {
+   "name": "Open Rice",
+   "osm": "node/10756703297"
+  },
+  {
+   "name": "Opopoppa",
+   "osm": "node/536820937"
+  },
+  {
+   "name": "Osteria di Lá",
+   "osm": "node/9505901462"
+  },
+  {
+   "name": "Osteria Qui",
+   "osm": "node/8078205798"
+  },
+  {
+   "name": "Oxie Grill och Pizzeria",
+   "osm": "way/218458955"
+  },
+  {
+   "name": "Pallani Pizza",
+   "osm": "node/4037719309"
+  },
+  {
+   "name": "Pappa Joe's",
+   "osm": "way/211713838"
+  },
+  {
+   "name": "Pasta kompaniet",
+   "osm": "node/10756703259"
+  },
+  {
+   "name": "Pastastationen",
+   "osm": "way/232186349"
+  },
+  {
+   "name": "Perssons Kök & Bar",
+   "osm": "node/1309359393"
+  },
+  {
+   "name": "Piccolo Mondo",
+   "osm": "way/1091108906"
+  },
+  {
+   "name": "Pink head noodle bar",
+   "osm": "node/3754763561"
+  },
+  {
+   "name": "Pivo",
+   "osm": "node/3357955289"
+  },
+  {
+   "name": "Pizza House & Grill",
+   "osm": "node/4523387997,way/1304005493"
+  },
+  {
+   "name": "Pizzeria Bellevue",
+   "osm": "node/10756703267"
+  },
+  {
+   "name": "Pizzeria Erikslust",
+   "osm": "node/10754116857"
+  },
+  {
+   "name": "Pizzeria Forno a Legna",
+   "osm": "node/8072027418"
+  },
+  {
+   "name": "Pizzeria Helena",
+   "osm": "node/6385559692"
+  },
+  {
+   "name": "Pizzeria Kronborg",
+   "osm": "node/10756703258"
+  },
+  {
+   "name": "Pizzeria Lamare",
+   "osm": "node/10756703244"
+  },
+  {
+   "name": "Pizzeria Lupo Trattoria",
+   "osm": "node/10756703252"
+  },
+  {
+   "name": "Pizzeria Perugina",
+   "osm": "node/10754158004"
+  },
+  {
+   "name": "Pizzeria Pompei",
+   "osm": "node/8078205795"
+  },
+  {
+   "name": "Pizzeria Quattro",
+   "osm": "node/10756703288"
+  },
+  {
+   "name": "Pizzeria teneriffa",
+   "osm": "node/10753036576"
+  },
+  {
+   "name": "Pizzeria Verona",
+   "osm": "node/10754116880"
+  },
+  {
+   "name": "Pizzeria Videdal",
+   "osm": "node/10754157980"
+  },
+  {
+   "name": "Porto Gastrobar",
+   "osm": "node/10129165428"
+  },
+  {
+   "name": "Portobello",
+   "osm": "node/11179361788,node/11179361789"
+  },
+  {
+   "name": "Potala",
+   "osm": "node/10754158068"
+  },
+  {
+   "name": "Pub Oxen",
+   "osm": "node/7646428166"
+  },
+  {
+   "name": "Que",
+   "osm": "node/4037719318"
+  },
+  {
+   "name": "Ramen Shack",
+   "osm": "node/10756703299"
+  },
+  {
+   "name": "Ramen to Bíiru",
+   "osm": "node/7283438902"
+  },
+  {
+   "name": "Rau",
+   "osm": "node/9505901463"
+  },
+  {
+   "name": "Rekas Burgers",
+   "osm": "node/10754116876"
+  },
+  {
+   "name": "Reko Sushi & Bowls",
+   "osm": "node/9232814289"
+  },
+  {
+   "name": "Restaurang Capri",
+   "osm": "node/11335027279"
+  },
+  {
+   "name": "Restaurang Mevlana Kolgrill",
+   "osm": "node/7283168689"
+  },
+  {
+   "name": "Restaurang Ribersborg",
+   "osm": "way/100074952"
+  },
+  {
+   "name": "Restaurang Rotundan",
+   "osm": "way/51335206"
+  },
+  {
+   "name": "Restaurang Shiraz",
+   "osm": "node/536824935"
+  },
+  {
+   "name": "Restaurang Vitlök",
+   "osm": "node/8069401272"
+  },
+  {
+   "name": "Restaurang Zula",
+   "osm": "node/445842838"
+  },
+  {
+   "name": "Rice & Soup",
+   "osm": "node/10129165433"
+  },
+  {
+   "name": "Ristorante Casa Bianca",
+   "osm": "node/7647597709"
+  },
+  {
+   "name": "Rockys Pizzeria",
+   "osm": "node/10754116886"
+  },
+  {
+   "name": "RoseGarden Neo Asian",
+   "osm": "node/1863945725"
+  },
+  {
+   "name": "Royal Pool Hall",
+   "osm": "node/6473822458"
+  },
+  {
+   "name": "Runda grillen",
+   "osm": "way/999729473"
+  },
+  {
+   "name": "Sakura Sushi",
+   "osm": "node/8606577877"
+  },
+  {
+   "name": "Salad & Sushi",
+   "osm": "node/8606570492"
+  },
+  {
+   "name": "Saladzone",
+   "osm": "node/11056830152"
+  },
+  {
+   "name": "San Greal",
+   "osm": "node/9195218959"
+  },
+  {
+   "name": "San Remo Pizzeria",
+   "osm": "node/10752148658"
+  },
+  {
+   "name": "Sankt Gertrud",
+   "osm": "node/444870987"
+  },
+  {
+   "name": "Sansa Café",
+   "osm": "node/9119830519"
+  },
+  {
+   "name": "Sara Super Falafel",
+   "osm": "node/10754157908"
+  },
+  {
+   "name": "Sauvage",
+   "osm": "node/8187973730"
+  },
+  {
+   "name": "Seaside",
+   "osm": "node/1575225594"
+  },
+  {
+   "name": "Segerestaurang",
+   "osm": "node/10752148635"
+  },
+  {
+   "name": "Shawarma-specialisten",
+   "osm": "node/8084187847"
+  },
+  {
+   "name": "Sichuan",
+   "osm": "node/10754157997"
+  },
+  {
+   "name": "Sinlapa",
+   "osm": "node/10754158013"
+  },
+  {
+   "name": "Sio",
+   "osm": "node/4860687821"
+  },
+  {
+   "name": "Slottsstadens Restaurang",
+   "osm": "node/10756703226"
+  },
+  {
+   "name": "Smack burgers",
+   "osm": "node/9598028077"
+  },
+  {
+   "name": "Smör & bröd",
+   "osm": "way/1092638267"
+  },
+  {
+   "name": "Smörgåshörnan",
+   "osm": "node/10754677883"
+  },
+  {
+   "name": "Snabbt & gott",
+   "osm": "node/3473354978"
+  },
+  {
+   "name": "Sofra",
+   "osm": "node/1677336148"
+  },
+  {
+   "name": "Sopi Burek House",
+   "osm": "node/7791158765"
+  },
+  {
+   "name": "Spazio",
+   "osm": "node/1677336183"
+  },
+  {
+   "name": "Srinin",
+   "osm": "node/8078205799"
+  },
+  {
+   "name": "Star restaurang och bar",
+   "osm": "node/534571956"
+  },
+  {
+   "name": "Statsfalafel & Grill",
+   "osm": "way/781905055"
+  },
+  {
+   "name": "Street Fam",
+   "osm": "node/10130500632"
+  },
+  {
+   "name": "Sugoi",
+   "osm": "node/6385559696"
+  },
+  {
+   "name": "Sumo sushi",
+   "osm": "way/1036504108"
+  },
+  {
+   "name": "Super Chicken",
+   "osm": "node/7021288955"
+  },
+  {
+   "name": "Surf shack",
+   "osm": "way/1091108930"
+  },
+  {
+   "name": "Surf Shack Beach Diner",
+   "osm": "way/233219302"
+  },
+  {
+   "name": "Svea Husmanskost",
+   "osm": "node/10754157933"
+  },
+  {
+   "name": "Söderkullas Pizzeria",
+   "osm": "node/10754116878"
+  },
+  {
+   "name": "Södervärn Salladsbar",
+   "osm": "node/3473354977"
+  },
+  {
+   "name": "Tandoor",
+   "osm": "node/7282929874"
+  },
+  {
+   "name": "Thai House",
+   "osm": "node/10754116848"
+  },
+  {
+   "name": "Thai Viet Restaurant",
+   "osm": "node/7295202486"
+  },
+  {
+   "name": "Thap Thim",
+   "osm": "node/5834378328"
+  },
+  {
+   "name": "The South Indian",
+   "osm": "node/7282929877"
+  },
+  {
+   "name": "The Thai Pad",
+   "osm": "node/10756727740"
+  },
+  {
+   "name": "Tin Tin Thai Bar & Restaurang",
+   "osm": "node/2396232443"
+  },
+  {
+   "name": "Toppgrillen 1",
+   "osm": "node/6311683886"
+  },
+  {
+   "name": "Tornet Pizzeria",
+   "osm": "node/7442057966"
+  },
+  {
+   "name": "Trastienda",
+   "osm": "way/1036504125"
+  },
+  {
+   "name": "Tre Colori",
+   "osm": "node/10754116843"
+  },
+  {
+   "name": "Tugg",
+   "osm": "way/1036504126"
+  },
+  {
+   "name": "Turning food",
+   "osm": "node/1670692583"
+  },
+  {
+   "name": "Twins Pub & Pizzeria",
+   "osm": "node/10752148659"
+  },
+  {
+   "name": "Ubåtshallen",
+   "osm": "node/9001415543"
+  },
+  {
+   "name": "V.E.D",
+   "osm": "node/7299722833"
+  },
+  {
+   "name": "Via Lorenzo",
+   "osm": "node/10756703238"
+  },
+  {
+   "name": "Via Piazza",
+   "osm": "node/6250400771"
+  },
+  {
+   "name": "Vibliotek",
+   "osm": "way/1036504124"
+  },
+  {
+   "name": "Vin:D",
+   "osm": "node/7282929879"
+  },
+  {
+   "name": "Von Troils Grill",
+   "osm": "node/8755629345"
+  },
+  {
+   "name": "Västgrillen",
+   "osm": "node/11262930038"
+  },
+  {
+   "name": "Wega",
+   "osm": "node/8824252442"
+  },
+  {
+   "name": "Wok Kitchen",
+   "osm": "node/6250400769"
+  },
+  {
+   "name": "WOSO",
+   "osm": "node/10129165432"
+  },
+  {
+   "name": "Wärldshuset",
+   "osm": "node/9891391563"
+  },
+  {
+   "name": "Yasmins mat",
+   "osm": "way/359075110"
+  },
+  {
+   "name": "Zinkaa Pizzeria",
+   "osm": "node/1685947256"
+  },
+  {
+   "name": "Zócalo",
+   "osm": "way/1093128521"
+  },
+  {
+   "name": "Zola",
+   "osm": "node/9679535903"
+  },
+  {
+   "name": "Zushi",
+   "osm": "node/6438282285"
+  },
+  {
+   "name": "Al-Shami",
+   "osm": "node/7500699334"
+  },
+  {
+   "name": "Albalam",
+   "osm": "node/12324453951"
+  },
+  {
+   "name": "Ali Orientaliskt",
+   "osm": "node/11985105512"
+  },
+  {
+   "name": "Aliwan Alshami",
+   "osm": "node/8078248459"
+  },
+  {
+   "name": "Anatolia Kolgrill",
+   "osm": "node/12522400098"
+  },
+  {
+   "name": "Anemon",
+   "osm": "node/13914160101"
+  },
+  {
+   "name": "Ark",
+   "osm": "node/4195728430"
+  },
+  {
+   "name": "Aro Deli",
+   "osm": "node/11684920141"
+  },
+  {
+   "name": "Arom Indisk Twist",
+   "osm": "node/12090552057"
+  },
+  {
+   "name": "Arsenik Bistro",
+   "osm": "node/12762036615"
+  },
+  {
+   "name": "Artisan Bar",
+   "osm": "node/1726889252"
+  },
+  {
+   "name": "Asia Restaurang",
+   "osm": "node/3693536964"
+  },
+  {
+   "name": "Asia Village",
+   "osm": "node/1838820244"
+  },
+  {
+   "name": "Asian House",
+   "osm": "node/11861982301"
+  },
+  {
+   "name": "Atemlos",
+   "osm": "node/534648804"
+  },
+  {
+   "name": "Autana Green",
+   "osm": "node/13985520852"
+  },
+  {
+   "name": "Babusia",
+   "osm": "node/3778749802"
+  },
+  {
+   "name": "Bagelkungen",
+   "osm": "node/11836930423"
+  },
+  {
+   "name": "Bai Ka Prao",
+   "osm": "node/3690978406"
+  },
+  {
+   "name": "Balkan Etno",
+   "osm": "way/680520026"
+  },
+  {
+   "name": "Bar Bobo",
+   "osm": "node/13881389774"
+  },
+  {
+   "name": "Bar Hugo",
+   "osm": "node/14203041601"
+  },
+  {
+   "name": "Bar[r]",
+   "osm": "node/13476232701"
+  },
+  {
+   "name": "BarBaren",
+   "osm": "node/14063428201"
+  },
+  {
+   "name": "Barekat",
+   "osm": "node/11637631147"
+  },
+  {
+   "name": "Belo's Grand Deli",
+   "osm": "node/13046495984"
+  },
+  {
+   "name": "Benne",
+   "osm": "node/11886736267"
+  },
+  {
+   "name": "Berg Pizzeria",
+   "osm": "node/7442000453"
+  },
+  {
+   "name": "Berlin Döner Malmö",
+   "osm": "node/13955785701"
+  },
+  {
+   "name": "Bistro Sante",
+   "osm": "node/1030487936"
+  },
+  {
+   "name": "Bistro Tout",
+   "osm": "node/13037841018"
+  },
+  {
+   "name": "bloom. café",
+   "osm": "node/10738149713"
+  },
+  {
+   "name": "Blå Hoddan",
+   "osm": "node/11920288475"
+  },
+  {
+   "name": "Boden Kebab",
+   "osm": "node/9679531694"
+  },
+  {
+   "name": "BOLL Cucina",
+   "osm": "way/1314243418"
+  },
+  {
+   "name": "Bollen i rullen",
+   "osm": "node/2606814827,node/3355797056"
+  },
+  {
+   "name": "Boom Bagel",
+   "osm": "node/10756703300"
+  },
+  {
+   "name": "Burek King Ćevapi",
+   "osm": "way/102209307"
+  },
+  {
+   "name": "Burger Mansion",
+   "osm": "node/7294162871"
+  },
+  {
+   "name": "Burger Station",
+   "osm": "node/13190587652"
+  },
+  {
+   "name": "burgRs",
+   "osm": "node/12100103736"
+  },
+  {
+   "name": "Byn Matbar",
+   "osm": "node/13136374980"
+  },
+  {
+   "name": "Bästa Falafel",
+   "osm": "node/13669704951"
+  },
+  {
+   "name": "C'mon Pizza & Rock n Roll",
+   "osm": "node/13437731201"
+  },
+  {
+   "name": "Cafe Grön",
+   "osm": "node/12107739818"
+  },
+  {
+   "name": "Captain Seafood",
+   "osm": "node/12803969503"
+  },
+  {
+   "name": "Cervejeria Rua du Rei",
+   "osm": "node/14011243076"
+  },
+  {
+   "name": "Chefs of Sweden",
+   "osm": "node/4738304723"
+  },
+  {
+   "name": "Chicama",
+   "osm": "node/4244531269"
+  },
+  {
+   "name": "Chicken Fresh",
+   "osm": "node/2747390806"
+  },
+  {
+   "name": "Chill Out Sushi",
+   "osm": "node/1860324502"
+  },
+  {
+   "name": "Cin Cin Vinbar",
+   "osm": "node/3734363701"
+  },
+  {
+   "name": "Crazy Food",
+   "osm": "node/13518159215"
+  },
+  {
+   "name": "Da Zio",
+   "osm": "node/8069401270"
+  },
+  {
+   "name": "Danial's Indian Kitchen & Pizza",
+   "osm": "node/12324453952"
+  },
+  {
+   "name": "Darbare Wali",
+   "osm": "node/4254748253"
+  },
+  {
+   "name": "Diba",
+   "osm": "node/10754157984"
+  },
+  {
+   "name": "Diwan",
+   "osm": "node/8122281187"
+  },
+  {
+   "name": "Dojo Sushi",
+   "osm": "node/1677336094"
+  },
+  {
+   "name": "Doori",
+   "osm": "node/11635629738"
+  },
+  {
+   "name": "döner kabab-ji",
+   "osm": "node/8187945110"
+  },
+  {
+   "name": "Edda",
+   "osm": "node/9576546413"
+  },
+  {
+   "name": "Ekke Bar",
+   "osm": "node/13889466534"
+  },
+  {
+   "name": "El Sótano",
+   "osm": "node/3357939782"
+  },
+  {
+   "name": "El Tepeyac",
+   "osm": "node/13914158302"
+  },
+  {
+   "name": "Enoclub Osteria",
+   "osm": "node/7294847547"
+  },
+  {
+   "name": "Être Bistro",
+   "osm": "way/1091108899"
+  },
+  {
+   "name": "Falafel Beirut",
+   "osm": "node/4879450090"
+  },
+  {
+   "name": "FIR",
+   "osm": "node/11894769136"
+  },
+  {
+   "name": "Fisky Business Dockan",
+   "osm": "node/1677337185"
+  },
+  {
+   "name": "FLAX",
+   "osm": "node/12133643644"
+  },
+  {
+   "name": "Fokus",
+   "osm": "node/13633679976"
+  },
+  {
+   "name": "Folkparksgrillen",
+   "osm": "way/1290834569"
+  },
+  {
+   "name": "Freden",
+   "osm": "node/850911323"
+  },
+  {
+   "name": "Freja Café &Vinbar",
+   "osm": "node/12020345518"
+  },
+  {
+   "name": "Fresh Grind",
+   "osm": "node/12106772001"
+  },
+  {
+   "name": "Fusion & Fresh",
+   "osm": "node/12645054433"
+  },
+  {
+   "name": "Gaji",
+   "osm": "node/13323956335"
+  },
+  {
+   "name": "Gao Noodles",
+   "osm": "node/13236426562"
+  },
+  {
+   "name": "Gatto Nero",
+   "osm": "node/444880200"
+  },
+  {
+   "name": "glassfabrik Signes",
+   "osm": "node/9949485305"
+  },
+  {
+   "name": "Greken i köket",
+   "osm": "node/11687512968"
+  },
+  {
+   "name": "Grill House",
+   "osm": "node/7282929872"
+  },
+  {
+   "name": "Gustavino",
+   "osm": "node/12867024197"
+  },
+  {
+   "name": "Hachiko",
+   "osm": "node/12803969504"
+  },
+  {
+   "name": "Hamn & Peppar",
+   "osm": "node/12951671360"
+  },
+  {
+   "name": "Heat",
+   "osm": "node/12816700824"
+  },
+  {
+   "name": "Hong Kong",
+   "osm": "node/13844120946"
+  },
+  {
+   "name": "Hummusson",
+   "osm": "node/12037142251"
+  },
+  {
+   "name": "Hygge Mat & Bar",
+   "osm": "node/10130500627"
+  },
+  {
+   "name": "Jou San",
+   "osm": "node/11780230895"
+  },
+  {
+   "name": "Kajen 11",
+   "osm": "node/9460387268"
+  },
+  {
+   "name": "Kappa Bar",
+   "osm": "node/12777860496"
+  },
+  {
+   "name": "Kasai in the Sky",
+   "osm": "node/12162330413"
+  },
+  {
+   "name": "Kebab Time",
+   "osm": "node/12107656148"
+  },
+  {
+   "name": "Khanh",
+   "osm": "node/3051074424"
+  },
+  {
+   "name": "Kichirou Sushi",
+   "osm": "node/12518209690"
+  },
+  {
+   "name": "King Pizza Malmö",
+   "osm": "node/13645596201"
+  },
+  {
+   "name": "Kintsugi Sushi",
+   "osm": "node/10756703284"
+  },
+  {
+   "name": "Kirseberg Falafel",
+   "osm": "way/1156193256"
+  },
+  {
+   "name": "Kitchen 961",
+   "osm": "node/10738094204"
+  },
+  {
+   "name": "Kochi",
+   "osm": "node/10754116844"
+  },
+  {
+   "name": "Koi",
+   "osm": "way/1091108937"
+  },
+  {
+   "name": "Kollektivkrogen",
+   "osm": "node/12162328272"
+  },
+  {
+   "name": "Kung Food",
+   "osm": "node/8072022113"
+  },
+  {
+   "name": "Kvarnby Byakrog",
+   "osm": "way/211973103"
+  },
+  {
+   "name": "Kålhuvet",
+   "osm": "node/7283438894"
+  },
+  {
+   "name": "Kölsch",
+   "osm": "node/536821189"
+  },
+  {
+   "name": "La cave vinbar",
+   "osm": "node/6341952008"
+  },
+  {
+   "name": "La Penombra",
+   "osm": "node/417987298"
+  },
+  {
+   "name": "LAU 99",
+   "osm": "node/13011475010"
+  },
+  {
+   "name": "Lavolia Pizzeria",
+   "osm": "node/12879030031"
+  },
+  {
+   "name": "Lera",
+   "osm": "node/4397748090"
+  },
+  {
+   "name": "Lilla Sicilien",
+   "osm": "node/14246794693"
+  },
+  {
+   "name": "Lilla Sjötorp",
+   "osm": "node/13056665900"
+  },
+  {
+   "name": "Lisas Restaurang & Catering",
+   "osm": "node/5602581922"
+  },
+  {
+   "name": "Living Room Bar",
+   "osm": "node/12307305009"
+  },
+  {
+   "name": "Lowkey LOCO",
+   "osm": "node/7299632725"
+  },
+  {
+   "name": "Mahalle",
+   "osm": "node/11886420146"
+  },
+  {
+   "name": "Malmös Burek&Cevapi",
+   "osm": "way/231512599"
+  },
+  {
+   "name": "Masala & More",
+   "osm": "node/13963456259"
+  },
+  {
+   "name": "Masala Kitchen & Bar",
+   "osm": "node/11684952024"
+  },
+  {
+   "name": "Maya Cantina",
+   "osm": "node/12164359490"
+  },
+  {
+   "name": "MENYn Grill & Sallad",
+   "osm": "way/189255291"
+  },
+  {
+   "name": "Meyhane",
+   "osm": "node/10754116864"
+  },
+  {
+   "name": "Mezza Beirut",
+   "osm": "node/13964578405"
+  },
+  {
+   "name": "Mirchi by Masala & More",
+   "osm": "node/9679521456"
+  },
+  {
+   "name": "Miss Wang",
+   "osm": "node/11070918305"
+  },
+  {
+   "name": "Modomia",
+   "osm": "node/12058822692"
+  },
+  {
+   "name": "Mr Mix Falafel",
+   "osm": "node/10754116896"
+  },
+  {
+   "name": "Mr Pizza",
+   "osm": "node/8078205800"
+  },
+  {
+   "name": "Mucho Gusto",
+   "osm": "node/11760207639"
+  },
+  {
+   "name": "Naan Wrapsters",
+   "osm": "node/13049858222"
+  },
+  {
+   "name": "New Star Saigon",
+   "osm": "node/1446487347"
+  },
+  {
+   "name": "Nikos Gyros",
+   "osm": "node/12162315273"
+  },
+  {
+   "name": "Novell",
+   "osm": "node/6513056496"
+  },
+  {
+   "name": "Oak berry",
+   "osm": "node/1677335977"
+  },
+  {
+   "name": "Olá",
+   "osm": "node/13955786901"
+  },
+  {
+   "name": "Osaka PokéRamen",
+   "osm": "way/1093128534"
+  },
+  {
+   "name": "Osteria Amore",
+   "osm": "node/3986086964"
+  },
+  {
+   "name": "Pak Indo Box",
+   "osm": "node/4610147523"
+  },
+  {
+   "name": "Palats",
+   "osm": "node/12814044098"
+  },
+  {
+   "name": "Paloma",
+   "osm": "node/7283459645"
+  },
+  {
+   "name": "Papi",
+   "osm": "node/13031745731"
+  },
+  {
+   "name": "Pappas Ćevapi",
+   "osm": "node/11091595347"
+  },
+  {
+   "name": "Peacock India in Every Bite",
+   "osm": "node/13228003744"
+  },
+  {
+   "name": "Peas & Honey",
+   "osm": "node/12058822690"
+  },
+  {
+   "name": "Perfetto",
+   "osm": "node/11780230901"
+  },
+  {
+   "name": "Pin Pin Dumpling",
+   "osm": "node/7283161477"
+  },
+  {
+   "name": "Pizzeria 040",
+   "osm": "node/3402678123"
+  },
+  {
+   "name": "Portalen Limhamn",
+   "osm": "node/9576546415"
+  },
+  {
+   "name": "PÅRIS",
+   "osm": "node/13860369502"
+  },
+  {
+   "name": "Restaurang Kolgrill",
+   "osm": "node/12134311779"
+  },
+  {
+   "name": "Restaurant Khayyam",
+   "osm": "node/578393373"
+  },
+  {
+   "name": "Rex",
+   "osm": "node/4396255810"
+  },
+  {
+   "name": "Sagitto",
+   "osm": "node/8078205804"
+  },
+  {
+   "name": "Saigo",
+   "osm": "node/12817072369"
+  },
+  {
+   "name": "Sakura",
+   "osm": "node/10754158012"
+  },
+  {
+   "name": "Salles Burger",
+   "osm": "node/3473354981"
+  },
+  {
+   "name": "Sanlo",
+   "osm": "node/1012287185"
+  },
+  {
+   "name": "Shahan Restaurang",
+   "osm": "node/1726889286"
+  },
+  {
+   "name": "Shawarmagiganten",
+   "osm": "node/536859303"
+  },
+  {
+   "name": "Slice",
+   "osm": "node/12477950693"
+  },
+  {
+   "name": "Solidar",
+   "osm": "node/13977195675"
+  },
+  {
+   "name": "Storasyster Mastio",
+   "osm": "node/11635574088"
+  },
+  {
+   "name": "Sultan kebab",
+   "osm": "node/1692398193"
+  },
+  {
+   "name": "Sushi & Bowl's",
+   "osm": "node/12131490387"
+  },
+  {
+   "name": "Sweet Lemon",
+   "osm": "node/11834955495"
+  },
+  {
+   "name": "Såjja",
+   "osm": "node/12213810194"
+  },
+  {
+   "name": "Tacopalatset",
+   "osm": "node/13871454744"
+  },
+  {
+   "name": "Tamnack Thai",
+   "osm": "node/12200997100"
+  },
+  {
+   "name": "Tang",
+   "osm": "node/11780230896"
+  },
+  {
+   "name": "Taqueria La Gata",
+   "osm": "node/12616247901"
+  },
+  {
+   "name": "Taste of Damascus",
+   "osm": "node/12100103737"
+  },
+  {
+   "name": "Taste of Thailand",
+   "osm": "node/850906909"
+  },
+  {
+   "name": "Tawana",
+   "osm": "node/1677336020"
+  },
+  {
+   "name": "Texas Mirage Smokehouse",
+   "osm": "node/444883186"
+  },
+  {
+   "name": "Thain n sushi for you",
+   "osm": "node/12134311780"
+  },
+  {
+   "name": "The Gem",
+   "osm": "node/13338784401"
+  },
+  {
+   "name": "The Green Lion Inn",
+   "osm": "node/12162331205"
+  },
+  {
+   "name": "The Paradise",
+   "osm": "node/1012306188"
+  },
+  {
+   "name": "The Pita Spot",
+   "osm": "node/11862078656"
+  },
+  {
+   "name": "The Poke",
+   "osm": "node/13128189001"
+  },
+  {
+   "name": "The Sherlock Holmes Cocktail Bar",
+   "osm": "node/8069401267"
+  },
+  {
+   "name": "The social bar and bistro",
+   "osm": "node/3519113027"
+  },
+  {
+   "name": "Tintin Sushi",
+   "osm": "node/11861982300"
+  },
+  {
+   "name": "Tipico",
+   "osm": "node/13031723448"
+  },
+  {
+   "name": "Torgets Grill",
+   "osm": "node/2293729021"
+  },
+  {
+   "name": "Torstens",
+   "osm": "node/5318761146"
+  },
+  {
+   "name": "Two Forks Mat & Vin",
+   "osm": "node/4173014124"
+  },
+  {
+   "name": "Ukranian Beer Bar",
+   "osm": "node/12330668417"
+  },
+  {
+   "name": "Umami",
+   "osm": "way/1036504122"
+  },
+  {
+   "name": "Urban Turban",
+   "osm": "way/1036504146"
+  },
+  {
+   "name": "Urfa sofrasi",
+   "osm": "node/11262930037"
+  },
+  {
+   "name": "V",
+   "osm": "node/13228003736"
+  },
+  {
+   "name": "V.E.S.P.A",
+   "osm": "node/11872007477"
+  },
+  {
+   "name": "Varv",
+   "osm": "node/2715104506"
+  },
+  {
+   "name": "Vessel",
+   "osm": "node/3777446770"
+  },
+  {
+   "name": "Via Parma",
+   "osm": "node/10753036590"
+  },
+  {
+   "name": "Vin & Ginbaren",
+   "osm": "node/13433135708"
+  },
+  {
+   "name": "Vivo",
+   "osm": "node/1721599298"
+  },
+  {
+   "name": "Volk",
+   "osm": "node/10754158006"
+  },
+  {
+   "name": "Västra Hamnens Pizzeria",
+   "osm": "node/14155537971"
+  },
+  {
+   "name": "X Falafel",
+   "osm": "node/12134311781"
+  },
+  {
+   "name": "Yemen Restaurang",
+   "osm": "node/3388921205"
+  },
+  {
+   "name": "Zar",
+   "osm": "node/10754157906"
+  },
+  {
+   "name": "Östergatan No. 25",
+   "osm": "node/3402678134"
+  }
+ ],
+ "drop": [
+  {
+   "name": "Boulebar Folkets Park",
+   "osm": "node/578393372",
+   "why": "chain"
+  },
+  {
+   "name": "Skybar @ Malmö Arena Hotel",
+   "osm": "node/13827761201",
+   "why": "hotel restaurant or canteen"
+  },
+  {
+   "name": "Wrap House Caroli",
+   "osm": "node/12623080980",
+   "why": "chain"
+  },
+  {
+   "name": "O'Learys",
+   "osm": "node/444845102",
+   "why": "chain"
+  },
+  {
+   "name": "Boulebar",
+   "osm": "node/3724579463",
+   "why": "chain"
+  },
+  {
+   "name": "Ribban Green Golf",
+   "osm": "node/10048295602",
+   "why": "not a krog / trivial"
+  },
+  {
+   "name": "Scandic Triangeln",
+   "osm": "node/6339859447",
+   "why": "hotel restaurant or canteen"
+  },
+  {
+   "name": "MH Matsalar - Orkanen",
+   "osm": "node/1780224916",
+   "why": "hotel restaurant or canteen"
+  },
+  {
+   "name": "Scandic Stortorget",
+   "osm": "node/6339859448",
+   "why": "hotel restaurant or canteen"
+  },
+  {
+   "name": "McDonald's Lockarp",
+   "osm": "node/252108692",
+   "why": "chain"
+  },
+  {
+   "name": "China Box",
+   "osm": "node/444854116",
+   "why": "chain"
+  },
+  {
+   "name": "China Box",
+   "osm": "node/1730423963",
+   "why": "chain"
+  },
+  {
+   "name": "Jensens Bøfhus",
+   "osm": "node/1988630831",
+   "why": "chain"
+  },
+  {
+   "name": "Korvhuset",
+   "osm": "node/1385696595",
+   "why": "duplicate/branch of Korvhuset (node/6301876265)"
+  },
+  {
+   "name": "Pølsemannen",
+   "osm": "node/1181418068",
+   "why": "chain"
+  },
+  {
+   "name": "China box",
+   "osm": "node/4037719315",
+   "why": "chain"
+  },
+  {
+   "name": "Salads and Smoothies",
+   "osm": "node/3414497905",
+   "why": "chain"
+  },
+  {
+   "name": "Spoonery",
+   "osm": "node/4102273492",
+   "why": "chain"
+  },
+  {
+   "name": "Africa Daily Market",
+   "osm": "node/11179214682",
+   "why": "not a krog / trivial"
+  },
+  {
+   "name": "Aiko Sushi",
+   "osm": "node/8072022115",
+   "why": "chain"
+  },
+  {
+   "name": "Aiko Sushi",
+   "osm": "way/1036504147",
+   "why": "chain"
+  },
+  {
+   "name": "Burrito friends",
+   "osm": "node/6303218324",
+   "why": "chain"
+  },
+  {
+   "name": "Chaplin Grill",
+   "osm": "node/8072638355",
+   "why": "duplicate/branch of Chaplin Grill (node/1812871205)"
+  },
+  {
+   "name": "Curry on Wheels",
+   "osm": "node/4860686121",
+   "why": "food truck or pop-up"
+  },
+  {
+   "name": "Eatery Social",
+   "osm": "node/8072022111",
+   "why": "hotel restaurant or canteen"
+  },
+  {
+   "name": "Freda49",
+   "osm": "node/8602130735",
+   "why": "duplicate/branch of Freda 49 (node/1780224912)"
+  },
+  {
+   "name": "GoGoGrill&Green",
+   "osm": "node/444877762",
+   "why": "duplicate/branch of GoGo Grill & Green (node/5643775271)"
+  },
+  {
+   "name": "Helsingburger",
+   "osm": "node/4533652812",
+   "why": "chain"
+  },
+  {
+   "name": "Helsingburger",
+   "osm": "node/9682624792",
+   "why": "chain"
+  },
+  {
+   "name": "Helsingburger",
+   "osm": "node/10754158069",
+   "why": "chain"
+  },
+  {
+   "name": "Kung Fu Dumplings",
+   "osm": "node/2396630557",
+   "why": "duplicate/branch of Kung Fu Dumpling (node/10754158018)"
+  },
+  {
+   "name": "Laziza",
+   "osm": "node/1343176255",
+   "why": "duplicate/branch of Laziza (node/3734378354)"
+  },
+  {
+   "name": "Linnea & Basilika",
+   "osm": "node/10738077800",
+   "why": "duplicate/branch of Linnea & Basilika (node/8455401671)"
+  },
+  {
+   "name": "Matfabrikens Livs och Delikatesser - Korv Olle",
+   "osm": "node/9001349644",
+   "why": "not a krog / trivial"
+  },
+  {
+   "name": "Matstugan",
+   "osm": "node/6611723095",
+   "why": "duplicate/branch of Matstugan (node/1691174377)"
+  },
+  {
+   "name": "Poké Poké",
+   "osm": "node/10754158023",
+   "why": "chain"
+  },
+  {
+   "name": "Popeye Grill",
+   "osm": "node/10754157912",
+   "why": "duplicate/branch of Popeye Grill (node/1855366439)"
+  },
+  {
+   "name": "Pölsemannen",
+   "osm": "node/6926065208",
+   "why": "chain"
+  },
+  {
+   "name": "Pölsemannen",
+   "osm": "node/6926065209",
+   "why": "chain"
+  },
+  {
+   "name": "Pölsemannen",
+   "osm": "node/10754157970",
+   "why": "chain"
+  },
+  {
+   "name": "Pølsemannen",
+   "osm": "node/6326746742",
+   "why": "chain"
+  },
+  {
+   "name": "Pölsemannen Limhamn",
+   "osm": "node/10754116856",
+   "why": "chain"
+  },
+  {
+   "name": "Sabaidee Triangeln",
+   "osm": "node/3051074370",
+   "why": "chain"
+  },
+  {
+   "name": "Salads and Smoothies",
+   "osm": "node/8072022116",
+   "why": "chain"
+  },
+  {
+   "name": "Spoonery",
+   "osm": "way/52042017",
+   "why": "chain"
+  },
+  {
+   "name": "Spoonery Slottstaden",
+   "osm": "node/9042549058",
+   "why": "chain"
+  },
+  {
+   "name": "Sushi",
+   "osm": "node/11249031237",
+   "why": "not a krog / trivial"
+  },
+  {
+   "name": "Texas Longhorn",
+   "osm": "way/1036504132",
+   "why": "chain"
+  },
+  {
+   "name": "Thap Thim",
+   "osm": "way/1091108932",
+   "why": "duplicate/branch of Thap Thim (node/5834378328)"
+  },
+  {
+   "name": "Woso",
+   "osm": "node/10754158024",
+   "why": "duplicate/branch of WOSO (node/10129165432)"
+  },
+  {
+   "name": "Aiko Sushi",
+   "osm": "node/12455685503",
+   "why": "chain"
+  },
+  {
+   "name": "Birria De Res Food Truck",
+   "osm": "node/12443754493",
+   "why": "food truck or pop-up"
+  },
+  {
+   "name": "Brödernas",
+   "osm": "node/11886749193",
+   "why": "chain"
+  },
+  {
+   "name": "Burrito Friends",
+   "osm": "node/11780230897",
+   "why": "chain"
+  },
+  {
+   "name": "Curry on Wheels",
+   "osm": "node/12698742984",
+   "why": "food truck or pop-up"
+  },
+  {
+   "name": "Da Zio",
+   "osm": "node/9505901457",
+   "why": "duplicate/branch of Da Zio (node/8069401270)"
+  },
+  {
+   "name": "Dukan Livs",
+   "osm": "node/1838821124",
+   "why": "not a krog / trivial"
+  },
+  {
+   "name": "Family Pub 2",
+   "osm": "node/4560211514",
+   "why": "branch of Family Pub"
+  },
+  {
+   "name": "Jalla Jalla",
+   "osm": "node/2398871034",
+   "why": "second Jalla Jalla branch"
+  },
+  {
+   "name": "Kiosko Import",
+   "osm": "node/13159386592",
+   "why": "not a krog / trivial"
+  },
+  {
+   "name": "Kitchen 961",
+   "osm": "node/5318761145",
+   "why": "duplicate/branch of Kitchen 961 (node/10738094204)"
+  },
+  {
+   "name": "Köpenhamns Falafel",
+   "osm": "way/999605984",
+   "why": "duplicate/branch of Köpenhamns Falafel (node/10756703231)"
+  },
+  {
+   "name": "L'Acquafarina",
+   "osm": "node/11763355712",
+   "why": "duplicate/branch of L'Acquafarina (node/3933039638)"
+  },
+  {
+   "name": "Mikkeller Pop Up | Moriskans Trädgård",
+   "osm": "way/1330518680",
+   "why": "food truck or pop-up"
+  },
+  {
+   "name": "Mister York",
+   "osm": "node/13136362427",
+   "why": "chain"
+  },
+  {
+   "name": "Mötesplats CRC - Mersmak",
+   "osm": "node/13732232160",
+   "why": "hotel restaurant or canteen"
+  },
+  {
+   "name": "Noi",
+   "osm": "node/10129165431",
+   "why": "chain"
+  },
+  {
+   "name": "Noi",
+   "osm": "node/12477950694",
+   "why": "chain"
+  },
+  {
+   "name": "Noi Bulltofta",
+   "osm": "node/12164359499",
+   "why": "chain"
+  },
+  {
+   "name": "Noi Erikslust",
+   "osm": "node/10753036581",
+   "why": "chain"
+  },
+  {
+   "name": "Pivo",
+   "osm": "node/11640709599",
+   "why": "duplicate/branch of Pivo (node/3357955289)"
+  },
+  {
+   "name": "Poké Poké",
+   "osm": "node/11780230899",
+   "why": "chain"
+  },
+  {
+   "name": "Pölsemannen",
+   "osm": "node/13814732472",
+   "why": "chain"
+  },
+  {
+   "name": "Ramen to Bíiru",
+   "osm": "node/12037142255",
+   "why": "duplicate/branch of Ramen to Bíiru (node/7283438902)"
+  },
+  {
+   "name": "Rekas burgers",
+   "osm": "way/219542107",
+   "why": "duplicate/branch of Rekas Burgers (node/10754116876)"
+  },
+  {
+   "name": "Sabaidee Slottsstaden",
+   "osm": "node/11824042335",
+   "why": "chain"
+  },
+  {
+   "name": "Salads and smoothies",
+   "osm": "node/1677336092",
+   "why": "chain"
+  },
+  {
+   "name": "Shah's Halal Food",
+   "osm": "node/2715607889",
+   "why": "chain"
+  },
+  {
+   "name": "Shah's Halal Food",
+   "osm": "node/13075545329",
+   "why": "chain"
+  },
+  {
+   "name": "Spoonery",
+   "osm": "node/13666976701",
+   "why": "chain"
+  },
+  {
+   "name": "Sushi Daily - ICA Maxi Toftanäs",
+   "osm": "node/12816700826",
+   "why": "chain"
+  }
+ ],
+ "missing": [
+  {
+   "name": "Soi 29",
+   "osm": "",
+   "lat": 55.5940805,
+   "lon": 13.0075321,
+   "why": "White Guide (MYCKET GOD KLASS) Thai restaurant at Möllan, not matched to an OSM restaurant node; open status not checked.",
+   "core": false
+  },
+  {
+   "name": "Myran",
+   "osm": "",
+   "lat": 55.6062876,
+   "lon": 12.9954899,
+   "why": "White Guide (MYCKET GOD KLASS) restaurant in the centre, not in the OSM list; open status not checked.",
+   "core": false
+  },
+  {
+   "name": "Elsa",
+   "osm": "",
+   "lat": 55.6072531,
+   "lon": 12.9883834,
+   "why": "White Guide (GOD KLASS), not in the OSM list; open status not checked.",
+   "core": false
+  },
+  {
+   "name": "MJ's Restaurant",
+   "osm": "",
+   "lat": 55.6058388,
+   "lon": 12.9979312,
+   "why": "White Guide (GOD KLASS) restaurant of Hotel MJ's on Mäster Johansgatan; a hotel restaurant, quiz value low.",
+   "core": false
+  },
+  {
+   "name": "Brasserie Grand Italian",
+   "osm": "",
+   "lat": 55.607437,
+   "lon": 12.994357,
+   "why": "White Guide (GOD KLASS), at the Grand Hotel on Brogatan, which press calls a dining institution for generations; not tagged as a restaurant in OSM.",
+   "core": false
+  },
+  {
+   "name": "Bjerreds Station",
+   "osm": "",
+   "lat": 0,
+   "lon": 0,
+   "why": "Visit Malmö lists it but it is in Bjärred (Lomma), outside the long list's area; known to Malmö diners but not core. Coordinates not looked up.",
+   "core": false,
+   "outsideMalmo": true
+  }
+ ],
+ "notes": "Core is 30, not 40: past the obvious institutions (Mando, Bullen, Kin Long, Johan P, Årstiderna, Operagrillen, Sture, the Lilla Torg bars, the Möllan pubs and falafel), the evidence thins out fast, and I would rather the owner promote from `everything` than pad. Good candidates for promotion: Grand Malmö (Grand Öl & Mat, Monbijougatan, ~2013), Izakaya Koi (the early-1990s place that started Lilla Torg's restaurant wave), Falafel Mästaren (Slottsgatan 33; The Local says Malmö's first falafel place, 1988), Restaurang Ribersborg (Limhamnsvägen), Gustav Adolf restaurant & café, Spot (Stora Nygatan), Mrs Brown, Sankt Markus Vinkällare (old julbord place, poor recent reviews), Lemongrass, Kvarnby Byakrog, Västra station (the old station building; it is changing hands, with Frantzén Group's Brasserie Astoria opening there in 2027, so wait).\nName changes seen in OSM: Izakaya Koi's way/1091108899 is now 'Être Bistro' and 'Koi' is way/1091108937 (was The Coconut), so Koi may have moved within Lilla Torg; Riket's node/6341952008 is now 'La cave vinbar', so White Guide's Riket may have closed or moved. Bastard closed in 2020 and became Ruths (same address, Mäster Johansgatan 11).\nDisplay names: OSM spells Mello Yello as 'Mellow Yellow' and Falafel Baghdad as 'Falafel Bagdad'; the core entries use the real names.\nChains dropped include Pølsemannen (a Malmö-born hot-dog chain with many stands; the owner may still want one, e.g. node/1181418068 at Centralen), China Box, Spoonery, Noi, Helsingburger, Aiko Sushi, Sabaidee, Jensens Bøfhus (leaving Sweden). Falafel No 1 is kept in core despite having been a brand with many branches, because the original stand is the institution; the other 'Falafel N.1' entries are separate businesses and sit in everything. Other same-name duplicates are dropped as branches, keeping the entry with more signals or the older one.\nNot verified, but believed to be closed or not a restaurant: Tempel, Glassfabriken and Smörgåstårtan from the brainstorm are not restaurants in OSM and I found no evidence for them. Rådhuskällaren had no closure news but I found no recent confirmation either (medium).\n`everything` is generous: it keeps all non-chain named places, including many recent pizzerias, sushi and grill places with no signal."
+}

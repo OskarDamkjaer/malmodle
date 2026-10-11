@@ -1,0 +1,364 @@
+{
+  "category": "torg",
+  "core": [
+    {
+      "name": "Stortorget",
+      "osm": "way/28411525,way/52039363,way/161775537,way/161775538,way/186634124,relation/3614792",
+      "lat": 55.60563,
+      "lon": 12.99964,
+      "why": "Malmö's 1530s main square with the town hall and Karl X Gustav statue, the city's reference point.",
+      "evidence": [
+        "sources: wikivoyage: see, wikivoyage-sv",
+        "inGame",
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg.html",
+        "wikidata Q8711309 (8 sitelinks)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Lilla Torg",
+      "osm": "way/4640835,way/191082405,way/191082408,way/1037153384,way/1037913216,relation/2577882",
+      "lat": 55.6052,
+      "lon": 12.99911,
+      "why": "The half-timbered square of outdoor dining that every Malmö resident knows and meets at.",
+      "evidence": [
+        "sources: wikivoyage: see, wikivoyage-sv, wikipedia",
+        "sv wiki views12m 3025, sitelinks 4",
+        "inGame"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Gustav Adolfs torg",
+      "osm": "way/22948607,way/1123355062,relation/2086362",
+      "lat": 55.60278,
+      "lon": 13.00152,
+      "why": "Central square on the main shopping axis and a major bus stop; 'vid Gustav Adolfs torg' is everyday direction-giving.",
+      "evidence": [
+        "sources: wikivoyage: see, wikivoyage-sv, wikipedia",
+        "sv wiki views12m 2324, sitelinks 4",
+        "inGame",
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Möllevångstorget",
+      "osm": "way/10498368,way/10498370,way/28414966,relation/2148806",
+      "lat": 55.59191,
+      "lon": 13.008,
+      "why": "Möllan: daily market, Arbetets ära monument, the heart of Möllevången nightlife.",
+      "evidence": [
+        "sources: wikivoyage-sv, wikipedia",
+        "sv wiki views12m 1417, sitelinks 2",
+        "inGame",
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg.html",
+        "https://malmo.se/Uppleva-och-gora/Fritidsaktiviteter/Torghandel.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Drottningtorget",
+      "osm": "way/226876674,way/1039326780",
+      "lat": 55.6082,
+      "lon": 13.01061,
+      "why": "Large square on the northeast edge of the old town by Caroli, a well-known landmark and bus stop.",
+      "evidence": [
+        "sources: visitmalmo: se och göra, wikipedia",
+        "sv wiki views12m 1520, sitelinks 3",
+        "inGame",
+        "visitmalmo listing"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Värnhemstorget",
+      "osm": "way/28481975,way/49186988,way/1530557086",
+      "lat": 55.60508,
+      "lon": 13.02334,
+      "why": "Major bus interchange and market square east of the centre.",
+      "evidence": [
+        "sources: wikipedia",
+        "sv wiki views12m 927, sitelinks 2",
+        "inGame",
+        "https://malmo.se/Uppleva-och-gora/Fritidsaktiviteter/Torghandel.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Davidshallstorg",
+      "osm": "way/1448378680,relation/3851569",
+      "lat": 55.59919,
+      "lon": 12.99877,
+      "why": "Square at the heart of the Davidshall quarter, a common meeting point with cafés and restaurants.",
+      "evidence": [
+        "sources: wikivoyage: see",
+        "inGame",
+        "wikivoyage: see"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Nobeltorget",
+      "osm": "way/28417278,way/191964989,way/783286979,relation/3015094",
+      "lat": 55.59176,
+      "lon": 13.01925,
+      "why": "Busy junction square between Möllevången, Sofielund and Rosengård with a well-known bus stop.",
+      "evidence": [
+        "sources: wikipedia",
+        "sv wiki views12m 534, sitelinks 2",
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Dalaplan",
+      "osm": "way/390183387",
+      "lat": 55.58473,
+      "lon": 13.00652,
+      "why": "Large traffic square and bus hub on the south side of the inner city that everyone uses as a landmark; currently being rebuilt as a proper square.",
+      "evidence": [
+        "https://malmo.se/Sa-arbetar-vi-med.../Kultur---projekt-och-satsningar/Malmo-konst/Open-calls---konstnarliga-utlysningar/Dalaplan.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Fridhemstorget",
+      "osm": "way/28792961",
+      "lat": 55.59853,
+      "lon": 12.97119,
+      "why": "Market square and bus stop on the west side, the everyday meeting point for Fridhem/Västra Innerstaden.",
+      "evidence": [
+        "https://malmo.se/Uppleva-och-gora/Fritidsaktiviteter/Torghandel.html"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Sankt Knuts torg",
+      "osm": "way/28417806,way/295558477,relation/3015095",
+      "lat": 55.59665,
+      "lon": 13.01222,
+      "why": "Large square between Möllevången and Sofielund with a well-known bus stop, commonly used for directions.",
+      "evidence": [
+        "OSM place=square, 6 named ways",
+        "hemnet uses 'S:t Knuts torg' as an area name"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "everything": [
+    {
+      "name": "Stadiontorget",
+      "osm": "way/1516441490"
+    },
+    {
+      "name": "Allétorget",
+      "osm": "relation/8476680"
+    },
+    {
+      "name": "Almtorget",
+      "osm": "way/211413033"
+    },
+    {
+      "name": "Augustenborgstorget",
+      "osm": "way/999860107"
+    },
+    {
+      "name": "Bagers plats",
+      "osm": "relation/2110279"
+    },
+    {
+      "name": "Dag Hammarskjölds torg",
+      "osm": "way/542844580"
+    },
+    {
+      "name": "Dockplatsen",
+      "osm": "relation/6964779"
+    },
+    {
+      "name": "Fendertorget",
+      "osm": "way/912949110"
+    },
+    {
+      "name": "Gjuttorget",
+      "osm": "way/930696383"
+    },
+    {
+      "name": "Holma torg",
+      "osm": "way/610870839"
+    },
+    {
+      "name": "Hovrättstorget",
+      "osm": "way/166514566,way/191082389,relation/2577881"
+    },
+    {
+      "name": "Hyllie stationstorg",
+      "osm": "relation/2107398"
+    },
+    {
+      "name": "Hötorget",
+      "osm": "way/914824957,way/1079229922"
+    },
+    {
+      "name": "Kirsebergs torg",
+      "osm": "way/41111503,way/250771678,way/250771732"
+    },
+    {
+      "name": "Kockums torg",
+      "osm": "relation/2219451"
+    },
+    {
+      "name": "Konsthallstorget",
+      "osm": "way/1032365219"
+    },
+    {
+      "name": "Kulladalstorget",
+      "osm": "relation/5994935"
+    },
+    {
+      "name": "Limhamns torg",
+      "osm": "relation/2343599"
+    },
+    {
+      "name": "Masttorget",
+      "osm": "way/332179783"
+    },
+    {
+      "name": "Nydalatorget",
+      "osm": "way/284963382"
+    },
+    {
+      "name": "Persborgstorget",
+      "osm": "way/28761106"
+    },
+    {
+      "name": "Posthusplatsen",
+      "osm": "way/159843185"
+    },
+    {
+      "name": "Segevångstorget",
+      "osm": "way/280700324"
+    },
+    {
+      "name": "Sevedsplan",
+      "osm": "way/288407573"
+    },
+    {
+      "name": "Spårvägstorget",
+      "osm": "way/1183773456"
+    },
+    {
+      "name": "Södra Fisketorget",
+      "osm": "relation/3840097"
+    },
+    {
+      "name": "Östervärns torg",
+      "osm": "way/1383641509"
+    }
+  ],
+  "drop": [
+    {
+      "name": "LOVE Malmö",
+      "osm": "way/1351229785",
+      "why": "an art installation/photo spot, not a square"
+    },
+    {
+      "name": "Skeppsbrokajen",
+      "osm": "way/240110122",
+      "why": "a quay, not a square"
+    },
+    {
+      "name": "Sagas Gränds Torg",
+      "osm": "node/10914113805",
+      "why": "tiny courtyard node in Hyllie, trivial"
+    },
+    {
+      "name": "Hermods Plats",
+      "osm": "way/521749159",
+      "why": "small local plaza in Bunkeflostrand, trivial"
+    },
+    {
+      "name": "Spiggans plats",
+      "osm": "way/1183776420",
+      "why": "small pocket space near Spårvägsmuseet, nobody calls it a square"
+    },
+    {
+      "name": "Nils Forsbergs plats",
+      "osm": "way/1170958064",
+      "why": "small named spot, not known as a square"
+    },
+    {
+      "name": "R F Bergs plats",
+      "osm": "way/510637937",
+      "why": "small named spot in Limhamn, not known as a square"
+    },
+    {
+      "name": "Sockerbitstorget",
+      "osm": "relation/5431237",
+      "why": "Arlöv (Burlöv) local square, not widely known by Malmö residents"
+    },
+    {
+      "name": "Ola Billgrens plats",
+      "osm": "way/1532084108,relation/9448019",
+      "why": "small recently named spot, not known as a square"
+    }
+  ],
+  "missing": [
+    {
+      "name": "Triangeln",
+      "osm": "relation/2556730",
+      "lat": 55.59692,
+      "lon": 13.00118,
+      "why": "The square at Triangeln (Södra Förstadsgatan, by S:t Johannes kyrka and the station/mall) is listed by malmo.se among Malmö's squares ('Triangeltorget'); tagged highway=pedestrian so it fell out of the list.",
+      "core": true,
+      "evidence": [
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg.html",
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg/Triangeln.html"
+      ]
+    },
+    {
+      "name": "Södervärn",
+      "osm": "node/328989280",
+      "lat": 55.58881,
+      "lon": 13.00637,
+      "why": "Bus-hub square south of the centre, already in the game as a square (landmarks.json); only the bus station is mapped, no square polygon.",
+      "core": true,
+      "evidence": [
+        "inGame (landmarks.json, icon square)"
+      ]
+    },
+    {
+      "name": "Anna Lindhs plats",
+      "osm": "relation/1992390",
+      "lat": 55.60926,
+      "lon": 12.99661,
+      "why": "Pedestrian square by Malmö C/Hamnkanalen with its own sv Wikipedia article (Q10412357) and bus stop; tagged highway=pedestrian.",
+      "core": false
+    },
+    {
+      "name": "Södertull",
+      "osm": "",
+      "lat": 55.6012,
+      "lon": 13.0007,
+      "why": "Listed by malmo.se among Malmö's squares: the piazzas between Gustav Adolfs torg and the canal at Davidshallsbron; not named in OSM, coordinates approximate.",
+      "core": false
+    },
+    {
+      "name": "Centralplan",
+      "osm": "way/4642565",
+      "lat": 55.60838,
+      "lon": 12.9993,
+      "why": "The forecourt in front of Malmö C; mapped only as bus service roads. People say 'Centralen' rather than Centralplan, so probably better covered by the station.",
+      "core": false
+    },
+    {
+      "name": "Scaniaplatsen",
+      "osm": "way/166505246",
+      "lat": 55.61283,
+      "lon": 12.97251,
+      "why": "Large waterside plaza in Västra Hamnen by Turning Torso; tagged area:highway=pedestrian.",
+      "core": false
+    }
+  ],
+  "notes": "Core = 11 from the list plus Triangeln and Södervärn from missing (13 total). Fewer than 15 because beyond these the squares are neighbourhood-level. Borderline core calls for the owner: Limhamns torg (centre of Limhamn, well known locally but less city-wide), Kirsebergs torg (malmo.se sommartorg 2026), Anna Lindhs plats (by Malmö C, but people say 'Centralen'). Fridhemstorget and Sankt Knuts torg are medium: well-known bus stops/market squares, weaker guide signals. Stortorget's Wikidata item (Q8711309, 8 sitelinks) sits in _unmatched wikidataOnly; it should be linked to the OSM Stortorget. Triangeln is also a station (Triangelns station) and mall; if the game has it as a station, the square question may be redundant. Södervärn is already in landmarks.json as a square but has no square geometry in OSM, only the bus station node. Dalaplan is under reconstruction into a real square; it stays a landmark either way. Västra Hamnen plazas (Dockplatsen, Masttorget, Kockums torg, plus Scaniaplatsen in missing and Stapelplatsen relation/4663162 not added) have low recognition."
+}

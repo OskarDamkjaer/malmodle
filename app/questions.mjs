@@ -1,13 +1,14 @@
-import { closest, contains, distanceTo, metersBetween, offset } from './geo.mjs';
+import { closest, contains, distanceTo, gap, metersBetween, offset } from './geo.mjs';
 
 export const MAX_SCORE = 100;
+export const CLOSE_SCORE = 25;
 
-const TOLERANCE = { area: 0, street: 40, bridge: 100, landmark: 150 };
+const GRACE = { shape: 10, point: 100 };
 const FALLOFF = 900;
 
-export function distanceScore(meters, kind) {
-  const over = meters - (TOLERANCE[kind] ?? 0);
-  if (over <= 0) return MAX_SCORE;
+export function distanceScore(meters, geometry) {
+  const grace = geometry?.type === 'Point' ? GRACE.point : GRACE.shape;
+  const over = Math.max(0, meters - grace);
   return Math.round(MAX_SCORE * Math.exp(-over / FALLOFF));
 }
 
@@ -20,18 +21,21 @@ const REACH = { street: 60, bridge: 200, landmark: 200 };
 
 export function tappedOn(items, point, kind) {
   const sameKind = items.filter((it) => it.kind === kind);
-  if (kind === 'area') {
-    const area = sameKind.find((it) => contains(it.geometry, point));
-    if (area) return area;
-  } else {
-    let best = null;
-    for (const it of sameKind) {
-      const d = distanceTo(it.geometry, point);
-      if (d <= REACH[kind] && (!best || d < best.d)) best = { it, d };
-    }
-    if (best) return best.it;
+  if (kind === 'area') return sameKind.find((it) => contains(it.geometry, point)) ?? null;
+  let best = null;
+  for (const it of sameKind) {
+    const d = distanceTo(it.geometry, point);
+    if (d <= REACH[kind] && (!best || d < best.d)) best = { it, d };
   }
-  return items.find((it) => it.kind === 'area' && contains(it.geometry, point)) ?? null;
+  return best?.it ?? null;
+}
+
+const CLOSE_M = { street: 20, landmark: 300, bridge: 300 };
+
+export function closeTo(target, other) {
+  if (!other || other.kind !== target.kind) return false;
+  if (target.kind === 'area') return (target.neighbours ?? []).includes(other.name);
+  return gap(target.geometry, other.geometry) <= (CLOSE_M[target.kind] ?? 0);
 }
 
 const PLACES = ['area', 'landmark', 'bridge'];
@@ -54,10 +58,10 @@ const point = {
   prompt: (q) => ({ title: `Var ligger ${q.target.name}?`, detail: q.target.label }),
   showing: () => [],
   view: () => 'home',
-  grade(q, tap, items) {
+  grade(q, tap, items, street) {
     const { distance, point: near } = closest(q.target.geometry, tap);
-    const score = distanceScore(distance, q.target.kind);
-    const hit = tappedOn(items, tap, q.target.kind);
+    const score = distanceScore(distance, q.target.geometry);
+    const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
     return {
       score,
       tap,
@@ -82,8 +86,10 @@ const identify = {
   prompt: (q) => ({ title: 'Vad är det här?', detail: q.target.label }),
   showing: (q) => [{ item: q.target, named: false }],
   view: (q) => ({ items: [q.target], context: 1500 }),
-  grade(q, choice) {
-    return { score: choice === q.target.name ? MAX_SCORE : 0, choice, answer: q.target.name };
+  grade(q, choice, items) {
+    const picked = items?.find((it) => it.name === choice);
+    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    return { score, choice, answer: q.target.name };
   },
 };
 
@@ -174,8 +180,10 @@ const neighbour = {
   prompt: (q) => ({ title: `Vilket område ligger direkt ${q.side} om ${q.from.name}?`, detail: q.target.label }),
   showing: (q) => [{ item: q.from, named: true }],
   view: (q) => ({ items: [q.from], context: 1200 }),
-  grade(q, choice) {
-    return { score: choice === q.target.name ? MAX_SCORE : 0, choice, answer: q.target.name };
+  grade(q, choice, items) {
+    const picked = items?.find((it) => it.name === choice);
+    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    return { score, choice, answer: q.target.name };
   },
 };
 

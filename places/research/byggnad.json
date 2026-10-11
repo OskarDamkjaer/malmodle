@@ -1,0 +1,706 @@
+{
+  "category": "byggnad",
+  "core": [
+    {
+      "name": "Turning Torso",
+      "osm": "way/30926877",
+      "lat": 55.6133,
+      "lon": 12.97631,
+      "why": "Malmö's skyline icon, visible from almost everywhere in the city.",
+      "evidence": [
+        "sources: wikivoyage: see, wikivoyage-sv, wikipedia",
+        "sitelinks 44",
+        "views12m 30277",
+        "inGame: Turning Torso"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Malmöhus slott",
+      "osm": "relation/282978",
+      "lat": 55.60479,
+      "lon": 12.98711,
+      "why": "The 1500s castle and museum complex everyone knows; anchors Slottsparken.",
+      "evidence": [
+        "sources: wikivoyage-sv, wikipedia",
+        "sitelinks 24",
+        "views12m 7527",
+        "inGame: Malmöhus slott"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Malmö centralstation",
+      "osm": "way/330653386",
+      "lat": 55.60919,
+      "lon": 13.00077,
+      "why": "Malmö C, the main transport hub and the most common meeting point in the city.",
+      "evidence": [
+        "sources: wikivoyage-sv, wikipedia",
+        "sitelinks 19",
+        "views12m 3798",
+        "inGame: Malmö Centralstation"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Triangeln",
+      "osm": "node/8559657094",
+      "lat": 55.59329,
+      "lon": 13.00104,
+      "why": "Citytunnel station that names the Triangeln area and mall; used constantly for directions.",
+      "evidence": [
+        "sources: visitmalmo: se och göra, wikivoyage-sv, wikipedia",
+        "sitelinks 12",
+        "views12m 3689",
+        "inGame: Triangeln station"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Hyllie",
+      "osm": "node/12839729423",
+      "lat": 55.56275,
+      "lon": 12.97587,
+      "why": "Citytunnel station at the heart of Hyllie, next to Emporia and Malmö Arena.",
+      "evidence": [
+        "sources: visitmalmo: se och göra, wikivoyage-sv, wikipedia",
+        "sitelinks 11",
+        "views12m 2368",
+        "inGame: Hyllie station"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Malmö universitet",
+      "osm": "relation/2220493",
+      "lat": 55.60273,
+      "lon": 12.99369,
+      "why": "The city university by Centralen; residents know the campus on Universitetsholmen.",
+      "evidence": [
+        "sources: wikipedia",
+        "sitelinks 32",
+        "views12m 3608",
+        "inGame: Malmö universitet"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Malmö Live",
+      "osm": "way/332179782",
+      "lat": 55.60731,
+      "lon": 12.99363,
+      "why": "Concert hall, congress centre and hotel tower by Centralen, a skyline landmark since 2015.",
+      "evidence": [
+        "sources: wikipedia",
+        "sitelinks 4",
+        "views12m 2327",
+        "inGame: Malmö Live"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Rådhuset",
+      "osm": "node/328997830",
+      "lat": 55.60644,
+      "lon": 13.0015,
+      "why": "The 1540s town hall on Stortorget, the most recognisable historic facade in central Malmö.",
+      "evidence": [
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Kulturarv-Malmo/Platser-och-byggnader.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Slottsmöllan",
+      "osm": "way/99363139",
+      "lat": 55.60309,
+      "lon": 12.98605,
+      "why": "The windmill in Slottsparken, one of the city's most photographed buildings and a common meeting point.",
+      "evidence": [
+        "sources: wikipedia",
+        "sitelinks 2",
+        "views12m 732",
+        "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Kulturarv-Malmo/Platser-och-byggnader.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Hyllie vattentorn",
+      "osm": "way/28654906",
+      "lat": 55.56507,
+      "lon": 12.97896,
+      "why": "The mushroom-shaped water tower at Hyllie, visible from the ring road and the bridge approach.",
+      "evidence": [
+        "sources: wikipedia",
+        "sitelinks 5",
+        "views12m 2353"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Slagthuset",
+      "osm": "way/52243640",
+      "lat": 55.61134,
+      "lon": 13.00266,
+      "why": "The old slaughterhouse behind Centralen, long known as a nightclub, theatre and event venue.",
+      "evidence": [
+        "sources: wikivoyage: drink, visitmalmo: se och göra, wikivoyage-sv, wikipedia",
+        "sitelinks 3",
+        "views12m 2075"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Hotel Kramer",
+      "osm": "relation/446664",
+      "lat": 55.60691,
+      "lon": 12.99944,
+      "why": "The grand hotel on Stortorget, a classic Malmö reference point.",
+      "evidence": [
+        "sources: wikipedia",
+        "sitelinks 3",
+        "views12m 1429"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Point Hyllie",
+      "osm": "way/332190868",
+      "lat": 55.562,
+      "lon": 12.97589,
+      "why": "Point Hyllie / The Point, at 110 m the second-tallest building in Malmö, visible across the south of the city.",
+      "evidence": [
+        "sources: wikipedia",
+        "sitelinks 4",
+        "views12m 767"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "everything": [
+    {
+      "name": "U3",
+      "osm": "way/933496567"
+    },
+    {
+      "name": "Malmö Studenthus",
+      "osm": "way/51334963"
+    },
+    {
+      "name": "Skabersjö slott",
+      "osm": "way/53440653",
+      "outsideMalmo": true
+    },
+    {
+      "name": "Alnarps slott",
+      "osm": "way/205893024",
+      "outsideMalmo": true
+    },
+    {
+      "name": "Länsresidenset Malmö",
+      "osm": "way/680764890"
+    },
+    {
+      "name": "Caroli kyrka",
+      "osm": "way/34732336"
+    },
+    {
+      "name": "Teschska palatset",
+      "osm": "way/52037555"
+    },
+    {
+      "name": "Hippodromen",
+      "osm": "way/417455554"
+    },
+    {
+      "name": "Malmö Syd Svågertorp",
+      "osm": "node/7541645331"
+    },
+    {
+      "name": "Malmö Konserthus",
+      "osm": "way/289662618"
+    },
+    {
+      "name": "Folkets hus",
+      "osm": "way/82445200"
+    },
+    {
+      "name": "Kungshögarna",
+      "osm": "way/487078427"
+    },
+    {
+      "name": "SJ-husen",
+      "osm": "way/51707239,way/51707246"
+    },
+    {
+      "name": "Malmömässan",
+      "osm": "way/165754564"
+    },
+    {
+      "name": "Orkanen",
+      "osm": "way/52200890"
+    },
+    {
+      "name": "Tycho Brahe-observatoriet",
+      "osm": "way/217510612"
+    },
+    {
+      "name": "Faxe-Gården",
+      "osm": "way/680587052"
+    },
+    {
+      "name": "Hedmanska gården",
+      "osm": "way/680621188"
+    },
+    {
+      "name": "Konsthögskolan",
+      "osm": "way/781396833"
+    },
+    {
+      "name": "Gamla Hovrätten",
+      "osm": "way/333136946"
+    },
+    {
+      "name": "Botildenborgs vattentorn",
+      "osm": "way/211659866"
+    },
+    {
+      "name": "Kommendanthuset",
+      "osm": "way/29856773"
+    },
+    {
+      "name": "Kompanihuset",
+      "osm": "way/680227904"
+    },
+    {
+      "name": "Kronetorps mölla",
+      "osm": "way/60476160",
+      "outsideMalmo": true
+    },
+    {
+      "name": "Hotel Scandic Triangeln",
+      "osm": "way/29784950"
+    },
+    {
+      "name": "Sibbarps Saltsjöbad",
+      "osm": "way/348735683"
+    },
+    {
+      "name": "Malmö vågbrytarbank",
+      "osm": "way/600635948"
+    },
+    {
+      "name": "Elite Plaza Hotel",
+      "osm": "way/680587033"
+    },
+    {
+      "name": "Rosengårds herrgård",
+      "osm": "node/12324368797"
+    },
+    {
+      "name": "Hovrätten över Skåne och Blekinge",
+      "osm": "way/52206235"
+    },
+    {
+      "name": "Malmö tingsrätt",
+      "osm": "node/3978996223"
+    },
+    {
+      "name": "Gula paviljongen",
+      "osm": "way/51459029"
+    },
+    {
+      "name": "Musikhögskolan",
+      "osm": "node/13019867792"
+    },
+    {
+      "name": "Oxie vattentorn",
+      "osm": "way/217510540"
+    },
+    {
+      "name": "Pildammstornet",
+      "osm": "way/49706156"
+    },
+    {
+      "name": "Stadshuset",
+      "osm": "way/35596150"
+    },
+    {
+      "name": "Stubbamöllan",
+      "osm": "node/883413087"
+    },
+    {
+      "name": "Sveriges lantbruksuniversitet",
+      "osm": "way/210704287",
+      "outsideMalmo": true
+    },
+    {
+      "name": "World Maritime University",
+      "osm": "relation/7759683"
+    }
+  ],
+  "drop": [
+    {
+      "name": "Malmö central",
+      "osm": "node/25589138",
+      "why": "duplicate of Malmö centralstation (station node)"
+    },
+    {
+      "name": "Burlöv",
+      "osm": "node/9953049123",
+      "why": "plain railway stop in Burlöv"
+    },
+    {
+      "name": "Östervärn",
+      "osm": "node/7541645335",
+      "why": "plain Pågatåg stop; the district is what people know"
+    },
+    {
+      "name": "Rosengård",
+      "osm": "node/7541645334",
+      "why": "district/station; districts already in the game"
+    },
+    {
+      "name": "Urbana hängslen",
+      "osm": "way/335200795",
+      "why": "housing/school block in Västra hamnen, not a landmark"
+    },
+    {
+      "name": "Folkhögskolan Hvilan",
+      "osm": "way/208001742",
+      "why": "folk high school in Åkarp, not widely known"
+    },
+    {
+      "name": "Åkarp",
+      "osm": "node/11412527155",
+      "why": "plain railway stop in Burlöv"
+    },
+    {
+      "name": "Oxie",
+      "osm": "node/7541645336",
+      "why": "plain railway stop; Oxie is a district"
+    },
+    {
+      "name": "Persborg",
+      "osm": "node/7541645333",
+      "why": "district/station; districts already in the game"
+    },
+    {
+      "name": "Kvarnby folkhögskola",
+      "osm": "way/1138676986",
+      "why": "school, not a landmark"
+    },
+    {
+      "name": "P-hus Anna",
+      "osm": "way/28486137",
+      "why": "parking garage"
+    },
+    {
+      "name": "Tre Skåne",
+      "osm": "way/51334455",
+      "why": "office building"
+    },
+    {
+      "name": "Glokala Folkhögskolan",
+      "osm": "node/3473354983",
+      "why": "school, not a landmark"
+    },
+    {
+      "name": "Sigmahuset",
+      "osm": "way/89219329",
+      "why": "office building"
+    },
+    {
+      "name": "Kalkbrottet",
+      "osm": "node/2951480558",
+      "why": "duplicate of Limhamns kalkbrott (in game)"
+    },
+    {
+      "name": "Region Skåne",
+      "osm": "node/1746309000",
+      "why": "regional government office"
+    },
+    {
+      "name": "Höllviken",
+      "osm": "way/600636993",
+      "why": "Höllviken lighthouse, outside Malmö and unknown to residents"
+    },
+    {
+      "name": "Elite Hotel Esplanade",
+      "osm": "relation/9444570",
+      "why": "ordinary hotel"
+    },
+    {
+      "name": "Bellevuegården",
+      "osm": "way/52405655",
+      "why": "Bellevuegården is a residential area name"
+    },
+    {
+      "name": "Burlöv Selfie Museum",
+      "osm": "node/12450325368",
+      "why": "commercial attraction in Burlöv, not lasting"
+    },
+    {
+      "name": "Dyssesten",
+      "osm": "way/328126627",
+      "why": "obscure archaeological site"
+    },
+    {
+      "name": "Frillinge hög",
+      "osm": "way/364257273",
+      "why": "obscure archaeological site"
+    },
+    {
+      "name": "Tornhög",
+      "osm": "way/364282769",
+      "why": "obscure archaeological site"
+    },
+    {
+      "name": "Förvaltningsrätten i Malmö",
+      "osm": "node/13369886725",
+      "why": "court office, not a landmark building"
+    },
+    {
+      "name": "Hoppets kapell",
+      "osm": "way/1304006911",
+      "why": "cemetery chapel; churches are their own category"
+    },
+    {
+      "name": "Hyllie Park Folkhögskola",
+      "osm": "node/9509332204",
+      "why": "school, not a landmark"
+    },
+    {
+      "name": "Hyres- och arrendenämnden i Malmö",
+      "osm": "node/13369886727",
+      "why": "tribunal office"
+    },
+    {
+      "name": "I love Malmo",
+      "osm": "node/12100979043",
+      "why": "sign/photo spot, not a building"
+    },
+    {
+      "name": "IHM Business School",
+      "osm": "node/3598296371",
+      "why": "private school office"
+    },
+    {
+      "name": "Kårhuset Alnarp",
+      "osm": "node/13316202700",
+      "why": "student union building in Alnarp"
+    },
+    {
+      "name": "Malmö tingsrätt",
+      "osm": "node/13369886726",
+      "why": "duplicate of Malmö tingsrätt"
+    },
+    {
+      "name": "Medborgar Huset",
+      "osm": "way/1379187971",
+      "why": "local community office"
+    },
+    {
+      "name": "Quality Hotel The Mill",
+      "osm": "way/102209299",
+      "why": "ordinary hotel"
+    },
+    {
+      "name": "Rikstelefon",
+      "osm": "node/12075550754",
+      "why": "not a landmark"
+    },
+    {
+      "name": "S:ta Birgittas kapell",
+      "osm": "way/1304006912",
+      "why": "cemetery chapel; churches are their own category"
+    },
+    {
+      "name": "Scaniabadet",
+      "osm": "node/11868162176",
+      "why": "bathing spot, belongs with beaches/parks"
+    },
+    {
+      "name": "Sightseeing by boat",
+      "osm": "node/1607415347",
+      "why": "tour operator, not a place"
+    },
+    {
+      "name": "Spetsbunkern",
+      "osm": "way/978830895",
+      "why": "bunker remnant, obscure"
+    },
+    {
+      "name": "Stadsområdesförvaltning Öster",
+      "osm": "relation/2904710",
+      "why": "administrative office"
+    },
+    {
+      "name": "Story Hotel Studio Malmo, Part of JDV by Hyatt",
+      "osm": "way/1435064303",
+      "why": "ordinary hotel"
+    },
+    {
+      "name": "Vita Bussarna 1945",
+      "osm": "node/13786399534",
+      "why": "memorial; belongs with konst"
+    },
+    {
+      "name": "Västra Ingelstad",
+      "osm": "node/868632786",
+      "why": "plain railway stop / village"
+    },
+    {
+      "name": "Östra Grevie folkhögskola",
+      "osm": "node/11912158468",
+      "why": "school outside Malmö"
+    }
+  ],
+  "missing": [
+    {
+      "name": "Södervärnstornet",
+      "osm": "way/81309994",
+      "lat": 55.58799,
+      "lon": 13.01174,
+      "why": "The 1916 water tower on Möllevången, 54 m, visible across Södra Innerstaden and widely known by its rude nickname; Wikidata item not in the long list.",
+      "core": true
+    },
+    {
+      "name": "Skånes universitetssjukhus (SUS Malmö)",
+      "osm": "way/28807180",
+      "lat": 55.58741,
+      "lon": 13.00141,
+      "why": "The city hospital, still called 'MAS' by everyone; a constant direction reference by Södervärn.",
+      "core": true
+    },
+    {
+      "name": "Kronprinsen",
+      "osm": "way/29711745",
+      "lat": 55.59838,
+      "lon": 12.98516,
+      "why": "The 75 m blue 1964 tower block with a mall at its foot; a well known landmark ('vid Kronprinsen'). Already in the handel list as a mall.",
+      "core": true
+    },
+    {
+      "name": "Jörgen Kocks hus (Kockska huset)",
+      "osm": "",
+      "lat": 55.60673,
+      "lon": 12.99897,
+      "why": "The 1520s brick house at Stortorget's north-west corner; byggnadsminne listed by malmo.se. No named OSM building; coordinates from the restaurant inside.",
+      "core": false
+    },
+    {
+      "name": "Centralposthuset",
+      "osm": "way/52243653",
+      "lat": 55.61004,
+      "lon": 12.99875,
+      "why": "Ferdinand Boberg's 1906 post office by Centralen (OSM name 'Posthuset'); byggnadsminne.",
+      "core": false
+    },
+    {
+      "name": "Casino Cosmopol",
+      "osm": "",
+      "lat": 55.6031,
+      "lon": 12.9941,
+      "why": "The state casino in Kungsparken (Slottsgatan 33); known to most residents. Not tagged in OSM.",
+      "core": false
+    },
+    {
+      "name": "Thottska huset",
+      "osm": "",
+      "lat": 55.6077,
+      "lon": 13.0085,
+      "why": "Malmö's oldest half-timbered house, Östergatan near Drottningtorget. Not named in OSM; approximate coordinates.",
+      "core": false
+    },
+    {
+      "name": "Flensburgska huset",
+      "osm": "",
+      "lat": 55.6046,
+      "lon": 13.0016,
+      "why": "1595 gabled house on Södergatan; byggnadsminne. Not named in OSM; approximate coordinates.",
+      "core": false
+    },
+    {
+      "name": "Rosenvingeska huset",
+      "osm": "way/680744164",
+      "lat": 55.60693,
+      "lon": 12.99795,
+      "why": "1530s renaissance house on Västergatan; byggnadsminne.",
+      "core": false
+    },
+    {
+      "name": "Malmö börshus",
+      "osm": "way/52201121",
+      "lat": 55.6085,
+      "lon": 12.9985,
+      "why": "The old stock exchange on Skeppsbron by Centralen.",
+      "core": false
+    },
+    {
+      "name": "Kirsebergstornet",
+      "osm": "way/74990327",
+      "lat": 55.60929,
+      "lon": 13.03449,
+      "why": "Malmö's first water tower (1879) on Kirseberg, now apartments; malmo.se has a page on it.",
+      "core": false
+    },
+    {
+      "name": "Gängtappen (Kockumshuset)",
+      "osm": "way/28938036",
+      "lat": 55.61274,
+      "lon": 12.98848,
+      "why": "Kockums' 65 m 1958 head office in Västra hamnen, a shipyard-era landmark.",
+      "core": false
+    },
+    {
+      "name": "Ubåtshallen",
+      "osm": "way/28937969",
+      "lat": 55.61508,
+      "lon": 12.98658,
+      "why": "Former Kockums submarine hall in Varvsstaden, now university and events; also a bus stop name.",
+      "core": false
+    },
+    {
+      "name": "Kranen",
+      "osm": "way/28938008",
+      "lat": 55.61567,
+      "lon": 12.98613,
+      "why": "Former Kockums building in Varvsstaden, now Malmö universitet. Not the gone Kockumskranen.",
+      "core": false
+    },
+    {
+      "name": "Niagara",
+      "osm": "way/332172519",
+      "lat": 55.60897,
+      "lon": 12.99445,
+      "why": "Malmö universitet's main building on Universitetsholmen (2015).",
+      "core": false
+    },
+    {
+      "name": "Hotell Savoy",
+      "osm": "node/2291411019",
+      "lat": 55.60765,
+      "lon": 13.00022,
+      "why": "Historic hotel opposite Centralen; Wikidata item in the area.",
+      "core": false
+    },
+    {
+      "name": "Glasvasen",
+      "osm": "way/334262812",
+      "lat": 55.61018,
+      "lon": 12.99991,
+      "why": "Distinctive glass office building by Centralen; marginal.",
+      "core": false
+    },
+    {
+      "name": "Malmö inre fyr",
+      "osm": "",
+      "lat": 55.6097,
+      "lon": 13.0003,
+      "why": "The disused 1878 inner-harbour lighthouse by Centralen. Not in OSM under that name; approximate coordinates, needs checking.",
+      "core": false
+    }
+  ],
+  "notes": "Core is 13 long-list items plus 3 missing (16), well short of 30: in this category the evidence only supports that many. Many places residents orient by (Stortorget, Malmö Opera, Stadsbiblioteket, Emporia, Malmö Arena, the churches, Ribersborgs kallbadhus, Moriska paviljongen, Västra station, Malmö Saluhall) are already in the game or in other category lists (handel, scen, krog, kyrka, museum).\nKockumskranen was dismantled in 2002 and moved to Ulsan, South Korea; it is not a quiz item. Varvsstaden is a locality/district name, not a building.\nMalmö Studenthus is the building everyone calls 'Kinesiska muren' (Rosengård); its high page views come from news about its problems. Use that name if it goes in.\nTeschska palatset is the Apoteket Lejonet building on Stortorget; 'Apoteket Lejonet' is the name people know.\nHippodromen overlaps the in-game 'Malmö Stadsteater' (Hipp is its main stage); Orkanen and Caroli kyrka are in the game already but did not make core here (Caroli belongs with churches).\nKronprinsen is in both handel and here: pick one.\nHyllie station and Triangeln station are core but already in the game. Lernacken and Ön are areas, not buildings. Sjöbefälsskolan, Ribersborgs skansen and Hylliemöllan were not found in OSM under those names.\nOther byggnadsminnen listed by malmo.se and not checked further: Beijerska huset, Sjöbergska palatset, Gamla riksbanken, Djäknegatshusen."
+}

@@ -1,0 +1,955 @@
+{
+ "category": "kafe",
+ "core": [
+  {
+   "name": "Konditori Hollandia",
+   "osm": "way/1036504141",
+   "lat": 55.60024,
+   "lon": 13.00125,
+   "why": "Malmö's oldest konditori, baking in the same premises on Södra Förstadsgatan since 1903 (named Hollandia since 1950); a true institution.",
+   "evidence": [
+    "https://visitsweden.com/where-to-go/southern-sweden/malmo/cafes-malmo/",
+    "https://thatsup.se/malmo/guide/h%C3%A4r-hittar-du-malm%C3%B6s-b%C3%A4sta-konditorier/",
+    "wikivoyage: Hollandia (unmatched entry)",
+    "job ads Konditori Hollandia AB July 2026 (still operating)"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Slottsträdgårdens Kafé",
+   "osm": "way/99835705",
+   "lat": 55.60378,
+   "lon": 12.98921,
+   "why": "Seasonal organic garden café in Slottsträdgården next to Malmöhus/Kungsparken, a long-standing summer favourite since the 2000s.",
+   "evidence": [
+    "https://visitsweden.com/where-to-go/southern-sweden/malmo/cafes-malmo/",
+    "https://andershusa.com/slottstradgardens-cafe-kafe-fika-coffee-lunch-malmo-sweden/",
+    "visitmalmo",
+    "osm 2015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Lilla Kafferosteriet",
+   "osm": "way/220245481",
+   "lat": 55.60453,
+   "lon": 13.00289,
+   "why": "Micro-roastery café in a 17th-century house on Baltzarsgatan since 2006, one of Sweden's pioneer micro-roasteries.",
+   "evidence": [
+    "https://visitsweden.com/where-to-go/southern-sweden/malmo/cafes-malmo/",
+    "https://www.falstaff.com/en/cafes/lilla-kafferosteriet"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Kaffebaren på Möllan",
+   "osm": "node/536833709",
+   "lat": 55.59106,
+   "lon": 13.00879,
+   "why": "Tiny classic coffee bar at Möllevångstorget, a Möllan fixture since at least 2009 (likely around 1998-2002).",
+   "evidence": [
+    "https://visitsweden.com/where-to-go/southern-sweden/malmo/cafes-malmo/",
+    "https://thatsup.co.uk/malmo/cafe/kaffebaren-pa-mollan/",
+    "https://www.timeout.com/sv/sweden/restauranger/basta-bagerier-i-malmo",
+    "osm 2009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Solde",
+   "osm": "node/3400216789",
+   "lat": 55.60077,
+   "lon": 13.00046,
+   "why": "Italian-style stand-up coffee bar and roastery at Regementsgatan 2 by Davidshallsbron, Best Coffee Bar at Malmö Gastronomy Award 2024; open since at least 2015.",
+   "evidence": [
+    "https://visitsweden.com/where-to-go/southern-sweden/malmo/cafes-malmo/",
+    "https://www.falstaff.com",
+    "osm 2015"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Pâtisserie David",
+   "osm": "node/444870966",
+   "lat": 55.60784,
+   "lon": 13.00742,
+   "why": "French-style patisserie on Östergatan run by David Fernandes since 2003, listed among Malmö's classic konditorier.",
+   "evidence": [
+    "https://www.falstaff.com/en/cafes/patisserie-david",
+    "https://thatsup.se/malmo/guide/h%C3%A4r-hittar-du-malm%C3%B6s-b%C3%A4sta-konditorier/",
+    "osm 2014"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Atrium",
+   "osm": "node/6804927072",
+   "lat": 55.5975,
+   "lon": 12.97892,
+   "why": "Bright neighbourhood café and brunch spot at Skvadronsgatan 13 in Slottsstaden, opened 2015 by Adrian and Natalia and since expanded into the premises next door.",
+   "evidence": [
+    "https://www.atriumcafe.se/om-oss/",
+    "https://visitsweden.com/where-to-go/southern-sweden/malmo/cafes-malmo/",
+    "owner example"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Systrar & Bröder",
+   "osm": "node/1669563673",
+   "lat": 55.59631,
+   "lon": 12.99314,
+   "why": "Retro-styled bakery café on Östra Rönneholmsvägen known for its breakfast buffet, around since at least 2012 (~650 Google reviews).",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/cafe/systrar-broder/",
+    "osm 2012"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Regement Konditori",
+   "osm": "node/2958276010",
+   "lat": 55.59796,
+   "lon": 12.9753,
+   "why": "Traditional konditori at Regementsgatan 86 in Slottsstaden, open for more than 20 years.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/cafe/regement-konditori/",
+    "https://thatsup.se/malmo/guide/h%C3%A4r-hittar-du-malm%C3%B6s-b%C3%A4sta-konditorier/",
+    "osm 2014"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Söderberg & Sara",
+   "osm": "node/3580863602",
+   "lat": 55.59664,
+   "lon": 13.01417,
+   "why": "Stone-oven sourdough bakery and roastery café at S:t Knuts torg, the Malmö sibling of an Ystad bakery, since about 2010.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/cafe/söderberg-sara/",
+    "https://mapstr.com/place/8xiAJQkTwOg",
+    "osm 2015"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Lilla Glassfabriken",
+   "osm": "node/3051074416",
+   "lat": 55.59807,
+   "lon": 12.99741,
+   "why": "Handmade Italian-style ice cream by Södertull/Davidshall, widely called Malmö's best ice cream by locals.",
+   "evidence": [
+    "https://thatsup.co.uk/malmo/cafe/lilla-glassfabriken-sodertull/",
+    "osm 2024 (name added late; shop older)"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Konditori Katarina",
+   "osm": "node/3051074368",
+   "lat": 55.59718,
+   "lon": 13.00136,
+   "why": "Malmö konditori brand dating from 1959; this is the Triangeln branch on Södra Förstadsgatan listed by Wikivoyage (several other branches exist).",
+   "evidence": [
+    "wikivoyage: eat",
+    "https://thatsup.co.uk/malmo/cafe/konditori-katarina-sallerupsvagen/"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "everything": [
+  {
+   "name": "Dolce Sicilia",
+   "osm": "node/444822081"
+  },
+  {
+   "name": "Bar Italia",
+   "osm": "node/1670692580"
+  },
+  {
+   "name": "Café 2000",
+   "osm": "node/1309356207"
+  },
+  {
+   "name": "Café Grannen",
+   "osm": "node/1624179498"
+  },
+  {
+   "name": "Espresso Maker",
+   "osm": "node/2408160477"
+  },
+  {
+   "name": "Graffiti",
+   "osm": "node/1685937003"
+  },
+  {
+   "name": "Limhamns kakbod & café",
+   "osm": "node/1719418321"
+  },
+  {
+   "name": "Mässingens mat och trädgård",
+   "osm": "way/230902324"
+  },
+  {
+   "name": "Pappas flickor",
+   "osm": "node/417994873"
+  },
+  {
+   "name": "Wallins konditori",
+   "osm": "node/445846438"
+  },
+  {
+   "name": "Feed",
+   "osm": "node/1668872414"
+  },
+  {
+   "name": "johan & nyström",
+   "osm": "node/4217517386"
+  },
+  {
+   "name": "Jord",
+   "osm": "node/2266095947"
+  },
+  {
+   "name": "Libanon Konditori",
+   "osm": "node/4233644290"
+  },
+  {
+   "name": "Lotta Love Superfoodbar",
+   "osm": "node/4217517384"
+  },
+  {
+   "name": "Musette",
+   "osm": "node/3399372495"
+  },
+  {
+   "name": "Nummer 6",
+   "osm": "node/3283009692"
+  },
+  {
+   "name": "Olivias deli",
+   "osm": "node/3139895157"
+  },
+  {
+   "name": "Puls",
+   "osm": "node/3402678125"
+  },
+  {
+   "name": "Uggla",
+   "osm": "node/1488710555"
+  },
+  {
+   "name": "1998 coffee & clothing shop",
+   "osm": "node/11047797805"
+  },
+  {
+   "name": "Acai och sånt",
+   "osm": "node/1677336195"
+  },
+  {
+   "name": "Adria ungerska bageriet i Västra hamnen",
+   "osm": "node/3794911371"
+  },
+  {
+   "name": "Albasha",
+   "osm": "node/10756703281"
+  },
+  {
+   "name": "Amalthea bokkafé",
+   "osm": "node/6712109978"
+  },
+  {
+   "name": "Ambrosia",
+   "osm": "node/3051074390"
+  },
+  {
+   "name": "Ateljén Limhamn",
+   "osm": "node/9576567318"
+  },
+  {
+   "name": "Augusta Glassmejeri",
+   "osm": "node/9576546404"
+  },
+  {
+   "name": "Bagels & Greens",
+   "osm": "node/8078205802"
+  },
+  {
+   "name": "Bageri caféet",
+   "osm": "way/1092638237"
+  },
+  {
+   "name": "Beans and Tales",
+   "osm": "node/9576565740"
+  },
+  {
+   "name": "Café Fridhem",
+   "osm": "node/8078205796"
+  },
+  {
+   "name": "Café Rost",
+   "osm": "node/8069401266"
+  },
+  {
+   "name": "Café Vendi",
+   "osm": "node/3402678114"
+  },
+  {
+   "name": "Cellos glassbar",
+   "osm": "way/395053199"
+  },
+  {
+   "name": "Chololava",
+   "osm": "node/9510615650"
+  },
+  {
+   "name": "Creperie Bretagne",
+   "osm": "node/3051074388"
+  },
+  {
+   "name": "Cuatro",
+   "osm": "node/10738153710"
+  },
+  {
+   "name": "Farm2Table",
+   "osm": "node/9105516556"
+  },
+  {
+   "name": "FLAX",
+   "osm": "node/7064616279"
+  },
+  {
+   "name": "Folkets smør & brød",
+   "osm": "node/8072027419"
+  },
+  {
+   "name": "Geijersgatan 53 Café",
+   "osm": "node/9431278828"
+  },
+  {
+   "name": "Gelato by Smak",
+   "osm": "node/9570858912"
+  },
+  {
+   "name": "Hamncaféet",
+   "osm": "node/8528307494"
+  },
+  {
+   "name": "Kaka på kaka",
+   "osm": "node/10754116850"
+  },
+  {
+   "name": "Konditori Sofia",
+   "osm": "node/10738185234"
+  },
+  {
+   "name": "Kärleksgatan 3",
+   "osm": "node/6301869951"
+  },
+  {
+   "name": "Le Boxx",
+   "osm": "node/8612687382"
+  },
+  {
+   "name": "Le Croissant",
+   "osm": "node/10754157959"
+  },
+  {
+   "name": "Lejonet & Björnen",
+   "osm": "way/1093128538"
+  },
+  {
+   "name": "Limhamns glassmejeri",
+   "osm": "node/9576567317"
+  },
+  {
+   "name": "Limhamns Smörgåsbutik och Catering",
+   "osm": "node/9576546406"
+  },
+  {
+   "name": "Mocca Café",
+   "osm": "node/7283459643"
+  },
+  {
+   "name": "Noir",
+   "osm": "way/1093128537"
+  },
+  {
+   "name": "Nostra Café",
+   "osm": "node/3402678104"
+  },
+  {
+   "name": "Notello Rolls",
+   "osm": "node/7648265213"
+  },
+  {
+   "name": "Orient Kakor",
+   "osm": "node/7283168685"
+  },
+  {
+   "name": "Playbake",
+   "osm": "way/1092638257"
+  },
+  {
+   "name": "Public",
+   "osm": "node/10112480546"
+  },
+  {
+   "name": "Sankt Knuts Bageri Konditori & Café",
+   "osm": "node/1855387943"
+  },
+  {
+   "name": "Smörgåsbutiken",
+   "osm": "node/9891391562"
+  },
+  {
+   "name": "Swetea",
+   "osm": "way/1036504142"
+  },
+  {
+   "name": "Vaganza Gelato",
+   "osm": "node/11125986305"
+  },
+  {
+   "name": "Wasabi orangeri café & restaurang",
+   "osm": "node/7741137887"
+  },
+  {
+   "name": "Yogiboost",
+   "osm": "node/10754157945"
+  },
+  {
+   "name": "Östra Kaffebaren",
+   "osm": "node/6385559697"
+  },
+  {
+   "name": "Al Rayyes Sweets",
+   "osm": "node/12089138161"
+  },
+  {
+   "name": "Altona",
+   "osm": "node/13957027521"
+  },
+  {
+   "name": "Ambrosia Café & Konditori",
+   "osm": "node/12623180625"
+  },
+  {
+   "name": "Bageri Baka",
+   "osm": "node/8606570493"
+  },
+  {
+   "name": "Balans",
+   "osm": "node/6445496397"
+  },
+  {
+   "name": "Beijers Parks Café",
+   "osm": "node/10752148650"
+  },
+  {
+   "name": "biu!tea",
+   "osm": "node/9949473002"
+  },
+  {
+   "name": "Brads Spelcafé",
+   "osm": "node/11934963722"
+  },
+  {
+   "name": "Cafe 1851",
+   "osm": "way/1091108902"
+  },
+  {
+   "name": "Café Erik",
+   "osm": "node/13801342112"
+  },
+  {
+   "name": "Café Harmony",
+   "osm": "node/883471949"
+  },
+  {
+   "name": "Café Lajvet",
+   "osm": "node/14098948702"
+  },
+  {
+   "name": "Café Myka",
+   "osm": "node/11618480883"
+  },
+  {
+   "name": "Café Ved",
+   "osm": "node/11859935137"
+  },
+  {
+   "name": "Cakeriet",
+   "osm": "node/5834378329"
+  },
+  {
+   "name": "Chef Mama",
+   "osm": "node/12539335059"
+  },
+  {
+   "name": "Dame Ginette",
+   "osm": "node/12736408109"
+  },
+  {
+   "name": "Delibaren",
+   "osm": "node/13734418584"
+  },
+  {
+   "name": "Dulcita",
+   "osm": "node/4394482607"
+  },
+  {
+   "name": "Favvo Glass",
+   "osm": "node/13860369503"
+  },
+  {
+   "name": "Fleurus",
+   "osm": "node/12430036837"
+  },
+  {
+   "name": "Gourmetgården",
+   "osm": "node/1359118612"
+  },
+  {
+   "name": "GreenHus",
+   "osm": "node/7951261837"
+  },
+  {
+   "name": "Kafé Kungsgatan",
+   "osm": "node/3744635803"
+  },
+  {
+   "name": "Kafé Sisko",
+   "osm": "node/12501375323"
+  },
+  {
+   "name": "Konditori Margareta",
+   "osm": "node/13955783301"
+  },
+  {
+   "name": "La Petite",
+   "osm": "node/2293728898"
+  },
+  {
+   "name": "Legato",
+   "osm": "node/12996767197"
+  },
+  {
+   "name": "Lilla Pang",
+   "osm": "node/2372994484"
+  },
+  {
+   "name": "Limhamns kafferosteri",
+   "osm": "node/13844594359"
+  },
+  {
+   "name": "Malmö tehus",
+   "osm": "node/10756703223"
+  },
+  {
+   "name": "Mavino",
+   "osm": "node/11868679057"
+  },
+  {
+   "name": "Milo's Kiflice",
+   "osm": "node/13011490201"
+  },
+  {
+   "name": "Mormors Bageri",
+   "osm": "node/11763806803"
+  },
+  {
+   "name": "Mormors Kunafa",
+   "osm": "node/1836544800"
+  },
+  {
+   "name": "Nomi the Karakal",
+   "osm": "node/12118002634"
+  },
+  {
+   "name": "Nordic Style Coffee",
+   "osm": "node/3402678107"
+  },
+  {
+   "name": "Notelle Hus",
+   "osm": "node/13953575401"
+  },
+  {
+   "name": "Oh Hi!",
+   "osm": "node/13975094342"
+  },
+  {
+   "name": "Paleterian",
+   "osm": "node/13914172101"
+  },
+  {
+   "name": "Percy Pastries",
+   "osm": "node/12716786475"
+  },
+  {
+   "name": "Sallys",
+   "osm": "node/13614350458"
+  },
+  {
+   "name": "Siri's Conditori & Café",
+   "osm": "node/7282929878"
+  },
+  {
+   "name": "Slottis Lotus Blomcafé",
+   "osm": "node/11763806802"
+  },
+  {
+   "name": "SLVRBRGS",
+   "osm": "node/14053949202"
+  },
+  {
+   "name": "Strand Café",
+   "osm": "node/3794911376"
+  },
+  {
+   "name": "Sweet Spot",
+   "osm": "way/1036504148"
+  },
+  {
+   "name": "Vallmo Café",
+   "osm": "node/12809175901"
+  },
+  {
+   "name": "Verde",
+   "osm": "node/13040025401"
+  },
+  {
+   "name": "Verde Gelato",
+   "osm": "way/1093128532"
+  },
+  {
+   "name": "Via Palermo",
+   "osm": "node/10572457309"
+  },
+  {
+   "name": "Örum Bageri",
+   "osm": "node/12338886287"
+  },
+  {
+   "name": "Örum Mejeri",
+   "osm": "node/12836554259"
+  }
+ ],
+ "drop": [
+  {
+   "name": "Ribersborgs Kallbadhus",
+   "osm": "way/383042812",
+   "why": "already in game as Ribersborgs Kallbadhus (the bath; café is part of it)"
+  },
+  {
+   "name": "Ribban Green Golf",
+   "osm": "node/2469122693",
+   "why": "minigolf with ice cream kiosk, not a café"
+  },
+  {
+   "name": "Arena 305",
+   "osm": "node/897688921",
+   "why": "café inside youth/culture venue"
+  },
+  {
+   "name": "Frälsningsarmén",
+   "osm": "node/3361573124",
+   "why": "Salvation Army charity café"
+  },
+  {
+   "name": "Föreningen Sahara",
+   "osm": "node/4356741064",
+   "why": "association premises"
+  },
+  {
+   "name": "Gottelisa",
+   "osm": "node/3402696470",
+   "why": "candy shop chain (Gottelisa)"
+  },
+  {
+   "name": "Mixan.se",
+   "osm": "node/3745065528",
+   "why": "university/student café"
+  },
+  {
+   "name": "Tårtrummet",
+   "osm": "node/3625639567",
+   "why": "outside Malmö (Åkarp/Burlöv), not widely known"
+  },
+  {
+   "name": "Wayne's",
+   "osm": "node/3051074422",
+   "why": "chain (Wayne's Coffee)"
+  },
+  {
+   "name": "AB Småland",
+   "osm": "node/6989788438",
+   "why": "café inside a design shop"
+  },
+  {
+   "name": "Ahlgrens konfektyr",
+   "osm": "way/1036504105",
+   "why": "confectionery shop, not a café"
+  },
+  {
+   "name": "Augusta",
+   "osm": "way/1036504111",
+   "why": "branch of Augusta ice cream (kept Limhamn glassmejeri)"
+  },
+  {
+   "name": "Augusta Glass",
+   "osm": "node/9576546411",
+   "why": "branch of Augusta ice cream (kept Limhamn glassmejeri)"
+  },
+  {
+   "name": "By Cloetta",
+   "osm": "node/9949586681",
+   "why": "chain (Cloetta candy)"
+  },
+  {
+   "name": "Coffee Square",
+   "osm": "node/8072022112",
+   "why": "small chain (Coffee Square)"
+  },
+  {
+   "name": "Farbror Eriks kafé",
+   "osm": "node/11398111461",
+   "why": "charity second-hand shop café (Erikshjälpen)"
+  },
+  {
+   "name": "Gateau",
+   "osm": "node/8078194461",
+   "why": "bakery chain branch (Gateau)"
+  },
+  {
+   "name": "Gateau",
+   "osm": "node/10754158026",
+   "why": "bakery chain branch (Gateau)"
+  },
+  {
+   "name": "Gateau",
+   "osm": "node/10756703293",
+   "why": "bakery chain branch (Gateau)"
+  },
+  {
+   "name": "Gottelisa",
+   "osm": "way/1092638248",
+   "why": "candy shop chain (Gottelisa)"
+  },
+  {
+   "name": "Kandyz",
+   "osm": "node/10754157972",
+   "why": "candy shop"
+  },
+  {
+   "name": "Konditori Katarina",
+   "osm": "way/1091108929",
+   "why": "second Konditori Katarina branch (Hamngatan); same name, ambiguous"
+  },
+  {
+   "name": "Köld",
+   "osm": "node/10130500625",
+   "why": "ice cream chain (Köld)"
+  },
+  {
+   "name": "Lemon garden",
+   "osm": "node/4582749968",
+   "why": "chain (Lemon Garden)"
+  },
+  {
+   "name": "Nybergs Hembageri och konditori",
+   "osm": "node/3745046910",
+   "why": "Stockholm chain (Nybergs), in Malmö since 2021"
+  },
+  {
+   "name": "St. Jakobs",
+   "osm": "node/9042549059",
+   "why": "bakery chain branch (St. Jakobs)"
+  },
+  {
+   "name": "St. Jakobs Glass",
+   "osm": "node/8078205797",
+   "why": "bakery chain branch (St. Jakobs)"
+  },
+  {
+   "name": "St. Jakobs Stenugnsbageri",
+   "osm": "node/8072027420",
+   "why": "bakery chain branch (St. Jakobs)"
+  },
+  {
+   "name": "Sweeet",
+   "osm": "node/10756703222",
+   "why": "candy chain (Sweeet)"
+  },
+  {
+   "name": "Sweeet Nobelvägen",
+   "osm": "node/7216642020",
+   "why": "candy chain (Sweeet), tagged post office"
+  },
+  {
+   "name": "Victoria Livs",
+   "osm": "node/9949678133",
+   "why": "grocery store"
+  },
+  {
+   "name": "Vina Food & Sushi",
+   "osm": "node/1677335986",
+   "why": "sushi restaurant"
+  },
+  {
+   "name": "Waynes's Coffee",
+   "osm": "way/1036504140",
+   "why": "chain (Wayne's Coffee)"
+  },
+  {
+   "name": "Bulltofta motionscenter café",
+   "osm": "node/3665126362",
+   "why": "sports centre café"
+  },
+  {
+   "name": "Coffee Square",
+   "osm": "way/189510000",
+   "why": "small chain (Coffee Square)"
+  },
+  {
+   "name": "Dame Ginette",
+   "osm": "node/11047700026",
+   "why": "outside Malmö (Staffanstorp area), branch"
+  },
+  {
+   "name": "Espresso House",
+   "osm": "node/13018634301",
+   "why": "chain (Espresso House), hospital area"
+  },
+  {
+   "name": "Gateau",
+   "osm": "node/8993117217",
+   "why": "bakery chain branch (Gateau), Centralen"
+  },
+  {
+   "name": "Graffiti Café WTC",
+   "osm": "node/12201030542",
+   "why": "branch of Graffiti café"
+  },
+  {
+   "name": "Katarina",
+   "osm": "way/1091108924",
+   "why": "Konditori Katarina branch duplicate (Hamngatan)"
+  },
+  {
+   "name": "Kunst Pottery Painting",
+   "osm": "node/12828442995",
+   "why": "pottery painting activity"
+  },
+  {
+   "name": "Köld",
+   "osm": "node/11780230900",
+   "why": "ice cream chain (Köld)"
+  },
+  {
+   "name": "Lakritsroten",
+   "osm": "node/5834257651",
+   "why": "chain (Lakritsroten)"
+  },
+  {
+   "name": "Le Croissant",
+   "osm": "node/11886748891",
+   "why": "duplicate name, second Le Croissant"
+  },
+  {
+   "name": "Röda Korset Café",
+   "osm": "node/11341266980",
+   "why": "Red Cross charity café"
+  },
+  {
+   "name": "Stadsteaterns kafé",
+   "osm": "node/12159387389",
+   "why": "venue café inside Malmö Stadsteater (in game)"
+  },
+  {
+   "name": "Sweet & Sallad Go Arlöv",
+   "osm": "node/3693537007",
+   "why": "Burlöv, unknown chain outlet"
+  },
+  {
+   "name": "Toftanaise, ICA MAxi",
+   "osm": "node/12816700827",
+   "why": "counter inside ICA Maxi"
+  }
+ ],
+ "missing": [
+  {
+   "name": "Bageri Leve",
+   "osm": "node/9547946597",
+   "lat": 55.5967,
+   "lon": 12.99966,
+   "why": "Well-known plant-based bakery café on Östra Rönneholmsvägen, in Time Out and Thatsup guides; tagged shop=bakery so missed.",
+   "core": false
+  },
+  {
+   "name": "Nansis Bageri",
+   "osm": "node/5239326040",
+   "lat": 55.59179,
+   "lon": 13.00922,
+   "why": "Persian bakery at Möllan since 1988 (Time Out); bakery more than café.",
+   "core": false
+  },
+  {
+   "name": "Konditori Valhall",
+   "osm": "node/10756703290",
+   "lat": 55.60145,
+   "lon": 12.97802,
+   "why": "Konditori on Tessins väg by Slottsparken/Ribersborg, in Thatsup konditori guide; tagged bakery.",
+   "core": false
+  },
+  {
+   "name": "Conditori Tessina",
+   "osm": "",
+   "lat": 55.6003,
+   "lon": 12.9752,
+   "why": "Konditori at Tessins väg 16, Ribersborg, baking since the late 1940s (Thatsup); not in OSM, coordinates approximate.",
+   "core": false
+  },
+  {
+   "name": "Segevång Konditori",
+   "osm": "node/2840592683",
+   "lat": 55.61583,
+   "lon": 13.04722,
+   "why": "Neighbourhood konditori in Segevång; tagged bakery.",
+   "core": false
+  },
+  {
+   "name": "Bagaren och Bonden",
+   "osm": "node/3758774854",
+   "lat": 55.60675,
+   "lon": 13.02195,
+   "why": "Award-winning organic sourdough bakery at Värnhem (Time Out).",
+   "core": false
+  },
+  {
+   "name": "Ruths",
+   "osm": "node/1947190977",
+   "lat": 55.60616,
+   "lon": 12.99769,
+   "why": "Restaurant/deli/bakery on Mäster Johansgatan, best bakery at Malmö Gastronomy Award (Visit Sweden); tagged restaurant, may belong elsewhere.",
+   "core": false
+  },
+  {
+   "name": "Stadscaféet i Slottsparken",
+   "osm": "way/336365538",
+   "lat": 55.60088,
+   "lon": 12.99246,
+   "why": "Park café/kiosk in Slottsparken; tagged fast_food.",
+   "core": false
+  },
+  {
+   "name": "Café Blå Kiosken",
+   "osm": "way/235026319",
+   "lat": 55.59911,
+   "lon": 12.95592,
+   "why": "Beach café/kiosk on Ribersborg; tagged fast_food.",
+   "core": false
+  }
+ ],
+ "notes": "The evidence supports about 12 core cafés, not 20: Malmö has few café institutions that outlive a decade, and most of the brainstorm names failed. Hollandia is open (job ads July 2026) and is the one unquestionable pick. Not found or not cafés: Café Siesta (Siesta at Hjorttackegatan is a bar/restaurant), Glassfabriken/Glassbaren (only Lilla Glassfabriken exists), Café Bulten, Café Kontoret, a Pildammsteatern/Pildammsparken café (Malmö stad mentions a café at Margaretapaviljongen since 1935 but OSM has no café there; Bloom in the Park is a restaurant), Ebbas Fik (no trace online, probably closed; Ebbas hus is a museum). Pronto (way/1091108905) is a brand-tagged café near Lilla torg, not verified, left out. Konditori Lundagård is in Lund, outside. Mormors Bageri is a Lund bakery that has been in Malmö for some years: put under everything. Konditori Katarina (since 1959) is a local chain with 6+ branches; I made the Triangeln branch core (Wikivoyage) and dropped the two Hamngatan entries. The owner should decide whether a chain belongs in core at all. Gateau, St. Jakobs, Köld, Augusta, Coffee Square and Le Croissant are local chains: one branch kept or all dropped. Ribersborgs Kallbadhus (its café) is dropped because the bath is already in the game. Siri's Conditori (Södra Förstadsgatan 88) claims more than 70 years: a core candidate if the owner knows it. 'Lilla Pang' (Nobelvägen 44A) is now Bröd & Vänner according to OSM's other tags. Kafé Sisko is the Moderna Museet café. Café 2000 (Kaptensgatan, since 2000) is a salad lunch café: everything."
+}

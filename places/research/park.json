@@ -1,0 +1,1216 @@
+{
+ "category": "park",
+ "core": [
+  {
+   "name": "Kungsparken",
+   "osm": "relation/12887996",
+   "lat": 55.60369,
+   "lon": 12.99149,
+   "why": "Malmö's oldest park (1872), central, next to the castle and Malmö Live.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikivoyage: do, wikivoyage-sv, wikipedia",
+    "views12m 1513",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Pildammsparken",
+   "osm": "way/22953383",
+   "lat": 55.59062,
+   "lon": 12.99206,
+   "why": "Malmö's largest and best-known park around the Pildammarna ponds, a default meeting place.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikivoyage: do, wikivoyage-sv, wikipedia",
+    "views12m 2595",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Folkets park",
+   "osm": "way/28417392",
+   "lat": 55.59348,
+   "lon": 13.01381,
+   "why": "Sweden's oldest folkets park (1891) at Möllevången, a fixed point for everyone in the city.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikivoyage: do, wikivoyage-sv, wikipedia",
+    "views12m 2114",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Slottsparken",
+   "osm": "way/30025167",
+   "lat": 55.60146,
+   "lon": 12.9887,
+   "why": "Large central park by Malmöhus and the city library, one of the most used walks.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikivoyage-sv, wikipedia",
+    "views12m 1140",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Scaniaparken",
+   "osm": "way/30053816",
+   "lat": 55.61768,
+   "lon": 12.97679,
+   "why": "Waterfront park in Västra hamnen by the Scaniabadet jetties.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikivoyage-sv, wikipedia",
+    "views12m 203",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Beijers park",
+   "osm": "relation/10344681",
+   "lat": 55.61049,
+   "lon": 13.05029,
+   "why": "12-hectare landscape park in Kirseberg, known from SVT's Sommarlov.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikipedia",
+    "views12m 1106",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Slottsträdgården",
+   "osm": "relation/13509464",
+   "lat": 55.60347,
+   "lon": 12.98795,
+   "why": "The garden next to Slottsparken and the windmill, with its café, widely known and visited.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikivoyage: do, wikivoyage-sv",
+    "wikivoyage do",
+    "wikivoyage-sv"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Bulltofta rekreationsområde",
+   "osm": "relation/11076658",
+   "lat": 55.60146,
+   "lon": 13.0779,
+   "why": "Malmö's largest recreation area, on the old Bulltofta airport.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikipedia",
+    "views12m 476",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Rörsjöparken",
+   "osm": "way/28461042",
+   "lat": 55.60508,
+   "lon": 13.01778,
+   "why": "19th-century park in Rörsjöstaden just east of the centre, a common landmark.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Parker-strander-och-naturomraden.html",
+    "sources: wikipedia",
+    "views12m 317",
+    "inGame",
+    "sitelinks 3"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Kroksbäcksparken",
+   "osm": "way/28553117",
+   "lat": 55.57407,
+   "lon": 12.97929,
+   "why": "Large 1970s park between Kroksbäck and Holma, a district name in its own right.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "sources: wikipedia",
+    "views12m 530",
+    "sitelinks 3"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Jesusparken",
+   "osm": "way/28809216",
+   "lat": 55.59041,
+   "lon": 13.01523,
+   "why": "Falsterboplan, universally called Jesusparken, at Möllevången; 1.2k yearly sv views.",
+   "evidence": [
+    "sources: wikipedia",
+    "views12m 1217",
+    "wikipedia"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Rönneholmsparken",
+   "osm": "way/43137702",
+   "lat": 55.59495,
+   "lon": 12.97599,
+   "why": "'Rönnan', the park around Rönneholmsgården, known across western inner city.",
+   "evidence": [
+    "sources: wikipedia",
+    "views12m 563",
+    "wikipedia"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Klagshamnsuddens naturreservat",
+   "osm": "relation/21515373",
+   "lat": 55.52445,
+   "lon": 12.9104,
+   "why": "Klagshamns udde, the nature area and bird spot on the old lime works fill; already in the game.",
+   "evidence": [
+    "sources: wikipedia",
+    "views12m 94",
+    "inGame (Klagshamns udde)",
+    "sitelinks 2"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "name": "Daniaparken",
+   "osm": "relation/19412138",
+   "lat": 55.61397,
+   "lon": 12.97169,
+   "why": "Sea park in Västra hamnen with the most used diving jetties in the city.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html",
+    "inGame"
+   ],
+   "confidence": "high"
+  },
+  {
+   "name": "Hyllie vattenpark",
+   "osm": "way/282208650",
+   "lat": 55.56502,
+   "lon": 12.97936,
+   "why": "Water play park in Hyllie, a summer destination for families from all of Malmö.",
+   "evidence": [
+    "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo.html"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "everything": [
+  {
+   "name": "Alnarpsparken",
+   "osm": "way/60113489",
+   "outsideMalmo": true
+  },
+  {
+   "name": "Gavelsbjers naturreservat",
+   "osm": "way/102924823",
+   "outsideMalmo": true
+  },
+  {
+   "name": "Gerlachs park",
+   "osm": "way/74990267"
+  },
+  {
+   "name": "Bunkeflo strandängars naturreservat",
+   "osm": "way/102925067"
+  },
+  {
+   "name": "Garnisonsplanteringen",
+   "osm": "way/74990273"
+  },
+  {
+   "name": "Cronheimsparken",
+   "osm": "way/41688058"
+  },
+  {
+   "name": "Södra Lommabuktens naturreservat",
+   "osm": "way/102924493",
+   "outsideMalmo": true
+  },
+  {
+   "name": "Arriesjön-Risebjärs naturreservat",
+   "osm": "way/1359716168",
+   "outsideMalmo": true
+  },
+  {
+   "name": "Strandhusens revlars naturreservat",
+   "osm": "way/1359716157",
+   "outsideMalmo": true
+  },
+  {
+   "name": "Öresundsparkens naturreservat",
+   "osm": "way/1359716156",
+   "outsideMalmo": true
+  },
+  {
+   "name": "Ögårdsparken",
+   "osm": "relation/55430"
+  },
+  {
+   "name": "Kastanjeplatsen",
+   "osm": "way/585939134"
+  },
+  {
+   "name": "Raoul Wallenbergs park",
+   "osm": "way/52403704"
+  },
+  {
+   "name": "Skogholms ängar",
+   "osm": "way/1193426573"
+  },
+  {
+   "name": "Törringelund",
+   "osm": "way/28834781,way/1340520889"
+  },
+  {
+   "name": "Almängen",
+   "osm": "way/42635122"
+  },
+  {
+   "name": "Altonaparken",
+   "osm": "way/126629327"
+  },
+  {
+   "name": "Ankarparken",
+   "osm": "relation/2219450"
+  },
+  {
+   "name": "Annetorpsparken",
+   "osm": "way/528932874"
+  },
+  {
+   "name": "Arilds Plan",
+   "osm": "way/28809347"
+  },
+  {
+   "name": "Askängen",
+   "osm": "way/28549772"
+  },
+  {
+   "name": "Augustenborgsparken",
+   "osm": "way/288423744"
+  },
+  {
+   "name": "Babelparken",
+   "osm": "way/42966949"
+  },
+  {
+   "name": "Badhusparken",
+   "osm": "way/41174366"
+  },
+  {
+   "name": "Badhusparken",
+   "osm": "way/528934986"
+  },
+  {
+   "name": "Bellevueparken",
+   "osm": "way/28804590"
+  },
+  {
+   "name": "Blekeparken",
+   "osm": "way/35202740"
+  },
+  {
+   "name": "Borgmästarlunden",
+   "osm": "way/500043350"
+  },
+  {
+   "name": "Broddaparken",
+   "osm": "way/528933996"
+  },
+  {
+   "name": "Byåkersparken",
+   "osm": "way/476858782"
+  },
+  {
+   "name": "Bågängen",
+   "osm": "way/196198441"
+  },
+  {
+   "name": "Cementparken",
+   "osm": "way/430414893"
+  },
+  {
+   "name": "Dagvattenparken",
+   "osm": "way/912963261"
+  },
+  {
+   "name": "Djupadalsparken",
+   "osm": "way/28768793"
+  },
+  {
+   "name": "Elinelundsparken",
+   "osm": "way/528933733"
+  },
+  {
+   "name": "Elinelundsparken",
+   "osm": "way/727254627,way/727255762"
+  },
+  {
+   "name": "Ellstorpsparken",
+   "osm": "way/366658154"
+  },
+  {
+   "name": "Enebacken",
+   "osm": "way/534643579"
+  },
+  {
+   "name": "Engelska parken",
+   "osm": "way/30037703"
+  },
+  {
+   "name": "Enskifteshagen",
+   "osm": "way/82312457"
+  },
+  {
+   "name": "Erikslustsplan",
+   "osm": "way/102212942"
+  },
+  {
+   "name": "Fjärilsparken",
+   "osm": "way/42051268"
+  },
+  {
+   "name": "Floras hage",
+   "osm": "node/12292627090"
+  },
+  {
+   "name": "Flygfältsparken",
+   "osm": "way/37004082"
+  },
+  {
+   "name": "Formparken",
+   "osm": "way/912949119"
+  },
+  {
+   "name": "Fregattparken",
+   "osm": "relation/18959424"
+  },
+  {
+   "name": "Gjuteriparken",
+   "osm": "way/534761249"
+  },
+  {
+   "name": "Glasbruksparken",
+   "osm": "way/210594604"
+  },
+  {
+   "name": "Glyttängen",
+   "osm": "way/102214388"
+  },
+  {
+   "name": "Gnällegraven",
+   "osm": "way/528932599"
+  },
+  {
+   "name": "Gottorps hörna",
+   "osm": "way/538770759"
+  },
+  {
+   "name": "Gottorpsparken",
+   "osm": "way/537917493"
+  },
+  {
+   "name": "Grevens park",
+   "osm": "way/42051383"
+  },
+  {
+   "name": "Grönalund",
+   "osm": "way/325388359"
+  },
+  {
+   "name": "Grönbetet",
+   "osm": "way/213571339"
+  },
+  {
+   "name": "Gröngräsparken",
+   "osm": "way/496751026"
+  },
+  {
+   "name": "Gröningen",
+   "osm": "way/211411868"
+  },
+  {
+   "name": "Gröningen Katrinelund",
+   "osm": "way/231397012"
+  },
+  {
+   "name": "Guldbaggen",
+   "osm": "way/539164345"
+  },
+  {
+   "name": "Gullviksparken",
+   "osm": "way/41688947"
+  },
+  {
+   "name": "Gullängen",
+   "osm": "way/42706751"
+  },
+  {
+   "name": "Gustav Freijs plats",
+   "osm": "way/965142723"
+  },
+  {
+   "name": "Gyllins trädgård",
+   "osm": "way/583266278"
+  },
+  {
+   "name": "Gårdsparken",
+   "osm": "way/217623100"
+  },
+  {
+   "name": "Göingeplan",
+   "osm": "way/161847340"
+  },
+  {
+   "name": "Hallstorpsparken",
+   "osm": "way/126223259"
+  },
+  {
+   "name": "Hammars park",
+   "osm": "way/335762253"
+  },
+  {
+   "name": "Hamnparken",
+   "osm": "relation/18035056"
+  },
+  {
+   "name": "Hanehögaparken",
+   "osm": "way/35202700"
+  },
+  {
+   "name": "Hantverkareparken",
+   "osm": "way/42466947,way/538944119"
+  },
+  {
+   "name": "Hantverkareparken",
+   "osm": "way/538961567"
+  },
+  {
+   "name": "Heleneholmsparken",
+   "osm": "way/470634606"
+  },
+  {
+   "name": "Hermodsdalsparken",
+   "osm": "way/41688630"
+  },
+  {
+   "name": "Hindby mosse",
+   "osm": "way/1040050688"
+  },
+  {
+   "name": "Hindby stationsplan",
+   "osm": "way/159634703"
+  },
+  {
+   "name": "Hjortkällans grönområde",
+   "osm": "way/531209252"
+  },
+  {
+   "name": "Hyllievångsparken",
+   "osm": "way/992681736"
+  },
+  {
+   "name": "Hylltorpsplan",
+   "osm": "way/325388399"
+  },
+  {
+   "name": "Högbo hage",
+   "osm": "way/528934256"
+  },
+  {
+   "name": "Högerudsplan",
+   "osm": "way/28792587"
+  },
+  {
+   "name": "Högsåkerhagen",
+   "osm": "way/528934402"
+  },
+  {
+   "name": "Höjaparken",
+   "osm": "way/1383643719"
+  },
+  {
+   "name": "Iduns park",
+   "osm": "way/992681735"
+  },
+  {
+   "name": "Kalkbrottsparken",
+   "osm": "way/992553326"
+  },
+  {
+   "name": "Kalkstensparken",
+   "osm": "way/335994468"
+  },
+  {
+   "name": "Kalkugnsparken",
+   "osm": "relation/11137372"
+  },
+  {
+   "name": "Kalvhagen",
+   "osm": "way/213571345"
+  },
+  {
+   "name": "Karlskronaplan",
+   "osm": "way/126704642,way/126704644"
+  },
+  {
+   "name": "Kasernparken",
+   "osm": "way/28903989"
+  },
+  {
+   "name": "Klagshamns stationspark",
+   "osm": "node/9170466306"
+  },
+  {
+   "name": "Klövervallen",
+   "osm": "way/502628210"
+  },
+  {
+   "name": "Knutsbacken",
+   "osm": "way/28790723"
+  },
+  {
+   "name": "Kockums park",
+   "osm": "relation/16455976"
+  },
+  {
+   "name": "Koggparken",
+   "osm": "way/229110771"
+  },
+  {
+   "name": "Kohagen",
+   "osm": "way/528933943"
+  },
+  {
+   "name": "Kranplatsen",
+   "osm": "relation/2219452"
+  },
+  {
+   "name": "Kristinebergsparken",
+   "osm": "way/85128196"
+  },
+  {
+   "name": "Kronetorpsparken",
+   "osm": "way/932767815"
+  },
+  {
+   "name": "Kungsgatanparken",
+   "osm": "way/281543345"
+  },
+  {
+   "name": "Käglinge naturområde",
+   "osm": "relation/5724673"
+  },
+  {
+   "name": "Lilla kalkbrottsparken",
+   "osm": "way/992553301"
+  },
+  {
+   "name": "Lillängen",
+   "osm": "way/1196077234"
+  },
+  {
+   "name": "Linneas park",
+   "osm": "way/937324964"
+  },
+  {
+   "name": "Lotsparken",
+   "osm": "way/534754074"
+  },
+  {
+   "name": "Lottaparken",
+   "osm": "way/123385856"
+  },
+  {
+   "name": "Lugnets park",
+   "osm": "way/259751145"
+  },
+  {
+   "name": "Lyckesholmsparken",
+   "osm": "way/1040050680"
+  },
+  {
+   "name": "Långängen",
+   "osm": "way/211965868"
+  },
+  {
+   "name": "Läparken",
+   "osm": "way/1317438848"
+  },
+  {
+   "name": "Magistratsparken",
+   "osm": "way/28482241"
+  },
+  {
+   "name": "Mellanhedsparken",
+   "osm": "way/29865956"
+  },
+  {
+   "name": "Midgårdstorget",
+   "osm": "way/28805371"
+  },
+  {
+   "name": "Midsommarängen",
+   "osm": "way/102214386"
+  },
+  {
+   "name": "Millennieskogen",
+   "osm": "way/55801342"
+  },
+  {
+   "name": "Månplan",
+   "osm": "way/335566699"
+  },
+  {
+   "name": "Naturmolnet",
+   "osm": "way/288245422"
+  },
+  {
+   "name": "Neptuniparken",
+   "osm": "way/423902353"
+  },
+  {
+   "name": "Nils Holmströms plats",
+   "osm": "way/946723052"
+  },
+  {
+   "name": "Nordmannaplan",
+   "osm": "way/149062300"
+  },
+  {
+   "name": "Nydalaparken",
+   "osm": "way/41688726"
+  },
+  {
+   "name": "Odalängen",
+   "osm": "way/129494430"
+  },
+  {
+   "name": "Odlingsparken",
+   "osm": "relation/10529667"
+  },
+  {
+   "name": "Oxieparken",
+   "osm": "way/483142826"
+  },
+  {
+   "name": "Oxievångsparken",
+   "osm": "way/28837059"
+  },
+  {
+   "name": "Pilstorpsparken",
+   "osm": "way/29068448"
+  },
+  {
+   "name": "Poppeludden",
+   "osm": "way/497816343"
+  },
+  {
+   "name": "Prästlunden",
+   "osm": "way/1462031050"
+  },
+  {
+   "name": "Päronparken",
+   "osm": "way/37255055"
+  },
+  {
+   "name": "Risebergaparken",
+   "osm": "way/42706819"
+  },
+  {
+   "name": "Robert Linds park",
+   "osm": "way/158387712"
+  },
+  {
+   "name": "Rosengårdsfältet",
+   "osm": "way/41687874"
+  },
+  {
+   "name": "Rosengårdsparken",
+   "osm": "way/1332043429"
+  },
+  {
+   "name": "Roshagen",
+   "osm": "way/28760689"
+  },
+  {
+   "name": "Rundelsparken",
+   "osm": "way/1062676613"
+  },
+  {
+   "name": "Rönnhagen",
+   "osm": "way/531209506"
+  },
+  {
+   "name": "Saltholm Vildtreservat",
+   "osm": "way/1202249375",
+   "outsideMalmo": true
+  },
+  {
+   "name": "Sandekullsplan",
+   "osm": "way/483142088"
+  },
+  {
+   "name": "Sannaparken",
+   "osm": "way/28791053"
+  },
+  {
+   "name": "Segeparken",
+   "osm": "way/230678187"
+  },
+  {
+   "name": "Segevångsparken",
+   "osm": "way/278834851"
+  },
+  {
+   "name": "Segeåparken",
+   "osm": "way/531186314"
+  },
+  {
+   "name": "Sjöscoutsparken",
+   "osm": "way/912949111"
+  },
+  {
+   "name": "Skrivareparken",
+   "osm": "way/914168195"
+  },
+  {
+   "name": "Skåneparken",
+   "osm": "relation/10529668"
+  },
+  {
+   "name": "Skäralidsparken",
+   "osm": "way/528932048"
+  },
+  {
+   "name": "Skärvängen",
+   "osm": "way/528739032"
+  },
+  {
+   "name": "Snäckparken",
+   "osm": "way/229270517"
+  },
+  {
+   "name": "Solursparken",
+   "osm": "way/467779280"
+  },
+  {
+   "name": "Sperlings hage",
+   "osm": "way/1381292762"
+  },
+  {
+   "name": "Stenåkersparken",
+   "osm": "relation/9932767"
+  },
+  {
+   "name": "Stolpalösaparken",
+   "osm": "relation/19210437"
+  },
+  {
+   "name": "Strandgårdsparken",
+   "osm": "way/334936400"
+  },
+  {
+   "name": "Strandparken",
+   "osm": "way/534760707"
+  },
+  {
+   "name": "Sundsbroparken",
+   "osm": "way/42467147"
+  },
+  {
+   "name": "Svampängen",
+   "osm": "way/390143958"
+  },
+  {
+   "name": "Svennedalsparken",
+   "osm": "way/528933967"
+  },
+  {
+   "name": "Svenshögsparken",
+   "osm": "way/29008390"
+  },
+  {
+   "name": "Svågertorpsparken",
+   "osm": "way/870826537"
+  },
+  {
+   "name": "Syrenplanen",
+   "osm": "way/219844470"
+  },
+  {
+   "name": "Södervärnsplan",
+   "osm": "way/81309983"
+  },
+  {
+   "name": "Sövdeborgsplan",
+   "osm": "way/129500465"
+  },
+  {
+   "name": "Teaterparken",
+   "osm": "way/37949923"
+  },
+  {
+   "name": "Torekovsplan",
+   "osm": "way/620647782"
+  },
+  {
+   "name": "Tornparken",
+   "osm": "way/210909688"
+  },
+  {
+   "name": "Tors park",
+   "osm": "way/912957333"
+  },
+  {
+   "name": "Tuvängen",
+   "osm": "way/216826425"
+  },
+  {
+   "name": "Tuvängskullen",
+   "osm": "way/216822064"
+  },
+  {
+   "name": "Tyelseparken",
+   "osm": "way/1462031054"
+  },
+  {
+   "name": "Uddeholmsparken",
+   "osm": "way/42706757"
+  },
+  {
+   "name": "Ulricedalsparken",
+   "osm": "way/41689378"
+  },
+  {
+   "name": "Vanåsparken",
+   "osm": "way/28567280"
+  },
+  {
+   "name": "Varvsparken",
+   "osm": "relation/1992391"
+  },
+  {
+   "name": "Vendelsfridsparken",
+   "osm": "way/42051814"
+  },
+  {
+   "name": "Vidars plan",
+   "osm": "way/1383641503"
+  },
+  {
+   "name": "Videdalsparken",
+   "osm": "way/219495698"
+  },
+  {
+   "name": "Vikingaplan",
+   "osm": "way/101738317"
+  },
+  {
+   "name": "Vinterparken",
+   "osm": "way/483142422"
+  },
+  {
+   "name": "Vitoxeln",
+   "osm": "way/531204568"
+  },
+  {
+   "name": "Viängen",
+   "osm": "way/173728787"
+  },
+  {
+   "name": "Vänskapsparken",
+   "osm": "way/1332043428"
+  },
+  {
+   "name": "Västra Stadionparken",
+   "osm": "way/42051659"
+  },
+  {
+   "name": "Växthusparken",
+   "osm": "way/272794313"
+  },
+  {
+   "name": "Ymers park",
+   "osm": "relation/21130201"
+  },
+  {
+   "name": "Ängdalaplan",
+   "osm": "way/102209554"
+  },
+  {
+   "name": "Ängslättsparken",
+   "osm": "way/537919787"
+  },
+  {
+   "name": "Ärtholmsparken",
+   "osm": "way/528327921"
+  },
+  {
+   "name": "Ögonfröjdsparken",
+   "osm": "way/932767816"
+  },
+  {
+   "name": "Öparken",
+   "osm": "way/87783167"
+  },
+  {
+   "name": "Öresundsparken, västra",
+   "osm": "way/530533698"
+  },
+  {
+   "name": "Östergårdsplan",
+   "osm": "way/965142471"
+  },
+  {
+   "name": "Östervärnsparken",
+   "osm": "way/1383641508"
+  },
+  {
+   "name": "Östra Stadionparken",
+   "osm": "way/42706689"
+  },
+  {
+   "name": "Östra Stadionparken",
+   "osm": "way/42706706"
+  }
+ ],
+ "drop": [
+  {
+   "name": "Foteviksområdets naturreservat",
+   "osm": "way/1150814075",
+   "why": "Foteviken reserve, far outside Malmö, little known as nature reserve"
+  },
+  {
+   "name": "Aftontrappan",
+   "osm": "way/499579263",
+   "why": "a stair, not a park"
+  },
+  {
+   "name": "Bussparken",
+   "osm": "way/1183773455",
+   "why": "trivial green patch"
+  },
+  {
+   "name": "Drottning Silvia Rosenträdgård",
+   "osm": "way/1385682405",
+   "why": "rose garden inside Pildammsparken"
+  },
+  {
+   "name": "Espresso Park",
+   "osm": "relation/11149078",
+   "why": "not a public park in practice (office/business area green)"
+  },
+  {
+   "name": "Falsterbohalvöns havsområdes naturreservat",
+   "osm": "relation/1460567",
+   "why": "sea area off Falsterbo, far outside, not a place people visit"
+  },
+  {
+   "name": "Falsterboplan",
+   "osm": "way/161847834",
+   "why": "other half of Jesusparken/Falsterboplan (kept as way/28809216)"
+  },
+  {
+   "name": "Fågellekplatsen",
+   "osm": "way/870310047",
+   "why": "playground"
+  },
+  {
+   "name": "Garageplan",
+   "osm": "way/1183773454",
+   "why": "trivial green patch"
+  },
+  {
+   "name": "Gazarondellen",
+   "osm": "way/126705040",
+   "why": "traffic roundabout planting"
+  },
+  {
+   "name": "Heidis trädgård",
+   "osm": "way/1084451662",
+   "why": "sub-garden of Slottsträdgården"
+  },
+  {
+   "name": "Klimatträdgården",
+   "osm": "way/1084451640",
+   "why": "sub-garden of Slottsträdgården"
+  },
+  {
+   "name": "Källlängen",
+   "osm": "way/930784826",
+   "why": "trivial green patch"
+  },
+  {
+   "name": "Köksträdgården",
+   "osm": "way/932767817",
+   "why": "kitchen garden plot"
+  },
+  {
+   "name": "Linnéträdgården",
+   "osm": "way/1084451647",
+   "why": "sub-garden of Slottsträdgården"
+  },
+  {
+   "name": "Lorensborgs gräsmatta",
+   "osm": "way/531393525",
+   "why": "lawn, not a named park"
+  },
+  {
+   "name": "Lorensborgs gräsmatta",
+   "osm": "way/531393668",
+   "why": "lawn, not a named park"
+  },
+  {
+   "name": "Minneslund",
+   "osm": "way/1476327305",
+   "why": "memorial grove, not a named park as such"
+  },
+  {
+   "name": "Möllevångsgården",
+   "osm": "way/451258453",
+   "why": "courtyard/community garden"
+  },
+  {
+   "name": "Nya Perennträdgården",
+   "osm": "way/1084451661",
+   "why": "sub-garden of Slottsträdgården"
+  },
+  {
+   "name": "Sjukhusparken",
+   "osm": "way/1460707875",
+   "why": "hospital grounds"
+  },
+  {
+   "name": "Slottträdgårdens Kafé-trädgård",
+   "osm": "way/1084451627",
+   "why": "café garden of Slottsträdgården"
+  },
+  {
+   "name": "Sortimentträdgården",
+   "osm": "way/1379306241",
+   "why": "part of Alnarpsparken"
+  },
+  {
+   "name": "Stapelbäddens Trädgård",
+   "osm": "way/1075616877",
+   "why": "community garden plot"
+  },
+  {
+   "name": "Tallriken",
+   "osm": "way/1234312488",
+   "why": "trivial green patch"
+  },
+  {
+   "name": "Torrt och frodigt",
+   "osm": "way/1084451660",
+   "why": "sub-garden of Slottsträdgården"
+  },
+  {
+   "name": "Trädgården som aldrig sover",
+   "osm": "way/1084451666",
+   "why": "sub-garden of Slottsträdgården"
+  },
+  {
+   "name": "Turbinen",
+   "osm": "way/332422544",
+   "why": "small unexplained garden plot"
+  },
+  {
+   "name": "Turboträdgården",
+   "osm": "way/1084451641",
+   "why": "sub-garden of Slottsträdgården"
+  },
+  {
+   "name": "Under Poppelen",
+   "osm": "way/1084451665",
+   "why": "sub-garden of Slottsträdgården"
+  }
+ ],
+ "missing": [
+  {
+   "name": "Limhamns kalkbrott",
+   "osm": "way/24215163",
+   "lat": 55.56763,
+   "lon": 12.93328,
+   "why": "Huge former limestone quarry, now a nature reserve (protected_area, not leisure=park, so missed); in the game already, 5 Wikidata sitelinks.",
+   "core": true
+  },
+  {
+   "name": "Öresundsparken",
+   "osm": "node/1435542275",
+   "lat": 55.60323,
+   "lon": 12.97455,
+   "why": "The long shore park behind Ribersborgsstranden; on malmo.se history list and in the game. Only the western part is in the long list (Öresundsparken, västra, way/530533698).",
+   "core": true
+  },
+  {
+   "name": "Sibbarp (Sibbarps badpark)",
+   "osm": "relation/3050089",
+   "lat": 55.5745,
+   "lon": 12.9095,
+   "why": "Park and beach area at the bridge with kallbadhus, skatepark and camping; on malmo.se history list; Wikidata types it as park. OSM only has the admin area.",
+   "core": true
+  },
+  {
+   "name": "Katrinetorp",
+   "osm": "node/3880896094",
+   "lat": 55.55102,
+   "lon": 13.00362,
+   "why": "Empire-style landeri with historic gardens and English landscape park, Wikivoyage see; known for events and Christmas market.",
+   "core": true
+  },
+  {
+   "name": "Lindängelund",
+   "osm": "",
+   "lat": 55.5512,
+   "lon": 13.007,
+   "why": "Malmö's new 100 ha city park and recreation area (Millennieskogen, Engelska parken are its parts), still being built in stages; no OSM area of its own.",
+   "core": false
+  },
+  {
+   "name": "Toftanäs våtmarkspark",
+   "osm": "",
+   "lat": 55.5985,
+   "lon": 13.0935,
+   "why": "Constructed wetland and bird site in Toftanäs; already in the game but no named OSM feature found.",
+   "core": false
+  },
+  {
+   "name": "Husie mosse",
+   "osm": "way/113267929",
+   "lat": 55.57507,
+   "lon": 13.09522,
+   "why": "Named meadow/wetland nature area in Husie, tagged landuse=meadow.",
+   "core": false
+  },
+  {
+   "name": "Spillepeng",
+   "osm": "relation/3050094",
+   "lat": 55.6388,
+   "lon": 13.0323,
+   "why": "Recreation area on the former landfill at Spillepengen by the Lomma bay; only the admin area exists in OSM.",
+   "core": false
+  }
+ ],
+ "notes": "Stapelbäddsparken (skatepark, way/96744343) is in the idrott list; Ribersborgsstranden, Sibbarp's beach and Scaniabadet are in 'bad'. Sibbarp overlaps with bad; pick one category. Limhamns kalkbrott and Öresundsparken are in the game already but absent from the park long list; Lindängelund is the city's biggest park project but has no OSM polygon, so it would need an outline built from Millennieskogen (way/55801342) + Engelska parken (way/30037703) or left out. Jesusparken = Falsterboplan; I kept the northern half under the popular name and dropped the southern half. Alnarpsparken (Lomma) is well visited by Malmö people but kept in everything, outsideMalmo. Saltholm (Danish island) is in everything only as a visible landmark; drop it if Denmark should stay out. Borderline core candidates left in everything: Garnisonsplanteringen ('Tjyvaparken'), Gyllins trädgård, Käglinge naturområde, Ögårdsparken, Magistratsparken, Raoul Wallenbergs park, Bunkeflo strandängar."
+}

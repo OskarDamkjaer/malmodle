@@ -1,0 +1,409 @@
+{
+  "category": "kyrka",
+  "core": [
+    {
+      "name": "Sankt Petri kyrka",
+      "osm": "way/28415187",
+      "lat": 55.60694,
+      "lon": 13.00332,
+      "why": "Malmö's oldest building, 14th-century brick Gothic cathedral-sized church by Stortorget; the city's defining church.",
+      "evidence": [
+        "sv Wikipedia views12m=6050",
+        "sitelinks=18",
+        "inGame: Sankt Petri kyrka",
+        "https://sv.wikipedia.org/wiki/Sankt_Petri_kyrka,_Malmö"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Sankt Johannes kyrka",
+      "osm": "way/28482245",
+      "lat": 55.5942,
+      "lon": 13.00175,
+      "why": "Jugend church from 1907 with tall copper spires at Sankt Johannesplan by Triangeln; a common directions anchor.",
+      "evidence": [
+        "sv Wikipedia views12m=2292",
+        "sitelinks=11",
+        "inGame: Sankt Johannes kyrka",
+        "https://sv.wikipedia.org/wiki/Sankt_Johannes_kyrka,_Malmö"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Sankt Pauli kyrka",
+      "osm": "way/28481855",
+      "lat": 55.60302,
+      "lon": 13.01438,
+      "why": "Large neo-Gothic church in Rörsjöstaden by Kungsgatan, a well-known landmark between Davidshall and Värnhem.",
+      "evidence": [
+        "sv Wikipedia views12m=2956",
+        "sitelinks=4",
+        "inGame: Sankt Pauli kyrka",
+        "https://sv.wikipedia.org/wiki/Sankt_Pauli_kyrka,_Malmö"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Malmö synagoga",
+      "osm": "way/37253592",
+      "lat": 55.59953,
+      "lon": 13.01082,
+      "why": "Malmö's 1903 synagogue on Föreningsgatan, historically important and widely known.",
+      "evidence": [
+        "sv Wikipedia views12m=1454",
+        "sitelinks=17",
+        "inGame: Malmö synagoga",
+        "https://sv.wikipedia.org/wiki/Malmö_synagoga"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Malmö moské",
+      "osm": "relation/2835333",
+      "lat": 55.57496,
+      "lon": 13.05145,
+      "why": "Malmö moské (Islamic Center) at Jägersro/Västra Skrävlinge, Sweden's first purpose-built mosque (1984); same as 'Malmö moské' in landmarks.json.",
+      "evidence": [
+        "sv Wikipedia views12m=1576",
+        "sitelinks=16",
+        "inGame: Malmö moské",
+        "https://sv.wikipedia.org/wiki/Malmö_moské"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Limhamns kyrka",
+      "osm": "way/28576312",
+      "lat": 55.57483,
+      "lon": 12.94474,
+      "why": "Limhamn's parish church with a prominent tower, the landmark of Limhamn.",
+      "evidence": [
+        "sv Wikipedia views12m=1157",
+        "sitelinks=3",
+        "wikivoyage-sv",
+        "inGame: Limhamns kyrka",
+        "https://sv.wikipedia.org/wiki/Limhamns_kyrka"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Umm Al-Mu'minin Khadijah-moskén",
+      "osm": "way/638684255",
+      "lat": 55.59426,
+      "lon": 13.03968,
+      "why": "Umm Al-Mu'minin Khadijah mosque (OSM name: Det Skandinaviska Wakf i Sverige) by Östra kyrkogården, Sweden's largest mosque (2017) and a visible building.",
+      "evidence": [
+        "sv Wikipedia views12m=446",
+        "sitelinks=6",
+        "https://sv.wikipedia.org/wiki/Umm_Al-Mu’minin_Khadijah-moskén"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Mahmoodmoskén",
+      "osm": "way/806337057",
+      "lat": 55.56626,
+      "lon": 13.08268,
+      "why": "Mahmoodmoskén in eastern Malmö (2016), Ahmadiyya's largest Swedish mosque with a 24 m minaret, much covered in media.",
+      "evidence": [
+        "sv Wikipedia views12m=1413",
+        "sitelinks=8",
+        "https://sv.wikipedia.org/wiki/Mahmoodmoskén"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Sankt Andreas kyrka",
+      "osm": "way/45706659",
+      "lat": 55.59921,
+      "lon": 12.97128,
+      "why": "Sankt Andreas kyrka in Fridhem, 1959 church with a tall free-standing tower, a parish church of S:t Petri; well-known in western Malmö.",
+      "evidence": [
+        "sv Wikipedia views12m=1088",
+        "sitelinks=2",
+        "https://sv.wikipedia.org/wiki/Sankt_Andreas_kyrka,_Malmö"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Hyllie kyrka",
+      "osm": "way/117742397",
+      "lat": 55.57584,
+      "lon": 12.97075,
+      "why": "Hyllie kyrka, parish church of Hyllie; listed by Visit Malmö and Swedish Wikivoyage.",
+      "evidence": [
+        "sv Wikipedia views12m=449",
+        "sitelinks=2",
+        "visitmalmo: se och göra",
+        "wikivoyage-sv",
+        "https://sv.wikipedia.org/wiki/Hyllie_kyrka"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Sankt Matteus kyrka",
+      "osm": "way/82312304",
+      "lat": 55.58902,
+      "lon": 13.02134,
+      "why": "Sankt Matteus kyrka by Södervärn/Möllevången, a parish church of S:t Johannes with relatively high page views.",
+      "evidence": [
+        "sv Wikipedia views12m=1018",
+        "sitelinks=2",
+        "https://sv.wikipedia.org/wiki/Sankt_Matteus_kyrka,_Malmö"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Kirsebergs kyrka",
+      "osm": "way/250774470",
+      "lat": 55.60885,
+      "lon": 13.04132,
+      "why": "Kirsebergs kyrka on the Kirseberg ridge, the church of Kirsebergsstaden and visible over north-east Malmö.",
+      "evidence": [
+        "sv Wikipedia views12m=482",
+        "sitelinks=2",
+        "https://sv.wikipedia.org/wiki/Kirsebergs_kyrka"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "everything": [
+    {
+      "name": "Västra Skrävlinge kyrka",
+      "osm": "way/28757719"
+    },
+    {
+      "name": "Husie kyrka",
+      "osm": "way/28494120"
+    },
+    {
+      "name": "Lockarps kyrka",
+      "osm": "way/28565626"
+    },
+    {
+      "name": "Bunkeflo kyrka",
+      "osm": "way/219950730"
+    },
+    {
+      "name": "Västra Klagstorps kyrka",
+      "osm": "way/29144489"
+    },
+    {
+      "name": "Tygelsjö kyrka",
+      "osm": "way/28519963"
+    },
+    {
+      "name": "Heliga Trefaldighetskyrkan",
+      "osm": "way/54149469"
+    },
+    {
+      "name": "Sankta Maria kyrka",
+      "osm": "way/81310001"
+    },
+    {
+      "name": "Helgeandskyrkan",
+      "osm": "node/8506599040"
+    },
+    {
+      "name": "Sankt Mikaels kyrka",
+      "osm": "way/37857305"
+    },
+    {
+      "name": "Bunkeflo strandkyrka",
+      "osm": "way/42466641"
+    },
+    {
+      "name": "Fosie kyrka",
+      "osm": "way/28558032"
+    },
+    {
+      "name": "Sankta Maria i Rosengård",
+      "osm": "way/28760536"
+    },
+    {
+      "name": "Tyska kyrkan",
+      "osm": "way/52245269"
+    },
+    {
+      "name": "Vår Frälsares Kyrka",
+      "osm": "relation/176711"
+    },
+    {
+      "name": "Oxie kyrka",
+      "osm": "way/76451815"
+    },
+    {
+      "name": "Immanuelskyrkan",
+      "osm": "way/424484007"
+    },
+    {
+      "name": "Södra Sallerups kyrka",
+      "osm": "way/89891277"
+    },
+    {
+      "name": "Glostorps kyrka",
+      "osm": "way/220199199"
+    },
+    {
+      "name": "Stadionkyrkan",
+      "osm": "way/52374858"
+    },
+    {
+      "name": "Makedoniska ortodoxa kyrkan",
+      "osm": "way/249514905"
+    },
+    {
+      "name": "Burlövs gamla kyrka",
+      "osm": "way/87743209",
+      "outsideMalmo": true
+    }
+  ],
+  "drop": [
+    {
+      "name": "Arrie kyrka",
+      "osm": "way/28825630",
+      "why": "Vellinge municipality village church, not widely known in Malmö"
+    },
+    {
+      "name": "Arlövs kyrka",
+      "osm": "way/28582100",
+      "why": "Arlöv (Burlöv) parish church, not widely known by Malmö residents"
+    },
+    {
+      "name": "Gessie kyrka",
+      "osm": "way/28745123",
+      "why": "Vellinge municipality village church"
+    },
+    {
+      "name": "Hököpinge kyrka",
+      "osm": "way/28745257",
+      "why": "Vellinge municipality village church"
+    },
+    {
+      "name": "Bjärshögs kyrka",
+      "osm": "way/188973969",
+      "why": "Svedala municipality village church"
+    },
+    {
+      "name": "Västra Ingelstads kyrka",
+      "osm": "way/28586568",
+      "why": "Vellinge municipality village church"
+    },
+    {
+      "name": "Särslövs kyrka",
+      "osm": "way/53097439",
+      "why": "Staffanstorp municipality village church"
+    },
+    {
+      "name": "Görslövs kyrka",
+      "osm": "way/53097470",
+      "why": "Staffanstorp municipality village church"
+    },
+    {
+      "name": "Tottarps kyrka",
+      "osm": "way/53096621",
+      "why": "Staffanstorp municipality village church"
+    },
+    {
+      "name": "Törringe kyrka",
+      "osm": "way/229117917",
+      "why": "Svedala municipality village church"
+    },
+    {
+      "name": "Adventkyrkan",
+      "osm": "way/29061690",
+      "why": "small free-church congregation, little known"
+    },
+    {
+      "name": "Al-Hoda-moskén",
+      "osm": "node/12145973902",
+      "why": "small mosque in ordinary premises"
+    },
+    {
+      "name": "Betaniakyrkan",
+      "osm": "way/77954072",
+      "why": "small congregation, little known"
+    },
+    {
+      "name": "Betlehemskyrkan",
+      "osm": "way/1327225673",
+      "why": "small congregation, little known"
+    },
+    {
+      "name": "C3 Church",
+      "osm": "way/211930661",
+      "why": "small congregation in commercial premises"
+    },
+    {
+      "name": "Frälsningsarmén",
+      "osm": "node/879023258",
+      "why": "Salvation Army corps in ordinary premises; OSM node also tagged C3 Church"
+    },
+    {
+      "name": "Heliga Korsets Kapell",
+      "osm": "way/230610822",
+      "why": "cemetery chapel, not a known place in itself"
+    },
+    {
+      "name": "Hillsong Church Malmö",
+      "osm": "node/10752148643",
+      "why": "congregation in rented premises"
+    },
+    {
+      "name": "Huda mosken",
+      "osm": "node/12675448318",
+      "why": "small mosque in ordinary premises"
+    },
+    {
+      "name": "Hyllie Park Kyrkan",
+      "osm": "node/9509332224",
+      "why": "congregation in commercial premises"
+    },
+    {
+      "name": "Islamakademin",
+      "osm": "node/13893476201",
+      "why": "Islamic school/prayer room in office premises"
+    },
+    {
+      "name": "Jesu Kristi kyrka av sista dagars heliga",
+      "osm": "way/52245268",
+      "why": "LDS meeting house, little known"
+    },
+    {
+      "name": "Korskyrkan",
+      "osm": "node/13142817314",
+      "why": "small congregation, little known"
+    },
+    {
+      "name": "Malmö Chán Buddhist Temple",
+      "osm": "node/11984886125",
+      "why": "small temple in ordinary premises"
+    },
+    {
+      "name": "Rumänska ortodoxa församlingen i södra Sverige",
+      "osm": "way/211956051",
+      "why": "small congregation, little known"
+    },
+    {
+      "name": "Scientologi-kyrkan i Malmö",
+      "osm": "way/89610446",
+      "why": "Scientology office in an industrial area"
+    },
+    {
+      "name": "Wesleykyrkan",
+      "osm": "node/10754116847",
+      "why": "small congregation, little known"
+    }
+  ],
+  "missing": [
+    {
+      "name": "Sankt Nicolai kapell",
+      "osm": "way/52201097",
+      "lat": 55.60779,
+      "lon": 12.9952,
+      "why": "Svenska kyrkan chapel belonging to S:t Petri församling (listed on svenskakyrkan.se/malmo/sa-leds-svenska-kyrkan-malmo); tagged building=chapel without amenity=place_of_worship, so it fell out of the long list.",
+      "core": false
+    }
+  ],
+  "notes": "Caroli kyrka (way/34732336, in game) is in byggnad.json, not here; it was deconsecrated in 2010 and sold, so it fits better as a building than a place of worship. Keep it there. The Khadijah mosque's OSM name is the operator ('Det Skandinaviska Wakf i Sverige'); use 'Umm Al-Mu'minin Khadijah-moskén' (or 'Khadijamoskén') as the display name. The long list covers every Svenska kyrkan church in Malmö pastorat except Sankt Nicolai kapell and Syster Astrids kyrka (a room in Husie församlingshem, skipped). Village churches outside Malmö municipality (Vellinge, Svedala, Staffanstorp, Burlöv) were dropped; Burlövs gamla kyrka kept in everything as a medieval church right at the city edge. Owner may prefer to drop it too. Core slots 9-12 (Sankt Andreas, Hyllie, Sankt Matteus, Kirseberg) are judgement calls; Västra Skrävlinge kyrka (by Inre Ringvägen) and Sankta Maria kyrka are the next candidates. Helgeandskyrkan is now Malmö International Church."
+}

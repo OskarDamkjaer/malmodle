@@ -1,0 +1,40 @@
+{
+  "category": "handel",
+  "core": [
+    {"name": "Emporia", "osm": "way/147530612", "lat": 55.56426, "lon": 12.97346, "why": "Malmö's largest shopping centre at Hyllie, one of the biggest in Scandinavia, with a striking facade by Wingårdh.", "evidence": ["sources: wikivoyage buy, visitmalmo, wikivoyage-sv, wikipedia", "sitelinks 12, views12m 5067", "https://www.dagensps.se/foretag/overraskningen-nu-ar-de-storst-i-sverige/", "inGame"], "confidence": "high"},
+    {"name": "Triangeln", "osm": "way/219950736", "lat": 55.59554, "lon": 13.00206, "why": "The largest shopping centre in central Malmö, built over Triangeln station; 'vid Triangeln' is everyday Malmö orientation.", "evidence": ["sources: wikivoyage-sv, wikipedia", "sitelinks 4, views12m 1008", "Wikipedia: 'Malmö citys största köpcentrum'"], "confidence": "high"},
+    {"name": "Mobilia", "osm": "way/591084148", "lat": 55.58144, "lon": 13.00393, "why": "Large shopping centre with over a hundred shops at Dalaplan/Per Albins väg, in the old Malmö Yllefabrik buildings.", "evidence": ["sources: wikivoyage buy, visitmalmo, wikivoyage-sv, wikipedia", "views12m 1012", "inGame"], "confidence": "high"},
+    {"name": "Hansa", "osm": "way/28414267", "lat": 55.6031, "lon": 13.0041, "why": "City-centre galleria between Stora Nygatan and Södra Promenaden, the former NK building, still universally called Hansa.", "evidence": ["sources: wikipedia (Hansa_(köpcentrum)), wikivoyage buy (unmatched 'Hansa')", "views12m 1445", "https://fojab.se/en/topical/hansa-one-step-closer-to-opening/", "inGame as Hansacompagniet"], "confidence": "high"},
+    {"name": "Malmö Saluhall", "osm": "way/187072516", "lat": 55.60784, "lon": 12.99085, "why": "The city's food hall in an old goods warehouse by Centralstationen, opened 2016.", "evidence": ["sources: whiteguide REKOMMENDERAD, wikivoyage eat, visitmalmo äta", "inGame"], "confidence": "high"},
+    {"name": "Möllevångstorget", "osm": "node/1309301894", "lat": 55.5916, "lon": 13.008, "why": "Malmö's market square, with daily stall trade in fruit and vegetables since the early 1900s.", "evidence": ["sources: wikivoyage see, wikivoyage-sv", "inGame"], "confidence": "high"},
+    {"name": "Åhléns City", "osm": "node/2293729283", "lat": 55.60387, "lon": 13.00108, "why": "The department store on Södergatan by Gustav Adolfs torg, a classic meeting point ('vid Åhléns').", "evidence": ["https://www.ahlens.se/varuhus/malmo-city (still open, Södergatan 17)", "OSM shop=department_store, branch=city (dropped from long list as a chain)"], "confidence": "medium"},
+    {"name": "Jägersro Center", "osm": "way/40664131", "lat": 55.56985, "lon": 13.05877, "why": "Long-standing shopping centre from 1962 opposite Jägersro racecourse, staying as the new Jägersro district is built around it.", "evidence": ["sources: wikivoyage buy, wikipedia", "sitelinks 3, views12m 591", "https://www.mynewsdesk.com/se/projekt-jaegersro/latest_news"], "confidence": "high"},
+    {"name": "Svågertorp", "osm": "way/41172181", "lat": 55.55082, "lon": 12.99107, "why": "The big-box retail area by the bridge approach with IKEA and many others; 'Svågertorp' is the name residents use for it.", "evidence": ["sources: wikivoyage-sv, wikipedia", "sitelinks 4, views12m 1510"], "confidence": "medium"},
+    {"name": "Kv. Caroli", "osm": "node/4397767524", "lat": 55.60767, "lon": 13.00738, "why": "The Caroli block in the old town (Caroli City), still widely known by name even though it is now more offices and homes than mall.", "evidence": ["sources: wikipedia (Caroli_city)", "views12m 872", "inGame (as Caroli kyrka / Kv. Caroli)"], "confidence": "medium"},
+    {"name": "Burlöv Center", "osm": "way/89611697", "lat": 55.63959, "lon": 13.0845, "outsideMalmo": true, "why": "Shopping centre in Arlöv just outside the city line, opened 1971 and widely used by Malmö residents in the north-east.", "evidence": ["sources: wikipedia", "views12m 841"], "confidence": "medium"},
+    {"name": "Rosengård Centrum", "osm": "way/40663102", "lat": 55.58616, "lon": 13.04503, "why": "The centre and square of Rosengård, a well-known name and bus stop across the city.", "evidence": ["inGame", "own knowledge"], "confidence": "medium"},
+    {"name": "Kronprinsen", "osm": "way/29711745", "lat": 55.59841, "lon": 12.98516, "why": "The 1964 skyscraper with a shopping centre at its base on Regementsgatan; a top direction-giving landmark in the west of the city.", "evidence": ["sources: wikipedia", "sitelinks 8, views12m 9570 (highest in this list)"], "confidence": "medium"}
+  ],
+  "everything": [
+    {"name": "Entré", "osm": "way/35672296,way/231960894"},
+    {"name": "Mitt Möllan", "osm": "node/2429958196"},
+    {"name": "Fiskehoddorna", "osm": "node/3786516975"},
+    {"name": "Cantin", "osm": "way/1517146894"},
+    {"name": "Marknadsbörsen", "osm": "node/12320276874"}
+  ],
+  "drop": [
+    {"name": "Bellevuegården köpcentrum", "osm": "node/9206415769", "why": "small neighbourhood centre"},
+    {"name": "Centrumhuset", "osm": "way/230677597", "why": "a building inside Mobilia (operator=Mobilia), duplicate"},
+    {"name": "Södra huset", "osm": "way/28987753", "why": "a building inside Mobilia (operator=Mobilia), duplicate"},
+    {"name": "e-center", "osm": "way/115613088", "why": "small supermarket strip on Agnesfridsvägen"},
+    {"name": "Katrinelunds köpcentrum", "osm": "way/36984709", "why": "small local strip mall"},
+    {"name": "Rusta", "osm": "node/9861806351", "why": "chain discount store"},
+    {"name": "Rusta", "osm": "node/10754677877", "why": "chain discount store"},
+    {"name": "ÖoB", "osm": "node/10754158053", "why": "chain discount store (inside/next to Emporia)"}
+  ],
+  "missing": [
+    {"name": "IKEA Malmö", "osm": "way/41241895", "lat": 55.5536, "lon": 12.9871, "why": "Huge blue box at Svågertorp, seen from the E20/bridge approach; residents use it as a reference point. Dropped from the long list as a brand.", "core": false},
+    {"name": "Södergatan", "osm": "way/28411524", "lat": 55.60456, "lon": 13.00122, "why": "Malmö's first pedestrian street (1978), the main shopping street between Stortorget and Gustav Adolfs torg ('gågatan'). Ways 28411524, 1123355063, 189255275, 1360214423.", "core": false}
+  ],
+  "notes": "Hansa: the game calls it Hansacompagniet, but since the post-2017 rebuild it is called just Hansa, and residents say Hansa; consider renaming. Kronprinsen is mainly a skyscraper, so if a buildings category claims it, drop it here. Kv. Caroli overlaps with Caroli kyrka in the game. Svågertorp vs IKEA: I made the area core and IKEA not core; flip them if a single-building target suits the quiz better. Södergatan is a street and probably belongs to the street questions, but it is the shopping street. Entré (2009, Fredsgatan/Värnhem) has been in decline and has been rebuilt several times; it is still open but not core. Cantin is a seasonal street-food park in Varvsstaden (April to September, first season 2026), too new for core. Marknadsbörsen (Fricksgatan 4, near Möllan) is a weekend market with little public profile, so it is borderline. Malmö has no NK. Lagerhuset and Dalaplan as shopping places: there is no Lagerhuset in OSM, and Dalaplan is a square whose shopping is Mobilia. Malmö Designer Village is in Löddeköpinge (opens 2027), outside the area. Väla is outside the bbox."
+}

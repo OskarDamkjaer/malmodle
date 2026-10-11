@@ -34,7 +34,10 @@ of the rest.
   never one that also lies on that side. Asked for any of the four directions,
   only where exactly one area borders X on that side.
 
-Every question scores 0–100. A day scores out of 1000.
+Every question scores 0–100. A day scores out of 1000. A wrong pick in "Vad är
+det här?" or "Direkt söder om" scores 25 when it is close to the answer: an
+area that borders it, a street that meets it, or a place within 300 m.
+"Närmast" is right or wrong.
 
 ## The map
 
@@ -53,10 +56,10 @@ Every question scores 0–100. A day scores out of 1000.
 
 ## Styles
 
-The app comes in several styles, each served at its own path from the same
-code: Papper at the root, and Natt, Tidning and Klar under their own names. A
-style changes colours, type and the basemap palette, never the game. The end
-screen links to all of them.
+The app has one style for players, Tidning, served at the root. Papper, Natt
+and Klar are kept at their own paths from the same code for trying out, and a
+switcher between them shows only when running locally. A style changes
+colours, type and the basemap palette, never the game.
 
 ## Constraints
 

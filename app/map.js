@@ -31,6 +31,8 @@ function labelsOf(items, extra = () => ({})) {
 const isPolygon = ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]];
 const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineString']]];
 const isPoint = ['==', ['geometry-type'], 'Point'];
+const isArea = ['==', ['get', 'kind'], 'area'];
+const isPlace = ['in', ['get', 'kind'], ['literal', ['landmark', 'bridge']]];
 const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
 function addFree(layer) {
@@ -61,12 +63,16 @@ export function setupLayers(mapInstance, items) {
   map.addSource('tap', { type: 'geojson', data: EMPTY });
 
   addFree({
-    id: 'all-area-fill', type: 'fill', source: 'quiz-shapes', filter: isPolygon,
+    id: 'all-area-fill', type: 'fill', source: 'quiz-shapes', filter: ['all', isPolygon, isArea],
     paint: { 'fill-color': COLOR.outline, 'fill-opacity': 0.03 },
   });
   addFree({
-    id: 'all-area-line', type: 'line', source: 'quiz-shapes', filter: isPolygon,
+    id: 'all-area-line', type: 'line', source: 'quiz-shapes', filter: ['all', isPolygon, isArea],
     paint: { 'line-color': COLOR.outline, 'line-width': 1.2, 'line-opacity': 0.8 },
+  });
+  addFree({
+    id: 'all-place-fill', type: 'fill', source: 'quiz-shapes', filter: ['all', isPolygon, isPlace],
+    paint: { 'fill-color': COLOR.answer, 'fill-opacity': 0.01 },
   });
   addFree({
     id: 'all-street', type: 'line', source: 'quiz-shapes', filter: isLine,
@@ -98,7 +104,7 @@ export function setupLayers(mapInstance, items) {
   });
 
   addFree({
-    id: 'all-points', type: 'circle', source: 'quiz-shapes', filter: isPoint,
+    id: 'all-points', type: 'circle', source: 'quiz-labels', filter: isPlace,
     paint: {
       'circle-radius': 5,
       'circle-color': HALO,
@@ -238,7 +244,7 @@ export function frameReveal(geometries, points) {
 }
 
 export function pick(point) {
-  const layers = ['all-points', 'all-street', 'all-area-fill'];
+  const layers = ['all-points', 'all-place-fill', 'all-street', 'all-area-fill'];
   const hits = map.queryRenderedFeatures(point, { layers });
   for (const id of layers) {
     const hit = hits.find((h) => h.layer.id === id);

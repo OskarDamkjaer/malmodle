@@ -1,0 +1,32 @@
+{
+  "category": "bad",
+  "core": [
+    {"name": "Ribersborgsstranden", "osm": "way/41173569", "lat": 55.6024, "lon": 12.96045, "why": "Ribban is Malmö's most visited beach, the city's default summer spot and a universal reference point.", "evidence": ["https://malmo.se/badplatser (Malmö's most visited beach)", "sv Wikipedia Ribersborgsstranden", "wikivoyage-sv", "already in game"], "confidence": "high"},
+    {"name": "Ribersborgs Kallbadhus", "osm": "relation/5698988", "lat": 55.60523, "lon": 12.96536, "why": "The 1898 cold-bath house on its pier at Ribban, 'Kallis', is one of Malmö's best known buildings and open all year.", "evidence": ["views12m 1858", "sitelinks 5", "wikivoyage-sv", "already in game"], "confidence": "high"},
+    {"name": "Hylliebadet", "osm": "way/335899280", "lat": 55.57036, "lon": 12.97787, "why": "Malmö's main public indoor bath since 2015, next to Kroksbäcksparken by Hyllie.", "evidence": ["views12m 681", "sitelinks 4", "wikivoyage (en): do", "https://malmo.se/Uppleva-och-gora/Bada-och-simma.html"], "confidence": "high"},
+    {"name": "Simhallsbadet", "osm": "way/37892937", "lat": 55.59922, "lon": 12.99241, "why": "The 1956 swimming hall at Regementsgatan, Aq-va-kul 1988-2015, known to generations of Malmö residents.", "evidence": ["views12m 2642 (highest in category)", "sitelinks 3", "https://malmo.se/simhallsbadet"], "confidence": "medium"},
+    {"name": "Scaniabadet", "osm": "node/3794911366", "lat": 55.61743, "lon": 12.97445, "why": "Västra hamnen's popular bathing deck with piers and diving off Scaniaparken, one of the city's five official bathing places.", "evidence": ["https://malmo.se/Uppleva-och-gora/Bada-och-simma/Strander-och-badplatser.html (one of five official bathing places)", "OSM tourism=attraction node/11868162176"], "confidence": "high"},
+    {"name": "Klagshamnstranden", "osm": "node/12135479815", "lat": 55.52497, "lon": 12.8959, "why": "The natural beach out on Klagshamnsudden, one of Malmö's five official bathing places.", "evidence": ["https://malmo.se/Uppleva-och-gora/Bada-och-simma/Strander-och-badplatser.html"], "confidence": "medium"}
+  ],
+  "everything": [
+    {"name": "Segevångsbadet", "osm": "way/1492826355"},
+    {"name": "Rosengårdsbadet", "osm": "way/336068930"},
+    {"name": "Nakenbadet", "osm": "way/1510992694"},
+    {"name": "Ribersborgs hundbadplats", "osm": "node/13384632722"},
+    {"name": "Burlövsbadet", "osm": "way/1087724894", "outsideMalmo": true}
+  ],
+  "drop": [
+    {"name": "Friskis & Svettis", "osm": "node/12142935783", "why": "gym chain, not a bath"},
+    {"name": "Nudism beach", "osm": "node/14084816859", "why": "duplicate of Nakenbadet (brygga 10, Ribersborg)"}
+  ],
+  "missing": [
+    {"name": "Sibbarpsstranden", "osm": "node/7500712661", "lat": 55.57451, "lon": 12.91179, "why": "Official bathing place at Sibbarp with piers, Barnviken and camping; in the game as 'Sibbarps badplats'. No beach polygon in OSM, so the osm id is the Sibbarp place node the game already uses.", "core": true},
+    {"name": "Sibbarps kallbadhus (Sibbarps saltsjöbad)", "osm": "way/348735683", "lat": 55.57715, "lon": 12.91077, "why": "Malmö's second cold-bath house, open all year, on the pier at Sibbarp; listed in wikivoyage as Sibbarps Saltsjöbad and has its own sv Wikipedia article.", "core": true},
+    {"name": "Sundspromenaden (badplats)", "osm": "way/79141670", "lat": 55.61254, "lon": 12.97217, "why": "One of Malmö's five official bathing places: bathing steps and piers along the Västra hamnen promenade. The osm id is the promenade (highway=pedestrian); there is no separate bathing feature.", "core": false},
+    {"name": "Lindängsbadet", "osm": "way/286601151", "lat": 55.5626, "lon": 13.0149, "why": "Municipal outdoor pool with a 50 m pool, open in summer. The OSM water_park polygon has no name; the name comes from malmo.se and a bike station node.", "core": false},
+    {"name": "Oxievångsbadet", "osm": "node/1495929057", "lat": 55.53532, "lon": 13.09501, "why": "Municipal indoor bath in Oxie with a 25 m pool.", "core": false},
+    {"name": "Öresunds Funkis", "osm": "way/100073020", "lat": 55.59821, "lon": 12.94903, "why": "The city's step-free bathing pier on Ribersborgsstranden, listed on malmo.se.", "core": false},
+    {"name": "T-bryggan", "osm": "way/28433640", "lat": 55.60255, "lon": 12.95739, "why": "T-shaped pier on Ribban, used as a meeting point; there are two OSM ways named T-bryggan (28433638, 28433640).", "core": false}
+  ],
+  "notes": "Malmö lists exactly five official bathing places: Ribersborg, Sibbarp, Klagshamn, Scaniabadet, Sundspromenaden. It lists indoor baths Hylliebadet, Simhallsbadet and Oxievångsbadet, and outdoor pools Rosengårdsbadet, Lindängsbadet and Segevångsbadet. Simhallsbadet is core with medium confidence: it is the best known bath name in the city (ex-Aq-va-kul), but it has served only clubs and lap swimmers since 2015, the diving pool has been closed since March 2026 pending review, and Heleneholmsbadet (due autumn 2028) may take over its role. Demote it if the 'still there' test matters most. Sibbarp: Sibbarpsstranden and Sibbarps kallbadhus are listed separately, but the game may want one 'Sibbarp' item since they sit 300 m apart. Sundspromenaden is a street, and it may clash with the streets quiz. Left out: Aq-va-kul (old name of Simhallsbadet), Kockum Fritid (private gym with a pool, node/8602130734), Lagunen (way/450127262, a marina and area beside the nudist bathing spot, not a bathing place), Gamla Burlövs badet (way/356623631, the old building beside Burlövsbadet), Ribban's numbered piers (Brygga 1-10). There is no Limhamns kallbadhus and no 'Daniabadet' in OSM or on malmo.se. Lomma and Bjärred beaches are outside the area or not Malmö places."
+}

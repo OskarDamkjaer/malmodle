@@ -6,6 +6,7 @@
       "carries": "E20 och Öresundsbanan",
       "lat": 55.56946,
       "lon": 12.86376,
+      "osm": ["way/148500437", "way/370255940"],
       "description": "Öppnad 1 juli 2000. 7 845 meter bro, som efter den konstgjorda ön Peberholm fortsätter i Drogdentunneln — därför är aldrig hela vägen till Danmark bro. Bil ovanpå, tåg inuti.",
       "source": "https://sv.wikipedia.org/wiki/%C3%96resundsbron",
       "verified": false
@@ -16,6 +17,7 @@
       "carries": null,
       "lat": 55.60848,
       "lon": 13.00211,
+      "osm": ["way/394896504"],
       "description": "Har sitt namn efter Sankt Petri kyrka.",
       "source": null,
       "verified": false
@@ -26,6 +28,7 @@
       "carries": null,
       "lat": 55.60915,
       "lon": 12.99753,
+      "osm": ["way/1352062485"],
       "description": "Namnet efter Frans Suell, köpmannen som drev fram Malmös hamn på 1770-talet.",
       "source": null,
       "verified": false
@@ -36,6 +39,7 @@
       "carries": "Slussgatan",
       "lat": 55.60919,
       "lon": 13.01275,
+      "osm": ["way/394896506"],
       "description": "Har sitt namn efter slussen som en gång skilde kanalen från hamnen.",
       "source": null,
       "verified": false
@@ -46,6 +50,7 @@
       "carries": "Skeppsbron",
       "lat": 55.60802,
       "lon": 12.99939,
+      "osm": ["way/394897889"],
       "description": "Bro och kaj med samma namn.",
       "source": null,
       "verified": false
@@ -56,6 +61,7 @@
       "carries": null,
       "lat": 55.61232,
       "lon": 12.99627,
+      "osm": ["way/1009101397"],
       "description": "Uppkallad efter Malmö universitet.",
       "source": null,
       "verified": false
@@ -66,6 +72,7 @@
       "carries": null,
       "lat": 55.60521,
       "lon": 12.99021,
+      "osm": ["way/394897885"],
       "description": "Går över den vallgrav som är kvar av Malmöhus försvarsverk.",
       "source": null,
       "verified": false
@@ -76,6 +83,7 @@
       "carries": null,
       "lat": 55.60397,
       "lon": 13.01069,
+      "osm": ["way/394896503"],
       "description": "Uppkallad efter Sankt Pauli kyrka.",
       "source": null,
       "verified": false
@@ -86,6 +94,7 @@
       "carries": null,
       "lat": 55.60809,
       "lon": 13.01323,
+      "osm": ["way/394896505"],
       "description": null,
       "source": null,
       "verified": false
@@ -96,6 +105,7 @@
       "carries": null,
       "lat": 55.60096,
       "lon": 12.99941,
+      "osm": ["way/394897888"],
       "description": null,
       "source": null,
       "verified": false
@@ -106,6 +116,7 @@
       "carries": null,
       "lat": 55.6073,
       "lon": 12.99611,
+      "osm": ["way/394897894"],
       "description": null,
       "source": null,
       "verified": false
@@ -116,6 +127,7 @@
       "carries": null,
       "lat": 55.60935,
       "lon": 12.99093,
+      "osm": ["way/1214029121"],
       "description": null,
       "source": null,
       "verified": false
@@ -126,6 +138,7 @@
       "carries": null,
       "lat": 55.60746,
       "lon": 12.985,
+      "osm": ["relation/17709592"],
       "description": "Delar namn med Neptunigatan.",
       "source": null,
       "verified": false
@@ -136,6 +149,7 @@
       "carries": null,
       "lat": 55.6039,
       "lon": 12.98209,
+      "osm": ["way/1210745419"],
       "description": null,
       "source": null,
       "verified": false
@@ -146,6 +160,7 @@
       "carries": null,
       "lat": 55.60589,
       "lon": 12.979,
+      "osm": ["way/542844581"],
       "description": "Uppkallad efter varvet, vars mark har blivit stad.",
       "source": null,
       "verified": false
@@ -156,6 +171,7 @@
       "carries": null,
       "lat": 55.60488,
       "lon": 12.98051,
+      "osm": ["way/1210745420"],
       "description": null,
       "source": null,
       "verified": false
@@ -166,6 +182,7 @@
       "carries": "gångväg",
       "lat": 55.60196,
       "lon": 12.99201,
+      "osm": ["way/30025528"],
       "description": "Gångbro genom en av stadens äldsta parker.",
       "source": null,
       "verified": false
@@ -176,6 +193,7 @@
       "carries": "gångväg",
       "lat": 55.60343,
       "lon": 12.98948,
+      "osm": ["way/144760039"],
       "description": "Gångbro, uppkallad efter Slottsträdgården.",
       "source": null,
       "verified": false
@@ -186,6 +204,7 @@
       "carries": "gångväg",
       "lat": 55.60271,
       "lon": 12.98667,
+      "osm": ["way/30026117", "way/1304440882"],
       "description": "Gångbro, uppkallad efter väderkvarnen Slottsmöllan.",
       "source": null,
       "verified": false

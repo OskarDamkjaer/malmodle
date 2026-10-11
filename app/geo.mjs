@@ -71,6 +71,27 @@ export function closest(geometry, point) {
 
 export const distanceTo = (geometry, point) => closest(geometry, point).distance;
 
+function crosses(a, b, c, d) {
+  const side = (p, q, r) => Math.sign((q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]));
+  return side(a, b, c) !== side(a, b, d) && side(c, d, a) !== side(c, d, b);
+}
+
+const vertices = (geometry) => (geometry.type === 'Point' ? [geometry.coordinates] : lines(geometry).flat());
+
+export function gap(a, b) {
+  for (const p of lines(a)) {
+    for (const q of lines(b)) {
+      for (let i = 1; i < p.length; i++) {
+        for (let j = 1; j < q.length; j++) if (crosses(p[i - 1], p[i], q[j - 1], q[j])) return 0;
+      }
+    }
+  }
+  let best = Infinity;
+  for (const v of vertices(a)) best = Math.min(best, distanceTo(b, v));
+  for (const v of vertices(b)) best = Math.min(best, distanceTo(a, v));
+  return best;
+}
+
 export function bounds(geometries) {
   let [w, s, e, n] = [Infinity, Infinity, -Infinity, -Infinity];
   const visit = (c) => {

@@ -1,0 +1,77 @@
+{
+  "note": "Places the owner picked directly after reviewing the Malmö articles on Wikipedia and Wikivoyage. Not researched further.",
+  "places": [
+    {
+      "name": "Spillepengen",
+      "category": "park",
+      "osm": "relation/6100189",
+      "why": "Recreation area on the old landfill by the coast, north of the harbour.",
+      "geometry": "District polygon already in build/data/districts.geojson (admin_level 10)."
+    },
+    {
+      "name": "Sege å",
+      "category": "vatten",
+      "osm": "way/28452739",
+      "wikidata": "Q7446221",
+      "why": "The river along Malmö's northern edge, out to the sea at Spillepengen/Arlöv.",
+      "geometry": "Many river and stream ways in OSM; join them by name and wikidata."
+    },
+    {
+      "name": "Ön",
+      "category": "område",
+      "osm": "",
+      "why": "The island district at Limhamn harbour.",
+      "geometry": "No named object in OSM. The district 'Limhamns Hamnområde' in build/data/districts.geojson is the closest polygon; check it matches what people call Ön."
+    },
+    {
+      "name": "Malmö Latinskola",
+      "category": "skola",
+      "osm": "way/52245411",
+      "wikidata": "Q4344220",
+      "why": "Upper secondary school that traces its roots to the medieval Latin school."
+    },
+    {
+      "name": "Pauliskolan",
+      "category": "skola",
+      "osm": "way/50018607",
+      "wikidata": "Q89193644",
+      "why": "Upper secondary school in the old Pauli quarter by Sankt Pauli kyrka."
+    },
+    {
+      "name": "Malmö Borgarskola",
+      "category": "skola",
+      "osm": "way/52245413",
+      "why": "Large upper secondary school by Slottsparken, known as Borgarskolan."
+    },
+    {
+      "name": "S:t Petri skola",
+      "category": "skola",
+      "osm": "way/52245410",
+      "why": "Upper secondary school next to Malmö Latinskola."
+    },
+    {
+      "name": "Family Pub",
+      "category": "krog",
+      "osm": "node/4738304722",
+      "why": "Pub picked by the owner. The second branch (node/4560211514) is left out."
+    },
+    {
+      "name": "Pivo",
+      "category": "krog",
+      "osm": "node/3357955289",
+      "why": "Pub picked by the owner. The second branch (node/11640709599) is left out."
+    },
+    {
+      "name": "Elysée",
+      "category": "krog",
+      "osm": "node/3369322610",
+      "why": "Restaurant picked by the owner; also listed on Wikivoyage."
+    },
+    {
+      "name": "Drumbar",
+      "category": "krog",
+      "osm": "way/1093128526",
+      "why": "Bar picked by the owner; also listed by Visit Malmö."
+    }
+  ]
+}

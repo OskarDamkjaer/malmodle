@@ -1,11 +1,11 @@
-const CODE = 'malmo-code-2';
+const CODE = 'malmo-code-4';
 const MAP = 'malmo-map-1';
 
 const CODE_FILES = [
   '/',
   '/index.html',
   '/natt/',
-  '/tidning/',
+  '/papper/',
   '/klar/',
   '/app.css',
   '/app.js',
@@ -15,6 +15,7 @@ const CODE_FILES = [
   '/geo.mjs',
   '/daily.mjs',
   '/questions.mjs',
+  '/tiles.mjs',
   '/manifest.webmanifest',
   '/style.json',
   '/data/quiz.json',
