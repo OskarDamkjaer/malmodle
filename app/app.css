@@ -8,10 +8,12 @@
   --chip-ink: #111111;
   --accent: #c8102e;
   --accent-ink: #ffffff;
-  --right: #2e8b4a;
-  --mid: #8a6a12;
   --wrong: #c8102e;
   --dot: #cfc9bd;
+  --band-green: #2e9e4f;
+  --band-yellow: #f2c230;
+  --band-orange: #f08a24;
+  --band-red: #db3a2f;
   --shadow: 4px 4px 0 #111111;
   --border: 1.5px solid #111111;
   --radius: 2px;
@@ -39,7 +41,6 @@
   --chip-ink: #eceff3;
   --accent: #5fd3a5;
   --accent-ink: #0b1a14;
-  --mid: #f2c14e;
   --wrong: #ff7a59;
   --dot: #343a45;
   --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 10px 30px rgb(0 0 0 / 45%);
@@ -57,7 +58,6 @@
   --chip-ink: #201d19;
   --accent: #1f6f5c;
   --accent-ink: #ffffff;
-  --mid: #9a6f0e;
   --wrong: #b4442a;
   --dot: #ddd4c7;
   --shadow: 0 1px 2px rgb(32 29 25 / 10%), 0 8px 24px rgb(32 29 25 / 10%);
@@ -80,7 +80,6 @@
   --chip-ink: #1b2a7a;
   --accent: #2b59ff;
   --accent-ink: #ffffff;
-  --mid: #c27c00;
   --wrong: #e8462f;
   --dot: #dfe3f0;
   --shadow: 0 2px 0 rgb(27 27 31 / 8%), 0 12px 28px rgb(43 89 255 / 14%);
@@ -163,9 +162,10 @@ button.primary:hover { filter: brightness(1.06); }
 #dots li { width: 9px; height: 9px; border-radius: 50%; background: var(--dot); transition: background-color .2s ease, transform .2s ease; }
 [data-theme="tidning"] #dots li { border-radius: 0; }
 #dots li[data-current] { background: var(--ink); transform: scale(1.25); }
-#dots li[data-tone="right"] { background: var(--right, var(--accent)); }
-#dots li[data-tone="mid"] { background: var(--mid); }
-#dots li[data-tone="wrong"] { background: var(--wrong); }
+#dots li[data-band="green"] { background: var(--band-green); }
+#dots li[data-band="yellow"] { background: var(--band-yellow); }
+#dots li[data-band="orange"] { background: var(--band-orange); }
+#dots li[data-band="red"] { background: var(--band-red); }
 #detail {
   font-size: 12px;
   font-weight: 600;
@@ -193,12 +193,9 @@ button.primary:hover { filter: brightness(1.06); }
 
 #result { padding: 14px 18px 14px; }
 #result .score { display: flex; align-items: baseline; gap: 6px; margin: 0; }
-#points { font-size: 36px; line-height: 1; font-weight: var(--display-weight); font-variant-numeric: tabular-nums; letter-spacing: var(--display-tracking); }
+#points { padding: 4px 12px; font-size: 36px; line-height: 1; font-weight: var(--display-weight); font-variant-numeric: tabular-nums; letter-spacing: var(--display-tracking); }
 #result .score span { font-size: 14px; color: var(--ink-soft); }
 #verdict { margin: 0; font-size: 16px; font-weight: 600; text-align: right; }
-#result[data-tone="right"] #points, #result[data-tone="right"] #verdict { color: var(--right, var(--accent)); }
-#result[data-tone="mid"] #points, #result[data-tone="mid"] #verdict { color: var(--mid); }
-#result[data-tone="wrong"] #points, #result[data-tone="wrong"] #verdict { color: var(--wrong); }
 #explain { margin: 8px 0 0; font-size: 15px; line-height: 1.45; }
 #explain:empty { display: none; }
 #next { width: 100%; margin-top: 12px; }
@@ -290,10 +287,10 @@ body[data-mapview] #end .total strong { font-size: 36px; }
 body[data-mapview] #endmap { margin-top: 12px; }
 
 .band { min-width: 44px; padding: 3px 10px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; border-radius: var(--radius-button); }
-.band[data-band="green"] { background: #2e9e4f; color: #ffffff; }
-.band[data-band="yellow"] { background: #f2c230; color: #1a1a1a; }
-.band[data-band="orange"] { background: #f08a24; color: #1a1a1a; }
-.band[data-band="red"] { background: #db3a2f; color: #ffffff; }
+.band[data-band="green"] { background: var(--band-green); color: #ffffff; }
+.band[data-band="yellow"] { background: var(--band-yellow); color: #1a1a1a; }
+.band[data-band="orange"] { background: var(--band-orange); color: #1a1a1a; }
+.band[data-band="red"] { background: var(--band-red); color: #ffffff; }
 #infoscore { display: flex; align-items: center; gap: 8px; margin: 6px 0 0; font-size: 14px; color: var(--ink-soft); }
 #infoscore[hidden] { display: none; }
 #infoclose { display: none; position: absolute; z-index: 1; top: 6px; right: 6px; width: 36px; min-height: 36px; padding: 0; font-size: 22px; line-height: 1; border: 0; box-shadow: none; background: var(--panel); color: var(--ink-soft); border-radius: 50%; }

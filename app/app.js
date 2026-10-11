@@ -107,18 +107,12 @@ const sum = (list) => list.reduce((a, b) => a + b, 0);
 function hide(...ids) { for (const id of ids) el(id).hidden = true; }
 function reveal(...ids) { for (const id of ids) el(id).hidden = false; }
 
-function tone(score) {
-  if (score >= 80) return 'right';
-  if (score >= 40) return 'mid';
-  return 'wrong';
-}
-
 function renderDots() {
   const dots = el('dots');
   dots.replaceChildren();
   set.forEach((_, i) => {
     const li = document.createElement('li');
-    if (results[i]) li.dataset.tone = tone(results[i].result.score);
+    if (results[i]) li.dataset.band = band(results[i].result.score);
     if (i === index && phase !== 'end') li.dataset.current = '';
     dots.append(li);
   });
@@ -217,7 +211,7 @@ async function answer(value) {
   navigator.vibrate?.(result.score === MAX_SCORE ? 15 : [10, 60, 10]);
 
   el('points').textContent = `${result.score}`;
-  el('result').dataset.tone = tone(result.score);
+  el('points').dataset.band = band(result.score);
 
   if (type.input === 'map') revealPoint(q, result);
   else revealChoice(q, result);
