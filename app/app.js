@@ -135,7 +135,7 @@ function play(questions) {
   set = questions;
   index = 0;
   results = [];
-  hide('end', 'back', 'card', 'result', 'freehint');
+  hide('end', 'back', 'card', 'result', 'info', 'freehint');
   setLabels(false);
   markToday([]);
   ask();
@@ -150,7 +150,8 @@ function ask() {
   renderDots();
   el('detail').textContent = detail ?? '';
   el('prompt').textContent = title;
-  hide('result');
+  hide('result', 'info');
+  delete document.body.dataset.answered;
   reveal('question');
 
   const choices = el('choices');
@@ -216,9 +217,44 @@ async function answer(value) {
 
   renderDots();
   hide('choices', 'hint');
+  showInfo(q.target);
   reveal('result');
   el('next').textContent = index + 1 < set.length ? 'Nästa' : practicing ? 'Se resultat' : 'Se dagens resultat';
   el('next').focus({ preventScroll: true });
+}
+
+function showInfo(item) {
+  el('infolabel').textContent = item.label;
+  el('infoname').textContent = item.name;
+  el('infoabout').textContent = item.about ?? '';
+  el('infosource').hidden = !item.source;
+  if (item.source) el('infosource').href = item.source;
+
+  const figure = el('infophoto');
+  figure.replaceChildren();
+  const photo = item.photos?.[0];
+  if (photo) {
+    const img = document.createElement('img');
+    img.src = photo.src;
+    img.alt = item.name;
+    img.loading = 'lazy';
+    const credit = document.createElement('figcaption');
+    const link = document.createElement('a');
+    link.href = photo.source;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = `Foto: ${photo.author}, ${photo.licence}`;
+    credit.append(link);
+    figure.append(img, credit);
+    delete figure.dataset.empty;
+  } else {
+    const note = document.createElement('span');
+    note.textContent = 'Bild kommer';
+    figure.append(note);
+    figure.dataset.empty = '';
+  }
+  document.body.dataset.answered = '';
+  reveal('info');
 }
 
 function revealPoint(q, result) {
@@ -302,7 +338,8 @@ function verdictFor(total, max) {
 function finish() {
   phase = 'end';
   clear();
-  hide('question', 'result', 'choices', 'hint');
+  hide('question', 'result', 'info', 'choices', 'hint');
+  delete document.body.dataset.answered;
   const scores = results.map((r) => r.result.score);
   const total = sum(scores);
   const max = set.length * MAX_SCORE;
