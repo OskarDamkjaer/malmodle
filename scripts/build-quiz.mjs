@@ -3,6 +3,7 @@ import { dirname } from 'node:path';
 import { bboxGap, bboxOf, distance, interiorPoint } from './lib/geo.mjs';
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
 import { neighbourhood } from './lib/adjacency.mjs';
+import { closest } from '../app/geo.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -254,6 +255,17 @@ for (const it of items) {
   if (!it.point || !Number.isFinite(it.point[0])) fail(`${it.name}: no point`);
   if (!it.geometry) fail(`${it.name}: no geometry`);
 }
+
+const OFF_SHAPE_M = 20;
+
+function onShape(geometry, point) {
+  if (geometry.type === 'Point') return geometry.coordinates;
+  const near = closest(geometry, point);
+  if (near.distance <= OFF_SHAPE_M) return point;
+  return roundCoords(geometry.type.endsWith('LineString') ? near.point : interiorPoint(geometry));
+}
+
+for (const it of items) if (it.point && it.geometry) it.point = onShape(it.geometry, it.point);
 
 if (problems.length) {
   console.error(`build-quiz: ${problems.length} problem(s)`);
