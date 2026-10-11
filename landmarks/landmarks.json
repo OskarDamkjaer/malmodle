@@ -115,7 +115,7 @@
     {
       "name": "Sankt Petri kyrka",
       "icon": "church",
-      "description": "Malmös äldsta byggnad, tegelgotik från 1300-talet efter mönster från Lübeck. Krämarkapellet har kvar sina medeltida målningar.",
+      "description": "Tegelgotisk kyrka från 1300-talets början, byggd efter samma förebild som Vor Frue Kirke i Köpenhamn. Krämarekapellet har väggmålningar från 1460- och 1520-talen.",
       "query": "Sankt Petri kyrka, Malmö",
       "lat": 55.60695,
       "lon": 13.00332,
@@ -381,7 +381,7 @@
     {
       "name": "Sankt Johannes kyrka",
       "icon": "church",
-      "description": "Jugendkyrka från 1907.",
+      "description": "Jugendkyrka i rött tegel, ritad av Axel Anderberg och invigd 1907. Det 60 meter höga tornet står i ett hörn, och inne finns rosor överallt, i sten, trä och målade.",
       "query": "Sankt Johannes kyrka, Malmö",
       "lat": 55.5942,
       "lon": 13.00174,
@@ -395,7 +395,7 @@
     {
       "name": "Sankt Pauli kyrka",
       "icon": "church",
-      "description": "Nygotisk tegelkyrka från 1880-talet.",
+      "description": "Sexkantig centralkyrka i gult tegel, ritad av Emil Langlet och färdig 1882. Mittornet omges av tolv mindre torn, ett för varje lärjunge.",
       "query": "Sankt Pauli kyrka, Malmö",
       "lat": 55.60299,
       "lon": 13.01438,

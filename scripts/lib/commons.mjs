@@ -117,7 +117,7 @@ export function toPhoto(page) {
     title: page.title.replace(/^File:/, '').replace(/\.[a-z]+$/i, ''),
     point: coord ? [coord.lon, coord.lat] : null,
     heading: null,
-    captured: text(meta.DateTimeOriginal?.value).slice(0, 10) || null,
+    captured: /^\d{4}-\d\d-\d\d/.exec(text(meta.DateTimeOriginal?.value))?.[0] ?? (year ? String(year) : null),
     year,
     author: text(meta.Artist?.value).slice(0, 80) || null,
     licence: text(meta.LicenseShortName?.value),

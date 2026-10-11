@@ -1,4 +1,145 @@
 {
+ "landmark:Sankt Johannes kyrka": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Malmö S t Johannes kyrka (43603575834).jpg",
+    "point": [
+     13.000325,
+     55.594227
+    ],
+    "heading": null,
+    "captured": "2018",
+    "licence": "CC BY 2.0",
+    "author": "Jorge Franganillo",
+    "url": "https://commons.wikimedia.org/wiki/File:Malm%C3%B6_S_t_Johannes_kyrka_(43603575834).jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Malm%C3%B6_S_t_Johannes_kyrka_%2843603575834%29.jpg/960px-Malm%C3%B6_S_t_Johannes_kyrka_%2843603575834%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Malmö S t Johannes kyrka (43603575834)",
+    "at": "Kategori: Sankt Johannes kyrka, Malmö"
+   },
+   {
+    "source": "commons",
+    "id": "File:St. John church in Malmo.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2019",
+    "licence": "CC BY-SA 4.0",
+    "author": "Leon petrosyan",
+    "url": "https://commons.wikimedia.org/wiki/File:St._John_church_in_Malmo.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/St._John_church_in_Malmo.jpg/960px-St._John_church_in_Malmo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "St. John church in Malmo",
+    "at": "Kategori: Sankt Johannes kyrka, Malmö"
+   },
+   {
+    "source": "commons",
+    "id": "File:Johanneskyrkan, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2018-08-15",
+    "licence": "CC BY-SA 4.0",
+    "author": "Johan Jönsson (Julle)",
+    "url": "https://commons.wikimedia.org/wiki/File:Johanneskyrkan,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Johanneskyrkan%2C_Malm%C3%B6.jpg/960px-Johanneskyrkan%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Johanneskyrkan, Malmö",
+    "at": "Kategori: Sankt Johannes kyrka, Malmö"
+   }
+  ],
+  "reviewed": false
+ },
+ "landmark:Sankt Pauli kyrka": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:WLM Malmö IMG 2183.jpg",
+    "point": [
+     13.013783,
+     55.602986
+    ],
+    "heading": null,
+    "captured": "2026-09-10",
+    "licence": "CC BY 4.0",
+    "author": "Rose Abrams",
+    "url": "https://commons.wikimedia.org/wiki/File:WLM_Malm%C3%B6_IMG_2183.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/WLM_Malm%C3%B6_IMG_2183.jpg/960px-WLM_Malm%C3%B6_IMG_2183.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "WLM Malmö IMG 2183",
+    "at": "Kategori: Sankt Pauli kyrka, Malmö"
+   },
+   {
+    "source": "commons",
+    "id": "File:Sankt Pauli kyrka, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2018-04-30",
+    "licence": "CC BY-SA 3.0",
+    "author": "Mattias Hill",
+    "url": "https://commons.wikimedia.org/wiki/File:Sankt_Pauli_kyrka,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Sankt_Pauli_kyrka%2C_Malm%C3%B6.jpg/960px-Sankt_Pauli_kyrka%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Sankt Pauli kyrka, Malmö",
+    "at": "Kategori: Sankt Pauli kyrka, Malmö"
+   },
+   {
+    "source": "commons",
+    "id": "File:Paulikyrkan, Malmö, mars 2015.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2015-03-28",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Paulikyrkan,_Malm%C3%B6,_mars_2015.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Paulikyrkan%2C_Malm%C3%B6%2C_mars_2015.jpg/960px-Paulikyrkan%2C_Malm%C3%B6%2C_mars_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Paulikyrkan, Malmö, mars 2015",
+    "at": "Wikidata-bild"
+   }
+  ],
+  "reviewed": false
+ },
+ "landmark:Sankt Petri kyrka": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Exterior of Sankt Petri kyrka, Malmö (08).jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2021-08-02",
+    "licence": "CC BY-SA 4.0",
+    "author": "Chris06",
+    "url": "https://commons.wikimedia.org/wiki/File:Exterior_of_Sankt_Petri_kyrka,_Malm%C3%B6_(08).jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Exterior_of_Sankt_Petri_kyrka%2C_Malm%C3%B6_%2808%29.jpg/960px-Exterior_of_Sankt_Petri_kyrka%2C_Malm%C3%B6_%2808%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Exterior of Sankt Petri kyrka, Malmö (08)",
+    "at": "Wikidata-bild"
+   },
+   {
+    "source": "commons",
+    "id": "File:20240625 173740 St. Petri, Malmö.JPG",
+    "point": null,
+    "heading": null,
+    "captured": "2024-06-25",
+    "licence": "CC BY 3.0",
+    "author": "Angela Monika Arnold, Berlin",
+    "url": "https://commons.wikimedia.org/wiki/File:20240625_173740_St._Petri,_Malm%C3%B6.JPG",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/20240625_173740_St._Petri%2C_Malm%C3%B6.JPG/960px-20240625_173740_St._Petri%2C_Malm%C3%B6.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "20240625 173740 St. Petri, Malmö",
+    "at": "Kategori: Sankt Petri kyrka, Malmö"
+   },
+   {
+    "source": "commons",
+    "id": "File:WLM Malmö IMG 2155.jpg",
+    "point": [
+     13.002511,
+     55.606689
+    ],
+    "heading": null,
+    "captured": "2026-09-10",
+    "licence": "CC BY 4.0",
+    "author": "Rose Abrams",
+    "url": "https://commons.wikimedia.org/wiki/File:WLM_Malm%C3%B6_IMG_2155.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/WLM_Malm%C3%B6_IMG_2155.jpg/960px-WLM_Malm%C3%B6_IMG_2155.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "WLM Malmö IMG 2155",
+    "at": "Tagna på platsen (inom 50 m)"
+   }
+  ],
+  "reviewed": false
+ },
  "street:Adelgatan": {
   "photos": [
    {
