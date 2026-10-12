@@ -14,3 +14,7 @@ node_modules/
 
 .DS_Store
 .env
+
+/places/facts/
+/places/descriptions/
+/places/factcheck/

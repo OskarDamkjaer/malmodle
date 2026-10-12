@@ -131,7 +131,10 @@ Output, one file per batch, `places/descriptions/<batch>.json`:
   quotes (names written differently in Swedish and English count if one
   appears in the other's snippet);
 - the text is over 220 characters, or contains a banned word;
-- it quotes only the `research` snippet for a fact.
+- it quotes only the `research` snippet for a fact;
+- it says where a fact comes from ("på kartan", "enligt webbplatsen") instead
+  of stating it. The first year a node appears in OpenStreetMap is not when
+  the place opened, and is not used.
 
 Then a second Sonnet agent reads each surviving description with its facts
 file, cold:
@@ -139,7 +142,9 @@ file, cold:
 > For each description, list every statement in it. For each statement, say
 > whether the facts file supports it. Answer `supported`, or `unsupported`
 > with the statement. Be strict: a statement that is plausible but not in the
-> snippets is unsupported.
+> snippets is unsupported. So is a statement about another branch or venue of
+> the same name, promotion taken from the place's own website, a weekly
+> schedule, or a text that never says what the place is.
 
 A rejected or unsupported description goes back to step 2 once, with the
 reason. If it fails again it is dropped and the name keeps no description.
@@ -152,15 +157,33 @@ file has that field. Names without a passing description get `null`, and the
 end screen shows nothing for them. It prints how many names in each kind have
 a description.
 
+## Step 5: fact check on the web
+
+The merged texts are checked once more, this time against the web. Batches of
+about 26 names go to `places/factcheck/batch-N.json`, and an agent per batch
+follows `places/factcheck/prompt.txt`: split each text into statements, back
+each one on Swedish Wikipedia, malmo.se, museum and heritage pages, the press
+or the place's own site, and make sure the source is about this place in Malmö.
+The verdict is `ok`, `fix` with a corrected text that keeps only what could be
+backed, or `remove`. A name with no description at all can go through the same
+step with `text: null`, and the agent writes one from web sources.
+
+`scripts/descriptions-factcheck.mjs` writes the verdicts from
+`places/factcheck/out-N.json` into the files in the scope table, matching on
+kind so a place and an area with the same name stay apart, and sets
+`verified: true`.
+
 ## Running it
 
 ```
-node scripts/facts-collect.mjs           # places/facts/*.json
+node scripts/facts-collect.mjs           # places/facts/*.json, --only a,b for some names
                                          # step 2: writer agents, one per batch
 node scripts/descriptions-check.mjs      # rejects and reasons per batch
                                          # step 3: checker agents on what passed
                                          # step 2 again for the rejected, once
 node scripts/descriptions-merge.mjs      # into places.json, about.json, …
+                                         # step 5: fact-check agents, one per batch
+node scripts/descriptions-factcheck.mjs  # their verdicts into the same files
 node scripts/build-quiz.mjs
 node --test 'test/*.test.mjs'
 ```
@@ -170,5 +193,5 @@ solid descriptions where there is a Wikipedia article or a Wikivoyage listing;
 for many restaurants, cafés and small places only a type and a year
 ("Irländsk pub, med sedan 1990-talet."), and some with none.
 
-`places/facts/` and `places/descriptions/` are working files and stay out of
-the repo; the merged text is what gets committed.
+`places/facts/`, `places/descriptions/` and `places/factcheck/` are working files
+and stay out of the repo. The merged text is what gets committed.

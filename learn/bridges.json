@@ -7,9 +7,9 @@
       "lat": 55.56946,
       "lon": 12.86376,
       "osm": ["way/148500437", "way/370255940"],
-      "description": "Öppnad 1 juli 2000. 7 845 meter bro, som efter den konstgjorda ön Peberholm fortsätter i Drogdentunneln — därför är aldrig hela vägen till Danmark bro. Bil ovanpå, tåg inuti.",
+      "description": "Öppnad 1 juli 2000. 7 845 meter bro, som efter den konstgjorda ön Pepparholm fortsätter i Drogdentunneln. Väg på övre däcket, järnväg på det undre.",
       "source": "https://sv.wikipedia.org/wiki/%C3%96resundsbron",
-      "verified": false
+      "verified": true
     },
     {
       "name": "Petribron",
@@ -18,9 +18,9 @@
       "lat": 55.60848,
       "lon": 13.00211,
       "osm": ["way/394896504"],
-      "description": "Har sitt namn efter Sankt Petri kyrka.",
-      "source": null,
-      "verified": false
+      "description": "Stenbro byggd inför Baltiska utställningen 1914. Hette först Vänersbron och fick namnet Petribron 1938.",
+      "source": "https://sv.wikipedia.org/wiki/Centralplan%2C_Malm%C3%B6",
+      "verified": true
     },
     {
       "name": "Suellsbron",
@@ -30,8 +30,8 @@
       "lon": 12.99753,
       "osm": ["way/1352062485"],
       "description": "Namnet efter Frans Suell, köpmannen som drev fram Malmös hamn på 1770-talet.",
-      "source": null,
-      "verified": false
+      "source": "https://www.mynewsdesk.com/se/malmo/pressreleases/nyinvigning-av-suellsbron-i-malmoe-351858",
+      "verified": true
     },
     {
       "name": "Slussbron",
@@ -51,9 +51,9 @@
       "lat": 55.60802,
       "lon": 12.99939,
       "osm": ["way/394897889"],
-      "description": "Bro och kaj med samma namn.",
-      "source": null,
-      "verified": false
+      "description": "Kaj och gata i Inre hamnen, där även södra delen av Ångbåtsbron räknas in. Härifrån gick Öresundsbåtarna till Köpenhamn fram till 2002.",
+      "source": "https://sv.wikipedia.org/wiki/Skeppsbron%2C_Malm%C3%B6",
+      "verified": true
     },
     {
       "name": "Universitetsbron",
@@ -62,9 +62,9 @@
       "lat": 55.61232,
       "lon": 12.99627,
       "osm": ["way/1009101397"],
-      "description": "Uppkallad efter Malmö universitet.",
-      "source": null,
-      "verified": false
+      "description": "Snedkabelbro mellan Skeppsbron och Hjälmarekajen, invigd 2004. Byggd bland annat för Malmö högskolas byggnader på Universitetsholmen.",
+      "source": "https://sv.wikipedia.org/wiki/Universitetsbron",
+      "verified": true
     },
     {
       "name": "Slottsbron",
@@ -73,9 +73,9 @@
       "lat": 55.60521,
       "lon": 12.99021,
       "osm": ["way/394897885"],
-      "description": "Går över den vallgrav som är kvar av Malmöhus försvarsverk.",
-      "source": null,
-      "verified": false
+      "description": "Bro på Malmöhusvägen över Parkkanalen. Dagens bro från 2004 ersatte en bro från 1931 med samma namn.",
+      "source": "https://denbilden.se/bildgalleri/malmo/gamla-staden/gamla-slottsbron/",
+      "verified": true
     },
     {
       "name": "Paulibron",
