@@ -90,7 +90,7 @@ const FILE_PROPS = {
   prop: 'imageinfo|coordinates',
   iiprop: 'url|size|mime|extmetadata',
   iiurlwidth: '800',
-  iiextmetadatafilter: 'LicenseShortName|Artist|DateTimeOriginal|ObjectName',
+  iiextmetadatafilter: 'LicenseShortName|Artist|DateTimeOriginal|ObjectName|ImageDescription|Categories',
   colimit: 'max',
 };
 
@@ -141,6 +141,8 @@ export function toPhoto(page) {
     captured: /^\d{4}-\d\d-\d\d/.exec(text(meta.DateTimeOriginal?.value))?.[0] ?? (year ? String(year) : null),
     year,
     author: text(meta.Artist?.value).slice(0, 80) || null,
+    description: text(meta.ImageDescription?.value).slice(0, 500) || null,
+    categories: (meta.Categories?.value ?? '').split('|').filter(Boolean),
     licence: text(meta.LicenseShortName?.value),
     url: info.descriptionurl,
     thumb: info.thumburl,

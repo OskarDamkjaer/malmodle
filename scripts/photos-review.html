@@ -27,7 +27,10 @@
   .info { padding: 10px 16px 12px; display: grid; gap: 6px; }
   .about { max-width: 70ch; font-size: 17px; }
   .about.missing { font-size: 14px; color: var(--muted); font-style: italic; }
-  .credit, .why { color: var(--muted); font-size: 13px; }
+  .credit, .why, .desc { color: var(--muted); font-size: 13px; }
+  .desc { max-width: 90ch; }
+  .verdict { font-size: 14px; }
+  .verdict.doubt { color: var(--no); }
   .credit a { color: var(--accent); }
   .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
   button { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
@@ -46,6 +49,8 @@
   <div class="info">
     <div class="about" id="about"></div>
     <div class="credit" id="credit"></div>
+    <div class="desc" id="desc"></div>
+    <div class="verdict" id="verdict"></div>
     <div class="why" id="why"></div>
     <div class="buttons">
       <button class="ok" id="ok">Godkänn<kbd>Enter</kbd></button>
@@ -97,6 +102,9 @@ function render() {
   $('about').textContent = q.about ?? (q.note ? `Ingen beskrivning än. Anteckning: ${q.note}` : 'Ingen beskrivning än.');
   $('about').classList.toggle('missing', !q.about);
   $('credit').innerHTML = a ? `Foto: ${a.author ?? 'okänd'}, ${a.licence} · ${a.captured ?? ''} · <a href="${a.url}" target="_blank" rel="noopener">källa</a>${a.title ? ` · ${a.title}` : ''}` : '';
+  $('desc').textContent = a ? [a.description && `Beskrivning: ${a.description}`, a.categories?.length && `Kategorier: ${a.categories.join(', ')}`].filter(Boolean).join(' · ') : '';
+  $('verdict').textContent = a?.check ? `Kontroll: ${a.check.likely ? 'troligen rätt' : 'tveksam'}. ${a.check.reason ?? ''}` : '';
+  $('verdict').classList.toggle('doubt', a?.check?.likely === false);
   $('why').textContent = a?.why ?? '';
   for (const n of [1, 2]) { const next = q.alternatives[alt + n]; if (next) new Image().src = src(next); }
 }
@@ -118,7 +126,7 @@ async function approve() {
   const a = q.alternatives[alt];
   if (!a) return;
   const e = entry(q);
-  const { why, ...photo } = a;
+  const { why, description, categories, check, ...photo } = a;
   if (!e.photos.some((p) => p.id === a.id)) e.photos.unshift(photo);
   e.final = a.id;
   e.approved = true;

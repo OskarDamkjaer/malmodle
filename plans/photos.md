@@ -167,7 +167,13 @@ reviewed by hand before the next.
    candidates (Wikidata image, category, OSM `image`/`wikimedia_commons`
    tags, photos taken at the place, and a name search kept only when the
    title names the place or it was taken within 150 m), and a Sonnet pass
-   orders them, best first. Mapillary is for streets only: photos taken near
+   orders them, best first. `node scripts/photos-describe.mjs` adds each
+   Commons photo's description and categories, and a second Sonnet pass
+   reads them with the image and keeps a photo only if it is at least likely
+   the place as it is today: not an event, not something demolished or
+   rebuilt, not another place, not a view from it, and for a business
+   something that ties it to that business. The rest are dropped from the
+   queue. Mapillary is for streets only: photos taken near
    a venue rarely show it. `data/cache/photos/final-queue.json` holds the
    places with their ordered alternatives. `node scripts/photos-review.mjs`
    serves http://127.0.0.1:8081: one place at a time, the photo large, the
