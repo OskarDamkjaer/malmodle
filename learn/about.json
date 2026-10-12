@@ -21,7 +21,7 @@
       "verified": false
     },
     "Augustenborg": {
-      "text": "Bostadsområde från 1950-talet, ombyggt från 1998 till Ekostaden Augustenborg med öppen dagvattenhantering och gröna tak — internationellt känt som exempel på klimatanpassning av miljonprogramsarv.",
+      "text": "Bostadsområde från 1950-talet, ombyggt från 1998 till Ekostaden Augustenborg med öppen dagvattenhantering och gröna tak.",
       "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Stadsdelar-och-omraden/Augustenborg.html",
       "verified": false
     },
@@ -81,7 +81,7 @@
       "verified": false
     },
     "Ribersborg": {
-      "text": "Stranden — Ribban — är stadens badplats, och Ribersborgs kallbadhus står ute i vattnet sedan 1898.",
+      "text": "Stranden, Ribban, är stadens badplats. Ribersborgs kallbadhus står ute i vattnet sedan 1898.",
       "source": null,
       "verified": false
     },
@@ -106,7 +106,7 @@
       "verified": false
     },
     "Rådmansvången": {
-      "text": "Området heter Rådmansvången i registren och Triangeln i verkligheten — ett av de tydligaste exemplen på att kartans namn inte alltid är stadens.",
+      "text": "Heter Rådmansvången i registren men kallas oftast Triangeln.",
       "source": null,
       "verified": false
     },
@@ -166,7 +166,7 @@
       "verified": false
     },
     "Östra Kyrkogården": {
-      "text": "Sigurd Lewerentz kyrkogård från 1920-talet, med sina kapell — ett av svensk 1900-talsarkitekturs mest besökta verk.",
+      "text": "Sigurd Lewerentz kyrkogård från 1920-talet, med sina kapell.",
       "source": null,
       "verified": false
     },
@@ -181,7 +181,7 @@
       "verified": false
     },
     "Södra Sallerup": {
-      "text": "Byn omgiven av kalkbrott — här har kalk brutits sedan medeltiden.",
+      "text": "By omgiven av kalkbrott. Här har kalk brutits sedan medeltiden.",
       "source": null,
       "verified": false
     },
@@ -238,6 +238,26 @@
     "Videdal": {
       "text": "Främst villabebyggelse från 1960-talet. Innefattar sedan år 1981 den tidigare stadsdelen Hohög.",
       "source": "https://sv.wikipedia.org/wiki/Videdal",
+      "verified": true
+    },
+    "Inre Hamnen": {
+      "text": "Den äldsta delen av Malmö hamn, byggd under slutet av 1700-talet och början av 1800-talet. Färjorna lades ned 2002.",
+      "source": "https://sv.wikipedia.org/wiki/Inre_hamnen%2C_Malm%C3%B6",
+      "verified": true
+    },
+    "Rönneholm": {
+      "text": "Bostadsområde med flerfamiljshus från första halvan av 1900-talet. Herrgården Rönneholmsgården byggdes 1798.",
+      "source": "https://sv.wikipedia.org/wiki/R%C3%B6nneholm%2C_Malm%C3%B6",
+      "verified": true
+    },
+    "Ellstorp": {
+      "text": "Tidigare koloniområde, bebyggt av Hugo Åberg för HSB med 1100 lägenheter från 1930-talet.",
+      "source": "https://sv.wikipedia.org/wiki/Ellstorp",
+      "verified": true
+    },
+    "Kirsebergsstaden": {
+      "text": "Delområde i Kirseberg, även kallat Backarna.",
+      "source": "https://sv.wikipedia.org/wiki/Kirsebergsstaden",
       "verified": true
     }
   }

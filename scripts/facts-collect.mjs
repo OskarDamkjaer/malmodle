@@ -28,7 +28,7 @@ async function fetchCached(url, as = 'json') {
     const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT }, signal: AbortSignal.timeout(15000), redirect: 'follow' });
     if (res.ok) body = as === 'json' ? await res.json() : await res.text();
   } catch {}
-  await writeFile(file, as === 'json' ? JSON.stringify(body) : body ?? '');
+  if (body != null) await writeFile(file, as === 'json' ? JSON.stringify(body) : body);
   return body;
 }
 
@@ -74,9 +74,17 @@ async function intro({ lang, title }, cached) {
 }
 
 async function guessIntro(name) {
-  for (const title of [name, `${name}, Malmö`, `${name} (Malmö)`, `${name}, Malmö kommun`]) {
+  const stem = name.toLowerCase().replace(/et$/, '');
+  for (const title of [name, `${name}, Malmö`, `${name} (Malmö)`, `${name}, Malmö kommun`, `Malmö ${stem}`]) {
     const got = await intro({ lang: 'sv', title }, {});
     if (got && /Malmö/.test(got.text) && !/kan syfta på|kan avse/.test(got.text)) return got;
+  }
+  const stems = name.split(/[\s,&]+/).filter((w) => w.length > 3).map((w) => fold(w).replace(/(et|en|s)$/, ''));
+  const api = `https://sv.wikipedia.org/w/api.php?${new URLSearchParams({ action: 'query', format: 'json', formatversion: '2', list: 'search', srsearch: `${name} Malmö`, srlimit: '5' })}`;
+  for (const hit of (await fetchCached(api))?.query?.search ?? []) {
+    if (!stems.length || !stems.every((s) => fold(hit.title).includes(s))) continue;
+    const got = await intro({ lang: 'sv', title: hit.title }, {});
+    if (got && /Malmö|Limhamn/.test(got.text) && !/kan syfta på|kan avse/.test(got.text)) return got;
   }
   return null;
 }

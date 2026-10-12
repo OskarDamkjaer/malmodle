@@ -46,6 +46,7 @@ export function check(entry, facts) {
   for (const t of tokens(entry.text, entry.name)) if (!backed(t, quotes)) reasons.push(`"${t}" is in no quote`);
   if (entry.text.length > MAX) reasons.push(`${entry.text.length} characters`);
   if (/på kartan|i OpenStreetMap|enligt (egen |sin )?webbplats/i.test(entry.text)) reasons.push('says where a fact comes from instead of stating a fact about the place');
+  if (/\s[—–]\s|—|;/.test(entry.text)) reasons.push('dash or semicolon as punctuation');
   for (const w of BANNED) if (new RegExp(`\\b${w}`, 'i').test(entry.text)) reasons.push(`banned word "${w}"`);
   return reasons;
 }
