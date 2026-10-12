@@ -15,7 +15,8 @@
    "lat": 55.60563,
    "lon": 12.99964,
    "why": "Malmö's 1530s main square with the town hall and Karl X Gustav statue, the city's reference point.",
-   "description": "Anlagt på 1530-talet och då Nordens största torg. Rådhuset står på östra sidan, Karl X Gustav till häst i mitten."
+   "description": "Anlagt i slutet av 1530-talet och då ansett som Nordens största torg. Rådhuset står på östra sidan, en ryttarstaty av Karl X Gustav från 1896 i mitten.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg/Stortorget.html"
   },
   {
    "name": "Lilla Torg",
@@ -31,7 +32,8 @@
    "lat": 55.6052,
    "lon": 12.99911,
    "why": "The half-timbered square of outdoor dining that every Malmö resident knows and meets at.",
-   "description": "Blev till på 1590-talet när Stortorget visade sig vara för stort. Korsvirkeshusen runt om är stadens bäst bevarade, och uteserveringarna Malmös tätaste."
+   "description": "Tillkom på 1590-talet som torg för lokal småhandel. Det röda korsvirkeshuset är Malmös bäst bevarade från 1500-talet, och i dag präglas torget av serveringar.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg/Lilla-torg.html"
   },
   {
    "name": "Gustav Adolfs torg",
@@ -44,7 +46,8 @@
    "lat": 55.60278,
    "lon": 13.00152,
    "why": "Central square on the main shopping axis and a major bus stop; 'vid Gustav Adolfs torg' is everyday direction-giving.",
-   "description": "Det stora torget i 1800-talets stadsplan, anlagt när staden växte ur sina vallar."
+   "description": "Anlagt 1806–1807 på mark som blev ledig när stadens försvarsvallar revs och fylldes i vallgravarna. I dag ett bilfritt parktorg.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg/Gustav-Adolfs-torg.html"
   },
   {
    "name": "Möllevångstorget",
@@ -59,7 +62,8 @@
    "lat": 55.59191,
    "lon": 13.008,
    "why": "Möllan: daily market, Arbetets ära monument, the heart of Möllevången nightlife.",
-   "description": "Torghandel sedan tidigt 1900-tal. Monumentet Arbetets ära står mitt på torget."
+   "description": "Anlagt 1904–1906 och torghandel sedan dess. Axel Ebbes staty Arbetets ära från 1931 står på torget.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg/Mollevangstorget.html"
   },
   {
    "name": "Drottningtorget",
@@ -70,7 +74,9 @@
    ],
    "lat": 55.6082,
    "lon": 13.01061,
-   "why": "Large square on the northeast edge of the old town by Caroli, a well-known landmark and bus stop."
+   "why": "Large square on the northeast edge of the old town by Caroli, a well-known landmark and bus stop.",
+   "description": "Torg från 1810-talet, anlagt när befästningsverken kring staden togs bort. Ridhuset på norra sidan uppfördes 1818.",
+   "source": "https://sv.wikipedia.org/wiki/Drottningtorget%2C_Malm%C3%B6"
   },
   {
    "name": "Värnhemstorget",
@@ -83,7 +89,8 @@
    "lat": 55.60508,
    "lon": 13.02334,
    "why": "Major bus interchange and market square east of the centre.",
-   "description": "Bytespunkt där många av stadens busslinjer möts."
+   "description": "Bytespunkt där många av stadens busslinjer möts.",
+   "source": "https://sv.wikipedia.org/wiki/V%C3%A4rnhemstorget"
   },
   {
    "name": "Davidshallstorg",
@@ -95,7 +102,8 @@
    "lat": 55.59919,
    "lon": 12.99877,
    "why": "Square at the heart of the Davidshall quarter, a common meeting point with cafés and restaurants.",
-   "description": "Torget mitt i Davidshalls funkiskvarter."
+   "description": "Torget mitt i Davidshall, omgivet av hus i 1920-talsklassicism från 1928–1934 och av restauranger.",
+   "source": "https://sv.wikipedia.org/wiki/Davidshall"
   },
   {
    "name": "Nobeltorget",
@@ -108,7 +116,9 @@
    ],
    "lat": 55.59176,
    "lon": 13.01925,
-   "why": "Busy junction square between Möllevången, Sofielund and Rosengård with a well-known bus stop."
+   "why": "Busy junction square between Möllevången, Sofielund and Rosengård with a well-known bus stop.",
+   "description": "Anlagt 1932 efter stadsingenjören Erik Bülow-Hübes stadsplan. Byggdes om 2015–2016.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg/Nobeltorget.html"
   },
   {
    "name": "Dalaplan",
@@ -118,7 +128,9 @@
    ],
    "lat": 55.58473,
    "lon": 13.00652,
-   "why": "Large traffic square and bus hub on the south side of the inner city that everyone uses as a landmark; currently being rebuilt as a proper square."
+   "why": "Large traffic square and bus hub on the south side of the inner city that everyone uses as a landmark; currently being rebuilt as a proper square.",
+   "description": "Gammal trafikknutpunkt där sex gator möts, bland dem Södra Förstadsgatan, Nobelvägen och Trelleborgsvägen. Namnet fick platsen 1932.",
+   "source": "https://sv.wikipedia.org/wiki/Dalaplan"
   },
   {
    "name": "Fridhemstorget",
@@ -128,7 +140,10 @@
    ],
    "lat": 55.59853,
    "lon": 12.97119,
-   "why": "Market square and bus stop on the west side, the everyday meeting point for Fridhem/Västra Innerstaden."
+   "why": "Market square and bus stop on the west side, the everyday meeting point for Fridhem/Västra Innerstaden.",
+   "description": "Torg med torghandel. S:t Andreas kyrka ligger vid torget.",
+   "source": "https://malmo.se/Uppleva-och-gora/Fritidsaktiviteter/Torghandel.html",
+   "verified": true
   },
   {
    "name": "Sankt Knuts torg",
@@ -140,7 +155,9 @@
    ],
    "lat": 55.59665,
    "lon": 13.01222,
-   "why": "Large square between Möllevången and Sofielund with a well-known bus stop, commonly used for directions."
+   "why": "Large square between Möllevången and Sofielund with a well-known bus stop, commonly used for directions.",
+   "description": "Torg bredvid Folkets park. Namngavs 1904 och är uppkallat efter den danske kungen Knut den helige.",
+   "source": "https://sv.wikipedia.org/wiki/S:t_Knuts_torg"
   },
   {
    "name": "Triangeln",
@@ -154,7 +171,8 @@
    "lat": 55.59692,
    "lon": 13.00118,
    "why": "The square at Triangeln (Södra Förstadsgatan, by S:t Johannes kyrka and the station/mall) is listed by malmo.se among Malmö's squares ('Triangeltorget'); tagged highway=pedestrian so it fell out of the list.",
-   "description": "Underjordisk station från Citytunneln 2010, mitt under Triangeln."
+   "description": "Underjordisk järnvägsstation i Citytunneln, cirka 25 meter under Triangeln. Togs i drift 2010.",
+   "source": "https://sv.wikipedia.org/wiki/Triangelns_station"
   },
   {
    "name": "Kungsparken",
@@ -165,7 +183,8 @@
    "lat": 55.60369,
    "lon": 12.99149,
    "why": "Malmö's oldest park (1872), central, next to the castle and Malmö Live.",
-   "description": "Malmös äldsta anlagda park, från 1870-talet."
+   "description": "Malmös äldsta park, anlagd 1869–1870 på mark som hört till befästningarna kring Malmöhus. Fick sitt namn efter Oscar II.",
+   "source": "https://sv.wikipedia.org/wiki/Kungsparken,_Malm%C3%B6"
   },
   {
    "name": "Pildammsparken",
@@ -177,7 +196,8 @@
    "lat": 55.59062,
    "lon": 12.99206,
    "why": "Malmö's largest and best-known park around the Pildammarna ponds, a default meeting place.",
-   "description": "Kring de gamla vattendammarna, formad av Baltiska utställningen 1914. Tallriken — den runda gräsytan — är utställningens kvarleva."
+   "description": "Malmös största park, kring dammarna som var stadens vattenreservoar. Anlagd där Baltiska utställningen hölls 1914, efter en plan från 1926.",
+   "source": "https://sv.wikipedia.org/wiki/Pildammsparken"
   },
   {
    "name": "Folkets Park",
@@ -189,7 +209,8 @@
    "lat": 55.59348,
    "lon": 13.01381,
    "why": "Sweden's oldest folkets park (1891) at Möllevången, a fixed point for everyone in the city.",
-   "description": "Sveriges äldsta folkets park, grundad 1891 av arbetarrörelsen. Moriskan i mitten är parkens signatur."
+   "description": "Sveriges äldsta folkpark, grundad 1891 av arbetarrörelsen. Mitt i parken ligger Moriska paviljongen.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Kulturarv-Malmo/Platser-och-byggnader/Folkets-Park.html"
   },
   {
    "name": "Slottsparken",
@@ -201,7 +222,8 @@
    "lat": 55.60146,
    "lon": 12.9887,
    "why": "Large central park by Malmöhus and the city library, one of the most used walks.",
-   "description": "En av de fyra parkerna som bildar det gröna stråket genom staden."
+   "description": "Park anlagd 1897–1900 på tidigare militär sankmark, efter förslag av Edvard Glæsel. Här ligger stadsbiblioteket.",
+   "source": "https://sv.wikipedia.org/wiki/Slottsparken,_Malm%C3%B6"
   },
   {
    "name": "Scaniaparken",
@@ -213,7 +235,8 @@
    "lat": 55.61768,
    "lon": 12.97679,
    "why": "Waterfront park in Västra hamnen by the Scaniabadet jetties.",
-   "description": "Anlagd där varvets Scaniaplan låg, med utsikt över sundet."
+   "description": "Park längs stranden i Västra hamnen, anlagd 1990–1991 på det gamla Kockumsområdet. Mest öppna gräsytor och kullar mot havet.",
+   "source": "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo/Scaniaparken.html"
   },
   {
    "name": "Beijers park",
@@ -224,7 +247,8 @@
    "lat": 55.61049,
    "lon": 13.05029,
    "why": "12-hectare landscape park in Kirseberg, known from SVT's Sommarlov.",
-   "description": "Uppkallad efter industrimannen Gottfrid Beijer."
+   "description": "Anlagd 1885 av grosshandlarna Gottfried och Lorens Beijer. Staden tog över parken 1901.",
+   "source": "https://sv.wikipedia.org/wiki/Beijers_park"
   },
   {
    "name": "Bulltofta rekreationsområde",
@@ -235,7 +259,8 @@
    "lat": 55.60146,
    "lon": 13.0779,
    "why": "Malmö's largest recreation area, on the old Bulltofta airport.",
-   "description": "Malmös största rekreationsområde, anlagt på det som var Bulltofta flygplats fram till 1972."
+   "description": "Rekreationsområde i östra Malmö, anlagt från 1983 på marken där Bulltofta flygplats låg fram till 1972.",
+   "source": "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo/Bulltoftaparken.html"
   },
   {
    "name": "Rörsjöparken",
@@ -246,7 +271,8 @@
    "lat": 55.60508,
    "lon": 13.01778,
    "why": "19th-century park in Rörsjöstaden just east of the centre, a common landmark.",
-   "description": "Kvarterspark från 1800-talets stadsutvidgning."
+   "description": "Park i Rörsjöstaden, påbörjad 1887 på den dåvarande Rörsjömarken och färdig 1903.",
+   "source": "https://sv.wikipedia.org/wiki/R%C3%B6rsj%C3%B6parken"
   },
   {
    "name": "Kroksbäcksparken",
@@ -256,7 +282,9 @@
    ],
    "lat": 55.57407,
    "lon": 12.97929,
-   "why": "Large 1970s park between Kroksbäck and Holma, a district name in its own right."
+   "why": "Large 1970s park between Kroksbäck and Holma, a district name in its own right.",
+   "description": "Park mellan Kroksbäck och Holma, anlagd på 1970-talet.",
+   "source": "https://sv.wikipedia.org/wiki/Kroksb%C3%A4cksparken"
   },
   {
    "name": "Jesusparken",
@@ -266,7 +294,9 @@
    ],
    "lat": 55.59041,
    "lon": 13.01523,
-   "why": "Falsterboplan, universally called Jesusparken, at Möllevången; 1.2k yearly sv views."
+   "why": "Falsterboplan, universally called Jesusparken, at Möllevången; 1.2k yearly sv views.",
+   "description": "Kallas även Falsterboplan. Parken ligger vid Möllevången och delas av Ystadsgatan i två delar.",
+   "source": "https://sv.wikipedia.org/wiki/Falsterboplan"
   },
   {
    "name": "Rönneholmsparken",
@@ -276,7 +306,9 @@
    ],
    "lat": 55.59495,
    "lon": 12.97599,
-   "why": "'Rönnan', the park around Rönneholmsgården, known across western inner city."
+   "why": "'Rönnan', the park around Rönneholmsgården, known across western inner city.",
+   "description": "Park som omger Rönneholmsgården. Den kom i Malmö stads ägo 1907.",
+   "source": "https://sv.wikipedia.org/wiki/R%C3%B6nneholmsparken"
   },
   {
    "name": "Klagshamns udde",
@@ -288,7 +320,8 @@
    "lat": 55.52445,
    "lon": 12.9104,
    "why": "Klagshamns udde, the nature area and bird spot on the old lime works fill; already in the game.",
-   "description": "Udden byggd av restmassor från Klagshamns kalkbruk, nu naturområde och fågellokal."
+   "description": "Konstgjord udde av rester från kalkbrytningen och cementtillverkningen i Klagshamn. Naturreservat sedan 2019, med rikt fågelliv.",
+   "source": "https://www.lansstyrelsen.se/skane/besoksmal/naturreservat/malmo/klagshamnsudden.html"
   },
   {
    "name": "Daniaparken",
@@ -299,7 +332,8 @@
    "lat": 55.61397,
    "lon": 12.97169,
    "why": "Sea park in Västra hamnen with the most used diving jetties in the city.",
-   "description": "Havspark med betongterrasser ner mot vattnet och stadens mest använda hoppkajer."
+   "description": "Park vid Öresund i Västra hamnen, anlagd till bomässan Bo01. Trappor leder ner till vattnet och en ramp upp till ett stort stenbord.",
+   "source": "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo/Daniaparken.html"
   },
   {
    "name": "Hyllie vattenpark",
@@ -310,7 +344,9 @@
    "apart": "Hyllie vattenpark",
    "lat": 55.56502,
    "lon": 12.97936,
-   "why": "Water play park in Hyllie, a summer destination for families from all of Malmö."
+   "why": "Water play park in Hyllie, a summer destination for families from all of Malmö.",
+   "description": "Temalekplats med åtta pedagogiska vattenstationer, invigd i maj 2015.",
+   "source": "https://www.vasyd.se/Artiklar/Hyllie-vattenpark"
   },
   {
    "name": "Limhamns kalkbrott",
@@ -321,7 +357,8 @@
    "lat": 55.56763,
    "lon": 12.93328,
    "why": "Huge former limestone quarry, now a nature reserve (protected_area, not leisure=park, so missed); in the game already, 5 Wikidata sitelinks.",
-   "description": "Hålet efter kalkbrytningen som byggde Limhamn — 65 meter djupt och 1,5 kilometer brett. I dag naturreservat med pilgrimsfalk."
+   "description": "Dagbrott efter kalkbrytningen i Limhamn, 1 300 meter långt, 800 meter brett och 65 meter djupt. Naturreservat där bland annat pilgrimsfalk finns.",
+   "source": "https://sv.wikipedia.org/wiki/Limhamns_kalkbrott"
   },
   {
    "name": "Öresundsparken",
@@ -333,7 +370,8 @@
    "lat": 55.60323,
    "lon": 12.97455,
    "why": "The long shore park behind Ribersborgsstranden; on malmo.se history list and in the game. Only the western part is in the long list (Öresundsparken, västra, way/530533698).",
-   "description": "Strandpark mot Öresund."
+   "description": "Långsmal park mellan Ribersborgsstranden och Limhamnsvägen, invigd 1924. Består främst av tre dammar.",
+   "source": "https://sv.wikipedia.org/wiki/%C3%96resundsparken,_Malm%C3%B6"
   },
   {
    "name": "Sibbarp",
@@ -346,7 +384,8 @@
    "lat": 55.5745,
    "lon": 12.9095,
    "why": "Park and beach area at the bridge with kallbadhus, skatepark and camping; on malmo.se history list; Wikidata types it as park. OSM only has the admin area.",
-   "description": "Badplats vid Öresund, långgrund och grillbar."
+   "description": "Badplats vid Öresund med kallbadhus, badbryggor och Malmös enda camping. Stranden närmast staden är grund.",
+   "source": "https://malmo.se/Uppleva-och-gora/Bada-och-simma/Strander-och-badplatser/Sibbarpsstranden.html"
   },
   {
    "name": "Katrinetorp",
@@ -358,7 +397,8 @@
    "lat": 55.55102,
    "lon": 13.00362,
    "why": "Empire-style landeri with historic gardens and English landscape park, Wikivoyage see; known for events and Christmas market.",
-   "description": "Herrgård från tidigt 1800-tal, med bevarad trädgård i empirstil."
+   "description": "Landeri vars huvudbyggnad stod klar 1813, en av landets bäst bevarade empireanläggningar. Trädgårdarna är rekonstruerade.",
+   "source": "https://malmo.se/Uppleva-och-gora/Besoksmal/Katrinetorp.html"
   },
   {
    "name": "Ribersborgsstranden",
@@ -370,7 +410,8 @@
    "lat": 55.6024,
    "lon": 12.96045,
    "why": "Ribban is Malmö's most visited beach, the city's default summer spot and a universal reference point.",
-   "description": "Ribban: två och en halv kilometer anlagd strand mot Öresund."
+   "description": "Ribban: Malmös mest besökta strand, en sandstrand på drygt 1,5 kilometer. Stranden anlades på grusvallar utanför järnvägsbanken och öppnade 1926.",
+   "source": "https://malmo.se/Uppleva-och-gora/Bada-och-simma/Strander-och-badplatser/Ribersborgsstranden.html"
   },
   {
    "name": "Ribersborgs Kallbadhus",
@@ -382,7 +423,8 @@
    "lat": 55.60523,
    "lon": 12.96536,
    "why": "The 1898 cold-bath house on its pier at Ribban, 'Kallis', is one of Malmö's best known buildings and open all year.",
-   "description": "Kallbadhus ute i vattnet, från 1898. Bastu och havsbad året om."
+   "description": "Kallbadhus ute i vattnet vid Ribersborgsstranden, flyttat hit 1898 och återuppbyggt efter en storm 1902. Bastu och kallbad året om.",
+   "source": "https://sv.wikipedia.org/wiki/Ribersborgs_kallbadhus"
   },
   {
    "name": "Hylliebadet",
@@ -392,7 +434,9 @@
    ],
    "lat": 55.57036,
    "lon": 12.97787,
-   "why": "Malmö's main public indoor bath since 2015, next to Kroksbäcksparken by Hyllie."
+   "why": "Malmö's main public indoor bath since 2015, next to Kroksbäcksparken by Hyllie.",
+   "description": "Badhus som invigdes 15 augusti 2015 för att ersätta Aq-va-kul / Simhallsbadet. Har en 50-metersbassäng.",
+   "source": "https://sv.wikipedia.org/wiki/Hylliebadet"
   },
   {
    "name": "Simhallsbadet",
@@ -402,7 +446,9 @@
    ],
    "lat": 55.59922,
    "lon": 12.99241,
-   "why": "The 1956 swimming hall at Regementsgatan, Aq-va-kul 1988-2015, known to generations of Malmö residents."
+   "why": "The 1956 swimming hall at Regementsgatan, Aq-va-kul 1988-2015, known to generations of Malmö residents.",
+   "description": "Badhus för föreningslivet och motionssimmare, invigt 1956. Hette Aq-va-kul 1988–2015.",
+   "source": "https://sv.wikipedia.org/wiki/Simhallsbadet,_Malm%C3%B6"
   },
   {
    "name": "Scaniabadet",
@@ -413,7 +459,9 @@
    "apart": "Scaniaparken",
    "lat": 55.61743,
    "lon": 12.97445,
-   "why": "Västra hamnen's popular bathing deck with piers and diving off Scaniaparken, one of the city's five official bathing places."
+   "why": "Västra hamnen's popular bathing deck with piers and diving off Scaniaparken, one of the city's five official bathing places.",
+   "description": "Havsbad i Scaniaparken i Västra hamnen, byggt 2005, med badbryggor och ett stort trädäck. Vattnet är djupt.",
+   "source": "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Parker-i-Malmo/Scaniaparken.html"
   },
   {
    "name": "Klagshamnstranden",
@@ -424,7 +472,10 @@
    "apart": "Klagshamns udde",
    "lat": 55.52497,
    "lon": 12.8959,
-   "why": "The natural beach out on Klagshamnsudden, one of Malmö's five official bathing places."
+   "why": "The natural beach out on Klagshamnsudden, one of Malmö's five official bathing places.",
+   "description": "Badplats på Klagshamnsudden, en konstgjord udde av rester från kalk- och cementindustrin.",
+   "source": "https://malmo.se/Uppleva-och-gora/Bada-och-simma/Strander-och-badplatser/Klagshamnsstranden.html",
+   "verified": true
   },
   {
    "name": "Sibbarps kallbadhus",
@@ -435,7 +486,9 @@
    "apart": "Sibbarp",
    "lat": 55.57715,
    "lon": 12.91077,
-   "why": "Malmö's second cold-bath house, open all year, on the pier at Sibbarp; listed in wikivoyage as Sibbarps Saltsjöbad and has its own sv Wikipedia article."
+   "why": "Malmö's second cold-bath house, open all year, on the pier at Sibbarp; listed in wikivoyage as Sibbarps Saltsjöbad and has its own sv Wikipedia article.",
+   "description": "Kallbadhus på Sibbarp i sydvästra delen av Malmö. Kallas även Sibbarps saltsjöbad.",
+   "source": "https://sv.wikipedia.org/wiki/Sibbarps_kallbadhus"
   },
   {
    "name": "Malmö Opera",
@@ -446,7 +499,8 @@
    "lat": 55.59612,
    "lon": 12.9957,
    "why": "One of the Nordic region's largest opera houses, on Östra Rönneholmsvägen since 1944; the city's flagship stage.",
-   "description": "Operahuset från 1944, med en av Europas största scener när det byggdes."
+   "description": "Operahus invigt 1944 som Malmö stadsteater, ritat av Sigurd Lewerentz, David Helldén och Erik Lallerstedt. Stora scenen är en av norra Europas största.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_Opera"
   },
   {
    "name": "Malmö Live",
@@ -458,7 +512,8 @@
    "lat": 55.60735,
    "lon": 12.99365,
    "why": "The city's concert hall in the Malmö Live complex by the Central Station, home of Malmö SymfoniOrkester.",
-   "description": "Konserthus, kongress och hotell, öppnat 2015. Hem för Malmö SymfoniOrkester."
+   "description": "Konserthus, kongress och hotell, öppnat 2015. Hem för Malmö SymfoniOrkester.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_Live"
   },
   {
    "name": "Malmö Stadsteater",
@@ -469,7 +524,8 @@
    "lat": 55.60572,
    "lon": 13.00379,
    "why": "The city theatre's main house, the Hippodromen circus building on Kalendegatan, known to everyone as Hipp.",
-   "description": "Stadens talscen, med Hipp som huvudscen."
+   "description": "Stadens talscen, med Hipp som huvudscen.",
+   "source": "https://www.malmostadsteater.se/about-malmo-stadsteater"
   },
   {
    "name": "Moriska Paviljongen",
@@ -481,7 +537,9 @@
    "apart": "Folkets Park",
    "lat": 55.59378,
    "lon": 13.0135,
-   "why": "The seven-towered 1902 pavilion in Folkets park, a concert and club venue known as Moriskan."
+   "why": "The seven-towered 1902 pavilion in Folkets park, a concert and club venue known as Moriskan.",
+   "description": "Kulturbyggnad i Folkets park med sju torn, invigd 1902. Ritad av Aron Krenzisky.",
+   "source": "https://sv.wikipedia.org/wiki/Moriska_paviljongen"
   },
   {
    "name": "Royal",
@@ -491,7 +549,9 @@
    ],
    "lat": 55.60173,
    "lon": 13.00073,
-   "why": "Filmstaden's big 1961 cinema at Södra Tullgatan/Triangeln, Malmö's largest screen."
+   "why": "Filmstaden's big 1961 cinema at Södra Tullgatan/Triangeln, Malmö's largest screen.",
+   "description": "Malmös största biograf, öppnad 1961. Den första i Skandinavien planerad för alla då kända filmformat.",
+   "source": "https://sv.wikipedia.org/wiki/Royal,_Malm%C3%B6"
   },
   {
    "name": "Filmstaden Storgatan",
@@ -501,7 +561,10 @@
    ],
    "lat": 55.59959,
    "lon": 13.00041,
-   "why": "The central multiplex on Storgatan since 1998, a common meeting point near Gustav Adolfs torg."
+   "why": "The central multiplex on Storgatan since 1998, a common meeting point near Gustav Adolfs torg.",
+   "description": "Biograf med flera salonger.",
+   "source": "https://cinematreasures.org/theaters/25765",
+   "verified": true
   },
   {
    "name": "Victoriateatern",
@@ -511,7 +574,9 @@
    ],
    "lat": 55.5992,
    "lon": 13.00124,
-   "why": "1912 cinema turned theatre and music stage on Södra Förstadsgatan, still active."
+   "why": "1912 cinema turned theatre and music stage on Södra Förstadsgatan, still active.",
+   "description": "Teaterbyggnad, byggd 1912 som en av stadens första biografer.",
+   "source": "https://sv.wikipedia.org/wiki/Victoriateatern,_Malm%C3%B6"
   },
   {
    "name": "Palladium",
@@ -521,7 +586,9 @@
    ],
    "lat": 55.6041,
    "lon": 13.00106,
-   "why": "1920 culture house on Södergatan between Stortorget and Gustav Adolfs torg, run as a concert venue by Musik i Syd."
+   "why": "1920 culture house on Södergatan between Stortorget and Gustav Adolfs torg, run as a concert venue by Musik i Syd.",
+   "description": "Kulturbyggnad mellan Stortorget och Gustav Adolfs torg, invigd 1920.",
+   "source": "https://sv.wikipedia.org/wiki/Palladium_(Malm%C3%B6)"
   },
   {
    "name": "Nöjesteatern",
@@ -532,7 +599,9 @@
    "apart": "Folkets Park",
    "lat": 55.59447,
    "lon": 13.01564,
-   "why": "Revue and musical stage at Amiralsgatan by Folkets park, a 1940 cinema building."
+   "why": "Revue and musical stage at Amiralsgatan by Folkets park, a 1940 cinema building.",
+   "description": "Privatteater, tidigare Nya teatern. Lokalen invigdes 27 januari 1940 som biografen Amiralen.",
+   "source": "https://sv.wikipedia.org/wiki/N%C3%B6jesteatern"
   },
   {
    "name": "Babel",
@@ -542,7 +611,9 @@
    ],
    "lat": 55.5961,
    "lon": 13.01088,
-   "why": "Club and concert venue in a former church on Spångatan at Möllan."
+   "why": "Club and concert venue in a former church on Spångatan at Möllan.",
+   "description": "Scen för konserter och klubbar i en kyrkbyggnad.",
+   "source": "https://thatsup.co.uk/malmo/bar/babel/"
   },
   {
    "name": "Inkonst",
@@ -552,7 +623,9 @@
    ],
    "lat": 55.59405,
    "lon": 13.00785,
-   "why": "Long-running club and performance venue on Bergsgatan, home of Intonal festival."
+   "why": "Long-running club and performance venue on Bergsgatan, home of Intonal festival.",
+   "description": "Scen för scenkonst, musik och samtal.",
+   "source": "https://sv.wikipedia.org/wiki/Inkonst"
   },
   {
    "name": "Pildammsteatern",
@@ -563,7 +636,9 @@
    "apart": "Pildammsparken",
    "lat": 55.58807,
    "lon": 12.99256,
-   "why": "The open-air stage in Pildammsparken used every summer since 1952."
+   "why": "The open-air stage in Pildammsparken used every summer since 1952.",
+   "description": "Friluftsteater i Pildammsparken. Teaterföreställningar och konserter varje sommar sedan 1952.",
+   "source": "https://sv.wikipedia.org/wiki/Pildammsteatern"
   },
   {
    "name": "Malmö Konsthall",
@@ -574,7 +649,8 @@
    "lat": 55.59522,
    "lon": 12.99931,
    "why": "Klas Anshelm's 1975 hall on S:t Johannesgatan, about 200,000 visitors a year, one of the best-known art venues in the city. OSM tags it amenity=arts_centre, so it was filed under scen. It is already in the game.",
-   "description": "Klas Anshelms byggnad från 1975, en av Europas största utställningshallar. Ljuset uppifrån genom taket är hela poängen med huset."
+   "description": "Klas Anshelms byggnad från 1975, en av Europas största utställningshallar för samtidskonst. Dagsljuset faller in genom 550 takfönster.",
+   "source": "https://malmokonsthall.se/en/architecture/"
   },
   {
    "name": "Panora",
@@ -584,7 +660,9 @@
    ],
    "lat": 55.59428,
    "lon": 13.00931,
-   "why": "Folkets Bio's art-house cinema at Möllan, active in 2026."
+   "why": "Folkets Bio's art-house cinema at Möllan, active in 2026.",
+   "description": "Biograf, öppnad i februari 2015. Drivs av Folkets Bio Malmö.",
+   "source": "https://www.europa-cinemas.org/en/portraits/panora-malmoe-sweden"
   },
   {
    "name": "Skånes Dansteater",
@@ -594,7 +672,9 @@
    ],
    "lat": 55.61623,
    "lon": 12.98532,
-   "why": "The regional dance company's house at Dockan in Västra hamnen."
+   "why": "The regional dance company's house at Dockan in Västra hamnen.",
+   "description": "Danskompani bildat 1995 ur Malmöbaletten. Inriktat på samtida modern dans.",
+   "source": "https://sv.wikipedia.org/wiki/Sk%C3%A5nes_Dansteater"
   },
   {
    "name": "Slagthuset",
@@ -604,7 +684,9 @@
    ],
    "lat": 55.61134,
    "lon": 13.00266,
-   "why": "The old slaughterhouse behind Centralen, long known as a nightclub, theatre and event venue."
+   "why": "The old slaughterhouse behind Centralen, long known as a nightclub, theatre and event venue.",
+   "description": "Kommunalt slakthus 1904–1969 i Nyhamnen. I dag teater och lokaler för konferenser och evenemang.",
+   "source": "https://sv.wikipedia.org/wiki/Slagthuset"
   },
   {
    "name": "Amiralen",
@@ -613,7 +695,9 @@
    "apart": "Folkets Park",
    "lat": 55.5946,
    "lon": 13.0153,
-   "why": "1939 dance palace in Folkets park, now shows, concerts and stand-up run with Nöjesteatern; no named OSM object, shares Amiralsgatan 35 with Nöjesteatern."
+   "why": "1939 dance palace in Folkets park, now shows, concerts and stand-up run with Nöjesteatern; no named OSM object, shares Amiralsgatan 35 with Nöjesteatern.",
+   "description": "Danspalats, vid öppnandet 1939 Nordens största. I dag scen för krogshower, konserter och stå upp-komik.",
+   "source": "https://malmo.se/Folkets-Park/Verksamheter/Amiralen.html"
   },
   {
    "name": "Malmö Stadsbibliotek",
@@ -624,7 +708,8 @@
    "lat": 55.60046,
    "lon": 12.99398,
    "why": "The main city library: Slottet plus Henning Larsen's Ljusets kalender, by Kungsparken. Everyone knows it and uses it as a landmark.",
-   "description": "Henning Larsens Ljusets kalender från 1997, byggd ihop med det gamla biblioteksslottet från 1946."
+   "description": "Henning Larsens Ljusets kalender från 1997, sammanbyggd med Slottet, en museibyggnad från 1901 som blev bibliotek 1946.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_stadsbibliotek"
   },
   {
    "name": "Teknikens och sjöfartens hus",
@@ -635,7 +720,8 @@
    "lat": 55.60484,
    "lon": 12.98287,
    "why": "The technology and maritime museum opposite Malmöhus, the classic school-trip museum. The tram and bus stop is still called Tekniska museet.",
-   "description": "Teknik- och sjöfartsmuseum, med ubåten U3 uppdragen på land."
+   "description": "Teknik- och sjöfartsmuseum, med ubåten U3 uppdragen på land.",
+   "source": "https://www.lonelyplanet.com/sweden/skane/malmo/attractions/teknikens-och-sjoefartens-hus/a/poi-sig/1581639/360797"
   },
   {
    "name": "Moderna Museet Malmö",
@@ -646,7 +732,8 @@
    "lat": 55.60463,
    "lon": 13.00957,
    "why": "The national modern art museum's Malmö branch in the old Elverket on Gasverksgatan, with an orange perforated extension. Well known and permanent.",
-   "description": "Modern konst i det gamla Elverket sedan 2009, med en orange perforerad tillbyggnad som syns långt."
+   "description": "Modern konst i det gamla elverket sedan 2009. Tillbyggnaden har en perforerad orangeröd plåtfasad.",
+   "source": "https://malmo.se/Stadsutveckling/Sa-utvecklar-vi-staden/Arkitektur/Mer-malmoitisk-arkitektur/Moderna-Museet.html"
   },
   {
    "name": "Form/Design Center",
@@ -657,7 +744,8 @@
    "lat": 55.6045,
    "lon": 12.99921,
    "why": "Design and architecture centre in Hedmanska gården by Lilla Torg, open since 1974 and visited about 100,000 times a year.",
-   "description": "Form och arkitektur i Hedmanska gården, ett korsvirkeskvarter från 1500-talet."
+   "description": "Centrum för form, arkitektur och design i Hedmanska gården, där det äldsta korsvirkeshuset är från 1597.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Byggnader-A-O/Hedmanska-garden.html"
   },
   {
    "name": "Malmö Konstmuseum",
@@ -667,7 +755,9 @@
    ],
    "lat": 55.60279,
    "lon": 12.99219,
-   "why": "The city art museum (wikidata Q2791306, 14 sitelinks). The OSM building is the yellow pavilion in Kungsparken, the former casino, where the museum already runs exhibitions and where the city plans its new art museum (architecture competition 2026–27). The collection is also shown in Malmöhus, which is covered by the Slottsholmen entry. https://malmo.se/Aktuellt/Artiklar-Malmo-stad/2025-08-21-Gront-ljus-fran-kommunstyrelsen---Malmo-tar-nasta-steg-mot-ett-nytt-konstmuseum-i-Kungsparken.html"
+   "why": "The city art museum (wikidata Q2791306, 14 sitelinks). The OSM building is the yellow pavilion in Kungsparken, the former casino, where the museum already runs exhibitions and where the city plans its new art museum (architecture competition 2026–27). The collection is also shown in Malmöhus, which is covered by the Slottsholmen entry. https://malmo.se/Aktuellt/Artiklar-Malmo-stad/2025-08-21-Gront-ljus-fran-kommunstyrelsen---Malmo-tar-nasta-steg-mot-ett-nytt-konstmuseum-i-Kungsparken.html",
+   "description": "Kommunalt konstmuseum, grundat 1841. Samlingen har över 40 000 verk.",
+   "source": "https://malmo.se/Uppleva-och-gora/Konst-och-museer/Malmo-Konstmuseum/Om-Malmo-Konstmuseum.html"
   },
   {
    "name": "Sankt Petri kyrka",
@@ -678,7 +768,8 @@
    "lat": 55.60694,
    "lon": 13.00332,
    "why": "Malmö's oldest building, 14th-century brick Gothic cathedral-sized church by Stortorget; the city's defining church.",
-   "description": "Malmös äldsta byggnad, tegelgotik från 1300-talet efter mönster från Lübeck. Krämarkapellet har kvar sina medeltida målningar."
+   "description": "Malmös äldsta bevarade tegelbyggnad, baltisk tegelgotik från 1300-talet med Mariakyrkan i Lübeck som förebild. Krämarkapellet har kvar sina senmedeltida målningar.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Byggnader-A-O/St-Petri-kyrka.html"
   },
   {
    "name": "Sankt Johannes kyrka",
@@ -689,7 +780,8 @@
    "lat": 55.5942,
    "lon": 13.00175,
    "why": "Jugend church from 1907 with tall copper spires at Sankt Johannesplan by Triangeln; a common directions anchor.",
-   "description": "Jugendkyrka från 1907."
+   "description": "Jugendkyrka från 1907.",
+   "source": "https://sv.wikipedia.org/wiki/Sankt_Johannes_kyrka,_Malm%C3%B6"
   },
   {
    "name": "Sankt Pauli kyrka",
@@ -700,7 +792,8 @@
    "lat": 55.60302,
    "lon": 13.01438,
    "why": "Large neo-Gothic church in Rörsjöstaden by Kungsgatan, a well-known landmark between Davidshall and Värnhem.",
-   "description": "Nygotisk tegelkyrka från 1880-talet."
+   "description": "Sexkantig centralkyrka i gult tegel, invigd 1882.",
+   "source": "https://sv.wikipedia.org/wiki/Sankt_Pauli_kyrka,_Malm%C3%B6"
   },
   {
    "name": "Turning Torso",
@@ -711,7 +804,8 @@
    "lat": 55.6133,
    "lon": 12.97631,
    "why": "Malmö's skyline icon, visible from almost everywhere in the city.",
-   "description": "Santiago Calatravas vridna torn, 190 meter och 54 våningar, klart 2005. Nio kuber som vrider sig 90 grader från botten till topp — stadens siluett sedan dess."
+   "description": "Santiago Calatravas vridna torn, drygt 190 meter och 54 våningar, klart 2005. Nio kuber som vrider sig ett kvarts varv från botten till topp.",
+   "source": "https://sv.wikipedia.org/wiki/Turning_Torso"
   },
   {
    "name": "Malmöhus slott",
@@ -722,7 +816,8 @@
    "lat": 55.60479,
    "lon": 12.98711,
    "why": "The 1500s castle and museum complex everyone knows; anchors Slottsparken.",
-   "description": "Byggt på 1530-talet av Christian III och Nordens äldsta bevarade renässansslott. Fängelse i nästan hela 1800-talet, i dag Malmö Museer."
+   "description": "Uppfört 1526–1539 och Nordens äldsta bevarade renässansslott. Fängelse 1828–1914, i dag del av Malmö Museer.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6hus"
   },
   {
    "name": "Malmö Centralstation",
@@ -733,7 +828,8 @@
    "lat": 55.60919,
    "lon": 13.00077,
    "why": "Malmö C, the main transport hub and the most common meeting point in the city.",
-   "description": "Stationen från 1856. Byggdes om när Citytunneln öppnade 2010 och fick underjordiska spår."
+   "description": "Järnvägsstation sedan 1856. Byggdes om när Citytunneln öppnade 2010 och fick underjordiska spår.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_centralstation"
   },
   {
    "name": "Hyllie station",
@@ -748,7 +844,8 @@
    "lat": 55.56275,
    "lon": 12.97587,
    "why": "Citytunnel station at the heart of Hyllie, next to Emporia and Malmö Arena.",
-   "description": "Station på Citytunneln, öppnad 2010."
+   "description": "Station på Citytunneln, öppnad 2010.",
+   "source": "https://sv.wikipedia.org/wiki/Hyllie_station"
   },
   {
    "name": "Malmö universitet",
@@ -759,7 +856,8 @@
    "lat": 55.60889,
    "lon": 12.99322,
    "why": "The city university by Centralen; residents know the campus on Universitetsholmen.",
-   "description": "Grundat som högskola 1998 på gammal varvsmark, universitet sedan 2018."
+   "description": "Grundat som högskola 1998 på gammal varvsmark, universitet sedan 2018.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_universitet"
   },
   {
    "name": "Rådhuset",
@@ -770,7 +868,9 @@
    "apart": "Stortorget",
    "lat": 55.60644,
    "lon": 13.0015,
-   "why": "The 1540s town hall on Stortorget, the most recognisable historic facade in central Malmö."
+   "why": "The 1540s town hall on Stortorget, the most recognisable historic facade in central Malmö.",
+   "description": "Före detta rådhus vid Stortorget, färdigställt 1546.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Byggnader-A-O/Radhuset.html"
   },
   {
    "name": "Slottsmöllan",
@@ -781,7 +881,9 @@
    "apart": "Slottsparken",
    "lat": 55.60309,
    "lon": 12.98605,
-   "why": "The windmill in Slottsparken, one of the city's most photographed buildings and a common meeting point."
+   "why": "The windmill in Slottsparken, one of the city's most photographed buildings and a common meeting point.",
+   "description": "Väderkvarn av holländsk typ, byggd 1851. Den sista möllan innanför Malmös kanaler.",
+   "source": "https://sv.wikipedia.org/wiki/Slottsm%C3%B6llan,_Malm%C3%B6"
   },
   {
    "name": "Hyllie vattentorn",
@@ -792,7 +894,9 @@
    "apart": "Hyllie vattenpark",
    "lat": 55.56507,
    "lon": 12.97896,
-   "why": "The mushroom-shaped water tower at Hyllie, visible from the ring road and the bridge approach."
+   "why": "The mushroom-shaped water tower at Hyllie, visible from the ring road and the bridge approach.",
+   "description": "Vitt torn format som en svamp eller ett flygande tefat, 62 meter högt. Stod klart 1973.",
+   "source": "https://sv.wikipedia.org/wiki/Hyllie_vattentorn"
   },
   {
    "name": "Södervärnstornet",
@@ -802,7 +906,9 @@
    ],
    "lat": 55.58799,
    "lon": 13.01174,
-   "why": "The 1916 water tower on Möllevången, 54 m, visible across Södra Innerstaden and widely known by its rude nickname; Wikidata item not in the long list."
+   "why": "The 1916 water tower on Möllevången, 54 m, visible across Södra Innerstaden and widely known by its rude nickname; Wikidata item not in the long list.",
+   "description": "Före detta vattentorn ritat av Salomon Sörensen, klart 1916 och 54 meter högt. Försåg Malmö med vatten till 2015.",
+   "source": "https://sv.wikipedia.org/wiki/S%C3%B6derv%C3%A4rnstornet"
   },
   {
    "name": "Skånes universitetssjukhus",
@@ -812,7 +918,9 @@
    ],
    "lat": 55.58741,
    "lon": 13.00141,
-   "why": "The city hospital, still called 'MAS' by everyone; a constant direction reference by Södervärn."
+   "why": "The city hospital, still called 'MAS' by everyone; a constant direction reference by Södervärn.",
+   "description": "Universitetssjukhus, grundat 2010 genom sammanslagning av Universitetssjukhuset i Lund och Universitetssjukhuset Mas i Malmö.",
+   "source": "https://sv.wikipedia.org/wiki/Sk%C3%A5nes_universitetssjukhus"
   },
   {
    "name": "Människan och Pegasus",
@@ -822,7 +930,9 @@
    ],
    "lat": 55.60111,
    "lon": 12.9871,
-   "why": "Carl Milles' winged horse on its tall column at Linnéplatsen by Slottsparken/Stadsbiblioteket, visible from far off and a classic Malmö image."
+   "why": "Carl Milles' winged horse on its tall column at Linnéplatsen by Slottsparken/Stadsbiblioteket, visible from far off and a classic Malmö image.",
+   "description": "Skulptur av Carl Milles från 1949.",
+   "source": "https://sv.wikipedia.org/wiki/M%C3%A4nniskan_och_Pegasus"
   },
   {
    "name": "Jägersro",
@@ -834,7 +944,8 @@
    "lat": 55.57307,
    "lon": 13.0662,
    "why": "Sweden's only combined trot and gallop track, a large landmark that names a whole district and a common reference point in eastern Malmö.",
-   "description": "Trav- och galoppbana, en av Sveriges största."
+   "description": "Trav- och galoppbana, en av Sveriges största.",
+   "source": "https://sv.wikipedia.org/wiki/J%C3%A4gersro"
   },
   {
    "name": "Eleda Stadion",
@@ -845,7 +956,9 @@
    "lat": 55.5837,
    "lon": 12.98772,
    "why": "Malmö FF's home arena (formerly Swedbank Stadion), the city's football stadium and the most-viewed article in the category.",
-   "description": "Byggt till fotbolls-VM 1958, då Malmös stora arena. I dag friidrott och träning."
+   "description": "Fotbollsarena och Malmö FF:s hemmaplan, invigd 2009. Hette tidigare Swedbank Stadion.",
+   "source": "https://sv.wikipedia.org/wiki/Eleda_Stadion",
+   "verified": true
   },
   {
    "name": "Malmö Arena",
@@ -856,7 +969,8 @@
    "lat": 55.5647,
    "lon": 12.97633,
    "why": "The big indoor arena at Hyllie (Redhawks, Eurovision 2013/2024), next to Hyllie station and a standard reference point there.",
-   "description": "Inomhusarena från 2008, hemmaplan för Malmö Redhawks. Här hölls Eurovision 2013."
+   "description": "Inomhusarena från 2008, hemmaplan för Malmö Redhawks. Här hölls Eurovision 2013 och 2024.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_Arena"
   },
   {
    "name": "Baltiska Hallen",
@@ -867,7 +981,8 @@
    "lat": 55.58361,
    "lon": 12.99165,
    "why": "The 1964 sports and event hall on Stadionområdet with the Idrottsmuseet, long the home of handball in Malmö.",
-   "description": "Handbollens och gymnastikens hemmaplan i Malmö."
+   "description": "Idrottshall från 1964, hemmaplan för HK Malmö i handboll och Malmö FBC i innebandy.",
+   "source": "https://sv.wikipedia.org/wiki/Baltiska_hallen"
   },
   {
    "name": "Malmö Isstadion",
@@ -877,7 +992,9 @@
    ],
    "lat": 55.58249,
    "lon": 12.99114,
-   "why": "The 1968 ice stadium on Stadionområdet, Redhawks' old home and Eurovision 1992 venue, still in use (IK Pantern)."
+   "why": "The 1968 ice stadium on Stadionområdet, Redhawks' old home and Eurovision 1992 venue, still in use (IK Pantern).",
+   "description": "Ishall på Stadionområdet, invigd 1968. Stod värd för Eurovision Song Contest 1992.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_isstadion"
   },
   {
    "name": "Malmö Idrottsplats",
@@ -887,7 +1004,9 @@
    ],
    "lat": 55.59395,
    "lon": 12.99583,
-   "why": "'Gamla idrottsplatsen' from 1896 by Pildammsparken/Fersens väg, a central, historic venue everyone passes."
+   "why": "'Gamla idrottsplatsen' from 1896 by Pildammsparken/Fersens väg, a central, historic venue everyone passes.",
+   "description": "Kallas Gamla idrottsplatsen, invigd 4 juli 1896. Sportens centrum i Malmö tills Malmö Stadion stod färdig 1958.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_IP"
   },
   {
    "name": "Stapelbäddsparken",
@@ -897,7 +1016,9 @@
    ],
    "lat": 55.61336,
    "lon": 12.98402,
-   "why": "The concrete skatepark and STPLN culture house in Västra hamnen, a well-known feature of the waterfront since 2005/06."
+   "why": "The concrete skatepark and STPLN culture house in Västra hamnen, a well-known feature of the waterfront since 2005/06.",
+   "description": "Skateboardpark i betong, invigd hösten 2005, i kvarteret där Malmös sista stapelbädd finns bevarad.",
+   "source": "https://sv.wikipedia.org/wiki/Stapelb%C3%A4ddsparken"
   },
   {
    "name": "Kockum Fritid",
@@ -908,7 +1029,8 @@
    "lat": 55.60859,
    "lon": 12.97599,
    "why": "The big sports and swimming centre in Kockums old industrial building in Västra hamnen; already in the game but missing from the long list (OSM tags it building=sports_centre with no leisure tag).",
-   "description": "Sim- och ishall, uppkallad efter varvet Kockums."
+   "description": "Sim- och ishall i Västra hamnen, ursprungligen varvet Kockums fritidsanläggning för de anställda.",
+   "source": "https://malmo.se/Malmonyckeln/Simning-och-ishall.html"
   },
   {
    "name": "Emporia",
@@ -919,7 +1041,8 @@
    "lat": 55.56426,
    "lon": 12.97346,
    "why": "Malmö's largest shopping centre at Hyllie, one of the biggest in Scandinavia, with a striking facade by Wingårdh.",
-   "description": "Köpcentrum från 2012, med Wingårdhs böljande gula glasfasad."
+   "description": "Köpcentrum från 2012, ritat av Wingårdhs, med en böljande entré i bärnstensfärgat glas.",
+   "source": "https://www.dezeen.com/2013/09/27/emporia-shopping-centre-in-malmo-by-wingardhs/amp/"
   },
   {
    "name": "Mobilia",
@@ -930,7 +1053,8 @@
    "lat": 55.58144,
    "lon": 13.00393,
    "why": "Large shopping centre with over a hundred shops at Dalaplan/Per Albins väg, in the old Malmö Yllefabrik buildings.",
-   "description": "Köpcentrum i det som var Malmö Yllefabrik — fabriksbyggnaderna står kvar runt gallerian."
+   "description": "Köpcentrum i en före detta textilfabrik. Öppnade 1967 som möbelvaruhus, därav namnet.",
+   "source": "https://sv.wikipedia.org/wiki/Mobilia_k%C3%B6pcentrum"
   },
   {
    "name": "Hansa",
@@ -940,7 +1064,9 @@
    ],
    "lat": 55.6031,
    "lon": 13.0041,
-   "why": "City-centre galleria between Stora Nygatan and Södra Promenaden, the former NK building, still universally called Hansa."
+   "why": "City-centre galleria between Stora Nygatan and Södra Promenaden, the former NK building, still universally called Hansa.",
+   "description": "Galleria vid Stora Nygatan. Nordiska Kompaniet öppnade här 1963, och 1992 öppnade Hansacompagniet som galleria.",
+   "source": "https://sv.wikipedia.org/wiki/Hansa_(k%C3%B6pcentrum)"
   },
   {
    "name": "Malmö Saluhall",
@@ -951,7 +1077,8 @@
    "lat": 55.60784,
    "lon": 12.99085,
    "why": "The city's food hall in an old goods warehouse by Centralstationen, opened 2016.",
-   "description": "Mathall i ett gammalt godsmagasin, öppnad 2016."
+   "description": "Mathall i ett gammalt godsmagasin, öppnad 2016.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Kulturarv-Malmo/Platser-och-byggnader/Saluhallar.html"
   },
   {
    "name": "Jägersro Center",
@@ -962,7 +1089,9 @@
    "apart": "Jägersro",
    "lat": 55.56985,
    "lon": 13.05877,
-   "why": "Long-standing shopping centre from 1962 opposite Jägersro racecourse, staying as the new Jägersro district is built around it."
+   "why": "Long-standing shopping centre from 1962 opposite Jägersro racecourse, staying as the new Jägersro district is built around it.",
+   "description": "Köpcentrum invigt 1962 som Skandinaviens första stormarknad.",
+   "source": "https://sv.wikipedia.org/wiki/J%C3%A4gersro_Center"
   },
   {
    "name": "Kv. Caroli",
@@ -973,7 +1102,8 @@
    "lat": 55.60767,
    "lon": 13.00738,
    "why": "The Caroli block in the old town (Caroli City), still widely known by name even though it is now more offices and homes than mall.",
-   "description": "Kvarteret vid Caroli kyrka, byggt om från galleria till bostäder och kontor."
+   "description": "Kvarter med butiker, bostäder och kontor, byggt 1969–1973 som Caroli City. Byggdes om 2013 till ett öppnare kvarter på ett plan.",
+   "source": "https://sv.wikipedia.org/wiki/Caroli_City"
   },
   {
    "name": "Rosengård Centrum",
@@ -984,7 +1114,8 @@
    "lat": 55.58616,
    "lon": 13.04503,
    "why": "The centre and square of Rosengård, a well-known name and bus stop across the city.",
-   "description": "Rosengårds centrum med torg, butiker och stadsdelens mötesplats."
+   "description": "Köpcentrum mitt i Rosengård, invigt 1970 och byggt över Amiralsgatan. Det var Malmös första stora centrumanläggning.",
+   "source": "https://sv.wikipedia.org/wiki/Roseng%C3%A5rd_centrum"
   },
   {
    "name": "Fagans",
@@ -994,7 +1125,9 @@
    ],
    "lat": 55.6037,
    "lon": 13.00032,
-   "why": "Irish pub at Per Weijersgatan/Stora Nygatan by Gustav Adolfs torg, a meeting-point name; already described as a lively Irish pub in 2011."
+   "why": "Irish pub at Per Weijersgatan/Stora Nygatan by Gustav Adolfs torg, a meeting-point name; already described as a lively Irish pub in 2011.",
+   "description": "Irländsk pub strax intill Gustav Adolfs torg.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/fagans/"
   },
   {
    "name": "Johan P",
@@ -1004,7 +1137,9 @@
    ],
    "lat": 55.60416,
    "lon": 12.99887,
-   "why": "Fish and seafood restaurant by Saluhallen off Lilla Torg since 1981."
+   "why": "Fish and seafood restaurant by Saluhallen off Lilla Torg since 1981.",
+   "description": "Restaurang med inriktning på skaldjur.",
+   "source": "https://www.enprimeurclub.com/restaurants/johan-p-malmo-restaurant"
   },
   {
    "name": "Restaurang Möllan",
@@ -1014,7 +1149,9 @@
    ],
    "lat": 55.59273,
    "lon": 13.00722,
-   "why": "Bergsgatan restaurant and bar with a big terrace, a Möllan classic."
+   "why": "Bergsgatan restaurant and bar with a big terrace, a Möllan classic.",
+   "description": "Restaurang och bar med franskt och svenskt kök, vid Möllevångstorget.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/restaurang-m%C3%B6llan/"
   },
   {
    "name": "Jalla Jalla",
@@ -1024,7 +1161,9 @@
    ],
    "lat": 55.59484,
    "lon": 13.00885,
-   "why": "Falafel stand on Bergsgatan at Möllan, named after the 2000 film and tied to the nightlife; the best-known falafel name in town."
+   "why": "Falafel stand on Bergsgatan at Möllan, named after the 2000 film and tied to the nightlife; the best-known falafel name in town.",
+   "description": "Falafelställe.",
+   "source": "https://www.thelocal.com/20190808/expats-decide-these-are-the-best-falafel-joints-in-malm"
   },
   {
    "name": "Krua Thai",
@@ -1034,7 +1173,9 @@
    ],
    "lat": 55.59133,
    "lon": 13.00894,
-   "why": "Thai restaurant on Möllevångstorget, a Möllan fixture for decades."
+   "why": "Thai restaurant on Möllevångstorget, a Möllan fixture for decades.",
+   "description": "Thailändsk restaurang.",
+   "source": "https://wolt.com/sv/swe/malmo/restaurant/krua-thai-3"
   },
   {
    "name": "Moosehead",
@@ -1044,7 +1185,9 @@
    ],
    "lat": 55.60545,
    "lon": 12.99867,
-   "why": "Sports bar and burger place at Lilla Torg, one of the square's long-running names."
+   "why": "Sports bar and burger place at Lilla Torg, one of the square's long-running names.",
+   "description": "Pub med skandinaviskt kök.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/moosehead/"
   },
   {
    "name": "Vegegården",
@@ -1054,7 +1197,9 @@
    ],
    "lat": 55.604,
    "lon": 13.0083,
-   "why": "All-vegan Asian buffet on Rörsjögatan, a long-running staple."
+   "why": "All-vegan Asian buffet on Rörsjögatan, a long-running staple.",
+   "description": "Vegansk restaurang med asiatiskt kök.",
+   "source": "https://vegegarden.com"
   },
   {
    "name": "Årstiderna i Kockska huset",
@@ -1064,7 +1209,10 @@
    ],
    "lat": 55.60673,
    "lon": 12.99897,
-   "why": "Traditional Swedish restaurant in the vaulted cellars of the 1520s Kockska huset by Stortorget."
+   "why": "Traditional Swedish restaurant in the vaulted cellars of the 1520s Kockska huset by Stortorget.",
+   "description": "Restaurang i källarvalven under Kockska huset, som borgmästaren och myntmästaren Jörgen Kock lät bygga på 1520-talet. Huset är byggnadsminne.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Byggnader-A-O/Jorgen-Kocks-hus.html",
+   "verified": true
   },
   {
    "name": "Brasserie Sture",
@@ -1074,7 +1222,10 @@
    ],
    "lat": 55.60731,
    "lon": 13.00043,
-   "why": "The Sture/Sturehof name on Adelgatan goes back to 1912 and is widely known, but today's brasserie (2015) is Michelin-listed and upscale; owner was undecided."
+   "why": "The Sture/Sturehof name on Adelgatan goes back to 1912 and is widely known, but today's brasserie (2015) is Michelin-listed and upscale; owner was undecided.",
+   "description": "Brasserie med mosaikgolv och lång bar. Restaurangen har funnits sedan 1912.",
+   "source": "https://guide.michelin.com/se/en/skane/malmo/restaurant/brasserie-sture",
+   "verified": true
   },
   {
    "name": "Saltimporten",
@@ -1084,7 +1235,9 @@
    ],
    "lat": 55.61607,
    "lon": 12.99712,
-   "why": "Lunch-only canteen in Frihamnen since 2012, famous far beyond its size."
+   "why": "Lunch-only canteen in Frihamnen since 2012, famous far beyond its size.",
+   "description": "Restaurang startad vintern 2012. Inriktad på lunchservering.",
+   "source": "https://sv.wikipedia.org/wiki/Saltimporten_Canteen"
   },
   {
    "name": "Bullen",
@@ -1094,7 +1247,9 @@
    ],
    "lat": 55.6,
    "lon": 13.00143,
-   "why": "Storgatan beer hall with a pub on the site since 1897 and an English-style 1960s interior; Malmö's archetypal old pub."
+   "why": "Storgatan beer hall with a pub on the site since 1897 and an English-style 1960s interior; Malmö's archetypal old pub.",
+   "description": "Krog på Storgatan, en gång Oskar och Eline Wernerssons öl- och biljardsalong.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Malmos-torg/Sodertull.html"
   },
   {
    "name": "Far i Hatten",
@@ -1104,7 +1259,9 @@
    ],
    "lat": 55.59259,
    "lon": 13.01424,
-   "why": "Folkets Park's original park restaurant: restaurant, beer garden and dance floor."
+   "why": "Folkets Park's original park restaurant: restaurant, beer garden and dance floor.",
+   "description": "Klassisk utedansbana med servering i Folkets park, tidigare Parkrestaurangen. Byggnaden fanns 1894.",
+   "source": "https://sv.wikipedia.org/wiki/Far_i_hatten"
   },
   {
    "name": "Limhamns Fiskrökeri",
@@ -1114,7 +1271,9 @@
    ],
    "lat": 55.58512,
    "lon": 12.92494,
-   "why": "Smokehouse, fish shop and restaurant in Limhamn's fishing harbour, reportedly around 80 years old."
+   "why": "Smokehouse, fish shop and restaurant in Limhamn's fishing harbour, reportedly around 80 years old.",
+   "description": "Fiskrestaurang och fiskaffär.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/limhamns-fiskrökeri/"
   },
   {
    "name": "Malmö Brewing Co & Taproom",
@@ -1124,7 +1283,9 @@
    ],
    "lat": 55.59341,
    "lon": 13.00762,
-   "why": "Brewery taproom on Bergsgatan since 2010."
+   "why": "Brewery taproom on Bergsgatan since 2010.",
+   "description": "Pub med eget bryggeri. Det öppnade för allmänheten i november 2010.",
+   "source": "https://www.malmobrewing.com"
   },
   {
    "name": "Mando Steakhouse",
@@ -1134,7 +1295,9 @@
    ],
    "lat": 55.60458,
    "lon": 13.00049,
-   "why": "Skomakaregatan steakhouse since 1966, famous for its plankstek."
+   "why": "Skomakaregatan steakhouse since 1966, famous for its plankstek.",
+   "description": "Stekrestaurang, öppnad 1966. Plankstek har stått på menyn sedan 1975.",
+   "source": "https://scanmagazine.co.uk/mando-steakhouse-bar-classic-steakhouse-in-the-heart-of-malmo/"
   },
   {
    "name": "Mello Yello",
@@ -1144,7 +1307,9 @@
    ],
    "lat": 55.6055,
    "lon": 12.99893,
-   "why": "Bar-restaurant at Lilla Torg 1, one of the square's best-known anchors (OSM spells it Mellow Yellow)."
+   "why": "Bar-restaurant at Lilla Torg 1, one of the square's best-known anchors (OSM spells it Mellow Yellow).",
+   "description": "Restaurang och bar vid Lilla torg med europeisk och svensk mat.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/mello-yello/"
   },
   {
    "name": "Nyhavn",
@@ -1154,7 +1319,10 @@
    ],
    "lat": 55.59196,
    "lon": 13.00847,
-   "why": "Beer bar with the big outdoor serving on Möllevångstorget 8."
+   "why": "Beer bar with the big outdoor serving on Möllevångstorget 8.",
+   "description": "Ölbar och restaurang vid Möllevångstorget med stor uteservering. Serverar pubmat och smörrebröd.",
+   "source": "https://www.thatsup.se/malmo/restaurang/nyhavn/",
+   "verified": true
   },
   {
    "name": "Pickwick",
@@ -1164,7 +1332,9 @@
    ],
    "lat": 55.60288,
    "lon": 13.00317,
-   "why": "English pub on Stadt Hamburgsgatan in Malmborgen, decades old, known for its Wednesday quiz."
+   "why": "English pub on Stadt Hamburgsgatan in Malmborgen, decades old, known for its Wednesday quiz.",
+   "description": "Pub i engelsk stil.",
+   "source": "https://theeuropeanbarguide.com/pickwick-pub-malmo-🇸🇪/"
   },
   {
    "name": "Falafel Baghdad",
@@ -1174,7 +1344,9 @@
    ],
    "lat": 55.58832,
    "lon": 13.02687,
-   "why": "One of Malmö's original falafel places, started as a cart, now a corner building on Annelundsgatan (OSM: Falafel Bagdad)."
+   "why": "One of Malmö's original falafel places, started as a cart, now a corner building on Annelundsgatan (OSM: Falafel Bagdad).",
+   "description": "Snabbmatsställe med mellanösterländskt kök, kebab och falafel.",
+   "source": "https://routesnorth.com/malmo/malmo-restaurants-bars/cheap-eats-malmo"
   },
   {
    "name": "Kin Long",
@@ -1184,7 +1356,9 @@
    ],
    "lat": 55.59647,
    "lon": 13.00067,
-   "why": "Malmö's oldest Chinese restaurant still running, on Rådmansgatan since 1964."
+   "why": "Malmö's oldest Chinese restaurant still running, on Rådmansgatan since 1964.",
+   "description": "Kinesisk restaurang, öppnad 1964 och den äldsta kinesiska restaurangen i Malmö.",
+   "source": "https://visitsweden.com/where-to-go/southern-sweden/malmo/top-5-malmo-restaurants"
   },
   {
    "name": "Syltan",
@@ -1194,7 +1368,9 @@
    ],
    "lat": 55.60809,
    "lon": 13.01444,
-   "why": "Pub at Östra Förstadsgatan 2 by Värnhem, with a pub on the site since the 1970s."
+   "why": "Pub at Östra Förstadsgatan 2 by Värnhem, with a pub on the site since the 1970s.",
+   "description": "Restaurang och bar.",
+   "source": "https://www.syltan.com/"
   },
   {
    "name": "Konditori Hollandia",
@@ -1204,7 +1380,9 @@
    ],
    "lat": 55.60024,
    "lon": 13.00125,
-   "why": "Malmö's oldest konditori, baking in the same premises on Södra Förstadsgatan since 1903 (named Hollandia since 1950); a true institution."
+   "why": "Malmö's oldest konditori, baking in the same premises on Södra Förstadsgatan since 1903 (named Hollandia since 1950); a true institution.",
+   "description": "Konditori som öppnade 1903 och fick namnet Hollandia 1950. Ett av Malmös äldsta.",
+   "source": "https://theculturetrip.com/articles/the-best-bakeries-in-malmo-sweden"
   },
   {
    "name": "Lilla Kafferosteriet",
@@ -1214,7 +1392,10 @@
    ],
    "lat": 55.60453,
    "lon": 13.00289,
-   "why": "Micro-roastery café in a 17th-century house on Baltzarsgatan since 2006, one of Sweden's pioneer micro-roasteries."
+   "why": "Micro-roastery café in a 17th-century house on Baltzarsgatan since 2006, one of Sweden's pioneer micro-roasteries.",
+   "description": "Kafé och mikrorosteri i ett hus från 1600-talet.",
+   "source": "https://www.routesnorth.com/sweden/malmo/malmo-restaurants-bars/lilla-kafferosteriet/",
+   "verified": true
   },
   {
    "name": "Kaffebaren på Möllan",
@@ -1224,7 +1405,10 @@
    ],
    "lat": 55.59106,
    "lon": 13.00879,
-   "why": "Tiny classic coffee bar at Möllevångstorget, a Möllan fixture since at least 2009 (likely around 1998-2002)."
+   "why": "Tiny classic coffee bar at Möllevångstorget, a Möllan fixture since at least 2009 (likely around 1998-2002).",
+   "description": "Kaffebar vid Möllevångstorget.",
+   "source": "https://thatsup.co.uk/malmo/cafe/kaffebaren-pa-mollan/",
+   "verified": true
   },
   {
    "name": "Solde",
@@ -1234,7 +1418,10 @@
    ],
    "lat": 55.60077,
    "lon": 13.00046,
-   "why": "Italian-style stand-up coffee bar and roastery at Regementsgatan 2 by Davidshallsbron, Best Coffee Bar at Malmö Gastronomy Award 2024; open since at least 2015."
+   "why": "Italian-style stand-up coffee bar and roastery at Regementsgatan 2 by Davidshallsbron, Best Coffee Bar at Malmö Gastronomy Award 2024; open since at least 2015.",
+   "description": "Kaffebar, öppnad 2006.",
+   "source": "https://andershusa.com/solde-kaffebar-kafferosteri-malmos-best-coffee-bar/",
+   "verified": true
   },
   {
    "name": "Pâtisserie David",
@@ -1244,7 +1431,9 @@
    ],
    "lat": 55.60784,
    "lon": 13.00742,
-   "why": "French-style patisserie on Östergatan run by David Fernandes since 2003, listed among Malmö's classic konditorier."
+   "why": "French-style patisserie on Östergatan run by David Fernandes since 2003, listed among Malmö's classic konditorier.",
+   "description": "Konditori i kvarteret Sankt Gertrud, öppnat 2003 av David Fernandes.",
+   "source": "http://www.patisseriedavid.se/"
   },
   {
    "name": "Atrium",
@@ -1254,7 +1443,9 @@
    ],
    "lat": 55.5975,
    "lon": 12.97892,
-   "why": "Bright neighbourhood café and brunch spot at Skvadronsgatan 13 in Slottsstaden, opened 2015 by Adrian and Natalia and since expanded into the premises next door."
+   "why": "Bright neighbourhood café and brunch spot at Skvadronsgatan 13 in Slottsstaden, opened 2015 by Adrian and Natalia and since expanded into the premises next door.",
+   "description": "Kafé i Slottsstaden som serverar frukost, lunch och fika.",
+   "source": "https://www.atriumcafe.se/"
   },
   {
    "name": "Systrar & Bröder",
@@ -1264,7 +1455,9 @@
    ],
    "lat": 55.59631,
    "lon": 12.99314,
-   "why": "Retro-styled bakery café on Östra Rönneholmsvägen known for its breakfast buffet, around since at least 2012 (~650 Google reviews)."
+   "why": "Retro-styled bakery café on Östra Rönneholmsvägen known for its breakfast buffet, around since at least 2012 (~650 Google reviews).",
+   "description": "Bageri och kafé.",
+   "source": "https://systrarbroder.se/"
   },
   {
    "name": "Regement Konditori",
@@ -1274,7 +1467,10 @@
    ],
    "lat": 55.59796,
    "lon": 12.9753,
-   "why": "Traditional konditori at Regementsgatan 86 in Slottsstaden, open for more than 20 years."
+   "why": "Traditional konditori at Regementsgatan 86 in Slottsstaden, open for more than 20 years.",
+   "description": "Konditori och bageri.",
+   "source": "https://thatsup.co.uk/malmo/cafe/regement-konditori/",
+   "verified": true
   },
   {
    "name": "Söderberg & Sara",
@@ -1284,7 +1480,10 @@
    ],
    "lat": 55.59664,
    "lon": 13.01417,
-   "why": "Stone-oven sourdough bakery and roastery café at S:t Knuts torg, the Malmö sibling of an Ystad bakery, since about 2010."
+   "why": "Stone-oven sourdough bakery and roastery café at S:t Knuts torg, the Malmö sibling of an Ystad bakery, since about 2010.",
+   "description": "Bageri och kafé med surdegsbröd, filial till ett äldre bageri i Ystad.",
+   "source": "https://thatsup.co.uk/malmo/cafe/söderberg-sara/",
+   "verified": true
   },
   {
    "name": "Lilla Glassfabriken",
@@ -1294,7 +1493,9 @@
    ],
    "lat": 55.59807,
    "lon": 12.99741,
-   "why": "Handmade Italian-style ice cream by Södertull/Davidshall, widely called Malmö's best ice cream by locals."
+   "why": "Handmade Italian-style ice cream by Södertull/Davidshall, widely called Malmö's best ice cream by locals.",
+   "description": "Glasservering.",
+   "source": "https://thatsup.co.uk/malmo/cafe/lilla-glassfabriken/"
   },
   {
    "name": "Konditori Katarina",
@@ -1304,7 +1505,9 @@
    ],
    "lat": 55.59718,
    "lon": 13.00136,
-   "why": "Malmö konditori brand dating from 1959; this is the Triangeln branch on Södra Förstadsgatan listed by Wikivoyage (several other branches exist)."
+   "why": "Malmö konditori brand dating from 1959; this is the Triangeln branch on Södra Förstadsgatan listed by Wikivoyage (several other branches exist).",
+   "description": "Konditori.",
+   "source": "https://wanderlog.com/place/details/2098241/konditori-katarina"
   },
   {
    "name": "Limhamns torg",
@@ -1312,7 +1515,10 @@
    "osm": [
     "relation/2343599"
    ],
-   "why": ""
+   "why": "",
+   "description": "Torg intill Gamla Limhamn, med lekplats samt höst- och julmarknad.",
+   "source": "https://sv.wikipedia.org/wiki/Limhamn",
+   "verified": true
   },
   {
    "name": "Anna Lindhs plats",
@@ -1322,7 +1528,9 @@
    ],
    "lat": 55.60926,
    "lon": 12.99661,
-   "why": "Pedestrian square by Malmö C/Hamnkanalen with its own sv Wikipedia article (Q10412357) and bus stop; tagged highway=pedestrian."
+   "why": "Pedestrian square by Malmö C/Hamnkanalen with its own sv Wikipedia article (Q10412357) and bus stop; tagged highway=pedestrian.",
+   "description": "Öppen plats intill Malmö C, uppkallad efter Anna Lindh.",
+   "source": "https://sv.wikipedia.org/wiki/Anna_Lindhs_plats%2C_Malm%C3%B6"
   },
   {
    "name": "Gyllins trädgård",
@@ -1330,7 +1538,9 @@
    "osm": [
     "way/583266278"
    ],
-   "why": ""
+   "why": "",
+   "description": "Tidigare handelsträdgård i Husie. Byggstart för bostäder skedde 2009.",
+   "source": "https://sv.wikipedia.org/wiki/Gyllins_tr%C3%A4dg%C3%A5rd"
   },
   {
    "name": "Magistratsparken",
@@ -1338,7 +1548,9 @@
    "osm": [
     "way/28482241"
    ],
-   "why": ""
+   "why": "",
+   "description": "Liten park intill Malmö Konsthall, anlagd på 1940-talet på mark som magistratens rådmän tidigare brukade. I parkens nordvästra del står en gammal hängbok.",
+   "source": "https://stud.epsilon.slu.se/12502/1/sjostrom_p_171026.pdf"
   },
   {
    "name": "Raoul Wallenbergs park",
@@ -1346,7 +1558,9 @@
    "osm": [
     "way/52403704"
    ],
-   "why": ""
+   "why": "",
+   "description": "Liten park vid kanalen i Gamla staden. Namnet fick den 1992 när Staffan Nihléns skulptur Pienza i rosa marmor invigdes till minne av Raoul Wallenberg.",
+   "source": "https://planteringsforeningen.se/projekt/pienza/"
   },
   {
    "name": "Disgusting Food Museum",
@@ -1357,7 +1571,8 @@
    "lat": 55.60089,
    "lon": 13.00131,
    "why": "",
-   "description": "Museum om mat som väcker avsky — och om varför avsky är kulturellt inlärt."
+   "description": "Museum om mat som väcker avsky, och om varför avsky är kulturellt inlärt.",
+   "source": "https://disgustingfoodmuseum.com/"
   },
   {
    "name": "Malmö Studenthus",
@@ -1365,7 +1580,9 @@
    "osm": [
     "way/51334963"
    ],
-   "why": ""
+   "why": "",
+   "description": "Studentbostäder med omkring 665 lägenheter i ena halvan av Kinesiska muren, ett niovåningskomplex längs Inre ringvägen byggt 1971 av MKB under miljonprogrammet.",
+   "source": "https://sv.wikipedia.org/wiki/Kinesiska_muren,_Malm%C3%B6"
   },
   {
    "name": "Teschska palatset",
@@ -1373,7 +1590,9 @@
    "osm": [
     "way/52037555"
    ],
-   "why": ""
+   "why": "",
+   "description": "Kallas även Apoteket Lejonet. Uppfört 1896 i nyrenässans på Stortorget.",
+   "source": "https://sv.wikipedia.org/wiki/Apoteket_Lejonet%2C_Malm%C3%B6"
   },
   {
    "name": "Orkanen",
@@ -1384,7 +1603,8 @@
    "lat": 55.61079,
    "lon": 12.99542,
    "why": "",
-   "description": "Universitetets bibliotek och lärarutbildning, invigt 2005."
+   "description": "Universitetets bibliotek och lärarutbildning, invigt 2005.",
+   "source": "https://fojab.se/en/project/lararhogskolan-orkanen/"
   },
   {
    "name": "IKEA Malmö",
@@ -1394,7 +1614,9 @@
    ],
    "lat": 55.5536,
    "lon": 12.9871,
-   "why": "Huge blue box at Svågertorp, seen from the E20/bridge approach; residents use it as a reference point. Dropped from the long list as a brand."
+   "why": "Huge blue box at Svågertorp, seen from the E20/bridge approach; residents use it as a reference point. Dropped from the long list as a brand.",
+   "description": "Möbelaffär.",
+   "source": "https://en.wikipedia.org/wiki/Sv%C3%A5gertorp"
   },
   {
    "name": "Entré",
@@ -1403,7 +1625,9 @@
     "way/35672296",
     "way/231960894"
    ],
-   "why": ""
+   "why": "",
+   "description": "Köpcentrum mellan norra motorvägsinfarten till Malmö och Värnhemstorget, invigt 19 mars 2009.",
+   "source": "https://sv.wikipedia.org/wiki/Entr%C3%A9_Malm%C3%B6"
   },
   {
    "name": "Grand Malmö",
@@ -1413,7 +1637,9 @@
    ],
    "lat": 55.5949,
    "lon": 13.0098,
-   "why": "Grand Öl & Mat on Monbijougatan, a big beer hall and restaurant by Folkets Park."
+   "why": "Grand Öl & Mat on Monbijougatan, a big beer hall and restaurant by Folkets Park.",
+   "description": "Restaurang med svenskt kök, nattklubb och konserter.",
+   "source": "https://www.grandmalmo.se/"
   },
   {
    "name": "Mrs Brown",
@@ -1423,7 +1649,10 @@
    ],
    "lat": 55.59967,
    "lon": 12.99893,
-   "why": "Bar-restaurant on Storgatan, a long-running after-work and nightlife name."
+   "why": "Bar-restaurant on Storgatan, a long-running after-work and nightlife name.",
+   "description": "Bar och restaurang på Storgatan.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/mrs-brown/",
+   "verified": true
   },
   {
    "name": "Nobes",
@@ -1433,7 +1662,9 @@
    ],
    "lat": 55.5912,
    "lon": 13.01686,
-   "why": "Gamle Nobes Bodega on Kristianstadsgatan, a neighbourhood pub since 1937 that everyone calls Nobes; known for kålpudding."
+   "why": "Gamle Nobes Bodega on Kristianstadsgatan, a neighbourhood pub since 1937 that everyone calls Nobes; known for kålpudding.",
+   "description": "Pub med svensk husmanskost, öppnad 1937.",
+   "source": "https://www.thelocal.se/20240322/five-budget-friendly-bars-for-a-night-out-in-malmo"
   },
   {
    "name": "Korvhuset",
@@ -1443,7 +1674,9 @@
    ],
    "lat": 55.60081,
    "lon": 13.00235,
-   "why": "Sausage kiosk at Västra Kanalgatan 1 by the canal, run by the same couple since 1998 with 100+ sausages; called an institution."
+   "why": "Sausage kiosk at Västra Kanalgatan 1 by the canal, run by the same couple since 1998 with 100+ sausages; called an institution.",
+   "description": "Korvkiosk med ett hundratal sorters korv.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/korvhuset-vastra-kanalgatan/"
   },
   {
    "name": "Värnhems Falafel",
@@ -1453,7 +1686,9 @@
    ],
    "lat": 55.6057,
    "lon": 13.02479,
-   "why": "Falafel place on Lundavägen at Värnhem with its own bread and a queue out the door; won The Local's 2019 survey and called 'almost legendary' in 2024."
+   "why": "Falafel place on Lundavägen at Värnhem with its own bread and a queue out the door; won The Local's 2019 survey and called 'almost legendary' in 2024.",
+   "description": "Falafelställe vid Värnhemstorget.",
+   "source": "https://www.thelocal.com/20190808/expats-decide-these-are-the-best-falafel-joints-in-malm"
   },
   {
    "name": "Paddy's",
@@ -1463,7 +1698,9 @@
    ],
    "lat": 55.60571,
    "lon": 13.0028,
-   "why": "Irish pub on Kalendegatan off Stortorget, already established in 2011, with a wine and gin bar opposite since 2016."
+   "why": "Irish pub on Kalendegatan off Stortorget, already established in 2011, with a wine and gin bar opposite since 2016.",
+   "description": "Irländsk pub och restaurang, öppnad 1993 som Malmös första irländska pub.",
+   "source": "https://www.reco.se/paddy-s-sp-restauranger-ab-malmo"
   },
   {
    "name": "Mässingshornet",
@@ -1473,7 +1710,9 @@
    ],
    "lat": 55.60911,
    "lon": 13.03733,
-   "why": "Kirseberg's 'sunkhak king', interior untouched since 1981; a real institution but mostly known locally in Kirseberg."
+   "why": "Kirseberg's 'sunkhak king', interior untouched since 1981; a real institution but mostly known locally in Kirseberg.",
+   "description": "Pub.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/massingshornet/"
   },
   {
    "name": "Rex",
@@ -1483,7 +1722,9 @@
    ],
    "lat": 55.59365,
    "lon": 13.02093,
-   "why": "Nobelvägen pizzeria-pub called the best example of a classic Swedish pizzeria in Malmö (Tropicana pizza); no age found."
+   "why": "Nobelvägen pizzeria-pub called the best example of a classic Swedish pizzeria in Malmö (Tropicana pizza); no age found.",
+   "description": "Pizzeria med öl på fat, biljard, shuffleboard och standupkomik, sedan 1999.",
+   "source": "https://rexmalmo.se/"
   },
   {
    "name": "Fregatten",
@@ -1493,7 +1734,9 @@
    ],
    "lat": 55.60503,
    "lon": 13.02319,
-   "why": "Seafaring-themed neighbourhood pub on Föreningsgatan, a sunkhak crawl stop; local only."
+   "why": "Seafaring-themed neighbourhood pub on Föreningsgatan, a sunkhak crawl stop; local only.",
+   "description": "Kvarterspub i Värnhem med svensk husmanskost.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/fregatten/"
   },
   {
    "name": "Sankt Markus Vinkällare",
@@ -1503,14 +1746,19 @@
    ],
    "lat": 55.60285,
    "lon": 13.00275,
-   "why": "Old candlelit wine cellar on Stadt Hamburgsgatan known for julbord; reviews poor, recent activity only to 2023."
+   "why": "Old candlelit wine cellar on Stadt Hamburgsgatan known for julbord; reviews poor, recent activity only to 2023.",
+   "description": "Vinkällare i centrala Malmö.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/sankt-markus-vinkallare/",
+   "verified": true
   },
   {
    "name": "Spillepengen",
    "category": "park",
    "osm": [],
    "district": "Spillepengen",
-   "why": "Recreation area on the old landfill by the coast, north of the harbour."
+   "why": "Recreation area on the old landfill by the coast, north of the harbour.",
+   "description": "Här ligger Malmös största avfallsanläggning. Delar av de gamla sophögarna är gjorda till ett gräsbevuxet rekreationsområde med havsutsikt.",
+   "source": "https://sv.wikipedia.org/wiki/Spillepengen"
   },
   {
    "name": "Sege å",
@@ -1546,14 +1794,18 @@
     "way/709354707",
     "way/1011489113"
    ],
-   "why": "The river along Malmö's northern edge, out to the sea at Spillepengen/Arlöv."
+   "why": "The river along Malmö's northern edge, out to the sea at Spillepengen/Arlöv.",
+   "description": "Vattendrag i västra Skåne. Ån utgår från Börringesjön och mynnar efter omkring 50 kilometer i Lommabukten i Öresund.",
+   "source": "https://sv.wikipedia.org/wiki/Sege_%C3%A5"
   },
   {
    "name": "Ön",
    "category": "omrade",
    "osm": [],
    "district": "Limhamns Hamnområde",
-   "why": "The island district at Limhamn harbour."
+   "why": "The island district at Limhamn harbour.",
+   "description": "Konstgjord halvö i Limhamn. Där låg skeppsvarv 1916–1921 och flygplansproduktion 1925–1935.",
+   "source": "https://sv.wikipedia.org/wiki/%C3%96n%2C_Limhamn"
   },
   {
    "name": "Malmö Latinskola",
@@ -1561,7 +1813,9 @@
    "osm": [
     "way/52245411"
    ],
-   "why": "Upper secondary school that traces its roots to the medieval Latin school."
+   "why": "Upper secondary school that traces its roots to the medieval Latin school.",
+   "description": "Gymnasieskola med ursprung i en kyrkskola som startade 1406 vid S:t Petri kyrka.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_latinskola"
   },
   {
    "name": "Pauliskolan",
@@ -1569,7 +1823,9 @@
    "osm": [
     "way/50018607"
    ],
-   "why": "Upper secondary school in the old Pauli quarter by Sankt Pauli kyrka."
+   "why": "Upper secondary school in the old Pauli quarter by Sankt Pauli kyrka.",
+   "description": "Gymnasieskola i centrala Malmö, förut Pauli Gymnasium.",
+   "source": "https://sv.wikipedia.org/wiki/Pauliskolan"
   },
   {
    "name": "Malmö Borgarskola",
@@ -1577,7 +1833,9 @@
    "osm": [
     "way/52245413"
    ],
-   "why": "Large upper secondary school by Slottsparken, known as Borgarskolan."
+   "why": "Large upper secondary school by Slottsparken, known as Borgarskolan.",
+   "description": "Malmös största gymnasieskola med cirka 1 370 elever. Verksamheten går tillbaka till 1874.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_Borgarskola"
   },
   {
    "name": "S:t Petri skola",
@@ -1585,7 +1843,9 @@
    "osm": [
     "way/52245410"
    ],
-   "why": "Upper secondary school next to Malmö Latinskola."
+   "why": "Upper secondary school next to Malmö Latinskola.",
+   "description": "Gymnasieskola byggd mellan 1904 och 1908, en av Malmös äldsta och största.",
+   "source": "https://sv.wikipedia.org/wiki/Sankt_Petri_skola"
   },
   {
    "name": "Family Pub",
@@ -1593,7 +1853,9 @@
    "osm": [
     "node/4738304722"
    ],
-   "why": "Pub picked by the owner. The second branch (node/4560211514) is left out."
+   "why": "Pub picked by the owner. The second branch (node/4560211514) is left out.",
+   "description": "Bar.",
+   "source": "https://thatsup.co.uk/malmo/bar/family-pub-nobel/"
   },
   {
    "name": "Pivo",
@@ -1601,7 +1863,9 @@
    "osm": [
     "node/3357955289"
    ],
-   "why": "Pub picked by the owner. The second branch (node/11640709599) is left out."
+   "why": "Pub picked by the owner. The second branch (node/11640709599) is left out.",
+   "description": "Pub.",
+   "source": "https://theeuropeanbarguide.com/pivo-vastergatan-malmo-%f0%9f%87%b8%f0%9f%87%aa/"
   },
   {
    "name": "Elysée",
@@ -1609,7 +1873,9 @@
    "osm": [
     "node/3369322610"
    ],
-   "why": "Restaurant picked by the owner; also listed on Wikivoyage."
+   "why": "Restaurant picked by the owner; also listed on Wikivoyage.",
+   "description": "Restaurang känd för buljongfondue, där gästen själv tillagar kött, kyckling eller fläsk i buljong. Ingår i restaurangkoncernen Malmborgen.",
+   "source": "https://elysee.nu/"
   },
   {
    "name": "Drumbar",
@@ -1617,7 +1883,10 @@
    "osm": [
     "way/1093128526"
    ],
-   "why": "Bar picked by the owner; also listed by Visit Malmö."
+   "why": "Bar picked by the owner; also listed by Visit Malmö.",
+   "description": "Skotsk pub och whiskybar vid Lilla Torg i en byggnad från 1500-talet. Malmös första skotska pub.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/drumbar/",
+   "verified": true
   }
  ]
 }

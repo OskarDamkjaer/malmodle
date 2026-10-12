@@ -1,39 +1,39 @@
 {
   "areas": {
     "Gamla Staden": {
-      "text": "Den medeltida staden innanför vallarna, och Malmös kärna sedan 1200-talet. Gatunätet är i stora drag det som lades ut då.",
-      "source": null,
-      "verified": false
+      "text": "Malmös medeltida stadskärna, omgiven av kanalerna. Staden uppstod på 1250-talet och växte längs Adelgatan, i dag Västergatan, Adelgatan och Östergatan.",
+      "source": "https://sv.wikipedia.org/wiki/Gamla_staden,_Malm%C3%B6",
+      "verified": true
     },
     "Västra Hamnen": {
-      "text": "Kockums varv låg här tills fartygsbyggandet lades ner på 1980-talet, och den stora bockkranen såldes till Sydkorea 2002. Bostadsmässan Bo01 byggde om området 2001.",
-      "source": null,
-      "verified": false
+      "text": "Kockums varv låg här tills den civila fartygsproduktionen upphörde 1987, och Kockumskranen fördes till Sydkorea 2002. Bomässan Bo01 år 2001 blev början på stadsdelen.",
+      "source": "https://sv.wikipedia.org/wiki/V%C3%A4stra_hamnen",
+      "verified": true
     },
     "Möllevången": {
-      "text": "Arbetarrörelsens Malmö, byggt för industristadens folk. I dag stadens tätaste blandning av restauranger, torghandel och nattliv.",
-      "source": null,
-      "verified": false
+      "text": "Byggt för stadens arbetarbefolkning under 1900-talets första decennier. I dag präglat av restauranger, nattklubbar och torghandeln på Möllevångstorget.",
+      "source": "https://sv.wikipedia.org/wiki/M%C3%B6llev%C3%A5ngen",
+      "verified": true
     },
     "Davidshall": {
-      "text": "Kvarteren kring Davidshallstorg, med 1930-talets funkis som tydligaste årsring.",
-      "source": null,
-      "verified": false
+      "text": "Kvarteren kring Davidshallstorg, mest hyreshus från tidigt 1900-tal. Husen kring torget byggdes 1928–1934 i 1920-talsklassicism.",
+      "source": "https://sv.wikipedia.org/wiki/Davidshall",
+      "verified": true
     },
     "Augustenborg": {
-      "text": "Bostadsområde från 1950-talet, ombyggt från 1998 till Ekostaden Augustenborg med öppen dagvattenhantering och gröna tak — internationellt känt som exempel på klimatanpassning av miljonprogramsarv.",
-      "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Stadsdelar-och-omraden/Augustenborg.html",
-      "verified": false
+      "text": "Bostadsområde byggt av MKB 1948–1952, ombyggt från 1998 som Ekostaden Augustenborg med öppen dagvattenhantering och gröna tak.",
+      "source": "https://sv.wikipedia.org/wiki/Augustenborg,_Malm%C3%B6",
+      "verified": true
     },
     "Bunkeflostrand": {
       "text": "Villasamhälle vid kusten, utbyggt från 1960-talet och framåt.",
-      "source": null,
-      "verified": false
+      "source": "https://sv.wikipedia.org/wiki/Bunkeflostrand",
+      "verified": true
     },
     "Klagshamn": {
-      "text": "Byggt kring ett kalkbruk vid kusten. Udden utanför är i dag naturområde, uppbyggd av restmassor från bruket.",
-      "source": null,
-      "verified": false
+      "text": "Byggt kring kalkbrytning och cementtillverkning vid kusten, ungefär 1880–1930. Udden utanför är uppbyggd av restmassor från industrin och naturreservat sedan 2019.",
+      "source": "https://malmo.se/klagshamnsudden",
+      "verified": true
     },
     "Jägersro": {
       "text": "Travbanan och galoppfältet, med köpcentrum och handelsområde intill.",
@@ -41,9 +41,9 @@
       "verified": false
     },
     "Lorensborg": {
-      "text": "Höghus från slutet av 1950- och 60-talen, en av Malmös första storskaliga bostadssatsningar.",
-      "source": null,
-      "verified": false
+      "text": "Bostadsområde byggt i slutet av 1950-talet, samtidigt som Malmö Stadion inför fotbolls-VM 1958. Tre höghus på 16 våningar reser sig över bebyggelsen.",
+      "source": "https://sv.wikipedia.org/wiki/Lorensborg",
+      "verified": true
     },
     "Kroksbäck": {
       "text": "Miljonprogramsområde med karakteristiska gräskullar mellan husen.",
@@ -61,29 +61,29 @@
       "verified": false
     },
     "Fridhem": {
-      "text": "Villor och flerfamiljshus från tidigt 1900-tal.",
-      "source": null,
-      "verified": false
+      "text": "Villaområde med villor från omkring 1900 och 1910-talet. Flerbostadshusen på Potatisåkern byggdes från 1990-talet efter en plan av Charles Moore.",
+      "source": "https://sv.wikipedia.org/wiki/Fridhem%2C_Malm%C3%B6",
+      "verified": true
     },
     "Mellanheden": {
-      "text": "1940- och 50-talets Malmö i lamellhus.",
-      "source": null,
-      "verified": false
+      "text": "Grannskapsenhet planerad av Gunnar Lindman, med flerbostadshus från 1950-talet, bland dem stjärnhusen från 1951, och villor från 1920-talet.",
+      "source": "https://sv.wikipedia.org/wiki/Mellanheden",
+      "verified": true
     },
     "Kulladal": {
-      "text": "Egnahems- och radhusområde, byggt från 1930-talet.",
-      "source": null,
-      "verified": false
+      "text": "Före detta egnahemsområde i Fosie, med småhus från tidigt 1900-tal och flerfamiljshus från 1960- och 1970-talen.",
+      "source": "https://sv.wikipedia.org/wiki/Kulladal",
+      "verified": true
     },
     "Rörsjöstaden": {
-      "text": "Rutnätsstaden som byggdes från slutet av 1800-talet, när Malmö växte ur sina vallar.",
-      "source": null,
-      "verified": false
+      "text": "Byggdes från 1870-talet där sjön Östra Rörsjön låg, utanför stadens fästningsverk. Planen utgår från boulevarden Kungsgatan.",
+      "source": "https://sv.wikipedia.org/wiki/R%C3%B6rsj%C3%B6staden",
+      "verified": true
     },
     "Ribersborg": {
-      "text": "Stranden — Ribban — är stadens badplats, och Ribersborgs kallbadhus står ute i vattnet sedan 1898.",
-      "source": null,
-      "verified": false
+      "text": "Funkisområde vid stranden, Ribban, byggt efter en stadsplan från 1936. Ribersborgs kallbadhus flyttades ut i vattnet där 1898.",
+      "source": "https://sv.wikipedia.org/wiki/Ribersborg",
+      "verified": true
     },
     "Pildammsparken": {
       "text": "Anlagd kring dammarna som en gång var stadens vattentäkt, och formad av Baltiska utställningen 1914. Tallriken i mitten är utställningens kvarleva.",
@@ -91,64 +91,64 @@
       "verified": false
     },
     "Bulltofta": {
-      "text": "Malmös flygplats från 1920-talet till 1972, då trafiken flyttade till Sturup. Banorna är i dag Bulltofta rekreationsområde.",
-      "source": null,
-      "verified": false
+      "text": "Malmös flygplats från 1923 till 1972, då trafiken flyttade till Sturup. Det tidigare flygfältet är i dag till stor del Bulltofta rekreationsområde.",
+      "source": "https://malmo.se/Uppleva-och-gora/Natur-och-parker/Bulltofta-rekreationsomrade/Besoka-Bulltofta/Om-Bulltofta-rekreationsomrade.html",
+      "verified": true
     },
     "Värnhem": {
-      "text": "Värnhemstorget är en av stadens största bytespunkter för buss.",
-      "source": null,
-      "verified": false
+      "text": "Viktig knutpunkt för Malmös busstrafik, sedan 2018 också med Östervärns station på Malmöringen. Bostadshusen är främst från 1920- och 1930-talen.",
+      "source": "https://sv.wikipedia.org/wiki/V%C3%A4rnhem",
+      "verified": true
     },
     "Södervärn": {
-      "text": "Knutpunkt där många av stadens busslinjer möts.",
-      "source": null,
-      "verified": false
+      "text": "Delområde i Södra Innerstaden. Den gamla stationen, ändstation för tåg mot Falsterbo till 1971, är ombyggd till bussterminal.",
+      "source": "https://sv.wikipedia.org/wiki/S%C3%B6derv%C3%A4rn",
+      "verified": true
     },
     "Rådmansvången": {
-      "text": "Området heter Rådmansvången i registren och Triangeln i verkligheten — ett av de tydligaste exemplen på att kartans namn inte alltid är stadens.",
-      "source": null,
-      "verified": false
+      "text": "Bostads- och affärsområde med mest tegelhus från slutet av 1800-talet och framåt. Här ligger Triangelns station och Hotell Triangeln.",
+      "source": "https://sv.wikipedia.org/wiki/R%C3%A5dmansv%C3%A5ngen",
+      "verified": true
     },
     "Holma": {
       "text": "Miljonprogramsområde.",
-      "source": null,
-      "verified": false
+      "source": "https://sv.wikipedia.org/wiki/Holma%2C_Malm%C3%B6",
+      "verified": true
     },
     "Lindängen": {
       "text": "Bostadsområde från miljonprogramstiden, kring Lindängens centrum.",
-      "source": null,
-      "verified": false
+      "source": "https://sv.wikipedia.org/wiki/Lind%C3%A4ngen",
+      "verified": true
     },
     "Hermodsdal": {
       "text": "Bostadsområde byggt på 1960-talet.",
-      "source": null,
-      "verified": false
+      "source": "https://sv.wikipedia.org/wiki/Hermodsdal",
+      "verified": true
     },
     "Nydala": {
-      "text": "Bostadsområde med Nydalabadet.",
-      "source": null,
-      "verified": false
+      "text": "Bostadsområde med flerfamiljshus från 1960-talet, byggt som en grannskapsenhet kring Nydalaparken.",
+      "source": "https://sv.wikipedia.org/wiki/Nydala,_Malm%C3%B6",
+      "verified": true
     },
     "Almgården": {
-      "text": "Ett av Rosengårds bostadsområden.",
-      "source": null,
-      "verified": false
+      "text": "Miljonprogramsområde med hyreshus byggda 1969–1972. Här ligger Malmö moské och Västra Skrävlinge kyrka.",
+      "source": "https://sv.wikipedia.org/wiki/Almg%C3%A5rden",
+      "verified": true
     },
     "Toftanäs": {
-      "text": "Våtmarkspark, anlagd för att rena dagvatten och i dag ett fågelområde.",
-      "source": null,
-      "verified": false
+      "text": "Industriområde som började byggas 1992 med Postens terminal. Dagvattnet leds till Toftanäs våtmarkspark.",
+      "source": "https://sv.wikipedia.org/wiki/Toftan%C3%A4s",
+      "verified": true
     },
     "Slussen": {
-      "text": "Uppkallat efter slussen mellan kanalen och hamnen.",
-      "source": null,
-      "verified": false
+      "text": "Namnet kommer från en sluss där en kanal från Sege å, igenfylld omkring 1910, mötte hamnkanalen. Främst hyreshus från början av 1900-talet.",
+      "source": "https://sv.wikipedia.org/wiki/Slussen,_Malm%C3%B6",
+      "verified": true
     },
     "Östervärn": {
-      "text": "Kring Östervärns station på Kontinentalbanan.",
-      "source": null,
-      "verified": false
+      "text": "Kvarter norr och öster om Värnhemstorget, mest stenhus från omkring 1900 och 1920-talet. Kontinentalbanan utgör gränsen i norr.",
+      "source": "https://sv.wikipedia.org/wiki/%C3%96sterv%C3%A4rn",
+      "verified": true
     },
     "Flensburg": {
       "text": "Uppkallat efter köpmanssläkten Flensburg.",
@@ -156,24 +156,24 @@
       "verified": false
     },
     "Katrinelund": {
-      "text": "Katrinelundsskolan och idrottsplatsen ligger här.",
-      "source": null,
-      "verified": false
+      "text": "Länge ett område för sjukvård. I dag ligger här Rönnens gymnasium och Katrinelundsskolan, och bostäderna är främst hyresrätter från 1960- och 1970-talen.",
+      "source": "https://sv.wikipedia.org/wiki/Katrinelund",
+      "verified": true
     },
     "Allmänna Sjukhuset": {
-      "text": "Delområdet är sjukhuset: Skånes universitetssjukhus i Malmö, SUS.",
-      "source": null,
-      "verified": false
+      "text": "Sjukhusområdet för Skånes universitetssjukhus i Malmö, före 2010 Universitetssjukhuset MAS, med byggnader i paviljonger i stället för ett centralblock.",
+      "source": "https://sv.wikipedia.org/wiki/Allm%C3%A4nna_sjukhuset,_Malm%C3%B6",
+      "verified": true
     },
     "Östra Kyrkogården": {
-      "text": "Sigurd Lewerentz kyrkogård från 1920-talet, med sina kapell — ett av svensk 1900-talsarkitekturs mest besökta verk.",
+      "text": "Sigurd Lewerentz kyrkogård från 1920-talet, med sina kapell.",
       "source": null,
       "verified": false
     },
     "Svågertorp": {
       "text": "Handels- och verksamhetsområde med egen station.",
-      "source": null,
-      "verified": false
+      "source": "https://sv.wikipedia.org/wiki/Sv%C3%A5gertorp",
+      "verified": true
     },
     "Hyllieby": {
       "text": "Den gamla byn Hyllie, kvar som namn sedan åkern blev stad.",
@@ -181,7 +181,7 @@
       "verified": false
     },
     "Södra Sallerup": {
-      "text": "Byn omgiven av kalkbrott — här har kalk brutits sedan medeltiden.",
+      "text": "By omgiven av kalkbrott. Här har kalk brutits sedan medeltiden.",
       "source": null,
       "verified": false
     },
@@ -189,6 +189,96 @@
       "text": "Avfallsanläggningen och deponin, med golfbanan ovanpå den gamla tippen.",
       "source": null,
       "verified": false
+    },
+    "Käglinge": {
+      "text": "Ursprungligen en by, bynamnet belagt sedan mitten av 1300-talet. Området består i huvudsak av villor och radhus, många av dem från 1980-talet.",
+      "source": "https://sv.wikipedia.org/wiki/K%C3%A4glinge",
+      "verified": true
+    },
+    "Vintrie": {
+      "text": "Bebyggelse i sydvästra delen av Malmö kommun, delområde i distriktet Bunkeflo.",
+      "source": "https://sv.wikipedia.org/wiki/Vintrie",
+      "verified": true
+    },
+    "Dammfri": {
+      "text": "Bostadsområde med flerfamiljshus, hälften bostadsrätter och hälften hyresrätter.",
+      "source": "https://sv.wikipedia.org/wiki/Dammfri",
+      "verified": true
+    },
+    "Persborg": {
+      "text": "Byggt på 1950-talet. Området har sitt torg avskilt från den övriga bebyggelsen.",
+      "source": "https://sv.wikipedia.org/wiki/Persborg",
+      "verified": true
+    },
+    "Kronborg": {
+      "text": "Flerfamiljshus från andra halvan av 1940-talet. Namn på gator och kvarter har hämtats från Danmark.",
+      "source": "https://sv.wikipedia.org/wiki/Kronborg,_Malm%C3%B6",
+      "verified": true
+    },
+    "Fågelbacken": {
+      "text": "Bostadsområde med flerfamiljshus, de flesta byggda på 1940- och 1950-talen.",
+      "source": "https://sv.wikipedia.org/wiki/F%C3%A5gelbacken",
+      "verified": true
+    },
+    "Lugnet": {
+      "text": "Huvuddelen var förr en del av Södra Förstaden, området öster om Kaptensgatan tillhörde Rörsjöstaden.",
+      "source": "https://sv.wikipedia.org/wiki/Lugnet%2C_Malm%C3%B6",
+      "verified": true
+    },
+    "Hästhagen": {
+      "text": "Skol- och bostadsområde, främst flerfamiljshus i slutna kvarter från tiden mellan 1910- och 1940-talet.",
+      "source": "https://sv.wikipedia.org/wiki/H%C3%A4sthagen,_Malm%C3%B6",
+      "verified": true
+    },
+    "Hyllievång": {
+      "text": "Nytt bostads- och affärsområde under byggnation. Marken utgjorde Hyllie bys östra vång fram till enskiftet.",
+      "source": "https://sv.wikipedia.org/wiki/Hylliev%C3%A5ng",
+      "verified": true
+    },
+    "Videdal": {
+      "text": "Främst villabebyggelse från 1960-talet. Innefattar sedan år 1981 den tidigare stadsdelen Hohög.",
+      "source": "https://sv.wikipedia.org/wiki/Videdal",
+      "verified": true
+    },
+    "Inre Hamnen": {
+      "text": "Den äldsta delen av Malmö hamn, byggd under slutet av 1700-talet och början av 1800-talet. Färjorna lades ned 2002.",
+      "source": "https://sv.wikipedia.org/wiki/Inre_hamnen%2C_Malm%C3%B6",
+      "verified": true
+    },
+    "Rönneholm": {
+      "text": "Bostadsområde med flerfamiljshus från första halvan av 1900-talet. Herrgården Rönneholmsgården byggdes 1798.",
+      "source": "https://sv.wikipedia.org/wiki/R%C3%B6nneholm,_Malm%C3%B6",
+      "verified": true
+    },
+    "Ellstorp": {
+      "text": "Tidigare koloniområde, bebyggt av Hugo Åberg för HSB med 1100 lägenheter från 1930-talet.",
+      "source": "https://sv.wikipedia.org/wiki/Ellstorp",
+      "verified": true
+    },
+    "Kirsebergsstaden": {
+      "text": "Delområde i Kirseberg, även kallat Backarna.",
+      "source": "https://sv.wikipedia.org/wiki/Kirsebergsstaden",
+      "verified": true
+    },
+    "Kronprinsen": {
+      "text": "Bebyggdes 1897 för Kronprinsens husarregemente, som lades ner 1927. Höghuset Kronprinsen stod klart 1964.",
+      "source": "https://sv.wikipedia.org/wiki/Kronprinsen,_Malm%C3%B6",
+      "verified": true
+    },
+    "Malmö Hus": {
+      "text": "Området kring Malmöhus slott, med Kungsparken och Slottsparken.",
+      "source": "https://en.wikipedia.org/wiki/Kungsparken,_Malm%C3%B6",
+      "verified": true
+    },
+    "Stadion": {
+      "text": "Idrottsområde med Eleda Stadion, Malmö FF:s hemmaarena sedan 2009, och det äldre Malmö stadion.",
+      "source": "https://sv.wikipedia.org/wiki/Eleda_Stadion",
+      "verified": true
+    },
+    "Frihamnen": {
+      "text": "Frihamn i Malmö hamn, anlagd på utfylld mark från 1917 och invigd 1922.",
+      "source": "https://www.lansstyrelsen.se/skane/besoksmal/kulturmiljoprogram/kulturmiljoprogram-omraden/kulturmiljoprogram-malmo-limhamn.html",
+      "verified": true
     }
   }
 }
