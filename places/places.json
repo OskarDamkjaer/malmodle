@@ -132,7 +132,10 @@
    ],
    "lat": 55.59853,
    "lon": 12.97119,
-   "why": "Market square and bus stop on the west side, the everyday meeting point for Fridhem/Västra Innerstaden."
+   "why": "Market square and bus stop on the west side, the everyday meeting point for Fridhem/Västra Innerstaden.",
+   "description": "Torg i Fridhem med torghandel. S:t Andreas kyrka ligger vid torget.",
+   "source": "https://malmo.se/Uppleva-och-gora/Fritidsaktiviteter/Torghandel.html",
+   "verified": false
   },
   {
    "name": "Sankt Knuts torg",
@@ -444,7 +447,10 @@
    "apart": "Klagshamns udde",
    "lat": 55.52497,
    "lon": 12.8959,
-   "why": "The natural beach out on Klagshamnsudden, one of Malmö's five official bathing places."
+   "why": "The natural beach out on Klagshamnsudden, one of Malmö's five official bathing places.",
+   "description": "Badplats på Klagshamnsudden, en konstgjord udde av rester från kalk- och cementindustrin.",
+   "source": "https://malmo.se/Uppleva-och-gora/Bada-och-simma/Strander-och-badplatser/Klagshamnsstranden.html",
+   "verified": false
   },
   {
    "name": "Sibbarps kallbadhus",
@@ -527,7 +533,10 @@
    ],
    "lat": 55.59959,
    "lon": 13.00041,
-   "why": "The central multiplex on Storgatan since 1998, a common meeting point near Gustav Adolfs torg."
+   "why": "The central multiplex on Storgatan since 1998, a common meeting point near Gustav Adolfs torg.",
+   "description": "Biograf med flera salonger.",
+   "source": "https://www.moviezine.se/nyheter/filmstadens-biografer-oppnar-igen",
+   "verified": false
   },
   {
    "name": "Victoriateatern",
@@ -1148,7 +1157,10 @@
    ],
    "lat": 55.60673,
    "lon": 12.99897,
-   "why": "Traditional Swedish restaurant in the vaulted cellars of the 1520s Kockska huset by Stortorget."
+   "why": "Traditional Swedish restaurant in the vaulted cellars of the 1520s Kockska huset by Stortorget.",
+   "description": "Restaurang i källarvalven under Kockska huset, som borgmästaren och myntmästaren Jörgen Kock lät bygga på 1520-talet. Huset är byggnadsminne.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Byggnader-A-O/Jorgen-Kocks-hus.html",
+   "verified": false
   },
   {
    "name": "Brasserie Sture",
@@ -1158,7 +1170,10 @@
    ],
    "lat": 55.60731,
    "lon": 13.00043,
-   "why": "The Sture/Sturehof name on Adelgatan goes back to 1912 and is widely known, but today's brasserie (2015) is Michelin-listed and upscale; owner was undecided."
+   "why": "The Sture/Sturehof name on Adelgatan goes back to 1912 and is widely known, but today's brasserie (2015) is Michelin-listed and upscale; owner was undecided.",
+   "description": "Brasserie med medelhavsinfluerad meny och mosaikgolv. Restauranglokalen på Adelgatan har anor från 1912.",
+   "source": "https://guide.michelin.com/jp/ja/skane/malmo/restaurant/brasserie-sture",
+   "verified": false
   },
   {
    "name": "Saltimporten",
@@ -1252,7 +1267,10 @@
    ],
    "lat": 55.59196,
    "lon": 13.00847,
-   "why": "Beer bar with the big outdoor serving on Möllevångstorget 8."
+   "why": "Beer bar with the big outdoor serving on Möllevångstorget 8.",
+   "description": "Ölbar och restaurang vid Möllevångstorget med stor uteservering. Serverar pubmat och smörrebröd.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/nyhavn/",
+   "verified": false
   },
   {
    "name": "Pickwick",
@@ -1322,7 +1340,10 @@
    ],
    "lat": 55.60453,
    "lon": 13.00289,
-   "why": "Micro-roastery café in a 17th-century house on Baltzarsgatan since 2006, one of Sweden's pioneer micro-roasteries."
+   "why": "Micro-roastery café in a 17th-century house on Baltzarsgatan since 2006, one of Sweden's pioneer micro-roasteries.",
+   "description": "Mikrorosteri och kafé i ett av Malmös äldre bostadshus, öppnat 2006. Ett av Sveriges första mikrorosterier.",
+   "source": "https://www.falstaff.com/en/cafes/lilla-kafferosteriet",
+   "verified": false
   },
   {
    "name": "Kaffebaren på Möllan",
@@ -1332,7 +1353,10 @@
    ],
    "lat": 55.59106,
    "lon": 13.00879,
-   "why": "Tiny classic coffee bar at Möllevångstorget, a Möllan fixture since at least 2009 (likely around 1998-2002)."
+   "why": "Tiny classic coffee bar at Möllevångstorget, a Möllan fixture since at least 2009 (likely around 1998-2002).",
+   "description": "Liten kaffebar med italiensk inriktning.",
+   "source": "https://thatsup.co.uk/malmo/cafe/kaffebaren-pa-mollan/",
+   "verified": false
   },
   {
    "name": "Solde",
@@ -1342,7 +1366,10 @@
    ],
    "lat": 55.60077,
    "lon": 13.00046,
-   "why": "Italian-style stand-up coffee bar and roastery at Regementsgatan 2 by Davidshallsbron, Best Coffee Bar at Malmö Gastronomy Award 2024; open since at least 2015."
+   "why": "Italian-style stand-up coffee bar and roastery at Regementsgatan 2 by Davidshallsbron, Best Coffee Bar at Malmö Gastronomy Award 2024; open since at least 2015.",
+   "description": "Kaffebar, öppnad 2006.",
+   "source": "https://andershusa.com/solde-kaffebar-kafferosteri-malmos-best-coffee-bar/",
+   "verified": false
   },
   {
    "name": "Pâtisserie David",
@@ -1388,7 +1415,10 @@
    ],
    "lat": 55.59796,
    "lon": 12.9753,
-   "why": "Traditional konditori at Regementsgatan 86 in Slottsstaden, open for more than 20 years."
+   "why": "Traditional konditori at Regementsgatan 86 in Slottsstaden, open for more than 20 years.",
+   "description": "Konditori i Slottsstaden.",
+   "source": "https://thatsup.co.uk/malmo/cafe/regement-konditori/",
+   "verified": false
   },
   {
    "name": "Söderberg & Sara",
@@ -1398,7 +1428,10 @@
    ],
    "lat": 55.59664,
    "lon": 13.01417,
-   "why": "Stone-oven sourdough bakery and roastery café at S:t Knuts torg, the Malmö sibling of an Ystad bakery, since about 2010."
+   "why": "Stone-oven sourdough bakery and roastery café at S:t Knuts torg, the Malmö sibling of an Ystad bakery, since about 2010.",
+   "description": "Bageri och kafé med surdegsbröd, filial till ett äldre bageri i Ystad.",
+   "source": "https://thatsup.co.uk/malmo/cafe/söderberg-sara/",
+   "verified": false
   },
   {
    "name": "Lilla Glassfabriken",
@@ -1430,7 +1463,10 @@
    "osm": [
     "relation/2343599"
    ],
-   "why": ""
+   "why": "",
+   "description": "Torg intill Gamla Limhamn, med lekplats samt höst- och julmarknad.",
+   "source": "https://sv.wikipedia.org/wiki/Limhamn",
+   "verified": false
   },
   {
    "name": "Anna Lindhs plats",
@@ -1553,7 +1589,10 @@
    ],
    "lat": 55.59967,
    "lon": 12.99893,
-   "why": "Bar-restaurant on Storgatan, a long-running after-work and nightlife name."
+   "why": "Bar-restaurant on Storgatan, a long-running after-work and nightlife name.",
+   "description": "Bar och restaurang på Storgatan.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/mrs-brown/",
+   "verified": false
   },
   {
    "name": "Nobes",
@@ -1647,7 +1686,10 @@
    ],
    "lat": 55.60285,
    "lon": 13.00275,
-   "why": "Old candlelit wine cellar on Stadt Hamburgsgatan known for julbord; reviews poor, recent activity only to 2023."
+   "why": "Old candlelit wine cellar on Stadt Hamburgsgatan known for julbord; reviews poor, recent activity only to 2023.",
+   "description": "Vinkällare i centrala Malmö, inredd med kyrkbänkar och ikoner.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/sankt-markus-vinkallare/",
+   "verified": false
   },
   {
    "name": "Spillepengen",
@@ -1777,7 +1819,10 @@
    "osm": [
     "way/1093128526"
    ],
-   "why": "Bar picked by the owner; also listed by Visit Malmö."
+   "why": "Bar picked by the owner; also listed by Visit Malmö.",
+   "description": "Skotsk pub och whiskybar vid Lilla Torg i en byggnad från 1500-talet. Malmös första skotska pub.",
+   "source": "https://thatsup.co.uk/malmo/restaurant/drumbar/",
+   "verified": false
   }
  ]
 }

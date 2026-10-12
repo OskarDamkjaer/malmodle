@@ -259,6 +259,26 @@
       "text": "Delområde i Kirseberg, även kallat Backarna.",
       "source": "https://sv.wikipedia.org/wiki/Kirsebergsstaden",
       "verified": true
+    },
+    "Kronprinsen": {
+      "text": "Tidigare kasernområde för Kronprinsens husarregemente. Höghuset Kronprinsen byggdes på 1960-talet.",
+      "source": "https://sv.wikipedia.org/wiki/Kronprinsen,_Malmö",
+      "verified": false
+    },
+    "Malmö Hus": {
+      "text": "Området kring Malmöhus slott, med Kungsparken och Slottsparken.",
+      "source": null,
+      "verified": false
+    },
+    "Stadion": {
+      "text": "Idrottsområde med Eleda Stadion, Malmö FF:s hemmaarena sedan 2009, och det äldre Malmö stadion.",
+      "source": "https://sv.wikipedia.org/wiki/Stadion,_Malmö",
+      "verified": false
+    },
+    "Frihamnen": {
+      "text": "Del av Malmö hamn norr om Inre hamnen, invigd 1923. Används för lagring och omlastning av gods, bland annat containrar.",
+      "source": "https://sv.wikipedia.org/wiki/Frihamnen,_Malmö",
+      "verified": false
     }
   }
 }
