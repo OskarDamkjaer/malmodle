@@ -47,6 +47,7 @@ java -Xmx4g -jar "$JAR" \
   --osm-path="$CLIP" \
   --bounds="$WEST,$SOUTH,$EAST,$NORTH" \
   --minzoom="$MINZ" --maxzoom="$MAXZ" --download --force \
+  --exclude-layers=poi,housenumber,mountain_peak,aeroway \
   --output="$CACHE/malmo.tmp.pmtiles"
 mv "$CACHE/malmo.tmp.pmtiles" "$OUT"
 
