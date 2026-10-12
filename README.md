@@ -1,4 +1,4 @@
-# Malmökoll
+# Malmödle
 
 A daily quiz for getting to know Malmö: <https://malmoe.damk.eu>
 
@@ -9,7 +9,7 @@ about each, can copy your result to share it, and can open the full map to look
 around on your own.
 
 It runs in the browser, works offline once loaded, and stores nothing about
-you.
+you. It can be installed on the home screen.
 
 Other styles are kept for trying out at their own addresses:
 [Papper](https://malmoe.damk.eu/papper/), [Natt](https://malmoe.damk.eu/natt/)

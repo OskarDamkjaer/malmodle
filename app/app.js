@@ -371,6 +371,7 @@ function finish() {
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
+  offerInstall();
 
   reveal('end');
   el('end').scrollTop = 0;
@@ -444,6 +445,44 @@ function reportLink() {
   return url.href;
 }
 
+let installEvent = null;
+const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const ios = /iPhone|iPod/.test(navigator.userAgent);
+const phone = navigator.userAgentData?.mobile
+  ?? (ios || /Android.*Mobile/.test(navigator.userAgent) || matchMedia('(pointer: coarse) and (max-width: 599px)').matches);
+
+addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  installEvent = e;
+  if (phase === 'end') offerInstall();
+});
+addEventListener('appinstalled', () => {
+  installEvent = null;
+  if (phase === 'end') offerInstall();
+});
+
+function offerInstall() {
+  const text = !phone || standalone() ? null
+    : installEvent ? 'Lägg Malmödle på hemskärmen, så är nästa omgång ett tryck bort.'
+    : ios ? 'Lägg Malmödle på hemskärmen: tryck på Dela och välj Lägg till på hemskärmen.'
+    : null;
+  el('install').hidden = !text;
+  el('installtext').textContent = text ?? '';
+  el('installbutton').hidden = !installEvent;
+}
+
+async function install() {
+  const event = installEvent;
+  if (!event) return;
+  installEvent = null;
+  offerInstall();
+  try {
+    await event.prompt();
+    await event.userChoice;
+  } catch {}
+  offerInstall();
+}
+
 function renderKinds() {
   const list = el('kinds');
   for (const kind of PRACTICE) {
@@ -506,6 +545,7 @@ el('sharenative').addEventListener('click', shareNative);
 el('sharetext').addEventListener('click', share);
 el('practise').addEventListener('click', toggleKinds);
 el('again').addEventListener('click', start);
+el('installbutton').addEventListener('click', install);
 el('infoclose').addEventListener('click', closePlace);
 el('endmap').addEventListener('click', toggleMapView);
 el('maptipbutton').addEventListener('click', (e) => {

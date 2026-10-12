@@ -285,6 +285,9 @@ body[data-mapview] #endverdict, body[data-mapview] #endsquares { display: none; 
 body[data-mapview] #end .total { margin-top: 4px; }
 body[data-mapview] #end .total strong { font-size: 36px; }
 body[data-mapview] #endmap { margin-top: 12px; }
+.install { display: flex; align-items: center; gap: 12px; margin: 16px 0 0; padding: 12px 14px; background: var(--panel); border: var(--border); border-radius: var(--radius); }
+#installtext { flex: 1; margin: 0; font-size: 15px; line-height: 1.4; }
+#installbutton { flex: 0 0 auto; min-height: 44px; padding: 8px 18px; font-weight: 600; }
 
 .band { min-width: 44px; padding: 3px 10px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; border-radius: var(--radius-button); }
 .band[data-band="green"] { background: var(--band-green); color: #ffffff; }
