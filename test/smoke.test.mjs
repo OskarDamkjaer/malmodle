@@ -93,7 +93,7 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
 
     await page.click('#share');
     const shared = await page.evaluate(() => navigator.clipboard.readText());
-    assert.match(shared, /^Malmökoll \d{4}-\d{2}-\d{2}\n\d+\/1000\n/);
+    assert.match(shared, /^Malmödle \d{4}-\d{2}-\d{2}\n\d+\/1000\n/);
     assert.equal([...shared.split('\n')[2]].length, 10);
 
     await page.waitForTimeout(800);

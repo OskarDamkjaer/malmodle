@@ -1,4 +1,4 @@
-# Malmökoll
+# Malmödle
 
 A daily quiz for getting to know Malmö: <https://malmoe.damk.eu>
 
