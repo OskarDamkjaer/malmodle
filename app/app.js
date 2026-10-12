@@ -130,14 +130,22 @@ function resume() {
   practicing = null;
   const questions = dailySet(items, key);
   const answered = recall(loadSaved(), key, questions);
-  if (!answered.length) {
-    try { localStorage.removeItem(SAVE_KEY); } catch {}
+  if (!answered.length) forget();
+  try {
+    play(questions, answered);
+  } catch (err) {
+    console.error(err);
+    forget();
+    play(questions);
   }
-  play(questions, answered);
 }
 
 function loadSaved() {
   try { return JSON.parse(localStorage.getItem(SAVE_KEY)); } catch { return null; }
+}
+
+function forget() {
+  try { localStorage.removeItem(SAVE_KEY); } catch {}
 }
 
 function save(finished) {

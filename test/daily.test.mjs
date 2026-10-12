@@ -232,24 +232,44 @@ test('a saved day for a different set is ignored', () => {
   assert.deepEqual(recall({ key, targets: set.map((q) => q.target.name), done: 'trasig' }, key, set), []);
 });
 
-test('broken saved answers are ignored', () => {
+test('anything else in storage comes back as nothing', () => {
   const key = '2026-10-10';
   const set = dailySet(items, key);
-  const targets = set.map((q) => q.target.name);
+  const good = stored(remember(null, { key, set, results: set.slice(0, 3).map((q) => answer(q, 40)), finished: false }));
   const map = set.findIndex((q) => TYPES[q.type].input === 'map');
   const choice = set.findIndex((q) => TYPES[q.type].input === 'choice');
-  const missing = (i, a) => set.slice(0, i + 1).map((q, j) => (j === i ? a : { score: MAX_SCORE }));
-  assert.deepEqual(recall({ key, targets, playing: [null] }, key, set), []);
-  assert.deepEqual(recall({ key, targets, playing: [{ score: 'mycket' }] }, key, set), []);
-  assert.deepEqual(recall({ key, targets, playing: [{ score: MAX_SCORE + 1 }] }, key, set), []);
-  assert.deepEqual(recall({ key, targets, playing: missing(map, { score: 40 }) }, key, set), []);
-  assert.deepEqual(recall({ key, targets, playing: missing(choice, { score: 0 }) }, key, set), []);
-  assert.equal(recall({ key, targets, playing: missing(map, { score: 40, distance: 300 }) }, key, set).length, map + 1);
+  const upTo = (i, broken) => set.slice(0, i + 1).map((q, j) => (j === i ? broken : stored(remember(null, { key, set, results: [answer(q, 40)], finished: true }).done[0])));
+  const broken = [
+    null, 'trasig', 42, [], {},
+    { ...good, version: 0 },
+    { ...good, version: undefined },
+    { ...good, targets: 'alla' },
+    { ...good, targets: good.targets.slice(1) },
+    { ...good, playing: 'trasig' },
+    { ...good, playing: [] },
+    { ...good, playing: [null] },
+    { ...good, playing: [{ score: 'mycket' }] },
+    { ...good, playing: [{ score: MAX_SCORE + 1, distance: 0, choice: 'x' }] },
+    { ...good, playing: [{ score: 40.5, distance: 0, choice: 'x' }] },
+    { ...good, playing: [...good.playing, ...set.map(() => good.playing[0])] },
+    { ...good, playing: upTo(map, { score: 40 }) },
+    { ...good, playing: upTo(map, { score: 40, distance: -1 }) },
+    { ...good, playing: upTo(choice, { score: 0 }) },
+    { ...good, playing: upTo(choice, { score: 0, choice: 7 }) },
+    { ...good, playing: undefined, done: good.playing },
+  ];
+  for (const raw of broken) assert.deepEqual(recall(raw, key, set), [], JSON.stringify(raw));
+  assert.equal(recall(good, key, set).length, 3);
 });
 
-test('a broken replay falls back to the finished day', () => {
+test('only the parts that parse are kept', () => {
   const key = '2026-10-10';
   const set = dailySet(items, key);
   const done = stored(remember(null, { key, set, results: set.map((q) => answer(q, 100)), finished: true }));
   assert.equal(recall({ ...done, playing: [null] }, key, set).length, set.length);
+  for (const { q, result } of recall(done, key, set)) {
+    assert.deepEqual(Object.keys(result).sort(), TYPES[q.type].input === 'map' ? ['distance', 'score'] : ['choice', 'score']);
+  }
+  const replay = stored(remember({ ...done, done: [null] }, { key, set, results: [answer(set[0], 0)], finished: false }));
+  assert.equal(replay.done, undefined);
 });

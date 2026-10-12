@@ -252,29 +252,45 @@ export function shareText({ key, scores, url }) {
 }
 
 export const SAVE_KEY = 'malmodle';
+const SAVE_VERSION = 1;
 
 const targetsOf = (set) => set.map((q) => q.target.name);
-const sameTargets = (saved, set) => JSON.stringify(saved?.targets) === JSON.stringify(targetsOf(set));
+const isScore = (n) => Number.isInteger(n) && n >= 0 && n <= MAX_SCORE;
 
-export function remember(saved, { key, set, results, finished }) {
-  const answers = results.map(({ result }) => ({ score: result.score, distance: result.distance, choice: result.choice }));
-  const targets = targetsOf(set);
-  if (finished) return { key, targets, done: answers };
-  const done = saved?.key === key && sameTargets(saved, set) ? saved.done : undefined;
-  return { key, targets, done, playing: answers };
+function parseAnswer(raw, q) {
+  if (!isScore(raw?.score)) return null;
+  if (TYPES[q.type].input === 'map') {
+    return Number.isFinite(raw.distance) && raw.distance >= 0 ? { score: raw.score, distance: raw.distance } : null;
+  }
+  return typeof raw.choice === 'string' ? { score: raw.score, choice: raw.choice } : null;
 }
 
-const validAnswer = (a, q) => {
-  if (!a || !Number.isInteger(a.score) || a.score < 0 || a.score > MAX_SCORE) return false;
-  if (a.score === MAX_SCORE) return true;
-  return TYPES[q.type].input === 'map' ? Number.isFinite(a.distance) : typeof a.choice === 'string';
-};
+function parseAnswers(raw, set) {
+  if (!Array.isArray(raw) || raw.length === 0 || raw.length > set.length) return undefined;
+  const answers = raw.map((a, i) => parseAnswer(a, set[i]));
+  return answers.every(Boolean) ? answers : undefined;
+}
 
-const usable = (answers, set) =>
-  Array.isArray(answers) && answers.length > 0 && answers.length <= set.length && answers.every((a, i) => validAnswer(a, set[i]));
+function parseSaved(raw, key, set) {
+  if (raw?.version !== SAVE_VERSION || raw.key !== key) return null;
+  const targets = targetsOf(set);
+  if (!Array.isArray(raw.targets) || raw.targets.length !== targets.length) return null;
+  if (raw.targets.some((t, i) => t !== targets[i])) return null;
+  const done = parseAnswers(raw.done, set);
+  const playing = parseAnswers(raw.playing, set);
+  const finished = done?.length === set.length ? done : undefined;
+  return finished || playing ? { done: finished, playing } : null;
+}
 
-export function recall(saved, key, set) {
-  if (saved?.key !== key || !sameTargets(saved, set)) return [];
-  const answers = [saved.playing, saved.done].find((a) => usable(a, set));
-  return answers ? answers.map((result, i) => ({ q: set[i], result })) : [];
+export function remember(raw, { key, set, results, finished }) {
+  const answers = results.map(({ q, result }) => parseAnswer(result, q));
+  const saved = { version: SAVE_VERSION, key, targets: targetsOf(set) };
+  if (finished) return { ...saved, done: answers };
+  return { ...saved, done: parseSaved(raw, key, set)?.done, playing: answers };
+}
+
+export function recall(raw, key, set) {
+  const saved = parseSaved(raw, key, set);
+  const answers = saved?.playing ?? saved?.done ?? [];
+  return answers.map((result, i) => ({ q: set[i], result }));
 }
