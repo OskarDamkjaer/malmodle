@@ -1,4 +1,1426 @@
 {
+ "area:Allmänna Sjukhuset": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:SUS, Malmö.jpg",
+    "point": [
+     13.00345,
+     55.58873
+    ],
+    "heading": null,
+    "captured": "2011-07-06",
+    "licence": "CC BY 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:SUS,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/SUS%2C_Malm%C3%B6.jpg/960px-SUS%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "SUS, Malmö",
+    "at": "Tagna inom området",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:SUS, Malmö.jpg",
+  "approved": true
+ },
+ "area:Almgården": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Almgården, Malmö.jpg",
+    "point": [
+     13.05836667,
+     55.57768889
+    ],
+    "heading": null,
+    "captured": "2006-09-23",
+    "licence": "CC BY-SA 3.0",
+    "author": "jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Almg%C3%A5rden,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Almg%C3%A5rden%2C_Malm%C3%B6.jpg/960px-Almg%C3%A5rden%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Almgården, Malmö",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Almgården, Malmö.jpg",
+  "approved": true
+ },
+ "area:Augustenborg": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Augustenborg, Malmö, 2014.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2014-03-08",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Augustenborg,_Malm%C3%B6,_2014.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Augustenborg%2C_Malm%C3%B6%2C_2014.jpg/960px-Augustenborg%2C_Malm%C3%B6%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Augustenborg, Malmö, 2014",
+    "at": "Sök: Augustenborg",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Augustenborg, Malmö, 2014.jpg",
+  "approved": true
+ },
+ "area:Bunkeflostrand": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Bunkeflostrand, Malmö.jpg",
+    "point": [
+     12.90924722,
+     55.553375
+    ],
+    "heading": null,
+    "captured": "2006",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Bunkeflostrand,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Bunkeflostrand%2C_Malm%C3%B6.jpg/960px-Bunkeflostrand%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Bunkeflostrand, Malmö",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Bunkeflostrand, Malmö.jpg",
+  "approved": true
+ },
+ "area:Dammfri": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Dammfri, Malmö.jpg",
+    "point": [
+     12.97888611,
+     55.59328611
+    ],
+    "heading": null,
+    "captured": "2006-03-14",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Dammfri,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Dammfri%2C_Malm%C3%B6.jpg/960px-Dammfri%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Dammfri, Malmö",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Dammfri, Malmö.jpg",
+  "approved": true
+ },
+ "area:Davidshall": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Davidshallstorg Malmö.jpg",
+    "point": [
+     13.000353,
+     55.599079
+    ],
+    "heading": null,
+    "captured": "2024",
+    "licence": "CC BY 4.0",
+    "author": "Twanoptveld",
+    "url": "https://commons.wikimedia.org/wiki/File:Davidshallstorg_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Davidshallstorg_Malm%C3%B6.jpg/960px-Davidshallstorg_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Davidshallstorg Malmö",
+    "at": "Tagna inom området",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Davidshallstorg Malmö.jpg",
+  "approved": true
+ },
+ "area:Frihamnen": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Scaniaparken April 2026 01.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2026-04-05",
+    "licence": "CC BY-SA 4.0",
+    "author": "ArildV",
+    "url": "https://commons.wikimedia.org/wiki/File:Scaniaparken_April_2026_01.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Scaniaparken_April_2026_01.jpg/960px-Scaniaparken_April_2026_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Scaniaparken April 2026 01",
+    "at": "Kategori: Malmö hamn",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Scaniaparken April 2026 01.jpg",
+  "approved": true
+ },
+ "area:Fågelbacken": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Helgeandskyrkan (Kronprinsen 1).jpg",
+    "point": [
+     12.98633333,
+     55.59633333
+    ],
+    "heading": null,
+    "captured": "2011-09-11",
+    "licence": "CC BY-SA 3.0",
+    "author": "Stefan Pålsson",
+    "url": "https://commons.wikimedia.org/wiki/File:Helgeandskyrkan_(Kronprinsen_1).jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Helgeandskyrkan_%28Kronprinsen_1%29.jpg/960px-Helgeandskyrkan_%28Kronprinsen_1%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Helgeandskyrkan (Kronprinsen 1)",
+    "at": "Tagna inom området",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Helgeandskyrkan (Kronprinsen 1).jpg",
+  "approved": true
+ },
+ "area:Gamla Staden": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:WLM Malmö IMG 2153.jpg",
+    "point": [
+     13.001942,
+     55.606117
+    ],
+    "heading": null,
+    "captured": "2026-09-10",
+    "licence": "CC BY 4.0",
+    "author": "Rose Abrams",
+    "url": "https://commons.wikimedia.org/wiki/File:WLM_Malm%C3%B6_IMG_2153.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/WLM_Malm%C3%B6_IMG_2153.jpg/960px-WLM_Malm%C3%B6_IMG_2153.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "WLM Malmö IMG 2153",
+    "at": "Tagna inom området",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:WLM Malmö IMG 2153.jpg",
+  "approved": true
+ },
+ "area:Hyllievång": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "area:Hästhagen": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "area:Inre Hamnen": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "area:Katrinelund": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Rönnen 1, Katrinelund, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2015-08-04",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:R%C3%B6nnen_1,_Katrinelund,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/R%C3%B6nnen_1%2C_Katrinelund%2C_Malm%C3%B6.jpg/960px-R%C3%B6nnen_1%2C_Katrinelund%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Rönnen 1, Katrinelund, Malmö",
+    "at": "Kategori: Katrinelund, Malmö",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Rönnen 1, Katrinelund, Malmö.jpg",
+  "approved": true
+ },
+ "area:Klagshamn": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Klagshamn, fd kalkbrottet.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2008-02-10",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Klagshamn,_fd_kalkbrottet.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Klagshamn%2C_fd_kalkbrottet.jpg/960px-Klagshamn%2C_fd_kalkbrottet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Klagshamn, fd kalkbrottet",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Klagshamn, fd kalkbrottet.jpg",
+  "approved": true
+ },
+ "area:Kronborg": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Bobergsängen, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2013-04-30",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Bobergs%C3%A4ngen,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Bobergs%C3%A4ngen%2C_Malm%C3%B6.jpg/960px-Bobergs%C3%A4ngen%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Bobergsängen, Malmö",
+    "at": "Kategori: Kronborg, Malmö",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Bobergsängen, Malmö.jpg",
+  "approved": true
+ },
+ "area:Kulladal": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Per Albin Hanssons museum.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2006",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Per_Albin_Hanssons_museum.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Per_Albin_Hanssons_museum.jpg/960px-Per_Albin_Hanssons_museum.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Per Albin Hanssons museum",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Per Albin Hanssons museum.jpg",
+  "approved": true
+ },
+ "area:Käglinge": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Käglingeparken.jpg",
+    "point": [
+     13.06573611,
+     55.53306389
+    ],
+    "heading": null,
+    "captured": null,
+    "licence": "CC BY-SA 3.0",
+    "author": "User Jorchr on sv.wikipedia",
+    "url": "https://commons.wikimedia.org/wiki/File:K%C3%A4glingeparken.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/K%C3%A4glingeparken.jpg/960px-K%C3%A4glingeparken.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Käglingeparken",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Käglingeparken.jpg",
+  "approved": true
+ },
+ "area:Lindängen": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Motetten, Lindängen, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2013-08-24",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Motetten,_Lind%C3%A4ngen,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Motetten%2C_Lind%C3%A4ngen%2C_Malm%C3%B6.jpg/960px-Motetten%2C_Lind%C3%A4ngen%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Motetten, Lindängen, Malmö",
+    "at": "Kategori: Lindängen",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Motetten, Lindängen, Malmö.jpg",
+  "approved": true
+ },
+ "area:Lorensborg": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Lorensborg, Malmö, 2014.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2014-08-19",
+    "licence": "CC BY-SA 4.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Lorensborg,_Malm%C3%B6,_2014.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Lorensborg%2C_Malm%C3%B6%2C_2014.jpg/960px-Lorensborg%2C_Malm%C3%B6%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Lorensborg, Malmö, 2014",
+    "at": "Kategori: Lorensborg",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Lorensborg, Malmö, 2014.jpg",
+  "approved": true
+ },
+ "area:Lugnet": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Mården, Lugnet, Malmö.jpg",
+    "point": [
+     13.00492778,
+     55.59976944
+    ],
+    "heading": null,
+    "captured": "2006-06-08",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:M%C3%A5rden,_Lugnet,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/M%C3%A5rden%2C_Lugnet%2C_Malm%C3%B6.jpg/960px-M%C3%A5rden%2C_Lugnet%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Mården, Lugnet, Malmö",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Mården, Lugnet, Malmö.jpg",
+  "approved": true
+ },
+ "area:Malmö Hus": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Slottsträdgården Borg Stadslager Malmö 2026-01-15 01.jpg",
+    "point": [
+     12.98916736,
+     55.60360012
+    ],
+    "heading": null,
+    "captured": "2026-01-15",
+    "licence": "CC0",
+    "author": "Leonhard Lenz",
+    "url": "https://commons.wikimedia.org/wiki/File:Slottstr%C3%A4dg%C3%A5rden_Borg_Stadslager_Malm%C3%B6_2026-01-15_01.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Slottstr%C3%A4dg%C3%A5rden_Borg_Stadslager_Malm%C3%B6_2026-01-15_01.jpg/960px-Slottstr%C3%A4dg%C3%A5rden_Borg_Stadslager_Malm%C3%B6_2026-01-15_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Slottsträdgården Borg Stadslager Malmö 2026-01-15 01",
+    "at": "Tagna inom området",
+    "score": 2
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Slottsträdgården Borg Stadslager Malmö 2026-01-15 01.jpg",
+  "approved": true
+ },
+ "area:Mellanheden": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Stjärnhusen, Malmö.jpg",
+    "point": [
+     12.96506944,
+     55.59214444
+    ],
+    "heading": null,
+    "captured": "2006",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Stj%C3%A4rnhusen,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Stj%C3%A4rnhusen%2C_Malm%C3%B6.jpg/960px-Stj%C3%A4rnhusen%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Stjärnhusen, Malmö",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Stjärnhusen, Malmö.jpg",
+  "approved": true
+ },
+ "area:Nydala": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Nydala, Malmö.jpg",
+    "point": [
+     13.01949722,
+     55.57400833
+    ],
+    "heading": null,
+    "captured": "2006-09-23",
+    "licence": "CC BY-SA 3.0",
+    "author": "jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Nydala,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Nydala%2C_Malm%C3%B6.jpg/960px-Nydala%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Nydala, Malmö",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Nydala, Malmö.jpg",
+  "approved": true
+ },
+ "area:Persborg": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Lönngatan street, Malmö.JPG",
+    "point": null,
+    "heading": null,
+    "captured": "2013-10-02",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jin Zan",
+    "url": "https://commons.wikimedia.org/wiki/File:L%C3%B6nngatan_street,_Malm%C3%B6.JPG",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/L%C3%B6nngatan_street%2C_Malm%C3%B6.JPG/960px-L%C3%B6nngatan_street%2C_Malm%C3%B6.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Lönngatan street, Malmö",
+    "at": "Kategori: Persborg",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Lönngatan street, Malmö.JPG",
+  "approved": true
+ },
+ "area:Ribersborg": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Skåne 2016-08-20 (29351255104).jpg",
+    "point": [
+     12.960465,
+     55.601608
+    ],
+    "heading": null,
+    "captured": "2016-08-20",
+    "licence": "CC BY-SA 2.0",
+    "author": "Guillaume Baviere from Copenhagen, Denmark",
+    "url": "https://commons.wikimedia.org/wiki/File:Sk%C3%A5ne_2016-08-20_(29351255104).jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Sk%C3%A5ne_2016-08-20_%2829351255104%29.jpg/960px-Sk%C3%A5ne_2016-08-20_%2829351255104%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Skåne 2016-08-20 (29351255104)",
+    "at": "Kategori: Ribersborg",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Skåne 2016-08-20 (29351255104).jpg",
+  "approved": true
+ },
+ "area:Rådmansvången": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Slöjdgatan.jpg",
+    "point": [
+     13.003753,
+     55.590858
+    ],
+    "heading": null,
+    "captured": "2024-03-26",
+    "licence": "CC BY-SA 4.0",
+    "author": "Alexandra Koch",
+    "url": "https://commons.wikimedia.org/wiki/File:Sl%C3%B6jdgatan.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Sl%C3%B6jdgatan.jpg/960px-Sl%C3%B6jdgatan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Slöjdgatan",
+    "at": "Kategori: Rådmansvången, Malmö",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Slöjdgatan.jpg",
+  "approved": true
+ },
+ "area:Rörsjöstaden": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Föreningsgatan Rörsjostaden 2014.jpg",
+    "point": [
+     13.012251,
+     55.600196
+    ],
+    "heading": null,
+    "captured": "2014-07-19",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jqv",
+    "url": "https://commons.wikimedia.org/wiki/File:F%C3%B6reningsgatan_R%C3%B6rsjostaden_2014.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/F%C3%B6reningsgatan_R%C3%B6rsjostaden_2014.jpg/960px-F%C3%B6reningsgatan_R%C3%B6rsjostaden_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Föreningsgatan Rörsjostaden 2014",
+    "at": "Kategori: Rörsjöstaden",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Föreningsgatan Rörsjostaden 2014.jpg",
+  "approved": true
+ },
+ "area:Slussen": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Polishuset, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2006-08-15",
+    "licence": "CC BY-SA 3.0",
+    "author": "jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Polishuset,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Polishuset%2C_Malm%C3%B6.jpg/960px-Polishuset%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Polishuset, Malmö",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Polishuset, Malmö.jpg",
+  "approved": true
+ },
+ "area:Svågertorp": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Media Markt, Svagertorp, Malmo.JPG",
+    "point": null,
+    "heading": null,
+    "captured": "2014",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jin Zan",
+    "url": "https://commons.wikimedia.org/wiki/File:Media_Markt,_Svagertorp,_Malmo.JPG",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Media_Markt%2C_Svagertorp%2C_Malmo.JPG/960px-Media_Markt%2C_Svagertorp%2C_Malmo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Media Markt, Svagertorp, Malmo",
+    "at": "Kategori: Svågertorp",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Media Markt, Svagertorp, Malmo.JPG",
+  "approved": true
+ },
+ "area:Videdal": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Videdal, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2007-04-22",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Videdal,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Videdal%2C_Malm%C3%B6.jpg/960px-Videdal%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Videdal, Malmö",
+    "at": "Kategori: Videdal",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Videdal, Malmö.jpg",
+  "approved": true
+ },
+ "area:Vintrie": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Vintrie, Malmö.jpg",
+    "point": [
+     12.95850278,
+     55.55464722
+    ],
+    "heading": null,
+    "captured": "2006-06-17",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Vintrie,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Vintrie%2C_Malm%C3%B6.jpg/960px-Vintrie%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Vintrie, Malmö",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Vintrie, Malmö.jpg",
+  "approved": true
+ },
+ "area:Västra Hamnen": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Västra hamnen Malmö panorama.JPG",
+    "point": [
+     12.97279,
+     55.60861
+    ],
+    "heading": null,
+    "captured": "2014",
+    "licence": "CC BY-SA 4.0",
+    "author": "Adbar",
+    "url": "https://commons.wikimedia.org/wiki/File:V%C3%A4stra_hamnen_Malm%C3%B6_panorama.JPG",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/V%C3%A4stra_hamnen_Malm%C3%B6_panorama.JPG/960px-V%C3%A4stra_hamnen_Malm%C3%B6_panorama.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Västra hamnen Malmö panorama",
+    "at": "Wikidata-bild",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Västra hamnen Malmö panorama.JPG",
+  "approved": true
+ },
+ "area:Östervärn": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Värnhemsgatan.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2007-07-10",
+    "licence": "Public domain",
+    "author": "Pluskvam",
+    "url": "https://commons.wikimedia.org/wiki/File:V%C3%A4rnhemsgatan.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/V%C3%A4rnhemsgatan.jpg/960px-V%C3%A4rnhemsgatan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Värnhemsgatan",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Värnhemsgatan.jpg",
+  "approved": true
+ },
+ "landmark:Atrium": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Babel": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Babel, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2015-03-28",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Babel,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Babel%2C_Malm%C3%B6.jpg/960px-Babel%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Babel, Malmö",
+    "at": "Sök: Babel",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Babel, Malmö.jpg",
+  "approved": true
+ },
+ "landmark:Bullen": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Beer (explore 2019-03-17) - Flickr - Maria Eklind.jpg",
+    "point": [
+     13.001436,
+     55.600166
+    ],
+    "heading": null,
+    "captured": "2019",
+    "licence": "CC BY-SA 2.0",
+    "author": "Maria Eklind",
+    "url": "https://commons.wikimedia.org/wiki/File:Beer_(explore_2019-03-17)_-_Flickr_-_Maria_Eklind.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Beer_%28explore_2019-03-17%29_-_Flickr_-_Maria_Eklind.jpg/960px-Beer_%28explore_2019-03-17%29_-_Flickr_-_Maria_Eklind.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Beer (explore 2019-03-17) - Flickr - Maria Eklind",
+    "at": "Tagna på platsen (inom 50 m)",
+    "score": 2
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Beer (explore 2019-03-17) - Flickr - Maria Eklind.jpg",
+  "approved": true
+ },
+ "landmark:Daniaparken": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Daniaparken, Malmö.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2008-05-14",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Daniaparken,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Daniaparken%2C_Malm%C3%B6.jpg/960px-Daniaparken%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Daniaparken, Malmö",
+    "at": "Kategori: Daniaparken",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Daniaparken, Malmö.jpg",
+  "approved": true
+ },
+ "landmark:Fagans": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Family Pub": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Form/Design Center": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Form-Design Center.jpg",
+    "point": [
+     12.99912,
+     55.60463
+    ],
+    "heading": null,
+    "captured": "2017-05-24",
+    "licence": "CC BY-SA 4.0",
+    "author": "Form Design Center",
+    "url": "https://commons.wikimedia.org/wiki/File:Form-Design_Center.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Form-Design_Center.jpg/960px-Form-Design_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Form-Design Center",
+    "at": "Kategori: Form/Design Center",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Form-Design Center.jpg",
+  "approved": true
+ },
+ "landmark:Grand Malmö": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Gyllins trädgård": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Hansa": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Hansacompagniet, Malmö.jpg",
+    "point": [
+     13.00463889,
+     55.603
+    ],
+    "heading": null,
+    "captured": "2007-06-17",
+    "licence": "CC BY-SA 3.0",
+    "author": "jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Hansacompagniet,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Hansacompagniet%2C_Malm%C3%B6.jpg/960px-Hansacompagniet%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Hansacompagniet, Malmö",
+    "at": "Wikidata-bild",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Hansacompagniet, Malmö.jpg",
+  "approved": true
+ },
+ "landmark:Hyllie station": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Hyllie station och Hyllie vattentorn, Hyllievång, Malmö, 03062022, 1.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2022-06-03",
+    "licence": "CC0",
+    "author": "Jin Zan",
+    "url": "https://commons.wikimedia.org/wiki/File:Hyllie_station_och_Hyllie_vattentorn,_Hylliev%C3%A5ng,_Malm%C3%B6,_03062022,_1.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Hyllie_station_och_Hyllie_vattentorn%2C_Hylliev%C3%A5ng%2C_Malm%C3%B6%2C_03062022%2C_1.jpg/960px-Hyllie_station_och_Hyllie_vattentorn%2C_Hylliev%C3%A5ng%2C_Malm%C3%B6%2C_03062022%2C_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Hyllie station och Hyllie vattentorn, Hyllievång, Malmö, 03062022, 1",
+    "at": "Kategori: Hyllie station",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Hyllie station och Hyllie vattentorn, Hyllievång, Malmö, 03062022, 1.jpg",
+  "approved": true
+ },
+ "landmark:Hyllie vattentorn": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Hyllie vattentorn, september 2013.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2013-09-06",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Hyllie_vattentorn,_september_2013.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Hyllie_vattentorn%2C_september_2013.jpg/960px-Hyllie_vattentorn%2C_september_2013.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Hyllie vattentorn, september 2013",
+    "at": "Wikidata-bild",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Hyllie vattentorn, september 2013.jpg",
+  "approved": true
+ },
+ "landmark:Hylliebadet": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Hylliebadet, Malmö, augusti 2015.jpg",
+    "point": [
+     12.97650278,
+     55.56939111
+    ],
+    "heading": null,
+    "captured": "2015-08-05",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Hylliebadet,_Malm%C3%B6,_augusti_2015.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Hylliebadet%2C_Malm%C3%B6%2C_augusti_2015.jpg/960px-Hylliebadet%2C_Malm%C3%B6%2C_augusti_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Hylliebadet, Malmö, augusti 2015",
+    "at": "Wikidata-bild",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Hylliebadet, Malmö, augusti 2015.jpg",
+  "approved": true
+ },
+ "landmark:IKEA Malmö": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:IKEA Malmö (4406946334).jpg",
+    "point": [
+     12.987166,
+     55.552
+    ],
+    "heading": null,
+    "captured": "2010-03-04",
+    "licence": "CC BY 2.0",
+    "author": "Håkan Dahlström from Malmö, Sweden",
+    "url": "https://commons.wikimedia.org/wiki/File:IKEA_Malm%C3%B6_(4406946334).jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/IKEA_Malm%C3%B6_%284406946334%29.jpg/960px-IKEA_Malm%C3%B6_%284406946334%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "IKEA Malmö (4406946334)",
+    "at": "Tagna på platsen (inom 50 m)",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:IKEA Malmö (4406946334).jpg",
+  "approved": true
+ },
+ "landmark:Jalla Jalla": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Jesusparken": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Jesusparken.jpg",
+    "point": null,
+    "heading": null,
+    "captured": null,
+    "licence": "Public domain",
+    "author": null,
+    "url": "https://commons.wikimedia.org/wiki/File:Jesusparken.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Jesusparken.jpg/960px-Jesusparken.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Jesusparken",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Jesusparken.jpg",
+  "approved": true
+ },
+ "landmark:Johan P": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Kaffebaren på Möllan": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Katrinetorp": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Katrinetorp Mansion close.jpg",
+    "point": [
+     13.00364722,
+     55.55056389
+    ],
+    "heading": null,
+    "captured": "2010-06-06",
+    "licence": "CC BY 3.0",
+    "author": "Philaweb",
+    "url": "https://commons.wikimedia.org/wiki/File:Katrinetorp_Mansion_close.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Katrinetorp_Mansion_close.jpg/960px-Katrinetorp_Mansion_close.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Katrinetorp Mansion close",
+    "at": "Kategori: Katrinetorp",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Katrinetorp Mansion close.jpg",
+  "approved": true
+ },
+ "landmark:Kin Long": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Klagshamns udde": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Klagshamnstranden": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Korvhuset": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Korvhuset (5221434307).jpg",
+    "point": [
+     13.015193,
+     55.608269
+    ],
+    "heading": null,
+    "captured": "2010-11-30",
+    "licence": "CC BY 2.0",
+    "author": "Håkan Dahlström from Malmö, Sweden",
+    "url": "https://commons.wikimedia.org/wiki/File:Korvhuset_(5221434307).jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Korvhuset_%285221434307%29.jpg/960px-Korvhuset_%285221434307%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Korvhuset (5221434307)",
+    "at": "Sök: Korvhuset",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Korvhuset (5221434307).jpg",
+  "approved": true
+ },
+ "landmark:Lilla Glassfabriken": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Limhamns kalkbrott": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Nature Reserve.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2018-10-06",
+    "licence": "CC BY-SA 4.0",
+    "author": "Lucc77",
+    "url": "https://commons.wikimedia.org/wiki/File:Nature_Reserve.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Nature_Reserve.jpg/960px-Nature_Reserve.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Nature Reserve",
+    "at": "Kategori: Limhamns kalkbrott",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Nature Reserve.jpg",
+  "approved": true
+ },
+ "landmark:Malmö Arena": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Malmo arena ext 2024.jpg",
+    "point": [
+     12.975886,
+     55.563525
+    ],
+    "heading": null,
+    "captured": "2024-08-31",
+    "licence": "CC BY-SA 4.0",
+    "author": "AR·NO",
+    "url": "https://commons.wikimedia.org/wiki/File:Malmo_arena_ext_2024.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Malmo_arena_ext_2024.jpg/960px-Malmo_arena_ext_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Malmo arena ext 2024",
+    "at": "Kategori: Malmö Arena",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Malmo arena ext 2024.jpg",
+  "approved": true
+ },
+ "landmark:Malmö Borgarskola": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Malmö borgarskola.jpg",
+    "point": [
+     12.99124722,
+     55.5989
+    ],
+    "heading": null,
+    "captured": "2007-03-12",
+    "licence": "CC BY-SA 3.0",
+    "author": "jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Malm%C3%B6_borgarskola.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Malm%C3%B6_borgarskola.jpg/960px-Malm%C3%B6_borgarskola.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Malmö borgarskola",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Malmö borgarskola.jpg",
+  "approved": true
+ },
+ "landmark:Malmö Idrottsplats": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Malmö IP FCR.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2022",
+    "licence": "CC BY-SA 4.0",
+    "author": "Tebdi",
+    "url": "https://commons.wikimedia.org/wiki/File:Malm%C3%B6_IP_FCR.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Malm%C3%B6_IP_FCR.jpg/960px-Malm%C3%B6_IP_FCR.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Malmö IP FCR",
+    "at": "Kategori: Malmö IP",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Malmö IP FCR.jpg",
+  "approved": true
+ },
+ "landmark:Malmö Konstmuseum": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Malmö Konstmuseum Stadslager Malmö 2026-01-15 01.jpg",
+    "point": [
+     12.99293309,
+     55.60267686
+    ],
+    "heading": null,
+    "captured": "2026-01-15",
+    "licence": "CC0",
+    "author": "Leonhard Lenz",
+    "url": "https://commons.wikimedia.org/wiki/File:Malm%C3%B6_Konstmuseum_Stadslager_Malm%C3%B6_2026-01-15_01.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Malm%C3%B6_Konstmuseum_Stadslager_Malm%C3%B6_2026-01-15_01.jpg/960px-Malm%C3%B6_Konstmuseum_Stadslager_Malm%C3%B6_2026-01-15_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Malmö Konstmuseum Stadslager Malmö 2026-01-15 01",
+    "at": "Tagna på platsen (inom 50 m)",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Malmö Konstmuseum Stadslager Malmö 2026-01-15 01.jpg",
+  "approved": true
+ },
+ "landmark:Malmö Latinskola": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Malmö latinskola April 2026 01.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2026-04-05",
+    "licence": "CC BY-SA 4.0",
+    "author": "ArildV",
+    "url": "https://commons.wikimedia.org/wiki/File:Malm%C3%B6_latinskola_April_2026_01.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Malm%C3%B6_latinskola_April_2026_01.jpg/960px-Malm%C3%B6_latinskola_April_2026_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Malmö latinskola April 2026 01",
+    "at": "Kategori: Malmö latinskola",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Malmö latinskola April 2026 01.jpg",
+  "approved": true
+ },
+ "landmark:Malmö Stadsteater": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:WLM Malmö IMG 2161.jpg",
+    "point": [
+     13.003717,
+     55.605758
+    ],
+    "heading": null,
+    "captured": "2026-09-10",
+    "licence": "CC BY 4.0",
+    "author": "Rose Abrams",
+    "url": "https://commons.wikimedia.org/wiki/File:WLM_Malm%C3%B6_IMG_2161.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/WLM_Malm%C3%B6_IMG_2161.jpg/960px-WLM_Malm%C3%B6_IMG_2161.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "WLM Malmö IMG 2161",
+    "at": "Kategori: Hippodromen",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:WLM Malmö IMG 2161.jpg",
+  "approved": true
+ },
+ "landmark:Mando Steakhouse": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Mello Yello": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Moderna Museet Malmö": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Moderna Museet Malmö.jpg",
+    "point": [
+     13.00908,
+     55.60485
+    ],
+    "heading": null,
+    "captured": "2013-03-27",
+    "licence": "CC BY-SA 3.0",
+    "author": "Åsa Lundén",
+    "url": "https://commons.wikimedia.org/wiki/File:Moderna_Museet_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Moderna_Museet_Malm%C3%B6.jpg/960px-Moderna_Museet_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Moderna Museet Malmö",
+    "at": "Kategori: Moderna museet Malmö",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Moderna Museet Malmö.jpg",
+  "approved": true
+ },
+ "landmark:Mässingshornet": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Nobeltorget": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Nobeltorget.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2018-09-25",
+    "licence": "CC BY-SA 4.0",
+    "author": "Titti qvarnström",
+    "url": "https://commons.wikimedia.org/wiki/File:Nobeltorget.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Nobeltorget.jpg/960px-Nobeltorget.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Nobeltorget",
+    "at": "Kategori: Nobeltorget",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Nobeltorget.jpg",
+  "approved": true
+ },
+ "landmark:Nöjesteatern": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Nöjesteatern, Malmö, mars 2015.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2015-03-28",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:N%C3%B6jesteatern,_Malm%C3%B6,_mars_2015.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/N%C3%B6jesteatern%2C_Malm%C3%B6%2C_mars_2015.jpg/960px-N%C3%B6jesteatern%2C_Malm%C3%B6%2C_mars_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Nöjesteatern, Malmö, mars 2015",
+    "at": "Sök: Nöjesteatern",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Nöjesteatern, Malmö, mars 2015.jpg",
+  "approved": true
+ },
+ "landmark:Orkanen": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Orkanen, Malmö 2026.jpg",
+    "point": [
+     12.997778,
+     55.61
+    ],
+    "heading": null,
+    "captured": "2026-06-02",
+    "licence": "CC BY-SA 4.0",
+    "author": "Lars A",
+    "url": "https://commons.wikimedia.org/wiki/File:Orkanen,_Malm%C3%B6_2026.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Orkanen%2C_Malm%C3%B6_2026.jpg/960px-Orkanen%2C_Malm%C3%B6_2026.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Orkanen, Malmö 2026",
+    "at": "Kategori: Orkanen, Malmö",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Orkanen, Malmö 2026.jpg",
+  "approved": true
+ },
+ "landmark:Paddy's": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Panora": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Panora October 2021, 02.jpg",
+    "point": [
+     13.009292,
+     55.594361
+    ],
+    "heading": null,
+    "captured": "2021-10-27",
+    "licence": "CC BY-SA 4.0",
+    "author": "Mattias Mattsson",
+    "url": "https://commons.wikimedia.org/wiki/File:Panora_October_2021,_02.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Panora_October_2021%2C_02.jpg/960px-Panora_October_2021%2C_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Panora October 2021, 02",
+    "at": "Kategori: Panora, Friisgatan",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Panora October 2021, 02.jpg",
+  "approved": true
+ },
+ "landmark:Pildammsparken": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Vattentornet vid Pildammarna.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2005",
+    "licence": "CC BY-SA 3.0",
+    "author": "User Jorchr on sv.wikipedia",
+    "url": "https://commons.wikimedia.org/wiki/File:Vattentornet_vid_Pildammarna.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Vattentornet_vid_Pildammarna.jpg/960px-Vattentornet_vid_Pildammarna.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Vattentornet vid Pildammarna",
+    "at": "Wikidata-bild",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Vattentornet vid Pildammarna.jpg",
+  "approved": true
+ },
+ "landmark:Pivo": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:WLM Malmö IMG 2354.jpg",
+    "point": [
+     12.998303,
+     55.606881
+    ],
+    "heading": null,
+    "captured": "2026-09-14",
+    "licence": "CC BY 4.0",
+    "author": "Rose Abrams",
+    "url": "https://commons.wikimedia.org/wiki/File:WLM_Malm%C3%B6_IMG_2354.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/WLM_Malm%C3%B6_IMG_2354.jpg/960px-WLM_Malm%C3%B6_IMG_2354.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "WLM Malmö IMG 2354",
+    "at": "Tagna på platsen (inom 50 m)",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:WLM Malmö IMG 2354.jpg",
+  "approved": true
+ },
+ "landmark:Restaurang Möllan": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Rex": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:S:t Petri skola": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Sankt Petri Läroverk, Malmö.jpg",
+    "point": [
+     12.99438056,
+     55.59956667
+    ],
+    "heading": null,
+    "captured": "2005",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Sankt_Petri_L%C3%A4roverk,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Sankt_Petri_L%C3%A4roverk%2C_Malm%C3%B6.jpg/960px-Sankt_Petri_L%C3%A4roverk%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Sankt Petri Läroverk, Malmö",
+    "at": "Tagna på platsen (inom 50 m)",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Sankt Petri Läroverk, Malmö.jpg",
+  "approved": true
+ },
  "landmark:Sankt Johannes kyrka": {
   "photos": [
    {
@@ -44,7 +1466,9 @@
     "at": "Kategori: Sankt Johannes kyrka, Malmö"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "File:Malmö S t Johannes kyrka (43603575834).jpg",
+  "approved": true
  },
  "landmark:Sankt Pauli kyrka": {
   "photos": [
@@ -138,7 +1562,186 @@
     "at": "Tagna på platsen (inom 50 m)"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "File:Exterior of Sankt Petri kyrka, Malmö (08).jpg",
+  "approved": true
+ },
+ "landmark:Scaniaparken": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Scaniaparken, Malmö.jpg",
+    "point": [
+     12.97378056,
+     55.61598889
+    ],
+    "heading": null,
+    "captured": "2008",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Scaniaparken,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Scaniaparken%2C_Malm%C3%B6.jpg/960px-Scaniaparken%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Scaniaparken, Malmö",
+    "at": "Wikidata-bild",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Scaniaparken, Malmö.jpg",
+  "approved": true
+ },
+ "landmark:Sibbarp": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:20180517 Sibbarp Malmo DSF5507 (42184163811).jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2018-05-17",
+    "licence": "CC BY 2.0",
+    "author": "Johan Wessman / News Oresund",
+    "url": "https://commons.wikimedia.org/wiki/File:20180517_Sibbarp_Malmo_DSF5507_(42184163811).jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/20180517_Sibbarp_Malmo_DSF5507_%2842184163811%29.jpg/960px-20180517_Sibbarp_Malmo_DSF5507_%2842184163811%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "20180517 Sibbarp Malmo DSF5507 (42184163811)",
+    "at": "Sök: Sibbarp",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:20180517 Sibbarp Malmo DSF5507 (42184163811).jpg",
+  "approved": true
+ },
+ "landmark:Solde": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Stapelbäddsparken": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Stapelbäddsparken 2019.jpg",
+    "point": [
+     12.98352,
+     55.61244
+    ],
+    "heading": null,
+    "captured": "2019",
+    "licence": "CC BY-SA 2.0",
+    "author": "Maria Eklind",
+    "url": "https://commons.wikimedia.org/wiki/File:Stapelb%C3%A4ddsparken_2019.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Stapelb%C3%A4ddsparken_2019.jpg/960px-Stapelb%C3%A4ddsparken_2019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Stapelbäddsparken 2019",
+    "at": "Kategori: Stapelbäddsparken, Malmö",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Stapelbäddsparken 2019.jpg",
+  "approved": true
+ },
+ "landmark:Syltan": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Söderberg & Sara": {
+  "photos": [],
+  "reviewed": false,
+  "final": null,
+  "approved": false
+ },
+ "landmark:Teknikens och sjöfartens hus": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Teknikens och Sjöfartens hus, Malmö, 2013.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2013-09-06",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Teknikens_och_Sj%C3%B6fartens_hus,_Malm%C3%B6,_2013.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Teknikens_och_Sj%C3%B6fartens_hus%2C_Malm%C3%B6%2C_2013.jpg/960px-Teknikens_och_Sj%C3%B6fartens_hus%2C_Malm%C3%B6%2C_2013.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Teknikens och Sjöfartens hus, Malmö, 2013",
+    "at": "Wikidata-bild",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Teknikens och Sjöfartens hus, Malmö, 2013.jpg",
+  "approved": true
+ },
+ "landmark:Teschska palatset": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Apoteket Lejonet, Malmö.jpg",
+    "point": [
+     13.00145556,
+     55.60574167
+    ],
+    "heading": null,
+    "captured": "2007-05-02",
+    "licence": "CC BY-SA 3.0",
+    "author": "jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Apoteket_Lejonet,_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Apoteket_Lejonet%2C_Malm%C3%B6.jpg/960px-Apoteket_Lejonet%2C_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Apoteket Lejonet, Malmö",
+    "at": "Wikidata-bild",
+    "score": 3
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Apoteket Lejonet, Malmö.jpg",
+  "approved": true
+ },
+ "landmark:Triangeln": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Triangelns station, norra uppgången.jpg",
+    "point": null,
+    "heading": null,
+    "captured": "2017-02-11",
+    "licence": "CC BY-SA 3.0",
+    "author": "Jorchr",
+    "url": "https://commons.wikimedia.org/wiki/File:Triangelns_station,_norra_uppg%C3%A5ngen.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Triangelns_station%2C_norra_uppg%C3%A5ngen.jpg/960px-Triangelns_station%2C_norra_uppg%C3%A5ngen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Triangelns station, norra uppgången",
+    "at": "Wikidata-bild",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Triangelns station, norra uppgången.jpg",
+  "approved": true
+ },
+ "landmark:Årstiderna i Kockska huset": {
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Jörgen Kocks hus 2026.jpg",
+    "point": [
+     12.999028,
+     55.607028
+    ],
+    "heading": null,
+    "captured": "2026-06-23",
+    "licence": "CC BY-SA 4.0",
+    "author": "Lars A",
+    "url": "https://commons.wikimedia.org/wiki/File:J%C3%B6rgen_Kocks_hus_2026.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/J%C3%B6rgen_Kocks_hus_2026.jpg/960px-J%C3%B6rgen_Kocks_hus_2026.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Jörgen Kocks hus 2026",
+    "at": "Tagna på platsen (inom 50 m)",
+    "score": 5
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Jörgen Kocks hus 2026.jpg",
+  "approved": true
  },
  "street:Adelgatan": {
   "photos": [
@@ -646,11 +2249,33 @@
     "at": "vid Regementsgatan"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "123391713597115",
+  "approved": true
  },
  "street:Engelbrektsgatan": {
-  "photos": [],
-  "reviewed": false
+  "photos": [
+   {
+    "source": "commons",
+    "id": "File:Engelbrektsgatan 17A-17B Malmö.jpg",
+    "point": [
+     12.998506,
+     55.603711
+    ],
+    "heading": null,
+    "captured": "2021-03-04",
+    "licence": "CC BY-SA 4.0",
+    "author": "Vogler",
+    "url": "https://commons.wikimedia.org/wiki/File:Engelbrektsgatan_17A-17B_Malm%C3%B6.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Engelbrektsgatan_17A-17B_Malm%C3%B6.jpg/960px-Engelbrektsgatan_17A-17B_Malm%C3%B6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "title": "Engelbrektsgatan 17A-17B Malmö",
+    "at": "Tagna på platsen (inom 15 m)",
+    "score": 4
+   }
+  ],
+  "reviewed": false,
+  "final": "File:Engelbrektsgatan 17A-17B Malmö.jpg",
+  "approved": true
  },
  "street:Fersens väg": {
   "photos": [
@@ -830,7 +2455,9 @@
     "at": "mitten"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "1309063647782793",
+  "approved": true
  },
  "street:John Ericssons väg": {
   "photos": [
@@ -1073,7 +2700,9 @@
     "at": "mitten"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "343058764573473",
+  "approved": true
  },
  "street:Lorensborgsgatan": {
   "photos": [
@@ -1110,7 +2739,9 @@
     "at": "mitten"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "205333418494683",
+  "approved": true
  },
  "street:Lundavägen": {
   "photos": [
@@ -1258,7 +2889,9 @@
     "at": "längs gatan 1"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "583767240107053",
+  "approved": true
  },
  "street:Neptunigatan": {
   "photos": [
@@ -1396,7 +3029,9 @@
     "at": "mitten"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "570046581280370",
+  "approved": true
  },
  "street:Nordenskiöldsgatan": {
   "photos": [
@@ -1433,7 +3068,9 @@
     "at": "mitten"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "6715182315167549",
+  "approved": true
  },
  "street:Norra Grängesbergsgatan": {
   "photos": [
@@ -1502,7 +3139,9 @@
     "at": "längs gatan 6"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "1236240270490584",
+  "approved": true
  },
  "street:Norra Vallgatan": {
   "photos": [
@@ -1661,7 +3300,9 @@
     "at": "mitten"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "178734681303962",
+  "approved": true
  },
  "street:Regementsgatan": {
   "photos": [
@@ -2004,7 +3645,9 @@
     "at": "längs gatan 8"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "2134917783567701",
+  "approved": true
  },
  "street:Södergatan": {
   "photos": [
@@ -2339,7 +3982,9 @@
     "at": "längs gatan 2"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "960096672320480",
+  "approved": true
  },
  "street:Ystadvägen": {
   "photos": [
@@ -2392,7 +4037,9 @@
     "at": "vid Agnesfridsvägen"
    }
   ],
-  "reviewed": false
+  "reviewed": false,
+  "final": "1476432462731521",
+  "approved": true
  },
  "street:Yttre Ringvägen": {
   "photos": [
