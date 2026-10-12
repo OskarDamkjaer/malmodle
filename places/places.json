@@ -914,7 +914,9 @@
    "lat": 55.5837,
    "lon": 12.98772,
    "why": "Malmö FF's home arena (formerly Swedbank Stadion), the city's football stadium and the most-viewed article in the category.",
-   "description": "Byggt till fotbolls-VM 1958, då Malmös stora arena. I dag friidrott och träning."
+   "description": "Fotbollsarena och Malmö FF:s hemmaplan, invigd 2009. Hette tidigare Swedbank Stadion.",
+   "source": "https://sv.wikipedia.org/wiki/Eleda_Stadion",
+   "verified": false
   },
   {
    "name": "Malmö Arena",
