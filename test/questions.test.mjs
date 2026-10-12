@@ -69,6 +69,27 @@ test('a street question names the street the map shows under the tap', () => {
   assert.equal(TYPES.point.grade({ target }, tap, items, null).hit, null);
 });
 
+test('tapping the asked street on the map scores full marks however far from its middle', () => {
+  const target = byName('Gata 1');
+  const tap = [12.97, 55.5772];
+  const seen = { name: 'Gata 1', kind: 'street', point: tap, geometry: target.geometry };
+  assert.ok(TYPES.point.grade({ target }, tap, items, null).score < MAX_SCORE);
+  const r = TYPES.point.grade({ target }, tap, items, seen);
+  assert.equal(r.score, MAX_SCORE);
+  assert.equal(r.hit, null);
+});
+
+test('a full-marks tap names nothing else, even inside a park around the answer', () => {
+  const target = byName('Plats 0');
+  const park = {
+    name: 'Parken', kind: 'landmark', point: target.point,
+    geometry: { type: 'Polygon', coordinates: [[[12.951, 55.570], [12.953, 55.570], [12.953, 55.572], [12.951, 55.572], [12.951, 55.570]]] },
+  };
+  const r = TYPES.point.grade({ target }, target.point, [park, ...items]);
+  assert.equal(r.score, MAX_SCORE);
+  assert.equal(r.hit, null);
+});
+
 test('a wrong pick that is close to the answer scores a little', () => {
   const plats = byName('Plats 5');
   assert.equal(TYPES.identify.grade({ target: plats }, 'Plats 5', items).score, MAX_SCORE);
@@ -85,10 +106,14 @@ test('streets that cross are close even with no corner near the crossing', () =>
   assert.ok(closeTo(byName('Gata 3'), across));
 });
 
-test('nearest is all or nothing', () => {
-  const target = byName('Plats 5');
-  assert.equal(TYPES.nearest.grade({ target }, 'Plats 5').score, MAX_SCORE);
-  assert.equal(TYPES.nearest.grade({ target }, 'Plats 6').score, 0);
+test('a street from A to B is named by what lies at its ends, and no decoy runs between them', () => {
+  const target = byName('Gata 3');
+  const q = TYPES.route.build({ target, items, rng: () => 0.3, avoid: new Set() });
+  assert.ok(q);
+  assert.notEqual(q.from.name, q.to.name);
+  assert.equal(q.options.length, 4);
+  assert.equal(q.options.filter((o) => o === target.name).length, 1);
+  assert.equal(TYPES.route.grade(q, target.name, items).score, MAX_SCORE);
 });
 
 test('a neighbour that also borders the answer scores a little', () => {

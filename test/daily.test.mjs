@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { MIX, dailySet, dateKey, hash, random, shareText, square } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, shareText, square, upcoming } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -31,27 +31,75 @@ test('different days give different sets', () => {
   assert.equal(firsts.size, days.length);
 });
 
-test('a set is mostly pointing, starts with it, and has one special', () => {
+test('a set is at least half pointing', () => {
   for (const day of days) {
     const set = dailySet(items, day);
-    assert.equal(set.length, MIX.length);
-    assert.equal(TYPES[set[0].type].input, 'map');
+    assert.equal(set.length, SET_SIZE);
     const count = (...types) => set.filter((q) => types.includes(q.type)).length;
-    assert.ok(count('point', 'area') > count('identify'));
-    assert.equal(count('nearest', 'neighbour'), 1);
+    assert.ok(count('point') >= count('identify', 'neighbour', 'route'));
   }
 });
 
-test('every day asks to point at at least two areas', () => {
+test('each kind keeps to its share of question types', () => {
+  for (let i = 0; i < 500; i++) {
+    const slots = plan(random(i));
+    const of = (group, type) => slots.filter((x) => x.group === group && x.type === type).length;
+    assert.ok(of('area', 'point') >= 1 && of('area', 'point') <= 3);
+    assert.ok(of('area', 'identify') >= 1 && of('area', 'identify') <= 2);
+    assert.ok(of('area', 'neighbour') <= 1);
+    assert.ok(of('street', 'point') >= 1 && of('street', 'identify') <= 2 && of('street', 'route') <= 1);
+    const places = slots.filter((x) => x.group === 'place').length;
+    assert.ok(of('place', 'identify') >= 1 && of('place', 'identify') <= Math.ceil(places / 3));
+    assert.equal(slots.filter((x) => x.group === 'place').length, of('place', 'point') + of('place', 'identify'));
+  }
+});
+
+test('every day starts by pointing at an area', () => {
   for (const day of days) {
-    const pointing = dailySet(items, day).filter((q) => TYPES[q.type].input === 'map');
-    assert.ok(pointing.filter((q) => q.target.kind === 'area').length >= 2, day);
+    const [first] = dailySet(items, day);
+    assert.equal(first.type, 'point', day);
+    assert.equal(first.target.kind, 'area', day);
   }
 });
 
-test('both specials turn up', () => {
+test('every day has 3–5 areas, 1–3 streets and 3–5 places', () => {
+  for (const day of days) {
+    const groups = dailySet(items, day).map((q) => GROUP[q.target.kind]);
+    const count = (g) => groups.filter((x) => x === g).length;
+    assert.ok(count('area') >= 3 && count('area') <= 5, day);
+    assert.ok(count('street') >= 1 && count('street') <= 3, day);
+    assert.ok(count('place') >= 3 && count('place') <= 5, day);
+  }
+});
+
+test('every split fills a set, and 4–2–4 is the most common', () => {
+  for (const s of SPLITS) assert.equal(s.area + s.street + s.place, SET_SIZE);
+  const seen = {};
+  for (let i = 0; i < 2000; i++) {
+    const slots = plan(random(i));
+    const key = ['area', 'street', 'place'].map((g) => slots.filter((x) => x.group === g).length).join('-');
+    seen[key] = (seen[key] ?? 0) + 1;
+  }
+  const [top] = Object.entries(seen).sort((a, b) => b[1] - a[1]);
+  assert.equal(top[0], '4-2-4');
+});
+
+test('places that sit together are never asked on the same day', () => {
+  for (const day of days) {
+    const set = dailySet(items, day);
+    const groups = set.map((q) => q.target.apart).filter(Boolean);
+    assert.equal(new Set(groups).size, groups.length, day);
+  }
+});
+
+test('both special questions turn up', () => {
   const seen = new Set(days.flatMap((d) => dailySet(items, d).map((q) => q.type)));
-  assert.ok(seen.has('nearest') && seen.has('neighbour'));
+  assert.ok(seen.has('neighbour') && seen.has('route'));
+});
+
+test('everything is asked within two rounds of its deck', () => {
+  const asked = new Set(days.flatMap((d) => dailySet(items, d).map((q) => q.target.name)));
+  for (const it of items) if (Object.values(DECKS).some((d) => d(it))) assert.ok(asked.has(it.name), it.name);
 });
 
 test('no target is asked twice in a day', () => {
@@ -80,16 +128,6 @@ test('identify offers things of the same kind', () => {
   }
 });
 
-test('the nearest answer is clearly the nearest', () => {
-  for (const day of days) {
-    for (const q of dailySet(items, day).filter((x) => x.type === 'nearest')) {
-      const d = (name) => metersBetween(items.find((it) => it.name === name).point, q.anchor.point);
-      const answer = d(q.target.name);
-      for (const name of q.options) if (name !== q.target.name) assert.ok(d(name) > answer * 1.5);
-    }
-  }
-});
-
 test('the neighbour answer is the one area on that side, and no decoy is on that side', () => {
   for (const day of days) {
     for (const q of dailySet(items, day).filter((x) => x.type === 'neighbour')) {
@@ -105,8 +143,46 @@ test('the neighbour answer is the one area on that side, and no decoy is on that
 
 test('the shared result is the day, the score and a square per question', () => {
   const text = shareText({ key: '2026-10-10', scores: [100, 50, 0], url: 'https://example.org' });
-  assert.equal(text, `Lär dig Malmö 2026-10-10\n150/${3 * MAX_SCORE}\n🟩🟨🟥\nhttps://example.org`);
-  assert.equal(square(80), '🟩');
-  assert.equal(square(79), '🟨');
+  assert.equal(text, `Malmökoll 2026-10-10\n150/${3 * MAX_SCORE}\n🟩🟧🟥\nhttps://example.org`);
+  assert.equal(square(MAX_SCORE), '🟩');
+  assert.equal(square(99), '🟨');
+  assert.equal(square(80), '🟨');
+  assert.equal(square(79), '🟧');
+  assert.equal(square(40), '🟧');
   assert.equal(square(39), '🟥');
+  assert.equal(square(0), '🟥');
+});
+
+test('days count on across months and years', () => {
+  assert.equal(laterKey('2026-10-31', 1), '2026-11-01');
+  assert.equal(laterKey('2026-12-28', 7), '2027-01-04');
+});
+
+test('the coming week is the targets of the next seven days', () => {
+  const soon = upcoming(items, '2026-10-10');
+  for (let n = 1; n <= 7; n++) {
+    for (const q of dailySet(items, laterKey('2026-10-10', n))) assert.ok(soon.has(q.target.name));
+  }
+});
+
+test('practice asks ten of one kind, two of them coming this week', () => {
+  const soon = upcoming(items, '2026-10-10');
+  for (const kind of PRACTICE.filter((k) => ['area', 'street'].includes(k.id))) {
+    for (const seed of [1, 2, 3]) {
+      const set = practiceSet(items, { key: '2026-10-10', category: kind.id, seed });
+      assert.equal(set.length, PRACTICE_SIZE);
+      assert.equal(new Set(set.map((q) => q.target.name)).size, PRACTICE_SIZE);
+      for (const q of set) assert.ok(kind.has(q.target), q.target.name);
+      const today = new Set(dailySet(items, '2026-10-10').map((q) => q.target.name));
+      const later = items.filter((it) => kind.has(it) && !soon.has(it.name) && !today.has(it.name)).length;
+      const coming = set.filter((q) => soon.has(q.target.name)).length;
+      if (later >= PRACTICE_SIZE - SOON_SHARE) assert.equal(coming, SOON_SHARE, kind.id);
+      else assert.equal(coming, PRACTICE_SIZE - later, kind.id);
+    }
+  }
+});
+
+test('practice mixes in the other question types', () => {
+  const types = new Set(practiceSet(items, { key: '2026-10-10', category: 'area', seed: 1 }).map((q) => q.type));
+  assert.ok(types.has('point') && types.has('identify'));
 });

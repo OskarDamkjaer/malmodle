@@ -11,33 +11,45 @@ Get familiar with Malmö through a short daily quiz.
 
 - One set a day, the same for everyone. It is derived from today's date in the
   browser's local time, through a hash. No day number is shown.
-- Ten questions, mixed across the kinds in the data. The mix follows how much
-  there is of each kind, so rare kinds (bridges, sights) do not appear every day.
+- Ten questions across three groups: areas, streets and places (bridges count
+  as places). Each day draws a split of 3–5 areas, 1–3 streets and 3–5
+  places; 4–2–4 is the most common. The first question always points at an
+  area.
+- Each kind is dealt from a deck: its items shuffled by a hash of the kind and
+  the round, so everything comes up once per round before anything repeats.
+  Restaurants have their own deck, dealt a little less than one a day.
+- Places that sit together (a park and the theatre inside it, a beach and its
+  bath house) are never asked on the same day.
 - Only names in Grunden (`learn/core.json`, as it is) are used by the app. The
   full curated data stays in the repo and in the build.
 - The set can be replayed. Replaying gives the same set, never a new one.
 
 ## Questions
 
-The code supports many question types. Pointing is the vast majority, and
-every day asks to point at at least two areas; then "what is this", then one
-of the rest.
+Pointing is the most common. Per kind:
+
+- Areas: "Var ligger X?" 1–3, "Vad ligger här?" 1–2, "Direkt söder om" 0–1.
+- Streets: "Var ligger X?" 1–3, "Vad ligger här?" 0–2, "Från A till B" 0–1.
+- Places: "Var ligger X?", with "Vad ligger här?" for about a quarter to a
+  third of them.
 
 - **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
   Afterwards: how far off you were, and what you actually tapped if it was
   something else.
-- **Vad är det här?** Something is highlighted on the map; pick its name from a
+- **Vad ligger här?** Something is highlighted on the map; pick its name from a
   list of nearby things of the same kind.
-- **Närmast.** "Vilken ligger närmast X?" Pick one of four.
 - **Direkt söder om.** "Vilket område ligger direkt söder om X?" Pick one of
   four. X is highlighted; the decoys are its other neighbours and nearby areas,
   never one that also lies on that side. Asked for any of the four directions,
   only where exactly one area borders X on that side.
+- **Från A till B.** "Vilken gata går från A till B?" Pick one of four. A and
+  B are the squares, parks or buildings at the street's ends, or the areas
+  they lie in; no decoy also joins them, and a pair belongs to one street.
 
 Every question scores 0–100. A day scores out of 1000. A wrong pick in "Vad är
-det här?" or "Direkt söder om" scores 25 when it is close to the answer: an
-area that borders it, a street that meets it, or a place within 300 m.
-"Närmast" is right or wrong.
+det här?", "Direkt söder om" or "Från A till B" scores 25 when it is close to
+the answer: an area that borders it, a street that meets it, or a place within
+300 m.
 
 ## The map
 

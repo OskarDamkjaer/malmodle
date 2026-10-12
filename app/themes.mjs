@@ -60,7 +60,7 @@ export const THEMES = {
       halo: '#f4f1ea',
       patterns: 0.35,
     },
-    marks: { answer: '#c8102e', context: '#111111', hit: '#7a7468', tap: '#111111', outline: '#55524c' },
+    marks: { answer: '#2e9e4f', context: '#111111', hit: '#c8102e', tap: '#111111', outline: '#55524c' },
   },
   klar: {
     label: 'Klar',

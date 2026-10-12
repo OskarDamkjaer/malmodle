@@ -10,35 +10,11 @@ const feature = (geometry, properties) => ({ type: 'Feature', geometry, properti
 
 let map = null;
 let labelLayers = [];
-const freeLayers = [];
-
-function shapesOf(items, extra = () => ({})) {
-  return {
-    type: 'FeatureCollection',
-    features: items.map((it) => feature(it.geometry, { name: it.name, kind: it.kind, label: it.label, ...extra(it) })),
-  };
-}
-
-function labelsOf(items, extra = () => ({})) {
-  return {
-    type: 'FeatureCollection',
-    features: items
-      .filter((it) => it.kind !== 'street')
-      .map((it) => feature({ type: 'Point', coordinates: it.point }, { name: it.name, kind: it.kind, ...extra(it) })),
-  };
-}
 
 const isPolygon = ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]];
 const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineString']]];
 const isPoint = ['==', ['geometry-type'], 'Point'];
-const isArea = ['==', ['get', 'kind'], 'area'];
-const isPlace = ['in', ['get', 'kind'], ['literal', ['landmark', 'bridge']]];
 const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
-
-function addFree(layer) {
-  map.addLayer({ ...layer, layout: { ...layer.layout, visibility: 'none' } });
-  freeLayers.push(layer.id);
-}
 
 export function applyTheme(mapInstance, theme) {
   map = mapInstance;
@@ -51,43 +27,13 @@ export function applyTheme(mapInstance, theme) {
   }
 }
 
-export function setupLayers(mapInstance, items) {
+export function setupLayers(mapInstance) {
   map = mapInstance;
   labelLayers = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 
-  map.addSource('quiz-shapes', { type: 'geojson', data: shapesOf(items) });
-  map.addSource('quiz-labels', { type: 'geojson', data: labelsOf(items) });
-  map.addSource('today', { type: 'geojson', data: EMPTY });
   map.addSource('focus', { type: 'geojson', data: EMPTY });
   map.addSource('focus-labels', { type: 'geojson', data: EMPTY });
   map.addSource('tap', { type: 'geojson', data: EMPTY });
-
-  addFree({
-    id: 'all-area-fill', type: 'fill', source: 'quiz-shapes', filter: ['all', isPolygon, isArea],
-    paint: { 'fill-color': COLOR.outline, 'fill-opacity': 0.03 },
-  });
-  addFree({
-    id: 'all-area-line', type: 'line', source: 'quiz-shapes', filter: ['all', isPolygon, isArea],
-    paint: { 'line-color': COLOR.outline, 'line-width': 1.2, 'line-opacity': 0.8 },
-  });
-  addFree({
-    id: 'all-place-fill', type: 'fill', source: 'quiz-shapes', filter: ['all', isPolygon, isPlace],
-    paint: { 'fill-color': COLOR.answer, 'fill-opacity': 0.01 },
-  });
-  addFree({
-    id: 'all-street', type: 'line', source: 'quiz-shapes', filter: isLine,
-    layout: { 'line-cap': 'round' },
-    paint: { 'line-color': COLOR.answer, 'line-width': 14, 'line-opacity': 0.01 },
-  });
-  addFree({
-    id: 'today-fill', type: 'fill', source: 'today', filter: isPolygon,
-    paint: { 'fill-color': COLOR.answer, 'fill-opacity': 0.12 },
-  });
-  addFree({
-    id: 'today-line', type: 'line', source: 'today', filter: ['!', isPoint],
-    layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': COLOR.answer, 'line-width': 3, 'line-opacity': 0.8 },
-  });
 
   map.addLayer({
     id: 'focus-fill', type: 'fill', source: 'focus', filter: isPolygon,
@@ -103,36 +49,32 @@ export function setupLayers(mapInstance, items) {
     paint: { 'line-color': COLOR.tap, 'line-width': 1.5, 'line-dasharray': [2, 2] },
   });
 
-  addFree({
-    id: 'all-points', type: 'circle', source: 'quiz-labels', filter: isPlace,
-    paint: {
-      'circle-radius': 5,
-      'circle-color': HALO,
-      'circle-stroke-color': ['match', ['get', 'kind'], 'bridge', COLOR.context, COLOR.answer],
-      'circle-stroke-width': 2,
-    },
+  map.addSource('scored', { type: 'geojson', data: EMPTY });
+  map.addSource('scored-labels', { type: 'geojson', data: EMPTY });
+  addScored({
+    id: 'scored-fill', type: 'fill', source: 'scored', filter: isPolygon,
+    paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.28 },
   });
-  addFree({
-    id: 'today-points', type: 'circle', source: 'today', filter: isPoint,
-    paint: { 'circle-radius': 7, 'circle-color': COLOR.answer, 'circle-stroke-color': HALO, 'circle-stroke-width': 2 },
+  addScored({
+    id: 'scored-line', type: 'line', source: 'scored', filter: ['!', isPoint],
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': ['get', 'color'], 'line-width': ['case', isPolygon, 2.5, 6] },
   });
-  addFree({
-    id: 'all-labels', type: 'symbol', source: 'quiz-labels',
+  addScored({
+    id: 'scored-points', type: 'circle', source: 'scored-labels', filter: ['!=', ['get', 'kind'], 'area'],
+    paint: { 'circle-radius': 8, 'circle-color': ['get', 'color'], 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
+  });
+  addScored({
+    id: 'scored-labels', type: 'symbol', source: 'scored-labels',
     layout: {
       'text-field': ['get', 'name'],
       'text-font': ['Roboto Medium'],
-      'text-size': ['case', ['==', ['get', 'kind'], 'area'], 12, 11],
-      'text-transform': ['case', ['==', ['get', 'kind'], 'area'], 'uppercase', 'none'],
-      'text-letter-spacing': ['case', ['==', ['get', 'kind'], 'area'], 0.06, 0],
+      'text-size': 13,
       'text-anchor': ['case', ['==', ['get', 'kind'], 'area'], 'center', 'top'],
-      'text-offset': ['case', ['==', ['get', 'kind'], 'area'], ['literal', [0, 0]], ['literal', [0, 0.7]]],
-      'text-max-width': 8,
+      'text-offset': ['case', ['==', ['get', 'kind'], 'area'], ['literal', [0, 0]], ['literal', [0, 0.9]]],
+      'text-max-width': 9,
     },
-    paint: {
-      'text-color': ['case', ['==', ['get', 'kind'], 'area'], COLOR.outline, COLOR.tap],
-      'text-halo-color': HALO,
-      'text-halo-width': 1.4,
-    },
+    paint: { 'text-color': COLOR.tap, 'text-halo-color': HALO, 'text-halo-width': 2 },
   });
 
   map.addLayer({
@@ -158,9 +100,29 @@ export function setupLayers(mapInstance, items) {
   });
 }
 
-export function setLabels(on) {
-  const visibility = on ? 'visible' : 'none';
-  for (const id of [...labelLayers, ...freeLayers]) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visibility);
+const scoredLayers = [];
+
+function addScored(layer) {
+  map.addLayer({ ...layer, layout: { ...layer.layout, visibility: 'none' } });
+  scoredLayers.push(layer.id);
+}
+
+export function showScored(marks) {
+  const at = (item, color) => ({ name: item.name, kind: item.kind, color });
+  map.getSource('scored').setData({
+    type: 'FeatureCollection',
+    features: marks.map(({ item, color }) => feature(item.geometry, at(item, color))),
+  });
+  map.getSource('scored-labels').setData({
+    type: 'FeatureCollection',
+    features: marks.map(({ item, color }) => feature({ type: 'Point', coordinates: item.point }, at(item, color))),
+  });
+  const visibility = marks.length ? 'visible' : 'none';
+  for (const id of scoredLayers) map.setLayoutProperty(id, 'visibility', visibility);
+}
+
+export function hideLabels() {
+  for (const id of labelLayers) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'none');
 }
 
 export function show(marks) {
@@ -190,10 +152,6 @@ export function clear() {
   map.getSource('tap').setData(EMPTY);
 }
 
-export function markToday(items) {
-  map.getSource('today').setData(shapesOf(items));
-}
-
 function padding() {
   const gap = 20;
   const top = Math.max(0, ...[...document.querySelectorAll('[data-edge="top"]:not([hidden])')]
@@ -204,11 +162,22 @@ function padding() {
   const bottom = bottoms.length ? h - Math.min(...bottoms) : 0;
   const w = map.getContainer().clientWidth;
   const side = Math.min(gap * 2, w / 10);
+  const shown = (selector) => [...document.querySelectorAll(selector)]
+    .filter((el) => !el.hidden && el.getClientRects().length)
+    .map((el) => el.getBoundingClientRect());
+  const columns = shown('[data-edge="left"]');
+  const beside = Math.max(0, ...columns.filter((r) => r.right < w * 0.6).map((r) => r.right));
+  const above = Math.max(0, ...columns.filter((r) => r.right >= w * 0.6).map((r) => r.bottom));
+  const sides = shown('[data-edge="side"]');
+  const right = Math.max(0, ...sides.filter((r) => r.left > w * 0.4).map((r) => w - r.left));
+  const across = sides.filter((r) => r.left <= w * 0.4);
+  const under = Math.max(top, ...across.filter((r) => r.top < h / 2).map((r) => r.bottom));
+  const over = Math.max(bottom, ...across.filter((r) => r.top >= h / 2).map((r) => h - r.top));
   return {
-    top: Math.min(top + gap, h * 0.45),
-    bottom: Math.min(bottom + gap, h * 0.45),
-    left: side,
-    right: side,
+    top: above ? Math.min(above + gap, h * 0.7) : Math.min(under + gap, h * 0.45),
+    bottom: Math.min(over + gap, h * 0.45),
+    left: beside && beside < w * 0.6 ? beside + gap * 5 : side,
+    right: right ? right + gap : side,
   };
 }
 
@@ -243,9 +212,11 @@ export function frameReveal(geometries, points) {
   frame(box, { maxZoom: 15 });
 }
 
-export function pick(point) {
-  const layers = ['all-points', 'all-place-fill', 'all-street', 'all-area-fill'];
-  const hits = map.queryRenderedFeatures(point, { layers });
+export function pickScored(point) {
+  const layers = ['scored-points', 'scored-labels', 'scored-line', 'scored-fill'];
+  if (map.getLayoutProperty(layers[0], 'visibility') !== 'visible') return null;
+  const reach = 10;
+  const hits = map.queryRenderedFeatures([[point.x - reach, point.y - reach], [point.x + reach, point.y + reach]], { layers });
   for (const id of layers) {
     const hit = hits.find((h) => h.layer.id === id);
     if (hit) return hit.properties.name;

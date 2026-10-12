@@ -3,6 +3,7 @@ import { dirname } from 'node:path';
 import { bboxGap, bboxOf, distance, interiorPoint } from './lib/geo.mjs';
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
 import { neighbourhood } from './lib/adjacency.mjs';
+import { closest } from '../app/geo.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -15,9 +16,9 @@ const STREET_LINK_M = 500;
 
 const json = async (f) => JSON.parse(await readFile(f, 'utf8'));
 
-const [districts, landmarksDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, sourcesDoc, shapesDoc] = await Promise.all([
+const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, sourcesDoc, shapesDoc] = await Promise.all([
   json('build/data/districts.geojson'),
-  json('landmarks/landmarks.json'),
+  json('places/places.json'),
   json('learn/bridges.json'),
   json('learn/streets.json'),
   json('learn/about.json'),
@@ -79,6 +80,7 @@ function simplifyPolygonal(geometry) {
 function shapeOr(kind, name, point) {
   const shape = shapesDoc.shapes[`${kind}:${name}`];
   if (!shape) return { type: 'Point', coordinates: roundCoords(point) };
+  if (shape.type === 'Point') return { type: 'Point', coordinates: roundCoords(shape.coordinates) };
   if (shape.type === 'MultiLineString') {
     return { type: 'MultiLineString', coordinates: shape.coordinates.map((line) => roundCoords(simplifyLine(line, 3))) };
   }
@@ -102,19 +104,45 @@ const areaItems = delomraden.map((f) => {
   };
 });
 
-const LANDMARK_LABEL = { park: 'Park', nature: 'Park', beach: 'Strand', square: 'Torg', church: 'Kyrka', station: 'Station' };
+const PLACE_LABEL = {
+  torg: 'Torg', park: 'Park', bad: 'Bad', scen: 'Scen', museum: 'Museum', kyrka: 'Kyrka', byggnad: 'Byggnad',
+  konst: 'Konstverk', idrott: 'Idrott', handel: 'Handel', krog: 'Krog', kafe: 'Kafé', vatten: 'Vatten', omrade: 'Område', skola: 'Skola',
+};
 
-const landmarkItems = landmarksDoc.landmarks
-  .filter((lm) => lm.lat != null && lm.lon != null)
-  .map((lm) => ({
-    name: lm.name,
+const districtByName = new Map(delomraden.map((f) => [f.properties.name, f]));
+
+function placeGeometry(p) {
+  if (p.district) {
+    const f = districtByName.get(p.district);
+    if (!f) { fail(`${p.name}: no district ${p.district}`); return null; }
+    return { geometry: simplifyPolygonal(f.geometry), point: interiorPoint(f.geometry) };
+  }
+  const shape = shapesDoc.shapes[`place:${p.name}`];
+  const middle = (line) => line[Math.floor(line.length / 2)];
+  const point = p.lat != null ? [p.lon, p.lat]
+    : shape?.type === 'Point' ? shape.coordinates
+    : shape?.type === 'MultiLineString' ? middle(shape.coordinates.reduce((a, b) => (b.length > a.length ? b : a)))
+    : shape ? interiorPoint(shape) : null;
+  if (!point) { fail(`${p.name}: no point or shape`); return null; }
+  return { geometry: shapeOr('place', p.name, point), point };
+}
+
+const landmarkItems = placesDoc.places.map((p) => {
+  if (!PLACE_LABEL[p.category]) fail(`${p.name}: unknown category ${p.category}`);
+  const where = placeGeometry(p);
+  if (!where) return null;
+  return {
+    name: p.name,
     kind: 'landmark',
-    label: LANDMARK_LABEL[lm.icon] ?? 'Sevärdhet',
-    point: roundCoords([lm.lon, lm.lat]),
-    geometry: shapeOr('landmark', lm.name, [lm.lon, lm.lat]),
-    about: lm.description ?? null,
-    source: lm.source ?? null,
-  }));
+    label: PLACE_LABEL[p.category],
+    category: p.category,
+    ...(p.apart && { apart: p.apart }),
+    point: roundCoords(where.point),
+    geometry: where.geometry,
+    about: p.description ?? null,
+    source: p.source ?? null,
+  };
+}).filter(Boolean);
 
 const bridgeItems = bridgesDoc.bridges.map((b) => {
   if (b.lat == null || b.lon == null) fail(`${b.name}: bridge without coordinates`);
@@ -195,7 +223,7 @@ const streetItems = streetsDoc.streets.map((s) => {
   };
 }).filter(Boolean);
 
-const PRECEDENCE = ['area', 'bridge', 'street', 'landmark'];
+const PRECEDENCE = ['landmark', 'area', 'bridge', 'street'];
 const byName = new Map();
 for (const it of [...areaItems, ...landmarkItems, ...bridgeItems, ...streetItems]) {
   const prev = byName.get(it.name);
@@ -227,6 +255,17 @@ for (const it of items) {
   if (!it.point || !Number.isFinite(it.point[0])) fail(`${it.name}: no point`);
   if (!it.geometry) fail(`${it.name}: no geometry`);
 }
+
+const OFF_SHAPE_M = 20;
+
+function onShape(geometry, point) {
+  if (geometry.type === 'Point') return geometry.coordinates;
+  const near = closest(geometry, point);
+  if (near.distance <= OFF_SHAPE_M) return point;
+  return roundCoords(geometry.type.endsWith('LineString') ? near.point : interiorPoint(geometry));
+}
+
+for (const it of items) if (it.point && it.geometry) it.point = onShape(it.geometry, it.point);
 
 if (problems.length) {
   console.error(`build-quiz: ${problems.length} problem(s)`);

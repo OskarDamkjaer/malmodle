@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 const ENDPOINT = 'https://nominatim.openstreetmap.org/search';
-const USER_AGENT = 'malmoemaps-build/1.0 (Lär dig Malmö, a daily map quiz; contact via repo)';
+const USER_AGENT = 'malmoemaps-build/1.0 (Malmökoll, a daily map quiz; contact via repo)';
 const MIN_INTERVAL_MS = 1100;
 
 let lastRequest = 0;

@@ -33,7 +33,8 @@ osmium, Java and hosts the sandbox cannot reach.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
 
 `questions.mjs`, `daily.mjs` and `geo.mjs` are pure and tested without a
-browser. To add a question type, add it to `TYPES` and to `MIX`.
+browser. To add a question type, add it to `TYPES` and give it slots in
+`plan` in `daily.mjs`.
 
 ## Conventions
 

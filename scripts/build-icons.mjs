@@ -1,8 +1,6 @@
 import { deflateSync } from 'node:zlib';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
-const PAPER = [0xf8, 0xf4, 0xf0];
-const INK = [0x1f, 0x6f, 0x5c];
 const WHITE = [0xff, 0xff, 0xff];
 
 function canvas(size, bg) {
@@ -34,7 +32,15 @@ function fill(c, rgb, inside) {
   }
 }
 
-const disc = (cx, cy, r) => (x, y) => (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
+const polygon = (pts) => (x, y) => {
+  let inside = false;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const [xi, yi] = pts[i];
+    const [xj, yj] = pts[j];
+    if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+};
 
 function bar(x1, y1, x2, y2, w) {
   const dx = x2 - x1;
@@ -86,25 +92,64 @@ function png({ size, px }) {
   ]);
 }
 
+function tower() {
+  const floors = 7;
+  const top = 3;
+  const bottom = 21;
+  const gap = 0.5;
+  const cx = 11.2;
+  const tall = (bottom - top - gap * (floors - 1)) / floors;
+  const along = (y) => (bottom - y) / (bottom - top);
+  const twist = (y) => along(y) * (Math.PI / 2) * 0.85 + 0.12;
+  const half = (y) => 2.2 - along(y) * 0.4;
+  const corner = (y, k) => cx + half(y) * Math.SQRT2 * Math.cos(twist(y) + Math.PI / 4 + (k * Math.PI) / 2);
+  const depth = (y, k) => Math.sin(twist(y) + Math.PI / 4 + (k * Math.PI) / 2);
+  const edge = (y) => Math.max(...[0, 1, 2, 3].map((k) => corner(y, k)));
+  const mast = cx + 3.1;
+  const faces = [];
+  const spine = [[mast, top - 0.4, mast, bottom]];
+  for (let i = 0; i < floors; i++) {
+    const y1 = bottom - i * (tall + gap);
+    const y0 = y1 - tall;
+    const mid = (y0 + y1) / 2;
+    const ks = [0, 1, 2, 3].sort((a, b) => depth(mid, b) - depth(mid, a));
+    const front = ks[0];
+    const [left, right] = [ks[1], ks[2]].sort((a, b) => corner(mid, a) - corner(mid, b));
+    const quad = (a, b) => [[corner(y0, a), y0], [corner(y0, b), y0], [corner(y1, b), y1], [corner(y1, a), y1]];
+    faces.push({ lit: true, pts: quad(left, front) });
+    faces.push({ lit: false, pts: quad(front, right) });
+    spine.push([mast, y1, edge(mid), mid]);
+  }
+  return { faces, spine };
+}
+
+const SKY = [0x6c, 0xac, 0xe4];
+const SHADE = [0xd2, 0xe6, 0xf7];
+const hex = (rgb) => `#${rgb.map((n) => n.toString(16).padStart(2, '0')).join('')}`;
+const round = (n) => Math.round(n * 100) / 100;
+
+function svg() {
+  const { faces, spine } = tower();
+  const shapes = faces.map((f) => `  <path d="M${f.pts.map(([x, y]) => `${round(x)} ${round(y)}`).join('L')}Z" fill="${hex(f.lit ? WHITE : SHADE)}"/>`);
+  const steel = spine.map(([x0, y0, x1, y1]) => `M${round(x0)} ${round(y0)}L${round(x1)} ${round(y1)}`).join('');
+  return [
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">',
+    `  <rect width="24" height="24" rx="5" fill="${hex(SKY)}"/>`,
+    ...shapes,
+    `  <path d="${steel}" stroke="${hex(WHITE)}" stroke-width="0.45" stroke-linecap="round" fill="none"/>`,
+    '</svg>',
+    '',
+  ].join('\n');
+}
+
 function mark(size, { maskable = false } = {}) {
-  const c = canvas(size, maskable ? INK : PAPER);
+  const c = canvas(size, SKY);
   const u = size / 24;
   const scale = maskable ? 0.78 : 1;
   const at = (n) => (n - 12) * u * scale + size / 2;
-
-  if (!maskable) fill(c, INK, disc(size / 2, size / 2, 10.5 * u));
-
-  const floors = 5;
-  for (let i = 0; i < floors; i++) {
-    const angle = -0.5 + i * (1 / (floors - 1));
-    const y = 6.6 + i * 2.7;
-    const half = 3.4;
-    fill(c, WHITE, bar(
-      at(12 - half * Math.cos(angle)), at(y - half * Math.sin(angle)),
-      at(12 + half * Math.cos(angle)), at(y + half * Math.sin(angle)),
-      1.7 * u * scale,
-    ));
-  }
+  const { faces, spine } = tower();
+  for (const f of faces) fill(c, f.lit ? WHITE : SHADE, polygon(f.pts.map(([x, y]) => [at(x), at(y)])));
+  for (const [x0, y0, x1, y1] of spine) fill(c, WHITE, bar(at(x0), at(y0), at(x1), at(y1), 0.45 * u * scale));
   return c;
 }
 
@@ -115,6 +160,8 @@ const out = [
   ['app/icons/icon-512.png', mark(512)],
   ['app/icons/icon-maskable-512.png', mark(512, { maskable: true })],
 ];
+writeFileSync('app/icons/icon.svg', svg());
+console.log('-> app/icons/icon.svg');
 for (const [file, c] of out) {
   const buf = png(c);
   writeFileSync(file, buf);

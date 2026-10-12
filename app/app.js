@@ -1,11 +1,10 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { dailySet, dateKey, shareText, square } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, band, dailySet, dateKey, practiceSet, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
-import { metersBetween } from './geo.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, markToday, pick, setLabels, setupLayers, show, showTap,
+  applyTheme, clear, frameHome, frameItems, frameReveal, hideLabels, pickScored, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -44,6 +43,12 @@ async function loadArchive(url) {
     if (total) progress((got / total) * 0.9);
   }
   return new File(chunks, url.split('/').pop());
+}
+
+if (!document.createElement('canvas').getContext('webgl2')) {
+  const err = new Error('Webbläsaren saknar stöd för WebGL2.');
+  fail('Kartan kunde inte visas', err);
+  throw err;
 }
 
 let archive;
@@ -93,6 +98,7 @@ let set = [];
 let index = 0;
 let results = [];
 let phase = 'loading';
+let practicing = null;
 
 const current = () => set[index];
 const typeOf = (q) => TYPES[q.type];
@@ -101,18 +107,12 @@ const sum = (list) => list.reduce((a, b) => a + b, 0);
 function hide(...ids) { for (const id of ids) el(id).hidden = true; }
 function reveal(...ids) { for (const id of ids) el(id).hidden = false; }
 
-function tone(score) {
-  if (score >= 80) return 'right';
-  if (score >= 40) return 'mid';
-  return 'wrong';
-}
-
 function renderDots() {
   const dots = el('dots');
   dots.replaceChildren();
   set.forEach((_, i) => {
     const li = document.createElement('li');
-    if (results[i]) li.dataset.tone = tone(results[i].result.score);
+    if (results[i]) li.dataset.band = band(results[i].result.score);
     if (i === index && phase !== 'end') li.dataset.current = '';
     dots.append(li);
   });
@@ -121,11 +121,26 @@ function renderDots() {
 
 function start() {
   key = dateKey();
-  set = dailySet(items, key);
+  practicing = null;
+  play(dailySet(items, key));
+}
+
+function practise(kind) {
+  key = dateKey();
+  practicing = kind;
+  play(practiceSet(items, { key, category: kind.id, seed: Math.floor(Math.random() * 2 ** 32) }));
+}
+
+function play(questions) {
+  set = questions;
   index = 0;
   results = [];
-  hide('end', 'back', 'card', 'result', 'freehint');
-  setLabels(false);
+  hide('end', 'result', 'info');
+  delete document.body.dataset.ended;
+  delete document.body.dataset.mapview;
+  el('endmap').textContent = 'Visa på kartan';
+  hideLabels();
+  showScored([]);
   ask();
 }
 
@@ -138,7 +153,8 @@ function ask() {
   renderDots();
   el('detail').textContent = detail ?? '';
   el('prompt').textContent = title;
-  hide('result');
+  hide('result', 'info');
+  delete document.body.dataset.answered;
   reveal('question');
 
   const choices = el('choices');
@@ -153,11 +169,9 @@ function ask() {
       choices.append(b);
     });
     choices.dataset.count = q.options.length;
-    hide('hint');
     reveal('choices');
   } else {
     hide('choices');
-    reveal('hint');
   }
 
   show(type.showing(q).map(({ item, named }) => ({ item, named, role: 'context' })));
@@ -190,23 +204,65 @@ async function answer(value) {
   phase = 'grading';
   const q = current();
   const type = typeOf(q);
-  const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value) : undefined;
+  const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value).catch(() => undefined) : undefined;
   const result = type.grade(q, value, items, street);
   results.push({ q, result });
   phase = 'answered';
   navigator.vibrate?.(result.score === MAX_SCORE ? 15 : [10, 60, 10]);
 
   el('points').textContent = `${result.score}`;
-  el('result').dataset.tone = tone(result.score);
+  el('points').dataset.band = band(result.score);
 
   if (type.input === 'map') revealPoint(q, result);
   else revealChoice(q, result);
 
   renderDots();
-  hide('choices', 'hint');
+  hide('choices');
+  showInfo(q.target);
   reveal('result');
-  el('next').textContent = index + 1 < set.length ? 'Nästa' : 'Se dagens resultat';
+  el('next').textContent = index + 1 < set.length ? 'Nästa' : practicing ? 'Se resultat' : 'Se dagens resultat';
   el('next').focus({ preventScroll: true });
+}
+
+function showInfo(item, played) {
+  el('infolabel').textContent = item.label;
+  el('infoname').textContent = item.name;
+  el('infoabout').textContent = item.about ?? '';
+  el('infoscore').hidden = !played;
+  if (played) {
+    const pill = el('infopoints');
+    pill.textContent = String(played.result.score);
+    pill.dataset.band = band(played.result.score);
+    el('infooutcome').textContent = outcome(played);
+  }
+  el('infosource').hidden = !item.source;
+  if (item.source) el('infosource').href = item.source;
+
+  const figure = el('infophoto');
+  figure.replaceChildren();
+  const photo = item.photos?.[0];
+  if (photo) {
+    const img = document.createElement('img');
+    img.src = photo.src;
+    img.alt = item.name;
+    img.loading = 'lazy';
+    const credit = document.createElement('figcaption');
+    const link = document.createElement('a');
+    link.href = photo.source;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = `Foto: ${photo.author}, ${photo.licence}`;
+    credit.append(link);
+    figure.append(img, credit);
+    delete figure.dataset.empty;
+  } else {
+    const note = document.createElement('span');
+    note.textContent = 'Bild kommer';
+    figure.append(note);
+    figure.dataset.empty = '';
+  }
+  document.body.dataset.answered = '';
+  reveal('info');
 }
 
 function revealPoint(q, result) {
@@ -229,17 +285,14 @@ function revealChoice(q, result) {
     add(q.target, 'answer');
     if (!right) add(byName.get(result.choice), 'hit');
     el('explain').textContent = right ? `Det är ${q.target.name}.` : `Det är ${q.target.name}, inte ${result.choice}.`;
-  } else if (q.type === 'nearest') {
-    add(q.anchor, 'context');
+  } else if (q.type === 'route') {
+    add(q.from, 'context');
+    add(q.to, 'context');
     add(q.target, 'answer');
-    const d = formatDistance(metersBetween(q.anchor.point, q.target.point));
-    let text = `${q.target.name} ligger ${d} från ${q.anchor.name}.`;
-    if (!right) {
-      const wrong = byName.get(result.choice);
-      add(wrong, 'hit');
-      text += ` ${wrong.name} ligger ${formatDistance(metersBetween(q.anchor.point, wrong.point))} bort.`;
-    }
-    el('explain').textContent = text;
+    if (!right) add(byName.get(result.choice), 'hit');
+    el('explain').textContent = right
+      ? `${q.target.name} går från ${q.from.name} till ${q.to.name}.`
+      : `Det är ${q.target.name}, inte ${result.choice}.`;
   } else if (q.type === 'neighbour') {
     add(q.from, 'context');
     add(q.target, 'answer');
@@ -281,97 +334,62 @@ function countUp(node, total) {
   requestAnimationFrame(step);
 }
 
-function verdictFor(total, max) {
-  const share = total / max;
-  if (share >= 0.9) return 'Du hittar i Malmö.';
-  if (share >= 0.7) return 'Riktigt bra.';
-  if (share >= 0.5) return 'Bra jobbat.';
-  if (share >= 0.3) return 'På god väg.';
-  return 'Imorgon blir det bättre.';
+const VERDICTS = [
+  [0.9, 'Snyggt!', 'Välkommen tillbaka imorgon.'],
+  [0.7, 'Riktigt bra!', 'Ses imorgon.'],
+  [0.5, 'Bra jobbat!', 'Ny omgång imorgon.'],
+  [0.3, 'På god väg.', 'Försök igen imorgon.'],
+  [0, 'Öva en gång till.', 'Försök igen imorgon.'],
+];
+
+function verdictFor(total, max, daily) {
+  const [share, praise, tomorrow] = VERDICTS.find(([least]) => total / max >= least);
+  if (!daily) return praise;
+  return share ? `${praise} ${tomorrow}` : tomorrow;
 }
 
 function finish() {
   phase = 'end';
   clear();
-  hide('question', 'result', 'choices', 'hint');
+  hide('question', 'result', 'info', 'choices');
+  delete document.body.dataset.answered;
+  document.body.dataset.ended = '';
   const scores = results.map((r) => r.result.score);
   const total = sum(scores);
   const max = set.length * MAX_SCORE;
-  el('enddate').textContent = new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
+  el('enddate').textContent = practicing
+    ? `Övning · ${practicing.label}`
+    : new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
+  el('sharecard').hidden = Boolean(practicing);
+  el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
+  el('kinds').hidden = !practicing;
   countUp(el('endscore'), total);
   el('endmax').textContent = `av ${max}`;
-  el('endverdict').textContent = verdictFor(total, max);
+  el('endverdict').textContent = verdictFor(total, max, !practicing);
   el('endsquares').textContent = scores.map(square).join('');
-
-  const list = el('endlist');
-  list.replaceChildren();
-  for (const r of results) {
-    const { q, result } = r;
-    const li = document.createElement('li');
-    const details = document.createElement('details');
-    const summary = document.createElement('summary');
-
-    const name = document.createElement('span');
-    name.className = 'name';
-    name.textContent = q.target.name;
-    const meta = document.createElement('span');
-    meta.className = 'meta';
-    meta.textContent = q.target.label;
-    const score = document.createElement('span');
-    score.className = 'score';
-    score.dataset.tone = tone(result.score);
-    score.textContent = String(result.score);
-    summary.append(name, meta, score);
-
-    const body = document.createElement('div');
-    body.className = 'body';
-    const asked = document.createElement('p');
-    asked.className = 'asked';
-    asked.textContent = `${typeOf(q).prompt(q).title} ${outcome(r)}`;
-    body.append(asked);
-    if (q.target.about) {
-      const about = document.createElement('p');
-      about.className = 'about';
-      about.textContent = q.target.about;
-      body.append(about);
-    }
-    const links = document.createElement('div');
-    links.className = 'links';
-    const onMap = document.createElement('button');
-    onMap.type = 'button';
-    onMap.textContent = 'Visa på kartan';
-    onMap.addEventListener('click', () => openMap(q.target));
-    links.append(onMap);
-    if (q.target.source) {
-      const a = document.createElement('a');
-      a.href = q.target.source;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.textContent = 'Läs mer';
-      links.append(a);
-    }
-    body.append(links);
-
-    details.append(summary, body);
-    li.append(details);
-    list.append(li);
-  }
+  el('sharetext').textContent = resultText();
+  el('sharenative').hidden = !navigator.share;
+  el('report').href = reportLink();
+  el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
 
   reveal('end');
   el('end').scrollTop = 0;
-  el('share').focus({ preventScroll: true });
+  spreadOut();
+  el(practicing ? 'again' : 'share').focus({ preventScroll: true });
 }
 
-async function share() {
-  const text = shareText({
+function resultText() {
+  return shareText({
     key,
     scores: results.map((r) => r.result.score),
     url: location.origin + themePath(themeName),
   });
-  const button = el('share');
+}
+
+async function copy(text) {
   try {
     await navigator.clipboard.writeText(text);
-    button.textContent = 'Kopierat';
+    return true;
   } catch {
     const area = document.createElement('textarea');
     area.value = text;
@@ -379,80 +397,121 @@ async function share() {
     area.select();
     const ok = document.execCommand('copy');
     area.remove();
-    button.textContent = ok ? 'Kopierat' : 'Kunde inte kopiera';
-  }
-  setTimeout(() => { button.textContent = 'Kopiera resultat'; }, 2000);
-}
-
-function openMap(focus = null) {
-  phase = 'free';
-  hide('end', 'card');
-  reveal('back', 'freehint');
-  setLabels(true);
-  markToday(results.map((r) => r.q.target));
-  clear();
-  if (focus) {
-    select(focus);
-    requestAnimationFrame(() => frameItems([focus], 600));
-  } else {
-    requestAnimationFrame(() => frameHome(items));
+    return ok;
   }
 }
 
-function select(item) {
-  show([{ item, role: 'answer', named: false }]);
-  el('cardname').textContent = item.name;
-  el('cardlabel').textContent = item.label;
-  el('cardabout').textContent = item.about ?? '';
-  const src = el('cardsource');
-  src.hidden = !item.source;
-  if (item.source) src.href = item.source;
-  hide('freehint');
-  reveal('card');
+let copiedTimer;
+async function share() {
+  const ok = await copy(resultText());
+  const button = el('share');
+  button.textContent = ok ? 'Kopierat ✓' : 'Kunde inte kopiera';
+  button.dataset.state = ok ? 'done' : 'failed';
+  if (ok) selectText(el('sharetext'));
+  clearTimeout(copiedTimer);
+  copiedTimer = setTimeout(() => {
+    button.textContent = 'Kopiera resultat';
+    delete button.dataset.state;
+  }, 2500);
 }
 
-function deselect() {
-  clear();
-  hide('card');
-  if (phase === 'free') reveal('freehint');
+function selectText(node) {
+  const range = document.createRange();
+  range.selectNodeContents(node);
+  getSelection().removeAllRanges();
+  getSelection().addRange(range);
 }
 
-function backToEnd() {
-  deselect();
-  hide('back', 'freehint');
-  setLabels(false);
-  phase = 'end';
-  reveal('end');
-}
-
-function renderThemes() {
-  const nav = el('devthemes');
-  nav.hidden = !['localhost', '127.0.0.1'].includes(location.hostname);
-  for (const [name, t] of Object.entries(THEMES)) {
-    const a = document.createElement('a');
-    a.href = themePath(name);
-    a.textContent = t.label;
-    if (name === themeName) a.setAttribute('aria-current', 'page');
-    nav.append(a);
+async function shareNative() {
+  try {
+    await navigator.share({ text: resultText() });
+  } catch (err) {
+    if (err.name !== 'AbortError') share();
   }
+}
+
+function reportLink() {
+  const body = [
+    `Datum: ${key}`,
+    `Stil: ${themeName}`,
+    `Webbläsare: ${navigator.userAgent}`,
+    '',
+    'Vad blev fel?',
+    '',
+  ].join('\n');
+  const url = new URL('https://github.com/OskarDamkjaer/malmoemaps/issues/new');
+  url.searchParams.set('body', body);
+  return url.href;
+}
+
+function renderKinds() {
+  const list = el('kinds');
+  for (const kind of PRACTICE) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = kind.label;
+    b.addEventListener('click', () => practise(kind));
+    list.append(b);
+  }
+}
+
+function toggleKinds() {
+  const open = el('kinds').hidden;
+  el('kinds').hidden = !open;
+  el('practise').setAttribute('aria-expanded', String(open));
+}
+
+function spreadOut() {
+  showScored(results.map(({ q, result }) => ({ item: q.target, color: BAND_COLORS[band(result.score)] })));
+  requestAnimationFrame(() => frameItems(results.map((r) => r.q.target), 300));
+}
+
+function showPlace(r) {
+  showInfo(r.q.target, r);
+  requestAnimationFrame(() => frameItems(results.map((x) => x.q.target), 300));
+}
+
+function toggleMapView() {
+  const on = !('mapview' in document.body.dataset);
+  if (on) document.body.dataset.mapview = '';
+  else delete document.body.dataset.mapview;
+  el('endmap').textContent = on ? 'Visa resultatet' : 'Visa på kartan';
+  closePlace();
+  requestAnimationFrame(() => frameItems(results.map((r) => r.q.target), 300));
+}
+
+function closePlace() {
+  hide('info');
 }
 
 map.on('click', (e) => {
   if (phase === 'asking' && typeOf(current()).input === 'map') {
     answer([e.lngLat.lng, e.lngLat.lat]);
-  } else if (phase === 'free') {
-    const name = pick(e.point);
-    if (name) select(byName.get(name));
-    else deselect();
+  } else if (phase === 'end') {
+    const name = pickScored(e.point);
+    const r = results.find((x) => x.q.target.name === name);
+    if (r) showPlace(r);
+    else closePlace();
   }
+});
+
+map.on('mousemove', (e) => {
+  if (phase !== 'end') return;
+  map.getCanvas().style.cursor = pickScored(e.point) ? 'pointer' : '';
 });
 
 el('next').addEventListener('click', next);
 el('share').addEventListener('click', share);
-el('openmap').addEventListener('click', () => openMap());
+el('sharenative').addEventListener('click', shareNative);
+el('sharetext').addEventListener('click', share);
+el('practise').addEventListener('click', toggleKinds);
 el('again').addEventListener('click', start);
-el('back').addEventListener('click', backToEnd);
-el('cardclose').addEventListener('click', deselect);
+el('infoclose').addEventListener('click', closePlace);
+el('endmap').addEventListener('click', toggleMapView);
+el('maptipbutton').addEventListener('click', (e) => {
+  const open = e.currentTarget.getAttribute('aria-expanded') !== 'true';
+  e.currentTarget.setAttribute('aria-expanded', String(open));
+});
 
 document.addEventListener('keydown', (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -462,9 +521,8 @@ document.addEventListener('keydown', (e) => {
   } else if (phase === 'answered' && e.key === 'Enter' && document.activeElement !== el('next')) {
     e.preventDefault();
     next();
-  } else if (phase === 'free' && e.key === 'Escape') {
-    if (!el('card').hidden) deselect();
-    else backToEnd();
+  } else if (phase === 'end' && e.key === 'Escape') {
+    closePlace();
   }
 });
 
@@ -473,15 +531,15 @@ map.on('load', async () => {
     applyTheme(map, theme);
     items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
     byName = new globalThis.Map(items.map((it) => [it.name, it]));
-    setupLayers(map, items);
+    setupLayers(map);
   } catch (err) {
     fail('Frågorna kunde inte laddas', err);
     return;
   }
   progress(1);
-  renderThemes();
+  renderKinds();
   start();
-  setTimeout(() => boot.classList.add('done'), reducedMotion ? 0 : 250);
+  setTimeout(() => boot.classList.add('done'), Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
 });
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {

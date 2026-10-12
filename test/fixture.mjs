@@ -26,7 +26,7 @@ export function fixture() {
   }
   for (let i = 0; i < 16; i++) {
     const p = [12.952 + (i % 4) * 0.015, 55.571 + Math.floor(i / 4) * 0.015];
-    items.push({ name: `Plats ${i}`, kind: 'landmark', label: 'Sevärdhet', point: p, geometry: { type: 'Point', coordinates: p } });
+    items.push({ name: `Plats ${i}`, kind: 'landmark', label: 'Sevärdhet', ...(i < 3 && { apart: 'Plats 0' }), point: p, geometry: { type: 'Point', coordinates: p } });
   }
   const areas = items.filter((it) => it.kind === 'area');
   const around = neighbourhood(areas, new Set(areas.map((it) => it.name)));

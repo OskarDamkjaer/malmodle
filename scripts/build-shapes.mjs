@@ -12,12 +12,12 @@ const NEAR_M = 250;
 
 const json = (f) => JSON.parse(readFileSync(f, 'utf8'));
 const places = [
-  ...json('landmarks/landmarks.json').landmarks
-    .filter((l) => l._resolved?.osm && l.lat != null)
-    .map((l) => ({ name: l.name, kind: 'landmark', ids: [l._resolved.osm], point: [l.lon, l.lat] })),
   ...json('learn/bridges.json').bridges
     .filter((b) => b.osm?.length && b.lat != null)
     .map((b) => ({ name: b.name, kind: 'bridge', ids: b.osm, point: [b.lon, b.lat] })),
+  ...json('places/places.json').places
+    .filter((p) => p.osm.length)
+    .map((p) => ({ name: p.name, kind: 'place', ids: p.osm, point: p.lat != null ? [p.lon, p.lat] : null })),
 ];
 
 const short = (id) => { const [type, n] = id.split('/'); return `${type[0]}${n}`; };
@@ -26,7 +26,7 @@ writeFileSync(`${tmp}/shapes-ids.txt`, `${[...new Set(places.flatMap((p) => p.id
 execFileSync('osmium', ['getid', '-r', pbf, '-i', `${tmp}/shapes-ids.txt`,
   '-o', `${tmp}/shapes.osm.pbf`, '--overwrite'], { stdio: 'inherit' });
 execFileSync('osmium', ['export', `${tmp}/shapes.osm.pbf`, '-o', `${tmp}/shapes-raw.geojson`,
-  '-f', 'geojson', '-a', 'type,id', '--geometry-types=linestring,polygon', '--overwrite'], { stdio: 'inherit' });
+  '-f', 'geojson', '-a', 'type,id', '--overwrite'], { stdio: 'inherit' });
 
 const byId = new Map();
 for (const f of json(`${tmp}/shapes-raw.geojson`).features) {
@@ -39,11 +39,13 @@ function shapeOf(place) {
   const found = place.ids.flatMap((id) => byId.get(id) ?? []);
   const polygons = found.flatMap((g) => (g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : []));
   if (polygons.length) {
-    const near = polygons.filter((p) => distanceTo({ type: 'Polygon', coordinates: p }, place.point) <= NEAR_M);
+    const near = place.point ? polygons.filter((p) => distanceTo({ type: 'Polygon', coordinates: p }, place.point) <= NEAR_M) : polygons;
     return near.length ? { type: 'MultiPolygon', coordinates: near } : null;
   }
   const lines = found.flatMap((g) => (g.type === 'LineString' ? [g.coordinates] : []));
-  return lines.length ? { type: 'MultiLineString', coordinates: lines } : null;
+  if (lines.length) return { type: 'MultiLineString', coordinates: lines };
+  const points = found.filter((g) => g.type === 'Point');
+  return points.length ? points[0] : null;
 }
 
 const shapes = {};
@@ -55,5 +57,6 @@ for (const place of places) {
 }
 
 writeFileSync(outFile, JSON.stringify({ shapes }));
-console.log(`build-shapes → ${outFile}: ${Object.keys(shapes).length} of ${places.length} places have a shape`);
-if (missing.length) console.log(`  points only: ${missing.join(', ')}`);
+const outlined = Object.values(shapes).filter((s) => s.type !== 'Point').length;
+console.log(`build-shapes → ${outFile}: ${outlined} of ${places.length} places have a shape`);
+if (missing.length) console.log(`  not found: ${missing.join(', ')}`);
