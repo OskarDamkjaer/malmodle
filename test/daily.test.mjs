@@ -143,7 +143,7 @@ test('the neighbour answer is the one area on that side, and no decoy is on that
 
 test('the shared result is the day, the score and a square per question', () => {
   const text = shareText({ key: '2026-10-10', scores: [100, 50, 0], url: 'https://example.org' });
-  assert.equal(text, `Malmökoll 2026-10-10\n150/${3 * MAX_SCORE}\n🟩🟧🟥\nhttps://example.org`);
+  assert.equal(text, `Malmödle 2026-10-10\n150/${3 * MAX_SCORE}\n🟩🟧🟥\nhttps://example.org`);
   assert.equal(square(MAX_SCORE), '🟩');
   assert.equal(square(99), '🟨');
   assert.equal(square(80), '🟨');

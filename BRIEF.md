@@ -65,6 +65,10 @@ the answer: an area that borders it, a street that meets it, or a place within
 - A way to open the full labelled map for free practice. Tapping a thing says
   what it is; today's names are marked.
 - No memory between days. Nothing is stored.
+- On a phone, after a round, the end screen offers to put the app on the home
+  screen: the browser's own install prompt where there is one, the steps on
+  iPhone. It is worked out from the browser each time, not remembered, and
+  not shown once installed.
 
 ## Styles
 
