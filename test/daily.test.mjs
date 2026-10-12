@@ -231,3 +231,25 @@ test('a saved day for a different set is ignored', () => {
   assert.deepEqual(recall(null, key, set), []);
   assert.deepEqual(recall({ key, targets: set.map((q) => q.target.name), done: 'trasig' }, key, set), []);
 });
+
+test('broken saved answers are ignored', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const targets = set.map((q) => q.target.name);
+  const map = set.findIndex((q) => TYPES[q.type].input === 'map');
+  const choice = set.findIndex((q) => TYPES[q.type].input === 'choice');
+  const missing = (i, a) => set.slice(0, i + 1).map((q, j) => (j === i ? a : { score: MAX_SCORE }));
+  assert.deepEqual(recall({ key, targets, playing: [null] }, key, set), []);
+  assert.deepEqual(recall({ key, targets, playing: [{ score: 'mycket' }] }, key, set), []);
+  assert.deepEqual(recall({ key, targets, playing: [{ score: MAX_SCORE + 1 }] }, key, set), []);
+  assert.deepEqual(recall({ key, targets, playing: missing(map, { score: 40 }) }, key, set), []);
+  assert.deepEqual(recall({ key, targets, playing: missing(choice, { score: 0 }) }, key, set), []);
+  assert.equal(recall({ key, targets, playing: missing(map, { score: 40, distance: 300 }) }, key, set).length, map + 1);
+});
+
+test('a broken replay falls back to the finished day', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const done = stored(remember(null, { key, set, results: set.map((q) => answer(q, 100)), finished: true }));
+  assert.equal(recall({ ...done, playing: [null] }, key, set).length, set.length);
+});
