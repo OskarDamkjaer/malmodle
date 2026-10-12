@@ -64,7 +64,11 @@ the answer: an area that borders it, a street that meets it, or a place within
   like other daily games. If the set is replayed, the latest result is shared.
 - A way to open the full labelled map for free practice. Tapping a thing says
   what it is; today's names are marked.
-- No memory between days. Nothing is stored.
+- No memory between days. The browser keeps only today's daily round: a
+  reload resumes it at the next question, or returns to the end screen once it
+  is finished. A replay in progress does not replace the finished result until
+  it ends. Practice is not kept, and an earlier day's round is ignored and then
+  replaced.
 - On a phone, after a round, the end screen offers to put the app on the home
   screen: the browser's own install prompt where there is one, the steps on
   iPhone. It is worked out from the browser each time, not remembered, and

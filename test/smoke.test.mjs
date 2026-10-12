@@ -62,9 +62,9 @@ const visibleText = (page) => page.evaluate(() => window.map.getStyle().layers
   .filter((l) => (window.map.getLayoutProperty(l.id, 'visibility') ?? 'visible') !== 'none')
   .map((l) => l.id));
 
-async function playThrough(page, viewport) {
+async function playThrough(page, viewport, count = 10) {
   const prompts = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < count; i++) {
     await page.waitForSelector('#question:not([hidden])');
     prompts.push(await page.textContent('#prompt'));
     assert.deepEqual(await visibleText(page), [], 'a label is visible during a question');
@@ -130,6 +130,32 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     await context.close();
   });
 }
+
+test('a reload returns to the same place in the day', { skip }, async () => {
+  const viewport = { width: 390, height: 844 };
+  const { page, context, errors } = await open(viewport);
+  await playThrough(page, viewport, 3);
+  const next = await page.textContent('#prompt');
+
+  await page.reload();
+  await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
+  await page.waitForSelector('#question:not([hidden])');
+  assert.equal(await page.textContent('#prompt'), next);
+  assert.equal(await page.locator('#dots li[data-band]').count(), 3);
+
+  await playThrough(page, viewport, 7);
+  await page.waitForSelector('#end:not([hidden])');
+  const shared = await page.textContent('#sharetext');
+
+  await page.reload();
+  await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
+  await page.waitForSelector('#end:not([hidden])');
+  assert.equal(await page.textContent('#sharetext'), shared);
+  assert.ok(await page.isVisible('#practise'));
+
+  assert.deepEqual(errors, []);
+  await context.close();
+});
 
 test('every style boots at its own path', { skip }, async () => {
   for (const [name, theme] of Object.entries(THEMES)) {

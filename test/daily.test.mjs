@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, shareText, square, upcoming } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, square, upcoming } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -185,4 +185,49 @@ test('practice asks ten of one kind, two of them coming this week', () => {
 test('practice mixes in the other question types', () => {
   const types = new Set(practiceSet(items, { key: '2026-10-10', category: 'area', seed: 1 }).map((q) => q.type));
   assert.ok(types.has('point') && types.has('identify'));
+});
+
+const answer = (q, score) => ({ q, result: { score, distance: 120, choice: q.options?.[0], tap: [13, 55], hit: q.target } });
+const stored = (value) => JSON.parse(JSON.stringify(value));
+
+test('a finished day comes back on the same day only', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const results = set.map((q) => answer(q, 80));
+  const saved = stored(remember(null, { key, set, results, finished: true }));
+  const back = recall(saved, key, set);
+  assert.equal(back.length, set.length);
+  assert.deepEqual(back.map((r) => r.q), set);
+  assert.deepEqual(back.map((r) => r.result.score), results.map((r) => r.result.score));
+  assert.equal(back[0].result.hit, undefined);
+  assert.deepEqual(recall(saved, '2026-10-11', dailySet(items, '2026-10-11')), []);
+});
+
+test('a round in progress resumes where it stopped', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const saved = stored(remember(null, { key, set, results: set.slice(0, 4).map((q) => answer(q, 50)), finished: false }));
+  assert.equal(recall(saved, key, set).length, 4);
+});
+
+test('a replay in progress keeps the finished day until it ends', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const done = stored(remember(null, { key, set, results: set.map((q) => answer(q, 100)), finished: true }));
+  const replay = stored(remember(done, { key, set, results: [answer(set[0], 0)], finished: false }));
+  assert.equal(replay.done.length, set.length);
+  assert.equal(recall(replay, key, set).length, 1);
+  const again = stored(remember(replay, { key, set, results: set.map((q) => answer(q, 0)), finished: true }));
+  assert.equal(again.playing, undefined);
+  assert.deepEqual(recall(again, key, set).map((r) => r.result.score), set.map(() => 0));
+});
+
+test('a saved day for a different set is ignored', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const saved = stored(remember(null, { key, set, results: set.map((q) => answer(q, 80)), finished: true }));
+  saved.targets[0] = 'Någon annanstans';
+  assert.deepEqual(recall(saved, key, set), []);
+  assert.deepEqual(recall(null, key, set), []);
+  assert.deepEqual(recall({ key, targets: set.map((q) => q.target.name), done: 'trasig' }, key, set), []);
 });

@@ -1,5 +1,5 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, band, dailySet, dateKey, practiceSet, shareText, square } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, shareText, square } from './daily.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
@@ -125,23 +125,42 @@ function start() {
   play(dailySet(items, key));
 }
 
+function resume() {
+  key = dateKey();
+  practicing = null;
+  const questions = dailySet(items, key);
+  play(questions, recall(loadSaved(), key, questions));
+}
+
+function loadSaved() {
+  try { return JSON.parse(localStorage.getItem(SAVE_KEY)); } catch { return null; }
+}
+
+function save(finished) {
+  if (practicing) return;
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify(remember(loadSaved(), { key, set, results, finished })));
+  } catch {}
+}
+
 function practise(kind) {
   key = dateKey();
   practicing = kind;
   play(practiceSet(items, { key, category: kind.id, seed: Math.floor(Math.random() * 2 ** 32) }));
 }
 
-function play(questions) {
+function play(questions, answered = []) {
   set = questions;
-  index = 0;
-  results = [];
+  results = answered;
+  index = results.length;
   hide('end', 'result', 'info');
   delete document.body.dataset.ended;
   delete document.body.dataset.mapview;
   el('endmap').textContent = 'Visa på kartan';
   hideLabels();
   showScored([]);
-  ask();
+  if (index < set.length) ask();
+  else finish();
 }
 
 function ask() {
@@ -207,6 +226,7 @@ async function answer(value) {
   const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value).catch(() => undefined) : undefined;
   const result = type.grade(q, value, items, street);
   results.push({ q, result });
+  save(false);
   phase = 'answered';
   navigator.vibrate?.(result.score === MAX_SCORE ? 15 : [10, 60, 10]);
 
@@ -345,6 +365,7 @@ function verdictFor(total, max, daily) {
 
 function finish() {
   phase = 'end';
+  save(true);
   clear();
   hide('question', 'result', 'info', 'choices');
   delete document.body.dataset.answered;
@@ -573,7 +594,7 @@ map.on('load', async () => {
   }
   progress(1);
   renderKinds();
-  start();
+  resume();
   setTimeout(() => boot.classList.add('done'), Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
 });
 

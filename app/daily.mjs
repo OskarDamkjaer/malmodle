@@ -250,3 +250,23 @@ export function shareText({ key, scores, url }) {
     url,
   ].filter(Boolean).join('\n');
 }
+
+export const SAVE_KEY = 'malmodle';
+
+const targetsOf = (set) => set.map((q) => q.target.name);
+const sameTargets = (saved, set) => JSON.stringify(saved?.targets) === JSON.stringify(targetsOf(set));
+
+export function remember(saved, { key, set, results, finished }) {
+  const answers = results.map(({ result }) => ({ score: result.score, distance: result.distance, choice: result.choice }));
+  const targets = targetsOf(set);
+  if (finished) return { key, targets, done: answers };
+  const done = saved?.key === key && sameTargets(saved, set) ? saved.done : undefined;
+  return { key, targets, done, playing: answers };
+}
+
+export function recall(saved, key, set) {
+  if (saved?.key !== key || !sameTargets(saved, set)) return [];
+  const answers = saved.playing?.length ? saved.playing : saved.done ?? [];
+  if (!Array.isArray(answers) || answers.length > set.length) return [];
+  return answers.map((result, i) => ({ q: set[i], result }));
+}
