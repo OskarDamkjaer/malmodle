@@ -108,7 +108,9 @@
    ],
    "lat": 55.59176,
    "lon": 13.01925,
-   "why": "Busy junction square between Möllevången, Sofielund and Rosengård with a well-known bus stop."
+   "why": "Busy junction square between Möllevången, Sofielund and Rosengård with a well-known bus stop.",
+   "description": "Anlagt 1932 efter stadsplan av Erik Bülow-Hübe. Byggdes om 2015–2016 för 28,8 miljoner kronor.",
+   "source": "https://sv.wikipedia.org/wiki/Nobeltorget"
   },
   {
    "name": "Dalaplan",
@@ -266,7 +268,9 @@
    ],
    "lat": 55.59041,
    "lon": 13.01523,
-   "why": "Falsterboplan, universally called Jesusparken, at Möllevången; 1.2k yearly sv views."
+   "why": "Falsterboplan, universally called Jesusparken, at Möllevången; 1.2k yearly sv views.",
+   "description": "Kallas även Falsterboplan. Parken ligger vid Möllevången och delas av Ystadsgatan i två delar.",
+   "source": "https://sv.wikipedia.org/wiki/Falsterboplan"
   },
   {
    "name": "Rönneholmsparken",
@@ -392,7 +396,9 @@
    ],
    "lat": 55.57036,
    "lon": 12.97787,
-   "why": "Malmö's main public indoor bath since 2015, next to Kroksbäcksparken by Hyllie."
+   "why": "Malmö's main public indoor bath since 2015, next to Kroksbäcksparken by Hyllie.",
+   "description": "Badhus som invigdes 15 augusti 2015 för att ersätta Aq-va-kul / Simhallsbadet. Har en 50-metersbassäng.",
+   "source": "https://sv.wikipedia.org/wiki/Hylliebadet"
   },
   {
    "name": "Simhallsbadet",
@@ -532,7 +538,9 @@
    "apart": "Folkets Park",
    "lat": 55.59447,
    "lon": 13.01564,
-   "why": "Revue and musical stage at Amiralsgatan by Folkets park, a 1940 cinema building."
+   "why": "Revue and musical stage at Amiralsgatan by Folkets park, a 1940 cinema building.",
+   "description": "Privatteater, tidigare Nya teatern. Lokalen invigdes 27 januari 1940 som biografen Amiralen.",
+   "source": "https://sv.wikipedia.org/wiki/N%C3%B6jesteatern"
   },
   {
    "name": "Babel",
@@ -542,7 +550,9 @@
    ],
    "lat": 55.5961,
    "lon": 13.01088,
-   "why": "Club and concert venue in a former church on Spångatan at Möllan."
+   "why": "Club and concert venue in a former church on Spångatan at Möllan.",
+   "description": "Scen för konserter och klubbar i en kyrkbyggnad.",
+   "source": "https://en.wikivoyage.org/wiki/Malmö"
   },
   {
    "name": "Inkonst",
@@ -584,7 +594,9 @@
    ],
    "lat": 55.59428,
    "lon": 13.00931,
-   "why": "Folkets Bio's art-house cinema at Möllan, active in 2026."
+   "why": "Folkets Bio's art-house cinema at Möllan, active in 2026.",
+   "description": "Biograf, öppnad 2015-02-27. Drivs av Folkets Bio Malmö.",
+   "source": "https://www.wikidata.org/wiki/Q106592879"
   },
   {
    "name": "Skånes Dansteater",
@@ -667,7 +679,9 @@
    ],
    "lat": 55.60279,
    "lon": 12.99219,
-   "why": "The city art museum (wikidata Q2791306, 14 sitelinks). The OSM building is the yellow pavilion in Kungsparken, the former casino, where the museum already runs exhibitions and where the city plans its new art museum (architecture competition 2026–27). The collection is also shown in Malmöhus, which is covered by the Slottsholmen entry. https://malmo.se/Aktuellt/Artiklar-Malmo-stad/2025-08-21-Gront-ljus-fran-kommunstyrelsen---Malmo-tar-nasta-steg-mot-ett-nytt-konstmuseum-i-Kungsparken.html"
+   "why": "The city art museum (wikidata Q2791306, 14 sitelinks). The OSM building is the yellow pavilion in Kungsparken, the former casino, where the museum already runs exhibitions and where the city plans its new art museum (architecture competition 2026–27). The collection is also shown in Malmöhus, which is covered by the Slottsholmen entry. https://malmo.se/Aktuellt/Artiklar-Malmo-stad/2025-08-21-Gront-ljus-fran-kommunstyrelsen---Malmo-tar-nasta-steg-mot-ett-nytt-konstmuseum-i-Kungsparken.html",
+   "description": "Kommunalt konstmuseum, grundat 1841. Samlingen har över 40 000 verk.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_konstmuseum"
   },
   {
    "name": "Sankt Petri kyrka",
@@ -792,7 +806,9 @@
    "apart": "Hyllie vattenpark",
    "lat": 55.56507,
    "lon": 12.97896,
-   "why": "The mushroom-shaped water tower at Hyllie, visible from the ring road and the bridge approach."
+   "why": "The mushroom-shaped water tower at Hyllie, visible from the ring road and the bridge approach.",
+   "description": "Vitt torn format som en svamp eller ett flygande tefat, 62 meter högt. Stod klart 1973.",
+   "source": "https://sv.wikipedia.org/wiki/Hyllie_vattentorn"
   },
   {
    "name": "Södervärnstornet",
@@ -887,7 +903,9 @@
    ],
    "lat": 55.59395,
    "lon": 12.99583,
-   "why": "'Gamla idrottsplatsen' from 1896 by Pildammsparken/Fersens väg, a central, historic venue everyone passes."
+   "why": "'Gamla idrottsplatsen' from 1896 by Pildammsparken/Fersens väg, a central, historic venue everyone passes.",
+   "description": "Kallas Gamla idrottsplatsen, invigd 4 juli 1896. Sportens centrum i Malmö tills Malmö Stadion stod färdig 1958.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_IP"
   },
   {
    "name": "Stapelbäddsparken",
@@ -897,7 +915,9 @@
    ],
    "lat": 55.61336,
    "lon": 12.98402,
-   "why": "The concrete skatepark and STPLN culture house in Västra hamnen, a well-known feature of the waterfront since 2005/06."
+   "why": "The concrete skatepark and STPLN culture house in Västra hamnen, a well-known feature of the waterfront since 2005/06.",
+   "description": "Skateboardpark i betong, invigd hösten 2005, i kvarteret där Malmös sista stapelbädd finns bevarad.",
+   "source": "https://sv.wikipedia.org/wiki/Stapelb%C3%A4ddsparken"
   },
   {
    "name": "Kockum Fritid",
@@ -940,7 +960,9 @@
    ],
    "lat": 55.6031,
    "lon": 13.0041,
-   "why": "City-centre galleria between Stora Nygatan and Södra Promenaden, the former NK building, still universally called Hansa."
+   "why": "City-centre galleria between Stora Nygatan and Södra Promenaden, the former NK building, still universally called Hansa.",
+   "description": "Galleria vid Stora Nygatan. Nordiska Kompaniet öppnade här 1963, och 1992 öppnade Hansacompagniet som galleria.",
+   "source": "https://sv.wikipedia.org/wiki/Hansa_(k%C3%B6pcentrum)"
   },
   {
    "name": "Malmö Saluhall",
@@ -994,7 +1016,9 @@
    ],
    "lat": 55.6037,
    "lon": 13.00032,
-   "why": "Irish pub at Per Weijersgatan/Stora Nygatan by Gustav Adolfs torg, a meeting-point name; already described as a lively Irish pub in 2011."
+   "why": "Irish pub at Per Weijersgatan/Stora Nygatan by Gustav Adolfs torg, a meeting-point name; already described as a lively Irish pub in 2011.",
+   "description": "Irländsk pub strax intill Gustav Adolfs torg.",
+   "source": "https://en.wikivoyage.org/wiki/Malmö"
   },
   {
    "name": "Johan P",
@@ -1004,7 +1028,9 @@
    ],
    "lat": 55.60416,
    "lon": 12.99887,
-   "why": "Fish and seafood restaurant by Saluhallen off Lilla Torg since 1981."
+   "why": "Fish and seafood restaurant by Saluhallen off Lilla Torg since 1981.",
+   "description": "Restaurang med inriktning på skaldjur.",
+   "source": "https://www.openstreetmap.org/node/2293728955"
   },
   {
    "name": "Restaurang Möllan",
@@ -1014,7 +1040,9 @@
    ],
    "lat": 55.59273,
    "lon": 13.00722,
-   "why": "Bergsgatan restaurant and bar with a big terrace, a Möllan classic."
+   "why": "Bergsgatan restaurant and bar with a big terrace, a Möllan classic.",
+   "description": "Restaurang som serverar biffar och säsongsrätter.",
+   "source": "https://en.wikivoyage.org/wiki/Malmö"
   },
   {
    "name": "Jalla Jalla",
@@ -1144,7 +1172,9 @@
    ],
    "lat": 55.6055,
    "lon": 12.99893,
-   "why": "Bar-restaurant at Lilla Torg 1, one of the square's best-known anchors (OSM spells it Mellow Yellow)."
+   "why": "Bar-restaurant at Lilla Torg 1, one of the square's best-known anchors (OSM spells it Mellow Yellow).",
+   "description": "Pub med svensk och europeisk mat.",
+   "source": "https://en.wikivoyage.org/wiki/Malmö"
   },
   {
    "name": "Nyhavn",
@@ -1184,7 +1214,9 @@
    ],
    "lat": 55.59647,
    "lon": 13.00067,
-   "why": "Malmö's oldest Chinese restaurant still running, on Rådmansgatan since 1964."
+   "why": "Malmö's oldest Chinese restaurant still running, on Rådmansgatan since 1964.",
+   "description": "Kinesisk restaurang, krogen anno 1964, som har expanderat till grannlokalen och blivit med vinbar.",
+   "source": "https://whiteguide.com"
   },
   {
    "name": "Syltan",
@@ -1254,7 +1286,9 @@
    ],
    "lat": 55.5975,
    "lon": 12.97892,
-   "why": "Bright neighbourhood café and brunch spot at Skvadronsgatan 13 in Slottsstaden, opened 2015 by Adrian and Natalia and since expanded into the premises next door."
+   "why": "Bright neighbourhood café and brunch spot at Skvadronsgatan 13 in Slottsstaden, opened 2015 by Adrian and Natalia and since expanded into the premises next door.",
+   "description": "Café i Slottsstaden som öppnade 2015 och blev rymligare när lokalen bredvid blev ledig. Här serveras frukost, lunch och fika.",
+   "source": "https://www.atriumcafe.se/"
   },
   {
    "name": "Systrar & Bröder",
@@ -1330,7 +1364,9 @@
    "osm": [
     "way/583266278"
    ],
-   "why": ""
+   "why": "",
+   "description": "Tidigare handelsträdgård i Husie. Byggstart för bostäder skedde 2009.",
+   "source": "https://sv.wikipedia.org/wiki/Gyllins_tr%C3%A4dg%C3%A5rd"
   },
   {
    "name": "Magistratsparken",
@@ -1373,7 +1409,9 @@
    "osm": [
     "way/52037555"
    ],
-   "why": ""
+   "why": "",
+   "description": "Kallas även Apoteket Lejonet. Uppfört 1896 i nyrenässans på Stortorget.",
+   "source": "https://sv.wikipedia.org/wiki/Apoteket_Lejonet%2C_Malm%C3%B6"
   },
   {
    "name": "Orkanen",
@@ -1413,7 +1451,9 @@
    ],
    "lat": 55.5949,
    "lon": 13.0098,
-   "why": "Grand Öl & Mat on Monbijougatan, a big beer hall and restaurant by Folkets Park."
+   "why": "Grand Öl & Mat on Monbijougatan, a big beer hall and restaurant by Folkets Park.",
+   "description": "Restaurang med asiatiskt och nordiskt kök, nattklubb och konserter.",
+   "source": "https://www.grandmalmo.se/"
   },
   {
    "name": "Mrs Brown",
@@ -1443,7 +1483,9 @@
    ],
    "lat": 55.60081,
    "lon": 13.00235,
-   "why": "Sausage kiosk at Västra Kanalgatan 1 by the canal, run by the same couple since 1998 with 100+ sausages; called an institution."
+   "why": "Sausage kiosk at Västra Kanalgatan 1 by the canal, run by the same couple since 1998 with 100+ sausages; called an institution.",
+   "description": "Snabbmatställe som serverar bratwurst och potatismos.",
+   "source": "https://en.wikivoyage.org/wiki/Malmö"
   },
   {
    "name": "Värnhems Falafel",
@@ -1463,7 +1505,9 @@
    ],
    "lat": 55.60571,
    "lon": 13.0028,
-   "why": "Irish pub on Kalendegatan off Stortorget, already established in 2011, with a wine and gin bar opposite since 2016."
+   "why": "Irish pub on Kalendegatan off Stortorget, already established in 2011, with a wine and gin bar opposite since 2016.",
+   "description": "Restaurang i en irländsk bar som serverar svensk mat.",
+   "source": "https://en.wikivoyage.org/wiki/Malmö"
   },
   {
    "name": "Mässingshornet",
@@ -1483,7 +1527,9 @@
    ],
    "lat": 55.59365,
    "lon": 13.02093,
-   "why": "Nobelvägen pizzeria-pub called the best example of a classic Swedish pizzeria in Malmö (Tropicana pizza); no age found."
+   "why": "Nobelvägen pizzeria-pub called the best example of a classic Swedish pizzeria in Malmö (Tropicana pizza); no age found.",
+   "description": "Pizzeria med öl på fat, biljard, shuffleboard och standup komedi, sedan 1999.",
+   "source": "https://rexmalmo.se/"
   },
   {
    "name": "Fregatten",
@@ -1561,7 +1607,9 @@
    "osm": [
     "way/52245411"
    ],
-   "why": "Upper secondary school that traces its roots to the medieval Latin school."
+   "why": "Upper secondary school that traces its roots to the medieval Latin school.",
+   "description": "Gymnasieskola med ursprung i en kyrkskola som startade 1406 vid S:t Petri kyrka.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_latinskola"
   },
   {
    "name": "Pauliskolan",
@@ -1577,7 +1625,9 @@
    "osm": [
     "way/52245413"
    ],
-   "why": "Large upper secondary school by Slottsparken, known as Borgarskolan."
+   "why": "Large upper secondary school by Slottsparken, known as Borgarskolan.",
+   "description": "Malmös största gymnasieskola med cirka 1 370 elever. Verksamheten går tillbaka till 1874.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_Borgarskola"
   },
   {
    "name": "S:t Petri skola",
@@ -1585,7 +1635,9 @@
    "osm": [
     "way/52245410"
    ],
-   "why": "Upper secondary school next to Malmö Latinskola."
+   "why": "Upper secondary school next to Malmö Latinskola.",
+   "description": "Gymnasieskola byggd mellan 1904 och 1908, en av Malmös äldsta och största.",
+   "source": "https://sv.wikipedia.org/wiki/Sankt_Petri_skola"
   },
   {
    "name": "Family Pub",

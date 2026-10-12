@@ -131,7 +131,10 @@ Output, one file per batch, `places/descriptions/<batch>.json`:
   quotes (names written differently in Swedish and English count if one
   appears in the other's snippet);
 - the text is over 220 characters, or contains a banned word;
-- it quotes only the `research` snippet for a fact.
+- it quotes only the `research` snippet for a fact;
+- it says where a fact comes from ("på kartan", "enligt webbplatsen") instead
+  of stating it. The first year a node appears in OpenStreetMap is not when
+  the place opened, and is not used.
 
 Then a second Sonnet agent reads each surviving description with its facts
 file, cold:
@@ -139,7 +142,9 @@ file, cold:
 > For each description, list every statement in it. For each statement, say
 > whether the facts file supports it. Answer `supported`, or `unsupported`
 > with the statement. Be strict: a statement that is plausible but not in the
-> snippets is unsupported.
+> snippets is unsupported. So is a statement about another branch or venue of
+> the same name, promotion taken from the place's own website, a weekly
+> schedule, or a text that never says what the place is.
 
 A rejected or unsupported description goes back to step 2 once, with the
 reason. If it fails again it is dropped and the name keeps no description.
@@ -155,7 +160,7 @@ a description.
 ## Running it
 
 ```
-node scripts/facts-collect.mjs           # places/facts/*.json
+node scripts/facts-collect.mjs           # places/facts/*.json, --only a,b for some names
                                          # step 2: writer agents, one per batch
 node scripts/descriptions-check.mjs      # rejects and reasons per batch
                                          # step 3: checker agents on what passed

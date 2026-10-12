@@ -189,6 +189,56 @@
       "text": "Avfallsanläggningen och deponin, med golfbanan ovanpå den gamla tippen.",
       "source": null,
       "verified": false
+    },
+    "Käglinge": {
+      "text": "Ursprungligen en by, bynamnet belagt sedan mitten av 1300-talet. Området består i huvudsak av villor och radhus, många av dem från 1980-talet.",
+      "source": "https://sv.wikipedia.org/wiki/K%C3%A4glinge",
+      "verified": true
+    },
+    "Vintrie": {
+      "text": "Bebyggelse i sydvästra delen av Malmö kommun, delområde i distriktet Bunkeflo.",
+      "source": "https://sv.wikipedia.org/wiki/Vintrie",
+      "verified": true
+    },
+    "Dammfri": {
+      "text": "Bostadsområde med flerfamiljshus, hälften bostadsrätter och hälften hyresrätter.",
+      "source": "https://sv.wikipedia.org/wiki/Dammfri",
+      "verified": true
+    },
+    "Persborg": {
+      "text": "Byggt på 1950-talet. Området har sitt torg avskilt från den övriga bebyggelsen.",
+      "source": "https://sv.wikipedia.org/wiki/Persborg",
+      "verified": true
+    },
+    "Kronborg": {
+      "text": "Flerfamiljshus från andra halvan av 1940-talet. Namn på gator och kvarter har hämtats från Danmark.",
+      "source": "https://sv.wikipedia.org/wiki/Kronborg%2C_Malm%C3%B6",
+      "verified": true
+    },
+    "Fågelbacken": {
+      "text": "Bostadsområde med flerfamiljshus, de flesta byggda på 1940- och 1950-talen.",
+      "source": "https://sv.wikipedia.org/wiki/F%C3%A5gelbacken",
+      "verified": true
+    },
+    "Lugnet": {
+      "text": "Huvuddelen var förr en del av Södra Förstaden, området öster om Kaptensgatan tillhörde Rörsjöstaden.",
+      "source": "https://sv.wikipedia.org/wiki/Lugnet%2C_Malm%C3%B6",
+      "verified": true
+    },
+    "Hästhagen": {
+      "text": "Skol- och bostadsområde, främst flerfamiljshus i slutna kvarter från tiden mellan 1910- och 1940-talet.",
+      "source": "https://sv.wikipedia.org/wiki/H%C3%A4sthagen%2C_Malm%C3%B6",
+      "verified": true
+    },
+    "Hyllievång": {
+      "text": "Nytt bostads- och affärsområde under byggnation. Marken utgjorde Hyllie bys östra vång fram till enskiftet.",
+      "source": "https://sv.wikipedia.org/wiki/Hylliev%C3%A5ng",
+      "verified": true
+    },
+    "Videdal": {
+      "text": "Främst villabebyggelse från 1960-talet. Innefattar sedan år 1981 den tidigare stadsdelen Hohög.",
+      "source": "https://sv.wikipedia.org/wiki/Videdal",
+      "verified": true
     }
   }
 }
