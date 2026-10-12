@@ -254,13 +254,8 @@ function showInfo(item, played) {
     link.textContent = `Foto: ${photo.author}, ${photo.licence}`;
     credit.append(link);
     figure.append(img, credit);
-    delete figure.dataset.empty;
-  } else {
-    const note = document.createElement('span');
-    note.textContent = 'Bild kommer';
-    figure.append(note);
-    figure.dataset.empty = '';
   }
+  figure.hidden = !photo;
   document.body.dataset.answered = '';
   reveal('info');
 }
