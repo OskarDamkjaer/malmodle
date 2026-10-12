@@ -5,6 +5,7 @@ import { execSync, spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { THEMES, themePath } from '../app/themes.mjs';
+import { SAVE_KEY, dateKey } from '../app/daily.mjs';
 
 const require = createRequire(import.meta.url);
 
@@ -45,8 +46,9 @@ after(async () => {
   server?.kill();
 });
 
-async function open(viewport, path = '/') {
+async function open(viewport, path = '/', saved) {
   const context = await browser.newContext({ viewport, serviceWorkers: 'block', permissions: ['clipboard-read', 'clipboard-write'] });
+  if (saved !== undefined) await context.addInitScript(([k, v]) => localStorage.setItem(k, v), [SAVE_KEY, saved]);
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
@@ -155,6 +157,23 @@ test('a reload returns to the same place in the day', { skip }, async () => {
 
   assert.deepEqual(errors, []);
   await context.close();
+});
+
+test('whatever is left in storage, the day starts', { skip }, async () => {
+  const key = dateKey();
+  for (const saved of [
+    '{trasig',
+    'null',
+    '[1,2,3]',
+    JSON.stringify({ version: 1, key, targets: 'alla', playing: [null] }),
+    JSON.stringify({ version: 1, key: '2001-01-01', targets: [], done: [] }),
+  ]) {
+    const { page, context, errors } = await open({ width: 390, height: 844 }, '/', saved);
+    assert.equal(await page.locator('#dots li[data-band]').count(), 0, saved);
+    assert.equal(await page.evaluate((k) => localStorage.getItem(k), SAVE_KEY), null, saved);
+    assert.deepEqual(errors, [], saved);
+    await context.close();
+  }
 });
 
 test('every style boots at its own path', { skip }, async () => {
