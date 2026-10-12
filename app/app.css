@@ -212,12 +212,8 @@ body[data-answered] #question { display: none; }
 #infophoto { position: relative; margin: 0; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius); background: var(--bg); }
 #infophoto img { display: block; width: 100%; height: 100%; object-fit: cover; }
 #infophoto figcaption { display: none; }
-#infophoto[data-empty] {
-  display: grid;
-  place-items: center;
-  background: repeating-linear-gradient(-45deg, var(--bg) 0 8px, color-mix(in srgb, var(--dot) 45%, var(--bg)) 8px 16px);
-}
-#infophoto[data-empty] span { padding: 3px 6px; font-size: 9px; white-space: nowrap; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); background: var(--panel); border-radius: var(--radius-button); }
+#infophoto[hidden] { display: none; }
+#info:has(#infophoto[hidden]) { grid-template-columns: 1fr; }
 #info .text { min-width: 0; align-self: center; }
 #infolabel { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
 #infoname { margin: 1px 0 0; font-size: 18px; font-weight: var(--display-weight); letter-spacing: var(--display-tracking); }
@@ -285,6 +281,9 @@ body[data-mapview] #endverdict, body[data-mapview] #endsquares { display: none; 
 body[data-mapview] #end .total { margin-top: 4px; }
 body[data-mapview] #end .total strong { font-size: 36px; }
 body[data-mapview] #endmap { margin-top: 12px; }
+.install { display: flex; align-items: center; gap: 12px; margin: 16px 0 0; padding: 12px 14px; background: var(--panel); border: var(--border); border-radius: var(--radius); }
+#installtext { flex: 1; margin: 0; font-size: 15px; line-height: 1.4; }
+#installbutton { flex: 0 0 auto; min-height: 44px; padding: 8px 18px; font-weight: 600; }
 
 .band { min-width: 44px; padding: 3px 10px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; border-radius: var(--radius-button); }
 .band[data-band="green"] { background: var(--band-green); color: #ffffff; }
@@ -349,7 +348,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
   #explain { margin-top: 2px; font-size: 14px; }
   #next { margin-top: 6px; min-height: 40px; }
   #info { grid-template-columns: 1fr; padding: 8px 14px; }
-  #infophoto, #infophoto[data-empty] { display: none; }
+  #infophoto { display: none; }
   #infoname { font-size: 16px; }
   #infoabout { -webkit-line-clamp: 1; font-size: 13px; }
 }
@@ -365,7 +364,6 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 
   body[data-answered] #question { display: block; }
   body[data-answered] #question, body[data-answered] #result { left: calc((100% - 340px - var(--gap)) / 2); }
-  #infophoto[data-empty] span { padding: 3px 8px; font-size: 11px; }
   #info {
     left: auto;
     right: var(--gap);
