@@ -129,7 +129,11 @@ function resume() {
   key = dateKey();
   practicing = null;
   const questions = dailySet(items, key);
-  play(questions, recall(loadSaved(), key, questions));
+  const answered = recall(loadSaved(), key, questions);
+  if (!answered.length) {
+    try { localStorage.removeItem(SAVE_KEY); } catch {}
+  }
+  play(questions, answered);
 }
 
 function loadSaved() {

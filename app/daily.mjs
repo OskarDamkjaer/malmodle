@@ -264,9 +264,17 @@ export function remember(saved, { key, set, results, finished }) {
   return { key, targets, done, playing: answers };
 }
 
+const validAnswer = (a, q) => {
+  if (!a || !Number.isInteger(a.score) || a.score < 0 || a.score > MAX_SCORE) return false;
+  if (a.score === MAX_SCORE) return true;
+  return TYPES[q.type].input === 'map' ? Number.isFinite(a.distance) : typeof a.choice === 'string';
+};
+
+const usable = (answers, set) =>
+  Array.isArray(answers) && answers.length > 0 && answers.length <= set.length && answers.every((a, i) => validAnswer(a, set[i]));
+
 export function recall(saved, key, set) {
   if (saved?.key !== key || !sameTargets(saved, set)) return [];
-  const answers = saved.playing?.length ? saved.playing : saved.done ?? [];
-  if (!Array.isArray(answers) || answers.length > set.length) return [];
-  return answers.map((result, i) => ({ q: set[i], result }));
+  const answers = [saved.playing, saved.done].find((a) => usable(a, set));
+  return answers ? answers.map((result, i) => ({ q: set[i], result })) : [];
 }
