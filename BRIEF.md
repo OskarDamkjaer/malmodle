@@ -65,6 +65,11 @@ the answer: an area that borders it, a street that meets it, or a place within
 - A way to open the full labelled map for free practice. Tapping a thing says
   what it is; today's names are marked.
 - No memory between days. Nothing is stored.
+- After a round, the end screen offers to put the app on the home screen: the
+  browser's own install prompt where there is one, the steps on iPhone. Once
+  installed, it offers a daily reminder where the browser can schedule one
+  without a server (Chrome's periodic background sync). Both are worked out
+  from the browser's state each time, not remembered.
 
 ## Styles
 

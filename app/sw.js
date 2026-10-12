@@ -98,3 +98,25 @@ self.addEventListener('fetch', (event) => {
     }
   })());
 });
+
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag !== 'daily') return;
+  event.waitUntil((async () => {
+    const windows = await self.clients.matchAll({ type: 'window' });
+    if (windows.some((w) => w.visibilityState === 'visible')) return;
+    await self.registration.showNotification('Malmödle', {
+      body: 'Dagens platser väntar på dig.',
+      tag: 'daily',
+      lang: 'sv',
+      icon: '/icons/icon-192.png',
+    });
+  })());
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil((async () => {
+    const [open] = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    return open ? open.focus() : self.clients.openWindow('/');
+  })());
+});

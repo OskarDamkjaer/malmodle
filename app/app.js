@@ -371,6 +371,7 @@ function finish() {
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
+  offerKeep();
 
   reveal('end');
   el('end').scrollTop = 0;
@@ -444,6 +445,68 @@ function reportLink() {
   return url.href;
 }
 
+let installEvent = null;
+const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  installEvent = e;
+});
+addEventListener('appinstalled', () => {
+  installEvent = null;
+  if (phase === 'end') offerKeep();
+});
+
+async function reminding() {
+  const registration = await navigator.serviceWorker?.getRegistration();
+  if (!registration?.periodicSync || !('Notification' in window)) return null;
+  const tags = await registration.periodicSync.getTags();
+  return { registration, on: Notification.permission === 'granted' && tags.includes('daily') };
+}
+
+function keep(text, button) {
+  el('keep').hidden = !text;
+  el('keeptext').textContent = text ?? '';
+  el('keepbutton').hidden = !button;
+  el('keepbutton').textContent = button ?? '';
+}
+
+async function offerKeep() {
+  keep(null);
+  if (!standalone()) {
+    if (installEvent) keep('Lägg Malmödle på hemskärmen, så är nästa omgång ett tryck bort.', 'Installera');
+    else if (ios) keep('Lägg Malmödle på hemskärmen: tryck på Dela och välj Lägg till på hemskärmen.');
+    return;
+  }
+  const state = await reminding().catch(() => null);
+  if (state && !state.on && Notification.permission !== 'denied') {
+    keep('Vill du få en påminnelse när det finns en ny omgång?', 'Påminn mig');
+  }
+}
+
+async function keepAction() {
+  if (installEvent) {
+    const event = installEvent;
+    installEvent = null;
+    await event.prompt();
+    await event.userChoice;
+    offerKeep();
+    return;
+  }
+  const state = await reminding().catch(() => null);
+  if (!state || await Notification.requestPermission() !== 'granted') {
+    offerKeep();
+    return;
+  }
+  try {
+    await state.registration.periodicSync.register('daily', { minInterval: 24 * 60 * 60 * 1000 });
+    keep('Du får en påminnelse en gång om dagen.');
+  } catch {
+    keep('Webbläsaren tillåter inte påminnelser just nu.');
+  }
+}
+
 function renderKinds() {
   const list = el('kinds');
   for (const kind of PRACTICE) {
@@ -506,6 +569,7 @@ el('sharenative').addEventListener('click', shareNative);
 el('sharetext').addEventListener('click', share);
 el('practise').addEventListener('click', toggleKinds);
 el('again').addEventListener('click', start);
+el('keepbutton').addEventListener('click', keepAction);
 el('infoclose').addEventListener('click', closePlace);
 el('endmap').addEventListener('click', toggleMapView);
 el('maptipbutton').addEventListener('click', (e) => {
@@ -543,5 +607,8 @@ map.on('load', async () => {
 });
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
-  navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch((err) => console.warn('sw:', err));
+  navigator.serviceWorker.register('/sw.js', { scope: '/' })
+    .then((registration) => registration.getNotifications?.({ tag: 'daily' }))
+    .then((shown) => shown?.forEach((n) => n.close()))
+    .catch((err) => console.warn('sw:', err));
 }

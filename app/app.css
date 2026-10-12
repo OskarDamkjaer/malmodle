@@ -262,6 +262,9 @@ body[data-answered] #question { display: none; }
 #share[data-state="done"] { background: var(--ink); color: var(--bg); }
 #share[data-state="failed"] { background: var(--chip); color: var(--wrong); }
 #sharenative { flex: 0 0 auto; padding: 10px 22px; font-weight: 600; }
+.keep { display: flex; align-items: center; gap: 12px; margin: 18px 0 0; padding: 12px 14px; background: var(--panel); border: var(--border); border-radius: var(--radius); }
+#keeptext { flex: 1; margin: 0; font-size: 15px; line-height: 1.4; }
+#keepbutton { flex: 0 0 auto; min-height: 44px; padding: 8px 18px; font-weight: 600; }
 #end .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 28px; }
 .kinds { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: -16px 0 28px; animation: fade .2s ease-out; }
 .kinds button { min-height: 44px; padding: 8px 12px; font-size: 15px; }
