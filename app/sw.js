@@ -51,9 +51,16 @@ async function fillCache(name, urls) {
   if (failed.length) console.warn(`sw: ${failed.length} of ${urls.length} failed`, failed.map((f) => f.reason?.message));
 }
 
+async function missing(name, urls) {
+  const cache = await caches.open(name);
+  const found = await Promise.all(urls.map((url) => cache.match(url)));
+  return urls.filter((_, i) => !found[i]);
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
-    await Promise.all([fillCache(CODE, CODE_FILES), fillCache(MAP, MAP_FILES)]);
+    const map = self.registration.active ? await missing(MAP, MAP_FILES) : [];
+    await Promise.all([fillCache(CODE, CODE_FILES), fillCache(MAP, map)]);
     await self.skipWaiting();
   })());
 });
@@ -67,6 +74,15 @@ self.addEventListener('activate', (event) => {
   })());
 });
 
+self.addEventListener('message', (event) => {
+  const { url, file } = event.data ?? {};
+  if (!MAP_FILES.includes(url) || !(file instanceof Blob)) return;
+  event.waitUntil((async () => {
+    const res = new Response(file, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(file.size) } });
+    await (await caches.open(MAP)).put(url, res);
+  })());
+});
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
@@ -77,13 +93,14 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith((async () => {
     const hit = await caches.match(request, { ignoreSearch: true });
+    if (hit && isMap) return hit;
     const update = fetch(request).then(async (res) => {
       if (res.ok) (await caches.open(isMap ? MAP : CODE)).put(request, res.clone());
       return res;
     });
 
     if (hit) {
-      if (!isMap) event.waitUntil(update.catch(() => {}));
+      event.waitUntil(update.catch(() => {}));
       return hit;
     }
 

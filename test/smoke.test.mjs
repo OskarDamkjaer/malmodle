@@ -21,6 +21,7 @@ function loadChromium() {
 }
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
+process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS = '1';
 const chromium = loadChromium();
 const missing = NEEDED.filter((p) => !existsSync(p));
 const skip = !chromium ? 'playwright is not installed'
@@ -174,6 +175,30 @@ test('whatever is left in storage, the day starts', { skip }, async () => {
     assert.deepEqual(errors, [], saved);
     await context.close();
   }
+});
+
+test('the map is downloaded once and then comes from the service worker', { skip }, async () => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  let downloads = 0;
+  context.on('response', (res) => {
+    if (new globalThis.URL(res.url()).pathname === '/malmo.pmtiles' && !res.fromServiceWorker()) downloads++;
+  });
+
+  await page.goto(URL);
+  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  await page.waitForFunction(async () => navigator.serviceWorker.controller
+    && Number((await caches.match('/malmo.pmtiles'))?.headers.get('Content-Length')) > 0, null, { timeout: 30000 });
+
+  await page.reload();
+  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  assert.equal(downloads, 1);
+
+  assert.deepEqual(errors, []);
+  await context.close();
 });
 
 test('every style boots at its own path', { skip }, async () => {

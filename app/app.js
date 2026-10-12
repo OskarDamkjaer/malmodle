@@ -52,10 +52,12 @@ if (!document.createElement('canvas').getContext('webgl2')) {
 }
 
 let archive;
+let archiveFile;
 try {
   const protocol = new pmtiles.Protocol();
   addProtocol('pmtiles', protocol.tile);
-  archive = new pmtiles.PMTiles(new pmtiles.FileSource(await loadArchive('/malmo.pmtiles')));
+  archiveFile = await loadArchive('/malmo.pmtiles');
+  archive = new pmtiles.PMTiles(new pmtiles.FileSource(archiveFile));
   protocol.add(archive);
 } catch (err) {
   fail('Kartan kunde inte laddas', err);
@@ -611,5 +613,9 @@ map.on('load', async () => {
 });
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
+  const uncontrolled = !navigator.serviceWorker.controller;
   navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch((err) => console.warn('sw:', err));
+  if (uncontrolled) {
+    navigator.serviceWorker.ready.then((reg) => reg.active?.postMessage({ url: '/malmo.pmtiles', file: archiveFile }));
+  }
 }
