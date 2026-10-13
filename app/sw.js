@@ -1,4 +1,4 @@
-const CODE = 'malmo-code-5';
+const CODE = 'malmo-code-6';
 const MAP = 'malmo-map-2';
 
 const CODE_FILES = [
@@ -14,6 +14,7 @@ const CODE_FILES = [
   '/map.js',
   '/geo.mjs',
   '/daily.mjs',
+  '/crowd.mjs',
   '/questions.mjs',
   '/tiles.mjs',
   '/manifest.webmanifest',

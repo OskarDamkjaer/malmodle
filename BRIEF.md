@@ -60,11 +60,19 @@ the answer: an area that borders it, a street that meets it, or a place within
 
 - An end screen with the score, today's names, how each went, and the
   descriptions. Descriptions are only shown here.
+- Beside the score, how the day went for everyone: where the total lands
+  among the day's players, a bar of totals with yours marked, and for each
+  question how many cleared it (80 or more) next to your own square. A few
+  lines name what few others cleared and you did, and what most cleared and
+  you did not. The first finished round of the day is the one that counts;
+  a replay shows that one. Offline, or with no answer from the server, the
+  section is left out and nothing else changes.
 - A button that copies the result as text (score and one square per question),
   like other daily games. If the set is replayed, the latest result is shared.
 - A way to open the full labelled map for free practice. Tapping a thing says
   what it is; today's names are marked.
-- No memory between days. The browser keeps only today's daily round: a
+- No memory between days. The browser keeps only today's daily round and a
+  random player id: a
   reload resumes it at the next question, or returns to the end screen once it
   is finished. A replay in progress does not replace the finished result until
   it ends. Practice is not kept, and an earlier day's round is ignored and then
@@ -83,7 +91,10 @@ colours, type and the basemap palette, never the game.
 
 ## Constraints
 
-- Static files, no backend, no accounts, no analytics.
+- Static files and one small API on Cloudflare: the end screen sends the
+  day's scores under the random player id and gets back the day's spread.
+  The server keeps a hash of the id, never the id. No accounts, no
+  analytics. Accounts and leaderboards are sketched in `plans/accounts.md`.
 - Offline PWA.
 - No framework, no bundler, no dependencies.
 - The UI is in Swedish.

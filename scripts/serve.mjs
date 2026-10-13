@@ -1,13 +1,45 @@
 import { createServer } from 'node:http';
-import { createReadStream, statSync, existsSync } from 'node:fs';
+import { createReadStream, statSync, existsSync, readFileSync } from 'node:fs';
 import { resolve, normalize, extname } from 'node:path';
 import { MOUNTS, MIME } from './lib/site.mjs';
+import { localD1 } from './lib/d1.mjs';
+import { dailySet, dateKey, random, setId } from '../app/daily.mjs';
+import worker from '../worker/index.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const port = Number(arg('--port', 8080));
 const host = arg('--host', '127.0.0.1');
 const root = resolve(process.cwd());
+const db = localD1(arg('--db', ':memory:'));
+const fake = Number(arg('--fake', 0));
+
+async function addFakePlayers(count) {
+  const { items } = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
+  const key = dateKey();
+  const set = dailySet(items, key);
+  const rng = random(count);
+  const ease = set.map(() => 0.15 + rng() * 0.8);
+  for (let p = 0; p < count; p++) {
+    const skill = rng() * 0.4 - 0.2;
+    const scores = ease.map((e) => (rng() < e + skill ? 80 + Math.floor(rng() * 21) : Math.floor(rng() ** 1.5 * 80)));
+    const total = scores.reduce((a, b) => a + b, 0);
+    await db.prepare('INSERT INTO results (day, player, set_id, total, scores, at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT DO NOTHING')
+      .bind(key, `fake-${p}`, setId(set), total, JSON.stringify(scores), Date.now()).run();
+  }
+}
+
+if (fake) await addFakePlayers(fake);
+
+async function api(req, res, url) {
+  const chunks = [];
+  for await (const chunk of req) chunks.push(chunk);
+  const body = ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks);
+  const reply = await worker.fetch(new Request(url, { method: req.method, headers: req.headers, body }), { DB: db });
+  res.writeHead(reply.status, Object.fromEntries(reply.headers));
+  res.end(Buffer.from(await reply.arrayBuffer()));
+  console.log(`${reply.status} ${req.method} ${url.pathname}`);
+}
 
 const mounts = MOUNTS
   .map((m) => ({ ...m, base: m.url.replace(/\/+$/, '') }))
@@ -30,6 +62,14 @@ function toFile(urlPath) {
 
 createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
+  if (url.pathname.startsWith('/api/')) {
+    api(req, res, url).catch((err) => {
+      console.error(err);
+      res.writeHead(500);
+      res.end();
+    });
+    return;
+  }
 
   const file = toFile(url.pathname);
   if (!file || !existsSync(file)) {

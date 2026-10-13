@@ -1,0 +1,54 @@
+name: Cloudflare
+
+on:
+  push:
+    branches: [cloudflare]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch the prebuilt map data
+        run: node scripts/fetch-dev-assets.mjs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch vendored runtime assets
+        run: node scripts/fetch-app-assets.mjs
+
+      - name: Draw the home-screen icons
+        run: node scripts/build-icons.mjs
+
+      - name: Build the map style
+        run: node scripts/build-style.mjs
+
+      - name: Build the quiz data
+        run: node scripts/build-quiz.mjs
+
+      - name: Test
+        run: node --test 'test/*.test.mjs'
+
+      - name: Assemble the site
+        run: node scripts/build-site.mjs
+
+      - name: Migrate the database
+        run: npx --yes wrangler@4 d1 migrations apply malmodle --remote
+
+      - name: Deploy
+        run: npx --yes wrangler@4 deploy

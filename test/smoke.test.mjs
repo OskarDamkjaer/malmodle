@@ -93,6 +93,8 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     assert.match(await page.textContent('#endverdict'), /imorgon\.$/);
     assert.match(await page.textContent('#endscore'), /^\d+$/);
     assert.equal(await page.textContent('#endmax'), 'av 1000');
+    await page.waitForSelector('#crowd:not([hidden])');
+    assert.match(await page.textContent('#crowdtext'), /idag\./);
 
     await page.click('#share');
     const shared = await page.evaluate(() => navigator.clipboard.readText());

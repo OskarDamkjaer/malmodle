@@ -1,5 +1,6 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, shareText, square } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square } from './daily.mjs';
+import { binOf, clearedLabel, standing, standouts } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
@@ -402,11 +403,96 @@ function finish() {
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
   offerInstall();
+  compare(total);
 
   reveal('end');
   el('end').scrollTop = 0;
   spreadOut();
   el(practicing ? 'again' : 'share').focus({ preventScroll: true });
+}
+
+const PLAYER_KEY = 'malmodle-player';
+let sessionPlayer;
+
+function newPlayer() {
+  return [...crypto.getRandomValues(new Uint8Array(16))].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function playerId() {
+  try {
+    let id = localStorage.getItem(PLAYER_KEY);
+    if (!/^[0-9a-f]{32}$/.test(id ?? '')) {
+      id = newPlayer();
+      localStorage.setItem(PLAYER_KEY, id);
+    }
+    return id;
+  } catch {
+    sessionPlayer ??= newPlayer();
+    return sessionPlayer;
+  }
+}
+
+async function compare(total) {
+  hide('crowd');
+  if (practicing) return;
+  const asked = set;
+  const scores = results.map((r) => r.result.score);
+  try {
+    const res = await fetch('/api/result', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ day: key, set: setId(set), player: playerId(), scores }),
+    });
+    if (!res.ok) return;
+    const crowd = await res.json();
+    if (phase === 'end' && !practicing && set === asked) renderCrowd(crowd, total);
+  } catch {}
+}
+
+function renderCrowd(crowd, total) {
+  const { histogram, cleared, you } = crowd;
+  el('crowdtext').textContent = standing(crowd, total);
+  const alone = crowd.players < 2;
+  el('crowdcharts').hidden = alone;
+
+  const peak = Math.max(1, ...histogram);
+  const mine = binOf(you.total, histogram.length);
+  el('histogram').replaceChildren(...histogram.map((n, i) => {
+    const bar = document.createElement('i');
+    bar.style.setProperty('--h', String(n / peak));
+    if (i === mine) bar.dataset.you = 'Du';
+    return bar;
+  }));
+  el('histogram').setAttribute('aria-label', `Poängen för dagens ${crowd.players} spelare. Du fick ${you.total}.`);
+
+  el('cleared').replaceChildren(...cleared.map((share, i) => {
+    const r = results[i];
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.band = band(you.scores[i]);
+    b.setAttribute('aria-label', clearedLabel(r.q.target.name, share, you.scores[i]));
+    b.title = b.getAttribute('aria-label');
+    const track = document.createElement('span');
+    track.className = 'track';
+    const fill = document.createElement('span');
+    fill.className = 'fill';
+    fill.style.setProperty('--share', String(share));
+    const dot = document.createElement('span');
+    dot.className = 'you';
+    track.append(fill);
+    b.append(track, dot);
+    b.addEventListener('click', () => showPlace(r));
+    li.append(b);
+    return li;
+  }));
+
+  el('standouts').replaceChildren(...standouts(results.map((r) => r.q.target.name), crowd).map((text) => {
+    const li = document.createElement('li');
+    li.textContent = text;
+    return li;
+  }));
+  reveal('crowd');
 }
 
 function resultText() {

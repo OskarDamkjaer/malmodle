@@ -255,6 +255,8 @@ export const SAVE_KEY = 'malmodle';
 const SAVE_VERSION = 1;
 
 const targetsOf = (set) => set.map((q) => q.target.name);
+
+export const setId = (set) => hash(targetsOf(set).join('\n')).toString(16);
 const isScore = (n) => Number.isInteger(n) && n >= 0 && n <= MAX_SCORE;
 
 function parseAnswer(raw, q) {
