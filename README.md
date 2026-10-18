@@ -11,14 +11,14 @@ your result to share it, and can open the full map to look around on your own.
 It runs in the browser and works offline once loaded. Your browser keeps
 today's round, so a reload picks up where you were, and a random id. When a
 round ends, its scores are sent with that id to get the day's spread back;
-the server stores a hash of the id and the scores, nothing else. While fewer
-than 50 have played, the reply also lists their totals, as bare numbers. It
-can be installed on the home screen.
+the server stores a hash of the id, the day's set, the scores and when the
+round ended, nothing else. Everyone can read the day's numbers: how many
+scored each total and how each question went, and while fewer than 10 have
+played, when each of them finished. It can be installed on the home screen.
 
 Other styles are kept for trying out at their own addresses:
 [Papper](https://malmodle.se/papper/), [Natt](https://malmodle.se/natt/)
-and [Klar](https://malmodle.se/klar/). Running locally, a switcher on the
-left edge moves between them.
+and [Klar](https://malmodle.se/klar/).
 
 ## Running it locally
 
