@@ -93,8 +93,7 @@ the answer: an area that borders it, a street that meets it, or a place within
 ## Styles
 
 The app has one style for players, Tidning, served at the root. Papper, Natt
-and Klar are kept at their own paths from the same code for trying out, and a
-switcher between them shows only when running locally. A style changes
+and Klar are kept at their own paths from the same code for trying out. A style changes
 colours, type and the basemap palette, never the game.
 
 ## Constraints
