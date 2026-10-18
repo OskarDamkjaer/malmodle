@@ -3,8 +3,12 @@ import assert from 'node:assert/strict';
 import { parseResult, playerKey, postResult } from '../worker/results.mjs';
 import { catchUp, fileKey } from '../worker/live.mjs';
 import { localR2 } from '../scripts/lib/r2.mjs';
-import { summarize, tally } from '../app/crowd.mjs';
+import { FEWEST_TO_RANK, summarize, tally } from '../app/crowd.mjs';
 import { localD1 } from '../scripts/lib/d1.mjs';
+import { DatabaseSync } from 'node:sqlite';
+import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import worker from '../worker/index.mjs';
 
 const NOW = Date.parse('2026-10-13T12:00:00Z');
@@ -99,6 +103,73 @@ test('the day is written as a file at most every 15 seconds, and the cron catche
 
   await postAt(NOW + 80000, { ...good, player: secret(3) });
   assert.equal((await file()).players, 3, 'after the gap a post writes at once');
+});
+
+test('finish times are kept while fewer than ten have played, and a repeat is not one', async () => {
+  fresh();
+  const times = [];
+  for (let p = 1; p <= FEWEST_TO_RANK + 2; p++) {
+    const at = NOW + p * 1000;
+    const { day } = await (await postAt(at, { ...good, player: secret(p) })).json();
+    if (p < FEWEST_TO_RANK) times.push(at);
+    if (p < FEWEST_TO_RANK) assert.deepEqual(day.finished, times);
+    else assert.equal(day.finished, null);
+    if (p === 1) {
+      const again = await (await postAt(at + 500, { ...good, player: secret(1) })).json();
+      assert.equal(again.day.players, 1);
+      assert.deepEqual(again.day.finished, [at]);
+    }
+  }
+  const row = await env.DB.prepare('SELECT players, finished FROM days').first();
+  assert.equal(row.players, FEWEST_TO_RANK + 2);
+  assert.equal(JSON.parse(row.finished).length, FEWEST_TO_RANK);
+});
+
+test('the threshold in the trigger is the one the client ranks by', () => {
+  const dir = 'worker/migrations';
+  const last = readdirSync(dir).filter((f) => f.endsWith('.sql')).sort()
+    .map((f) => readFileSync(join(dir, f), 'utf8'))
+    .filter((sql) => sql.includes('CREATE TRIGGER results_count')).at(-1);
+  const numbers = [...last.matchAll(/players < (\d+)/g)].map((m) => Number(m[1]));
+  assert.ok(numbers.length >= 2);
+  for (const n of numbers) assert.equal(n, FEWEST_TO_RANK);
+});
+
+test('the migrations carry an existing database over with its results and counts', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'malmodle-'));
+  const path = join(dir, 'd1.sqlite');
+  const old = new DatabaseSync(path);
+  for (const file of ['0001_results.sql', '0002_days.sql']) old.exec(readFileSync(join('worker/migrations', file), 'utf8'));
+  const insert = old.prepare('INSERT INTO results (day, player, set_id, total, scores, at) VALUES (?, ?, ?, ?, ?, ?)');
+  const scores = JSON.stringify(good.scores);
+  for (const [p, at] of [[1, NOW + 30], [2, NOW + 10], [3, NOW + 20]]) insert.run(good.day, `a${p}`, good.set, 700, scores, at);
+  for (let p = 1; p <= FEWEST_TO_RANK + 1; p++) insert.run(good.day, `b${p}`, 'ffff', 700, scores, NOW + p);
+  const before = old.prepare('SELECT day, set_id, players, totals, questions FROM days ORDER BY set_id').all();
+  old.close();
+
+  try {
+    env = { DB: localD1(path), LIVE: localR2(), LIVE_URL: 'https://data.example' };
+    const db = env.DB;
+    assert.equal((await db.prepare('SELECT count(*) AS n FROM results').first()).n, 3 + FEWEST_TO_RANK + 1);
+    const after = (await db.prepare('SELECT day, set_id, players, totals, questions, finished FROM days ORDER BY set_id').all()).results;
+    assert.deepEqual(after.map(({ finished, ...rest }) => ({ ...rest })), before.map((r) => ({ ...r })));
+    assert.deepEqual(JSON.parse(after.find((r) => r.set_id === good.set).finished), [NOW + 10, NOW + 20, NOW + 30]);
+    const schema = (await db.prepare("SELECT name, sql FROM sqlite_master WHERE tbl_name = 'results'").all()).results;
+    assert.deepEqual(schema.map((r) => r.name).sort(), ['results', 'results_count']);
+    assert.match(schema.find((r) => r.name === 'results').sql, /WITHOUT ROWID/);
+
+    const { day } = await (await postAt(NOW + 40, { ...good, player: secret(4) })).json();
+    assert.equal(day.players, 4);
+    assert.deepEqual(day.finished, [NOW + 10, NOW + 20, NOW + 30, NOW + 40]);
+    const other = await (await postAt(NOW + 50, { ...good, set: 'ffff', player: secret(5) })).json();
+    assert.equal(other.day.players, FEWEST_TO_RANK + 2);
+    assert.equal(other.day.finished, null);
+
+    const again = localD1(path);
+    assert.equal((await again.prepare('SELECT count(*) AS n FROM results').first()).n, 3 + FEWEST_TO_RANK + 3);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('a failed write is tried again by the cron', async () => {

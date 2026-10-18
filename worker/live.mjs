@@ -6,27 +6,21 @@ export const CACHE = 'public, max-age=15';
 export const fileKey = (day, set) => `${day}/${set}.json`;
 export const fileUrl = (env, day, set) => (env.LIVE && env.LIVE_URL ? `${env.LIVE_URL}/${fileKey(day, set)}` : null);
 
-export async function dayFile(db, day, set, row) {
-  const file = {
+export function dayFile(day, set, row) {
+  return {
     day,
     set,
     players: row.players,
     totals: JSON.parse(row.totals),
     questions: JSON.parse(row.questions),
-    finished: null,
+    finished: row.players < FEWEST_TO_RANK ? JSON.parse(row.finished) : null,
   };
-  if (row.players < FEWEST_TO_RANK) {
-    const { results } = await db.prepare('SELECT at FROM results WHERE day = ? AND set_id = ? ORDER BY at')
-      .bind(day, set).all();
-    file.finished = results.map((r) => r.at);
-  }
-  return file;
 }
 
 export async function claim(db, day, set, now) {
   return db.prepare(`UPDATE days SET written = ?1, written_players = players
     WHERE day = ?2 AND set_id = ?3 AND players > written_players AND written <= ?1 - ?4
-    RETURNING players, totals, questions`).bind(now, day, set, WRITE_GAP).first();
+    RETURNING players, totals, questions, finished`).bind(now, day, set, WRITE_GAP).first();
 }
 
 export async function write(env, file) {
@@ -43,7 +37,7 @@ export async function write(env, file) {
 export async function publish(env, day, set, now = Date.now()) {
   if (!env.LIVE) return;
   const row = await claim(env.DB, day, set, now);
-  if (row) await write(env, await dayFile(env.DB, day, set, row));
+  if (row) await write(env, dayFile(day, set, row));
 }
 
 export async function catchUp(env, now = Date.now()) {

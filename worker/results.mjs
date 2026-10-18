@@ -52,9 +52,9 @@ export async function postResult(request, env, ctx, now = Date.now()) {
     .bind(result.day, player).first();
   const set = mine.set_id;
   const claimed = env.LIVE ? await claim(db, result.day, set, now) : null;
-  const row = claimed ?? await db.prepare('SELECT players, totals, questions FROM days WHERE day = ? AND set_id = ?')
+  const row = claimed ?? await db.prepare('SELECT players, totals, questions, finished FROM days WHERE day = ? AND set_id = ?')
     .bind(result.day, set).first();
-  const day = await dayFile(db, result.day, set, row);
+  const day = dayFile(result.day, set, row);
   if (claimed) {
     const writing = write(env, day);
     if (ctx?.waitUntil) ctx.waitUntil(writing);

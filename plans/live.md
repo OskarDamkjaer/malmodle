@@ -9,8 +9,13 @@ others finished in the last quarter hour.
 - **A running summary.** D1 keeps one row per day and set in `days`: the
   player count, the count of each exact total, and per question the count of
   each score. A trigger on `results` updates it inside the insert, so a replay
-  or a repeated post never counts twice. A post costs about three rows
-  written however many have played, and nothing reads every row.
+  or a repeated post never counts twice. Nothing reads every row.
+- **Two rows written a post.** Measured on D1: a post writes the result and
+  updates the `days` row, two rows written however many have played.
+  `results` is a `WITHOUT ROWID` table keyed on `(day, player)` with no other
+  index, so no index entry is written beside the row. The first post of a day
+  and set writes two more, the new `days` row and its key. A repeated post
+  writes nothing.
 - **One file for everyone.** The day's numbers are the same for every player,
   so they are a file, `<day>/<set>.json` in the R2 bucket `malmodle`,
   served at `data.malmodle.se` through Cloudflare's cache for 15 seconds.
@@ -24,9 +29,12 @@ others finished in the last quarter hour.
   seconds ago. A cron trigger every minute writes any file still behind, so
   the last results of a quiet spell show within a minute. That caps the
   writes at about four a minute per day and set, whatever the crowd.
-- **The last quarter hour.** While fewer than ten have played, the file lists
-  when each finished, and the client counts the others in the last 15
-  minutes against its own clock.
+- **The last quarter hour.** While fewer than ten have played, the trigger
+  appends each finish time to `finished` in the `days` row, and the file lists
+  them. The client counts the others in the last 15 minutes against its own
+  clock. From ten players on the list stops growing and the file says `null`.
+  The ten in the trigger is `FEWEST_TO_RANK` in `app/crowd.mjs`, and a test
+  keeps the two the same.
 
 ## Polling
 
@@ -42,14 +50,15 @@ others finished in the last quarter hour.
 ## Cost
 
 Checked against Cloudflare's pricing in October 2026. Per finished round: one
-Worker request and about three D1 rows written. Free limits: 100 000 Worker
+Worker request and two D1 rows written. Claiming the file write adds one row,
+at most four a minute per day and set, under 6 000 a day. Free limits: 100 000 Worker
 requests and 100 000 D1 rows written a day, R2 1 million writes and 10 million
 reads a month.
 
 | | Free plan holds | All of Malmö, 360 000 a day |
 |---|---|---|
 | Worker | about 98 000 rounds a day, after the cron | 11 million a month, in the $5 plan's 10 million plus about $0.30 |
-| D1 | about 33 000 rounds a day | 32 million rows written a month, in the $5 plan's 50 million |
+| D1 | about 47 000 rounds a day | 22 million rows written a month, in the $5 plan's 50 million |
 | R2 writes | about 175 000 a month at the cap | the same |
 | R2 reads | a few thousand a day | the same, with the cache rule |
 | Polls | free | free |
@@ -72,7 +81,8 @@ Without the cache rule on `data.malmodle.se`, Cloudflare does not cache
 ## Options
 
 - **Senaste kvarten always.** The file could carry the finish times of the
-  last quarter hour at any size, read through the `(day, set_id, at)` index.
+  last quarter hour at any size. That needs a `(day, set_id, at)` index on
+  `results` to read them by, one more row written a post.
 - **"Spelar just nu."** A ping after the first question, dropped if the round
   is not finished within ten minutes. A new kind of data: the server would
   learn that someone started.
