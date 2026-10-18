@@ -105,7 +105,7 @@ test('highlights are put in words, with ties counted in your favour', () => {
   const hit = (n, players = 300) => highlightText('Möllan', { score: 100, count: n, better: 0, share: n / players }, players);
   assert.equal(hit(1).text, 'Du är först med att pricka Möllan idag.');
   assert.equal(hit(4).text, 'Du är en av fyra som prickat Möllan idag.');
-  assert.deepEqual(hit(61), { kicker: 'Mitt i prick', text: 'Du hör till de 20 % som prickat Möllan idag.', detail: '61 av 300.' });
+  assert.deepEqual(hit(61), { kicker: 'Mitt i prick', text: 'Du hör till de 20 % som prickat Möllan idag.', detail: 'Ni är 61 stycken.' });
   assert.equal(near(1, 0).text, 'Du var närmast Möllan av alla idag.');
   assert.deepEqual(near(4, 0), { kicker: 'Nära nog', text: 'Ingen var närmare Möllan än du.', detail: 'Tre andra var lika nära.' });
   assert.equal(near(2, 1).text, 'Bara en spelare var närmare Möllan än du.');

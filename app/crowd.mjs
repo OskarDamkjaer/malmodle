@@ -168,7 +168,7 @@ export function highlightText(name, { score, count: n, better, share }, players)
     const kicker = 'Mitt i prick';
     if (n === 1) return { kicker, text: `Du är först med att pricka ${name} idag.` };
     if (n < FEW_HITS) return { kicker, text: `Du är en av ${say(n)} som prickat ${name} idag.` };
-    return { kicker, text: `Du hör till de ${percent(share)} som prickat ${name} idag.`, detail: cap(`${say(n)} av ${say(players)}.`) };
+    return { kicker, text: `Du hör till de ${percent(share)} som prickat ${name} idag.`, detail: `Ni är ${say(n)} stycken.` };
   }
   const kicker = 'Nära nog';
   const tied = n - 1 - better;
