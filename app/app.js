@@ -6,7 +6,7 @@ import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, hideLabels, panTo, pickScored, setupLayers, show, showScored, showTap,
+  applyTheme, clear, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -669,10 +669,11 @@ function renderSquares() {
 function pickSquare(r) {
   showInfo(r.q.target, r);
   markSquare(r);
-  requestAnimationFrame(() => panTo(r.q.target));
+  requestAnimationFrame(() => frameItems([r.q.target], 400));
 }
 
 function markSquare(r) {
+  glowScored(r?.q.target.name);
   [...el('endsquares').children].forEach((b, i) => b.toggleAttribute('aria-current', results[i] === r));
 }
 
