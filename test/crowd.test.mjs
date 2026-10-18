@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, field, firstRound, highlight, highlightText,
+  BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, field, highlight, kept, highlightText,
   pausedText, place, pollDelay, rankLabel, recentOthers, standing, strongest, strongestText, summarize, tally, waiting,
 } from '../app/crowd.mjs';
 
@@ -85,7 +85,18 @@ test('your share and place read the same way everywhere', () => {
   assert.equal(aside(at(20, 1)), 'snyggt jobbat');
   assert.equal(aside(at(300, 300)), 'men du är säkert bra på annat');
   assert.equal(aside(at(300, 150)), null);
-  assert.match(firstRound(742), /742 poäng\.$/);
+});
+
+test('a kept reply is used only for its own day and set, and only when whole', () => {
+  const you = { total: 30, scores: [10, 20, 0, 0, 0, 0, 0, 0, 0, 0], at: 1 };
+  const reply = { day: '2026-10-18', set: 'ab', you, poll: '/live/2026-10-18/ab.json' };
+  assert.deepEqual(kept(reply, '2026-10-18', 'ab'), { you, poll: reply.poll });
+  assert.equal(kept(reply, '2026-10-19', 'ab'), null);
+  assert.equal(kept(reply, '2026-10-18', 'cd'), null);
+  assert.equal(kept({ ...reply, poll: null }, '2026-10-18', 'ab'), null);
+  assert.equal(kept({ ...reply, you: { ...you, total: 31 } }, '2026-10-18', 'ab'), null);
+  assert.equal(kept({ ...reply, you: { ...you, scores: [10, 20] } }, '2026-10-18', 'ab'), null);
+  assert.equal(kept(null, '2026-10-18', 'ab'), null);
 });
 
 test('the wait counts down in words, and says who finished lately', () => {

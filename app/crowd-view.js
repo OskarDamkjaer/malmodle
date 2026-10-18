@@ -1,6 +1,6 @@
 import {
   FEWEST_TO_RANK, MAX_TOTAL, aside, beatenText, belowText, columns, countBelow, highlight, highlightText,
-  firstRound, pausedText, practiceTip, rankLabel, standing, strongest, strongestText, waiting,
+  pausedText, practiceTip, rankLabel, standing, strongest, strongestText, waiting,
 } from './crowd.mjs';
 
 const W = 300;
@@ -77,12 +77,14 @@ function chart({ onRefresh } = {}) {
   const ahead = svg('path', { class: 'ahead', 'clip-path': `url(#${id}ahead)` });
   const stroke = svg('path', { class: 'stroke', 'vector-effect': 'non-scaling-stroke' });
   const line = svg('line', { class: 'line', y1: -4, y2: H, 'vector-effect': 'non-scaling-stroke' });
-  drawing.append(defs, behind, ahead, stroke, line);
+  const tryLines = svg('g', { class: 'tries' });
+  drawing.append(defs, behind, ahead, stroke, tryLines, line);
 
   const plot = el('div', 'plot');
   const you = el('span', 'you');
   const rank = el('span', 'rank');
-  plot.append(drawing, you, rank);
+  const tryTags = el('span', 'tries');
+  plot.append(drawing, tryTags, you, rank);
   const bar = el('div', 'split');
   const ticks = el('span', 'ticks');
   bar.append(el('span', 'behind'), el('span', 'ahead'), ticks, el('span', 'mark'));
@@ -114,6 +116,7 @@ function chart({ onRefresh } = {}) {
   let focus = null;
   let paused = null;
   let waitingFor = null;
+  let tries = [];
 
   const say = () => {
     const stop = paused ? pausedText(paused) : null;
@@ -179,6 +182,8 @@ function chart({ onRefresh } = {}) {
     const mine = crowd.you.total;
     const near = (a, b) => Math.abs(a - b) / MAX_TOTAL * graph.clientWidth < SNAP;
     if (near(score, mine)) return { score: mine, mine: true };
+    const attempt = tries.findIndex((t) => near(score, t));
+    if (attempt >= 0) return { score: tries[attempt], attempt: attempt + 2 };
     const rest = others();
     if (rest?.length && !exact) {
       const closest = rest.reduce((a, b) => (Math.abs(b - score) < Math.abs(a - score) ? b : a));
@@ -188,17 +193,18 @@ function chart({ onRefresh } = {}) {
   };
 
   const show = (point) => {
-    const { score, mine, someone } = point;
+    const { score, mine, someone, attempt } = point;
     const t = score / MAX_TOTAL;
     const share = mine
       ? beatenText(crowd)
-      : belowText(countBelow(crowd, score), crowd.players - (someone ? 1 : 0));
+      : belowText(countBelow(crowd, score), crowd.players - (someone || attempt ? 1 : 0));
+    const who = mine ? 'Du, ' : attempt ? `Försök ${attempt}, ` : '';
     graph.dataset.hover = mine ? 'you' : '';
     for (const node of [cursor, cursorScore, cursorShare]) {
       node.style.left = `${100 * t}%`;
       node.dataset.edge = edgeOf(t);
     }
-    cursorScore.textContent = mine ? `Du, ${score}` : String(score);
+    cursorScore.textContent = `${who}${score}`;
     cursorShare.textContent = share;
     const covered = (node) => {
       const a = node.getBoundingClientRect();
@@ -207,8 +213,8 @@ function chart({ onRefresh } = {}) {
         return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
       });
     };
-    for (const node of [you, rank, ...numbers.children]) node.classList.toggle('faded', covered(node));
-    return `${mine ? 'Du, ' : ''}${score} poäng: bättre än ${share}`;
+    for (const node of [you, ...numbers.children, ...tryTags.children]) node.classList.toggle('faded', covered(node));
+    return `${who}${score} poäng: bättre än ${share}`;
   };
 
   const hide = () => {
@@ -245,10 +251,24 @@ function chart({ onRefresh } = {}) {
   graph.addEventListener('blur', () => { focus = null; hide(); });
 
   const describe = (c) => (c
-    ? `Poängen för dagens ${c.players} spelare. Du fick ${c.you.total} och var bättre än ${beatenText(c)} av de andra, ${rankLabel(c)}. Piltangenterna visar andra poäng.`
+    ? `Poängen för dagens ${c.players} spelare. Du fick ${c.you.total} och var bättre än ${beatenText(c)} av de andra, ${rankLabel(c)}.${tries.length ? ` Dina omspelningar, som inte räknas: ${tries.join(', ')}.` : ''} Piltangenterna visar andra poäng.`
     : waitText.textContent);
 
-  const update = (next, { recent = 0 } = {}) => {
+  const placeTries = (mine) => {
+    const x = (t) => (t / MAX_TOTAL) * W;
+    const apart = (t) => (Math.abs(t - mine) / MAX_TOTAL) * graph.clientWidth > 48;
+    tryLines.replaceChildren(...tries.map((t) => svg('line', { class: 'try', x1: x(t), x2: x(t), y1: 0, y2: H, 'vector-effect': 'non-scaling-stroke' })));
+    tryTags.replaceChildren(...tries.map((t, i) => {
+      const tag = el('span', 'try', `försök ${i + 2}`);
+      tag.style.left = `${(100 * t) / MAX_TOTAL}%`;
+      tag.dataset.edge = edgeOf(t / MAX_TOTAL);
+      tag.hidden = !apart(t);
+      return tag;
+    }));
+  };
+
+  const update = (next, { recent = 0, tries: played = [] } = {}) => {
+    tries = played;
     const ready = next.players >= FEWEST_TO_RANK;
     crowd = ready ? next : null;
     waitingFor = ready ? null : { players: next.players, recent };
@@ -267,6 +287,7 @@ function chart({ onRefresh } = {}) {
     graph.setAttribute('role', 'group');
     graph.setAttribute('aria-label', describe(next));
     you.replaceChildren(el('span', 'who', 'Du'), el('span', 'sep', ', '), el('span', 'mine', String(next.you.total)));
+    placeTries(next.you.total);
     rank.textContent = rankLabel(next);
     const rest = others() ?? [];
     ticks.replaceChildren(...rest.map((t) => {
@@ -297,11 +318,10 @@ export function crowdCard({ onPractise, onRefresh } = {}) {
   const best = el('div', 'best');
   node.append(top, graph.node, best);
 
-  const update = (crowd, names, shown = crowd.you.total, live = {}) => {
+  const update = (crowd, names, live = {}) => {
     const ready = crowd.players >= FEWEST_TO_RANK;
     const said = ready ? standing(crowd) : null;
     top.replaceChildren(...(said ? [el('p', 'head', said.head), el('p', 'dek', said.dek)] : []));
-    if (shown !== crowd.you.total) top.append(el('p', 'dek', firstRound(crowd.you.total)));
     graph.update(crowd, live);
     const hl = ready ? highlight(crowd) : null;
     const strong = ready && !hl ? strongest(crowd) : null;

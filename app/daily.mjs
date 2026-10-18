@@ -275,6 +275,8 @@ const targetsOf = (set) => set.map((q) => q.target.name);
 
 export const setId = (set) => hash(targetsOf(set).join('\n')).toString(16);
 const isScore = (n) => Number.isInteger(n) && n >= 0 && n <= MAX_SCORE;
+const isTotal = (n) => Number.isInteger(n) && n >= 0 && n <= SET_SIZE * MAX_SCORE;
+const totalOf = (answers) => answers.reduce((sum, a) => sum + a.score, 0);
 
 function parseAnswer(raw, q) {
   if (!isScore(raw?.score)) return null;
@@ -298,15 +300,22 @@ function parseSaved(raw, key, set) {
   const done = parseAnswers(raw.done, set);
   const playing = parseAnswers(raw.playing, set);
   const finished = done?.length === set.length ? done : undefined;
-  return finished || playing ? { done: finished, playing } : null;
+  const rounds = Array.isArray(raw.rounds) && raw.rounds.every(isTotal) ? raw.rounds : finished ? [totalOf(finished)] : [];
+  return finished || playing ? { done: finished, playing, rounds } : null;
 }
 
 export function remember(raw, { key, set, results, finished }) {
   const answers = results.map(({ q, result }) => parseAnswer(result, q));
+  const before = parseSaved(raw, key, set);
   const saved = { version: SAVE_VERSION, key, targets: targetsOf(set) };
-  if (finished) return { ...saved, done: answers };
-  return { ...saved, done: parseSaved(raw, key, set)?.done, playing: answers };
+  if (finished) {
+    const rounds = before?.playing || !before?.rounds.length ? [...(before?.rounds ?? []), totalOf(answers)] : before.rounds;
+    return { ...saved, done: answers, rounds };
+  }
+  return { ...saved, done: before?.done, playing: answers, rounds: before?.rounds ?? [] };
 }
+
+export const played = (raw, key, set) => parseSaved(raw, key, set)?.rounds ?? [];
 
 export function recall(raw, key, set) {
   const saved = parseSaved(raw, key, set);

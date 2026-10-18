@@ -19,6 +19,11 @@ others finished in the last quarter hour.
 - **Your view on the client.** The post answers with your first round, the
   day's numbers and the file's address. `summarize(day, you)` in
   `app/crowd.mjs` works out your place, share and per-question counts.
+- **One post per player and day.** The device keeps the answer to its first
+  post under `malmodle-crowd`. A reload or a replay that day reads the file
+  instead of posting, and the chart draws replays as thin lines from the
+  totals in the save, which never leave the device. Only a device without a
+  kept answer posts again, and the server keeps the first round anyway.
 - **Writing the file, at most every 15 seconds.** A post claims the write in
   the `days` row only if the file is behind and was written more than 15
   seconds ago. A cron trigger every minute writes any file still behind, so
@@ -41,7 +46,7 @@ others finished in the last quarter hour.
 
 ## Cost
 
-Checked against Cloudflare's pricing in October 2026. Per finished round: one
+Checked against Cloudflare's pricing in October 2026. Per player and day: one
 Worker request and about three D1 rows written. Free limits: 100 000 Worker
 requests and 100 000 D1 rows written a day, R2 1 million writes and 10 million
 reads a month.

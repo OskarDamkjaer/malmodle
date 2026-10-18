@@ -30,6 +30,7 @@ const STATES = [
   { label: '400 spelare, näst bäst', players: 400, place: 2 },
   { label: '400 spelare, pausad', players: 400, place: 40, paused: true },
   { label: '400 spelare, tia', players: 400, place: 10 },
+  { label: '400 spelare, två omspelningar', players: 400, share: 0.6, tries: [520, 740] },
   { label: '400 spelare, elva', players: 400, place: 11 },
   { label: '5 000 spelare, plats 23', players: 5000, place: 23 },
   { label: '5 000 spelare, delad plats 12', players: 5000, place: 12, tied: 4 },
@@ -136,7 +137,7 @@ function render() {
     const section = el('section', 'state');
     const card = crowdCard({ onPractise: () => {} });
     section.append(el('h3', '', state.label), card.node);
-    card.update(reply, names, reply.you.total, { recent: state.recent });
+    card.update(reply, names, { recent: state.recent, tries: state.tries });
     if (state.paused) card.pause(new Date());
     return section;
   }));

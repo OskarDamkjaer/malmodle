@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -250,6 +250,23 @@ test('a carried round does not replace one already finished here', () => {
   assert.equal(arrive(mine, code, key, set), mine);
   const started = stored(remember(null, { key, set, results: [answer(set[0], 50)], finished: false }));
   assert.equal(recall(arrive(started, code, key, set), key, set).length, set.length);
+});
+
+test('every finished round of the day is counted once, in order', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const round = (score) => set.map((q) => answer(q, score));
+  const first = stored(remember(stored(remember(null, { key, set, results: round(10).slice(0, 9), finished: false })), { key, set, results: round(10), finished: true }));
+  assert.deepEqual(played(first, key, set), [100]);
+  const reloaded = stored(remember(first, { key, set, results: round(10), finished: true }));
+  assert.deepEqual(played(reloaded, key, set), [100]);
+  const replaying = stored(remember(reloaded, { key, set, results: round(30).slice(0, 3), finished: false }));
+  assert.deepEqual(played(replaying, key, set), [100]);
+  const second = stored(remember(replaying, { key, set, results: round(30), finished: true }));
+  assert.deepEqual(played(second, key, set), [100, 300]);
+  const old = stored(remember(null, { key, set, results: round(50), finished: true }));
+  delete old.rounds;
+  assert.deepEqual(played(old, key, set), [500]);
 });
 
 test('a saved day for a different set is ignored', () => {

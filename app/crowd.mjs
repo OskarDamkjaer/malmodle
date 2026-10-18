@@ -75,6 +75,15 @@ export function summarize(day, you) {
   };
 }
 
+export function kept(raw, day, set) {
+  if (raw?.day !== day || raw.set !== set || typeof raw.poll !== 'string') return null;
+  const { total, scores, at } = raw.you ?? {};
+  if (!Array.isArray(scores) || scores.length !== SET_SIZE) return null;
+  if (!scores.every((s) => Number.isInteger(s) && s >= 0 && s <= MAX_SCORE)) return null;
+  if (total !== scores.reduce((a, b) => a + b, 0) || !Number.isFinite(at)) return null;
+  return { you: { total, scores, at }, poll: raw.poll };
+}
+
 export function recentOthers(day, you, now) {
   if (!day.finished) return 0;
   const recent = day.finished.filter((at) => now - at <= RECENT);
@@ -152,7 +161,6 @@ export function field(crowd) {
 
 export const standing = (crowd) => place(crowd) ?? field(crowd);
 
-export const firstRound = (total) => `Räknat på din första omgång idag, ${total} poäng.`;
 
 export function rankLabel(crowd) {
   const rank = count(crowd.you.above + 1);

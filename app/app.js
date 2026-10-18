@@ -1,7 +1,7 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
-import { pollDelay, recentOthers, summarize } from './crowd.mjs';
+import { kept, pollDelay, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
@@ -441,6 +441,29 @@ function stopFollowing() {
   following = null;
 }
 
+const KEPT_KEY = 'malmodle-crowd';
+
+async function firstRound() {
+  const id = setId(set);
+  let stored = null;
+  try { stored = kept(JSON.parse(localStorage.getItem(KEPT_KEY)), key, id); } catch {}
+  if (stored) {
+    const res = await fetch(stored.poll);
+    return res.ok ? { ...stored, day: await res.json() } : {};
+  }
+  const res = await fetch('/api/result', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ day: key, set: id, player: playerId(), scores: results.map((r) => r.result.score) }),
+  });
+  if (!res.ok) return {};
+  const reply = await res.json();
+  if (reply.poll) {
+    try { localStorage.setItem(KEPT_KEY, JSON.stringify({ day: key, set: id, you: reply.you, poll: reply.poll })); } catch {}
+  }
+  return reply;
+}
+
 async function compare() {
   hide('crowd');
   stopFollowing();
@@ -448,27 +471,20 @@ async function compare() {
   delete end.dataset.crowd;
   if (practicing) return;
   const asked = set;
-  const scores = results.map((r) => r.result.score);
   end.dataset.crowd = 'asking';
   try {
-    const res = await fetch('/api/result', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ day: key, set: setId(set), player: playerId(), scores }),
-    });
-    if (!res.ok) return;
-    const { you, day, poll } = await res.json();
-    if (phase !== 'end' || practicing || set !== asked) return;
+    const { you, day, poll } = await firstRound();
+    if (!day || phase !== 'end' || practicing || set !== asked) return;
     card ??= crowdCard({
       onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); },
       onRefresh: () => following?.restart(),
     });
     el('crowd').replaceChildren(card.node);
     const names = set.map((q) => q.target.name);
-    const shown = sum(scores);
-    const show = (d) => card.update(summarize(d, you), names, shown, { recent: recentOthers(d, you, Date.now()) });
-    show(day);
+    const tries = played(loadSaved(), key, set).slice(1);
+    const show = (d) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries });
     reveal('crowd');
+    show(day);
     end.dataset.crowd = 'shown';
     if (poll) following = follow(poll, day, show);
   } catch {} finally {

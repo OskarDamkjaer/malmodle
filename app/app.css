@@ -313,6 +313,11 @@ body[data-mapview] #endmap { margin-top: 12px; }
 .graph .ahead { fill: var(--dot); transition: fill .5s; }
 .graph .stroke { fill: none; stroke: var(--ink-soft); stroke-width: 1.5; stroke-linejoin: round; }
 .graph .line { stroke: var(--accent); stroke-width: 2; }
+.graph .tries .try { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3; opacity: .45; }
+.graph span.try { position: absolute; top: 46px; left: 0; transform: translateX(-50%); font: 600 10px/1 var(--font); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+.graph span.try[data-edge="left"] { transform: none; }
+.graph span.try[data-edge="right"] { transform: translateX(-100%); }
+.graph[data-waiting] :is(.tries, span.try) { opacity: 0; }
 .graph .you { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; transform: translateX(-50%); font: 700 11px/1 var(--font); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
 .graph .you[data-edge="left"] { align-items: flex-start; }
 .graph .you[data-edge="right"] { align-items: flex-end; }
