@@ -17,11 +17,14 @@ export function dayFile(day, set, row) {
   };
 }
 
-export async function claim(db, day, set, now) {
-  return db.prepare(`UPDATE days SET written = ?1, written_players = players
-    WHERE day = ?2 AND set_id = ?3 AND players > written_players AND written <= ?1 - ?4
-    RETURNING players, totals, questions, finished`).bind(now, day, set, WRITE_GAP).first();
-}
+const claimSql = (set) => `UPDATE days SET written = ?1, written_players = players
+    WHERE day = ?2 AND set_id = ${set} AND players > written_players AND written <= ?1 - ?4
+    RETURNING players, totals, questions, finished`;
+
+const playerSet = '(SELECT set_id FROM results WHERE day = ?2 AND player = ?3)';
+
+export const claiming = (db, day, set, now) => db.prepare(claimSql('?3')).bind(now, day, set, WRITE_GAP);
+export const claimingFor = (db, day, player, now) => db.prepare(claimSql(playerSet)).bind(now, day, player, WRITE_GAP);
 
 export async function write(env, file) {
   try {
@@ -36,7 +39,7 @@ export async function write(env, file) {
 
 export async function publish(env, day, set, now = Date.now()) {
   if (!env.LIVE) return;
-  const row = await claim(env.DB, day, set, now);
+  const row = await claiming(env.DB, day, set, now).first();
   if (row) await write(env, dayFile(day, set, row));
 }
 

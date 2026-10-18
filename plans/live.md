@@ -16,6 +16,11 @@ others finished in the last quarter hour.
   index, so no index entry is written beside the row. The first post of a day
   and set writes two more, the new `days` row and its key. A repeated post
   writes nothing.
+- **One round trip a post.** The Worker sends a post's statements to D1 as
+  one batch, which runs them in order as one transaction: the insert, your
+  first round, the claim on the file write, and the `days` row. The last
+  three find the set by your first round, so a replay from another set
+  answers with the one you played.
 - **One file for everyone.** The day's numbers are the same for every player,
   so they are a file, `<day>/<set>.json` in the R2 bucket `malmodle`,
   served at `data.malmodle.se` through Cloudflare's cache for 15 seconds.

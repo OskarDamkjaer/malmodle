@@ -172,6 +172,65 @@ test('the migrations carry an existing database over with its results and counts
   }
 });
 
+function counted(db) {
+  const outside = [];
+  const wrap = (statement) => ({
+    ...statement,
+    bind: (...values) => wrap(statement.bind(...values)),
+    first: () => { outside.push(statement.sql); return statement.first(); },
+    all: () => { outside.push(statement.sql); return statement.all(); },
+    run: () => { outside.push(statement.sql); return statement.run(); },
+  });
+  let batches = 0;
+  return {
+    outside,
+    batches: () => batches,
+    db: { prepare: (sql) => wrap(db.prepare(sql)), batch: (statements) => { batches++; return db.batch(statements); } },
+  };
+}
+
+test('a post asks the database once', async () => {
+  for (const live of [true, false]) {
+    fresh();
+    if (!live) delete env.LIVE;
+    const count = counted(env.DB);
+    env.DB = count.db;
+    await postAt(NOW, good);
+    await postAt(NOW + 1, good);
+    await postAt(NOW + 30000, { ...good, player: secret(2) });
+    assert.deepEqual(count.outside, []);
+    assert.equal(count.batches(), 3);
+  }
+});
+
+test('a replay from another set answers with the set it first played', async () => {
+  fresh();
+  await postAt(NOW, good);
+  const again = await (await postAt(NOW + 30000, { ...good, set: 'ffff', scores: Array(10).fill(0) })).json();
+  assert.equal(again.day.set, good.set);
+  assert.equal(again.day.players, 1);
+  assert.equal(again.you.total, 700);
+  assert.equal(again.poll, `https://data.example/${good.day}/${good.set}.json`);
+  assert.equal(await file('ffff'), null);
+});
+
+test('a batch that fails takes its insert back with it', async () => {
+  fresh();
+  const db = env.DB;
+  const insert = db.prepare('INSERT INTO results (day, player, set_id, total, scores, at) VALUES (?, ?, ?, ?, ?, ?)')
+    .bind(good.day, 'p', good.set, 700, JSON.stringify(good.scores), NOW);
+  await assert.rejects(db.batch([insert, db.prepare('SELECT 1'), insert]), /UNIQUE/);
+  assert.equal((await db.prepare('SELECT count(*) AS n FROM results').first()).n, 0);
+  assert.equal((await db.prepare('SELECT count(*) AS n FROM days').first()).n, 0);
+
+  const [stored, row, claimed] = await db.batch([insert, db.prepare('SELECT players FROM days'),
+    db.prepare('UPDATE days SET written = 1 RETURNING written')]);
+  assert.equal(stored.success, true);
+  assert.equal(stored.meta.changes, 1);
+  assert.deepEqual(row.results.map((r) => ({ ...r })), [{ players: 1 }]);
+  assert.deepEqual(claimed.results.map((r) => ({ ...r })), [{ written: 1 }]);
+});
+
 test('a failed write is tried again by the cron', async () => {
   fresh();
   const put = env.LIVE.put;

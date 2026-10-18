@@ -15,11 +15,30 @@ export function localD1(path = ':memory:') {
     db.prepare('INSERT INTO d1_migrations (name) VALUES (?)').run(file);
     db.exec('COMMIT');
   }
+  const execute = (sql, args) => {
+    const prepared = db.prepare(sql);
+    if (prepared.columns().length) return { results: prepared.all(...args), success: true, meta: { changes: 0 } };
+    const { changes, lastInsertRowid } = prepared.run(...args);
+    return { results: [], success: true, meta: { changes, last_row_id: Number(lastInsertRowid) } };
+  };
   const statement = (sql, args = []) => ({
+    sql,
+    args,
     bind: (...values) => statement(sql, values),
     async first() { return db.prepare(sql).get(...args) ?? null; },
-    async all() { return { results: db.prepare(sql).all(...args) }; },
-    async run() { db.prepare(sql).run(...args); return { success: true }; },
+    async all() { return execute(sql, args); },
+    async run() { return execute(sql, args); },
   });
-  return { prepare: (sql) => statement(sql) };
+  async function batch(statements) {
+    db.exec('BEGIN');
+    try {
+      const results = statements.map((s) => execute(s.sql, s.args));
+      db.exec('COMMIT');
+      return results;
+    } catch (err) {
+      db.exec('ROLLBACK');
+      throw err;
+    }
+  }
+  return { prepare: (sql) => statement(sql), batch };
 }
