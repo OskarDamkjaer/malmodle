@@ -254,7 +254,7 @@ body[data-answered] #question { display: none; }
 #elsewhere { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); }
 #elsewherelink { color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 #elsewherelink:hover { text-decoration-thickness: 2.5px; }
-.round { margin: 28px 0 0; padding: 4px 0 0; border-top: var(--rule); }
+.round { margin: 28px 0 0; padding: 12px 0 0; border-top: var(--rule); }
 .squares { display: flex; gap: 4px; margin: 0 0 10px; }
 .squares .sq { flex: 1; min-height: 0; height: 28px; padding: 7px 0; background: color-mix(in srgb, var(--band) 55%, var(--bg)); background-clip: content-box; border: 0; border-radius: 1px; box-shadow: none; transition: background-color .15s ease; }
 .squares .sq:hover, .squares .sq[aria-current] { background-color: var(--band); }
@@ -439,7 +439,9 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
       var(--veil-strong) calc(var(--sheet) + 64px), var(--veil-light) calc(var(--sheet) + 130px));
   }
   #end .sheet { display: flex; flex-direction: column; max-width: var(--sheet); height: 100%; margin: 0 0 0 32px; padding-top: calc(var(--safe-top) + 32px); padding-bottom: calc(var(--safe-bottom) + 28px); background: none; border-bottom: 0; }
-  #end #crowd { margin-bottom: 28px; }
+  #end #crowd { margin: clamp(22px, 5vh, 56px) 0 28px; }
+  #end .graph { margin-top: clamp(6px, 2.5vh, 28px); }
+  #end .crowd .best { margin-top: clamp(18px, 4vh, 44px); padding-top: clamp(12px, 2.5vh, 24px); }
   #end .round { margin-top: auto; }
   #end .actions { margin-bottom: 0; }
   #end .kinds { margin: 12px 0 0; }
