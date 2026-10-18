@@ -1,7 +1,7 @@
 import { THEMES, DEFAULT_THEME } from '/themes.mjs';
 import { dailySet, dateKey, random } from '/daily.mjs';
 import { CLOSE_SCORE, MAX_SCORE, TYPES, distanceScore } from '/questions.mjs';
-import { summarize } from '/crowd.mjs';
+import { summarize, tally } from '/crowd.mjs';
 import { crowdCard } from '/crowd-view.js';
 
 let days = [];
@@ -11,6 +11,8 @@ const SHAPES = { vanlig: 'vanlig', tvådelad: 'två grupper', lätt: 'lätt dag'
 const STATES = [
   { label: 'Ensam', players: 1, place: 1 },
   { label: '3 spelare', players: 3, place: 2 },
+  { label: '3 spelare, två senaste kvarten', players: 3, place: 2, recent: 2 },
+  { label: '3 spelare, pausad', players: 3, place: 2, paused: true },
   { label: '4 spelare, du bäst', players: 4, place: 1 },
   { label: '5 spelare, du bäst', players: 5, place: 1 },
   { label: '5 spelare, tvåa', players: 5, place: 2 },
@@ -25,6 +27,7 @@ const STATES = [
   { label: '40 spelare, delad trea med tre', players: 40, place: 3, tied: 3 },
   { label: '250 spelare, delad bäst med två', players: 250, place: 1, tied: 2 },
   { label: '400 spelare, näst bäst', players: 400, place: 2 },
+  { label: '400 spelare, pausad', players: 400, place: 40, paused: true },
   { label: '400 spelare, tia', players: 400, place: 10 },
   { label: '400 spelare, elva', players: 400, place: 11 },
   { label: '5 000 spelare, plats 23', players: 5000, place: 23 },
@@ -109,7 +112,7 @@ function crowdFor(state, i) {
 
 function crowdFrom(questions, played, me) {
   const rows = played.map((scores) => ({ total: sum(scores), scores }));
-  return { reply: summarize(rows, rows[me]), names: questions.map((q) => q.target.name) };
+  return { reply: summarize(tally(rows), rows[me]), names: questions.map((q) => q.target.name) };
 }
 
 function liveState() {
@@ -122,7 +125,7 @@ function liveState() {
   let n = 1;
   let timer = 0;
   const section = el('section', 'state');
-  const card = crowdCard({ onPractise: () => {} });
+  const card = crowdCard({ onPractise: () => {}, onRefresh: () => { if (paused) pause.click(); } });
   const controls = el('div', 'live');
   const label = el('h3', '', '');
   const set = (count) => {
@@ -137,7 +140,13 @@ function liveState() {
     auto.textContent = 'Pausa';
     timer = setInterval(() => { set(n + Math.max(1, Math.round(n / 8))); if (n >= pool.length) auto.click(); }, 900);
   });
-  controls.append(button('Börja om', () => set(1)), button('+1', () => set(n + 1)), button('+10', () => set(n + 10)), auto);
+  let paused = false;
+  const pause = button('Pausa uppdatering', () => {
+    paused = !paused;
+    pause.textContent = paused ? 'Uppdatera igen' : 'Pausa uppdatering';
+    card.pause(paused ? new Date() : null);
+  });
+  controls.append(button('Börja om', () => set(1)), button('+1', () => set(n + 1)), button('+10', () => set(n + 10)), auto, pause);
   section.append(label, controls, card.node);
   set(1);
   return section;
@@ -149,7 +158,8 @@ function render() {
     const section = el('section', 'state');
     const card = crowdCard({ onPractise: () => {} });
     section.append(el('h3', '', state.label), card.node);
-    card.update(reply, names);
+    card.update(reply, names, reply.you.total, { recent: state.recent });
+    if (state.paused) card.pause(new Date());
     return section;
   }));
 }

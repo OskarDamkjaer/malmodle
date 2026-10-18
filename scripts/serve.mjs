@@ -3,8 +3,10 @@ import { createReadStream, statSync, existsSync, readFileSync } from 'node:fs';
 import { resolve, normalize, extname } from 'node:path';
 import { MOUNTS, MIME } from './lib/site.mjs';
 import { localD1 } from './lib/d1.mjs';
+import { localR2 } from './lib/r2.mjs';
 import { dailySet, dateKey, random, setId } from '../app/daily.mjs';
 import worker from '../worker/index.mjs';
+import { catchUp } from '../worker/live.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -13,29 +15,41 @@ const host = arg('--host', '127.0.0.1');
 const root = resolve(process.cwd());
 const db = localD1(arg('--db', ':memory:'));
 const fake = Number(arg('--fake', 0));
+const trickle = Number(arg('--trickle', 0));
+const env = { DB: db, LIVE: localR2(), LIVE_URL: '/live' };
+const ctx = { waitUntil: (promise) => promise.catch((err) => console.error(err)) };
 
-async function addFakePlayers(count) {
+function fakePlayers() {
   const { items } = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
   const key = dateKey();
   const set = dailySet(items, key);
-  const rng = random(count);
+  const rng = random(set.length);
   const ease = set.map(() => 0.15 + rng() * 0.8);
-  for (let p = 0; p < count; p++) {
-    const skill = rng() * 0.4 - 0.2;
-    const scores = ease.map((e) => (rng() < e + skill ? 80 + Math.floor(rng() * 21) : Math.floor(rng() ** 1.5 * 80)));
-    const total = scores.reduce((a, b) => a + b, 0);
-    await db.prepare('INSERT INTO results (day, player, set_id, total, scores, at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT DO NOTHING')
-      .bind(key, `fake-${p}`, setId(set), total, JSON.stringify(scores), Date.now()).run();
-  }
+  let p = 0;
+  return async (count) => {
+    for (const end = p + count; p < end; p++) {
+      const skill = rng() * 0.4 - 0.2;
+      const scores = ease.map((e) => (rng() < e + skill ? 80 + Math.floor(rng() * 21) : Math.floor(rng() ** 1.5 * 80)));
+      const total = scores.reduce((a, b) => a + b, 0);
+      await db.prepare('INSERT INTO results (day, player, set_id, total, scores, at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT DO NOTHING')
+        .bind(key, `fake-${p}`, setId(set), total, JSON.stringify(scores), Date.now()).run();
+    }
+  };
 }
 
-if (fake) await addFakePlayers(fake);
+if (fake || trickle) {
+  const addFake = fakePlayers();
+  await addFake(fake);
+  if (trickle) setInterval(() => addFake(1), trickle * 1000);
+}
+await catchUp(env);
+setInterval(() => worker.scheduled({ scheduledTime: Date.now() }, env, ctx), 60000);
 
 async function api(req, res, url) {
   const chunks = [];
   for await (const chunk of req) chunks.push(chunk);
   const body = ['GET', 'HEAD'].includes(req.method) ? undefined : Buffer.concat(chunks);
-  const reply = await worker.fetch(new Request(url, { method: req.method, headers: req.headers, body }), { DB: db });
+  const reply = await worker.fetch(new Request(url, { method: req.method, headers: req.headers, body }), env, ctx);
   res.writeHead(reply.status, Object.fromEntries(reply.headers));
   res.end(Buffer.from(await reply.arrayBuffer()));
   console.log(`${reply.status} ${req.method} ${url.pathname}`);
@@ -60,8 +74,27 @@ function toFile(urlPath) {
   return null;
 }
 
+async function live(res, url) {
+  const file = await env.LIVE.get(decodeURIComponent(url.pathname.slice('/live/'.length)));
+  if (!file) {
+    res.writeHead(404, { 'content-type': 'text/plain' });
+    res.end();
+    return;
+  }
+  res.writeHead(200, { 'content-type': file.httpMetadata.contentType, 'cache-control': file.httpMetadata.cacheControl });
+  res.end(file.body);
+}
+
 createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
+  if (url.pathname.startsWith('/live/')) {
+    live(res, url).catch((err) => {
+      console.error(err);
+      res.writeHead(500);
+      res.end();
+    });
+    return;
+  }
   if (url.pathname.startsWith('/api/')) {
     api(req, res, url).catch((err) => {
       console.error(err);

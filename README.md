@@ -32,8 +32,9 @@ node scripts/serve.mjs               # http://127.0.0.1:8080
 ```
 
 `serve.mjs` also answers the API, from an SQLite database in memory (or
-`--db file`). `--fake 200` fills today with 200 made-up players, to see the
-end screen with a crowd. It also serves <http://127.0.0.1:8080/dev/crowd.html>,
+`--db file`), and the day's numbers under `/live/` in place of the R2 bucket.
+`--fake 200` fills today with 200 made-up players, to see the end screen with
+a crowd, and `--trickle 10` adds one more every 10 seconds, to see it update. It also serves <http://127.0.0.1:8080/dev/crowd.html>,
 which draws the end screen's comparison for a few dozen made-up crowds, and one
 that fills up as you click. `dev/` is never part of the built site.
 
@@ -78,8 +79,9 @@ Tests that need built data or a browser skip when those are missing.
 ## Hosting
 
 The site and its API run as one Cloudflare Worker (`wrangler.jsonc`): the
-built site as static assets, `worker/` for `/api/`, and a D1 database for
-the results. Pushing to the `cloudflare` branch builds, tests and deploys it
+built site as static assets, `worker/` for `/api/`, a D1 database for
+the results, and an R2 bucket at data.malmodle.se for the day's numbers the
+end screen polls. Setting up the bucket is in `plans/live.md`. Pushing to the `cloudflare` branch builds, tests and deploys it
 (`.github/workflows/cloudflare.yml`). `node scripts/build-site.mjs` builds the
 same folder locally in `build/site`.
 
@@ -89,7 +91,7 @@ Set up once:
 npx wrangler d1 create malmodle      # put the id in wrangler.jsonc
 ```
 
-and give the repository the secrets `CLOUDFLARE_API_TOKEN` (Workers, D1 and
+and give the repository the secrets `CLOUDFLARE_API_TOKEN` (Workers, D1, R2 and
 the malmodle.se zone, edit) and `CLOUDFLARE_ACCOUNT_ID`. The domain is
 attached by the deploy, so the malmodle.se zone has to be on the same
 Cloudflare account.

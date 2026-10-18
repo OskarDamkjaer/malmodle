@@ -15,6 +15,15 @@
       "migrations_dir": "worker/migrations"
     }
   ],
+  "r2_buckets": [
+    { "binding": "LIVE", "bucket_name": "malmodle" }
+  ],
+  "vars": {
+    "LIVE_URL": "https://data.malmodle.se"
+  },
+  "triggers": {
+    "crons": ["* * * * *"]
+  },
   "routes": [
     { "pattern": "malmodle.se", "custom_domain": true }
   ]

@@ -324,8 +324,11 @@ body[data-mapview] #endmap { margin-top: 12px; }
 .graph .wait p { margin: 0; font: italic 16px/1.45 var(--font-display); color: var(--ink-soft); white-space: pre-line; }
 .graph .wait .invite { min-height: 0; padding: 4px 2px; font: 700 11px/1.4 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); background: none; border: 0; border-bottom: 1.5px solid currentColor; border-radius: 0; box-shadow: none; cursor: pointer; }
 .graph .wait .invite:hover { color: var(--ink); }
-.graph[data-waiting] { cursor: default; }
-.graph[data-waiting] .wait { opacity: 1; visibility: visible; }
+.graph .wait [hidden] { display: none; }
+.graph[data-waiting], .graph[data-paused] { cursor: default; }
+.graph[data-waiting] .wait, .graph[data-paused] .wait { opacity: 1; visibility: visible; }
+.graph[data-paused]:not([data-waiting]) :is(svg, .split, .numbers, .you) { opacity: .2; }
+.graph[data-paused]:not([data-waiting]) .wait p { color: var(--ink); }
 .graph[data-waiting] svg { filter: blur(6px); opacity: .55; animation: breathe 1.6s ease-in-out infinite alternate; }
 .graph[data-waiting] .behind, .graph[data-waiting] .ahead { fill: color-mix(in srgb, var(--accent) 25%, var(--dot)); }
 .graph[data-waiting] .split .behind, .graph[data-waiting] .split .ahead { background: color-mix(in srgb, var(--accent) 25%, var(--dot)); }

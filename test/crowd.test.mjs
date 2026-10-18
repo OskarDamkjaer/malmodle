@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, field, firstRound, highlight, highlightText,
-  place, rankLabel, standing, strongest, strongestText, summarize, waiting,
+  pausedText, place, pollDelay, rankLabel, recentOthers, standing, strongest, strongestText, summarize, tally, waiting,
 } from '../app/crowd.mjs';
 
 const at = (players, rank, tied = 0) => ({ players, you: { total: 500, scores: [], above: rank - 1, below: players - rank - tied } });
@@ -16,7 +16,7 @@ test('the summary counts totals in bins of ten, who is above and below you, and 
     { total: 500, scores: [50, 100] },
     { total: 500, scores: [50, 90] },
   ];
-  const s = summarize(rows, rows[3]);
+  const s = summarize(tally(rows), rows[3]);
   assert.equal(s.players, 5);
   assert.equal(s.histogram.length, BINS);
   assert.equal(BINS, 100);
@@ -31,14 +31,14 @@ test('the summary counts totals in bins of ten, who is above and below you, and 
 });
 
 test('the list of totals is only sent while the crowd is small', () => {
-  const few = summarize(rowsOf(Array(EXACT_BELOW - 1).fill(300)), { total: 300, scores: [] });
-  const many = summarize(rowsOf(Array(EXACT_BELOW).fill(300)), { total: 300, scores: [] });
+  const few = summarize(tally(rowsOf(Array(EXACT_BELOW - 1).fill(300))), { total: 300, scores: [] });
+  const many = summarize(tally(rowsOf(Array(EXACT_BELOW).fill(300))), { total: 300, scores: [] });
   assert.equal(few.totals.length, EXACT_BELOW - 1);
   assert.equal(many.totals, null);
 });
 
 test('the curve leaves you out unless asked, and is scaled to its peak', () => {
-  const s = summarize(rowsOf([100, 105, 500]), { total: 500, scores: [] });
+  const s = summarize(tally(rowsOf([100, 105, 500])), { total: 500, scores: [] });
   const ys = columns(s, 20);
   assert.equal(ys.length, 50);
   assert.equal(ys[5], 1);
@@ -88,9 +88,48 @@ test('your share and place read the same way everywhere', () => {
   assert.match(firstRound(742), /742 poäng\.$/);
 });
 
-test('the wait counts down in words', () => {
-  assert.match(waiting(1).text, /^Statistiken visas automatiskt när nio till har spelat\.\n/);
+test('the wait counts down in words, and says who finished lately', () => {
+  assert.match(waiting(1).text, /^Statistiken visas automatiskt när nio till har spelat\.\nKika in igen/);
   assert.match(waiting(9).text, /när en till har spelat/);
+  assert.match(waiting(3, { recent: 1 }).text, /\nEn annan spelade klart senaste kvarten\.$/);
+  assert.match(waiting(3, { recent: 4 }).text, /\nFyra andra spelade klart senaste kvarten\.$/);
+  assert.equal(waiting(3, { recent: 4, paused: true }).text, 'Statistiken visas när sju till har spelat.');
+});
+
+test('the last quarter hour counts the others who finished in it', () => {
+  const now = Date.parse('2026-10-18T12:00:00Z');
+  const ago = (min) => now - min * 60000;
+  const day = { finished: [ago(40), ago(14), ago(3), ago(1)] };
+  assert.equal(recentOthers(day, { at: ago(1) }, now), 2);
+  assert.equal(recentOthers(day, { at: ago(40) }, now), 3);
+  assert.equal(recentOthers({ finished: null }, { at: now }, now), 0);
+});
+
+test('polling asks often at first, then less, then stops', () => {
+  const min = 60000;
+  assert.equal(pollDelay(0), 20000);
+  assert.equal(pollDelay(4.9 * min), 20000);
+  assert.equal(pollDelay(5 * min), min);
+  assert.equal(pollDelay(15 * min), 2 * min);
+  assert.equal(pollDelay(25 * min), 5 * min);
+  assert.equal(pollDelay(30 * min), null);
+});
+
+test('a paused card says since when, and offers to update', () => {
+  const { text, button } = pausedText(new Date(2026, 9, 18, 14, 32));
+  assert.equal(text, 'Automatisk uppdatering pausad 14:32');
+  assert.equal(button, 'Uppdatera');
+});
+
+test('the day counts each exact total and each score per question', () => {
+  const day = tally([{ total: 120, scores: [100, 20] }, { total: 120, scores: [25, 95] }, { total: 7, scores: [7, 0] }]);
+  assert.equal(day.players, 3);
+  assert.deepEqual(day.totals, { 7: 1, 120: 2 });
+  assert.deepEqual(day.questions.slice(0, 2), [{ 100: 1, 25: 1, 7: 1 }, { 20: 1, 95: 1, 0: 1 }]);
+  const s = summarize(day, { total: 120, scores: [25, 95] });
+  assert.deepEqual([s.you.above, s.you.below], [0, 1]);
+  assert.deepEqual(s.atLeast.slice(0, 2), [2, 1]);
+  assert.deepEqual(s.better.slice(0, 2), [1, 0]);
 });
 
 test('the highlight is the rarest question you did well on, once ten have played', () => {

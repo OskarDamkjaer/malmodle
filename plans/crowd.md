@@ -16,12 +16,16 @@ in `app/crowd.mjs`, the card in `app/crowd-view.js`, and
   the others; a share read on another player's tick is of everyone but them;
   a share read between ticks is of everyone. Shares are rounded down, so they
   never flatter.
-- **Exact while small.** Under 50 players the reply lists the totals, the bar
-  shows a tick for each, and readings snap to them and count exactly. Above
-  that they are read from 10-point bins.
+- **Exact while small.** Under 50 players the bar shows a tick for each
+  total, and readings snap to them and count exactly. Above that, readings
+  are taken from 10-point bins. Your own place is exact at any size.
 - **Ten before anything.** Until ten have played the card shows the scores so
-  far as a blur, counts down, and offers a link to share the game. The card
-  keeps its size in every state, including the highlight's space.
+  far as a blur, counts down, says how many others finished in the last
+  quarter hour, and offers a link to share the game. The card keeps its size
+  in every state, including the highlight's space.
+- **Paused, not hidden.** When polling stops, the chart fades and says since
+  when, with a button to update. Before ten have played the same line sits in
+  the waiting text.
 - **A place only near the top.** The headline names your place in the top
   quarter of the first ten, or in the top half percent however many have
   played. Otherwise it names your part of the field, from "Bland de allra
@@ -37,10 +41,9 @@ in `app/crowd.mjs`, the card in `app/crowd-view.js`, and
 
 ## Open
 
-- **Polling.** The waiting text says the numbers appear "automatiskt", which
-  needs the screen to ask again by itself. See `plans/live.md`.
-- **The day's hardest question.** Needs one more number per question from the
-  server, the share who got it fully right. A candidate for a fact of its own.
+- **The day's hardest question.** The day's numbers carry every score per
+  question, so the share who got each fully right is at hand. A candidate for
+  a fact of its own.
 - **Very large crowds.** At 20 000 players the top half percent is "Plats 100";
   a cap around 50 may read better.
 - **Made-up crowds.** The dev page's tap distances are a guess; real days will

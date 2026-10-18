@@ -1,6 +1,7 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
+import { pollDelay, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
@@ -165,6 +166,7 @@ function practise(kind) {
 }
 
 function play(questions, answered = []) {
+  stopFollowing();
   set = questions;
   results = answered;
   index = results.length;
@@ -433,9 +435,16 @@ function playerId() {
 }
 
 let card = null;
+let following = null;
+
+function stopFollowing() {
+  following?.stop();
+  following = null;
+}
 
 async function compare() {
   hide('crowd');
+  stopFollowing();
   if (practicing) return;
   const asked = set;
   const scores = results.map((r) => r.result.score);
@@ -446,13 +455,70 @@ async function compare() {
       body: JSON.stringify({ day: key, set: setId(set), player: playerId(), scores }),
     });
     if (!res.ok) return;
-    const crowd = await res.json();
+    const { you, day, poll } = await res.json();
     if (phase !== 'end' || practicing || set !== asked) return;
-    card ??= crowdCard({ onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } });
+    card ??= crowdCard({
+      onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); },
+      onRefresh: () => following?.restart(),
+    });
     el('crowd').replaceChildren(card.node);
-    card.update(crowd, set.map((q) => q.target.name), sum(results.map((r) => r.result.score)));
+    const names = set.map((q) => q.target.name);
+    const shown = sum(scores);
+    const show = (d) => card.update(summarize(d, you), names, shown, { recent: recentOthers(d, you, Date.now()) });
+    show(day);
     reveal('crowd');
+    if (poll) following = follow(poll, day, show);
   } catch {}
+}
+
+function follow(url, first, show) {
+  let latest = first;
+  let started = Date.now();
+  let timer = 0;
+  let stopped = false;
+
+  const ask = async () => {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return;
+      const day = await res.json();
+      if (stopped || day.players < latest.players) return;
+      latest = day;
+      show(day);
+    } catch {}
+  };
+
+  const schedule = () => {
+    clearTimeout(timer);
+    if (stopped || document.hidden) return;
+    const delay = pollDelay(Date.now() - started);
+    if (delay === null) { card.pause(new Date()); return; }
+    timer = setTimeout(async () => { await ask(); schedule(); }, delay);
+  };
+
+  const visible = async () => {
+    if (document.hidden) { clearTimeout(timer); return; }
+    await ask();
+    schedule();
+  };
+
+  document.addEventListener('visibilitychange', visible);
+  card.pause(null);
+  schedule();
+
+  return {
+    stop() {
+      stopped = true;
+      clearTimeout(timer);
+      document.removeEventListener('visibilitychange', visible);
+    },
+    async restart() {
+      started = Date.now();
+      card.pause(null);
+      await ask();
+      schedule();
+    },
+  };
 }
 
 function resultText() {

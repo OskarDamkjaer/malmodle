@@ -1,6 +1,6 @@
 import {
   FEWEST_TO_RANK, MAX_TOTAL, aside, beatenText, belowText, columns, countBelow, highlight, highlightText,
-  firstRound, practiceTip, rankLabel, standing, strongest, strongestText, waiting,
+  firstRound, pausedText, practiceTip, rankLabel, standing, strongest, strongestText, waiting,
 } from './crowd.mjs';
 
 const W = 300;
@@ -62,7 +62,7 @@ async function invite(link) {
 
 let ids = 0;
 
-function chart() {
+function chart({ onRefresh } = {}) {
   const id = `crowd${ids++}`;
   const drawing = svg('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const defs = svg('defs');
@@ -92,7 +92,11 @@ function chart() {
   const link = el('button', 'invite');
   link.type = 'button';
   link.addEventListener('click', () => invite(link));
-  wait.append(waitText, link);
+  const refresh = el('button', 'invite refresh');
+  refresh.type = 'button';
+  refresh.hidden = true;
+  refresh.addEventListener('click', () => onRefresh?.());
+  wait.append(waitText, refresh, link);
   const cursor = el('span', 'cursor');
   const cursorScore = el('span', 'cursor-score');
   const cursorShare = el('span', 'cursor-share');
@@ -108,6 +112,21 @@ function chart() {
   let frame = 0;
   let crowd = null;
   let focus = null;
+  let paused = null;
+  let waitingFor = null;
+
+  const say = () => {
+    const stop = paused ? pausedText(paused) : null;
+    const words = waitingFor ? waiting(waitingFor.players, { recent: waitingFor.recent, paused: Boolean(paused) }) : null;
+    waitText.textContent = [words?.text, stop?.text].filter(Boolean).join('\n');
+    refresh.hidden = !stop;
+    if (stop) refresh.textContent = stop.button;
+    link.hidden = !words;
+    if (words && !('done' in link.dataset)) link.textContent = `${words.invite} →`;
+    if (paused) graph.dataset.paused = '';
+    else delete graph.dataset.paused;
+    if (crowd) graph.setAttribute('aria-label', paused ? waitText.textContent : describe(crowd));
+  };
 
   const draw = () => {
     const top = outline(ys);
@@ -198,7 +217,7 @@ function chart() {
   };
 
   const pointer = (event) => {
-    if (!crowd) return;
+    if (!crowd || paused) return;
     const rect = plot.getBoundingClientRect();
     const t = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
     show(readAt(Math.round(t * MAX_TOTAL)));
@@ -208,7 +227,7 @@ function chart() {
   graph.addEventListener('pointerleave', () => { if (focus === null) hide(); });
 
   graph.addEventListener('keydown', (event) => {
-    if (!crowd) return;
+    if (!crowd || paused) return;
     const keys = { ArrowLeft: -STEP, ArrowDown: -STEP, ArrowRight: STEP, ArrowUp: STEP, PageDown: -100, PageUp: 100 };
     if (event.key === 'Escape') { focus = null; hide(); return; }
     if (event.key === 'Home') focus = 0;
@@ -219,7 +238,7 @@ function chart() {
     spoken.textContent = show(readAt(focus, true));
   });
   graph.addEventListener('focus', () => {
-    if (!crowd) return;
+    if (!crowd || paused) return;
     focus = crowd.you.total;
     spoken.textContent = show({ score: focus, mine: true });
   });
@@ -229,17 +248,16 @@ function chart() {
     ? `Poängen för dagens ${c.players} spelare. Du fick ${c.you.total} och var bättre än ${beatenText(c)} av de andra, ${rankLabel(c)}. Piltangenterna visar andra poäng.`
     : waitText.textContent);
 
-  const update = (next) => {
+  const update = (next, { recent = 0 } = {}) => {
     const ready = next.players >= FEWEST_TO_RANK;
     crowd = ready ? next : null;
+    waitingFor = ready ? null : { players: next.players, recent };
+    say();
     if (!ready) {
       graph.dataset.waiting = '';
       graph.removeAttribute('tabindex');
       graph.removeAttribute('role');
       graph.removeAttribute('aria-label');
-      const words = waiting(next.players);
-      waitText.textContent = words.text;
-      if (!('done' in link.dataset)) link.textContent = `${words.invite} →`;
       hide();
       morph(columns(next, WIDTH, true), next.you.total / MAX_TOTAL);
       return;
@@ -262,23 +280,29 @@ function chart() {
     morph(columns(next, WIDTH), next.you.total / MAX_TOTAL);
   };
 
+  const pause = (time) => {
+    paused = time;
+    if (paused) hide();
+    say();
+  };
+
   draw();
-  return { node: graph, update };
+  return { node: graph, update, pause };
 }
 
-export function crowdCard({ onPractise } = {}) {
+export function crowdCard({ onPractise, onRefresh } = {}) {
   const node = el('div', 'crowd');
   const top = el('div', 'standing');
-  const graph = chart();
+  const graph = chart({ onRefresh });
   const best = el('div', 'best');
   node.append(top, graph.node, best);
 
-  const update = (crowd, names, shown = crowd.you.total) => {
+  const update = (crowd, names, shown = crowd.you.total, live = {}) => {
     const ready = crowd.players >= FEWEST_TO_RANK;
     const said = ready ? standing(crowd) : null;
     top.replaceChildren(...(said ? [el('p', 'head', said.head), el('p', 'dek', said.dek)] : []));
     if (shown !== crowd.you.total) top.append(el('p', 'dek', firstRound(crowd.you.total)));
-    graph.update(crowd);
+    graph.update(crowd, live);
     const hl = ready ? highlight(crowd) : null;
     const strong = ready && !hl ? strongest(crowd) : null;
     const tip = ready && !hl && !strong && onPractise;
@@ -304,5 +328,5 @@ export function crowdCard({ onPractise } = {}) {
     if (line.detail) best.append(el('p', 'detail', line.detail));
   };
 
-  return { node, update };
+  return { node, update, pause: graph.pause };
 }

@@ -1,6 +1,6 @@
 import { MAX_SCORE } from '../app/questions.mjs';
 import { SET_SIZE } from '../app/daily.mjs';
-import { summarize } from '../app/crowd.mjs';
+import { claim, dayFile, fileUrl, write } from './live.mjs';
 
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
 const PLAYER = /^[0-9a-f]{32}$/;
@@ -19,7 +19,7 @@ export function parseResult(raw, now = Date.now()) {
   if (typeof day !== 'string' || !DAY.test(day) || !nearToday(day, now)) return null;
   if (typeof set !== 'string' || !SET.test(set)) return null;
   if (typeof player !== 'string' || !PLAYER.test(player)) return null;
-  if (!Array.isArray(scores) || scores.length < 1 || scores.length > SET_SIZE || !scores.every(isScore)) return null;
+  if (!Array.isArray(scores) || scores.length !== SET_SIZE || !scores.every(isScore)) return null;
   return { day, set, player, scores };
 }
 
@@ -33,7 +33,7 @@ const json = (body, status = 200) => new Response(JSON.stringify(body), {
   headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
 });
 
-export async function postResult(request, db, now = Date.now()) {
+export async function postResult(request, env, ctx, now = Date.now()) {
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
   const text = await request.text();
   if (text.length > 2048) return json({ error: 'size' }, 413);
@@ -42,15 +42,27 @@ export async function postResult(request, db, now = Date.now()) {
   const result = parseResult(raw, now);
   if (!result) return json({ error: 'invalid' }, 400);
 
+  const db = env.DB;
   const player = await playerKey(result.player);
   const total = result.scores.reduce((a, b) => a + b, 0);
   await db.prepare('INSERT INTO results (day, player, set_id, total, scores, at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT DO NOTHING')
     .bind(result.day, player, result.set, total, JSON.stringify(result.scores), now).run();
 
-  const mine = await db.prepare('SELECT set_id, total, scores FROM results WHERE day = ? AND player = ?')
+  const mine = await db.prepare('SELECT set_id, total, scores, at FROM results WHERE day = ? AND player = ?')
     .bind(result.day, player).first();
-  const { results } = await db.prepare('SELECT total, scores FROM results WHERE day = ? AND set_id = ?')
-    .bind(result.day, mine.set_id).all();
-  const rows = results.map((r) => ({ total: r.total, scores: JSON.parse(r.scores) }));
-  return json({ day: result.day, ...summarize(rows, { total: mine.total, scores: JSON.parse(mine.scores) }) });
+  const set = mine.set_id;
+  const claimed = env.LIVE ? await claim(db, result.day, set, now) : null;
+  const row = claimed ?? await db.prepare('SELECT players, totals, questions FROM days WHERE day = ? AND set_id = ?')
+    .bind(result.day, set).first();
+  const day = await dayFile(db, result.day, set, row);
+  if (claimed) {
+    const writing = write(env, day);
+    if (ctx?.waitUntil) ctx.waitUntil(writing);
+    else await writing;
+  }
+  return json({
+    you: { total: mine.total, scores: JSON.parse(mine.scores), at: mine.at },
+    day,
+    poll: fileUrl(env, result.day, set),
+  });
 }

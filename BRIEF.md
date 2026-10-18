@@ -69,8 +69,10 @@ the answer: an area that borders it, a street that meets it, or a place within
   rarest thing you did well: a question few others got fully right, or one
   where few were closer than you, or else the question where you beat the
   most others. Until ten have played, the chart is a blur
-  of the scores so far, with a note on how many more are needed and a link to
-  share the game. The first finished round of the day is the one that counts;
+  of the scores so far, with a note on how many more are needed, how many
+  others finished in the last quarter hour, and a link to share the game.
+  The numbers update by themselves while the screen is open, then pause with
+  a button to update. The first finished round of the day is the one that counts;
   a replay shows that one. Offline, or with no answer from the server, the
   section is left out and nothing else changes.
 - A button that copies the result as text (score and one square per question),
@@ -99,6 +101,8 @@ colours, type and the basemap palette, never the game.
 
 - Static files and one small API on Cloudflare: the end screen sends the
   day's scores under the random player id and gets back the day's spread.
+  While it is open it asks again for the spread, which is one file for
+  everyone, and stops after half an hour.
   The server keeps a hash of the id, never the id. No accounts, no
   analytics. Accounts and leaderboards are sketched in `plans/accounts.md`.
 - Offline PWA.

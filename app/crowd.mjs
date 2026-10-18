@@ -17,6 +17,11 @@ export const FEW_HITS = 10;
 export const LOWEST_SCORE = 40;
 export const RAREST = 0.3;
 
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+export const RECENT = 15 * MINUTE;
+export const POLL = [[5 * MINUTE, 20 * SECOND], [10 * MINUTE, MINUTE], [20 * MINUTE, 2 * MINUTE], [30 * MINUTE, 5 * MINUTE]];
+
 const NBSP = ' ';
 const BEST = ['Bäst', 'Näst bäst', 'Tredje bäst', 'Fjärde bäst', 'Femte bäst', 'Sjätte bäst', 'Sjunde bäst', 'Åttonde bäst', 'Nionde bäst', 'Tionde bäst'];
 const ORDINAL = ['första', 'andra', 'tredje', 'fjärde', 'femte', 'sjätte', 'sjunde', 'åttonde', 'nionde', 'tionde'];
@@ -30,31 +35,56 @@ const others = (n) => `${say(n)} ${n === 1 ? 'annan' : 'andra'}`;
 
 export const binOf = (total) => Math.min(BINS - 1, Math.floor(total / BIN));
 
-export function summarize(rows, you) {
+export function tally(rows) {
+  const totals = {};
+  const questions = Array.from({ length: SET_SIZE }, () => ({}));
+  for (const row of rows) {
+    totals[row.total] = (totals[row.total] ?? 0) + 1;
+    row.scores.forEach((score, i) => { questions[i][score] = (questions[i][score] ?? 0) + 1; });
+  }
+  return { players: rows.length, totals, questions, finished: null };
+}
+
+export function summarize(day, you) {
   const histogram = Array(BINS).fill(0);
-  const atLeast = you.scores.map(() => 0);
-  const better = you.scores.map(() => 0);
+  const list = [];
   let above = 0;
   let below = 0;
-  for (const row of rows) {
-    histogram[binOf(row.total)] += 1;
-    if (row.total > you.total) above += 1;
-    if (row.total < you.total) below += 1;
-    you.scores.forEach((mine, i) => {
-      const theirs = row.scores[i] ?? 0;
-      if (theirs >= mine) atLeast[i] += 1;
-      if (theirs > mine) better[i] += 1;
-    });
+  for (const [key, n] of Object.entries(day.totals)) {
+    const total = Number(key);
+    histogram[binOf(total)] += n;
+    if (total > you.total) above += n;
+    if (total < you.total) below += n;
+    if (day.players < EXACT_BELOW) for (let k = 0; k < n; k++) list.push(total);
   }
-  const players = rows.length;
+  const atLeast = you.scores.map(() => 0);
+  const better = you.scores.map(() => 0);
+  you.scores.forEach((mine, i) => {
+    for (const [key, n] of Object.entries(day.questions[i] ?? {})) {
+      if (Number(key) >= mine) atLeast[i] += n;
+      if (Number(key) > mine) better[i] += n;
+    }
+  });
   return {
-    players,
+    players: day.players,
     you: { total: you.total, scores: you.scores, above, below },
     histogram,
-    totals: players < EXACT_BELOW ? rows.map((r) => r.total).sort((a, b) => a - b) : null,
+    totals: day.players < EXACT_BELOW ? list.sort((a, b) => a - b) : null,
     atLeast,
     better,
   };
+}
+
+export function recentOthers(day, you, now) {
+  if (!day.finished) return 0;
+  const recent = day.finished.filter((at) => now - at <= RECENT);
+  const mine = recent.indexOf(you.at);
+  return recent.length - (mine >= 0 ? 1 : 0);
+}
+
+export function pollDelay(elapsed) {
+  const step = POLL.find(([until]) => elapsed < until);
+  return step ? step[1] : null;
 }
 
 export function columns({ histogram, you }, width, everyone = false) {
@@ -77,13 +107,20 @@ export function countBelow({ histogram, totals }, score) {
 const tiedWith = ({ players, you }) => players - you.above - you.below - 1;
 const beaten = ({ players, you }) => you.below / (players - 1);
 
-export function waiting(players) {
+export function waiting(players, { recent = 0, paused = false } = {}) {
   const left = Math.max(1, FEWEST_TO_RANK - players);
+  const when = `när ${left === 1 ? 'en' : say(left)} till har spelat.`;
+  const lately = recent ? `${cap(others(recent))} spelade klart senaste kvarten.` : 'Kika in igen om en stund.';
   return {
-    text: `Statistiken visas automatiskt när ${left === 1 ? 'en' : say(left)} till har spelat.\nKika in igen om en stund.`,
+    text: paused ? `Statistiken visas ${when}` : `Statistiken visas automatiskt ${when}\n${lately}`,
     invite: 'Dela Malmödle med en vän',
   };
 }
+
+export const pausedText = (time) => ({
+  text: `Automatisk uppdatering pausad ${time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}`,
+  button: 'Uppdatera',
+});
 
 export function place(crowd) {
   const { players, you } = crowd;
