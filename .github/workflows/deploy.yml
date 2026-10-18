@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: deploy
+  cancel-in-progress: false
 
 jobs:
   map-data:
@@ -111,7 +111,40 @@ jobs:
         with:
           path: build/site
 
-  deploy:
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: build/site
+          retention-days: 1
+
+  cloudflare:
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: cloudflare
+      cancel-in-progress: false
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: build/site
+
+      - name: Migrate the database
+        run: npx --yes wrangler@4 d1 migrations apply malmodle --remote
+
+      - name: Deploy
+        run: npx --yes wrangler@4 deploy
+
+  pages:
     needs: build
     runs-on: ubuntu-latest
     permissions:

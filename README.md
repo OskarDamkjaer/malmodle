@@ -81,8 +81,10 @@ Tests that need built data or a browser skip when those are missing.
 The site and its API run as one Cloudflare Worker (`wrangler.jsonc`): the
 built site as static assets, `worker/` for `/api/`, a D1 database for
 the results, and an R2 bucket at data.malmodle.se for the day's numbers the
-end screen polls. Setting up the bucket is in `plans/live.md`. Pushing to the `cloudflare` branch builds, tests and deploys it
-(`.github/workflows/cloudflare.yml`). `node scripts/build-site.mjs` builds the
+end screen polls. Setting up the bucket is in `plans/live.md`. Pushing to
+`main` builds and tests the site once, then migrates the database and deploys
+the Worker, and publishes the same build to GitHub Pages
+(`.github/workflows/deploy.yml`). `node scripts/build-site.mjs` builds the
 same folder locally in `build/site`.
 
 Set up once:
@@ -96,7 +98,7 @@ the malmodle.se zone, edit) and `CLOUDFLARE_ACCOUNT_ID`. The domain is
 attached by the deploy, so the malmodle.se zone has to be on the same
 Cloudflare account.
 
-Pushing to `main` still publishes the site without the API to GitHub Pages
-(`.github/workflows/deploy.yml`); there the comparison is left out.
+On GitHub Pages there is no API: the post is refused, and the end screen
+leaves the comparison out.
 
 Map data © OpenMapTiles © OpenStreetMap contributors.
