@@ -1,19 +1,23 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, hideLabels, pickScored, setupLayers, show, showScored, showTap,
+  applyTheme, clear, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
 const boot = el('boot');
+let splashGone;
+const booted = new Promise((resolve) => { splashGone = resolve; });
 const bootmsg = el('bootmsg');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wide = matchMedia('(min-width: 760px)');
 
+const HOME = 'malmodle.se';
 const themeName = themeFromPath(location.pathname);
 const theme = THEMES[themeName];
 document.documentElement.dataset.theme = themeName;
@@ -77,9 +81,9 @@ const map = new Map({
   style,
   center: [header.centerLon, header.centerLat],
   zoom: 12,
-  minZoom: 10,
+  minZoom: 9,
   maxZoom: header.maxZoom + 2,
-  maxBounds: [[header.minLon - 0.06, header.minLat - 0.03], [header.maxLon + 0.06, header.maxLat + 0.03]],
+  maxBounds: [[header.minLon - 1, header.minLat - 0.5], [header.maxLon + 1, header.maxLat + 0.5]],
   bearing: 0,
   pitch: 0,
   dragRotate: false,
@@ -133,7 +137,7 @@ function resume() {
   key = dateKey();
   practicing = null;
   const questions = dailySet(items, key);
-  const answered = recall(loadSaved(), key, questions);
+  const answered = recall(arrived(questions), key, questions);
   if (!answered.length) forget();
   try {
     play(questions, answered);
@@ -146,6 +150,16 @@ function resume() {
 
 function loadSaved() {
   try { return JSON.parse(localStorage.getItem(SAVE_KEY)); } catch { return null; }
+}
+
+function arrived(questions) {
+  const saved = loadSaved();
+  const code = new URLSearchParams(location.hash.slice(1)).get('runda');
+  if (!code) return saved;
+  history.replaceState(null, '', location.pathname + location.search);
+  const round = arrive(saved, code, key, questions);
+  if (round !== saved) try { localStorage.setItem(SAVE_KEY, JSON.stringify(round)); } catch {}
+  return round;
 }
 
 function forget() {
@@ -366,20 +380,6 @@ function countUp(node, total) {
   requestAnimationFrame(step);
 }
 
-const VERDICTS = [
-  [0.9, 'Snyggt!', 'Välkommen tillbaka imorgon.'],
-  [0.7, 'Riktigt bra!', 'Ses imorgon.'],
-  [0.5, 'Bra jobbat!', 'Ny omgång imorgon.'],
-  [0.3, 'På god väg.', 'Försök igen imorgon.'],
-  [0, 'Öva en gång till.', 'Försök igen imorgon.'],
-];
-
-function verdictFor(total, max, daily) {
-  const [share, praise, tomorrow] = VERDICTS.find(([least]) => total / max >= least);
-  if (!daily) return praise;
-  return share ? `${praise} ${tomorrow}` : tomorrow;
-}
-
 function finish() {
   phase = 'end';
   save(true);
@@ -392,15 +392,16 @@ function finish() {
   const max = set.length * MAX_SCORE;
   el('enddate').textContent = practicing
     ? `Övning · ${practicing.label}`
-    : new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
+    : `${new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })} · Nr ${issue(key)}`;
   el('sharecard').hidden = Boolean(practicing);
   el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
   el('kinds').hidden = !practicing;
   countUp(el('endscore'), total);
   el('endmax').textContent = `av ${max}`;
-  el('endverdict').textContent = verdictFor(total, max, !practicing);
-  el('endsquares').textContent = scores.map(square).join('');
-  el('sharetext').textContent = resultText();
+  el('endverdict').textContent = verdict(total, max, !practicing);
+  renderSquares();
+  el('elsewhere').hidden = Boolean(practicing) || location.hostname === HOME;
+  el('elsewherelink').href = `https://${HOME}${themePath(themeName)}#runda=${carry({ key, set, results })}`;
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
@@ -454,7 +455,6 @@ async function fetchDay(url) {
 
 async function postResult(body) {
   for (let tries = 0; ; tries++) {
-    if (!navigator.onLine) await new Promise((r) => addEventListener('online', r, { once: true }));
     try {
       const res = await fetch('/api/result', { method: 'POST', headers: { 'content-type': 'application/json' }, body });
       if (res.ok) return await res.json();
@@ -485,10 +485,14 @@ async function compare() {
   hide('crowd');
   stopFollowing();
   const turn = ++comparing;
+  const end = el('end');
+  delete end.dataset.crowd;
   if (practicing) return;
   const scores = results.map((r) => r.result.score);
+  end.dataset.crowd = 'asking';
   try {
     const reply = await ownResult(key, setId(set), scores);
+    await booted;
     if (!reply || turn !== comparing || phase !== 'end' || practicing) return;
     const { you, day, poll } = reply;
     card ??= crowdCard({
@@ -497,12 +501,15 @@ async function compare() {
     });
     el('crowd').replaceChildren(card.node);
     const names = set.map((q) => q.target.name);
-    const shown = sum(scores);
-    const show = (d) => card.update(summarize(d, you), names, shown, { recent: recentOthers(d, you, Date.now()) });
-    show(day);
+    const tries = played(loadSaved(), key, set).slice(1);
+    const show = (d) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries });
     reveal('crowd');
+    show(day);
+    end.dataset.crowd = 'shown';
     if (poll) following = follow(poll, day, show);
-  } catch {}
+  } catch {} finally {
+    if (end.dataset.crowd === 'asking' && turn === comparing) delete end.dataset.crowd;
+  }
 }
 
 function follow(url, first, show) {
@@ -580,19 +587,11 @@ async function share() {
   const button = el('share');
   button.textContent = ok ? 'Kopierat ✓' : 'Kunde inte kopiera';
   button.dataset.state = ok ? 'done' : 'failed';
-  if (ok) selectText(el('sharetext'));
   clearTimeout(copiedTimer);
   copiedTimer = setTimeout(() => {
     button.textContent = 'Kopiera resultat';
     delete button.dataset.state;
   }, 2500);
-}
-
-function selectText(node) {
-  const range = document.createRange();
-  range.selectNodeContents(node);
-  getSelection().removeAllRanges();
-  getSelection().addRange(range);
 }
 
 async function shareNative() {
@@ -679,7 +678,35 @@ function spreadOut() {
 
 function showPlace(r) {
   showInfo(r.q.target, r);
+  markSquare(r);
   requestAnimationFrame(() => frameItems(results.map((x) => x.q.target), 300));
+}
+
+function renderSquares() {
+  el('endsquares').replaceChildren(...results.map((r) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sq';
+    b.dataset.band = band(r.result.score);
+    b.setAttribute('aria-label', `${r.q.target.name}, ${r.result.score} poäng`);
+    b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') pickSquare(r); });
+    b.addEventListener('click', () => {
+      if (!wide.matches && !('mapview' in document.body.dataset)) toggleMapView();
+      pickSquare(r);
+    });
+    return b;
+  }));
+}
+
+function pickSquare(r) {
+  showInfo(r.q.target, r);
+  markSquare(r);
+  requestAnimationFrame(() => frameItems([r.q.target], 400));
+}
+
+function markSquare(r) {
+  glowScored(r?.q.target.name);
+  [...el('endsquares').children].forEach((b, i) => b.toggleAttribute('aria-current', results[i] === r));
 }
 
 function toggleMapView() {
@@ -693,6 +720,7 @@ function toggleMapView() {
 
 function closePlace() {
   hide('info');
+  markSquare(null);
 }
 
 map.on('click', (e) => {
@@ -714,7 +742,6 @@ map.on('mousemove', (e) => {
 el('next').addEventListener('click', next);
 el('share').addEventListener('click', share);
 el('sharenative').addEventListener('click', shareNative);
-el('sharetext').addEventListener('click', share);
 el('practise').addEventListener('click', toggleKinds);
 el('again').addEventListener('click', start);
 el('installbutton').addEventListener('click', install);
@@ -751,7 +778,10 @@ map.on('load', async () => {
   progress(1);
   renderKinds();
   resume();
-  setTimeout(() => boot.classList.add('done'), Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
+  setTimeout(() => {
+    boot.classList.add('done');
+    setTimeout(splashGone, reducedMotion ? 0 : 450);
+  }, Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
 });
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {

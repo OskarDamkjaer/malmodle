@@ -52,6 +52,15 @@ export function setupLayers(mapInstance) {
   map.addSource('scored', { type: 'geojson', data: EMPTY });
   map.addSource('scored-labels', { type: 'geojson', data: EMPTY });
   addScored({
+    id: 'scored-glow-line', type: 'line', source: 'scored', filter: glowing(null, ['!', isPoint]),
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': ['get', 'color'], 'line-width': ['case', isPolygon, 12, 20], 'line-blur': 10, 'line-opacity': 0.6 },
+  });
+  addScored({
+    id: 'scored-glow-point', type: 'circle', source: 'scored-labels', filter: glowing(null, ['!=', ['get', 'kind'], 'area']),
+    paint: { 'circle-radius': 22, 'circle-color': ['get', 'color'], 'circle-blur': 0.8, 'circle-opacity': 0.6 },
+  });
+  addScored({
     id: 'scored-fill', type: 'fill', source: 'scored', filter: isPolygon,
     paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.28 },
   });
@@ -101,6 +110,13 @@ export function setupLayers(mapInstance) {
 }
 
 const scoredLayers = [];
+
+const glowing = (name, filter) => ['all', filter, ['==', ['get', 'name'], name ?? '']];
+
+export function glowScored(name) {
+  map.setFilter('scored-glow-line', glowing(name, ['!', isPoint]));
+  map.setFilter('scored-glow-point', glowing(name, ['!=', ['get', 'kind'], 'area']));
+}
 
 function addScored(layer) {
   map.addLayer({ ...layer, layout: { ...layer.layout, visibility: 'none' } });
@@ -169,8 +185,9 @@ function padding() {
   const beside = Math.max(0, ...columns.filter((r) => r.right < w * 0.6).map((r) => r.right));
   const above = Math.max(0, ...columns.filter((r) => r.right >= w * 0.6).map((r) => r.bottom));
   const sides = shown('[data-edge="side"]');
-  const right = Math.max(0, ...sides.filter((r) => r.left > w * 0.4).map((r) => w - r.left));
-  const across = sides.filter((r) => r.left <= w * 0.4);
+  const tall = (r) => r.left > w * 0.4 && r.height > h / 2;
+  const right = Math.max(0, ...sides.filter(tall).map((r) => w - r.left));
+  const across = sides.filter((r) => !tall(r));
   const under = Math.max(top, ...across.filter((r) => r.top < h / 2).map((r) => r.bottom));
   const over = Math.max(bottom, ...across.filter((r) => r.top >= h / 2).map((r) => h - r.top));
   return {

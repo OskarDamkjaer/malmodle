@@ -139,7 +139,7 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     await playThrough(page, viewport);
     await page.waitForSelector('#end:not([hidden])');
     assert.match(await page.textContent('#enddate'), /^Övning · /);
-    assert.ok(await page.isHidden('.sharecard'));
+    assert.ok(await page.isHidden('#sharecard'));
 
     assert.deepEqual(errors, []);
     await context.close();
@@ -160,12 +160,14 @@ test('a reload returns to the same place in the day', { skip }, async () => {
 
   await playThrough(page, viewport, 7);
   await page.waitForSelector('#end:not([hidden])');
-  const shared = await page.textContent('#sharetext');
+  const squares = () => page.$$eval('#endsquares .sq', (bs) => bs.map((b) => b.getAttribute('aria-label')));
+  const shared = await squares();
+  assert.equal(shared.length, 10);
 
   await page.reload();
   await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
   await page.waitForSelector('#end:not([hidden])');
-  assert.equal(await page.textContent('#sharetext'), shared);
+  assert.deepEqual(await squares(), shared);
   assert.ok(await page.isVisible('#practise'));
 
   assert.deepEqual(errors, []);

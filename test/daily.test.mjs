@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, square, upcoming } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -220,6 +220,53 @@ test('a replay in progress keeps the finished day until it ends', () => {
   const again = stored(remember(replay, { key, set, results: set.map((q) => answer(q, 0)), finished: true }));
   assert.equal(again.playing, undefined);
   assert.deepEqual(recall(again, key, set).map((r) => r.result.score), set.map(() => 0));
+});
+
+test('the number of the day counts from launch day as the first', () => {
+  assert.equal(issue('2026-10-10'), 1);
+  assert.equal(issue('2026-10-18'), 9);
+  assert.equal(issue('2026-11-01'), 23);
+});
+
+test('a finished round carried in a link comes back on the same day and set', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const results = set.map((q, i) => answer(q, i * 10));
+  const code = carry({ key, set, results });
+  assert.match(code, /^[A-Za-z0-9_-]+$/);
+  const saved = stored(arrive(null, code, key, set));
+  assert.deepEqual(recall(saved, key, set).map((r) => r.result.score), results.map((r) => r.result.score));
+  const tomorrow = '2026-10-11';
+  assert.equal(arrive(null, code, tomorrow, dailySet(items, tomorrow)), null);
+  assert.equal(arrive(null, 'inte-en-runda', key, set), null);
+  assert.equal(arrive(null, carry({ key, set, results: results.slice(0, 4) }), key, set), null);
+});
+
+test('a carried round does not replace one already finished here', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const mine = stored(remember(null, { key, set, results: set.map((q) => answer(q, 100)), finished: true }));
+  const code = carry({ key, set, results: set.map((q) => answer(q, 0)) });
+  assert.equal(arrive(mine, code, key, set), mine);
+  const started = stored(remember(null, { key, set, results: [answer(set[0], 50)], finished: false }));
+  assert.equal(recall(arrive(started, code, key, set), key, set).length, set.length);
+});
+
+test('every finished round of the day is counted once, in order', () => {
+  const key = '2026-10-10';
+  const set = dailySet(items, key);
+  const round = (score) => set.map((q) => answer(q, score));
+  const first = stored(remember(stored(remember(null, { key, set, results: round(10).slice(0, 9), finished: false })), { key, set, results: round(10), finished: true }));
+  assert.deepEqual(played(first, key, set), [100]);
+  const reloaded = stored(remember(first, { key, set, results: round(10), finished: true }));
+  assert.deepEqual(played(reloaded, key, set), [100]);
+  const replaying = stored(remember(reloaded, { key, set, results: round(30).slice(0, 3), finished: false }));
+  assert.deepEqual(played(replaying, key, set), [100]);
+  const second = stored(remember(replaying, { key, set, results: round(30), finished: true }));
+  assert.deepEqual(played(second, key, set), [100, 300]);
+  const old = stored(remember(null, { key, set, results: round(50), finished: true }));
+  delete old.rounds;
+  assert.deepEqual(played(old, key, set), [500]);
 });
 
 test('a saved day for a different set is ignored', () => {

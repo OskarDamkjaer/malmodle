@@ -167,7 +167,6 @@ export function field(crowd) {
 
 export const standing = (crowd) => place(crowd) ?? field(crowd);
 
-export const firstRound = (total) => `Räknat på din första omgång idag, ${total} poäng.`;
 
 export function rankLabel(crowd) {
   const rank = count(crowd.you.above + 1);

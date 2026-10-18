@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, counted, field, firstRound, highlight, highlightText,
+  BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, counted, field, highlight, highlightText,
   pausedText, place, pollDelay, posted, rankLabel, recentOthers, standing, strongest, strongestText, summarize, tally, waiting,
 } from '../app/crowd.mjs';
 import { SET_SIZE } from '../app/daily.mjs';
@@ -86,7 +86,6 @@ test('your share and place read the same way everywhere', () => {
   assert.equal(aside(at(20, 1)), 'snyggt jobbat');
   assert.equal(aside(at(300, 300)), 'men du är säkert bra på annat');
   assert.equal(aside(at(300, 150)), null);
-  assert.match(firstRound(742), /742 poäng\.$/);
 });
 
 test('the wait counts down in words, and says who finished lately', () => {

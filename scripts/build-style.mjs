@@ -38,7 +38,7 @@ const OVERRIDE = {
 
   road_minor: { minzoom: 13 },
   road_minor_casing: { minzoom: 13 },
-  building: { minzoom: 14, maxzoom: 17 },
+  building: { minzoom: 14, maxzoom: 24 },
 
   road_service_track: { minzoom: 15 },
   road_service_track_casing: { minzoom: 15 },

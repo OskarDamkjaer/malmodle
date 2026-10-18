@@ -13,6 +13,7 @@ export const SPLITS = [
 export const SET_SIZE = 10;
 
 export const EPOCH = '2026-01-01';
+export const LAUNCH = '2026-10-10';
 
 export const GROUP = { area: 'area', street: 'street', landmark: 'place', bridge: 'place' };
 
@@ -113,6 +114,8 @@ function daysBetween(from, to) {
   for (let t = utc(from); t < utc(to); t += 86400000) out.push(new Date(t).toISOString().slice(0, 10));
   return out;
 }
+
+export const issue = (key) => daysBetween(LAUNCH, key).length + 1;
 
 export function dealt(key) {
   const count = Object.fromEntries(Object.keys(DECKS).map((d) => [d, 0]));
@@ -251,6 +254,20 @@ export function shareText({ key, scores, url }) {
   ].filter(Boolean).join('\n');
 }
 
+const VERDICTS = [
+  [0.9, 'Snyggt!', 'Välkommen tillbaka imorgon.'],
+  [0.7, 'Riktigt bra!', 'Ses imorgon.'],
+  [0.5, 'Bra jobbat!', 'Ny omgång imorgon.'],
+  [0.3, 'På god väg.', 'Försök igen imorgon.'],
+  [0, 'Öva en gång till.', 'Försök igen imorgon.'],
+];
+
+export function verdict(total, max, daily) {
+  const [share, praise, tomorrow] = VERDICTS.find(([least]) => total / max >= least);
+  if (!daily) return praise;
+  return share ? `${praise} ${tomorrow}` : tomorrow;
+}
+
 export const SAVE_KEY = 'malmodle';
 const SAVE_VERSION = 1;
 
@@ -258,6 +275,8 @@ const targetsOf = (set) => set.map((q) => q.target.name);
 
 export const setId = (set) => hash(targetsOf(set).join('\n')).toString(16);
 const isScore = (n) => Number.isInteger(n) && n >= 0 && n <= MAX_SCORE;
+const isTotal = (n) => Number.isInteger(n) && n >= 0 && n <= SET_SIZE * MAX_SCORE;
+const totalOf = (answers) => answers.reduce((sum, a) => sum + a.score, 0);
 
 function parseAnswer(raw, q) {
   if (!isScore(raw?.score)) return null;
@@ -281,18 +300,42 @@ function parseSaved(raw, key, set) {
   const done = parseAnswers(raw.done, set);
   const playing = parseAnswers(raw.playing, set);
   const finished = done?.length === set.length ? done : undefined;
-  return finished || playing ? { done: finished, playing } : null;
+  const rounds = Array.isArray(raw.rounds) && raw.rounds.every(isTotal) ? raw.rounds : finished ? [totalOf(finished)] : [];
+  return finished || playing ? { done: finished, playing, rounds } : null;
 }
 
 export function remember(raw, { key, set, results, finished }) {
   const answers = results.map(({ q, result }) => parseAnswer(result, q));
+  const before = parseSaved(raw, key, set);
   const saved = { version: SAVE_VERSION, key, targets: targetsOf(set) };
-  if (finished) return { ...saved, done: answers };
-  return { ...saved, done: parseSaved(raw, key, set)?.done, playing: answers };
+  if (finished) {
+    const rounds = before?.playing || !before?.rounds.length ? [...(before?.rounds ?? []), totalOf(answers)] : before.rounds;
+    return { ...saved, done: answers, rounds };
+  }
+  return { ...saved, done: before?.done, playing: answers, rounds: before?.rounds ?? [] };
 }
+
+export const played = (raw, key, set) => parseSaved(raw, key, set)?.rounds ?? [];
 
 export function recall(raw, key, set) {
   const saved = parseSaved(raw, key, set);
   const answers = saved?.playing ?? saved?.done ?? [];
   return answers.map((result, i) => ({ q: set[i], result }));
+}
+
+const toCode = (text) => btoa(String.fromCharCode(...new TextEncoder().encode(text))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const fromCode = (code) => new TextDecoder().decode(Uint8Array.from(atob(code.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0)));
+
+export function carry({ key, set, results }) {
+  const packed = results.map(({ q, result }) => [result.score, TYPES[q.type].input === 'map' ? Math.round(result.distance) : result.choice]);
+  return toCode(JSON.stringify([key, setId(set), packed]));
+}
+
+export function arrive(raw, code, key, set) {
+  let day, id, packed;
+  try { [day, id, packed] = JSON.parse(fromCode(code)); } catch { return raw; }
+  if (day !== key || id !== setId(set) || parseSaved(raw, key, set)?.done || !Array.isArray(packed)) return raw;
+  const done = packed.map((a, i) => Array.isArray(a) && set[i] && (TYPES[set[i].type].input === 'map' ? { score: a[0], distance: a[1] } : { score: a[0], choice: a[1] }));
+  const answers = parseAnswers(done, set);
+  return answers?.length === set.length ? { version: SAVE_VERSION, key, targets: targetsOf(set), done: answers } : raw;
 }
