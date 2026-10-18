@@ -3,24 +3,24 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 
 const WHITE = [0xff, 0xff, 0xff];
 
-function canvas(size, bg) {
-  const px = Buffer.alloc(size * size * 4);
-  for (let i = 0; i < size * size; i++) {
+function canvas(w, h, bg) {
+  const px = Buffer.alloc(w * h * 4);
+  for (let i = 0; i < w * h; i++) {
     px[i * 4] = bg[0]; px[i * 4 + 1] = bg[1]; px[i * 4 + 2] = bg[2]; px[i * 4 + 3] = 255;
   }
-  return { size, px };
+  return { w, h, px };
 }
 
 function blend(c, x, y, rgb, a) {
-  if (a <= 0 || x < 0 || y < 0 || x >= c.size || y >= c.size) return;
-  const i = (y * c.size + x) * 4;
+  if (a <= 0 || x < 0 || y < 0 || x >= c.w || y >= c.h) return;
+  const i = (y * c.w + x) * 4;
   for (let k = 0; k < 3; k++) c.px[i + k] = Math.round(c.px[i + k] * (1 - a) + rgb[k] * a);
 }
 
 function fill(c, rgb, inside) {
   const S = 3;
-  for (let y = 0; y < c.size; y++) {
-    for (let x = 0; x < c.size; x++) {
+  for (let y = 0; y < c.h; y++) {
+    for (let x = 0; x < c.w; x++) {
       let hits = 0;
       for (let sy = 0; sy < S; sy++) {
         for (let sx = 0; sx < S; sx++) {
@@ -73,16 +73,16 @@ function chunk(type, data) {
   return Buffer.concat([len, body, crc]);
 }
 
-function png({ size, px }) {
+function png({ w, h, px }) {
   const ihdr = Buffer.alloc(13);
-  ihdr.writeUInt32BE(size, 0);
-  ihdr.writeUInt32BE(size, 4);
+  ihdr.writeUInt32BE(w, 0);
+  ihdr.writeUInt32BE(h, 4);
   ihdr[8] = 8;
   ihdr[9] = 6;
-  const raw = Buffer.alloc((size * 4 + 1) * size);
-  for (let y = 0; y < size; y++) {
-    raw[y * (size * 4 + 1)] = 0;
-    px.copy(raw, y * (size * 4 + 1) + 1, y * size * 4, (y + 1) * size * 4);
+  const raw = Buffer.alloc((w * 4 + 1) * h);
+  for (let y = 0; y < h; y++) {
+    raw[y * (w * 4 + 1)] = 0;
+    px.copy(raw, y * (w * 4 + 1) + 1, y * w * 4, (y + 1) * w * 4);
   }
   return Buffer.concat([
     Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
@@ -142,16 +142,18 @@ function svg() {
   ].join('\n');
 }
 
-function mark(size, { maskable = false } = {}) {
-  const c = canvas(size, SKY);
-  const u = size / 24;
-  const scale = maskable ? 0.78 : 1;
-  const at = (n) => (n - 12) * u * scale + size / 2;
+function draw(c, u) {
+  const ax = (n) => (n - 12) * u + c.w / 2;
+  const ay = (n) => (n - 12) * u + c.h / 2;
   const { faces, spine } = tower();
-  for (const f of faces) fill(c, f.lit ? WHITE : SHADE, polygon(f.pts.map(([x, y]) => [at(x), at(y)])));
-  for (const [x0, y0, x1, y1] of spine) fill(c, WHITE, bar(at(x0), at(y0), at(x1), at(y1), 0.45 * u * scale));
+  for (const f of faces) fill(c, f.lit ? WHITE : SHADE, polygon(f.pts.map(([x, y]) => [ax(x), ay(y)])));
+  for (const [x0, y0, x1, y1] of spine) fill(c, WHITE, bar(ax(x0), ay(y0), ax(x1), ay(y1), 0.45 * u));
   return c;
 }
+
+const mark = (size, { maskable = false } = {}) => draw(canvas(size, size, SKY), (size / 24) * (maskable ? 0.78 : 1));
+
+const card = (w, h) => draw(canvas(w, h, SKY), h / 24 * 0.85);
 
 mkdirSync('app/icons', { recursive: true });
 const out = [
@@ -159,11 +161,12 @@ const out = [
   ['app/icons/icon-192.png', mark(192)],
   ['app/icons/icon-512.png', mark(512)],
   ['app/icons/icon-maskable-512.png', mark(512, { maskable: true })],
+  ['app/icons/og.png', card(1200, 630)],
 ];
 writeFileSync('app/icons/icon.svg', svg());
 console.log('-> app/icons/icon.svg');
 for (const [file, c] of out) {
   const buf = png(c);
   writeFileSync(file, buf);
-  console.log(`-> ${file}  ${c.size}×${c.size}, ${(buf.length / 1024).toFixed(1)} KB`);
+  console.log(`-> ${file}  ${c.w}×${c.h}, ${(buf.length / 1024).toFixed(1)} KB`);
 }
