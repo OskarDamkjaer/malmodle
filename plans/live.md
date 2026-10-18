@@ -80,8 +80,10 @@ Without the cache rule on `data.malmodle.se`, Cloudflare does not cache
 - A cache rule on the zone: hostname `data.malmodle.se`, eligible for cache,
   edge and browser TTL from the origin's `Cache-Control`, and a cache key that
   ignores the query string, so `?anything` cannot bypass the cache into R2.
-- `wrangler.jsonc` binds the bucket as `LIVE`, sets `LIVE_URL`, and runs the
-  cron every minute.
+- `wrangler.jsonc` binds the bucket as `LIVE`, sets `LIVE_URL`, runs the
+  cron every minute, and turns on Workers Logs. Errors and failed requests
+  show there by themselves; the cron logs each file it found behind, so a
+  set id that is not the day's shows up as a line of its own.
 
 ## Options
 

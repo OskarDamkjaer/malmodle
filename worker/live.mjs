@@ -50,4 +50,5 @@ export async function catchUp(env, now = Date.now()) {
   const { results } = await env.DB.prepare('SELECT day, set_id FROM days WHERE day >= ? AND players > written_players')
     .bind(since).all();
   for (const { day, set_id: set } of results) await publish(env, day, set, now);
+  if (results.length) console.log(`live: behind ${results.map((r) => `${r.day}/${r.set_id}`).join(' ')}`);
 }

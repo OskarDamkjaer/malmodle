@@ -21,6 +21,9 @@
   "vars": {
     "LIVE_URL": "https://data.malmodle.se"
   },
+  "observability": {
+    "enabled": true
+  },
   "triggers": {
     "crons": ["* * * * *"]
   },
