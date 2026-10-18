@@ -251,6 +251,20 @@ export function shareText({ key, scores, url }) {
   ].filter(Boolean).join('\n');
 }
 
+const VERDICTS = [
+  [0.9, 'Snyggt!', 'Välkommen tillbaka imorgon.'],
+  [0.7, 'Riktigt bra!', 'Ses imorgon.'],
+  [0.5, 'Bra jobbat!', 'Ny omgång imorgon.'],
+  [0.3, 'På god väg.', 'Försök igen imorgon.'],
+  [0, 'Öva en gång till.', 'Försök igen imorgon.'],
+];
+
+export function verdict(total, max, daily) {
+  const [share, praise, tomorrow] = VERDICTS.find(([least]) => total / max >= least);
+  if (!daily) return praise;
+  return share ? `${praise} ${tomorrow}` : tomorrow;
+}
+
 export const SAVE_KEY = 'malmodle';
 const SAVE_VERSION = 1;
 

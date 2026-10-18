@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="sv" data-theme="tidning">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Slutskärm 3 · Facit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="/dev/end.css">
+<style>
+  :root { --font: "Source Sans 3", "Helvetica Neue", Arial, sans-serif; --font-display: "Source Serif 4", Georgia, serif; }
+  #end { --veil-strong: color-mix(in srgb, var(--bg) 97%, transparent); }
+  .total strong { font-weight: 600; font-variation-settings: "opsz" 60; }
+  #elsewherelink { color: var(--accent); font-weight: 600; }
+
+  .crowd, .facit { margin: 28px 0 0; padding: 12px 0 0; background: none; border: 0; border-top: 3px solid var(--ink); border-radius: 0; }
+  .graph .cursor-score, .graph .cursor-share { background: var(--bg); }
+  .label { margin: 0 0 4px; font: 700 12px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; }
+
+  #endlist { margin: 0; padding: 0; list-style: none; }
+  #endlist li { display: grid; grid-template-columns: 20px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); }
+  #endlist .n { font: 600 13px/1 var(--font); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  #endlist .what { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; min-width: 0; }
+  #endlist .name { font: 17px/1.25 var(--font-display); }
+  #endlist .kind { font: 13px/1.25 var(--font); color: var(--ink-soft); }
+  #endlist .pts { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 52px; font: 700 15px/1 var(--font); font-variant-numeric: tabular-nums; }
+  #endlist .pts::before { content: ""; width: 12px; height: 12px; background: var(--band); }
+
+  .sharecard { margin: 20px 0 0; padding: 0; background: none; border: 0; box-shadow: none; }
+  #end .actions { margin: 10px 0 28px; }
+  #end .actions button { background: none; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<section id="end">
+  <div class="sheet" data-edge="left">
+    <header>
+      <p id="enddate"></p>
+      <p class="total"><strong id="endscore"></strong><span id="endmax"></span></p>
+      <p id="endverdict"></p>
+      <p id="elsewhere" hidden><a id="elsewherelink" href="#">Spela på malmodle.se</a> för mer statistik.</p>
+    </header>
+    <div id="crowd" hidden></div>
+    <div class="facit">
+      <p class="label">Facit</p>
+      <ol id="endlist"></ol>
+    </div>
+    <div id="sharecard" class="sharecard">
+      <div class="shareactions">
+        <button id="share" type="button" class="primary">Kopiera resultat</button>
+        <button id="sharenative" type="button" hidden>Dela</button>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="practise" type="button">Öva</button>
+      <button id="again" type="button">Spela igen</button>
+    </div>
+  </div>
+</section>
+<script type="module" src="/dev/end.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="sv" data-theme="tidning">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Slutskärm 2 · Förstasida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400&display=swap">
+<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="/dev/end.css">
+<style>
+  :root { --font: "Libre Franklin", "Helvetica Neue", Arial, sans-serif; --font-display: "Newsreader", Georgia, serif; }
+  #end { --veil-strong: color-mix(in srgb, var(--bg) 97%, transparent); }
+  #end .sheet { padding-top: calc(var(--safe-top) + 16px); }
+
+  .mast { text-align: center; }
+  .mast .name { margin: 0 0 10px; font: 700 40px/1 var(--font-display); letter-spacing: -0.02em; }
+  .mast .dateline { display: flex; justify-content: space-between; margin: 0; padding: 6px 0 5px; border-top: 1px solid var(--ink); border-bottom: 3px solid var(--ink); font: 600 11px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; }
+  #enddate { margin: 0; font: inherit; letter-spacing: inherit; color: inherit; }
+
+  .lede { margin: 18px 0 0; }
+  .lede .total { justify-content: flex-start; margin: 0; }
+  .lede .total strong { font-size: 96px; font-weight: 500; letter-spacing: -0.045em; font-variation-settings: "opsz" 72; }
+  .lede .total span { font: 600 13px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; }
+  #endverdict { margin: 6px 0 0; font: 600 30px/1.1 var(--font-display); letter-spacing: -0.01em; }
+  #elsewhere { margin: 8px 0 0; font: 15px/1.4 var(--font); color: var(--ink-soft); }
+  #elsewherelink { color: var(--accent); font-weight: 600; }
+
+  .crowd { margin: 6px 0 0; padding: 0; background: none; border: 0; border-radius: 0; }
+  .crowd .standing { min-height: 0; }
+  .crowd .head { font: 600 30px/1.1 var(--font-display); letter-spacing: -0.01em; }
+  .crowd .dek { margin-top: 6px; font-size: 15px; }
+  .crowd .text { font-size: 18px; }
+  .graph .cursor-score, .graph .cursor-share { background: var(--bg); }
+
+  .sharecard { margin: 28px 0 0; padding: 10px 0 0; background: none; border: 0; border-top: 3px solid var(--ink); border-radius: 0; box-shadow: none; }
+  .label { margin: 0 0 10px; font: 700 11px/1.2 var(--font); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .squares { display: flex; gap: 5px; margin: 0 0 14px; }
+  .squares .sq { flex: 1; height: 28px; border-radius: 0; }
+  .shareactions button { font-weight: 700; }
+
+  #end .actions { display: flex; justify-content: center; gap: 0; margin: 22px 0 28px; }
+  #end .actions button { min-height: 44px; padding: 8px 18px; background: none; border: 0; font: 700 12px/1 var(--font); letter-spacing: .14em; text-transform: uppercase; }
+  #end .actions button + button { border-left: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); }
+  #end .actions button:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<section id="end">
+  <div class="sheet" data-edge="left">
+    <header class="mast">
+      <p class="name">Malmödle</p>
+      <p class="dateline"><span id="enddate"></span><span id="endissue"></span></p>
+    </header>
+    <div class="lede">
+      <p class="total"><strong id="endscore"></strong><span id="endmax"></span></p>
+      <p id="endverdict"></p>
+      <p id="elsewhere" hidden><a id="elsewherelink" href="#">Spela på malmodle.se</a> för mer statistik.</p>
+    </div>
+    <div id="crowd" hidden></div>
+    <div id="sharecard" class="sharecard">
+      <p class="label">Dela</p>
+      <p class="squares" data-squares aria-hidden="true"></p>
+      <div class="shareactions">
+        <button id="share" type="button" class="primary">Kopiera resultat</button>
+        <button id="sharenative" type="button" hidden>Dela</button>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="practise" type="button">Öva</button>
+      <button id="again" type="button">Spela igen</button>
+    </div>
+  </div>
+</section>
+<script type="module" src="/dev/end.js"></script>
+</body>
+</html>

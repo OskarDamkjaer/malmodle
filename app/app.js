@@ -1,5 +1,5 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square, carry, arrive } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square, carry, arrive, verdict } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { pollDelay, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
@@ -377,20 +377,6 @@ function countUp(node, total) {
   requestAnimationFrame(step);
 }
 
-const VERDICTS = [
-  [0.9, 'Snyggt!', 'Välkommen tillbaka imorgon.'],
-  [0.7, 'Riktigt bra!', 'Ses imorgon.'],
-  [0.5, 'Bra jobbat!', 'Ny omgång imorgon.'],
-  [0.3, 'På god väg.', 'Försök igen imorgon.'],
-  [0, 'Öva en gång till.', 'Försök igen imorgon.'],
-];
-
-function verdictFor(total, max, daily) {
-  const [share, praise, tomorrow] = VERDICTS.find(([least]) => total / max >= least);
-  if (!daily) return praise;
-  return share ? `${praise} ${tomorrow}` : tomorrow;
-}
-
 function finish() {
   phase = 'end';
   save(true);
@@ -409,7 +395,7 @@ function finish() {
   el('kinds').hidden = !practicing;
   countUp(el('endscore'), total);
   el('endmax').textContent = `av ${max}`;
-  el('endverdict').textContent = verdictFor(total, max, !practicing);
+  el('endverdict').textContent = verdict(total, max, !practicing);
   el('endsquares').textContent = scores.map(square).join('');
   el('elsewhere').hidden = Boolean(practicing) || location.hostname === HOME;
   el('elsewherelink').href = `https://${HOME}${themePath(themeName)}#runda=${carry({ key, set, results })}`;

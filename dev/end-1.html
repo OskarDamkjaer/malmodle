@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="sv" data-theme="tidning">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Slutskärm 1 · Linjer</title>
+<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="/dev/end.css">
+<style>
+  #end { --veil-strong: color-mix(in srgb, var(--bg) 97%, transparent); }
+  .crowd, .sharecard { margin: 28px 0 0; padding: 14px 0 0; background: none; border: 0; border-top: 3px solid var(--ink); border-radius: 0; box-shadow: none; }
+  .graph .cursor-score, .graph .cursor-share { background: var(--bg); }
+  .squares { display: flex; gap: 5px; margin: 0 0 14px; }
+  .squares .sq { flex: 1; height: 28px; border-radius: 1px; }
+  #end .actions { gap: 0; margin: 20px 0 28px; padding-top: 4px; border-top: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); }
+  #end .actions button { background: none; border: 0; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+  #end .actions button:hover { color: var(--accent); }
+  #elsewherelink { color: var(--accent); }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<section id="end">
+  <div class="sheet" data-edge="left">
+    <header>
+      <p id="enddate"></p>
+      <p class="total"><strong id="endscore"></strong><span id="endmax"></span></p>
+      <p id="endverdict"></p>
+      <p id="elsewhere" hidden><a id="elsewherelink" href="#">Spela på malmodle.se</a> för mer statistik.</p>
+    </header>
+    <div id="crowd" hidden></div>
+    <div id="sharecard" class="sharecard">
+      <p class="squares" data-squares aria-hidden="true"></p>
+      <div class="shareactions">
+        <button id="share" type="button" class="primary">Kopiera resultat</button>
+        <button id="sharenative" type="button" hidden>Dela</button>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="practise" type="button">Öva</button>
+      <button id="again" type="button">Spela igen</button>
+    </div>
+  </div>
+</section>
+<script type="module" src="/dev/end.js"></script>
+</body>
+</html>
