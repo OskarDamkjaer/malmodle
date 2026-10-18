@@ -50,6 +50,20 @@ in `app/crowd.mjs`, the card in `app/crowd-view.js`, and
 
 ## Hosting
 
+- malmodle.se runs the Worker `malmodle` with the D1 database `malmodle`. It
+  is deployed by hand from a local checkout:
+
+  ```
+  node scripts/build-site.mjs
+  npx wrangler d1 migrations apply malmodle --remote   # when the schema changes
+  npx wrangler deploy
+  ```
+
+- On the zone: Always Use HTTPS is on, and the rate limit described in
+  `plans/live.md`. For www, a proxied `A` record for `www` (to `192.0.2.1`)
+  and the "Redirect from WWW to root" redirect rule are still to add. A
+  redirect in the Worker would miss most requests, since static files are
+  served without running it.
 - The site will deploy from `main` to Cloudflare at malmodle.se, with the API.
 - The page should find out whether the API is there and work either way. The
   GitHub Pages copy has no API: there, the end screen links to malmodle.se,

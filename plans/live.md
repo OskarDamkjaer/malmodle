@@ -5,6 +5,23 @@ finished round is reloaded. The waiting text says the statistics appear
 "automatiskt", which only holds once the screen asks again by itself. That is
 the next step.
 
+## Before real traffic: a running summary
+
+Every posted result reads every row for its day and set to build the reply,
+so the rows read grow with the square of the players. D1 bills rows read, and
+the free plan allows 5 million a day:
+
+| Players a day | Rows read |
+|---|---|
+| 1 000 | about 0.5 million |
+| 3 000 | about 4.5 million |
+| 10 000 | about 50 million |
+
+Polling multiplies it. The fix is a summary row per day and set, updated on
+each insert: the totals histogram, the count of each score per question, and
+the player count. A reply then reads one row, plus the totals while fewer
+than 50 have played. The same row is what a cached polling answer carries.
+
 ## Polling (to build)
 
 - A `GET /api/day?day=…&set=…&player=…` that answers with the same summary as
@@ -34,6 +51,18 @@ the next step.
   cannot reach connections held by another.
 - **Yesterday as the placeholder.** Before anyone else has played, the blurred
   chart could show yesterday's real spread instead of only your own score.
+
+## Abuse
+
+- A Cloudflare rate-limiting rule on `/api/result` blocks an IP for 10
+  seconds after 20 requests in 10 seconds. It stops one machine flooding the
+  database. A lower limit would block shared addresses (a class on one school
+  network, phones behind one carrier address) without stopping much more.
+- Fake scores are still easy: each can carry a new player id. If it becomes a
+  problem, Cloudflare Turnstile on the POST, checked by the Worker before
+  storing, is the cheap defence.
+- Bot Fight Mode stays off: it cannot be tuned on the free plan, and a
+  challenge on the app's own `fetch` would silently hide the comparison.
 
 Polling gets most of the feeling for little code; streaming is worth it only if
 the numbers moving while you watch turns out to matter.
