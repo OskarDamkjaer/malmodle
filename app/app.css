@@ -229,7 +229,6 @@ body[data-answered] #question { display: none; }
   --veil-strong: color-mix(in srgb, var(--bg) 97%, transparent);
   --veil-light: color-mix(in srgb, var(--bg) 20%, transparent);
   --rule: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
-  --line: color-mix(in srgb, var(--ink) 30%, transparent);
   animation: fade .3s ease-out;
 }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
@@ -264,12 +263,11 @@ body[data-answered] #question { display: none; }
 .sq[data-band="orange"] { --band: var(--band-orange); }
 .sq[data-band="red"] { --band: var(--band-red); }
 .shareactions { display: flex; gap: 8px; }
-.shareactions button { min-height: 48px; font-size: 16px; font-weight: 600; border: 1px solid var(--line); }
-#share { flex: 1; color: var(--ink); background: color-mix(in srgb, var(--ink) 7%, var(--bg)); }
-#share:hover { filter: none; background: color-mix(in srgb, var(--ink) 12%, var(--bg)); }
+.shareactions button { min-height: 52px; font-size: 17px; }
+#share { flex: 1; }
 #share[data-state="done"] { background: var(--ink); color: var(--bg); }
 #share[data-state="failed"] { background: var(--chip); color: var(--wrong); }
-#sharenative { flex: 0 0 auto; padding: 10px 22px; background: none; }
+#sharenative { flex: 0 0 auto; padding: 10px 22px; font-weight: 600; }
 #end .actions { display: grid; grid-template-columns: 1fr 1fr; margin: 14px 0 28px; }
 #end .actions button { background: none; border: 0; box-shadow: none; font-weight: 600; color: var(--ink-soft); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 #end .actions button:hover, #practise[aria-expanded="true"] { color: var(--ink); }
