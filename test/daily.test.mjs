@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -220,6 +220,12 @@ test('a replay in progress keeps the finished day until it ends', () => {
   const again = stored(remember(replay, { key, set, results: set.map((q) => answer(q, 0)), finished: true }));
   assert.equal(again.playing, undefined);
   assert.deepEqual(recall(again, key, set).map((r) => r.result.score), set.map(() => 0));
+});
+
+test('the number of the day counts from launch day as the first', () => {
+  assert.equal(issue('2026-10-10'), 1);
+  assert.equal(issue('2026-10-18'), 9);
+  assert.equal(issue('2026-11-01'), 23);
 });
 
 test('a finished round carried in a link comes back on the same day and set', () => {

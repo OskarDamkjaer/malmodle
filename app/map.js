@@ -181,6 +181,10 @@ function padding() {
   };
 }
 
+export function panTo(item) {
+  map.easeTo({ center: item.point, padding: padding(), duration: 500 });
+}
+
 function frame(box, { duration = 500, maxZoom = 15.5 } = {}) {
   map.fitBounds(box, { padding: padding(), maxZoom, duration });
 }

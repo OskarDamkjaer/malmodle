@@ -143,7 +143,7 @@ function chart({ onRefresh } = {}) {
     you.style.left = `${100 * at}%`;
     you.dataset.edge = edgeOf(at);
     rank.style.left = `${100 * at}%`;
-    rank.dataset.side = at > 0.6 ? 'left' : 'right';
+    rank.dataset.edge = edgeOf(at);
     bar.style.setProperty('--at', `${100 * at}%`);
   };
 

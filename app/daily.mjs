@@ -13,6 +13,7 @@ export const SPLITS = [
 export const SET_SIZE = 10;
 
 export const EPOCH = '2026-01-01';
+export const LAUNCH = '2026-10-10';
 
 export const GROUP = { area: 'area', street: 'street', landmark: 'place', bridge: 'place' };
 
@@ -113,6 +114,8 @@ function daysBetween(from, to) {
   for (let t = utc(from); t < utc(to); t += 86400000) out.push(new Date(t).toISOString().slice(0, 10));
   return out;
 }
+
+export const issue = (key) => daysBetween(LAUNCH, key).length + 1;
 
 export function dealt(key) {
   const count = Object.fromEntries(Object.keys(DECKS).map((d) => [d, 0]));

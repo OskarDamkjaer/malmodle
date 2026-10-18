@@ -1,12 +1,12 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { pollDelay, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, hideLabels, pickScored, setupLayers, show, showScored, showTap,
+  applyTheme, clear, frameHome, frameItems, frameReveal, hideLabels, panTo, pickScored, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -79,9 +79,9 @@ const map = new Map({
   style,
   center: [header.centerLon, header.centerLat],
   zoom: 12,
-  minZoom: 10,
+  minZoom: 9,
   maxZoom: header.maxZoom + 2,
-  maxBounds: [[header.minLon - 0.06, header.minLat - 0.03], [header.maxLon + 0.06, header.maxLat + 0.03]],
+  maxBounds: [[header.minLon - 1, header.minLat - 0.5], [header.maxLon + 1, header.maxLat + 0.5]],
   bearing: 0,
   pitch: 0,
   dragRotate: false,
@@ -390,7 +390,7 @@ function finish() {
   const max = set.length * MAX_SCORE;
   el('enddate').textContent = practicing
     ? `Övning · ${practicing.label}`
-    : new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
+    : `${new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' })} · Nr ${issue(key)}`;
   el('sharecard').hidden = Boolean(practicing);
   el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
   el('kinds').hidden = !practicing;
@@ -657,13 +657,19 @@ function renderSquares() {
     b.className = 'sq';
     b.dataset.band = band(r.result.score);
     b.setAttribute('aria-label', `${r.q.target.name}, ${r.result.score} poäng`);
-    b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') showPlace(r); });
+    b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') pickSquare(r); });
     b.addEventListener('click', () => {
       if (!wide.matches && !('mapview' in document.body.dataset)) toggleMapView();
-      showPlace(r);
+      pickSquare(r);
     });
     return b;
   }));
+}
+
+function pickSquare(r) {
+  showInfo(r.q.target, r);
+  markSquare(r);
+  requestAnimationFrame(() => panTo(r.q.target));
 }
 
 function markSquare(r) {
