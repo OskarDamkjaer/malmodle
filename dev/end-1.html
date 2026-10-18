@@ -7,27 +7,35 @@
 <link rel="stylesheet" href="/app.css">
 <link rel="stylesheet" href="/dev/end.css">
 <style>
-  #end { --veil-strong: color-mix(in srgb, var(--bg) 97%, transparent); }
-  .crowd, .sharecard { margin: 28px 0 0; padding: 14px 0 0; background: none; border: 0; border-top: 3px solid var(--ink); border-radius: 0; box-shadow: none; }
-  .graph .cursor-score, .graph .cursor-share { background: var(--bg); }
-  .squares { display: flex; gap: 5px; margin: 0 0 14px; }
-  .squares .sq { flex: 1; height: 28px; border-radius: 1px; }
-  #end .actions { gap: 0; margin: 20px 0 28px; padding-top: 4px; border-top: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); }
-  #end .actions button { background: none; border: 0; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
-  #end .actions button:hover { color: var(--accent); }
-  #elsewherelink { color: var(--accent); }
+  .mast { text-align: center; }
+  .mast .name { margin: 0 0 10px; font: var(--display-weight) 24px/1 var(--font-display); letter-spacing: var(--display-tracking); }
+  .mast .dateline { display: flex; justify-content: center; gap: 10px; margin: 0; padding: 7px 0; border-top: var(--rule); border-bottom: var(--rule); font: 600 11px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  .mast .dateline span + span::before { content: "·"; margin-right: 10px; }
+  #enddate { margin: 0; font: inherit; letter-spacing: inherit; color: inherit; }
+  .lede { text-align: center; }
+  .lede .total { margin-top: 18px; }
+
+  .crowd, .sharecard { margin: 28px 0 0; padding: 18px 0 0; background: none; border: 0; border-top: var(--rule); border-radius: 0; box-shadow: none; }
+  .squares { display: flex; gap: 4px; margin: 0 0 14px; }
+  .squares .sq { flex: 1; height: 14px; border-radius: 1px; }
+  #end .actions { gap: 0; margin: 14px 0 28px; }
+  #end .actions button { background: none; border: 0; font-weight: 600; color: var(--ink-soft); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  #end .actions button:hover { color: var(--ink); }
 </style>
 </head>
 <body>
 <div id="map"></div>
 <section id="end">
   <div class="sheet" data-edge="left">
-    <header>
-      <p id="enddate"></p>
+    <header class="mast">
+      <p class="name">Malmödle</p>
+      <p class="dateline"><span id="enddate"></span><span id="endissue"></span></p>
+    </header>
+    <div class="lede">
       <p class="total"><strong id="endscore"></strong><span id="endmax"></span></p>
       <p id="endverdict"></p>
       <p id="elsewhere" hidden><a id="elsewherelink" href="#">Spela på malmodle.se</a> för mer statistik.</p>
-    </header>
+    </div>
     <div id="crowd" hidden></div>
     <div id="sharecard" class="sharecard">
       <p class="squares" data-squares aria-hidden="true"></p>

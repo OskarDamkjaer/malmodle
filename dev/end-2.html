@@ -6,44 +6,40 @@
 <title>Slutskärm 2 · Förstasida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400&display=swap">
 <link rel="stylesheet" href="/app.css">
 <link rel="stylesheet" href="/dev/end.css">
 <style>
   :root { --font: "Libre Franklin", "Helvetica Neue", Arial, sans-serif; --font-display: "Newsreader", Georgia, serif; }
-  #end { --veil-strong: color-mix(in srgb, var(--bg) 97%, transparent); }
   #end .sheet { padding-top: calc(var(--safe-top) + 16px); }
 
   .mast { text-align: center; }
-  .mast .name { margin: 0 0 10px; font: 700 40px/1 var(--font-display); letter-spacing: -0.02em; }
-  .mast .dateline { display: flex; justify-content: space-between; margin: 0; padding: 6px 0 5px; border-top: 1px solid var(--ink); border-bottom: 3px solid var(--ink); font: 600 11px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; }
+  .mast .name { margin: 0 0 10px; font: 600 28px/1 var(--font-display); letter-spacing: -0.01em; }
+  .mast .dateline { display: flex; justify-content: space-between; margin: 0; padding: 7px 0 6px; border-top: var(--rule-strong); border-bottom: var(--rule); font: 600 11px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
   #enddate { margin: 0; font: inherit; letter-spacing: inherit; color: inherit; }
 
-  .lede { margin: 18px 0 0; }
-  .lede .total { justify-content: flex-start; margin: 0; }
-  .lede .total strong { font-size: 96px; font-weight: 500; letter-spacing: -0.045em; font-variation-settings: "opsz" 72; }
-  .lede .total span { font: 600 13px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; }
-  #endverdict { margin: 6px 0 0; font: 600 30px/1.1 var(--font-display); letter-spacing: -0.01em; }
+  .lede { margin: 22px 0 0; }
+  .lede .total { justify-content: flex-start; margin: 0; gap: 10px; }
+  .lede .total strong { font-size: 72px; font-weight: 400; letter-spacing: -0.035em; font-variation-settings: "opsz" 72; }
+  .lede .total span { font: 15px/1 var(--font); color: var(--ink-soft); }
+  #endverdict { margin: 10px 0 0; font: 400 22px/1.25 var(--font-display); }
   #elsewhere { margin: 8px 0 0; font: 15px/1.4 var(--font); color: var(--ink-soft); }
-  #elsewherelink { color: var(--accent); font-weight: 600; }
 
-  .crowd { margin: 6px 0 0; padding: 0; background: none; border: 0; border-radius: 0; }
+  .crowd { margin: 16px 0 0; padding: 0; background: none; border: 0; border-radius: 0; }
   .crowd .standing { min-height: 0; }
-  .crowd .head { font: 600 30px/1.1 var(--font-display); letter-spacing: -0.01em; }
-  .crowd .dek { margin-top: 6px; font-size: 15px; }
-  .crowd .text { font-size: 18px; }
-  .graph .cursor-score, .graph .cursor-share { background: var(--bg); }
+  .crowd .head { font: 400 22px/1.25 var(--font-display); letter-spacing: 0; }
+  .crowd .dek { margin-top: 4px; font-size: 14px; }
+  .crowd .best { border-top: var(--rule); }
 
-  .sharecard { margin: 28px 0 0; padding: 10px 0 0; background: none; border: 0; border-top: 3px solid var(--ink); border-radius: 0; box-shadow: none; }
-  .label { margin: 0 0 10px; font: 700 11px/1.2 var(--font); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
-  .squares { display: flex; gap: 5px; margin: 0 0 14px; }
-  .squares .sq { flex: 1; height: 28px; border-radius: 0; }
-  .shareactions button { font-weight: 700; }
+  .sharecard { margin: 32px 0 0; padding: 12px 0 0; background: none; border: 0; border-top: var(--rule); border-radius: 0; box-shadow: none; }
+  .label { margin: 0 0 10px; font: 600 11px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  .squares { display: flex; gap: 4px; margin: 0 0 14px; }
+  .squares .sq { flex: 1; height: 14px; border-radius: 0; }
 
-  #end .actions { display: flex; justify-content: center; gap: 0; margin: 22px 0 28px; }
-  #end .actions button { min-height: 44px; padding: 8px 18px; background: none; border: 0; font: 700 12px/1 var(--font); letter-spacing: .14em; text-transform: uppercase; }
-  #end .actions button + button { border-left: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); }
-  #end .actions button:hover { color: var(--accent); }
+  #end .actions { display: flex; justify-content: center; gap: 0; margin: 16px 0 28px; }
+  #end .actions button { min-height: 44px; padding: 8px 18px; background: none; border: 0; font: 600 12px/1 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  #end .actions button + button { border-left: var(--rule); }
+  #end .actions button:hover { color: var(--ink); }
 </style>
 </head>
 <body>

@@ -6,11 +6,16 @@
 #end .sheet { padding-bottom: 72px; }
 
 .sq { display: inline-block; width: 1em; height: 1em; border-radius: 2px; vertical-align: -0.12em; }
-[data-band="green"] { --band: var(--band-green); }
-[data-band="yellow"] { --band: var(--band-yellow); }
-[data-band="orange"] { --band: var(--band-orange); }
-[data-band="red"] { --band: var(--band-red); }
+[data-band="green"] { --band: color-mix(in srgb, var(--band-green) 55%, var(--bg)); }
+[data-band="yellow"] { --band: color-mix(in srgb, var(--band-yellow) 55%, var(--bg)); }
+[data-band="orange"] { --band: color-mix(in srgb, var(--band-orange) 55%, var(--bg)); }
+[data-band="red"] { --band: color-mix(in srgb, var(--band-red) 55%, var(--bg)); }
 .sq { background: var(--band); }
+
+#end { --veil-strong: color-mix(in srgb, var(--bg) 97%, transparent); --rule: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); --rule-strong: 1px solid color-mix(in srgb, var(--ink) 55%, transparent); }
+.graph .cursor-score, .graph .cursor-share { background: var(--bg); }
+#share.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+#elsewherelink { color: var(--accent); }
 
 .devbar { position: fixed; z-index: 50; right: 8px; bottom: 8px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; max-width: calc(100% - 16px); padding: 6px 10px; font: 12px/1.3 system-ui, sans-serif; color: #111; background: #fff; border: 1px solid #0003; border-radius: 6px; box-shadow: 0 2px 8px #0002; }
 .devbar a { color: #111; }
