@@ -1,4 +1,4 @@
-import { EPOCH, band, dailySet, dateKey, random, shareText, verdict } from '/daily.mjs';
+import { band, dailySet, dateKey, random, shareText, verdict } from '/daily.mjs';
 import { MAX_SCORE } from '/questions.mjs';
 import { summarize, tally } from '/crowd.mjs';
 import { crowdCard } from '/crowd-view.js';
@@ -92,7 +92,6 @@ const max = set.length * MAX_SCORE;
 const end = $('#end');
 
 $('#enddate').textContent = new Date().toLocaleDateString('sv-SE', { weekday: 'long', day: 'numeric', month: 'long' });
-each('#endissue', (node) => { node.textContent = `Nr ${Math.round((Date.parse(key) - Date.parse(EPOCH)) / 864e5) + 1}`; });
 $('#endscore').textContent = String(total);
 $('#endmax').textContent = `av ${max}`;
 $('#endverdict').textContent = verdict(total, max, true);
