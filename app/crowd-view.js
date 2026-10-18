@@ -1,6 +1,6 @@
 import {
   FEWEST_TO_RANK, MAX_TOTAL, aside, beatenText, belowText, columns, countBelow, highlight, highlightText,
-  firstRound, rankLabel, standing, waiting,
+  firstRound, practiceTip, rankLabel, standing, strongest, strongestText, waiting,
 } from './crowd.mjs';
 
 const W = 300;
@@ -81,7 +81,8 @@ function chart() {
 
   const plot = el('div', 'plot');
   const you = el('span', 'you');
-  plot.append(drawing, you);
+  const rank = el('span', 'rank');
+  plot.append(drawing, you, rank);
   const bar = el('div', 'split');
   const ticks = el('span', 'ticks');
   bar.append(el('span', 'behind'), el('span', 'ahead'), ticks, el('span', 'mark'));
@@ -122,6 +123,8 @@ function chart() {
     line.setAttribute('x2', x);
     you.style.left = `${100 * at}%`;
     you.dataset.edge = edgeOf(at);
+    rank.style.left = `${100 * at}%`;
+    rank.dataset.side = at > 0.6 ? 'left' : 'right';
     bar.style.setProperty('--at', `${100 * at}%`);
   };
 
@@ -169,7 +172,7 @@ function chart() {
     const { score, mine, someone } = point;
     const t = score / MAX_TOTAL;
     const share = mine
-      ? `${beatenText(crowd)} · ${rankLabel(crowd)}`
+      ? beatenText(crowd)
       : belowText(countBelow(crowd, score), crowd.players - (someone ? 1 : 0));
     graph.dataset.hover = mine ? 'you' : '';
     for (const node of [cursor, cursorScore, cursorShare]) {
@@ -185,7 +188,7 @@ function chart() {
         return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
       });
     };
-    for (const node of [you, ...numbers.children]) node.classList.toggle('faded', covered(node));
+    for (const node of [you, rank, ...numbers.children]) node.classList.toggle('faded', covered(node));
     return `${mine ? 'Du, ' : ''}${score} poäng: bättre än ${share}`;
   };
 
@@ -246,6 +249,7 @@ function chart() {
     graph.setAttribute('role', 'group');
     graph.setAttribute('aria-label', describe(next));
     you.textContent = `Du, ${next.you.total}`;
+    rank.textContent = rankLabel(next);
     const rest = others() ?? [];
     ticks.replaceChildren(...rest.map((t) => {
       const tick = el('span', 'tick');
@@ -262,7 +266,7 @@ function chart() {
   return { node: graph, update };
 }
 
-export function crowdCard() {
+export function crowdCard({ onPractise } = {}) {
   const node = el('div', 'crowd');
   const top = el('div', 'standing');
   const graph = chart();
@@ -276,14 +280,24 @@ export function crowdCard() {
     if (shown !== crowd.you.total) top.append(el('p', 'dek', firstRound(crowd.you.total)));
     graph.update(crowd);
     const hl = ready ? highlight(crowd) : null;
-    best.dataset.state = !ready ? 'waiting' : hl ? '' : 'empty';
-    if (!hl) {
+    const strong = ready && !hl ? strongest(crowd) : null;
+    const tip = ready && !hl && !strong && onPractise;
+    best.dataset.state = !ready ? 'waiting' : hl || strong || tip ? '' : 'empty';
+    if (tip) {
+      best.removeAttribute('aria-hidden');
+      const go = el('button', 'action', practiceTip.action);
+      go.type = 'button';
+      go.addEventListener('click', onPractise);
+      best.replaceChildren(el('p', 'kicker', practiceTip.kicker), el('p', 'text', practiceTip.text), go);
+      return;
+    }
+    if (!hl && !strong) {
       best.replaceChildren(el('span', 'bone'), el('span', 'bone'));
       best.setAttribute('aria-hidden', 'true');
       return;
     }
     best.removeAttribute('aria-hidden');
-    const line = highlightText(names[hl.i], hl, crowd.players);
+    const line = hl ? highlightText(names[hl.i], hl, crowd.players) : strongestText(names[strong.i], strong);
     best.replaceChildren(el('p', 'kicker', line.kicker), el('p', 'text', line.text));
     if (line.detail) best.append(el('p', 'detail', line.detail));
   };

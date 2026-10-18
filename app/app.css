@@ -298,6 +298,10 @@ body[data-mapview] #endmap { margin-top: 12px; }
 .graph .stroke { fill: none; stroke: var(--ink-soft); stroke-width: 1.5; stroke-linejoin: round; }
 .graph .line { stroke: var(--accent); stroke-width: 2; }
 .graph .you { position: absolute; top: 0; left: 0; transform: translateX(-50%); font: 700 12px/1 var(--font); white-space: nowrap; }
+.graph .rank { position: absolute; top: 28px; left: 0; padding: 0 6px; font: 600 12px/1.2 var(--font); color: var(--ink-soft); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.graph .rank[data-side="left"] { transform: translateX(-100%); }
+.graph .rank { opacity: 0; }
+.graph[data-hover="you"] .rank { opacity: 1; }
 .graph [data-edge="left"] { transform: none; }
 .graph [data-edge="right"] { transform: translateX(-100%); }
 .graph .split { position: relative; display: flex; height: 8px; margin: 6px 0 0; }
@@ -332,6 +336,8 @@ body[data-mapview] #endmap { margin-top: 12px; }
 .crowd .best { min-height: 76px; margin: 18px 0 0; padding: 12px 0 0; border-top: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); }
 .crowd .kicker { margin: 0; font: 700 11px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 .crowd .text { margin: 4px 0 0; font: 17px/1.35 var(--font-display); }
+.crowd .action { min-height: 0; margin: 8px 0 0; padding: 4px 2px; font: 700 11px/1.4 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); background: none; border: 0; border-bottom: 1.5px solid currentColor; border-radius: 0; box-shadow: none; cursor: pointer; }
+.crowd .action:hover { color: var(--ink); }
 .crowd .detail { margin: 3px 0 0; font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 .crowd .bone { display: block; height: 12px; margin: 4px 0 10px; border-radius: 2px; background: color-mix(in srgb, var(--accent) 18%, var(--dot)); filter: blur(3px); opacity: .5; animation: breathe 1.6s ease-in-out infinite alternate; }
 .crowd .bone:first-child { width: 22%; height: 9px; }

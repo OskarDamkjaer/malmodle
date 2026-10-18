@@ -67,7 +67,8 @@ the answer: an area that borders it, a street that meets it, or a place within
   split at your score, and the share of the others you beat. Hovering, tapping
   or the arrow keys read off any score. One line under the chart picks out the
   rarest thing you did well: a question few others got fully right, or one
-  where few were closer than you. Until ten have played, the chart is a blur
+  where few were closer than you, or else the question where you beat the
+  most others. Until ten have played, the chart is a blur
   of the scores so far, with a note on how many more are needed and a link to
   share the game. The first finished round of the day is the one that counts;
   a replay shows that one. Offline, or with no answer from the server, the

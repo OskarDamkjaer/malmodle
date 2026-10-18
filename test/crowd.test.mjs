@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, field, firstRound, highlight, highlightText,
-  place, rankLabel, standing, summarize, waiting,
+  place, rankLabel, standing, strongest, strongestText, summarize, waiting,
 } from '../app/crowd.mjs';
 
 const at = (players, rank, tied = 0) => ({ players, you: { total: 500, scores: [], above: rank - 1, below: players - rank - tied } });
@@ -111,4 +111,13 @@ test('highlights are put in words, with ties counted in your favour', () => {
   assert.equal(near(2, 1).text, 'Bara en spelare var närmare Möllan än du.');
   assert.equal(near(10, 8).detail, 'En annan var lika nära.');
   assert.deepEqual(near(108, 107, 1500), { kicker: 'Nära nog', text: 'Du var närmare Möllan än 93 % av spelarna idag.', detail: 'Bara 107 var närmare.' });
+});
+
+test('without a highlight, the strongest question is the one where you beat the most others', () => {
+  const crowd = { players: 301, you: { scores: [100, 60, 0] }, atLeast: [250, 100, 301] };
+  const s = strongest(crowd);
+  assert.equal(s.i, 1);
+  assert.equal(strongestText('Möllan', s).text, 'Möllan gick bättre för dig än för 67 % av spelarna.');
+  assert.equal(strongest({ ...crowd, atLeast: [301, 301, 301] }), null);
+  assert.equal(strongest({ ...crowd, players: 9 }), null);
 });

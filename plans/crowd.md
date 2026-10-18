@@ -1,0 +1,58 @@
+# The day's comparison
+
+How the end screen's comparison card is meant to work, and why. The rules live
+in `app/crowd.mjs`, the card in `app/crowd-view.js`, and
+`/dev/crowd.html` on the local server shows it for many made-up crowds.
+
+## Decisions
+
+- **One chart.** A softened line of the day's totals in fixed 20-point steps.
+  The smoothing is monotone: the line passes through every count and never
+  adds a peak or dip. Fixed steps, not ones that adapt to the crowd, so a small
+  crowd looks as rough as it is.
+- **You are the line, the curve is everyone else.** Your own score is left out
+  of the curve, so being best tints all of it.
+- **Each share counts everyone but the person it is about.** Your share is of
+  the others; a share read on another player's tick is of everyone but them;
+  a share read between ticks is of everyone. Shares are rounded down, so they
+  never flatter.
+- **Exact while small.** Under 50 players the reply lists the totals, the bar
+  shows a tick for each, and readings snap to them and count exactly. Above
+  that they are read from 10-point bins.
+- **Ten before anything.** Until ten have played the card shows the scores so
+  far as a blur, counts down, and offers a link to share the game. The card
+  keeps its size in every state, including the highlight's space.
+- **A place only near the top.** The headline names your place in the top
+  quarter of the first ten, or in the top half percent however many have
+  played. Otherwise it names your part of the field, from "Bland de allra
+  bästa" to "Understa fjärdedelen". Your place is always readable by pointing
+  at your own line.
+- **One fact under the chart, about you.** The rarest question you did well
+  on, measured as the share who scored at least as much, if you scored 40 or
+  more and at most 30 % matched you. Otherwise the question where you beat the
+  most others. Otherwise a tip to try practice. Ties count in your favour in
+  the wording.
+- **Written for reading.** Numbers up to twelve as words, "idag" as one word
+  as in the rest of the app, percentages with a space before "%".
+
+## Open
+
+- **Polling.** The waiting text says the numbers appear "automatiskt", which
+  needs the screen to ask again by itself. See `plans/live.md`.
+- **The day's hardest question.** Needs one more number per question from the
+  server, the share who got it fully right. A candidate for a fact of its own.
+- **Very large crowds.** At 20 000 players the top half percent is "Plats 100";
+  a cap around 50 may read better.
+- **Made-up crowds.** The dev page's tap distances are a guess; real days will
+  show how lumpy totals are.
+- **Styles.** Only Tidning has been looked at. The others are not shown to
+  players.
+
+## Hosting
+
+- The site will deploy from `main` to Cloudflare at malmodle.se, with the API.
+- The page should find out whether the API is there and work either way. The
+  GitHub Pages copy has no API: there, the end screen links to malmodle.se,
+  passing the round along in an obscured URL parameter, so the comparison can
+  be seen there. Scores are easy to fake anyway, so the parameter only needs
+  to keep the link tidy, not secret.

@@ -144,6 +144,25 @@ export function highlight({ players, you, atLeast, better }) {
     .reduce((a, b) => (!a || b.share < a.share ? b : a), null);
 }
 
+export function strongest({ players, you, atLeast }) {
+  if (players < FEWEST_TO_COMPARE) return null;
+  const best = you.scores
+    .map((score, i) => ({ i, beaten: (players - atLeast[i]) / (players - 1) }))
+    .reduce((a, b) => (b.beaten > a.beaten ? b : a));
+  return best.beaten > 0 ? best : null;
+}
+
+export const strongestText = (name, { beaten }) => ({
+  kicker: 'Din starkaste fråga',
+  text: `${name} gick bättre för dig än för ${percent(beaten)} av spelarna.`,
+});
+
+export const practiceTip = {
+  kicker: 'Tips',
+  text: 'Prova Malmödles övningsläge.',
+  action: 'Öva på en sorts plats i taget →',
+};
+
 export function highlightText(name, { score, count: n, better, share }, players) {
   if (score >= MAX_SCORE) {
     const kicker = 'Mitt i prick';

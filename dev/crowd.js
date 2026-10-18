@@ -46,6 +46,7 @@ const STATES = [
   { label: 'Nära: 30 spelare', players: 30, share: 0.4, near: [1, 0] },
   { label: '2 000 spelare, svår dag, nära', players: 2000, share: 0.2, shape: 'svår', near: [60, 3] },
   { label: '300 spelare, inget att lyfta', players: 300, share: 0.8, flop: true },
+  { label: '300 spelare, noll på allt', players: 300, share: 1, zero: true },
   ...[200, 5000].flatMap((players) => Object.entries(SHAPES).map(([shape, name]) => (
     { label: `${players.toLocaleString('sv-SE')} spelare, ${name}`, players, shape, share: 0.3 }
   ))),
@@ -101,6 +102,7 @@ function crowdFor(state, i) {
     });
     played[me][nearQ] = 100;
   }
+  if (state.zero) played[me] = played[me].map(() => 0);
   for (let t = 0; t < (state.tied ?? 0); t++) played[place + t] = played[place - 1];
   return crowdFrom(questions, played, me);
 }
@@ -120,7 +122,7 @@ function liveState() {
   let n = 1;
   let timer = 0;
   const section = el('section', 'state');
-  const card = crowdCard();
+  const card = crowdCard({ onPractise: () => {} });
   const controls = el('div', 'live');
   const label = el('h3', '', '');
   const set = (count) => {
@@ -145,7 +147,7 @@ function render() {
   document.getElementById('states').replaceChildren(liveState(), ...STATES.map((state, i) => {
     const { reply, names } = crowdFor(state, i);
     const section = el('section', 'state');
-    const card = crowdCard();
+    const card = crowdCard({ onPractise: () => {} });
     section.append(el('h3', '', state.label), card.node);
     card.update(reply, names);
     return section;

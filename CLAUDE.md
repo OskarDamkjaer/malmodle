@@ -13,6 +13,7 @@ node scripts/serve.mjs --fake 200      # and 200 made-up players today
 
 `/dev/crowd.html` on the local server shows the comparison card for many
 made-up crowds. `serve.mjs` mounts `dev/` itself, so the site build leaves it out.
+`plans/crowd.md` holds the card's decisions and what is still open.
 
 Read the skip count, not just the failures. Tests that need `build/`, `data/`
 or a browser skip instead of failing, so a green run can be an empty one.

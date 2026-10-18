@@ -448,7 +448,7 @@ async function compare() {
     if (!res.ok) return;
     const crowd = await res.json();
     if (phase !== 'end' || practicing || set !== asked) return;
-    card ??= crowdCard();
+    card ??= crowdCard({ onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } });
     el('crowd').replaceChildren(card.node);
     card.update(crowd, set.map((q) => q.target.name), sum(results.map((r) => r.result.score)));
     reveal('crowd');
