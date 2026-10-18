@@ -611,7 +611,7 @@ function reportLink() {
     'Vad blev fel?',
     '',
   ].join('\n');
-  const url = new URL('https://github.com/OskarDamkjaer/malmoemaps/issues/new');
+  const url = new URL('https://github.com/OskarDamkjaer/malmodle/issues/new');
   url.searchParams.set('body', body);
   return url.href;
 }
@@ -619,6 +619,7 @@ function reportLink() {
 let installEvent = null;
 const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 const ios = /iPhone|iPod/.test(navigator.userAgent);
+const firefox = /Android.*Firefox\//.test(navigator.userAgent);
 const phone = navigator.userAgentData?.mobile
   ?? (ios || /Android.*Mobile/.test(navigator.userAgent) || matchMedia('(pointer: coarse) and (max-width: 599px)').matches);
 
@@ -636,6 +637,7 @@ function offerInstall() {
   const text = !phone || standalone() ? null
     : installEvent ? 'Lägg Malmödle på hemskärmen, så är nästa omgång ett tryck bort.'
     : ios ? 'Lägg Malmödle på hemskärmen: tryck på Dela och välj Lägg till på hemskärmen.'
+    : firefox ? 'Lägg Malmödle på hemskärmen: öppna menyn ⋮ och välj Lägg till på startskärmen.'
     : null;
   el('install').hidden = !text;
   el('installtext').textContent = text ?? '';
