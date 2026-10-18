@@ -249,6 +249,9 @@ body[data-answered] #question { display: none; }
 .total span { font-size: 16px; color: var(--ink-soft); }
 #endverdict { margin: 8px 0 0; font-size: 18px; font-family: var(--font-display); }
 #endsquares { margin: 12px 0 0; font-size: 22px; letter-spacing: 3px; }
+#elsewhere { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); }
+#elsewherelink { color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+#elsewherelink:hover { text-decoration-thickness: 2.5px; }
 .sharecard { margin: 24px 0 0; padding: 14px; background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: 0 1px 2px rgb(0 0 0 / 6%); }
 [data-theme="tidning"] .sharecard { box-shadow: none; }
 #sharetext { margin: 0 0 12px; padding: 12px 14px; font: 15px/1.5 ui-monospace, "SF Mono", Menlo, monospace; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); border-radius: var(--radius); cursor: copy; user-select: all; -webkit-user-select: all; }
@@ -277,7 +280,8 @@ body[data-ended] #maptip { display: block; }
 #endmap::after { content: " ↓"; }
 body[data-mapview] #endmap::after { content: " ↑"; }
 body[data-mapview] #end .sheet > :not(header):not(#endmap) { display: none; }
-body[data-mapview] #endverdict, body[data-mapview] #endsquares { display: none; }
+body[data-mapview] #endverdict, body[data-mapview] #endsquares, body[data-mapview] #elsewhere { display: none; }
+#end[data-crowd] #endverdict, #end[data-crowd] #endsquares, #end[data-crowd] #elsewhere { display: none; }
 body[data-mapview] #end .total { margin-top: 4px; }
 body[data-mapview] #end .total strong { font-size: 36px; }
 body[data-mapview] #endmap { margin-top: 12px; }

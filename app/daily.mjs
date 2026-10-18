@@ -296,3 +296,20 @@ export function recall(raw, key, set) {
   const answers = saved?.playing ?? saved?.done ?? [];
   return answers.map((result, i) => ({ q: set[i], result }));
 }
+
+const toCode = (text) => btoa(String.fromCharCode(...new TextEncoder().encode(text))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const fromCode = (code) => new TextDecoder().decode(Uint8Array.from(atob(code.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0)));
+
+export function carry({ key, set, results }) {
+  const packed = results.map(({ q, result }) => [result.score, TYPES[q.type].input === 'map' ? Math.round(result.distance) : result.choice]);
+  return toCode(JSON.stringify([key, setId(set), packed]));
+}
+
+export function arrive(raw, code, key, set) {
+  let day, id, packed;
+  try { [day, id, packed] = JSON.parse(fromCode(code)); } catch { return raw; }
+  if (day !== key || id !== setId(set) || parseSaved(raw, key, set)?.done || !Array.isArray(packed)) return raw;
+  const done = packed.map((a, i) => Array.isArray(a) && set[i] && (TYPES[set[i].type].input === 'map' ? { score: a[0], distance: a[1] } : { score: a[0], choice: a[1] }));
+  const answers = parseAnswers(done, set);
+  return answers?.length === set.length ? { version: SAVE_VERSION, key, targets: targetsOf(set), done: answers } : raw;
+}

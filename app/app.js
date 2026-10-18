@@ -1,5 +1,5 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square, carry, arrive } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { pollDelay, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
@@ -14,6 +14,7 @@ const boot = el('boot');
 const bootmsg = el('bootmsg');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const HOME = 'malmodle.se';
 const themeName = themeFromPath(location.pathname);
 const theme = THEMES[themeName];
 document.documentElement.dataset.theme = themeName;
@@ -133,7 +134,7 @@ function resume() {
   key = dateKey();
   practicing = null;
   const questions = dailySet(items, key);
-  const answered = recall(loadSaved(), key, questions);
+  const answered = recall(arrived(questions), key, questions);
   if (!answered.length) forget();
   try {
     play(questions, answered);
@@ -146,6 +147,16 @@ function resume() {
 
 function loadSaved() {
   try { return JSON.parse(localStorage.getItem(SAVE_KEY)); } catch { return null; }
+}
+
+function arrived(questions) {
+  const saved = loadSaved();
+  const code = new URLSearchParams(location.hash.slice(1)).get('runda');
+  if (!code) return saved;
+  history.replaceState(null, '', location.pathname + location.search);
+  const round = arrive(saved, code, key, questions);
+  if (round !== saved) try { localStorage.setItem(SAVE_KEY, JSON.stringify(round)); } catch {}
+  return round;
 }
 
 function forget() {
@@ -400,6 +411,8 @@ function finish() {
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdictFor(total, max, !practicing);
   el('endsquares').textContent = scores.map(square).join('');
+  el('elsewhere').hidden = Boolean(practicing) || location.hostname === HOME;
+  el('elsewherelink').href = `https://${HOME}${themePath(themeName)}#runda=${carry({ key, set, results })}`;
   el('sharetext').textContent = resultText();
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
@@ -445,9 +458,12 @@ function stopFollowing() {
 async function compare() {
   hide('crowd');
   stopFollowing();
+  const end = el('end');
+  delete end.dataset.crowd;
   if (practicing) return;
   const asked = set;
   const scores = results.map((r) => r.result.score);
+  end.dataset.crowd = 'asking';
   try {
     const res = await fetch('/api/result', {
       method: 'POST',
@@ -467,8 +483,11 @@ async function compare() {
     const show = (d) => card.update(summarize(d, you), names, shown, { recent: recentOthers(d, you, Date.now()) });
     show(day);
     reveal('crowd');
+    end.dataset.crowd = 'shown';
     if (poll) following = follow(poll, day, show);
-  } catch {}
+  } catch {} finally {
+    if (end.dataset.crowd === 'asking' && set === asked) delete end.dataset.crowd;
+  }
 }
 
 function follow(url, first, show) {

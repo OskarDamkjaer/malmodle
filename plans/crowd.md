@@ -68,8 +68,10 @@ in `app/crowd.mjs`, the card in `app/crowd-view.js`, and
   redirect in the Worker would miss most requests, since static files are
   served without running it.
 - The site will deploy from `main` to Cloudflare at malmodle.se, with the API.
-- The page should find out whether the API is there and work either way. The
-  GitHub Pages copy has no API: there, the end screen links to malmodle.se,
-  passing the round along in an obscured URL parameter, so the comparison can
-  be seen there. Scores are easy to fake anyway, so the parameter only needs
-  to keep the link tidy, not secret.
+- The end screen asks the API and works either way. While it asks, and when
+  the card shows, the verdict and the squares are hidden. Without an API, as
+  on the GitHub Pages copy, they stay, with a link to malmodle.se that carries
+  the round in `#runda=`: the day, the set and each answer, as base64url JSON.
+  There it becomes the day's finished round, unless that device already has
+  one, and is posted like any other. Scores are easy to fake anyway, so the
+  code only keeps the link tidy, not secret.
