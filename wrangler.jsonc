@@ -11,7 +11,7 @@
     {
       "binding": "DB",
       "database_name": "malmodle",
-      "database_id": "REPLACE_WITH_THE_ID_FROM_wrangler_d1_create",
+      "database_id": "73570ba5-c319-498d-913f-ed6beea9915f",
       "migrations_dir": "worker/migrations"
     }
   ],

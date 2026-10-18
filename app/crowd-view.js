@@ -285,10 +285,12 @@ export function crowdCard({ onPractise } = {}) {
     best.dataset.state = !ready ? 'waiting' : hl || strong || tip ? '' : 'empty';
     if (tip) {
       best.removeAttribute('aria-hidden');
-      const go = el('button', 'action', practiceTip.action);
+      const go = el('button', 'inline', practiceTip.link);
       go.type = 'button';
       go.addEventListener('click', onPractise);
-      best.replaceChildren(el('p', 'kicker', practiceTip.kicker), el('p', 'text', practiceTip.text), go);
+      const text = el('p', 'text');
+      text.append(practiceTip.before, go, practiceTip.after);
+      best.replaceChildren(el('p', 'kicker', practiceTip.kicker), text);
       return;
     }
     if (!hl && !strong) {

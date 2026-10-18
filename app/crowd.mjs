@@ -159,8 +159,9 @@ export const strongestText = (name, { beaten }) => ({
 
 export const practiceTip = {
   kicker: 'Tips',
-  text: 'Prova Malmödles övningsläge.',
-  action: 'Öva på en sorts plats i taget →',
+  before: 'Prova Malmödles ',
+  link: 'övningsläge',
+  after: '.',
 };
 
 export function highlightText(name, { score, count: n, better, share }, players) {
