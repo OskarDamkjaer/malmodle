@@ -432,19 +432,32 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
   #infoabout { -webkit-line-clamp: 1; font-size: 13px; }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 760px) {
   #end {
+    --sheet: min(var(--width), calc(100vw - 340px - 32px - 3 * var(--gap)));
     background: linear-gradient(to right,
-      var(--veil-strong) calc(var(--width) + 64px), var(--veil-light) calc(var(--width) + 130px));
+      var(--veil-strong) calc(var(--sheet) + 64px), var(--veil-light) calc(var(--sheet) + 130px));
   }
-  #end .sheet { display: flex; flex-direction: column; height: 100%; margin: 0 0 0 32px; padding-top: calc(var(--safe-top) + 32px); padding-bottom: calc(var(--safe-bottom) + 28px); background: none; border-bottom: 0; }
+  #end .sheet { display: flex; flex-direction: column; max-width: var(--sheet); height: 100%; margin: 0 0 0 32px; padding-top: calc(var(--safe-top) + 32px); padding-bottom: calc(var(--safe-bottom) + 28px); background: none; border-bottom: 0; }
   #end #crowd { margin-bottom: 28px; }
   #end .round { margin-top: auto; }
   #end .actions { margin-bottom: 0; }
   #end .kinds { margin: 12px 0 0; }
-  body[data-ended] #info { top: var(--gap); bottom: auto; animation: slide .28s ease-out; }
   #endmap { display: none; }
+  body[data-ended] #info {
+    top: var(--gap);
+    bottom: auto;
+    left: auto;
+    right: var(--gap);
+    transform: none;
+    width: 340px;
+    max-height: calc(100% - 2 * var(--gap) - var(--safe-top) - var(--attribution));
+    overflow-y: auto;
+    animation: slide .28s ease-out;
+  }
+}
 
+@media (min-width: 1000px) {
   body[data-answered] #question { display: block; }
   body[data-answered] #question, body[data-answered] #result { left: calc((100% - 340px - var(--gap)) / 2); }
   #info {

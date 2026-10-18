@@ -185,8 +185,9 @@ function padding() {
   const beside = Math.max(0, ...columns.filter((r) => r.right < w * 0.6).map((r) => r.right));
   const above = Math.max(0, ...columns.filter((r) => r.right >= w * 0.6).map((r) => r.bottom));
   const sides = shown('[data-edge="side"]');
-  const right = Math.max(0, ...sides.filter((r) => r.left > w * 0.4).map((r) => w - r.left));
-  const across = sides.filter((r) => r.left <= w * 0.4);
+  const tall = (r) => r.left > w * 0.4 && r.height > h / 2;
+  const right = Math.max(0, ...sides.filter(tall).map((r) => w - r.left));
+  const across = sides.filter((r) => !tall(r));
   const under = Math.max(top, ...across.filter((r) => r.top < h / 2).map((r) => r.bottom));
   const over = Math.max(bottom, ...across.filter((r) => r.top >= h / 2).map((r) => h - r.top));
   return {

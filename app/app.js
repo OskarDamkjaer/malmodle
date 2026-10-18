@@ -13,7 +13,7 @@ const el = (id) => document.getElementById(id);
 const boot = el('boot');
 const bootmsg = el('bootmsg');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const wide = matchMedia('(min-width: 1000px)');
+const wide = matchMedia('(min-width: 760px)');
 
 const HOME = 'malmodle.se';
 const themeName = themeFromPath(location.pathname);
