@@ -301,6 +301,7 @@ body[data-mapview] #endmap { margin-top: 12px; }
 .crowd { margin: 22px 0 0; }
 #end button:focus-visible { outline-color: var(--ink); }
 .crowd .standing { min-height: 50px; }
+.crowd:has(.graph[data-waiting]) .standing { min-height: 0; }
 .crowd .head { margin: 0; font: var(--display-weight) 24px/1.15 var(--font-display); letter-spacing: var(--display-tracking); }
 .crowd .dek { margin: 4px 0 0; font-size: 14px; line-height: 1.4; color: var(--ink-soft); }
 .graph { position: relative; margin: 6px 0 0; touch-action: pan-y; cursor: crosshair; border-radius: var(--radius); }
