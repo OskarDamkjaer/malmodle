@@ -12,6 +12,7 @@ const NS = 'http://www.w3.org/2000/svg';
 
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ease = (t) => 1 - (1 - t) ** 3;
+const glide = (t) => (t < 0.5 ? 4 * t ** 3 : 1 - (2 - 2 * t) ** 3 / 2);
 const edgeOf = (t) => (t < 0.15 ? 'left' : t > 0.85 ? 'right' : '');
 
 function svg(tag, attrs = {}) {
@@ -117,6 +118,8 @@ function chart({ onRefresh } = {}) {
   let paused = null;
   let waitingFor = null;
   let tries = [];
+  let mine = null;
+  let ranked = false;
 
   const say = () => {
     const stop = paused ? pausedText(paused) : null;
@@ -144,13 +147,15 @@ function chart({ onRefresh } = {}) {
     line.setAttribute('x1', x);
     line.setAttribute('x2', x);
     you.style.left = `${100 * at}%`;
+    you.style.transform = `translateX(${-100 * (at < 0.15 ? at / 0.3 : at > 0.85 ? 1 - (1 - at) / 0.3 : 0.5)}%)`;
     you.dataset.edge = edgeOf(at);
+    if (mine) mine.textContent = String(Math.round(at * MAX_TOTAL));
     rank.style.left = `${100 * at}%`;
     rank.dataset.edge = edgeOf(at);
     bar.style.setProperty('--at', `${100 * at}%`);
   };
 
-  const morph = (toYs, toAt) => {
+  const morph = (toYs, toAt, duration = 700, curve = ease) => {
     cancelAnimationFrame(frame);
     if (still()) {
       ys = toYs;
@@ -162,7 +167,7 @@ function chart({ onRefresh } = {}) {
     const fromAt = at;
     const start = performance.now();
     const tick = (now) => {
-      const t = ease(Math.min(1, (now - start) / 700));
+      const t = curve(Math.min(1, (now - start) / duration));
       ys = fromYs.map((v, i) => v + (toYs[i] - v) * t);
       at = fromAt + (toAt - fromAt) * t;
       draw();
@@ -286,7 +291,8 @@ function chart({ onRefresh } = {}) {
     graph.tabIndex = 0;
     graph.setAttribute('role', 'group');
     graph.setAttribute('aria-label', describe(next));
-    you.replaceChildren(el('span', 'who', 'Du'), el('span', 'sep', ', '), el('span', 'mine', String(next.you.total)));
+    mine = el('span', 'mine', String(next.you.total));
+    you.replaceChildren(el('span', 'who', 'Du'), el('span', 'sep', ', '), mine);
     placeTries(next.you.total);
     rank.textContent = rankLabel(next);
     const rest = others() ?? [];
@@ -298,7 +304,10 @@ function chart({ onRefresh } = {}) {
     const extra = aside(next);
     numbers.replaceChildren(el('span', 'beaten', `Bättre än ${beatenText(next)}`));
     if (extra) numbers.append(el('span', 'sep', '·'), el('span', 'aside', extra));
-    morph(columns(next, WIDTH), next.you.total / MAX_TOTAL);
+    const first = !ranked;
+    ranked = true;
+    if (first) at = 0;
+    morph(columns(next, WIDTH), next.you.total / MAX_TOTAL, ...(first ? [1600, glide] : []));
   };
 
   const pause = (time) => {

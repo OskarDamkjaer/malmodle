@@ -11,6 +11,8 @@ import {
 
 const el = (id) => document.getElementById(id);
 const boot = el('boot');
+let splashGone;
+const booted = new Promise((resolve) => { splashGone = resolve; });
 const bootmsg = el('bootmsg');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wide = matchMedia('(min-width: 760px)');
@@ -474,6 +476,7 @@ async function compare() {
   end.dataset.crowd = 'asking';
   try {
     const { you, day, poll } = await firstRound();
+    await booted;
     if (!day || phase !== 'end' || practicing || set !== asked) return;
     card ??= crowdCard({
       onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); },
@@ -762,7 +765,10 @@ map.on('load', async () => {
   progress(1);
   renderKinds();
   resume();
-  setTimeout(() => boot.classList.add('done'), Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
+  setTimeout(() => {
+    boot.classList.add('done');
+    setTimeout(splashGone, reducedMotion ? 0 : 450);
+  }, Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
 });
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
