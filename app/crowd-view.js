@@ -266,7 +266,7 @@ function chart({ onRefresh } = {}) {
     graph.tabIndex = 0;
     graph.setAttribute('role', 'group');
     graph.setAttribute('aria-label', describe(next));
-    you.textContent = `Du, ${next.you.total}`;
+    you.replaceChildren(el('span', 'who', 'Du'), el('span', 'sep', ', '), el('span', 'mine', String(next.you.total)));
     rank.textContent = rankLabel(next);
     const rest = others() ?? [];
     ticks.replaceChildren(...rest.map((t) => {

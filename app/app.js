@@ -1,5 +1,5 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square, carry, arrive, verdict } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { pollDelay, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
@@ -13,6 +13,7 @@ const el = (id) => document.getElementById(id);
 const boot = el('boot');
 const bootmsg = el('bootmsg');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wide = matchMedia('(min-width: 1000px)');
 
 const HOME = 'malmodle.se';
 const themeName = themeFromPath(location.pathname);
@@ -396,10 +397,9 @@ function finish() {
   countUp(el('endscore'), total);
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
-  el('endsquares').textContent = scores.map(square).join('');
+  renderSquares();
   el('elsewhere').hidden = Boolean(practicing) || location.hostname === HOME;
   el('elsewherelink').href = `https://${HOME}${themePath(themeName)}#runda=${carry({ key, set, results })}`;
-  el('sharetext').textContent = resultText();
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
@@ -555,19 +555,11 @@ async function share() {
   const button = el('share');
   button.textContent = ok ? 'Kopierat ✓' : 'Kunde inte kopiera';
   button.dataset.state = ok ? 'done' : 'failed';
-  if (ok) selectText(el('sharetext'));
   clearTimeout(copiedTimer);
   copiedTimer = setTimeout(() => {
     button.textContent = 'Kopiera resultat';
     delete button.dataset.state;
   }, 2500);
-}
-
-function selectText(node) {
-  const range = document.createRange();
-  range.selectNodeContents(node);
-  getSelection().removeAllRanges();
-  getSelection().addRange(range);
 }
 
 async function shareNative() {
@@ -654,7 +646,28 @@ function spreadOut() {
 
 function showPlace(r) {
   showInfo(r.q.target, r);
+  markSquare(r);
   requestAnimationFrame(() => frameItems(results.map((x) => x.q.target), 300));
+}
+
+function renderSquares() {
+  el('endsquares').replaceChildren(...results.map((r) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sq';
+    b.dataset.band = band(r.result.score);
+    b.setAttribute('aria-label', `${r.q.target.name}, ${r.result.score} poäng`);
+    b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') showPlace(r); });
+    b.addEventListener('click', () => {
+      if (!wide.matches && !('mapview' in document.body.dataset)) toggleMapView();
+      showPlace(r);
+    });
+    return b;
+  }));
+}
+
+function markSquare(r) {
+  [...el('endsquares').children].forEach((b, i) => b.toggleAttribute('aria-current', results[i] === r));
 }
 
 function toggleMapView() {
@@ -668,6 +681,7 @@ function toggleMapView() {
 
 function closePlace() {
   hide('info');
+  markSquare(null);
 }
 
 map.on('click', (e) => {
@@ -689,7 +703,6 @@ map.on('mousemove', (e) => {
 el('next').addEventListener('click', next);
 el('share').addEventListener('click', share);
 el('sharenative').addEventListener('click', shareNative);
-el('sharetext').addEventListener('click', share);
 el('practise').addEventListener('click', toggleKinds);
 el('again').addEventListener('click', start);
 el('installbutton').addEventListener('click', install);
