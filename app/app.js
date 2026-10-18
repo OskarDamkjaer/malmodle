@@ -1,7 +1,7 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
-import { pollDelay, recentOthers, summarize } from './crowd.mjs';
+import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
@@ -436,27 +436,61 @@ function playerId() {
 
 let card = null;
 let following = null;
+let comparing = 0;
 
 function stopFollowing() {
   following?.stop();
   following = null;
 }
 
+async function fetchDay(url) {
+  try {
+    const res = await fetch(url);
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+}
+
+async function postResult(body) {
+  for (let tries = 0; ; tries++) {
+    if (!navigator.onLine) await new Promise((r) => addEventListener('online', r, { once: true }));
+    try {
+      const res = await fetch('/api/result', { method: 'POST', headers: { 'content-type': 'application/json' }, body });
+      if (res.ok) return await res.json();
+      if (res.status < 500 || tries) return null;
+    } catch {
+      if (tries) return null;
+    }
+    await new Promise((r) => setTimeout(r, RETRY));
+  }
+}
+
+async function ownResult(day, id, scores) {
+  let saved = null;
+  try { saved = posted(JSON.parse(localStorage.getItem(POSTED_KEY)), day, id); } catch {}
+  if (saved) {
+    const file = await fetchDay(saved.poll);
+    if (counted(saved, file)) return { you: saved.you, poll: saved.poll, day: file };
+  }
+  const reply = await postResult(JSON.stringify({ day, set: id, player: playerId(), scores }));
+  if (reply?.poll) {
+    const mine = { day, set: id, you: reply.you, poll: reply.poll, players: reply.day.players };
+    try { localStorage.setItem(POSTED_KEY, JSON.stringify(mine)); } catch {}
+  }
+  return reply;
+}
+
 async function compare() {
   hide('crowd');
   stopFollowing();
+  const turn = ++comparing;
   if (practicing) return;
-  const asked = set;
   const scores = results.map((r) => r.result.score);
   try {
-    const res = await fetch('/api/result', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ day: key, set: setId(set), player: playerId(), scores }),
-    });
-    if (!res.ok) return;
-    const { you, day, poll } = await res.json();
-    if (phase !== 'end' || practicing || set !== asked) return;
+    const reply = await ownResult(key, setId(set), scores);
+    if (!reply || turn !== comparing || phase !== 'end' || practicing) return;
+    const { you, day, poll } = reply;
     card ??= crowdCard({
       onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); },
       onRefresh: () => following?.restart(),
@@ -478,14 +512,10 @@ function follow(url, first, show) {
   let stopped = false;
 
   const ask = async () => {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) return;
-      const day = await res.json();
-      if (stopped || day.players < latest.players) return;
-      latest = day;
-      show(day);
-    } catch {}
+    const day = await fetchDay(url);
+    if (!day || stopped || day.players < latest.players) return;
+    latest = day;
+    show(day);
   };
 
   const schedule = () => {

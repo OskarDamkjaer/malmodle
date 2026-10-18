@@ -86,6 +86,12 @@ async function playThrough(page, viewport, count = 10) {
 for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1280, height: 800 }]]) {
   test(`a day can be played start to finish on ${name}`, { skip }, async () => {
     const { page, context, errors } = await open(viewport);
+    const asked = [];
+    page.on('request', (r) => {
+      const { pathname } = new globalThis.URL(r.url());
+      if (pathname === '/api/result') asked.push('post');
+      else if (pathname.startsWith('/live/')) asked.push('file');
+    });
     const prompts = await playThrough(page, viewport);
 
     await page.waitForSelector('#end:not([hidden])');
@@ -115,12 +121,16 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     await page.click('#infoclose');
     assert.ok(await page.isHidden('#info'));
 
+    assert.equal(asked[0], 'post');
+    asked.length = 0;
     await page.click('#again');
     await page.waitForSelector('#question:not([hidden])');
     assert.equal(await page.textContent('#prompt'), prompts[0]);
     await playThrough(page, viewport);
 
     await page.waitForSelector('#end:not([hidden])');
+    await page.waitForSelector('#crowd:not([hidden])');
+    assert.equal(asked[0], 'file');
     await page.click('#practise');
     assert.equal(await page.locator('#kinds button').count(), 9);
     await page.locator('#kinds button').nth(2).click();

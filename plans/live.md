@@ -64,7 +64,8 @@ Without the cache rule on `data.malmodle.se`, Cloudflare does not cache
 - A CORS policy on the bucket allowing `GET` and `HEAD` from
   `https://malmodle.se`.
 - A cache rule on the zone: hostname `data.malmodle.se`, eligible for cache,
-  edge and browser TTL from the origin's `Cache-Control`.
+  edge and browser TTL from the origin's `Cache-Control`, and a cache key that
+  ignores the query string, so `?anything` cannot bypass the cache into R2.
 - `wrangler.jsonc` binds the bucket as `LIVE`, sets `LIVE_URL`, and runs the
   cron every minute.
 

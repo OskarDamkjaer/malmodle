@@ -1,9 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, field, firstRound, highlight, highlightText,
-  pausedText, place, pollDelay, rankLabel, recentOthers, standing, strongest, strongestText, summarize, tally, waiting,
+  BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, counted, field, firstRound, highlight, highlightText,
+  pausedText, place, pollDelay, posted, rankLabel, recentOthers, standing, strongest, strongestText, summarize, tally, waiting,
 } from '../app/crowd.mjs';
+import { SET_SIZE } from '../app/daily.mjs';
 
 const at = (players, rank, tied = 0) => ({ players, you: { total: 500, scores: [], above: rank - 1, below: players - rank - tied } });
 const rowsOf = (totals, scores = () => []) => totals.map((total, i) => ({ total, scores: scores(i) }));
@@ -159,4 +160,27 @@ test('without a highlight, the strongest question is the one where you beat the 
   assert.equal(strongestText('Möllan', s).text, 'Möllan gick bättre för dig än för 67 % av spelarna.');
   assert.equal(strongest({ ...crowd, atLeast: [301, 301, 301] }), null);
   assert.equal(strongest({ ...crowd, players: 9 }), null);
+});
+
+test('a remembered post is used only for the same day and set, and only while it is whole', () => {
+  const scores = Array.from({ length: SET_SIZE }, (_, i) => i * 10);
+  const you = { total: scores.reduce((a, b) => a + b, 0), scores, at: 1760000000000 };
+  const saved = { day: '2026-10-18', set: 'ab12', you, poll: 'https://data.malmodle.se/2026-10-18/ab12.json', players: 4 };
+  assert.deepEqual(posted(saved, '2026-10-18', 'ab12'), { you, poll: saved.poll, players: 4 });
+  assert.equal(posted(saved, '2026-10-19', 'ab12'), null);
+  assert.equal(posted(saved, '2026-10-18', 'cd34'), null);
+  for (const broken of [
+    null, 'trasig', {}, { ...saved, poll: null }, { ...saved, poll: '' }, { ...saved, players: 0 }, { ...saved, players: 1.5 },
+    { ...saved, you: null }, { ...saved, you: { ...you, total: you.total + 1 } }, { ...saved, you: { ...you, scores: scores.slice(1) } },
+    { ...saved, you: { ...you, scores: scores.map(() => 101) } }, { ...saved, you: { ...you, at: 'igår' } },
+  ]) assert.equal(posted(broken, '2026-10-18', 'ab12'), null, JSON.stringify(broken));
+});
+
+test('the day file counts you once it has at least as many players as your post saw', () => {
+  const saved = { players: 4 };
+  assert.equal(counted(saved, { players: 4 }), true);
+  assert.equal(counted(saved, { players: 9 }), true);
+  assert.equal(counted(saved, { players: 3 }), false);
+  assert.equal(counted(saved, null), false);
+  assert.equal(counted(saved, {}), false);
 });

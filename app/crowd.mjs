@@ -21,6 +21,8 @@ const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 export const RECENT = 15 * MINUTE;
 export const POLL = [[5 * MINUTE, 20 * SECOND], [10 * MINUTE, MINUTE], [20 * MINUTE, 2 * MINUTE], [30 * MINUTE, 5 * MINUTE]];
+export const RETRY = 3 * SECOND;
+export const POSTED_KEY = 'malmodle-posted';
 
 const NBSP = ' ';
 const BEST = ['Bäst', 'Näst bäst', 'Tredje bäst', 'Fjärde bäst', 'Femte bäst', 'Sjätte bäst', 'Sjunde bäst', 'Åttonde bäst', 'Nionde bäst', 'Tionde bäst'];
@@ -81,6 +83,19 @@ export function recentOthers(day, you, now) {
   const mine = recent.indexOf(you.at);
   return recent.length - (mine >= 0 ? 1 : 0);
 }
+
+const isScore = (n) => Number.isInteger(n) && n >= 0 && n <= MAX_SCORE;
+
+export function posted(raw, day, set) {
+  if (raw?.day !== day || raw.set !== set || typeof raw.poll !== 'string' || !raw.poll) return null;
+  if (!Number.isInteger(raw.players) || raw.players < 1) return null;
+  const { total, scores, at } = raw.you ?? {};
+  if (!Array.isArray(scores) || scores.length !== SET_SIZE || !scores.every(isScore)) return null;
+  if (total !== scores.reduce((a, b) => a + b, 0) || !Number.isFinite(at)) return null;
+  return { you: { total, scores, at }, poll: raw.poll, players: raw.players };
+}
+
+export const counted = (saved, file) => Number.isInteger(file?.players) && file.players >= saved.players;
 
 export function pollDelay(elapsed) {
   const step = POLL.find(([until]) => elapsed < until);
