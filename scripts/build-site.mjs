@@ -1,6 +1,7 @@
-import { cpSync, existsSync, mkdirSync, rmSync, statSync, readdirSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, rmSync, statSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { MOUNTS } from './lib/site.mjs';
+import { codeHash, stampWorker } from './lib/stamp.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -32,6 +33,10 @@ for (const m of MOUNTS) {
   }
 }
 
+const worker = join(tmp, 'sw.js');
+const hash = codeHash(tmp);
+writeFileSync(worker, stampWorker(readFileSync(worker, 'utf8'), hash));
+
 rmSync(out, { recursive: true, force: true });
 cpSync(tmp, out, { recursive: true });
 rmSync(tmp, { recursive: true, force: true });
@@ -46,5 +51,5 @@ let files = 0;
   }
 }(out));
 
-console.log(`-> ${out}   ${files} files, ${(bytes / 1048576).toFixed(1)} MB`);
+console.log(`-> ${out}   ${files} files, ${(bytes / 1048576).toFixed(1)} MB, code ${hash}`);
 console.log('   upload as-is. Requirements: HTTPS, and HTTP Range support for .pmtiles.');

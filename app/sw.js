@@ -1,4 +1,4 @@
-const CODE = 'malmo-code-6';
+const CODE = 'malmo-code';
 const MAP = 'malmo-map-2';
 
 const CODE_FILES = [
