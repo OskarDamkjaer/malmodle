@@ -42,7 +42,7 @@ test('the player is stored as a hash of the secret', async () => {
 
 let env;
 const post = (body) => worker.fetch(new Request('http://x/api/result', { method: 'POST', body: JSON.stringify(body) }), env);
-const postAt = (now, body) => postResult(new Request('http://x/api/result', { method: 'POST', body: JSON.stringify(body) }), env, null, now);
+const postAt = (now, body, ctx = null) => postResult(new Request('http://x/api/result', { method: 'POST', body: JSON.stringify(body) }), env, ctx, now);
 const fresh = () => { env = { DB: localD1(), LIVE: localR2(), LIVE_URL: 'https://data.example' }; };
 const file = async (set = good.set) => JSON.parse((await env.LIVE.get(fileKey(good.day, set)))?.body ?? 'null');
 
@@ -229,6 +229,22 @@ test('a batch that fails takes its insert back with it', async () => {
   assert.equal(stored.meta.changes, 1);
   assert.deepEqual(row.results.map((r) => ({ ...r })), [{ players: 1 }]);
   assert.deepEqual(claimed.results.map((r) => ({ ...r })), [{ written: 1 }]);
+});
+
+test('a slow write never replaces a newer file', async () => {
+  fresh();
+  const put = env.LIVE.put;
+  let release;
+  const held = new Promise((r) => { release = r; });
+  env.LIVE.put = async (...args) => { await held; return put(...args); };
+  const writes = [];
+  await postAt(NOW, good, { waitUntil: (p) => writes.push(p) });
+  env.LIVE.put = put;
+  await postAt(NOW + 20000, { ...good, player: secret(2) });
+  assert.equal((await file()).players, 2);
+  release();
+  await Promise.all(writes);
+  assert.equal((await file()).players, 2);
 });
 
 test('a failed write is tried again by the cron', async () => {

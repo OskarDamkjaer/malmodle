@@ -26,10 +26,11 @@ const playerSet = '(SELECT set_id FROM results WHERE day = ?2 AND player = ?3)';
 export const claiming = (db, day, set, now) => db.prepare(claimSql('?3')).bind(now, day, set, WRITE_GAP);
 export const claimingFor = (db, day, player, now) => db.prepare(claimSql(playerSet)).bind(now, day, player, WRITE_GAP);
 
-export async function write(env, file) {
+export async function write(env, file, claimed) {
   try {
     await env.LIVE.put(fileKey(file.day, file.set), JSON.stringify(file), {
       httpMetadata: { contentType: 'application/json; charset=utf-8', cacheControl: CACHE },
+      onlyIf: { uploadedBefore: new Date(claimed) },
     });
   } catch (err) {
     console.error('live:', err);
@@ -40,7 +41,7 @@ export async function write(env, file) {
 export async function publish(env, day, set, now = Date.now()) {
   if (!env.LIVE) return;
   const row = await claiming(env.DB, day, set, now).first();
-  if (row) await write(env, dayFile(day, set, row));
+  if (row) await write(env, dayFile(day, set, row), now);
 }
 
 export async function catchUp(env, now = Date.now()) {

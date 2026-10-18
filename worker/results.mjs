@@ -59,7 +59,7 @@ export async function postResult(request, env, ctx, now = Date.now()) {
   const [row] = replies.at(-1).results;
   const day = dayFile(result.day, set, row);
   if (claimed) {
-    const writing = write(env, day);
+    const writing = write(env, day, now);
     if (ctx?.waitUntil) ctx.waitUntil(writing);
     else await writing;
   }
