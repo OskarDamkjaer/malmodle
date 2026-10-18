@@ -60,11 +60,16 @@ the answer: an area that borders it, a street that meets it, or a place within
 
 - An end screen with the score, today's names, how each went, and the
   descriptions. Descriptions are only shown here.
-- Beside the score, how the day went for everyone: where the total lands
-  among the day's players, a bar of totals with yours marked, and for each
-  question how many cleared it (80 or more) next to your own square. A few
-  lines name what few others cleared and you did, and what most cleared and
-  you did not. The first finished round of the day is the one that counts;
+- Beside the score, how the day went for everyone. A headline names your
+  place when it is near the top (in the top quarter and the first ten, or in
+  the top half percent), and otherwise which part of the field you landed in.
+  Under it, a softened curve of the day's totals with a line at yours, a bar
+  split at your score, and the share of the others you beat. Hovering, tapping
+  or the arrow keys read off any score. One line under the chart picks out the
+  rarest thing you did well: a question few others got fully right, or one
+  where few were closer than you. Until ten have played, the chart is a blur
+  of the scores so far, with a note on how many more are needed and a link to
+  share the game. The first finished round of the day is the one that counts;
   a replay shows that one. Offline, or with no answer from the server, the
   section is left out and nothing else changes.
 - A button that copies the result as text (score and one square per question),

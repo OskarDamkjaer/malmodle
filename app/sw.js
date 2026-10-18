@@ -15,6 +15,7 @@ const CODE_FILES = [
   '/geo.mjs',
   '/daily.mjs',
   '/crowd.mjs',
+  '/crowd-view.js',
   '/questions.mjs',
   '/tiles.mjs',
   '/manifest.webmanifest',

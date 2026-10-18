@@ -11,6 +11,9 @@ node scripts/serve.mjs                 # http://127.0.0.1:8080, with the API
 node scripts/serve.mjs --fake 200      # and 200 made-up players today
 ```
 
+`/dev/crowd.html` on the local server shows the comparison card for many
+made-up crowds. `serve.mjs` mounts `dev/` itself, so the site build leaves it out.
+
 Read the skip count, not just the failures. Tests that need `build/`, `data/`
 or a browser skip instead of failing, so a green run can be an empty one.
 
@@ -26,8 +29,10 @@ osmium, Java and hosts the sandbox cannot reach.
   describes its prompt and what the map shows, and grades an answer.
 - `app/daily.mjs`: the day's set, seeded from the local date, and the share text.
 - `app/geo.mjs`: distances and containment.
-- `app/crowd.mjs`: the end screen's comparison in words, and the limits the
-  API shares with it.
+- `app/crowd.mjs`: the day's summary the API returns, and the end screen's
+  comparison in words with every threshold it uses.
+- `app/crowd-view.js`: the comparison card on the end screen: the chart, its
+  hover and keyboard reading, and the waiting state.
 - `app/map.js`: map layers, hiding labels, framing.
 - `app/themes.mjs`: the styles. Each has a path, UI colours in `app.css` under
   `[data-theme]`, and a basemap palette applied at load. A new style needs all
@@ -35,7 +40,7 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/app.js`: boot and the screens.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
 - `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result,
-  stores it in D1 and sums up the day; `migrations/` is the schema, which
+  stores it in D1 and answers with the day's summary from `crowd.mjs`; `migrations/` is the schema, which
   `scripts/lib/d1.mjs` also loads into `node:sqlite` for `serve.mjs` and the
   tests. Deployed by `wrangler.jsonc`.
 

@@ -11,8 +11,9 @@ your result to share it, and can open the full map to look around on your own.
 It runs in the browser and works offline once loaded. Your browser keeps
 today's round, so a reload picks up where you were, and a random id. When a
 round ends, its scores are sent with that id to get the day's spread back;
-the server stores a hash of the id and the scores, nothing else. It can be
-installed on the home screen.
+the server stores a hash of the id and the scores, nothing else. While fewer
+than 50 have played, the reply also lists their totals, as bare numbers. It
+can be installed on the home screen.
 
 Other styles are kept for trying out at their own addresses:
 [Papper](https://malmodle.se/papper/), [Natt](https://malmodle.se/natt/)
@@ -32,7 +33,9 @@ node scripts/serve.mjs               # http://127.0.0.1:8080
 
 `serve.mjs` also answers the API, from an SQLite database in memory (or
 `--db file`). `--fake 200` fills today with 200 made-up players, to see the
-end screen with a crowd.
+end screen with a crowd. It also serves <http://127.0.0.1:8080/dev/crowd.html>,
+which draws the end screen's comparison for a few dozen made-up crowds, and one
+that fills up as you click. `dev/` is never part of the built site.
 
 `build-quiz.mjs` needs the map data in `build/data/` and `data/cache/`. Either
 rebuild it (below) or fetch a prebuilt copy with

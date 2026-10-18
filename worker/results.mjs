@@ -1,8 +1,6 @@
 import { MAX_SCORE } from '../app/questions.mjs';
 import { SET_SIZE } from '../app/daily.mjs';
-import { BIN, CLEARED, binOf } from '../app/crowd.mjs';
-
-export const BINS = (SET_SIZE * MAX_SCORE) / BIN;
+import { summarize } from '../app/crowd.mjs';
 
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
 const PLAYER = /^[0-9a-f]{32}$/;
@@ -23,24 +21,6 @@ export function parseResult(raw, now = Date.now()) {
   if (typeof player !== 'string' || !PLAYER.test(player)) return null;
   if (!Array.isArray(scores) || scores.length < 1 || scores.length > SET_SIZE || !scores.every(isScore)) return null;
   return { day, set, player, scores };
-}
-
-export function summarize(rows, you) {
-  const histogram = Array(BINS).fill(0);
-  const cleared = you.scores.map(() => 0);
-  let below = 0;
-  for (const row of rows) {
-    histogram[binOf(row.total, BINS)] += 1;
-    if (row.total < you.total) below += 1;
-    row.scores.forEach((s, i) => { if (i < cleared.length && s >= CLEARED) cleared[i] += 1; });
-  }
-  const players = rows.length;
-  return {
-    players,
-    you: { total: you.total, scores: you.scores, below },
-    histogram,
-    cleared: cleared.map((n) => (players ? Math.round((1000 * n) / players) / 1000 : 0)),
-  };
 }
 
 export async function playerKey(secret) {

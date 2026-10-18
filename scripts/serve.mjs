@@ -41,7 +41,7 @@ async function api(req, res, url) {
   console.log(`${reply.status} ${req.method} ${url.pathname}`);
 }
 
-const mounts = MOUNTS
+const mounts = [...MOUNTS, { url: '/dev/', dir: 'dev' }]
   .map((m) => ({ ...m, base: m.url.replace(/\/+$/, '') }))
   .sort((a, b) => b.base.length - a.base.length);
 

@@ -1,6 +1,6 @@
 import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, square } from './daily.mjs';
-import { binOf, clearedLabel, standing, standouts } from './crowd.mjs';
+import { crowdCard } from './crowd-view.js';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { THEMES, themeFromPath, themePath } from './themes.mjs';
@@ -403,7 +403,7 @@ function finish() {
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
   offerInstall();
-  compare(total);
+  compare();
 
   reveal('end');
   el('end').scrollTop = 0;
@@ -432,7 +432,9 @@ function playerId() {
   }
 }
 
-async function compare(total) {
+let card = null;
+
+async function compare() {
   hide('crowd');
   if (practicing) return;
   const asked = set;
@@ -445,54 +447,12 @@ async function compare(total) {
     });
     if (!res.ok) return;
     const crowd = await res.json();
-    if (phase === 'end' && !practicing && set === asked) renderCrowd(crowd, total);
+    if (phase !== 'end' || practicing || set !== asked) return;
+    card ??= crowdCard();
+    el('crowd').replaceChildren(card.node);
+    card.update(crowd, set.map((q) => q.target.name), sum(results.map((r) => r.result.score)));
+    reveal('crowd');
   } catch {}
-}
-
-function renderCrowd(crowd, total) {
-  const { histogram, cleared, you } = crowd;
-  el('crowdtext').textContent = standing(crowd, total);
-  const alone = crowd.players < 2;
-  el('crowdcharts').hidden = alone;
-
-  const peak = Math.max(1, ...histogram);
-  const mine = binOf(you.total, histogram.length);
-  el('histogram').replaceChildren(...histogram.map((n, i) => {
-    const bar = document.createElement('i');
-    bar.style.setProperty('--h', String(n / peak));
-    if (i === mine) bar.dataset.you = 'Du';
-    return bar;
-  }));
-  el('histogram').setAttribute('aria-label', `Poängen för dagens ${crowd.players} spelare. Du fick ${you.total}.`);
-
-  el('cleared').replaceChildren(...cleared.map((share, i) => {
-    const r = results[i];
-    const li = document.createElement('li');
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.dataset.band = band(you.scores[i]);
-    b.setAttribute('aria-label', clearedLabel(r.q.target.name, share, you.scores[i]));
-    b.title = b.getAttribute('aria-label');
-    const track = document.createElement('span');
-    track.className = 'track';
-    const fill = document.createElement('span');
-    fill.className = 'fill';
-    fill.style.setProperty('--share', String(share));
-    const dot = document.createElement('span');
-    dot.className = 'you';
-    track.append(fill);
-    b.append(track, dot);
-    b.addEventListener('click', () => showPlace(r));
-    li.append(b);
-    return li;
-  }));
-
-  el('standouts').replaceChildren(...standouts(results.map((r) => r.q.target.name), crowd).map((text) => {
-    const li = document.createElement('li');
-    li.textContent = text;
-    return li;
-  }));
-  reveal('crowd');
 }
 
 function resultText() {

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { BINS, parseResult, playerKey, summarize } from '../worker/results.mjs';
+import { parseResult, playerKey } from '../worker/results.mjs';
 import { localD1 } from '../scripts/lib/d1.mjs';
 import worker from '../worker/index.mjs';
 
@@ -23,22 +23,6 @@ test('a result is a day near today, a set, a player and up to ten scores', () =>
     { ...good, scores: [12.5] },
     null,
   ]) assert.equal(parseResult(bad, NOW), null, JSON.stringify(bad));
-});
-
-test('the summary counts totals in bins, who is below you and who cleared each question', () => {
-  const rows = [
-    { total: 0, scores: [0, 0] },
-    { total: 180, scores: [100, 80] },
-    { total: 1000, scores: [100, 79] },
-    { total: 500, scores: [50, 100] },
-  ];
-  const s = summarize(rows, { total: 500, scores: [50, 100] });
-  assert.equal(s.players, 4);
-  assert.equal(s.histogram.length, BINS);
-  assert.equal(s.histogram.reduce((a, b) => a + b, 0), 4);
-  assert.equal(s.histogram[BINS - 1], 1);
-  assert.equal(s.you.below, 2);
-  assert.deepEqual(s.cleared, [0.5, 0.5]);
 });
 
 test('the player is stored as a hash of the secret', async () => {
