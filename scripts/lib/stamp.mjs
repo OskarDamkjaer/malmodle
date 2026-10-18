@@ -4,6 +4,7 @@ import { join, relative, sep } from 'node:path';
 
 const UNHASHED = new Set(['sw.js', 'malmo.pmtiles']);
 const CODE = "const CODE = 'malmo-code';";
+const MAP = "const MAP = 'malmo-map';";
 
 function files(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -21,7 +22,13 @@ export function codeHash(dir) {
   return hash.digest('hex').slice(0, 12);
 }
 
-export function stampWorker(source, hash) {
-  if (!source.includes(CODE)) throw new Error(`sw.js has no ${CODE}`);
-  return source.replace(CODE, `const CODE = 'malmo-code-${hash}';`);
+export function mapHash(dir) {
+  return createHash('sha256').update(readFileSync(join(dir, 'malmo.pmtiles'))).digest('hex').slice(0, 12);
+}
+
+export function stampWorker(source, code, map) {
+  for (const line of [CODE, MAP]) if (!source.includes(line)) throw new Error(`sw.js has no ${line}`);
+  return source
+    .replace(CODE, `const CODE = 'malmo-code-${code}';`)
+    .replace(MAP, `const MAP = 'malmo-map-${map}';`);
 }

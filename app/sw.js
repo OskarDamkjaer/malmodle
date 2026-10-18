@@ -1,5 +1,5 @@
 const CODE = 'malmo-code';
-const MAP = 'malmo-map-2';
+const MAP = 'malmo-map';
 
 const CODE_FILES = [
   '/',
