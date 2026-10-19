@@ -90,3 +90,8 @@ Cloudflare account.
 
 On GitHub Pages there is no API: the post is refused, and the end screen
 leaves the comparison out.
+
+`.github/workflows/watch.yml` checks the live site every half hour: that the
+page and `quiz.json` load and that the Worker answers a bad post with 400. It
+writes nothing. A failed run is emailed to whoever last changed its schedule,
+and GitHub turns it off after 60 days without a push.

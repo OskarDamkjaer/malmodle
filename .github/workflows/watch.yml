@@ -1,0 +1,33 @@
+name: Watch
+
+on:
+  schedule:
+    - cron: '24,54 * * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  live:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 5
+    env:
+      SITE: https://malmodle.se
+      CURL: curl --silent --show-error --retry 2 --retry-delay 10 --max-time 20
+    steps:
+      - name: The page answers
+        run: $CURL --fail "$SITE/" | grep -q 'Malmödle'
+
+      - name: The quiz loads
+        run: $CURL --fail "$SITE/data/quiz.json" | python3 -c 'import json, sys; assert json.load(sys.stdin)["items"]'
+
+      - name: The Worker answers
+        run: |
+          reply=$($CURL --request POST --header 'content-type: application/json' --data '{}' --write-out '\n%{http_code}' "$SITE/api/result")
+          echo "$reply"
+          test "$(tail -n 1 <<<"$reply")" = 400
+          grep -q '"invalid"' <<<"$reply"
