@@ -313,17 +313,18 @@ function streetviewPoint(it) {
   if (it.kind === 'area') return nearest(roads, it.point, it.geometry).point ?? nearest(roads, it.point).point;
   if (it.category === 'park') {
     const outline = it.geometry.type.endsWith('Polygon') ? it.geometry : null;
-    return reached(nearest(paths, it.point, outline), PATH_REACH_M) ?? it.point;
+    return reached(nearest(paths, it.point, outline), PATH_REACH_M);
   }
   if (OPEN_SPACE.has(it.category)) {
-    const road = nearest(roads, it.point);
-    const path = nearest(paths, it.point);
-    return reached(road.distance < path.distance ? road : path, PATH_REACH_M) ?? it.point;
+    const hits = [[nearest(roads, it.point), ROAD_REACH_M], [nearest(paths, it.point), PATH_REACH_M]]
+      .filter(([hit, reach]) => reached(hit, reach))
+      .map(([hit]) => hit);
+    return hits.reduce((a, b) => (b.distance < a.distance ? b : a), hits[0])?.point;
   }
-  return reached(onAddressStreet(it), ROAD_REACH_M) ?? reached(nearest(roads, it.point), ROAD_REACH_M) ?? it.point;
+  return reached(onAddressStreet(it), ROAD_REACH_M) ?? reached(nearest(roads, it.point), ROAD_REACH_M);
 }
 
-for (const it of items) if (it.point && it.geometry) it.streetview = roundCoords(streetviewPoint(it));
+for (const it of items) if (it.point && it.geometry) it.streetview = roundCoords(streetviewPoint(it) ?? it.point);
 
 if (problems.length) {
   console.error(`build-quiz: ${problems.length} problem(s)`);
