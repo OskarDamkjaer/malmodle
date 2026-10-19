@@ -16,7 +16,13 @@ const root = resolve(process.cwd());
 const db = localD1(arg('--db', ':memory:'));
 const fake = Number(arg('--fake', 0));
 const trickle = Number(arg('--trickle', 0));
-const env = { DB: db, LIVE: localR2(), LIVE_URL: '/live' };
+const assets = {
+  fetch: async (request) => {
+    const mount = MOUNTS.find((m) => m.file && !m.page && m.url === new URL(request.url).pathname);
+    return mount && existsSync(mount.file) ? new Response(readFileSync(mount.file)) : new Response('Not found', { status: 404 });
+  },
+};
+const env = { DB: db, LIVE: localR2(), LIVE_URL: '/live', ASSETS: assets };
 const ctx = { waitUntil: (promise) => promise.catch((err) => console.error(err)) };
 
 function fakePlayers() {

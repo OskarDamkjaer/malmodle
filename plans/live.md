@@ -92,7 +92,7 @@ Without the cache rule on `data.malmodle.se`, Cloudflare does not cache
 - `wrangler.jsonc` binds the bucket as `LIVE`, sets `LIVE_URL`, runs the
   cron every minute, and turns on Workers Logs. Errors and failed requests
   show there by themselves; the cron logs each file it found behind, so a
-  set id that is not the day's shows up as a line of its own.
+  set id from before a mid-day deploy shows up as a line of its own.
 
 ## Options
 
@@ -109,6 +109,11 @@ Without the cache rule on `data.malmodle.se`, Cloudflare does not cache
 
 ## Abuse
 
+- The Worker only takes the day's own set, which it works out from
+  `quiz.json` in its static assets the way the browser does, or a set that
+  already has a `days` row that day, so players who loaded the site before a
+  deploy that changed the deck still count. A made-up set id is refused with
+  409 before anything is written, so it cannot add rows, files or cron work.
 - A Cloudflare rate-limiting rule on `/api/result` blocks an IP for 10
   seconds after 20 requests in 10 seconds. It stops one machine flooding the
   database. A lower limit would block shared addresses (a class on one school
