@@ -1,6 +1,6 @@
 import {
-  FEWEST_TO_RANK, MAX_TOTAL, aside, beatenText, belowText, columns, countBelow, highlight, highlightText,
-  pausedText, practiceTip, rankLabel, standing, strongest, strongestText, waiting,
+  MAX_TOTAL, aside, beatenText, belowText, columns, countBelow, highlight, highlightText,
+  pausedText, practiceTip, rankLabel, shown, standing, strongest, strongestText, waiting,
 } from './crowd.mjs';
 
 const W = 300;
@@ -63,7 +63,7 @@ async function invite(link) {
 
 let ids = 0;
 
-function chart({ onRefresh } = {}) {
+function chart({ onRefresh, onEarly } = {}) {
   const id = `crowd${ids++}`;
   const drawing = svg('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const defs = svg('defs');
@@ -99,7 +99,11 @@ function chart({ onRefresh } = {}) {
   refresh.type = 'button';
   refresh.hidden = true;
   refresh.addEventListener('click', () => onRefresh?.());
-  wait.append(waitText, refresh, link);
+  const early = el('button', 'invite early');
+  early.type = 'button';
+  early.hidden = true;
+  early.addEventListener('click', () => onEarly?.());
+  wait.append(waitText, refresh, link, early);
   const cursor = el('span', 'cursor');
   const cursorScore = el('span', 'cursor-score');
   const cursorShare = el('span', 'cursor-share');
@@ -129,6 +133,8 @@ function chart({ onRefresh } = {}) {
     if (stop) refresh.textContent = stop.button;
     link.hidden = !words;
     if (words && !('done' in link.dataset)) link.textContent = `${words.invite} →`;
+    early.hidden = !words?.early || !onEarly;
+    if (words?.early) early.textContent = words.early;
     if (paused) graph.dataset.paused = '';
     else delete graph.dataset.paused;
     if (crowd) graph.setAttribute('aria-label', paused ? waitText.textContent : describe(crowd));
@@ -272,9 +278,8 @@ function chart({ onRefresh } = {}) {
     }));
   };
 
-  const update = (next, { recent = 0, tries: played = [] } = {}) => {
+  const update = (next, { recent = 0, tries: played = [], ready = shown(next.players) } = {}) => {
     tries = played;
-    const ready = next.players >= FEWEST_TO_RANK;
     crowd = ready ? next : null;
     waitingFor = ready ? null : { players: next.players, recent };
     say();
@@ -323,15 +328,24 @@ function chart({ onRefresh } = {}) {
 export function crowdCard({ onPractise, onRefresh } = {}) {
   const node = el('div', 'crowd');
   const top = el('div', 'standing');
-  const graph = chart({ onRefresh });
+  let early = false;
+  let last = null;
+  const graph = chart({
+    onRefresh,
+    onEarly: () => {
+      early = true;
+      if (last) update(...last);
+    },
+  });
   const best = el('div', 'best');
   node.append(top, graph.node, best);
 
   const update = (crowd, names, live = {}) => {
-    const ready = crowd.players >= FEWEST_TO_RANK;
+    last = [crowd, names, live];
+    const ready = shown(crowd.players, early);
     const said = ready ? standing(crowd) : null;
     top.replaceChildren(...(said ? [el('p', 'head', said.head), el('p', 'dek', said.dek)] : []));
-    graph.update(crowd, live);
+    graph.update(crowd, { ...live, ready });
     const hl = ready ? highlight(crowd) : null;
     const strong = ready && !hl ? strongest(crowd) : null;
     const tip = ready && !hl && !strong && onPractise;

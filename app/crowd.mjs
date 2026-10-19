@@ -7,6 +7,7 @@ export const BINS = MAX_TOTAL / BIN;
 export const EXACT_BELOW = 50;
 
 export const FEWEST_TO_RANK = 10;
+export const FEWEST_TO_PEEK = 2;
 export const PLACES_NAMED = 10;
 export const TOP_PART = 1 / 4;
 export const TOP_ALWAYS = 0.005;
@@ -122,6 +123,8 @@ export function countBelow({ histogram, totals }, score) {
 const tiedWith = ({ players, you }) => players - you.above - you.below - 1;
 const beaten = ({ players, you }) => you.below / (players - 1);
 
+export const shown = (players, early = false) => players >= FEWEST_TO_RANK || (early && players >= FEWEST_TO_PEEK);
+
 export function waiting(players, { recent = 0, paused = false } = {}) {
   const left = Math.max(1, FEWEST_TO_RANK - players);
   const when = `när ${left === 1 ? 'en' : say(left)} till har spelat.`;
@@ -129,6 +132,7 @@ export function waiting(players, { recent = 0, paused = false } = {}) {
   return {
     text: paused ? `Statistiken visas ${when}` : `Statistiken visas automatiskt ${when}\n${lately}`,
     invite: 'Dela Malmödle med en vän',
+    early: players >= FEWEST_TO_PEEK ? 'Visa ändå' : null,
   };
 }
 

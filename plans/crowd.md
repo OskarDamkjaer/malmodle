@@ -21,8 +21,10 @@ in `app/crowd.mjs`, the card in `app/crowd-view.js`, and
   are taken from 10-point bins. Your own place is exact at any size.
 - **Ten before anything.** Until ten have played the card shows the scores so
   far as a blur, counts down, says how many others finished in the last
-  quarter hour, and offers a link to share the game. The card keeps its size
-  in every state, including the highlight's space.
+  quarter hour, and offers a link to share the game. Once anyone else has
+  played, "Visa ändå" shows the chart for the few there are, with the
+  standing but no fact about a question, which needs ten. The card keeps its
+  size in every state, including the highlight's space.
 - **Paused, not hidden.** When polling stops, the chart fades and says since
   when, with a button to update. Before ten have played the same line sits in
   the waiting text.
