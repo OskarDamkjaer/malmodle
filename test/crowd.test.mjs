@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, counted, field, highlight, highlightText,
-  pausedText, place, pollDelay, posted, rankLabel, recentOthers, standing, strongest, strongestText, summarize, tally, waiting,
+  pausedText, place, pollDelay, posted, rankLabel, recentOthers, shown, standing, strongest, strongestText, summarize, tally, waiting,
 } from '../app/crowd.mjs';
 import { SET_SIZE } from '../app/daily.mjs';
 
@@ -88,12 +88,18 @@ test('your share and place read the same way everywhere', () => {
   assert.equal(aside(at(300, 150)), null);
 });
 
-test('the wait counts down in words, and says who finished lately', () => {
+test('the wait counts down in words, says who finished lately, and can be skipped once there is someone to compare with', () => {
   assert.match(waiting(1).text, /^Statistiken visas automatiskt när nio till har spelat\.\nKika in igen/);
   assert.match(waiting(9).text, /när en till har spelat/);
   assert.match(waiting(3, { recent: 1 }).text, /\nEn annan spelade klart senaste kvarten\.$/);
   assert.match(waiting(3, { recent: 4 }).text, /\nFyra andra spelade klart senaste kvarten\.$/);
   assert.equal(waiting(3, { recent: 4, paused: true }).text, 'Statistiken visas när sju till har spelat.');
+  assert.equal(waiting(1).early, null);
+  assert.equal(waiting(2).early, 'Visa ändå');
+  assert.equal(shown(9), false);
+  assert.equal(shown(10), true);
+  assert.equal(shown(1, true), false);
+  assert.equal(shown(2, true), true);
 });
 
 test('the last quarter hour counts the others who finished in it', () => {
