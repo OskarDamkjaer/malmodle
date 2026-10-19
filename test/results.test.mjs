@@ -10,10 +10,15 @@ import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import worker from '../worker/index.mjs';
+import { dailySet, setId } from '../app/daily.mjs';
+import { fixture } from './fixture.mjs';
 
 const NOW = Date.parse('2026-10-13T12:00:00Z');
 const secret = (n) => n.toString(16).padStart(32, '0');
-const good = { day: '2026-10-13', set: 'a1b2c3d4', player: secret(1), scores: [100, 80, 0, 50, 100, 100, 20, 90, 60, 100] };
+const ITEMS = fixture();
+const setFor = (day, items = ITEMS) => setId(dailySet(items, day));
+const assets = (items = ITEMS) => ({ fetch: async () => Response.json({ items }) });
+const good = { day: '2026-10-13', set: setFor('2026-10-13'), player: secret(1), scores: [100, 80, 0, 50, 100, 100, 20, 90, 60, 100] };
 
 test('a result is a day near today, a set, a player and ten scores', () => {
   assert.deepEqual(parseResult(good, NOW), good);
@@ -43,26 +48,48 @@ test('the player is stored as a hash of the secret', async () => {
 let env;
 const post = (body) => worker.fetch(new Request('http://x/api/result', { method: 'POST', body: JSON.stringify(body) }), env);
 const postAt = (now, body, ctx = null) => postResult(new Request('http://x/api/result', { method: 'POST', body: JSON.stringify(body) }), env, ctx, now);
-const fresh = () => { env = { DB: localD1(), LIVE: localR2(), LIVE_URL: 'https://data.example' }; };
+const fresh = () => { env = { DB: localD1(), LIVE: localR2(), LIVE_URL: 'https://data.example', ASSETS: assets() }; };
 const file = async (set = good.set) => JSON.parse((await env.LIVE.get(fileKey(good.day, set)))?.body ?? 'null');
 
 test('the first result of the day counts, and replays return it', async () => {
   fresh();
   const today = new Date().toISOString().slice(0, 10);
-  const first = await (await post({ ...good, day: today })).json();
+  const played = { ...good, day: today, set: setFor(today) };
+  const first = await (await post(played)).json();
   assert.equal(first.day.players, 1);
   assert.equal(first.you.total, 700);
   assert.deepEqual(first.you.scores, good.scores);
 
-  const again = await (await post({ ...good, day: today, scores: Array(10).fill(0) })).json();
+  const again = await (await post({ ...played, scores: Array(10).fill(0) })).json();
   assert.equal(again.day.players, 1);
   assert.equal(again.you.total, 700);
 
-  await post({ ...good, day: today, player: secret(2), scores: Array(10).fill(0) });
-  await post({ ...good, day: today, player: secret(3), set: 'ffff', scores: Array(10).fill(100) });
-  const third = await (await post({ ...good, day: today })).json();
-  assert.equal(third.day.players, 2, 'a different set is counted apart');
+  await post({ ...played, player: secret(2), scores: Array(10).fill(0) });
+  const third = await (await post(played)).json();
+  assert.equal(third.day.players, 2);
   assert.equal(summarize(third.day, third.you).you.below, 1);
+});
+
+test('only the day\'s own set is taken, and one already played that day', async () => {
+  fresh();
+  const made = await postAt(NOW, { ...good, set: 'ffff' });
+  assert.equal(made.status, 409);
+  assert.equal((await env.DB.prepare('SELECT count(*) AS n FROM days').first()).n, 0);
+
+  const before = ITEMS.slice(1);
+  const old = setFor(good.day, before);
+  assert.notEqual(old, good.set);
+  env.ASSETS = assets(before);
+  assert.equal((await (await postAt(NOW, { ...good, set: old })).json()).day.set, old);
+  env.ASSETS = assets();
+  const late = await (await postAt(NOW + 1, { ...good, set: old, player: secret(2) })).json();
+  assert.equal(late.day.players, 2, 'a set from before a deploy is still counted that day');
+  const now = await (await postAt(NOW + 2, { ...good, player: secret(3) })).json();
+  assert.equal(now.day.players, 1, 'and apart from the new one');
+
+  delete env.ASSETS;
+  assert.equal((await postAt(NOW + 3, { ...good, set: setFor('2026-10-14'), day: '2026-10-14', player: secret(4) })).status, 409);
+  assert.equal((await postAt(NOW + 4, { ...good, player: secret(5) })).status, 200, 'without the quiz only played sets are taken');
 });
 
 test('the day keeps a running count that matches the stored results', async () => {

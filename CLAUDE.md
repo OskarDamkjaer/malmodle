@@ -41,8 +41,9 @@ osmium, Java and hosts the sandbox cannot reach.
   three plus its path in `app/sw.js`; `test/themes.test.mjs` checks them.
 - `app/app.js`: boot and the screens.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
-- `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result,
-  stores it in D1 and answers with your first round and the day's numbers.
+- `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result
+  against the day's set, which `sets.mjs` works out from `quiz.json`, stores
+  it in D1 and answers with your first round and the day's numbers.
   `live.mjs` writes the day's numbers to R2 for polling, from a post or the
   cron. `migrations/` is the schema, whose trigger keeps the running count,
   which `scripts/lib/d1.mjs` also loads into `node:sqlite` for `serve.mjs`
