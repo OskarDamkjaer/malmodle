@@ -425,6 +425,20 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
   #result, #choices { padding: 16px 18px; }
 }
 
+@media (max-width: 759px) {
+  body:not([data-mapview]) :is(#report, #maptip) { z-index: 4; }
+}
+
+@media (max-width: 759px) and (max-height: 720px) {
+  #end .sheet { padding-top: calc(var(--safe-top) + 12px); padding-bottom: 8px; }
+  .total { margin-top: 10px; }
+  .total strong { font-size: 52px; }
+  .crowd { margin-top: 8px; }
+  .crowd .best { margin-top: 10px; padding-top: 8px; }
+  .round { margin-top: 14px; padding-top: 10px; }
+  #end .actions { margin: 4px 0 8px; }
+}
+
 @media (max-height: 520px) and (min-width: 600px) {
   #question { padding: 8px 16px 10px; }
   #prompt { margin-top: 4px; font-size: 20px; }
