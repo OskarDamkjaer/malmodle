@@ -99,11 +99,11 @@ function chart({ onRefresh, onEarly } = {}) {
   refresh.type = 'button';
   refresh.hidden = true;
   refresh.addEventListener('click', () => onRefresh?.());
-  const early = el('button', 'invite early');
+  const early = el('button', 'inline');
   early.type = 'button';
-  early.hidden = true;
   early.addEventListener('click', () => onEarly?.());
-  wait.append(waitText, refresh, link, early);
+  const peeking = el('span', 'peek');
+  wait.append(waitText, refresh, link);
   const cursor = el('span', 'cursor');
   const cursorScore = el('span', 'cursor-score');
   const cursorShare = el('span', 'cursor-share');
@@ -128,13 +128,20 @@ function chart({ onRefresh, onEarly } = {}) {
   const say = () => {
     const stop = paused ? pausedText(paused) : null;
     const words = waitingFor ? waiting(waitingFor.players, { recent: waitingFor.recent, paused: Boolean(paused) }) : null;
-    waitText.textContent = [words?.text, stop?.text].filter(Boolean).join('\n');
+    const peek = words?.early && onEarly ? words.early : null;
+    if (peek) {
+      early.textContent = peek.link;
+      peeking.replaceChildren(early, peek.after);
+    }
+    waitText.replaceChildren(
+      words?.text ?? '',
+      ...(peek ? [peeking] : []),
+      stop ? `${words ? '\n' : ''}${stop.text}` : '',
+    );
     refresh.hidden = !stop;
     if (stop) refresh.textContent = stop.button;
     link.hidden = !words;
     if (words && !('done' in link.dataset)) link.textContent = `${words.invite} →`;
-    early.hidden = !words?.early || !onEarly;
-    if (words?.early) early.textContent = words.early;
     if (paused) graph.dataset.paused = '';
     else delete graph.dataset.paused;
     if (crowd) graph.setAttribute('aria-label', paused ? waitText.textContent : describe(crowd));

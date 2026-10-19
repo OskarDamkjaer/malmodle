@@ -351,6 +351,7 @@ body[data-mapview] #endmap { margin-top: 12px; }
 .graph .wait p { margin: 0; font: italic 16px/1.45 var(--font-display); color: var(--ink-soft); white-space: pre-line; }
 .graph .wait .invite { min-height: 0; padding: 4px 2px; font: 700 11px/1.4 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); background: none; border: 0; border-bottom: 1.5px solid currentColor; border-radius: 0; box-shadow: none; cursor: pointer; }
 .graph .wait .invite:hover { color: var(--ink); }
+.graph .wait .peek { white-space: nowrap; }
 .graph .wait [hidden] { display: none; }
 .graph[data-waiting], .graph[data-paused] { cursor: default; }
 .graph[data-waiting] .wait, .graph[data-paused] .wait { opacity: 1; visibility: visible; }

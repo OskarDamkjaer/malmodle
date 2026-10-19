@@ -91,11 +91,15 @@ test('your share and place read the same way everywhere', () => {
 test('the wait counts down in words, says who finished lately, and can be skipped once there is someone to compare with', () => {
   assert.match(waiting(1).text, /^Statistiken visas automatiskt när nio till har spelat\.\nKika in igen/);
   assert.match(waiting(9).text, /när en till har spelat/);
-  assert.match(waiting(3, { recent: 1 }).text, /\nEn annan spelade klart senaste kvarten\.$/);
-  assert.match(waiting(3, { recent: 4 }).text, /\nFyra andra spelade klart senaste kvarten\.$/);
+  assert.match(waiting(3, { recent: 1 }).text, /\nEn annan spelade klart senaste kvarten\. $/);
+  assert.match(waiting(3, { recent: 4 }).text, /\nFyra andra spelade klart senaste kvarten\. $/);
   assert.equal(waiting(3, { recent: 4, paused: true }).text, 'Statistiken visas när sju till har spelat.');
   assert.equal(waiting(1).early, null);
-  assert.equal(waiting(2).early, 'Visa ändå');
+  assert.match(waiting(1).text, /Kika in igen om en stund\.$/);
+  assert.match(waiting(2).text, /\nKika in igen om en stund, eller $/);
+  assert.deepEqual(waiting(2).early, { link: 'visa ändå', after: '?' });
+  assert.equal(waiting(3, { recent: 1 }).early.link, 'Visa ändå');
+  assert.equal(waiting(3, { paused: true }).early, null);
   assert.equal(shown(9), false);
   assert.equal(shown(10), true);
   assert.equal(shown(1, true), false);
