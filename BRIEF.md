@@ -46,8 +46,8 @@ Pointing is the most common. Per kind:
   B are the squares, parks or buildings at the street's ends, or the areas
   they lie in; no decoy also joins them, and a pair belongs to one street.
 
-Every question scores 0–100. A day scores out of 1000. A wrong pick in "Vad är
-det här?", "Direkt söder om" or "Från A till B" scores 25 when it is close to
+Every question scores 0–100. A day scores out of 1000. A wrong pick in "Vad
+ligger här?", "Direkt söder om" or "Från A till B" scores 25 when it is close to
 the answer: an area that borders it, a street that meets it, or a place within
 300 m.
 
