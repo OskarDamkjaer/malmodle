@@ -1,6 +1,7 @@
 # Working in this repo
 
-`BRIEF.md` is what the app is meant to be. `README.md` is for people.
+`BRIEF.md` is what the app is meant to be. `README.md` is for people who
+find the repo, `CONTRIBUTING.md` for working on it.
 
 ## Commands
 
