@@ -54,7 +54,7 @@ publishes it, so bumping that tag is how the map data gets rebuilt.
 scripts/build-basemap.sh             # OpenStreetMap → data/cache/malmo.pmtiles
 node scripts/build-districts.mjs     # → build/data/districts.geojson
 node scripts/build-streets.mjs       # → data/cache/streets.json
-node scripts/build-shapes.mjs        # → data/cache/shapes.json, outlines of places and bridges
+node scripts/build-shapes.mjs        # → data/cache/shapes.json, outlines and street addresses of places and bridges
 node scripts/places-shapes.mjs       # → places/shapes.json, an outline for everything in the long list
 ```
 

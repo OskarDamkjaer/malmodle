@@ -3,7 +3,7 @@ import { dirname } from 'node:path';
 import { bboxGap, bboxOf, distance, interiorPoint } from './lib/geo.mjs';
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
 import { neighbourhood } from './lib/adjacency.mjs';
-import { closest } from '../app/geo.mjs';
+import { closest, contains } from '../app/geo.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -266,6 +266,64 @@ function onShape(geometry, point) {
 }
 
 for (const it of items) if (it.point && it.geometry) it.point = onShape(it.geometry, it.point);
+
+const ROAD_CLASSES = new Set(['motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'minor']);
+const PATH_SUBCLASSES = new Set(['path', 'footway', 'cycleway', 'pedestrian']);
+const OPEN_SPACE = new Set(['bad', 'vatten', 'torg', 'konst', 'omrade']);
+const ROAD_REACH_M = 300;
+const PATH_REACH_M = 150;
+
+const roads = [];
+const paths = [];
+for (const tile of tiles(archive, { zoom: STREET_ZOOM })) {
+  for (const f of layerFeatures(tile.data, 'transportation', tile)) {
+    const { class: kind, subclass } = f.properties;
+    const into = ROAD_CLASSES.has(kind) ? roads : kind === 'path' && PATH_SUBCLASSES.has(subclass) ? paths : null;
+    if (!into) continue;
+    const lines = f.geometry.type === 'MultiLineString' ? f.geometry.coordinates
+      : f.geometry.type === 'LineString' ? [f.geometry.coordinates] : [];
+    for (const line of lines) for (let i = 1; i < line.length; i++) into.push([line[i - 1], line[i]]);
+  }
+}
+
+function nearest(segments, point, within) {
+  let best = { point: null, distance: Infinity };
+  for (const segment of segments) {
+    const c = closest({ type: 'LineString', coordinates: segment }, point);
+    if (c.distance < best.distance && (!within || contains(within, c.point))) best = c;
+  }
+  return best;
+}
+
+const reached = (hit, reach) => (hit?.point && hit.distance <= reach ? hit.point : null);
+
+function streetMiddle(geometry) {
+  const [minX, minY, maxX, maxY] = bboxOf(geometry.coordinates.flat());
+  return closest(geometry, [(minX + maxX) / 2, (minY + maxY) / 2]).point;
+}
+
+function onAddressStreet(it) {
+  const pieces = streetPieces.get(shapesDoc.streets?.[`place:${it.name}`]);
+  return pieces ? closest({ type: 'MultiLineString', coordinates: pieces }, it.point) : null;
+}
+
+function streetviewPoint(it) {
+  if (it.kind === 'street') return streetMiddle(it.geometry);
+  if (it.kind === 'bridge') return it.point;
+  if (it.kind === 'area') return nearest(roads, it.point, it.geometry).point ?? nearest(roads, it.point).point;
+  if (it.category === 'park') {
+    const outline = it.geometry.type.endsWith('Polygon') ? it.geometry : null;
+    return reached(nearest(paths, it.point, outline), PATH_REACH_M) ?? it.point;
+  }
+  if (OPEN_SPACE.has(it.category)) {
+    const road = nearest(roads, it.point);
+    const path = nearest(paths, it.point);
+    return reached(road.distance < path.distance ? road : path, PATH_REACH_M) ?? it.point;
+  }
+  return reached(onAddressStreet(it), ROAD_REACH_M) ?? reached(nearest(roads, it.point), ROAD_REACH_M) ?? it.point;
+}
+
+for (const it of items) if (it.point && it.geometry) it.streetview = roundCoords(streetviewPoint(it));
 
 if (problems.length) {
   console.error(`build-quiz: ${problems.length} problem(s)`);

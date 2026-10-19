@@ -29,10 +29,12 @@ execFileSync('osmium', ['export', `${tmp}/shapes.osm.pbf`, '-o', `${tmp}/shapes-
   '-f', 'geojson', '-a', 'type,id', '--overwrite'], { stdio: 'inherit' });
 
 const byId = new Map();
+const streetOf = new Map();
 for (const f of json(`${tmp}/shapes-raw.geojson`).features) {
   const id = `${f.properties['@type']}/${f.properties['@id']}`;
   if (!byId.has(id)) byId.set(id, []);
   byId.get(id).push(f.geometry);
+  if (f.properties['addr:street'] && !streetOf.has(id)) streetOf.set(id, f.properties['addr:street']);
 }
 
 function shapeOf(place) {
@@ -49,14 +51,17 @@ function shapeOf(place) {
 }
 
 const shapes = {};
+const streets = {};
 const missing = [];
 for (const place of places) {
   const shape = shapeOf(place);
   if (shape) shapes[`${place.kind}:${place.name}`] = shape;
   else missing.push(place.name);
+  const street = place.ids.map((id) => streetOf.get(id)).find(Boolean);
+  if (street) streets[`${place.kind}:${place.name}`] = street;
 }
 
-writeFileSync(outFile, JSON.stringify({ shapes }));
+writeFileSync(outFile, JSON.stringify({ shapes, streets }));
 const outlined = Object.values(shapes).filter((s) => s.type !== 'Point').length;
-console.log(`build-shapes → ${outFile}: ${outlined} of ${places.length} places have a shape`);
+console.log(`build-shapes → ${outFile}: ${outlined} of ${places.length} places have a shape, ${Object.keys(streets).length} a street address`);
 if (missing.length) console.log(`  not found: ${missing.join(', ')}`);
