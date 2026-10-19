@@ -3,7 +3,6 @@ const MAP = 'malmo-map';
 
 const CODE_FILES = [
   '/',
-  '/index.html',
   '/natt/',
   '/papper/',
   '/klar/',
@@ -111,7 +110,7 @@ self.addEventListener('fetch', (event) => {
       return await update;
     } catch (err) {
       if (request.mode === 'navigate') {
-        const shell = await caches.match('/index.html');
+        const shell = await caches.match('/');
         if (shell) return shell;
       }
       throw err;
