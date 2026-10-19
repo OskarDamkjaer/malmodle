@@ -39,6 +39,18 @@ test('a street\'s point is on it', { skip }, () => {
   }
 });
 
+test('every item has a street view point near it', { skip }, () => {
+  for (const it of items) {
+    assert.ok(Number.isFinite(it.streetview?.[0]) && Number.isFinite(it.streetview?.[1]), it.name);
+    const d = distanceTo(it.geometry, it.streetview);
+    assert.ok(d < 400, `${it.name} is ${Math.round(d)} m from its street view point`);
+  }
+});
+
+test('an area\'s street view point is inside it', { skip }, () => {
+  for (const it of items.filter((x) => x.kind === 'area')) assert.ok(contains(it.geometry, it.streetview), it.name);
+});
+
 test('a year of daily sets can be built from the real data', { skip }, () => {
   for (let i = 0; i < 365; i++) {
     const set = dailySet(items, dateKey(new Date(2027, 0, 1 + i)));
