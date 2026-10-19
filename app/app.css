@@ -294,6 +294,7 @@ body[data-mapview] #endmap::after { content: " ↑"; }
 body[data-mapview] #end .sheet > :not(header):not(#endmap) { display: none; }
 body[data-mapview] #endverdict, body[data-mapview] #elsewhere { display: none; }
 #end[data-crowd] #endverdict, #end[data-crowd] #elsewhere { display: none; }
+body:not([data-mapview]) #end[data-crowd="asking"] .total { visibility: hidden; }
 body:not([data-mapview]) #end:has(#crowd:not([hidden]) .graph:not([data-waiting])) .total { display: none; }
 body[data-mapview] #end .total { margin-top: 4px; }
 body[data-mapview] #end .total strong { font-size: 36px; }

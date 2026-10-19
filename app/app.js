@@ -375,15 +375,18 @@ function outcome({ q, result }) {
   return result.score === MAX_SCORE ? 'Rätt.' : `Du svarade ${result.choice}.`;
 }
 
+const counting = new WeakMap();
+
 function countUp(node, total) {
+  cancelAnimationFrame(counting.get(node));
   if (reducedMotion) { node.textContent = String(total); return; }
   const startAt = performance.now();
   const step = (now) => {
     const t = Math.min(1, (now - startAt) / 900);
     node.textContent = String(Math.round(total * (1 - (1 - t) ** 3)));
-    if (t < 1) requestAnimationFrame(step);
+    if (t < 1) counting.set(node, requestAnimationFrame(step));
   };
-  requestAnimationFrame(step);
+  counting.set(node, requestAnimationFrame(step));
 }
 
 function finish() {
@@ -441,6 +444,7 @@ function playerId() {
   }
 }
 
+const PATIENCE = 1500;
 let card = null;
 let following = null;
 let comparing = 0;
@@ -496,6 +500,11 @@ async function compare() {
   if (practicing) return;
   const scores = results.map((r) => r.result.score);
   end.dataset.crowd = 'asking';
+  const slow = setTimeout(() => {
+    if (end.dataset.crowd !== 'asking' || turn !== comparing) return;
+    end.dataset.crowd = 'slow';
+    countUp(el('endscore'), sum(scores));
+  }, PATIENCE);
   try {
     const reply = await ownResult(key, setId(set), scores);
     await booted;
@@ -514,7 +523,9 @@ async function compare() {
     end.dataset.crowd = 'shown';
     if (poll) following = follow(poll, day, show);
   } catch {} finally {
-    if (end.dataset.crowd === 'asking' && turn === comparing) delete end.dataset.crowd;
+    clearTimeout(slow);
+    if (turn === comparing && end.dataset.crowd === 'asking') countUp(el('endscore'), sum(scores));
+    if (turn === comparing && ['asking', 'slow'].includes(end.dataset.crowd)) delete end.dataset.crowd;
   }
 }
 
