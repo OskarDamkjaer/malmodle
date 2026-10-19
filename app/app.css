@@ -106,6 +106,10 @@ html, body {
 }
 
 #map { position: absolute; inset: 0; background: var(--bg); }
+#aim, #aimhint { display: none; position: absolute; pointer-events: none; }
+body[data-pointing]:has(.maplibregl-canvas:focus-visible) :is(#aim, #aimhint) { display: block; }
+#aim { z-index: 2; left: 50%; top: 50%; width: 32px; height: 32px; margin: -16px 0 0 -16px; background: linear-gradient(var(--ink), var(--ink)) center / 2px 100% no-repeat, linear-gradient(var(--ink), var(--ink)) center / 100% 2px no-repeat; filter: drop-shadow(0 0 1.5px var(--bg)) drop-shadow(0 0 1.5px var(--bg)); }
+#aimhint { z-index: 3; left: 50%; bottom: calc(var(--safe-bottom) + var(--attribution) + 12px); width: max-content; max-width: calc(100vw - 2 * var(--gap)); margin: 0; padding: 8px 12px; transform: translateX(-50%); font-size: 14px; line-height: 1.4; color: var(--ink); background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: 0 2px 8px rgb(0 0 0 / 15%); }
 
 [hidden] { display: none !important; }
 

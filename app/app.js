@@ -107,6 +107,7 @@ let index = 0;
 let results = [];
 let phase = 'loading';
 let practicing = null;
+let aimed = false;
 
 const current = () => set[index];
 const typeOf = (q) => TYPES[q.type];
@@ -206,6 +207,9 @@ function ask() {
   hide('result', 'info');
   delete document.body.dataset.answered;
   reveal('question');
+  if (type.input === 'map') document.body.dataset.pointing = '';
+  else delete document.body.dataset.pointing;
+  if (type.input === 'map' && aimed) map.getCanvas().focus({ preventScroll: true });
 
   const choices = el('choices');
   choices.replaceChildren();
@@ -215,7 +219,7 @@ function ask() {
       b.type = 'button';
       b.textContent = option[0].toUpperCase() + option.slice(1);
       b.setAttribute('aria-keyshortcuts', String(i + 1));
-      b.addEventListener('click', () => answer(option));
+      b.addEventListener('click', (e) => answer(option, e.detail === 0));
       choices.append(b);
     });
     choices.dataset.count = q.options.length;
@@ -249,9 +253,11 @@ async function clickedStreet(tap) {
   return street && (byName.get(street.name)?.kind === 'street' ? byName.get(street.name) : street);
 }
 
-async function answer(value) {
+async function answer(value, keyed = false) {
   if (phase !== 'asking') return;
   phase = 'grading';
+  aimed = keyed;
+  delete document.body.dataset.pointing;
   const q = current();
   const type = typeOf(q);
   const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value).catch(() => undefined) : undefined;
@@ -756,7 +762,12 @@ el('maptipbutton').addEventListener('click', (e) => {
 
 document.addEventListener('keydown', (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (phase === 'asking' && /^[1-9]$/.test(e.key)) {
+  if (phase === 'asking' && 'pointing' in document.body.dataset && document.activeElement === map.getCanvas() && (e.key === 'Enter' || e.key === ' ')) {
+    e.preventDefault();
+    const canvas = map.getCanvas();
+    const { lng, lat } = map.unproject([canvas.clientWidth / 2, canvas.clientHeight / 2]);
+    answer([lng, lat], true);
+  } else if (phase === 'asking' && /^[1-9]$/.test(e.key)) {
     const button = el('choices').children[Number(e.key) - 1];
     if (button && !el('choices').hidden) { e.preventDefault(); button.click(); }
   } else if (phase === 'answered' && e.key === 'Enter' && document.activeElement !== el('next')) {

@@ -83,6 +83,29 @@ async function playThrough(page, viewport, count = 10) {
   return prompts;
 }
 
+test('the map can be answered from the keyboard', { skip }, async () => {
+  const viewport = { width: 1280, height: 800 };
+  const { page, context, errors } = await open(viewport);
+  for (let i = 0; i < 10; i++) {
+    await page.waitForSelector('#question:not([hidden])');
+    if (await page.isVisible('#choices')) {
+      await page.keyboard.press('1');
+    } else {
+      const onMap = () => page.evaluate(() => document.activeElement === window.map.getCanvas());
+      for (let t = 0; t < 10 && !(await onMap()); t++) await page.keyboard.press('Tab');
+      assert.ok(await onMap());
+      assert.ok(await page.isVisible('#aim'));
+      await page.keyboard.press('Enter');
+    }
+    await page.waitForSelector('#result:not([hidden])');
+    assert.ok(!(await page.isVisible('#aim')));
+    await page.keyboard.press('Enter');
+  }
+  await page.waitForSelector('#end:not([hidden])');
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
 for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1280, height: 800 }]]) {
   test(`a day can be played start to finish on ${name}`, { skip }, async () => {
     const { page, context, errors } = await open(viewport);
