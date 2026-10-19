@@ -128,11 +128,15 @@ export const shown = (players, early = false) => players >= FEWEST_TO_RANK || (e
 export function waiting(players, { recent = 0, paused = false } = {}) {
   const left = Math.max(1, FEWEST_TO_RANK - players);
   const when = `när ${left === 1 ? 'en' : say(left)} till har spelat.`;
-  const lately = recent ? `${cap(others(recent))} spelade klart senaste kvarten.` : 'Kika in igen om en stund.';
+  const invite = 'Dela Malmödle med en vän';
+  if (paused) return { text: `Statistiken visas ${when}`, invite, early: null };
+  const peek = players >= FEWEST_TO_PEEK;
+  const lately = recent ? `${cap(others(recent))} spelade klart senaste kvarten.${peek ? ' ' : ''}`
+    : `Kika in igen om en stund${peek ? ', eller ' : '.'}`;
   return {
-    text: paused ? `Statistiken visas ${when}` : `Statistiken visas automatiskt ${when}\n${lately}`,
-    invite: 'Dela Malmödle med en vän',
-    early: players >= FEWEST_TO_PEEK ? 'Visa ändå' : null,
+    text: `Statistiken visas automatiskt ${when}\n${lately}`,
+    invite,
+    early: peek ? { link: recent ? 'Visa ändå' : 'visa ändå', after: '?' } : null,
   };
 }
 
