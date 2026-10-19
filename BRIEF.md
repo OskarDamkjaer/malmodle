@@ -55,6 +55,10 @@ the answer: an area that borders it, a street that meets it, or a place within
 
 - No labels on the map while a question is open. Pan and zoom are allowed.
 - Always north-up.
+- From the keyboard, tabbing to the map shows a crosshair in its middle and a
+  line on how to use it: arrows pan, + and − zoom, Enter answers at the
+  crosshair. After a keyboard answer the next map question takes focus by
+  itself. Nothing shows for a mouse or a finger.
 
 ## After the set
 
