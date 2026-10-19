@@ -11,7 +11,7 @@ const missing = MOUNTS.map((m) => m.file ?? m.dir).filter((p) => !existsSync(p))
 if (missing.length) {
   console.error('FATAL: nothing to copy from:');
   for (const p of missing) console.error(`  ${p}`);
-  console.error('\nBuild the data and assets first (see README).');
+  console.error('\nBuild the data and assets first (see CONTRIBUTING.md).');
   process.exit(1);
 }
 
