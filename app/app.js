@@ -294,6 +294,8 @@ function showInfo(item, played) {
   }
   el('infosource').hidden = !item.source;
   if (item.source) el('infosource').href = item.source;
+  const [lng, lat] = item.streetview ?? item.point;
+  el('infostreet').href = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
 
   const figure = el('infophoto');
   figure.replaceChildren();

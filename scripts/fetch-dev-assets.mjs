@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execSync } from 'node:child_process';
 
-const TAG = 'dev-assets-v6';
+const TAG = 'dev-assets-v7';
 const FILE = 'dev-assets.tar.gz';
 
 const CHECKS = [

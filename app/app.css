@@ -223,7 +223,8 @@ body[data-answered] #question { display: none; }
 #infoname { margin: 1px 0 0; font-size: 18px; font-weight: var(--display-weight); letter-spacing: var(--display-tracking); }
 #infoabout { margin: 4px 0 0; font-size: 14px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 #infoabout:empty { display: none; }
-#infosource { display: none; font-size: 14px; color: var(--ink-soft); }
+#infolinks { display: flex; gap: 16px; margin: 4px 0 0; font-size: 14px; }
+#infolinks a { color: var(--ink-soft); }
 
 #end {
   position: absolute;
@@ -503,7 +504,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
   #info .text { padding: 14px 18px 18px; }
   #infoname { font-size: 24px; }
   #infoabout { font-size: 15px; line-height: 1.5; display: block; margin-top: 8px; }
-  #infosource { display: inline-block; margin-top: 10px; }
+  #infolinks { margin-top: 10px; }
 }
 
 @keyframes slide {
