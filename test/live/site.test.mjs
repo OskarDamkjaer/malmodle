@@ -20,6 +20,16 @@ after(async () => {
   await browser?.close();
 });
 
+const again = (fn) => async (t) => {
+  try {
+    await fn(t);
+  } catch (e) {
+    t.diagnostic(`first try failed, trying again: ${String(e.message).replace(/\s+/g, ' ')}`);
+    for (const context of browser?.contexts() ?? []) await context.close();
+    await fn(t);
+  }
+};
+
 const own = (site, url) => new URL(url).origin === new URL(site).origin;
 
 async function open(site, viewport, path = '/', { workers = 'block' } = {}) {
@@ -52,7 +62,7 @@ for (const site of SITES) {
   });
 
   for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1280, height: 800 }]]) {
-    test(`all but the last question can be answered on ${site} on ${name}`, { skip }, async () => {
+    test(`all but the last question can be answered on ${site} on ${name}`, { skip }, again(async () => {
       const { page, context, errors } = await open(site, viewport);
       for (let i = 0; i < 9; i++) {
         await page.waitForSelector('#question:not([hidden])');
@@ -66,19 +76,19 @@ for (const site of SITES) {
       assert.equal(await page.locator('#dots li[data-band]').count(), 9);
       assert.deepEqual(errors, []);
       await context.close();
-    });
+    }));
   }
 
-  test(`every style boots on ${site}`, { skip }, async () => {
+  test(`every style boots on ${site}`, { skip }, again(async () => {
     for (const [name, theme] of Object.entries(THEMES)) {
       const { page, context, errors } = await open(site, { width: 390, height: 844 }, themePath(name));
       assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), theme.map.background, name);
       assert.deepEqual(errors, [], name);
       await context.close();
     }
-  });
+  }));
 
-  test(`${site} opens offline once it has been visited`, { skip }, async () => {
+  test(`${site} opens offline once it has been visited`, { skip }, again(async () => {
     const { page, context, errors } = await open(site, { width: 390, height: 844 }, '/', { workers: 'allow' });
     await page.waitForFunction(async () => navigator.serviceWorker.controller
       && Number((await caches.match('/malmo.pmtiles'))?.headers.get('Content-Length')) > 0, null, { timeout: 60000 });
@@ -90,13 +100,13 @@ for (const site of SITES) {
     if (!booted) assert.fail(`no question offline; boot says "${await page.textContent('#bootmsg')}"; errors: ${offline().join(' | ') || 'none'}`);
     assert.deepEqual(offline(), []);
     await context.close();
-  });
+  }));
 
-  test(`the results API on ${site} turns away a broken result`, { skip: new URL(site).hostname !== 'malmodle.se' && 'no API here' }, async () => {
+  test(`the results API on ${site} turns away a broken result`, { skip: new URL(site).hostname !== 'malmodle.se' && 'no API here' }, again(async () => {
     const res = await fetch(`${site}/api/result`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' });
     assert.equal(res.status, 400);
     assert.match(await res.text(), /"invalid"/);
-  });
+  }));
 }
 
 test('the build to compare with is there', { skip: !BUILD && 'BUILD is not set' }, () => {

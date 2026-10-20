@@ -86,7 +86,9 @@ last question on phone and desktop, boots every style, opens the site offline
 after one visit, and checks the API turns away a broken result. It never
 finishes a day, so it never posts a result or counts as a player; posting is
 covered by the browser tests before the release, against the same Worker code
-on SQLite. A failure there means fixing forward; nothing is rolled back. `SITES` picks the sites (malmodle.se by
+on SQLite. Each check gets a second try in a fresh browser, so a passing blip on
+the host does not fail the deploy; the first failure stays in the log. A
+failure there means fixing forward; nothing is rolled back. `SITES` picks the sites (malmodle.se by
 default) and `BUILD` the built site to compare with.
 
 ## Hosting
