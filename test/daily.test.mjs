@@ -40,6 +40,11 @@ test('the days before the spaced deal keep the sets they were played with', () =
     ['2026-10-19', 'd0e04b1c'],
     ['2026-10-20', '7e12f4db'],
     ['2026-10-21', '24dabb6a'],
+    ['2026-10-22', '2a36c771'],
+    ['2026-10-23', 'fc484e08'],
+    ['2026-10-24', 'fe0ca251'],
+    ['2026-10-25', 'a467291f'],
+    ['2026-10-26', 'f7973056'],
   ];
   for (const [day, id] of played) assert.equal(setId(dailySet(items, day)), id, day);
   assert.equal(laterKey(played.at(-1)[0], 1), SPACED);

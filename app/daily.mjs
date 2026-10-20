@@ -14,7 +14,7 @@ export const SET_SIZE = 10;
 
 export const EPOCH = '2026-01-01';
 export const LAUNCH = '2026-10-10';
-export const SPACED = '2026-10-22';
+export const SPACED = '2026-10-27';
 
 export const GROUP = { area: 'area', street: 'street', landmark: 'place', bridge: 'place' };
 
@@ -188,7 +188,7 @@ function spacedRound(before, rng) {
     const lately = new Set(tail.map((o) => o.apart).filter(Boolean));
     const fits = left.filter((x) => !lately.has(x.card.apart));
     const ready = fits.filter((x) => x.ready <= q);
-    const due = fits.filter((x) => x.card.apart && groups.get(x.card.apart) * APART_GAP >= n - q);
+    const due = fits.filter((x) => x.card.apart && (groups.get(x.card.apart) - 1) * APART_GAP >= n - q - 1);
     const pool = due.length ? due : ready.length ? ready : fits.length ? [fits.reduce((a, b) => (b.ready < a.ready ? b : a))] : left;
     const pick = pool[Math.floor(rng() * pool.length)];
     out.push(pick.card);
