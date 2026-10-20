@@ -71,6 +71,29 @@ export function closest(geometry, point) {
 
 export const distanceTo = (geometry, point) => closest(geometry, point).distance;
 
+export function along(geometry, count) {
+  if (geometry.type === 'Point') return [geometry.coordinates];
+  const segments = lines(geometry).flatMap((line) => line.slice(1).map((b, i) => [line[i], b, metersBetween(line[i], b)]));
+  const total = segments.reduce((sum, [, , m]) => sum + m, 0);
+  if (!total) return [lines(geometry)[0][0]];
+  const out = [];
+  let k = 0;
+  let passed = 0;
+  for (let n = 0; n < count; n++) {
+    const want = ((n + 0.5) / count) * total;
+    while (k < segments.length - 1 && passed + segments[k][2] < want) passed += segments[k++][2];
+    const [a, b, m] = segments[k];
+    const t = m ? Math.min(1, (want - passed) / m) : 0;
+    out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
+  }
+  return out;
+}
+
+export function meanDistance(from, to, count = 24) {
+  const points = along(from, count);
+  return points.reduce((sum, p) => sum + distanceTo(to, p), 0) / points.length;
+}
+
 function crosses(a, b, c, d) {
   const side = (p, q, r) => Math.sign((q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]));
   return side(a, b, c) !== side(a, b, d) && side(c, d, a) !== side(c, d, b);

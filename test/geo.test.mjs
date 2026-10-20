@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { around, bounds, closest, contains, distanceTo, metersBetween, offset } from '../app/geo.mjs';
+import { along, around, bounds, closest, contains, distanceTo, meanDistance, metersBetween, offset } from '../app/geo.mjs';
 
 const square = {
   type: 'Polygon',
@@ -49,4 +49,12 @@ test('bounds and around enclose what they are given', () => {
   const [[aw, as], [ae, an]] = around([13, 55.6], 1000);
   assert.ok(Math.abs(metersBetween([aw, 55.6], [ae, 55.6]) - 2000) < 1);
   assert.ok(Math.abs(metersBetween([13, as], [13, an]) - 2000) < 1);
+});
+
+test('points along a line are spread evenly by length, not by corner', () => {
+  const north = (m) => [13, 55.6 + m / 111320];
+  const line = { type: 'LineString', coordinates: [north(0), north(100), north(400)] };
+  const points = along(line, 4);
+  assert.deepEqual(points.map((p) => Math.round(metersBetween(north(0), p))), [50, 150, 250, 350]);
+  assert.equal(Math.round(meanDistance(line, { type: 'Point', coordinates: north(0) })), 200);
 });

@@ -47,9 +47,12 @@ Pointing is the most common. Per kind:
   they lie in; no decoy also joins them, and a pair belongs to one street.
 
 Every question scores 0–100. A day scores out of 1000. A wrong pick in "Vad
-ligger här?", "Direkt söder om" or "Från A till B" scores 25 when it is close to
-the answer: an area that borders it, a street that meets it, or a place within
-300 m.
+ligger här?", "Direkt söder om" or "Från A till B" scores up to 35 by how close
+it lies to the answer, measured as the average distance from along the pick to
+the answer, and nothing below 5. A place a few dozen metres off scores near 30
+and one 300 m off a few points; an area that borders the answer about 15; a
+street running alongside more than one that only crosses it. A wrong pick
+never leaves the red band.
 
 ## The map
 

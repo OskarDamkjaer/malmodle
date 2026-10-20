@@ -1,6 +1,6 @@
 import { THEMES, DEFAULT_THEME } from '/themes.mjs';
 import { dailySet, dateKey, random } from '/daily.mjs';
-import { CLOSE_SCORE, TYPES } from '/questions.mjs';
+import { NEAR_SCORE, TYPES } from '/questions.mjs';
 import { summarize, tally } from '/crowd.mjs';
 import { crowdCard } from '/crowd-view.js';
 import { rounds, sum } from '/dev/fake.mjs';
@@ -64,7 +64,7 @@ function crowdFor(state, i) {
   const isMap = (q) => TYPES[q.type].input === 'map';
   const nearQ = questions.findIndex(isMap);
   const me = place - 1;
-  if (state.flop || state.near || state.hit !== undefined) played[me] = played[me].map((s, q) => (isMap(questions[q]) ? Math.min(s, 70) : Math.min(s, CLOSE_SCORE)));
+  if (state.flop || state.near || state.hit !== undefined) played[me] = played[me].map((s, q) => (isMap(questions[q]) ? Math.min(s, 70) : Math.min(s, NEAR_SCORE)));
   if (state.near) {
     const [closer, tied] = state.near;
     let k = 0;

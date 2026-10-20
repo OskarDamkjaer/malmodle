@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CLOSE_SCORE, MAX_SCORE, TYPES, closeTo, distanceScore, formatDistance, tappedOn } from '../app/questions.mjs';
+import { MAX_SCORE, NEAR_SCORE, TYPES, distanceScore, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
+import { band } from '../app/daily.mjs';
 import { fixture } from './fixture.mjs';
 
 const items = fixture();
@@ -90,20 +91,37 @@ test('a full-marks tap names nothing else, even inside a park around the answer'
   assert.equal(r.hit, null);
 });
 
-test('a wrong pick that is close to the answer scores a little', () => {
+const NORTH = 111320;
+const EAST = NORTH * Math.cos((55.6 * Math.PI) / 180);
+const at = (east, north) => [13 + east / EAST, 55.6 + north / NORTH];
+const place = (name, north) => ({ name, kind: 'landmark', geometry: { type: 'Point', coordinates: at(0, north) } });
+const street = (name, coordinates) => ({ name, kind: 'street', geometry: { type: 'LineString', coordinates } });
+
+test('a wrong pick scores less the further it lies from the answer, and stays in the red band', () => {
+  const target = place('Mål', 0);
+  const scores = [30, 150, 250, 1500].map((m) => nearScore(target, place(`${m} m`, m)));
+  assert.ok(scores[0] > scores[1] && scores[1] > scores[2] && scores[2] > 0, scores.join());
+  assert.equal(scores[3], 0);
+  assert.ok(scores[0] <= NEAR_SCORE);
+  assert.equal(band(NEAR_SCORE), 'red');
+});
+
+test('a wrong pick is graded by the answer it was mistaken for', () => {
   const plats = byName('Plats 5');
   assert.equal(TYPES.identify.grade({ target: plats }, 'Plats 5', items).score, MAX_SCORE);
   assert.equal(TYPES.identify.grade({ target: plats }, 'Plats 15', items).score, 0);
   const area = byName('Område 2-2');
-  assert.equal(TYPES.identify.grade({ target: area }, 'Område 2-3', items).score, CLOSE_SCORE);
+  assert.ok(TYPES.identify.grade({ target: area }, 'Område 2-3', items).score > 0);
   assert.equal(TYPES.identify.grade({ target: area }, 'Område 5-5', items).score, 0);
-  const street = byName('Gata 3');
-  assert.equal(TYPES.identify.grade({ target: street }, 'Gata 4', items).score, 0);
 });
 
-test('streets that cross are close even with no corner near the crossing', () => {
-  const across = { name: 'Tvärgata', kind: 'street', geometry: { type: 'LineString', coordinates: [[12.98, 55.57], [12.98, 55.6]] } };
-  assert.ok(closeTo(byName('Gata 3'), across));
+test('a street alongside the answer scores more than one that only crosses it', () => {
+  const target = street('Mål', [at(-200, 0), at(200, 0)]);
+  const alongside = nearScore(target, street('Bredvid', [at(-200, 60), at(200, 60)]));
+  const crossing = nearScore(target, street('Tvärs', [at(0, -200), at(0, 200)]));
+  const far = nearScore(target, street('Långt bort', [at(-200, 1500), at(200, 1500)]));
+  assert.ok(alongside > crossing && crossing > far, [alongside, crossing, far].join());
+  assert.equal(far, 0);
 });
 
 test('a street from A to B is named by what lies at its ends, and no decoy runs between them', () => {
@@ -121,7 +139,7 @@ test('a neighbour that also borders the answer scores a little', () => {
   const target = byName(from.beside.norr);
   const grade = (name) => TYPES.neighbour.grade({ from, target }, name, items).score;
   assert.equal(grade(target.name), MAX_SCORE);
-  assert.equal(grade('Område 1-3'), CLOSE_SCORE);
+  assert.ok(grade('Område 1-3') > 0);
   assert.equal(grade(from.beside.söder), 0);
 });
 

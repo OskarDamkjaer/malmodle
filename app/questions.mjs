@@ -1,7 +1,8 @@
-import { closest, contains, distanceTo, gap, metersBetween, offset } from './geo.mjs';
+import { closest, contains, distanceTo, gap, meanDistance, metersBetween, offset } from './geo.mjs';
 
 export const MAX_SCORE = 100;
-export const CLOSE_SCORE = 25;
+export const NEAR_SCORE = 35;
+export const NEAR_FLOOR = 5;
 
 const GRACE = { shape: 10, point: 100 };
 const FALLOFF = 900;
@@ -30,12 +31,13 @@ export function tappedOn(items, point, kind) {
   return best?.it ?? null;
 }
 
-const CLOSE_M = { street: 20, landmark: 300, bridge: 300 };
+export const NEAR_FALLOFF = { area: 400, street: 250, landmark: 150, bridge: 150 };
 
-export function closeTo(target, other) {
-  if (!other || other.kind !== target.kind) return false;
-  if (target.kind === 'area') return (target.neighbours ?? []).includes(other.name);
-  return gap(target.geometry, other.geometry) <= (CLOSE_M[target.kind] ?? 0);
+export function nearScore(target, other) {
+  if (!other || other.kind !== target.kind || other.name === target.name) return 0;
+  const meters = meanDistance(other.geometry, target.geometry);
+  const score = Math.round(NEAR_SCORE * Math.exp(-meters / NEAR_FALLOFF[target.kind]));
+  return score < NEAR_FLOOR ? 0 : score;
 }
 
 function shuffle(list, rng) {
@@ -83,7 +85,7 @@ const identify = {
   view: (q) => ({ items: [q.target], context: 1500 }),
   grade(q, choice, items) {
     const picked = items?.find((it) => it.name === choice);
-    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    const score = choice === q.target.name ? MAX_SCORE : nearScore(q.target, picked);
     return { score, choice, answer: q.target.name };
   },
 };
@@ -122,7 +124,7 @@ const neighbour = {
   view: (q) => ({ items: [q.from], context: 1200 }),
   grade(q, choice, items) {
     const picked = items?.find((it) => it.name === choice);
-    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    const score = choice === q.target.name ? MAX_SCORE : nearScore(q.target, picked);
     return { score, choice, answer: q.target.name };
   },
 };
@@ -183,7 +185,7 @@ const route = {
   view: (q) => ({ items: [q.from, q.to], context: 400 }),
   grade(q, choice, items) {
     const picked = items?.find((it) => it.name === choice);
-    const score = choice === q.target.name ? MAX_SCORE : closeTo(q.target, picked) ? CLOSE_SCORE : 0;
+    const score = choice === q.target.name ? MAX_SCORE : nearScore(q.target, picked);
     return { score, choice, answer: q.target.name };
   },
 };
