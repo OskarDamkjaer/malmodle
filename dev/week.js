@@ -36,6 +36,7 @@ const map = new Map({
   maplibreLogo: false,
 });
 map.touchZoomRotate.disableRotation();
+map.keyboard.disable();
 window.map = map;
 
 let items = [];
@@ -344,12 +345,21 @@ function select(index, scroll = true) {
   at = index;
   const { q, key, button } = rows[index];
   button.setAttribute('aria-current', 'true');
-  if (scroll) button.scrollIntoView({ block: 'nearest' });
   const marks = marksFor(q);
   show(marks);
   showFalloff(q);
   frame(marks);
   card(q, key);
+  if (scroll) reveal(button);
+}
+
+const sideBySide = matchMedia('(min-width: 900px)');
+
+function reveal(button) {
+  const scroller = sideBySide.matches ? el('side') : document.documentElement;
+  const pinned = sideBySide.matches ? el('card') : el('weekmap');
+  scroller.style.scrollPaddingTop = `${pinned.offsetHeight + 8}px`;
+  button.scrollIntoView({ block: 'nearest' });
 }
 
 function card(q, key) {
@@ -399,7 +409,7 @@ function card(q, key) {
 }
 
 addEventListener('keydown', (e) => {
-  if (e.target.matches('input')) return;
+  if (e.target.matches('input:not([type="checkbox"])')) return;
   if (e.key === 'ArrowDown' || e.key === 'j') { e.preventDefault(); select(at + 1); }
   if (e.key === 'ArrowUp' || e.key === 'k') { e.preventDefault(); select(at - 1); }
 });
