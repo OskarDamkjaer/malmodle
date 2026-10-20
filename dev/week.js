@@ -1,8 +1,9 @@
 import { Map, addProtocol } from '/vendor/maplibre-gl.mjs';
 import { THEMES, DEFAULT_THEME } from '/themes.mjs';
-import { GROUP, SHOWN_GAP, dailySet, dateKey, issue, laterKey } from '/daily.mjs';
-import { TYPES } from '/questions.mjs';
-import { applyTheme, frameItems, setupLayers, show } from '/map.js';
+import { BAND_COLORS, GROUP, SHOWN_GAP, dailySet, dateKey, issue, laterKey } from '/daily.mjs';
+import { TYPES, distanceScore, formatDistance } from '/questions.mjs';
+import { around, bounds, closest } from '/geo.mjs';
+import { applyTheme, setupLayers, show } from '/map.js';
 
 const el = (id) => document.getElementById(id);
 const theme = THEMES[DEFAULT_THEME];
@@ -48,6 +49,146 @@ applyTheme(map, theme);
 baseLabels = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 setupLayers(map);
 items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
+
+const LEVELS = [75, 50, 25];
+const GRID = 240;
+const SPREAD = 3000;
+const RAMP = [[100, BAND_COLORS.green], [80, BAND_COLORS.yellow], [40, BAND_COLORS.orange], [0, BAND_COLORS.red]];
+const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+const NOTHING = { type: 'FeatureCollection', features: [] };
+const FALLOFF_LAYERS = ['falloff', 'falloff-lines', 'falloff-labels'];
+
+map.addSource('falloff', { type: 'image', url: BLANK, coordinates: [[0, 1], [1, 1], [1, 0], [0, 0]] });
+map.addSource('falloff-lines', { type: 'geojson', data: NOTHING });
+map.addLayer({ id: 'falloff', type: 'raster', source: 'falloff', paint: { 'raster-resampling': 'linear', 'raster-fade-duration': 0 } }, 'focus-fill');
+map.addLayer({
+  id: 'falloff-lines', type: 'line', source: 'falloff-lines',
+  paint: { 'line-color': 'rgba(20, 20, 20, 0.7)', 'line-width': 1.4, 'line-dasharray': [3, 2] },
+}, 'focus-fill');
+map.addLayer({
+  id: 'falloff-labels', type: 'symbol', source: 'falloff-lines', filter: ['==', ['geometry-type'], 'Point'],
+  layout: { 'text-field': ['get', 'label'], 'text-font': ['Roboto Medium'], 'text-size': 12, 'text-allow-overlap': true },
+  paint: { 'text-color': '#141414', 'text-halo-color': '#fff', 'text-halo-width': 2 },
+});
+
+const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+
+function rampColor(score) {
+  for (let i = 1; i < RAMP.length; i++) {
+    const [hi, upper] = RAMP[i - 1];
+    const [lo, lower] = RAMP[i];
+    if (score >= lo) {
+      const t = (score - lo) / (hi - lo);
+      return rgb(lower).map((c, k) => Math.round(c + (rgb(upper)[k] - c) * t));
+    }
+  }
+  return rgb(RAMP.at(-1)[1]);
+}
+
+function reach(score, geometry) {
+  let [lo, hi] = [0, 20000];
+  while (hi - lo > 1) {
+    const mid = (lo + hi) / 2;
+    if (distanceScore(mid, geometry) >= score) lo = mid; else hi = mid;
+  }
+  return lo;
+}
+
+function contour(field, size, level, spot) {
+  const value = (i, j) => field[j * (size + 1) + i];
+  const cross = (a, b, pa, pb) => {
+    const t = (level - a) / (b - a);
+    return [pa[0] + (pb[0] - pa[0]) * t, pa[1] + (pb[1] - pa[1]) * t];
+  };
+  const segments = [];
+  for (let j = 0; j < size; j++) {
+    for (let i = 0; i < size; i++) {
+      const corners = [[i, j], [i + 1, j], [i + 1, j + 1], [i, j + 1]];
+      const points = [];
+      for (let k = 0; k < 4; k++) {
+        const [a, b] = [corners[k], corners[(k + 1) % 4]];
+        const [va, vb] = [value(...a), value(...b)];
+        if ((va < level) !== (vb < level)) points.push(cross(va, vb, spot(...a), spot(...b)));
+      }
+      for (let k = 0; k + 1 < points.length; k += 2) segments.push([points[k], points[k + 1]]);
+    }
+  }
+  return segments;
+}
+
+const falloffs = new globalThis.Map();
+
+function falloff(target) {
+  if (falloffs.has(target.name)) return falloffs.get(target.name);
+  const { geometry } = target;
+  const [[w, s], [e, n]] = bounds([geometry]);
+  const [[west, south]] = around([w, s], SPREAD);
+  const [, [east, north]] = around([e, n], SPREAD);
+  const spot = (i, j) => [west + ((east - west) * i) / GRID, north - ((north - south) * j) / GRID];
+  const field = new Float32Array((GRID + 1) ** 2);
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = GRID + 1;
+  const ctx = canvas.getContext('2d');
+  const image = ctx.createImageData(GRID + 1, GRID + 1);
+  for (let j = 0; j <= GRID; j++) {
+    for (let i = 0; i <= GRID; i++) {
+      const k = j * (GRID + 1) + i;
+      field[k] = closest(geometry, spot(i, j)).distance;
+      const score = distanceScore(field[k], geometry);
+      image.data.set([...rampColor(score), Math.round(255 * 0.5 * Math.min(1, Math.max(0, (score - 3) / 20)))], k * 4);
+    }
+  }
+  ctx.putImageData(image, 0, 0);
+  const features = LEVELS.flatMap((score) => {
+    const segments = contour(field, GRID, reach(score, geometry), spot);
+    if (!segments.length) return [];
+    const top = segments.flat().reduce((a, b) => (b[1] > a[1] ? b : a));
+    return [
+      { type: 'Feature', properties: {}, geometry: { type: 'MultiLineString', coordinates: segments } },
+      { type: 'Feature', properties: { label: `${score} p` }, geometry: { type: 'Point', coordinates: top } },
+    ];
+  });
+  const result = {
+    url: canvas.toDataURL(),
+    coordinates: [[west, north], [east, north], [east, south], [west, south]],
+    lines: { type: 'FeatureCollection', features },
+  };
+  falloffs.set(target.name, result);
+  return result;
+}
+
+function showFalloff(q) {
+  const on = q.type === 'point' && el('falloff').checked;
+  for (const id of FALLOFF_LAYERS) map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none');
+  if (!on) return;
+  const { url, coordinates, lines } = falloff(q.target);
+  map.getSource('falloff').updateImage({ url, coordinates });
+  map.getSource('falloff-lines').setData(lines);
+}
+
+const gain = document.createElement('div');
+gain.id = 'gain';
+gain.hidden = true;
+el('weekmap').append(gain);
+
+map.on('mousemove', (e) => {
+  const q = rows[at]?.q;
+  if (!q || q.type !== 'point' || !el('falloff').checked) { gain.hidden = true; return; }
+  const { score, distance } = TYPES.point.grade(q, [e.lngLat.lng, e.lngLat.lat], items);
+  gain.textContent = distance ? `${score} p · ${formatDistance(distance)}` : `${score} p`;
+  gain.style.transform = `translate(${e.point.x + 14}px, ${e.point.y + 14}px)`;
+  gain.hidden = false;
+});
+map.getCanvas().addEventListener('mouseleave', () => { gain.hidden = true; });
+
+function frame(marks) {
+  const [sw, ne] = bounds(marks.map((m) => m.item.geometry));
+  const view = map.getBounds();
+  if (view.contains(sw) && view.contains(ne)) return;
+  const camera = map.cameraForBounds([sw, ne], { padding: 60 });
+  if (!camera) return;
+  map.easeTo({ center: camera.center, zoom: Math.min(camera.zoom, map.getZoom()), duration: 400 });
+}
 byName = new globalThis.Map(items.map((it) => [it.name, it]));
 
 function setLabels() {
@@ -197,7 +338,8 @@ function select(index, scroll = true) {
   if (scroll) button.scrollIntoView({ block: 'nearest' });
   const marks = marksFor(q);
   show(marks);
-  frameItems(marks.map((m) => m.item), 300);
+  showFalloff(q);
+  frame(marks);
   card(q, key);
 }
 
@@ -237,6 +379,13 @@ function card(q, key) {
     links.append(a);
   }
   box.append(label, h, about, links);
+  if (q.type === 'point') {
+    const scale = document.createElement('p');
+    scale.className = 'meta';
+    const from = t.geometry.type === 'Point' ? 'från punkten' : 'från kanten';
+    scale.textContent = `${LEVELS.map((s) => `${s} p inom ${formatDistance(reach(s, t.geometry))}`).join(' · ')} ${from}`;
+    box.append(scale);
+  }
   box.hidden = false;
 }
 
@@ -249,6 +398,7 @@ el('from').addEventListener('change', build);
 el('count').addEventListener('change', build);
 el('labels').addEventListener('change', setLabels);
 el('options').addEventListener('change', () => select(at, false));
+el('falloff').addEventListener('change', () => select(at, false));
 
 setLabels();
 build();
