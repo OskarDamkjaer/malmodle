@@ -79,11 +79,12 @@ Chromium or else the installed Chrome.
 
 The deploy runs the first set before it releases anything, and stops if a
 single test skips. Once both sites are out, it runs the second set against
-them: it waits until each serves the build just released, plays a day on phone
-and desktop, boots every style, opens the site offline after one visit, and
-checks the API turns away a broken result. Results are answered inside the
-browser, so these runs never count as players. A failure there means fixing
-forward; nothing is rolled back. `SITES` picks the sites (malmodle.se by
+them: it waits until each serves the build just released, answers all but the
+last question on phone and desktop, boots every style, opens the site offline
+after one visit, and checks the API turns away a broken result. It never
+finishes a day, so it never posts a result or counts as a player; posting is
+covered by the browser tests before the release, against the same Worker code
+on SQLite. A failure there means fixing forward; nothing is rolled back. `SITES` picks the sites (malmodle.se by
 default) and `BUILD` the built site to compare with.
 
 ## Hosting

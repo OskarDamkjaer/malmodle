@@ -24,13 +24,11 @@ const own = (site, url) => new URL(url).origin === new URL(site).origin;
 
 async function open(site, viewport, path = '/', { workers = 'block' } = {}) {
   const context = await browser.newContext({ viewport, serviceWorkers: workers });
-  await context.route(`${site}/api/result`, (route) => route.fulfill({ status: 400, contentType: 'application/json', body: '{"error":"invalid"}' }));
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
-  page.on('console', (m) => {
-    if (m.type() === 'error' && !m.location().url.endsWith('/api/result')) errors.push(m.text());
-  });
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('request', (r) => { if (r.method() === 'POST') errors.push(`posted to ${r.url()}`); });
   page.on('requestfailed', (r) => { if (own(site, r.url())) errors.push(`${r.failure()?.errorText} ${r.url()}`); });
   await page.goto(new URL(path, site).href);
   await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
@@ -54,9 +52,9 @@ for (const site of SITES) {
   });
 
   for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1280, height: 800 }]]) {
-    test(`a day can be played on ${site} on ${name}`, { skip }, async () => {
+    test(`all but the last question can be answered on ${site} on ${name}`, { skip }, async () => {
       const { page, context, errors } = await open(site, viewport);
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 9; i++) {
         await page.waitForSelector('#question:not([hidden])');
         if (await page.isVisible('#choices')) await page.locator('#choices button').first().click();
         else await page.mouse.click(viewport.width / 2, viewport.height / 2);
@@ -64,9 +62,8 @@ for (const site of SITES) {
         assert.match(await page.textContent('#points'), /^\d+$/);
         await page.click('#next');
       }
-      await page.waitForSelector('#end:not([hidden])');
-      assert.match(await page.textContent('#endscore'), /^\d+$/);
-      assert.equal(await page.textContent('#endmax'), 'av 1000');
+      await page.waitForSelector('#question:not([hidden])');
+      assert.equal(await page.locator('#dots li[data-band]').count(), 9);
       assert.deepEqual(errors, []);
       await context.close();
     });
@@ -88,9 +85,10 @@ for (const site of SITES) {
     await context.setOffline(true);
     errors.length = 0;
     await page.reload();
-    await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
-    await page.waitForSelector('#question:not([hidden])');
-    assert.deepEqual(errors.filter((e) => !/ERR_INTERNET_DISCONNECTED|net::/.test(e)), []);
+    const offline = () => errors.filter((e) => !/ERR_INTERNET_DISCONNECTED|net::/.test(e));
+    const booted = await page.waitForSelector('#question:not([hidden])', { timeout: 60000 }).then(() => true, () => false);
+    if (!booted) assert.fail(`no question offline; boot says "${await page.textContent('#bootmsg')}"; errors: ${offline().join(' | ') || 'none'}`);
+    assert.deepEqual(offline(), []);
     await context.close();
   });
 
