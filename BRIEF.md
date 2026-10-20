@@ -109,7 +109,7 @@ colours, type and the basemap palette, never the game.
   The server keeps a hash of the id, never the id. No accounts, no
   analytics. Accounts and leaderboards are sketched in `plans/accounts.md`.
 - Offline PWA.
-- No framework, no bundler, no dependencies.
+- No framework, no bundler, nothing the site depends on at run time.
 - The UI is in Swedish.
 - Phone and desktop matter equally.
 

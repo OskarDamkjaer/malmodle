@@ -7,6 +7,8 @@ fi
 
 cd "${CLAUDE_PROJECT_DIR:-$(dirname "$0")/../..}"
 
+npm ci --no-fund --no-audit >/dev/null 2>&1 || echo "session-start: could not install the tools; browser tests will skip" >&2
+
 if [ ! -f build/style.json ]; then
   node scripts/build-style.mjs || echo "session-start: could not build build/style.json" >&2
 fi

@@ -8,8 +8,9 @@ the day's statistics.
 
 ## How it's built
 
-- No framework, bundler or dependencies. The browser loads the modules as
-  written, and the game logic is tested with `node --test`.
+- No framework, bundler or runtime dependencies. The browser loads the modules
+  as written, and the game logic is tested with `node --test`. `package.json`
+  holds only the tools for working on it: a browser driver and Wrangler.
 - Its own map: vector tiles of Malmö cut from OpenStreetMap, served with the
   site, about 10 MB.
 - The day's set comes from the date, so everyone gets the same one without

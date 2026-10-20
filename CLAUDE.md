@@ -6,6 +6,7 @@ find the repo, `CONTRIBUTING.md` for working on it.
 ## Commands
 
 ```
+npm install                            # the tools: playwright-core, wrangler
 node --test 'test/*.test.mjs'          # all tests, no runner or config
 node --test 'test/live/*.test.mjs'     # the live site, as the deploy checks it
 node scripts/build-quiz.mjs            # build/data/quiz.json
@@ -63,8 +64,10 @@ browser. To add a question type, add it to `TYPES` and give it slots in
 
 ## Conventions
 
-- No framework, bundler, `package.json` or dependencies. The browser loads the
-  modules as written. Wrangler runs through `npx` in the deploy only.
+- No framework, bundler or runtime dependencies. The browser loads the modules
+  as written, and nothing under `app/` or `worker/` imports from `node_modules`.
+  `package.json` holds the tools only, pinned exactly: `playwright-core` and
+  `wrangler`. A new one needs a reason the standard library cannot meet.
 - No code comments.
 - No version history in docs or code: describe what is, not what was.
 - UI text is Swedish.

@@ -1,21 +1,6 @@
-import { createRequire } from 'node:module';
-import { execSync } from 'node:child_process';
-import { join } from 'node:path';
+const loaded = await import('playwright-core').catch(() => null);
 
-const require = createRequire(import.meta.url);
-
-function loadChromium() {
-  const roots = [];
-  try { roots.push(execSync('npm root -g', { encoding: 'utf8' }).trim()); } catch {}
-  for (const name of ['playwright-core', 'playwright']) {
-    for (const from of [name, ...roots.map((r) => join(r, name))]) {
-      try { return require(from).chromium; } catch {}
-    }
-  }
-  return null;
-}
-
-export const chromium = loadChromium();
+export const chromium = loaded?.chromium ?? null;
 
 export async function launch() {
   try {

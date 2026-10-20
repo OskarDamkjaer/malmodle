@@ -1,0 +1,18 @@
+{
+  "name": "malmodle",
+  "private": true,
+  "description": "Tools for working on the site. The site itself loads app/ as written and needs none of this.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test 'test/*.test.mjs'",
+    "test:live": "node --test 'test/live/*.test.mjs'",
+    "serve": "node scripts/serve.mjs",
+    "quiz": "node scripts/build-quiz.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.64.0",
+    "wrangler": "4.151.1"
+  }
+}

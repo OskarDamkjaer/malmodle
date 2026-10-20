@@ -6,7 +6,8 @@ is hosted. [`BRIEF.md`](BRIEF.md) is what the game is meant to be, and
 
 ## Running it locally
 
-Needs Node. There is nothing to install.
+Needs Node 22 or later. `npm install` fetches the tools: `playwright-core` for
+the browser tests and `wrangler` for the Worker. The site itself needs neither.
 
 ```
 node scripts/fetch-app-assets.mjs    # map library, fonts and icons
@@ -69,13 +70,13 @@ node scripts/places-shapes.mjs       # → places/shapes.json, an outline for ev
 ## Tests
 
 ```
-node --test 'test/*.test.mjs'
-node --test 'test/live/*.test.mjs'
+npm test                             # node --test 'test/*.test.mjs'
+npm run test:live                    # node --test 'test/live/*.test.mjs'
 ```
 
 Tests that need built data or a browser skip when those are missing. The browser
-is driven by `playwright-core`, installed globally with npm, using its own
-Chromium or else the installed Chrome.
+is driven by `playwright-core` from `npm install`, using its own Chromium or
+else the installed Chrome.
 
 The deploy runs the first set before it releases anything, and stops if a
 single test skips. Once both sites are out, it runs the second set against
