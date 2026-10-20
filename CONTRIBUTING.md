@@ -52,7 +52,9 @@ Needs `osmium` and Java 21. The deploy workflow runs the same steps on GitHub
 and publishes the result as a release. The release is named after a hash of
 everything these steps read: the scripts below, the modules they import, and
 the files they open, such as `places/places.json` and `config/bbox.json`
-(`scripts/lib/dev-assets.mjs` finds them). Changing any of them rebuilds the map
+(`scripts/lib/dev-assets.mjs` finds them by the paths written in the scripts, so
+an input opened through a computed path has to be written out somewhere in the
+script to count). Changing any of them rebuilds the map
 data on the next deploy, and `fetch-dev-assets.mjs` fetches the new release
 once it is published.
 

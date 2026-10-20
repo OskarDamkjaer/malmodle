@@ -1,6 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { PIPELINE, devAssetsTag, sources } from '../scripts/lib/dev-assets.mjs';
 
 test('the map data release covers every step of the deploy that builds it', () => {
@@ -22,4 +25,16 @@ test('the map data release is named after what the pipeline reads', () => {
 test('the fetch and the deploy use the same release name', () => {
   assert.match(readFileSync('scripts/fetch-dev-assets.mjs', 'utf8'), /const TAG = devAssetsTag\(\);/);
   assert.match(readFileSync('.github/workflows/deploy.yml', 'utf8'), /m\.devAssetsTag\(\)/);
+});
+
+test('an unquoted path in a pipeline script counts as an input', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'dev-assets-'));
+  mkdirSync(join(dir, 'scripts/lib'), { recursive: true });
+  mkdirSync(join(dir, 'config'));
+  for (const file of ['scripts/build-districts.mjs', 'scripts/build-streets.mjs', 'scripts/build-shapes.mjs']) writeFileSync(join(dir, file), '');
+  writeFileSync(join(dir, 'scripts/build-basemap.sh'), 'STYLE=config/layers.yml\n');
+  writeFileSync(join(dir, 'config/layers.yml'), 'x');
+  const script = `import('${join(process.cwd(), 'scripts/lib/dev-assets.mjs')}').then((m) => console.log(JSON.stringify(m.sources())))`;
+  const found = JSON.parse(execFileSync(process.execPath, ['-e', script], { cwd: dir, encoding: 'utf8' }));
+  assert.ok(found.includes('config/layers.yml'), found.join(', '));
 });

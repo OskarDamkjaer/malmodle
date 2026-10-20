@@ -11,7 +11,7 @@ export const PIPELINE = [
 
 const MADE = /^(data|build|tools)\//;
 const IMPORT = /from '(\.{1,2}\/[^']+)'/g;
-const PATH = /['"](?:\.\/)?([a-z][\w-]*\/[\w./-]+\.\w+)['"]/g;
+const PATH = /(?:^|[\s'"`(=:,])(?:\.\/)?([a-z][\w-]*\/[\w./-]+\.\w+)/gm;
 
 export function sources() {
   const seen = new Set();
