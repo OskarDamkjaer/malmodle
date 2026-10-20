@@ -134,6 +134,12 @@ test('areas know who borders them, and in which direction', () => {
   assert.equal(byName('Område 0-0').beside['väster'], undefined);
 });
 
+test('a place can be asked for by another phrase than its name', () => {
+  const target = { ...byName('Plats 1'), asked: 'det ursprungliga Plats 1' };
+  assert.equal(TYPES.point.prompt({ target }).title, 'Var ligger det ursprungliga Plats 1?');
+  assert.equal(TYPES.point.prompt({ target: byName('Plats 1') }).title, 'Var ligger Plats 1?');
+});
+
 test('every type can describe itself', () => {
   for (const [name, type] of Object.entries(TYPES)) {
     assert.ok(['map', 'choice'].includes(type.input), name);

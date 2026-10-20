@@ -137,6 +137,7 @@ const landmarkItems = placesDoc.places.map((p) => {
     label: PLACE_LABEL[p.category],
     category: p.category,
     ...(p.apart && { apart: p.apart }),
+    ...(p.asked && { asked: p.asked }),
     point: roundCoords(where.point),
     geometry: where.geometry,
     about: p.description ?? null,

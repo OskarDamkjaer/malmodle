@@ -50,7 +50,7 @@ function shuffle(list, rng) {
 const point = {
   input: 'map',
   build: ({ target }) => ({ target }),
-  prompt: (q) => ({ title: `Var ligger ${q.target.name}?`, detail: q.target.label }),
+  prompt: (q) => ({ title: `Var ligger ${q.target.asked ?? q.target.name}?`, detail: q.target.label }),
   showing: () => [],
   view: () => 'home',
   grade(q, tap, items, street) {

@@ -1499,15 +1499,16 @@
   },
   {
    "name": "Konditori Katarina",
+   "asked": "det ursprungliga Konditori Katarina",
    "category": "kafe",
    "osm": [
-    "node/3051074368"
+    "node/2405585968"
    ],
-   "lat": 55.59718,
-   "lon": 13.00136,
-   "why": "Malmö konditori brand dating from 1959; this is the Triangeln branch on Södra Förstadsgatan listed by Wikivoyage (several other branches exist).",
-   "description": "Konditori.",
-   "source": "https://wanderlog.com/place/details/2098241/konditori-katarina"
+   "lat": 55.60038,
+   "lon": 13.04065,
+   "why": "The original Konditori Katarina, at Sallerupsvägen 87 since August 1959 and home to its bakery until 2011; the chain's first branch opened on Stora Nygatan in 2004 and it now has several more, Hamngatan the best known.",
+   "description": "Det första Konditori Katarina, på Sallerupsvägen sedan 1959 och i samma familj sedan 1968. Kedjans första filial öppnade 2004 på Stora Nygatan.",
+   "source": "https://konditorikatarina.se/var-historia"
   },
   {
    "name": "Limhamns torg",
