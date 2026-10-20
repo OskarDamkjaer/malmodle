@@ -50,6 +50,10 @@ baseLabels = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) =>
 setupLayers(map);
 items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
 
+for (const [layer, prop] of [['focus-fill', 'fill-color'], ['focus-line', 'line-color'], ['focus-circle', 'circle-color'], ['focus-label', 'text-color']]) {
+  map.setPaintProperty(layer, prop, ['match', ['get', 'role'], 'close', BAND_COLORS.orange, map.getPaintProperty(layer, prop)]);
+}
+
 const LEVELS = [75, 50, 25];
 const GRID = 240;
 const SPREAD = 3000;
@@ -324,7 +328,12 @@ function marksFor(q) {
   const marks = [{ item: q.target, role: 'answer', named: true }];
   for (const it of [q.from, q.to]) if (it) marks.push({ item: it, role: 'context', named: true });
   if (el('options').checked) {
-    for (const o of q.options ?? []) if (o !== q.target.name && byName.has(o)) marks.push({ item: byName.get(o), role: 'hit', named: true });
+    for (const o of q.options ?? []) {
+      if (o === q.target.name || !byName.has(o)) continue;
+      const item = byName.get(o);
+      const score = TYPES[q.type].grade(q, o, items).score;
+      marks.push(score ? { item: { ...item, name: `${o} · ${score} p` }, role: 'close', named: true } : { item, role: 'hit', named: true });
+    }
   }
   return marks;
 }
