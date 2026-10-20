@@ -94,7 +94,7 @@ test('a full-marks tap names nothing else, even inside a park around the answer'
 const NORTH = 111320;
 const EAST = NORTH * Math.cos((55.6 * Math.PI) / 180);
 const at = (east, north) => [13 + east / EAST, 55.6 + north / NORTH];
-const place = (name, north) => ({ name, kind: 'landmark', geometry: { type: 'Point', coordinates: at(0, north) } });
+const place = (name, north) => ({ name, kind: 'landmark', point: at(0, north), geometry: { type: 'Point', coordinates: at(0, north) } });
 const street = (name, coordinates) => ({ name, kind: 'street', geometry: { type: 'LineString', coordinates } });
 
 test('a wrong pick scores less the further it lies from the answer, and stays in the red band', () => {
@@ -122,6 +122,28 @@ test('a street alongside the answer scores more than one that only crosses it', 
   const far = nearScore(target, street('Långt bort', [at(-200, 1500), at(200, 1500)]));
   assert.ok(alongside > crossing && crossing > far, [alongside, crossing, far].join());
   assert.equal(far, 0);
+});
+
+const area = (name, west, east, side) => ({
+  name, kind: 'area', point: at((west + east) / 2, 0),
+  geometry: { type: 'Polygon', coordinates: [[at(west, -side / 2), at(east, -side / 2), at(east, side / 2), at(west, side / 2), at(west, -side / 2)]] },
+});
+
+test('a bordering area scores the same either way round, and as much in the outskirts as in the centre', () => {
+  const small = area('Liten', 0, 400, 400);
+  const large = area('Stor', -4000, 0, 4000);
+  assert.equal(nearScore(small, large), nearScore(large, small));
+  const centre = nearScore(area('A', 0, 500, 500), area('B', -500, 0, 500));
+  const outskirts = nearScore(area('C', 0, 3000, 3000), area('D', -3000, 0, 3000));
+  assert.ok(outskirts > 0 && Math.abs(centre - outskirts) <= 5, [centre, outskirts].join());
+  assert.equal(nearScore(area('E', 0, 500, 500), area('F', -2500, -2000, 500)), 0);
+});
+
+test('a place beside a larger one scores either way round', () => {
+  const beach = { name: 'Stranden', kind: 'landmark', point: at(0, 0), geometry: { type: 'Polygon', coordinates: [[at(-100, -20), at(100, -20), at(100, 20), at(-100, 20), at(-100, -20)]] } };
+  const point = { name: 'Udden', kind: 'landmark', point: at(800, 0), geometry: { type: 'Polygon', coordinates: [[at(250, -400), at(1350, -400), at(1350, 400), at(250, 400), at(250, -400)]] } };
+  assert.ok(nearScore(beach, point) > 0);
+  assert.equal(nearScore(beach, point), nearScore(point, beach));
 });
 
 test('a street from A to B is named by what lies at its ends, and no decoy runs between them', () => {

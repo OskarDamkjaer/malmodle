@@ -1,4 +1,4 @@
-import { closest, contains, distanceTo, gap, meanDistance, metersBetween, offset } from './geo.mjs';
+import { closest, contains, distanceTo, gap, meanDistance, metersBetween, offset, radius } from './geo.mjs';
 
 export const MAX_SCORE = 100;
 export const NEAR_SCORE = 35;
@@ -33,9 +33,16 @@ export function tappedOn(items, point, kind) {
 
 export const NEAR_FALLOFF = { area: 400, street: 250, landmark: 150, bridge: 150 };
 
+function nearMeters(target, other) {
+  if (target.kind === 'street') return meanDistance(other.geometry, target.geometry);
+  const meters = Math.min(meanDistance(other.geometry, target.geometry), meanDistance(target.geometry, other.geometry));
+  const size = Math.sqrt(radius(target.geometry, target.point) * radius(other.geometry, other.point));
+  return meters / Math.max(1, size / NEAR_FALLOFF[target.kind]);
+}
+
 export function nearScore(target, other) {
   if (!other || other.kind !== target.kind || other.name === target.name) return 0;
-  const meters = meanDistance(other.geometry, target.geometry);
+  const meters = nearMeters(target, other);
   const score = Math.round(NEAR_SCORE * Math.exp(-meters / NEAR_FALLOFF[target.kind]));
   return score < NEAR_FLOOR ? 0 : score;
 }

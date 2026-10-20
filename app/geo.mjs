@@ -94,6 +94,11 @@ export function meanDistance(from, to, count = 24) {
   return points.reduce((sum, p) => sum + distanceTo(to, p), 0) / points.length;
 }
 
+export function radius(geometry, centre, count = 48) {
+  const points = along(geometry, count);
+  return points.reduce((sum, p) => sum + metersBetween(p, centre), 0) / points.length;
+}
+
 function crosses(a, b, c, d) {
   const side = (p, q, r) => Math.sign((q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]));
   return side(a, b, c) !== side(a, b, d) && side(c, d, a) !== side(c, d, b);
