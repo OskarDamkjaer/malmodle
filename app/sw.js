@@ -40,6 +40,8 @@ const CODE_FILES = [
 ];
 
 const MAP_FILES = ['/malmo.pmtiles'];
+const FRESH = /(\/|\.html|\.m?js|\.css|\.json|\.webmanifest)$/;
+const PATIENCE = 4000;
 
 async function fillCache(name, urls) {
   const cache = await caches.open(name);
@@ -92,18 +94,21 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/live/')) return;
 
   const isMap = url.pathname.endsWith('.pmtiles');
+  const fresh = request.mode === 'navigate' || FRESH.test(url.pathname);
 
   event.respondWith((async () => {
     const hit = await caches.match(request, { ignoreSearch: true });
     if (hit && isMap) return hit;
     const update = fetch(request).then(async (res) => {
-      if (res.ok) (await caches.open(isMap ? MAP : CODE)).put(request, res.clone());
+      if (res.ok) await (await caches.open(isMap ? MAP : CODE)).put(request, res.clone());
       return res;
     });
+    event.waitUntil(update.catch(() => {}));
 
+    if (hit && !fresh) return hit;
     if (hit) {
-      event.waitUntil(update.catch(() => {}));
-      return hit;
+      const late = new Promise((resolve) => { setTimeout(() => resolve(hit), PATIENCE); });
+      return Promise.race([update.then((res) => (res.ok ? res : hit), () => hit), late]);
     }
 
     try {
