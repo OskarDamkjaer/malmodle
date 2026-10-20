@@ -22,8 +22,9 @@ node scripts/serve.mjs               # http://127.0.0.1:8080
 a crowd, and `--trickle 10` adds one more every 10 seconds, to see it update. It also serves <http://127.0.0.1:8080/dev/crowd.html>,
 which draws the end screen's comparison for a few dozen made-up crowds, and one
 that fills up as you click, and <http://127.0.0.1:8080/dev/week.html>, which
-lists the coming days' sets beside the map, with each answer, its options and
-its text, and flags what looks wrong. `dev/` is never part of the built site.
+lays the coming days' sets out in a strip above the map, with each answer and
+its text, draws the options and the points a tap or a near option gives on
+the map, and flags what looks wrong. `dev/` is never part of the built site.
 
 `build-quiz.mjs` needs the map data in `build/data/` and `data/cache/`. Either
 rebuild it (below) or fetch a prebuilt copy with

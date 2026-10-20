@@ -244,7 +244,9 @@ function build() {
       Object.entries(types).map(([t, n]) => `${n} ${TYPE_NAMES[t].toLowerCase()}`).join(', '),
       set.length === 10 ? '' : `${set.length} frågor`,
     ].filter(Boolean).join(' · ');
-    section.append(h, sum);
+    const list = document.createElement('div');
+    list.className = 'qs';
+    section.append(h, sum, list);
 
     const listed = new globalThis.Map();
     const shown = new globalThis.Map();
@@ -287,22 +289,6 @@ function build() {
       meta.className = 'meta';
       meta.textContent = [TYPE_NAMES[q.type], detail, q.type === 'point' ? '' : `svar: ${t.name}`].filter(Boolean).join(' · ');
       b.append(n, tt, meta);
-      if (q.options) {
-        const opts = document.createElement('span');
-        opts.className = 'opts';
-        q.options.forEach((o, k) => {
-          if (k) opts.append(', ');
-          const score = TYPES[q.type].grade(q, o, items).score;
-          const w = document.createElement(o === t.name ? 'b' : 'span');
-          w.textContent = o;
-          if (o !== t.name && score) {
-            w.className = 'close';
-            w.textContent = `${o} ${score}\u00a0p`;
-          }
-          opts.append(w);
-        });
-        b.append(opts);
-      }
       if (flags.length) {
         const f = document.createElement('span');
         f.className = 'flags';
@@ -317,7 +303,7 @@ function build() {
       const index = rows.length;
       b.addEventListener('click', () => select(index));
       rows.push({ q, key, button: b });
-      section.append(b);
+      list.append(b);
     });
     root.append(section);
   });
@@ -350,16 +336,15 @@ function select(index, scroll = true) {
   showFalloff(q);
   frame(marks);
   card(q, key);
-  if (scroll) reveal(button);
+  if (scroll) button.scrollIntoView({ block: 'nearest', inline: 'center' });
 }
 
-const sideBySide = matchMedia('(min-width: 900px)');
-
-function reveal(button) {
-  const scroller = sideBySide.matches ? el('side') : document.documentElement;
-  const pinned = sideBySide.matches ? el('card') : el('weekmap');
-  scroller.style.scrollPaddingTop = `${pinned.offsetHeight + 8}px`;
-  button.scrollIntoView({ block: 'nearest' });
+function stepDay(direction) {
+  const key = rows[at]?.key;
+  const index = direction > 0
+    ? rows.findIndex((r, i) => i > at && r.key !== key)
+    : rows.findIndex((r) => r.key === rows.findLast((x, i) => i < at && x.key !== key)?.key);
+  if (index >= 0) select(index);
 }
 
 function card(q, key) {
@@ -410,8 +395,10 @@ function card(q, key) {
 
 addEventListener('keydown', (e) => {
   if (e.target.matches('input:not([type="checkbox"])')) return;
-  if (e.key === 'ArrowDown' || e.key === 'j') { e.preventDefault(); select(at + 1); }
-  if (e.key === 'ArrowUp' || e.key === 'k') { e.preventDefault(); select(at - 1); }
+  if (e.key === 'ArrowRight' || e.key === 'l') { e.preventDefault(); select(at + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'h') { e.preventDefault(); select(at - 1); }
+  if (e.key === 'ArrowDown' || e.key === 'j') { e.preventDefault(); stepDay(1); }
+  if (e.key === 'ArrowUp' || e.key === 'k') { e.preventDefault(); stepDay(-1); }
 });
 el('from').addEventListener('change', build);
 el('count').addEventListener('change', build);
