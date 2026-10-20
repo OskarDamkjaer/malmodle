@@ -31,6 +31,9 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/questions.mjs`: question types. Each one builds itself from the items,
   describes its prompt and what the map shows, and grades an answer.
 - `app/daily.mjs`: the day's set, seeded from the local date, and the share text.
+  From `SPACED` on, each deck is dealt so a target waits most of a round before
+  it comes back, and nothing named on the map is asked within `SHOWN_GAP` days.
+  Days before `SPACED` keep the deal they were played with, and a test pins them.
 - `app/geo.mjs`: distances and containment.
 - `app/crowd.mjs`: your view of the day's numbers, the polling schedule, and
   the end screen's comparison in words with every threshold it uses.

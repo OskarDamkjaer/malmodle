@@ -14,6 +14,7 @@ export const SET_SIZE = 10;
 
 export const EPOCH = '2026-01-01';
 export const LAUNCH = '2026-10-10';
+export const SPACED = '2026-10-22';
 
 export const GROUP = { area: 'area', street: 'street', landmark: 'place', bridge: 'place' };
 
@@ -26,6 +27,8 @@ export const DECKS = {
 
 const FOOD_SHARE = 0.2;
 const APART_GAP = 6;
+const SPACING = 0.75;
+export const SHOWN_GAP = 3;
 
 const MIXES = {
   area: { point: [1, 3], identify: [1, 2], special: [0, 1], type: 'neighbour' },
@@ -108,19 +111,27 @@ export function plan(rng) {
 
 const dayRandom = (key) => random(hash(`malmo:plan:${key}`));
 
+const utc = (key) => { const [y, m, d] = key.split('-').map(Number); return Date.UTC(y, m - 1, d); };
+const dayCount = (from, to) => Math.max(0, Math.round((utc(to) - utc(from)) / 86400000));
+
 function daysBetween(from, to) {
-  const utc = (k) => { const [y, m, d] = k.split('-').map(Number); return Date.UTC(y, m - 1, d); };
   const out = [];
   for (let t = utc(from); t < utc(to); t += 86400000) out.push(new Date(t).toISOString().slice(0, 10));
   return out;
 }
 
-export const issue = (key) => daysBetween(LAUNCH, key).length + 1;
+export const issue = (key) => dayCount(LAUNCH, key) + 1;
+
+const tally = [Object.fromEntries(Object.keys(DECKS).map((d) => [d, 0]))];
 
 export function dealt(key) {
-  const count = Object.fromEntries(Object.keys(DECKS).map((d) => [d, 0]));
-  for (const day of daysBetween(EPOCH, key)) for (const slot of plan(dayRandom(day))) count[slot.deck] += 1;
-  return count;
+  const at = dayCount(EPOCH, key);
+  while (tally.length <= at) {
+    const count = { ...tally[tally.length - 1] };
+    for (const slot of plan(dayRandom(laterKey(EPOCH, tally.length - 1)))) count[slot.deck] += 1;
+    tally.push(count);
+  }
+  return { ...tally[at] };
 }
 
 function deck(items, name) {
@@ -142,9 +153,8 @@ function deck(items, name) {
   return { size: cards.length, at: (n) => round(Math.floor(n / cards.length))[n % cards.length] };
 }
 
-export function dailySet(items, key) {
+function drawn(items, key, decks) {
   const slots = plan(dayRandom(key));
-  const decks = Object.fromEntries(Object.keys(DECKS).map((d) => [d, deck(items, d)]));
   const next = dealt(key);
   const taken = new Set();
   const apartTaken = new Set();
@@ -163,7 +173,112 @@ export function dailySet(items, key) {
     if (it) { taken.add(it.name); if (it.apart) apartTaken.add(it.apart); }
     return it;
   });
-  return assemble(slots, targets, items, random(hash(`malmo:${key}`)), new Set(taken));
+  return { slots, targets };
+}
+
+function spacedRound(before, rng) {
+  const n = before.length;
+  const wait = Math.ceil(n * SPACING);
+  const left = before.map((card, p) => ({ card, ready: Math.max(0, p - (n - wait)) }));
+  const groups = new Map();
+  for (const { card } of left) if (card.apart) groups.set(card.apart, (groups.get(card.apart) ?? 0) + 1);
+  const out = [];
+  for (let q = 0; q < n; q++) {
+    const tail = out.length >= APART_GAP - 1 ? out.slice(1 - APART_GAP) : [...before.slice(before.length - (APART_GAP - 1 - out.length)), ...out];
+    const lately = new Set(tail.map((o) => o.apart).filter(Boolean));
+    const fits = left.filter((x) => !lately.has(x.card.apart));
+    const ready = fits.filter((x) => x.ready <= q);
+    const due = fits.filter((x) => x.card.apart && groups.get(x.card.apart) * APART_GAP >= n - q);
+    const pool = due.length ? due : ready.length ? ready : fits.length ? [fits.reduce((a, b) => (b.ready < a.ready ? b : a))] : left;
+    const pick = pool[Math.floor(rng() * pool.length)];
+    out.push(pick.card);
+    left.splice(left.indexOf(pick), 1);
+    if (pick.card.apart) groups.set(pick.card.apart, groups.get(pick.card.apart) - 1);
+  }
+  return out;
+}
+
+function spacedDeck(cards, name, before) {
+  const rounds = [];
+  const round = (r) => {
+    while (rounds.length <= r) {
+      const prev = rounds.length ? rounds[rounds.length - 1] : before;
+      rounds.push(spacedRound(prev, random(hash(`malmo:spaced:${name}:${rounds.length}`))));
+    }
+    return rounds[r];
+  };
+  return { size: cards.length, at: (n) => round(Math.floor(n / cards.length))[n % cards.length] };
+}
+
+function dealer(items) {
+  const days = new Map();
+  const shuffled = Object.fromEntries(Object.keys(DECKS).map((d) => [d, deck(items, d)]));
+  const on = (key) => {
+    if (!days.has(key)) days.set(key, key < SPACED ? drawn(items, key, shuffled) : spaced(key));
+    return days.get(key);
+  };
+  let decks = null;
+  const spacedDecks = () => {
+    if (decks) return decks;
+    const last = new Map();
+    for (const day of daysBetween(LAUNCH, SPACED)) {
+      const shown = day >= laterKey(SPACED, -SHOWN_GAP) ? dailySet(items, day) : on(day).targets.map((target) => ({ target }));
+      for (const q of shown) for (const it of [q.target, q.from, q.to]) if (it) last.set(it.name, day);
+    }
+    const asked = (it) => last.get(it.name) ?? '';
+    decks = Object.fromEntries(Object.keys(DECKS).map((name) => {
+      const cards = items.filter(DECKS[name]).sort((a, b) => (a.name < b.name ? -1 : 1));
+      const before = [...cards].sort((a, b) => (asked(a) < asked(b) ? -1 : asked(a) > asked(b) ? 1 : 0));
+      return [name, spacedDeck(cards, name, before)];
+    }));
+    return decks;
+  };
+  const deckOf = (name) => (spacedDecks()[name].size ? name : 'place');
+  const counts = [Object.fromEntries(Object.keys(DECKS).map((d) => [d, 0]))];
+  const cursor = (key) => {
+    const at = dayCount(SPACED, key);
+    while (counts.length <= at) {
+      const next = { ...counts[counts.length - 1] };
+      for (const slot of plan(dayRandom(laterKey(SPACED, counts.length - 1)))) next[deckOf(slot.deck)] += 1;
+      counts.push(next);
+    }
+    return { ...counts[at] };
+  };
+  function spaced(key) {
+    const slots = plan(dayRandom(key));
+    const next = cursor(key);
+    const targets = slots.map((slot) => {
+      const name = deckOf(slot.deck);
+      return spacedDecks()[name].at(next[name]++);
+    });
+    return { slots, targets };
+  }
+  return on;
+}
+
+const dealers = new WeakMap();
+
+function dealerFor(items) {
+  if (!dealers.has(items)) dealers.set(items, dealer(items));
+  return dealers.get(items);
+}
+
+const names = (targets) => new Set(targets.filter(Boolean).map((it) => it.name));
+
+export function targetsOn(items, key) {
+  return dealerFor(items)(key).targets.filter(Boolean);
+}
+
+export function dailySet(items, key) {
+  const on = dealerFor(items);
+  const { slots, targets } = on(key);
+  const avoid = names(targets);
+  if (key >= SPACED) {
+    for (let n = 1; n <= SHOWN_GAP; n++) {
+      for (const it of [...targetsOn(items, laterKey(key, n)), ...targetsOn(items, laterKey(key, -n))]) avoid.add(it.name);
+    }
+  }
+  return assemble(slots, [...targets], items, random(hash(`malmo:${key}`)), avoid);
 }
 
 function assemble(slots, targets, items, rng, avoid) {
@@ -199,8 +314,8 @@ export const PRACTICE = [
 ];
 
 export const PRACTICE_SIZE = 10;
-export const SOON_DAYS = 7;
-export const SOON_SHARE = 2;
+export const SOON_DAYS = 14;
+export const SOON_SHARE = 5;
 
 export function laterKey(key, days) {
   const [y, m, d] = key.split('-').map(Number);
@@ -208,18 +323,20 @@ export function laterKey(key, days) {
 }
 
 export function upcoming(items, key, days = SOON_DAYS) {
-  const names = new Set();
-  for (let n = 1; n <= days; n++) for (const q of dailySet(items, laterKey(key, n))) names.add(q.target.name);
-  return names;
+  const soon = new Map();
+  for (let n = days; n >= 1; n--) for (const it of targetsOn(items, laterKey(key, n))) soon.set(it.name, n);
+  return soon;
 }
 
 export function practiceSet(items, { key, category, seed }) {
   const kind = PRACTICE.find((c) => c.id === category);
   const pool = items.filter(kind.has).sort((a, b) => (a.name < b.name ? -1 : 1));
   const soon = upcoming(items, key);
-  const today = new Set(dailySet(items, key).map((q) => q.target.name));
+  const today = names(targetsOn(items, key));
   const rng = random(seed);
-  const coming = shuffle(pool.filter((it) => soon.has(it.name)), rng).slice(0, SOON_SHARE);
+  const coming = shuffle(pool.filter((it) => soon.has(it.name)), rng)
+    .sort((a, b) => soon.get(a.name) - soon.get(b.name))
+    .slice(0, SOON_SHARE);
   const later = shuffle(pool.filter((it) => !soon.has(it.name) && !today.has(it.name)), rng);
   const rest = shuffle(pool.filter((it) => !coming.includes(it) && !later.includes(it)), rng);
   const targets = shuffle([...coming, ...later, ...rest].slice(0, PRACTICE_SIZE), rng);

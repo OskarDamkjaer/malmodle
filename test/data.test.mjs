@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { GROUP, PRACTICE, PRACTICE_SIZE, dailySet, dateKey, practiceSet } from '../app/daily.mjs';
+import { GROUP, PRACTICE, PRACTICE_SIZE, SHOWN_GAP, SPACED, dailySet, dateKey, laterKey, practiceSet } from '../app/daily.mjs';
 import { contains, distanceTo } from '../app/geo.mjs';
 
 const QUIZ = 'build/data/quiz.json';
@@ -62,6 +62,32 @@ test('a year of daily sets can be built from the real data', { skip }, () => {
     const count = (g) => set.filter((q) => GROUP[q.target.kind] === g).length;
     assert.ok(count('area') >= 3 && count('area') <= 5 && count('street') >= 1 && count('street') <= 3 && count('place') >= 3 && count('place') <= 5);
   }
+});
+
+test('over a year, an area waits a week before it is asked again, a street or place two', { skip }, () => {
+  const wait = { area: 7, street: 14, place: 14 };
+  const last = new Map();
+  for (let n = 0; n < 365; n++) {
+    for (const q of dailySet(items, laterKey(SPACED, n))) {
+      const since = n - (last.get(q.target.name) ?? -Infinity);
+      assert.ok(since >= wait[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
+      last.set(q.target.name, n);
+    }
+  }
+});
+
+test('over a year, what a question names on the map is not asked days around it', { skip }, () => {
+  const sets = Array.from({ length: 365 }, (_, n) => dailySet(items, laterKey(SPACED, n)));
+  const asked = new Map();
+  sets.forEach((set, n) => set.forEach((q) => asked.set(q.target.name, [...(asked.get(q.target.name) ?? []), n])));
+  sets.forEach((set, n) => {
+    for (const q of set) {
+      for (const shown of [q.from, q.to].filter(Boolean)) {
+        const near = (asked.get(shown.name) ?? []).filter((m) => Math.abs(m - n) <= SHOWN_GAP);
+        assert.deepEqual(near, [], `${shown.name} shown on day ${n}`);
+      }
+    }
+  });
 });
 
 test('every kind turns up over a month', { skip }, () => {

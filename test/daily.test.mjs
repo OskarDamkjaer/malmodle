@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SOON_SHARE, SPLITS, dailySet, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SHOWN_GAP, SOON_DAYS, SOON_SHARE, SPACED, SPLITS, dailySet, setId, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -24,6 +24,50 @@ test('the seed is stable', () => {
 test('the same day gives the same set', () => {
   const describe = (set) => set.map((q) => `${q.type}:${q.target.name}:${q.options?.join(',') ?? ''}`);
   assert.deepEqual(describe(dailySet(items, '2026-10-10')), describe(dailySet(items, '2026-10-10')));
+});
+
+test('the days before the spaced deal keep the sets they were played with', () => {
+  const played = [
+    ['2026-10-10', '6c675d36'],
+    ['2026-10-11', '34f968ca'],
+    ['2026-10-12', 'c60ec4c4'],
+    ['2026-10-13', '16f6f239'],
+    ['2026-10-14', 'f14deab8'],
+    ['2026-10-15', '1b82f48'],
+    ['2026-10-16', '94fa6bf4'],
+    ['2026-10-17', 'aeec37a8'],
+    ['2026-10-18', '2fe3685c'],
+    ['2026-10-19', 'd0e04b1c'],
+    ['2026-10-20', '7e12f4db'],
+    ['2026-10-21', '24dabb6a'],
+  ];
+  for (const [day, id] of played) assert.equal(setId(dailySet(items, day)), id, day);
+  assert.equal(laterKey(played.at(-1)[0], 1), SPACED);
+});
+
+test('a target waits before it is asked again, from the spaced deal on', () => {
+  const wait = { area: 5, street: 3, place: 2 };
+  const last = new Map();
+  for (let n = 0; n < 120; n++) {
+    for (const q of dailySet(items, laterKey(SPACED, n))) {
+      const since = n - (last.get(q.target.name) ?? -Infinity);
+      assert.ok(since >= wait[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
+      last.set(q.target.name, n);
+    }
+  }
+});
+
+test('what a question names on the map is not asked days before or after', () => {
+  const sets = Array.from({ length: 60 }, (_, n) => dailySet(items, laterKey(SPACED, n)));
+  sets.forEach((set, n) => {
+    for (const q of set) {
+      for (const shown of [q.from, q.to].filter(Boolean)) {
+        for (let m = Math.max(0, n - SHOWN_GAP); m <= Math.min(sets.length - 1, n + SHOWN_GAP); m++) {
+          assert.ok(!sets[m].some((x) => x.target.name === shown.name), `${shown.name} shown ${n}, asked ${m}`);
+        }
+      }
+    }
+  });
 });
 
 test('different days give different sets', () => {
@@ -158,14 +202,27 @@ test('days count on across months and years', () => {
   assert.equal(laterKey('2026-12-28', 7), '2027-01-04');
 });
 
-test('the coming week is the targets of the next seven days', () => {
-  const soon = upcoming(items, '2026-10-10');
-  for (let n = 1; n <= 7; n++) {
-    for (const q of dailySet(items, laterKey('2026-10-10', n))) assert.ok(soon.has(q.target.name));
+test('the coming days are the targets ahead, each with the first day it is asked', () => {
+  const soon = upcoming(items, '2026-10-20');
+  const first = new Map();
+  for (let n = SOON_DAYS; n >= 1; n--) for (const q of dailySet(items, laterKey('2026-10-20', n))) first.set(q.target.name, n);
+  assert.deepEqual([...soon].sort(), [...first].sort());
+});
+
+test('practice takes what is asked soonest', () => {
+  const soon = upcoming(items, '2026-10-20');
+  for (const kind of PRACTICE.filter((k) => ['area', 'street'].includes(k.id))) {
+    for (const seed of [1, 2, 3]) {
+      const set = practiceSet(items, { key: '2026-10-20', category: kind.id, seed });
+      const picked = set.map((q) => q.target.name).filter((name) => soon.has(name));
+      const days = picked.map((name) => soon.get(name)).sort((a, b) => a - b);
+      const passed = items.filter((it) => kind.has(it) && soon.has(it.name) && !picked.includes(it.name));
+      for (const it of passed) assert.ok(soon.get(it.name) >= days[SOON_SHARE - 1], `${it.name} is sooner than what practice took`);
+    }
   }
 });
 
-test('practice asks ten of one kind, two of them coming this week', () => {
+test('practice asks ten of one kind, some of them coming soon', () => {
   const soon = upcoming(items, '2026-10-10');
   for (const kind of PRACTICE.filter((k) => ['area', 'street'].includes(k.id))) {
     for (const seed of [1, 2, 3]) {
