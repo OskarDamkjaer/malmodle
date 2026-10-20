@@ -40,15 +40,7 @@ const CODE_FILES = [
 ];
 
 const MAP_FILES = ['/malmo.pmtiles'];
-const FRESH = /(\/|\.html|\.m?js|\.css|\.json|\.webmanifest)$/;
-const PATIENCE = 4000;
-const pages = new Map();
-
-function remember(client, from) {
-  if (!client) return;
-  pages.set(client, from);
-  if (pages.size > 20) pages.delete(pages.keys().next().value);
-}
+const STEADY = 'malmo-steady';
 
 async function fillCache(name, urls) {
   const cache = await caches.open(name);
@@ -71,20 +63,25 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const map = self.registration.active ? await missing(MAP, MAP_FILES) : [];
     await Promise.all([fillCache(CODE, CODE_FILES), fillCache(MAP, map)]);
-    await self.skipWaiting();
+    if (!self.registration.active || !(await caches.has(STEADY))) await self.skipWaiting();
   })());
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     for (const key of await caches.keys()) {
-      if (key !== CODE && key !== MAP) await caches.delete(key);
+      if (![CODE, MAP, STEADY].includes(key)) await caches.delete(key);
     }
+    await caches.open(STEADY);
     await self.clients.claim();
   })());
 });
 
 self.addEventListener('message', (event) => {
+  if (event.data === 'skip') {
+    event.waitUntil(self.skipWaiting());
+    return;
+  }
   const { url, file } = event.data ?? {};
   if (!MAP_FILES.includes(url) || !(file instanceof Blob)) return;
   event.waitUntil((async () => {
@@ -100,39 +97,20 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== location.origin) return;
   if (url.pathname.startsWith('/live/')) return;
 
-  const isMap = url.pathname.endsWith('.pmtiles');
-  const navigate = request.mode === 'navigate';
-  const fresh = navigate || FRESH.test(url.pathname);
-
   event.respondWith((async () => {
-    const hit = await caches.match(request, { ignoreSearch: true });
-    if (hit && isMap) return hit;
-    const update = fetch(request).then((res) => {
-      if (res.ok && !(fresh && hit)) {
+    const cache = await caches.open(url.pathname.endsWith('.pmtiles') ? MAP : CODE);
+    const hit = await cache.match(request, { ignoreSearch: true });
+    if (hit) return hit;
+    try {
+      const res = await fetch(request);
+      if (res.ok) {
         const copy = res.clone();
-        event.waitUntil(caches.open(isMap ? MAP : CODE).then((cache) => cache.put(request, copy)).catch(() => {}));
+        event.waitUntil(cache.put(request, copy).catch(() => {}));
       }
       return res;
-    });
-    event.waitUntil(update.catch(() => {}));
-
-    if (hit && !fresh) return hit;
-    const page = navigate ? undefined : pages.get(event.clientId);
-    if (hit && page === 'cache') return hit;
-    if (hit && page === 'network') return update.then((res) => (res.ok ? res : hit), () => hit);
-    if (hit) {
-      const late = new Promise((resolve) => { setTimeout(() => resolve([hit, 'cache']), PATIENCE); });
-      const [res, from] = await Promise.race([update.then((r) => (r.ok ? [r, 'network'] : [hit, 'cache']), () => [hit, 'cache']), late]);
-      if (navigate) remember(event.resultingClientId, from);
-      return res;
-    }
-    if (navigate) remember(event.resultingClientId, 'network');
-
-    try {
-      return await update;
     } catch (err) {
       if (request.mode === 'navigate') {
-        const shell = await caches.match('/');
+        const shell = await (await caches.open(CODE)).match('/');
         if (shell) return shell;
       }
       throw err;

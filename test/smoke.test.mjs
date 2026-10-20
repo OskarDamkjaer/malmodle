@@ -1,7 +1,7 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, statSync, utimesSync } from 'node:fs';
 import { THEMES, themePath } from '../app/themes.mjs';
 import { SAVE_KEY, dateKey } from '../app/daily.mjs';
 import { chromium, launch } from './browser.mjs';
@@ -221,6 +221,57 @@ test('the map is downloaded once and then comes from the service worker', { skip
 
   assert.deepEqual(errors, []);
   await context.close();
+});
+
+async function until(check, what, ms = 60000) {
+  for (const deadline = Date.now() + ms; Date.now() < deadline;) {
+    if (await check()) return;
+    await new Promise((r) => setTimeout(r, 100));
+  }
+  assert.fail(`waited for ${what}`);
+}
+
+test('a new version is taken before the first answer, and waits after one', { skip }, async () => {
+  const touched = 'app/theme.js';
+  const { atime, mtime } = statSync(touched);
+  const release = () => utimesSync(touched, atime, new Date());
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  let loads = 0;
+  page.on('load', () => { loads += 1; });
+  const version = () => page.evaluate(async () => (await caches.keys()).filter((k) => k.startsWith('malmo-code-')));
+  try {
+    await page.goto(URL);
+    await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+    await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 30000 });
+    const [first] = await version();
+
+    release();
+    loads = 0;
+    await page.reload();
+    await until(() => loads >= 2, 'the page to reload into the new version');
+    await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
+    await page.waitForSelector('#question:not([hidden])');
+    const now = await version();
+    assert.equal(now.length, 1);
+    assert.notEqual(now[0], first);
+
+    if (await page.isVisible('#choices')) await page.locator('#choices button').first().click();
+    else await page.mouse.click(195, 422);
+    await page.waitForSelector('#result:not([hidden])');
+    release();
+    await page.evaluate(() => navigator.serviceWorker.getRegistration().then((reg) => reg.update()));
+    await page.waitForFunction(() => navigator.serviceWorker.getRegistration().then((reg) => Boolean(reg.waiting)), null, { timeout: 30000 });
+    assert.equal(loads, 2);
+    assert.ok(await page.isVisible('#result'));
+    assert.deepEqual(errors, []);
+  } finally {
+    utimesSync(touched, atime, mtime);
+    await context.close();
+  }
 });
 
 test('every style boots at its own path', { skip }, async () => {

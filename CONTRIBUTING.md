@@ -99,6 +99,13 @@ the Worker, and publishes the same build to GitHub Pages at malmoe.damk.eu
 (`.github/workflows/deploy.yml`). `node scripts/build-site.mjs` builds the
 same folder locally in `build/site`.
 
+A player gets a new build the next time they open the site. The service worker
+answers from the cache of the version the page started with, and fetches and
+installs the new one in the background; the page switches to it and reloads if
+nothing has been answered since it loaded, or else once it is hidden. Locally,
+`serve.mjs` names the version after the files it serves, so an edit arrives
+the same way.
+
 Set up once:
 
 ```

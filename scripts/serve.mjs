@@ -1,7 +1,9 @@
 import { createServer } from 'node:http';
-import { createReadStream, statSync, existsSync, readFileSync } from 'node:fs';
-import { resolve, normalize, extname } from 'node:path';
+import { createHash } from 'node:crypto';
+import { createReadStream, statSync, existsSync, readFileSync, readdirSync } from 'node:fs';
+import { resolve, normalize, extname, join } from 'node:path';
 import { MOUNTS, MIME } from './lib/site.mjs';
+import { stampWorker } from './lib/stamp.mjs';
 import { localD1 } from './lib/d1.mjs';
 import { localR2 } from './lib/r2.mjs';
 import { dailySet, dateKey, random, setId } from '../app/daily.mjs';
@@ -80,6 +82,22 @@ function toFile(urlPath) {
   return null;
 }
 
+function served(m) {
+  if (m.file) return existsSync(m.file) ? [m.file] : [];
+  return readdirSync(m.dir, { recursive: true, withFileTypes: true }).filter((e) => e.isFile()).map((e) => join(e.parentPath, e.name));
+}
+
+function stampedWorker() {
+  const code = createHash('sha256');
+  const map = createHash('sha256');
+  for (const file of [...new Set(MOUNTS.flatMap(served))].sort()) {
+    if (file === join('app', 'sw.js')) continue;
+    const { size, mtimeMs } = statSync(file);
+    (file.endsWith('.pmtiles') ? map : code).update(`${file}\0${size}\0${mtimeMs}\0`);
+  }
+  return stampWorker(readFileSync('app/sw.js', 'utf8'), code.digest('hex').slice(0, 12), map.digest('hex').slice(0, 12));
+}
+
 async function live(res, url) {
   const file = await env.LIVE.get(decodeURIComponent(url.pathname.slice('/live/'.length)));
   if (!file) {
@@ -107,6 +125,12 @@ createServer((req, res) => {
       res.writeHead(500);
       res.end();
     });
+    return;
+  }
+
+  if (url.pathname === '/sw.js') {
+    res.writeHead(200, { 'content-type': MIME['.js'], 'cache-control': 'no-store' });
+    res.end(stampedWorker());
     return;
   }
 

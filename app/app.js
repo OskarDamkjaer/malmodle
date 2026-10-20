@@ -57,6 +57,41 @@ if (!document.createElement('canvas').getContext('webgl2')) {
   throw err;
 }
 
+const workers = 'serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname)) ? navigator.serviceWorker : null;
+const controlled = Boolean(workers?.controller);
+let playedHere = false;
+let stale = false;
+
+const idle = () => !playedHere || document.hidden;
+
+function reloadWhenIdle() {
+  if (!stale || !idle()) return;
+  stale = false;
+  location.reload();
+}
+
+function takeUpdate(reg) {
+  if (controlled && reg.waiting && idle()) reg.waiting.postMessage('skip');
+}
+
+workers?.addEventListener('controllerchange', () => {
+  if (!controlled) return;
+  stale = true;
+  reloadWhenIdle();
+});
+
+workers?.register('/sw.js', { scope: '/' }).then((reg) => {
+  if (!reg) return;
+  takeUpdate(reg);
+  reg.addEventListener('updatefound', () => {
+    const next = reg.installing;
+    next?.addEventListener('statechange', () => { if (next.state === 'installed') takeUpdate(reg); });
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { takeUpdate(reg); reloadWhenIdle(); } else reg.update().catch(() => {});
+  });
+}, (err) => console.warn('sw:', err));
+
 let archive;
 let archiveFile;
 try {
@@ -256,6 +291,7 @@ async function clickedStreet(tap) {
 async function answer(value, keyed = false) {
   if (phase !== 'asking') return;
   phase = 'grading';
+  playedHere = true;
   aimed = keyed;
   delete document.body.dataset.pointing;
   const q = current();
@@ -810,10 +846,6 @@ map.on('load', async () => {
   }, Math.max(reducedMotion ? 0 : 250, 500 - performance.now()));
 });
 
-if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
-  const uncontrolled = !navigator.serviceWorker.controller;
-  navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch((err) => console.warn('sw:', err));
-  if (uncontrolled) {
-    navigator.serviceWorker.ready.then((reg) => reg.active?.postMessage({ url: '/malmo.pmtiles', file: archiveFile }));
-  }
+if (workers && !controlled) {
+  workers.ready.then((reg) => reg.active?.postMessage({ url: '/malmo.pmtiles', file: archiveFile }));
 }

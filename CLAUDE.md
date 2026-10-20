@@ -47,6 +47,11 @@ osmium, Java and hosts the sandbox cannot reach.
   `[data-theme]`, and a basemap palette applied at load. A new style needs all
   three plus its path in `app/sw.js`; `test/themes.test.mjs` checks them.
 - `app/app.js`: boot and the screens.
+- `app/sw.js`: the offline worker. Each version answers only from its own
+  cache, so a page never mixes versions. A new one waits until the page asks
+  for it, which `app.js` does before the first answer of a page load or while
+  the page is hidden, and then reloads; a reload resumes the saved day. The
+  build stamps its cache names, and `serve.mjs` stamps them per request.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
 - `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result
   against the day's set, which `sets.mjs` works out from `quiz.json`, stores
