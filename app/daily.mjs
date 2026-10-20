@@ -14,7 +14,7 @@ export const SET_SIZE = 10;
 
 export const EPOCH = '2026-01-01';
 export const LAUNCH = '2026-10-10';
-export const SPACED = '2026-10-27';
+export const SPACED = '2026-10-21';
 
 export const GROUP = { area: 'area', street: 'street', landmark: 'place', bridge: 'place' };
 
