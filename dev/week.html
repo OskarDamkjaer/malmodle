@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kommande dagar</title>
+<link rel="stylesheet" href="/vendor/maplibre-gl.css">
+<link rel="stylesheet" href="/app.css">
+<style>
+  html, body { height: auto; overflow: auto; overscroll-behavior: auto; }
+  body { display: grid; grid-template-rows: auto 45vh auto; min-height: 100vh; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 10px 16px; font-size: 14px; border-bottom: var(--border); background: var(--panel); }
+  .bar input[type="date"], .bar input[type="number"] { font: inherit; padding: 4px 6px; }
+  .bar input[type="number"] { width: 4em; }
+  .bar .hint { color: var(--ink-soft); }
+  #weekmap { position: sticky; top: 0; z-index: 2; border-bottom: var(--border); }
+  #days { padding: 12px 16px 40px; }
+  .day { margin: 0 0 24px; }
+  .day > h2 { margin: 0 0 4px; font-size: 20px; }
+  .day > .sum { margin: 0 0 8px; font-size: 13px; color: var(--ink-soft); }
+  .q { display: grid; grid-template-columns: 22px 1fr; gap: 2px 8px; width: 100%; text-align: left; padding: 8px 10px; margin: 0 0 4px; min-height: 0; font-size: 14px; line-height: 1.35; box-shadow: none; }
+  .q[aria-current="true"] { outline: 3px solid var(--accent); outline-offset: -3px; }
+  .q .n { font-weight: 600; color: var(--ink-soft); }
+  .q .title { font-weight: 600; }
+  .q .meta { grid-column: 2; font-size: 12px; color: var(--ink-soft); }
+  .q .opts { grid-column: 2; font-size: 12px; }
+  .q .opts b { color: var(--band-green); }
+  .q .flags { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px; }
+  .flag { font-size: 11px; padding: 1px 6px; border: 1px solid currentColor; border-radius: 9px; }
+  .flag.warn { color: var(--wrong); }
+  .flag.note { color: var(--ink-soft); }
+  #card { padding: 10px 16px; border-bottom: var(--border); background: var(--panel); font-size: 14px; }
+  #card h3 { margin: 0 0 2px; font: 600 17px/1.3 var(--font-display); }
+  #card p { margin: 4px 0; }
+  #card .links { display: flex; gap: 12px; flex-wrap: wrap; }
+  #card img { max-width: 160px; max-height: 120px; float: right; margin: 0 0 6px 10px; }
+  @media (min-width: 900px) {
+    body { grid-template-columns: minmax(380px, 460px) 1fr; grid-template-rows: auto 1fr; height: 100vh; overflow: hidden; }
+    .bar { grid-column: 1 / -1; }
+    #card { position: sticky; top: 0; z-index: 1; }
+    #side { grid-column: 1; grid-row: 2; overflow: auto; border-right: var(--border); }
+    #weekmap { grid-column: 2; grid-row: 2; position: relative; top: 0; border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <label>Från <input id="from" type="date"></label>
+  <label>Dagar <input id="count" type="number" min="1" max="60" value="8"></label>
+  <label><input id="labels" type="checkbox" checked> Kartetiketter</label>
+  <label><input id="options" type="checkbox" checked> Visa alternativ</label>
+  <span class="hint">↑ ↓ eller j k bläddrar</span>
+</div>
+<div id="weekmap"></div>
+<div id="side">
+  <section id="card" hidden></section>
+  <main id="days"></main>
+</div>
+<script src="/vendor/pmtiles.js"></script>
+<script type="module" src="/dev/week.js"></script>
+</body>
+</html>
