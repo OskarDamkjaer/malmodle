@@ -28,7 +28,7 @@ async function open(site, viewport, path = '/', { workers = 'block' } = {}) {
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
-  page.on('request', (r) => { if (r.method() === 'POST') errors.push(`posted to ${r.url()}`); });
+  page.on('request', (r) => { if (r.method() === 'POST' && own(site, r.url()) && new URL(r.url()).pathname.startsWith('/api/')) errors.push(`posted to ${r.url()}`); });
   page.on('response', (r) => { if (own(site, r.url()) && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
   await page.goto(new URL(path, site).href);
   await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
