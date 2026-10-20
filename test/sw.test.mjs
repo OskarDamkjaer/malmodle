@@ -38,11 +38,13 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
   };
   const listeners = {};
   const skipped = [];
+  const reloaded = [];
+  const windows = [{ url: `${ORIGIN}/`, navigate: async (url) => { reloaded.push(url); } }];
   const self = {
     addEventListener: (type, fn) => { listeners[type] = fn; },
     registration: { active: active ? {} : null },
     skipWaiting: async () => { skipped.push(true); },
-    clients: { claim: async () => {} },
+    clients: { claim: async () => {}, matchAll: async () => windows },
   };
   vm.runInNewContext(source(code), { self, caches, fetch, Response, Blob, URL, console, Promise, location: new URL(ORIGIN) });
 
@@ -58,6 +60,7 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
   return {
     fetched,
     skipped,
+    reloaded,
     store,
     async seed(entries, name = code) {
       const cache = await open(name);
@@ -68,7 +71,10 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
       return (await (await open(name)).match(path))?.text();
     },
     install: () => dispatch('install', {}),
-    activate: () => dispatch('activate', {}),
+    async activate() {
+      await dispatch('activate', {});
+      await new Promise((resolve) => { setImmediate(resolve); });
+    },
     message: (data) => dispatch('message', { data }),
   };
 }
@@ -132,12 +138,26 @@ test('a new version waits for the page to ask for it', async () => {
   assert.equal(next.skipped.length, 1);
 });
 
-test('a new version takes over from a worker that cannot ask for it', async () => {
+test('a new version takes over from a worker that cannot ask for it, and reloads its pages', async () => {
   const store = new Map();
   await worker({ store }).seed({ '/': 'old start' });
   const next = worker({ code: NEW, active: true, store });
   await next.install();
   assert.equal(next.skipped.length, 1);
+  await next.activate();
+  assert.deepEqual(next.reloaded, [`${ORIGIN}/`]);
+});
+
+test('neither a first visit nor a later update reloads the page from the worker', async () => {
+  const store = new Map();
+  const first = worker({ store });
+  await first.install();
+  await first.activate();
+  const next = worker({ code: NEW, active: true, store });
+  await next.install();
+  await next.message('skip');
+  await next.activate();
+  assert.deepEqual([...first.reloaded, ...next.reloaded], []);
 });
 
 test('taking over clears the old version and keeps the map', async () => {

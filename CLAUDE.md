@@ -50,7 +50,8 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/sw.js`: the offline worker. Each version answers only from its own
   cache, so a page never mixes versions. A new one waits until the page asks
   for it, which `app.js` does before the first answer of a page load or while
-  the page is hidden, and then reloads; a reload resumes the saved day. The
+  the page is hidden, and then reloads; a reload resumes the saved day. Taking
+over from a worker without that handshake, it reloads the old pages itself. The
   build stamps its cache names, and `serve.mjs` stamps them per request.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
 - `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result

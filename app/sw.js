@@ -68,13 +68,21 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil((async () => {
-    for (const key of await caches.keys()) {
+  const activated = (async () => {
+    const keys = await caches.keys();
+    const takeover = !keys.includes(STEADY) && keys.some((key) => key.startsWith('malmo-code') && key !== CODE);
+    for (const key of keys) {
       if (![CODE, MAP, STEADY].includes(key)) await caches.delete(key);
     }
     await caches.open(STEADY);
     await self.clients.claim();
-  })());
+    return takeover;
+  })();
+  event.waitUntil(activated);
+  activated.then(async (takeover) => {
+    if (!takeover) return;
+    for (const client of await self.clients.matchAll({ type: 'window' })) client.navigate(client.url).catch(() => {});
+  });
 });
 
 self.addEventListener('message', (event) => {
