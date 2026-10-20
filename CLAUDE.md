@@ -7,6 +7,7 @@ find the repo, `CONTRIBUTING.md` for working on it.
 
 ```
 node --test 'test/*.test.mjs'          # all tests, no runner or config
+node --test 'test/live/*.test.mjs'     # the live site, as the deploy checks it
 node scripts/build-quiz.mjs            # build/data/quiz.json
 node scripts/serve.mjs                 # http://127.0.0.1:8080, with the API
 node scripts/serve.mjs --fake 200      # and 200 made-up players today

@@ -68,9 +68,21 @@ node scripts/places-shapes.mjs       # → places/shapes.json, an outline for ev
 
 ```
 node --test 'test/*.test.mjs'
+node --test 'test/live/*.test.mjs'
 ```
 
-Tests that need built data or a browser skip when those are missing.
+Tests that need built data or a browser skip when those are missing. The browser
+is driven by `playwright-core`, installed globally with npm, using its own
+Chromium or else the installed Chrome.
+
+The deploy runs the first set before it releases anything, and stops if a
+single test skips. Once both sites are out, it runs the second set against
+them: it waits until each serves the build just released, plays a day on phone
+and desktop, boots every style, opens the site offline after one visit, and
+checks the API turns away a broken result. Results are answered inside the
+browser, so these runs never count as players. A failure there means fixing
+forward; nothing is rolled back. `SITES` picks the sites (malmodle.se by
+default) and `BUILD` the built site to compare with.
 
 ## Hosting
 

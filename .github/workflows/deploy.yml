@@ -108,8 +108,17 @@ jobs:
       - name: Build the quiz data
         run: node scripts/build-quiz.mjs
 
+      - name: Install the browser driver
+        run: npm install --global playwright-core@1.64.0
+
       - name: Test
-        run: node --test 'test/*.test.mjs'
+        shell: bash
+        run: |
+          node --test --test-reporter=tap 'test/*.test.mjs' | tee test.log
+          if grep '# SKIP' test.log; then
+            echo '::error::tests skipped before a release'
+            exit 1
+          fi
 
       - name: Assemble the site
         run: node scripts/build-site.mjs
@@ -159,6 +168,41 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  live:
+    needs: [cloudflare, pages]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site
+          path: build/site
+
+      - name: Install the browser driver
+        run: npm install --global playwright-core@1.64.0
+
+      - name: Check the live sites
+        shell: bash
+        run: |
+          node --test --test-reporter=tap 'test/live/*.test.mjs' | tee live.log
+          if grep '# SKIP' live.log | grep -v '# SKIP no API here'; then
+            echo '::error::live checks skipped'
+            exit 1
+          fi
+        env:
+          SITES: https://malmodle.se https://malmoe.damk.eu
+          BUILD: build/site
 
   pages:
     needs: build

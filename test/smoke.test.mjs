@@ -1,28 +1,13 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { createRequire } from 'node:module';
-import { execSync, spawn } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import { THEMES, themePath } from '../app/themes.mjs';
 import { SAVE_KEY, dateKey } from '../app/daily.mjs';
-
-const require = createRequire(import.meta.url);
-
-function loadChromium() {
-  const roots = [];
-  try { roots.push(execSync('npm root -g', { encoding: 'utf8' }).trim()); } catch {}
-  for (const name of ['playwright-core', 'playwright']) {
-    for (const from of [name, ...roots.map((r) => join(r, name))]) {
-      try { return require(from).chromium; } catch {}
-    }
-  }
-  return null;
-}
+import { chromium, launch } from './browser.mjs';
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
 process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS = '1';
-const chromium = loadChromium();
 const missing = NEEDED.filter((p) => !existsSync(p));
 const skip = !chromium ? 'playwright is not installed'
   : missing.length ? `missing: ${missing.join(', ')}` : false;
@@ -39,7 +24,7 @@ before(async () => {
     try { if ((await fetch(URL)).ok) break; } catch {}
     await new Promise((r) => setTimeout(r, 100));
   }
-  browser = await chromium.launch();
+  browser = await launch();
 });
 
 after(async () => {
