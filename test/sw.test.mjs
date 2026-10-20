@@ -6,14 +6,17 @@ import vm from 'node:vm';
 const ORIGIN = 'https://malmodle.se';
 const source = readFileSync('app/sw.js', 'utf8');
 
-function worker({ online = true, slow = false, pages = {}, cached = {} } = {}) {
+function worker({ online = true, slow = false, full = false, pages = {}, cached = {} } = {}) {
   const store = new Map();
   const keyOf = (req) => new URL(typeof req === 'string' ? req : req.url, ORIGIN).pathname;
   const open = async (name) => {
     if (!store.has(name)) store.set(name, new Map());
     const cache = store.get(name);
     return {
-      put: async (req, res) => { cache.set(keyOf(req), res); },
+      put: async (req, res) => {
+        if (full) throw new Error('QuotaExceededError');
+        cache.set(keyOf(req), res);
+      },
       match: async (req) => cache.get(keyOf(req)),
     };
   };
@@ -31,7 +34,7 @@ function worker({ online = true, slow = false, pages = {}, cached = {} } = {}) {
     fetched.push(path);
     if (!online) throw new TypeError('offline');
     if (path === '/index.html') return new Response(null, { status: 307, headers: { Location: '/' } });
-    if (slow) await new Promise((resolve) => { setTimeout(resolve, 20); });
+    if (slow === true || slow.includes?.(path)) await new Promise((resolve) => { setTimeout(resolve, 50); });
     return new Response(pages[path] ?? 'fresh');
   };
   const listeners = {};
@@ -41,7 +44,7 @@ function worker({ online = true, slow = false, pages = {}, cached = {} } = {}) {
   };
   vm.runInNewContext(source, {
     self, caches, fetch, Response, Blob, URL, console, Promise,
-    setTimeout: slow ? (fn) => fn() : setTimeout,
+    setTimeout: slow ? (fn) => setTimeout(fn, 10) : setTimeout,
     location: new URL(ORIGIN),
   });
 
@@ -51,16 +54,18 @@ function worker({ online = true, slow = false, pages = {}, cached = {} } = {}) {
       const cache = await open('malmo-code');
       for (const [path, body] of Object.entries(entries)) await cache.put(path, new Response(body));
     },
-    async navigate(path, mode = 'navigate') {
+    async navigate(path, mode = 'navigate', client = 'page') {
       let answer;
       const waits = [];
       listeners.fetch({
         request: { method: 'GET', mode, url: ORIGIN + path },
+        clientId: mode === 'navigate' ? '' : client,
+        resultingClientId: mode === 'navigate' ? client : '',
         respondWith: (p) => { answer = p; },
         waitUntil: (p) => waits.push(p),
       });
       const res = await answer;
-      await Promise.all(waits);
+      for (let i = 0; i < waits.length; i++) await waits[i];
       return res;
     },
     async cachedText(path) {
@@ -101,7 +106,35 @@ test('online, a page and its code come from the network even when cached', async
   assert.equal(await (await sw.navigate('/')).text(), 'new start');
   assert.equal(await (await sw.navigate('/app.js', 'cors')).text(), 'new code');
   assert.equal(await (await sw.navigate('/data/quiz.json', 'cors')).text(), 'new quiz');
-  assert.equal(await sw.cachedText('/app.js'), 'new code');
+});
+
+test('cached code is replaced only by the next worker, so the cache stays one version', async () => {
+  const sw = worker({ pages: { '/': 'new start', '/app.js': 'new code', '/map.js': 'new map' } });
+  await sw.seed({ '/': 'old start', '/app.js': 'old code' });
+  await sw.navigate('/');
+  await sw.navigate('/app.js', 'script');
+  await sw.navigate('/map.js', 'script');
+  assert.equal(await sw.cachedText('/app.js'), 'old code');
+  assert.equal(await sw.cachedText('/map.js'), 'new map');
+});
+
+test('a page shown from the cache loads its code from the cache too', async () => {
+  const sw = worker({ slow: ['/'], pages: { '/': 'new start', '/app.js': 'new code' } });
+  await sw.seed({ '/': 'old start', '/app.js': 'old code' });
+  assert.equal(await (await sw.navigate('/', 'navigate', 'a')).text(), 'old start');
+  assert.equal(await (await sw.navigate('/app.js', 'script', 'a')).text(), 'old code');
+});
+
+test('a page from the network waits for its code from the network too', async () => {
+  const sw = worker({ slow: ['/app.js'], pages: { '/': 'new start', '/app.js': 'new code' } });
+  await sw.seed({ '/': 'old start', '/app.js': 'old code' });
+  assert.equal(await (await sw.navigate('/', 'navigate', 'b')).text(), 'new start');
+  assert.equal(await (await sw.navigate('/app.js', 'script', 'b')).text(), 'new code');
+});
+
+test('a full cache does not stop the answer from the network', async () => {
+  const sw = worker({ full: true, pages: { '/malmo.pmtiles': 'tiles' } });
+  assert.equal(await (await sw.navigate('/malmo.pmtiles', 'cors')).text(), 'tiles');
 });
 
 test('offline, code comes from the cache', async () => {
@@ -110,11 +143,10 @@ test('offline, code comes from the cache', async () => {
   assert.equal(await (await sw.navigate('/app.js', 'cors')).text(), 'old code');
 });
 
-test('on a slow network, the cached page is shown and the new one saved for next time', async () => {
+test('on a slow network, the cached page is shown', async () => {
   const sw = worker({ slow: true, pages: { '/': 'new start' } });
   await sw.seed({ '/': 'old start' });
   assert.equal(await (await sw.navigate('/')).text(), 'old start');
-  assert.equal(await sw.cachedText('/'), 'new start');
 });
 
 test('images and glyphs come from the cache and update behind it', async () => {

@@ -42,6 +42,13 @@ const CODE_FILES = [
 const MAP_FILES = ['/malmo.pmtiles'];
 const FRESH = /(\/|\.html|\.m?js|\.css|\.json|\.webmanifest)$/;
 const PATIENCE = 4000;
+const pages = new Map();
+
+function remember(client, from) {
+  if (!client) return;
+  pages.set(client, from);
+  if (pages.size > 20) pages.delete(pages.keys().next().value);
+}
 
 async function fillCache(name, urls) {
   const cache = await caches.open(name);
@@ -94,22 +101,32 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/live/')) return;
 
   const isMap = url.pathname.endsWith('.pmtiles');
-  const fresh = request.mode === 'navigate' || FRESH.test(url.pathname);
+  const navigate = request.mode === 'navigate';
+  const fresh = navigate || FRESH.test(url.pathname);
 
   event.respondWith((async () => {
     const hit = await caches.match(request, { ignoreSearch: true });
     if (hit && isMap) return hit;
-    const update = fetch(request).then(async (res) => {
-      if (res.ok) await (await caches.open(isMap ? MAP : CODE)).put(request, res.clone());
+    const update = fetch(request).then((res) => {
+      if (res.ok && !(fresh && hit)) {
+        const copy = res.clone();
+        event.waitUntil(caches.open(isMap ? MAP : CODE).then((cache) => cache.put(request, copy)).catch(() => {}));
+      }
       return res;
     });
     event.waitUntil(update.catch(() => {}));
 
     if (hit && !fresh) return hit;
+    const page = navigate ? undefined : pages.get(event.clientId);
+    if (hit && page === 'cache') return hit;
+    if (hit && page === 'network') return update.then((res) => (res.ok ? res : hit), () => hit);
     if (hit) {
-      const late = new Promise((resolve) => { setTimeout(() => resolve(hit), PATIENCE); });
-      return Promise.race([update.then((res) => (res.ok ? res : hit), () => hit), late]);
+      const late = new Promise((resolve) => { setTimeout(() => resolve([hit, 'cache']), PATIENCE); });
+      const [res, from] = await Promise.race([update.then((r) => (r.ok ? [r, 'network'] : [hit, 'cache']), () => [hit, 'cache']), late]);
+      if (navigate) remember(event.resultingClientId, from);
+      return res;
     }
+    if (navigate) remember(event.resultingClientId, 'network');
 
     try {
       return await update;
