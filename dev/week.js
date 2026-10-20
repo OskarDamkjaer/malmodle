@@ -146,8 +146,13 @@ function build() {
         opts.className = 'opts';
         q.options.forEach((o, k) => {
           if (k) opts.append(', ');
+          const score = TYPES[q.type].grade(q, o, items).score;
           const w = document.createElement(o === t.name ? 'b' : 'span');
           w.textContent = o;
+          if (o !== t.name && score) {
+            w.className = 'close';
+            w.textContent = `${o} ${score}\u00a0p`;
+          }
           opts.append(w);
         });
         b.append(opts);
