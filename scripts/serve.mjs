@@ -90,7 +90,7 @@ function served(m) {
 function stampedWorker() {
   const code = createHash('sha256');
   const map = createHash('sha256');
-  for (const file of [...new Set(MOUNTS.flatMap(served))].sort()) {
+  for (const file of [...new Set(mounts.flatMap(served))].sort()) {
     if (file === join('app', 'sw.js')) continue;
     const { size, mtimeMs } = statSync(file);
     (file.endsWith('.pmtiles') ? map : code).update(`${file}\0${size}\0${mtimeMs}\0`);

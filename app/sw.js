@@ -53,6 +53,23 @@ async function fillCache(name, urls) {
   if (failed.length) console.warn(`sw: ${failed.length} of ${urls.length} failed`, failed.map((f) => f.reason?.message));
 }
 
+async function ranged(request, res) {
+  const range = /^bytes=(\d+)-(\d*)$/.exec(request.headers.get('Range') ?? '');
+  if (!range) return res;
+  const body = await res.blob();
+  const start = Number(range[1]);
+  const end = range[2] ? Math.min(Number(range[2]), body.size - 1) : body.size - 1;
+  if (start > end) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${body.size}` } });
+  return new Response(body.slice(start, end + 1), {
+    status: 206,
+    headers: {
+      'Content-Type': res.headers.get('Content-Type') ?? 'application/octet-stream',
+      'Content-Length': String(end - start + 1),
+      'Content-Range': `bytes ${start}-${end}/${body.size}`,
+    },
+  });
+}
+
 async function missing(name, urls) {
   const cache = await caches.open(name);
   const found = await Promise.all(urls.map((url) => cache.match(url)));
@@ -108,7 +125,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith((async () => {
     const cache = await caches.open(url.pathname.endsWith('.pmtiles') ? MAP : CODE);
     const hit = await cache.match(request, { ignoreSearch: true });
-    if (hit) return hit;
+    if (hit) return ranged(request, hit);
     try {
       const res = await fetch(request);
       if (res.ok) {

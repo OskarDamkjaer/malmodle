@@ -46,7 +46,7 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
     skipWaiting: async () => { skipped.push(true); },
     clients: { claim: async () => {}, matchAll: async () => windows },
   };
-  vm.runInNewContext(source(code), { self, caches, fetch, Response, Blob, URL, console, Promise, location: new URL(ORIGIN) });
+  vm.runInNewContext(source(code), { self, caches, fetch, Response, Blob, URL, Headers, console, Promise, location: new URL(ORIGIN) });
 
   const dispatch = async (type, event) => {
     const waits = [];
@@ -66,7 +66,7 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
       const cache = await open(name);
       for (const [path, body] of Object.entries(entries)) await cache.put(path, new Response(body));
     },
-    navigate: (path, mode = 'navigate') => dispatch('fetch', { request: { method: 'GET', mode, url: ORIGIN + path } }),
+    navigate: (path, mode = 'navigate', headers = {}) => dispatch('fetch', { request: { method: 'GET', mode, url: ORIGIN + path, headers: new Headers(headers) } }),
     async cachedText(path, name = code) {
       return (await (await open(name)).match(path))?.text();
     },
@@ -113,6 +113,19 @@ test('a worker never answers from the cache of another version', async () => {
   assert.equal(await (await sw.navigate('/app.js', 'script')).text(), 'network code');
   assert.equal(await sw.cachedText('/app.js'), 'network code');
   assert.equal(await sw.cachedText('/app.js', NEW), 'next code');
+});
+
+test('a range of the cached map is answered with just those bytes', async () => {
+  const sw = worker({ online: false });
+  await sw.seed({ '/malmo.pmtiles': '0123456789' }, 'malmo-map-222222222222');
+  const part = await sw.navigate('/malmo.pmtiles', 'cors', { Range: 'bytes=2-5' });
+  assert.equal(part.status, 206);
+  assert.equal(part.headers.get('Content-Range'), 'bytes 2-5/10');
+  assert.equal(await part.text(), '2345');
+  const rest = await sw.navigate('/malmo.pmtiles', 'cors', { Range: 'bytes=8-' });
+  assert.equal(await rest.text(), '89');
+  assert.equal((await sw.navigate('/malmo.pmtiles', 'cors', { Range: 'bytes=20-' })).status, 416);
+  assert.equal(await (await sw.navigate('/malmo.pmtiles', 'cors')).text(), '0123456789');
 });
 
 test('a full cache does not stop the answer from the network', async () => {
