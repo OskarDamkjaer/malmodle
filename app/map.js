@@ -257,11 +257,12 @@ function padding() {
   const across = sides.filter((r) => !tall(r));
   const under = Math.max(top, ...across.filter((r) => r.top < h / 2).map((r) => r.bottom));
   const over = Math.max(bottom, ...across.filter((r) => r.top >= h / 2).map((r) => h - r.top));
+  const zoom = Math.max(0, ...shown('.maplibregl-ctrl-group').filter((r) => r.left > w / 2).map((r) => w - r.left));
   return {
     top: above ? Math.min(above + gap, h * 0.7) : Math.min(under + gap, h * 0.45),
     bottom: Math.min(over + gap, h * 0.45),
     left: beside && beside < w * 0.6 ? beside + gap * 5 : side,
-    right: right ? right + gap : side,
+    right: Math.max(right ? right + gap : side, zoom && zoom + gap),
   };
 }
 

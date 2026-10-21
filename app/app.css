@@ -26,6 +26,7 @@
   --gap: 12px;
   --width: 560px;
   --attribution: 26px;
+  --zoom: 92px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   color-scheme: light;
@@ -433,7 +434,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
     right: var(--gap);
     transform: none;
     width: 340px;
-    max-height: calc(100% - 2 * var(--gap) - var(--safe-top) - var(--attribution));
+    max-height: calc(100% - 2 * var(--gap) - var(--safe-top) - var(--attribution) - 52px - var(--zoom));
     overflow-y: auto;
     animation: slide .28s ease-out;
   }
@@ -447,7 +448,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
     right: var(--gap);
     transform: none;
     width: 340px;
-    max-height: calc(100% - 2 * var(--gap) - var(--safe-top) - var(--attribution));
+    max-height: calc(100% - 3 * var(--gap) - var(--safe-top) - var(--attribution) - var(--zoom));
     overflow-y: auto;
     display: block;
     padding: 0;
