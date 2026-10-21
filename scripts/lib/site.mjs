@@ -5,6 +5,16 @@ export const MOUNTS = [
   { url: '/malmo.pmtiles', file: 'data/cache/malmo.pmtiles' },
 ];
 
+export const MOVED = ['/natt/', '/papper/', '/klar/'];
+
+export const movedPage = `<!doctype html>
+<meta charset="utf-8">
+<title>Malmödle</title>
+<link rel="canonical" href="/">
+<script>location.replace('/' + location.search + location.hash);</script>
+<meta http-equiv="refresh" content="0; url=/">
+`;
+
 export const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',

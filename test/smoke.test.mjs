@@ -68,6 +68,13 @@ async function playThrough(page, viewport, count = 10) {
   return prompts;
 }
 
+test('a page of a style that is gone leads to the start page, keeping the hash', { skip }, async () => {
+  const { page, context, errors } = await open({ width: 390, height: 844 }, '/natt/#x=1');
+  assert.equal(await page.evaluate(() => location.pathname + location.hash), '/#x=1');
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
 test('the map can be answered from the keyboard', { skip }, async () => {
   const viewport = { width: 1280, height: 800 };
   const { page, context, errors } = await open(viewport);
