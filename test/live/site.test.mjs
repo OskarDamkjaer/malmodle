@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { PALETTE } from '../../app/palette.mjs';
+import { MOVED } from '../../scripts/lib/site.mjs';
 import { chromium, launch } from '../browser.mjs';
 
 const SITES = (process.env.SITES ?? 'https://malmodle.se').split(/\s+/).filter(Boolean);
@@ -78,6 +79,15 @@ for (const site of SITES) {
       await context.close();
     }));
   }
+
+  test(`the pages of styles that are gone on ${site} lead to the start page`, { skip }, again(async () => {
+    for (const path of MOVED) {
+      const { page, context, errors } = await open(site, { width: 390, height: 844 }, path);
+      assert.equal(new URL(page.url()).pathname, '/', path);
+      assert.deepEqual(errors, []);
+      await context.close();
+    }
+  }));
 
   test(`${site} paints the basemap with the palette`, { skip }, again(async () => {
     const { page, context, errors } = await open(site, { width: 390, height: 844 }, '/');

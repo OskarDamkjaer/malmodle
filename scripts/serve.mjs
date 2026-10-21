@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { createHash } from 'node:crypto';
 import { createReadStream, statSync, existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, normalize, extname, join } from 'node:path';
-import { MOUNTS, MIME } from './lib/site.mjs';
+import { MIME, MOUNTS, MOVED, movedPage } from './lib/site.mjs';
 import { stampWorker } from './lib/stamp.mjs';
 import { localD1 } from './lib/d1.mjs';
 import { localR2 } from './lib/r2.mjs';
@@ -131,6 +131,12 @@ createServer((req, res) => {
   if (url.pathname === '/sw.js') {
     res.writeHead(200, { 'content-type': MIME['.js'], 'cache-control': 'no-store' });
     res.end(stampedWorker());
+    return;
+  }
+
+  if (MOVED.includes(url.pathname.replace(/\/?$/, '/'))) {
+    res.writeHead(200, { 'content-type': MIME['.html'], 'cache-control': 'no-store' });
+    res.end(req.method === 'HEAD' ? undefined : movedPage);
     return;
   }
 

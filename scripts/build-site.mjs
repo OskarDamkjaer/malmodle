@@ -1,6 +1,6 @@
 import { cpSync, existsSync, mkdirSync, rmSync, statSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import { MOUNTS } from './lib/site.mjs';
+import { MOUNTS, MOVED, movedPage } from './lib/site.mjs';
 import { codeHash, mapHash, stampWorker } from './lib/stamp.mjs';
 
 const args = process.argv.slice(2);
@@ -28,6 +28,12 @@ for (const m of MOUNTS) {
   } else {
     cpSync(m.dir, dest, { recursive: true });
   }
+}
+
+for (const url of MOVED) {
+  const dest = join(tmp, url);
+  mkdirSync(dest, { recursive: true });
+  writeFileSync(join(dest, 'index.html'), movedPage);
 }
 
 const worker = join(tmp, 'sw.js');
