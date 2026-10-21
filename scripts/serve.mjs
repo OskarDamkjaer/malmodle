@@ -142,13 +142,6 @@ createServer((req, res) => {
     return;
   }
 
-  if (file === resolve(root, 'app/index.html')) {
-    const page = readFileSync(file, 'utf8').replace('<head>', '<head>\n<script src="/dev/clock.js"></script>');
-    res.writeHead(200, { 'content-type': MIME['.html'], 'cache-control': 'no-store' });
-    res.end(req.method === 'HEAD' ? undefined : page);
-    return;
-  }
-
   const { size } = statSync(file);
   const type = MIME[extname(file)] ?? 'application/octet-stream';
   const headers = { 'content-type': type, 'accept-ranges': 'bytes', 'cache-control': 'no-store' };
