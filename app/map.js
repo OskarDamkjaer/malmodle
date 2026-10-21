@@ -17,6 +17,7 @@ let labelLayers = [];
 const isPolygon = ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]];
 const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineString']]];
 const isPoint = ['==', ['geometry-type'], 'Point'];
+const fade = ['coalesce', ['feature-state', 'fade'], 1];
 const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
 export function applyPalette(mapInstance) {
@@ -34,18 +35,18 @@ export function setupLayers(mapInstance) {
   map = mapInstance;
   labelLayers = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 
-  map.addSource('focus', { type: 'geojson', data: EMPTY });
-  map.addSource('focus-labels', { type: 'geojson', data: EMPTY });
+  map.addSource('focus', { type: 'geojson', data: EMPTY, promoteId: 'role' });
+  map.addSource('focus-labels', { type: 'geojson', data: EMPTY, promoteId: 'role' });
   map.addSource('tap', { type: 'geojson', data: EMPTY });
 
   map.addLayer({
     id: 'focus-fill', type: 'fill', source: 'focus', filter: isPolygon,
-    paint: { 'fill-color': roleColor(), 'fill-opacity': 0.22 },
+    paint: { 'fill-color': roleColor(), 'fill-opacity': ['*', 0.22, fade] },
   });
   map.addLayer({
     id: 'focus-line', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['!=', ['get', 'role'], 'ask']],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': roleColor(), 'line-width': ['case', isPolygon, 2.5, 6] },
+    paint: { 'line-color': roleColor(), 'line-width': ['case', isPolygon, 2.5, 6], 'line-opacity': fade },
   });
   map.addLayer({
     id: 'focus-ask', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['==', ['get', 'role'], 'ask']],
@@ -96,7 +97,7 @@ export function setupLayers(mapInstance) {
 
   map.addLayer({
     id: 'focus-circle', type: 'circle', source: 'focus', filter: isPoint,
-    paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
+    paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5, 'circle-opacity': fade, 'circle-stroke-opacity': fade },
   });
   map.addLayer({
     id: 'tap-point', type: 'circle', source: 'tap', filter: isPoint,
@@ -113,7 +114,7 @@ export function setupLayers(mapInstance) {
       'text-max-width': 10,
       'text-allow-overlap': true,
     },
-    paint: { 'text-color': roleColor(), 'text-halo-color': HALO, 'text-halo-width': 2 },
+    paint: { 'text-color': roleColor(), 'text-halo-color': HALO, 'text-halo-width': 2, 'text-opacity': fade },
   });
 }
 
@@ -202,12 +203,7 @@ export function entry(geometry, from, to) {
 }
 
 export function fadeAnswer(k) {
-  const scaled = (value) => (k >= 1 ? value : ['case', ['==', ['get', 'role'], 'answer'], value * k, value]);
-  map.setPaintProperty('focus-fill', 'fill-opacity', scaled(0.22));
-  map.setPaintProperty('focus-line', 'line-opacity', scaled(1));
-  map.setPaintProperty('focus-circle', 'circle-opacity', scaled(1));
-  map.setPaintProperty('focus-circle', 'circle-stroke-opacity', scaled(1));
-  map.setPaintProperty('focus-label', 'text-opacity', scaled(1));
+  for (const source of ['focus', 'focus-labels']) map.setFeatureState({ source, id: 'answer' }, { fade: k });
 }
 
 export function showPin(tap, ms) {
@@ -220,6 +216,10 @@ export function showPin(tap, ms) {
   element.style.setProperty('--lock', `${ms}ms`);
   element.innerHTML = '<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="track" cx="22" cy="22" r="16"/><circle class="ring" cx="22" cy="22" r="16" pathLength="100"/><circle class="dot" cx="22" cy="22" r="6"/></svg>';
   pin = new Marker({ element }).setLngLat(tap).addTo(map);
+}
+
+export function holdPin() {
+  pin?.getElement().classList.add('held');
 }
 
 export function clearPin() {

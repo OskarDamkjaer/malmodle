@@ -84,7 +84,7 @@ the other side.
 
 | Flag | What it does |
 | --- | --- |
-| `pin` | A tap on the map sets a pin that locks in after half a second. Moving the map, a second finger or a tap on the pin takes it back, and a tap elsewhere moves it. A double tap no longer zooms. The answer is then drawn as a line from the pin, once the camera has settled, and fades in as the line enters it. |
+| `pin` | A tap on the map sets a pin that locks in after half a second, counted again from the start while a finger or button is held down. Moving the map, a second finger or a tap on the pin takes it back, and a tap elsewhere moves it. A double tap no longer zooms. The answer is then drawn as a line from the pin, once the camera has settled, and fades in as the line enters it; a full score shows at once. |
 
 ## Tests
 
