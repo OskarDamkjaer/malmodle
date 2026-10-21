@@ -37,7 +37,8 @@ Pointing is the most common. Per kind:
   Afterwards: how far off you were, and what you actually tapped if it was
   something else.
 - **Vad ligger här?** Something is highlighted on the map; pick its name from a
-  list of nearby things of the same kind.
+  list of nearby things of the same kind, never one that holds it or sits
+  inside it.
 - **Direkt söder om.** "Vilket område ligger direkt söder om X?" Pick one of
   four. X is highlighted; the decoys are its other neighbours and nearby areas,
   never one that also lies on that side. Asked for any of the four directions,

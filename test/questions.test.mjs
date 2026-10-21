@@ -146,6 +146,15 @@ test('a place beside a larger one scores either way round', () => {
   assert.equal(nearScore(beach, point), nearScore(point, beach));
 });
 
+test('what is shown is not offered alongside a place that holds it or that it holds', () => {
+  const park = { name: 'Parken', kind: 'landmark', point: at(0, 300), geometry: { type: 'Polygon', coordinates: [[at(-400, -400), at(400, -400), at(400, 400), at(-400, 400), at(-400, -400)]] } };
+  const theatre = place('Teatern', 0);
+  const others = [600, 700, 800, 900].map((m) => place(`${m} m`, m));
+  const offered = (target) => TYPES.identify.build({ target, items: [park, theatre, ...others], rng: () => 0.5 }).options;
+  assert.ok(!offered(theatre).includes('Parken'));
+  assert.ok(!offered(park).includes('Teatern'));
+});
+
 test('a street from A to B is named by what lies at its ends, and no decoy runs between them', () => {
   const target = byName('Gata 3');
   const q = TYPES.route.build({ target, items, rng: () => 0.3, avoid: new Set() });

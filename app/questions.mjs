@@ -77,11 +77,13 @@ const point = {
   },
 };
 
+const together = (a, b) => contains(a.geometry, b.point) || contains(b.geometry, a.point);
+
 const identify = {
   input: 'choice',
   build({ target, items, rng }) {
     const others = items
-      .filter((it) => it.kind === target.kind && it.name !== target.name)
+      .filter((it) => it.kind === target.kind && it.name !== target.name && !together(it, target))
       .sort((a, b) => metersBetween(a.point, target.point) - metersBetween(b.point, target.point))
       .slice(0, 7);
     if (others.length < 3) return null;
