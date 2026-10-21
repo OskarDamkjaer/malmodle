@@ -62,6 +62,30 @@ node scripts/build-shapes.mjs        # → data/cache/shapes.json, outlines and 
 node scripts/places-shapes.mjs       # → places/shapes.json, an outline for everything in the long list
 ```
 
+## Feature flags
+
+A flag lets something unfinished ship turned off, for whoever is asked to try
+it. Open the site with `#flaggor=` and the flags to turn on, separated by
+commas, and the browser keeps them until it is told otherwise:
+
+```
+https://malmodle.se/#flaggor=pin     # pin on, every other flag off
+https://malmodle.se/#flaggor=        # every flag off
+```
+
+The address replaces what was kept rather than adding to it, and the app
+removes `flaggor` from the address once it has read it, so a link copied later
+does not pass the flags on. Names not in `FLAGS` are ignored. The flags that
+are on are also on `<html data-flags>`.
+
+`app/flags.mjs` lists them and reads the address; `app.js` asks `flags.has()`.
+A flag is removed once its feature is kept or dropped, along with the code for
+the other side.
+
+| Flag | What it does |
+| --- | --- |
+| `pin` | A tap on the map sets a pin that locks in after half a second. Moving the map, a second finger or a tap on the pin takes it back, and a tap elsewhere moves it. A double tap no longer zooms. The answer is then drawn as a line from the pin, once the camera has settled, and fades in as the line enters it. |
+
 ## Tests
 
 ```

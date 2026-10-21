@@ -47,6 +47,8 @@ osmium, Java and hosts the sandbox cannot reach.
   load. The UI colours are in `app.css`. `test/palette.test.mjs` checks that
   every coloured basemap layer is recoloured.
 - `app/app.js`: boot and the screens.
+- `app/flags.mjs`: feature flags, turned on with `#flaggor=` and kept in the
+  browser. `CONTRIBUTING.md` has how they work and the ones there are.
 - `app/sw.js`: the offline worker. Each version answers only from its own
   cache, so a page never mixes versions. A new one waits until the page asks
   for it, which `app.js` does before the first answer of a page load or while

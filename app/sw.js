@@ -12,6 +12,7 @@ const CODE_FILES = [
   '/crowd.mjs',
   '/crowd-view.js',
   '/questions.mjs',
+  '/flags.mjs',
   '/tiles.mjs',
   '/manifest.webmanifest',
   '/style.json',

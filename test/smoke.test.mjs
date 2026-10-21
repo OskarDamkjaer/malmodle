@@ -91,6 +91,36 @@ test('the map can be answered from the keyboard', { skip }, async () => {
   await context.close();
 });
 
+test('with the pin flag a tap locks in after a moment, and moving the map takes it back', { skip }, async () => {
+  const viewport = { width: 1280, height: 800 };
+  const { page, context, errors } = await open(viewport, '/#flaggor=pin');
+  assert.equal(await page.evaluate(() => location.hash), '');
+  assert.equal(await page.evaluate(() => document.documentElement.dataset.flags), 'pin');
+  for (let i = 0; i < 10 && await page.isVisible('#choices'); i++) {
+    await page.locator('#choices button').first().click();
+    await page.waitForSelector('#result:not([hidden])');
+    await page.click('#next');
+    await page.waitForSelector('#question:not([hidden])');
+  }
+  const [x, y] = [viewport.width / 2, viewport.height / 2];
+  await page.mouse.click(x, y);
+  assert.ok(await page.isVisible('.pin'));
+  await page.mouse.down();
+  for (let i = 1; i <= 10; i++) await page.mouse.move(x + i * 10, y);
+  await page.mouse.up();
+  await page.waitForTimeout(1000);
+  assert.ok(!(await page.isVisible('.pin')));
+  assert.ok(await page.isHidden('#result'));
+  await page.mouse.click(x, y);
+  await page.waitForSelector('#result:not([hidden])');
+  assert.ok(!(await page.isVisible('.pin')));
+  await page.reload();
+  await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
+  assert.equal(await page.evaluate(() => document.documentElement.dataset.flags), 'pin');
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
 for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['desktop', { width: 1280, height: 800 }]]) {
   test(`a day can be played start to finish on ${name}`, { skip }, async () => {
     const { page, context, errors } = await open(viewport);
