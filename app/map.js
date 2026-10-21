@@ -1,5 +1,5 @@
 import { around, bounds, union } from './geo.mjs';
-import { paintFor } from './themes.mjs';
+import { PALETTE, paintFor } from './palette.mjs';
 
 let COLOR = {};
 let HALO = '#ffffff';
@@ -16,12 +16,12 @@ const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineSt
 const isPoint = ['==', ['geometry-type'], 'Point'];
 const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
-export function applyTheme(mapInstance, theme) {
+export function applyPalette(mapInstance) {
   map = mapInstance;
-  COLOR = theme.marks;
-  HALO = theme.map.halo;
+  COLOR = PALETTE.marks;
+  HALO = PALETTE.map.halo;
   for (const layer of map.getStyle().layers) {
-    for (const [property, value] of Object.entries(paintFor(layer, theme.map))) {
+    for (const [property, value] of Object.entries(paintFor(layer, PALETTE.map))) {
       map.setPaintProperty(layer.id, property, value);
     }
   }

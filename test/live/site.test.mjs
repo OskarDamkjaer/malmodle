@@ -2,7 +2,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { THEMES, themePath } from '../../app/themes.mjs';
+import { PALETTE } from '../../app/palette.mjs';
 import { chromium, launch } from '../browser.mjs';
 
 const SITES = (process.env.SITES ?? 'https://malmodle.se').split(/\s+/).filter(Boolean);
@@ -79,13 +79,11 @@ for (const site of SITES) {
     }));
   }
 
-  test(`every style boots on ${site}`, { skip }, again(async () => {
-    for (const [name, theme] of Object.entries(THEMES)) {
-      const { page, context, errors } = await open(site, { width: 390, height: 844 }, themePath(name));
-      assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), theme.map.background, name);
-      assert.deepEqual(errors, [], name);
-      await context.close();
-    }
+  test(`${site} paints the basemap with the palette`, { skip }, again(async () => {
+    const { page, context, errors } = await open(site, { width: 390, height: 844 }, '/');
+    assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), PALETTE.map.background);
+    assert.deepEqual(errors, []);
+    await context.close();
   }));
 
   test(`${site} opens offline once it has been visited`, { skip }, again(async () => {

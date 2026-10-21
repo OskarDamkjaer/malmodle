@@ -79,11 +79,11 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
   };
 }
 
-test('a page load offline falls back to the cached page, then to the start page', async () => {
+test('a page load offline is answered with the cached start page', async () => {
   const sw = worker({ online: false });
-  await sw.seed({ '/': 'start', '/natt/': 'night' });
-  assert.equal(await (await sw.navigate('/natt/?x=1')).text(), 'night');
-  assert.equal(await (await sw.navigate('/papper/')).text(), 'start');
+  await sw.seed({ '/': 'start' });
+  assert.equal(await (await sw.navigate('/?x=1')).text(), 'start');
+  assert.equal(await (await sw.navigate('/finns-inte/')).text(), 'start');
 });
 
 test('a page load offline with nothing cached fails instead of hanging', async () => {

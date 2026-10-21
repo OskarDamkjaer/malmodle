@@ -101,11 +101,10 @@ never leaves the red band.
   iPhone. It is worked out from the browser each time, not remembered, and
   not shown once installed.
 
-## Styles
+## Style
 
-The app has one style for players, Tidning, served at the root. Papper, Natt
-and Klar are kept at their own paths from the same code for trying out. A style changes
-colours, type and the basemap palette, never the game.
+One style, Tidning, for everyone. There is no picker: reading this map is part
+of the challenge.
 
 ## Constraints
 

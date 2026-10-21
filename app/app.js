@@ -4,9 +4,8 @@ import { crowdCard } from './crowd-view.js';
 import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
-import { THEMES, themeFromPath, themePath } from './themes.mjs';
 import {
-  applyTheme, clear, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showScored, showTap,
+  applyPalette, clear, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -18,10 +17,6 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wide = matchMedia('(min-width: 760px)');
 
 const HOME = 'malmodle.se';
-const themeName = themeFromPath(location.pathname);
-const theme = THEMES[themeName];
-document.documentElement.dataset.theme = themeName;
-document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme.themeColor);
 
 function fail(what, err) {
   console.error(what, err);
@@ -450,7 +445,7 @@ function finish() {
   el('endverdict').textContent = verdict(total, max, !practicing);
   renderSquares();
   el('elsewhere').hidden = Boolean(practicing) || location.hostname === HOME;
-  el('elsewherelink').href = `https://${HOME}${themePath(themeName)}#runda=${carry({ key, set, results })}`;
+  el('elsewherelink').href = `https://${HOME}/#runda=${carry({ key, set, results })}`;
   el('sharenative').hidden = !navigator.share;
   el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
@@ -619,7 +614,7 @@ function resultText() {
   return shareText({
     key,
     scores: results.map((r) => r.result.score),
-    url: location.origin + themePath(themeName),
+    url: `${location.origin}/`,
   });
 }
 
@@ -662,7 +657,6 @@ async function shareNative() {
 function reportLink() {
   const body = [
     `Datum: ${key}`,
-    `Stil: ${themeName}`,
     `Webbläsare: ${navigator.userAgent}`,
     '',
     'Vad blev fel?',
@@ -831,7 +825,7 @@ document.addEventListener('keydown', (e) => {
 
 map.on('load', async () => {
   try {
-    applyTheme(map, theme);
+    applyPalette(map);
     items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
     byName = new globalThis.Map(items.map((it) => [it.name, it]));
     setupLayers(map);

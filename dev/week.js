@@ -1,13 +1,10 @@
 import { Map, addProtocol } from '/vendor/maplibre-gl.mjs';
-import { THEMES, DEFAULT_THEME } from '/themes.mjs';
 import { BAND_COLORS, GROUP, SHOWN_GAP, dailySet, dateKey, issue, laterKey } from '/daily.mjs';
 import { TYPES, distanceScore, formatDistance } from '/questions.mjs';
 import { around, bounds, closest } from '/geo.mjs';
-import { applyTheme, setupLayers, show } from '/map.js';
+import { applyPalette, setupLayers, show } from '/map.js';
 
 const el = (id) => document.getElementById(id);
-const theme = THEMES[DEFAULT_THEME];
-document.documentElement.dataset.theme = DEFAULT_THEME;
 
 const params = new URLSearchParams(location.search);
 el('from').value = params.get('from') ?? dateKey();
@@ -46,7 +43,7 @@ let rows = [];
 let at = -1;
 
 await new Promise((resolve) => map.on('load', resolve));
-applyTheme(map, theme);
+applyPalette(map);
 baseLabels = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 setupLayers(map);
 items = (await fetch('/data/quiz.json').then((r) => r.json())).items;

@@ -20,7 +20,7 @@ const fake = Number(arg('--fake', 0));
 const trickle = Number(arg('--trickle', 0));
 const assets = {
   fetch: async (request) => {
-    const mount = MOUNTS.find((m) => m.file && !m.page && m.url === new URL(request.url).pathname);
+    const mount = MOUNTS.find((m) => m.file && m.url === new URL(request.url).pathname);
     return mount && existsSync(mount.file) ? new Response(readFileSync(mount.file)) : new Response('Not found', { status: 404 });
   },
 };

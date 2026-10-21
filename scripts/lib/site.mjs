@@ -1,13 +1,8 @@
-import { DEFAULT_THEME, THEMES, themePath } from '../../app/themes.mjs';
-
 export const MOUNTS = [
   { url: '/', dir: 'app' },
   { url: '/style.json', file: 'build/style.json' },
   { url: '/data/quiz.json', file: 'build/data/quiz.json' },
   { url: '/malmo.pmtiles', file: 'data/cache/malmo.pmtiles' },
-  ...Object.keys(THEMES)
-    .filter((name) => name !== DEFAULT_THEME)
-    .map((name) => ({ url: themePath(name), file: 'app/index.html', page: true })),
 ];
 
 export const MIME = {

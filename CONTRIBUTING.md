@@ -30,12 +30,6 @@ the map, and flags what looks wrong. `dev/` is never part of the built site.
 rebuild it (below) or fetch a prebuilt copy with
 `node scripts/fetch-dev-assets.mjs`, which needs the `gh` CLI.
 
-## Styles
-
-Tidning is the style players see. Others are kept for trying out at their own
-paths: [Papper](https://malmodle.se/papper/), [Natt](https://malmodle.se/natt/)
-and [Klar](https://malmodle.se/klar/).
-
 ## The data
 
 - `learn/core.json`: which places the app asks about.

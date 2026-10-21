@@ -2,7 +2,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { existsSync, statSync, utimesSync } from 'node:fs';
-import { THEMES, themePath } from '../app/themes.mjs';
+import { PALETTE } from '../app/palette.mjs';
 import { SAVE_KEY, dateKey } from '../app/daily.mjs';
 import { chromium, launch } from './browser.mjs';
 
@@ -232,7 +232,7 @@ async function until(check, what, ms = 60000) {
 }
 
 test('a new version is taken before the first answer, and waits after one', { skip }, async () => {
-  const touched = 'app/theme.js';
+  const touched = 'app/palette.mjs';
   const { atime, mtime } = statSync(touched);
   const release = () => utimesSync(touched, atime, new Date());
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
@@ -274,12 +274,9 @@ test('a new version is taken before the first answer, and waits after one', { sk
   }
 });
 
-test('every style boots at its own path', { skip }, async () => {
-  for (const [name, theme] of Object.entries(THEMES)) {
-    const { page, context, errors } = await open({ width: 390, height: 844 }, themePath(name));
-    assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), name);
-    assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), theme.map.background);
-    assert.deepEqual(errors, [], name);
-    await context.close();
-  }
+test('the palette is applied to the basemap', { skip }, async () => {
+  const { page, context, errors } = await open({ width: 390, height: 844 });
+  assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), PALETTE.map.background);
+  assert.deepEqual(errors, []);
+  await context.close();
 });

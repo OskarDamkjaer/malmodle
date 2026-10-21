@@ -50,8 +50,6 @@ in `app/crowd.mjs`, the card in `app/crowd-view.js`, and
   a cap around 50 may read better.
 - **Made-up crowds.** The dev page's tap distances are a guess; real days will
   show how lumpy totals are.
-- **Styles.** Only Tidning has been looked at. The others are not shown to
-  players.
 
 ## Hosting
 

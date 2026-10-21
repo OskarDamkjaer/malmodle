@@ -43,9 +43,9 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/crowd-view.js`: the comparison card on the end screen: the chart, its
   hover and keyboard reading, and the waiting and paused states.
 - `app/map.js`: map layers, hiding labels, framing.
-- `app/themes.mjs`: the styles. Each has a path, UI colours in `app.css` under
-  `[data-theme]`, and a basemap palette applied at load. A new style needs all
-  three plus its path in `app/sw.js`; `test/themes.test.mjs` checks them.
+- `app/palette.mjs`: the basemap palette and the answer colours, applied at
+  load. The UI colours are in `app.css`. `test/palette.test.mjs` checks that
+  every coloured basemap layer is recoloured.
 - `app/app.js`: boot and the screens.
 - `app/sw.js`: the offline worker. Each version answers only from its own
   cache, so a page never mixes versions. A new one waits until the page asks

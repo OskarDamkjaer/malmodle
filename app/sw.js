@@ -3,13 +3,9 @@ const MAP = 'malmo-map';
 
 const CODE_FILES = [
   '/',
-  '/natt/',
-  '/papper/',
-  '/klar/',
   '/app.css',
   '/app.js',
-  '/theme.js',
-  '/themes.mjs',
+  '/palette.mjs',
   '/map.js',
   '/geo.mjs',
   '/daily.mjs',
