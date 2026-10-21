@@ -422,8 +422,24 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 }
 .maplibregl-ctrl-attrib a { color: var(--ink-soft); }
 
+.maplibregl-ctrl-top-right { top: 50%; transform: translateY(-50%); }
+.maplibregl-ctrl-top-right .maplibregl-ctrl { margin: 0 var(--gap) 0 0; }
+.maplibregl-ctrl.maplibregl-ctrl-group { display: flex; flex-direction: column; overflow: hidden; background: var(--panel); border: var(--border); border-radius: min(var(--radius), 14px); box-shadow: var(--shadow); }
+.maplibregl-ctrl-group button { width: 44px; height: 44px; min-height: 0; padding: 0; color: var(--ink); background: none; border: 0; border-radius: 0; box-shadow: none; transition: background-color .15s ease; }
+.maplibregl-ctrl-group button + button { border-top: 1px solid var(--dot); }
+.maplibregl-ctrl-group button:not(:disabled):hover { background: var(--chip-hover); }
+.maplibregl-ctrl-group button:active { transform: none; }
+.maplibregl-ctrl-group button:active .maplibregl-ctrl-icon { transform: scale(.85); }
+.maplibregl-ctrl-group button:focus-visible, .maplibregl-ctrl-group button:focus:focus-visible { box-shadow: none; outline: 3px solid var(--accent); outline-offset: -3px; }
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon { transition: transform .1s ease; }
+.maplibregl-ctrl-group button.maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon { background: linear-gradient(currentColor, currentColor) center / 14px 2px no-repeat; }
+.maplibregl-ctrl-group button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon { background: linear-gradient(currentColor, currentColor) center / 14px 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 14px no-repeat; }
+.maplibregl-ctrl-group button:disabled .maplibregl-ctrl-icon { opacity: .3; }
+
 @media (min-width: 760px) {
   #question { padding: 16px 22px 20px; }
+  .maplibregl-ctrl-top-right { top: auto; bottom: calc(var(--safe-bottom) + var(--attribution) + var(--gap)); transform: none; }
+  body[data-ended] .maplibregl-ctrl-top-right { bottom: calc(var(--safe-bottom) + var(--attribution) + 52px); }
   #result, #choices { padding: 16px 18px; }
 }
 

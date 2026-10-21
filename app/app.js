@@ -1,4 +1,4 @@
-import { Map, AttributionControl, addProtocol } from './vendor/maplibre-gl.mjs';
+import { Map, AttributionControl, NavigationControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
@@ -128,10 +128,12 @@ const map = new Map({
   attributionControl: false,
   maplibreLogo: false,
   fadeDuration: 120,
+  locale: { 'NavigationControl.ZoomIn': 'Zooma in', 'NavigationControl.ZoomOut': 'Zooma ut' },
 });
 map.touchZoomRotate.disableRotation();
 map.keyboard.disableRotation();
 map.addControl(new AttributionControl({ compact: false }), 'bottom-right');
+map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
 window.map = map;
 
 let items = [];
