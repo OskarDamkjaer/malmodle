@@ -191,6 +191,7 @@ body[data-answered] #question { display: none; }
 #end header { text-align: center; }
 #end .masthead { margin: 0 0 10px; font: var(--display-weight) 24px/1 var(--font-display); letter-spacing: var(--display-tracking); }
 #enddate { margin: 0; padding: 7px 0; border-top: var(--rule); border-bottom: var(--rule); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.confetti { position: fixed; inset: 0; z-index: 20; width: 100vw; height: 100vh; pointer-events: none; }
 .total { display: flex; justify-content: center; align-items: baseline; gap: 8px; margin: 18px 0 0; }
 .total strong { font-size: 64px; line-height: 1; font-weight: var(--display-weight); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .total span { font-size: 16px; color: var(--ink-soft); }

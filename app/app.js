@@ -1,6 +1,7 @@
 import { Map, AttributionControl, NavigationControl, addProtocol } from './vendor/maplibre-gl.mjs';
 import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
+import { confetti } from './confetti.js';
 import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
@@ -454,8 +455,9 @@ function revealChoice(q, result) {
 function next() {
   if (phase !== 'answered') return;
   index += 1;
-  if (index < set.length) ask();
-  else finish();
+  if (index < set.length) { ask(); return; }
+  finish();
+  if (!reducedMotion && results.every((r) => r.result.score === MAX_SCORE)) confetti();
 }
 
 function outcome({ q, result }) {

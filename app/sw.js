@@ -11,6 +11,7 @@ const CODE_FILES = [
   '/daily.mjs',
   '/crowd.mjs',
   '/crowd-view.js',
+  '/confetti.js',
   '/questions.mjs',
   '/flags.mjs',
   '/tiles.mjs',
