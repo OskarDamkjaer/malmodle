@@ -6,7 +6,7 @@ import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { FLAGS_KEY, readFlags } from './flags.mjs';
 import {
-  applyPalette, clear, clearPin, entry, fadeAnswer, FRAMING, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showPin, showScored, showTap,
+  applyPalette, clear, clearPin, entry, holdPin, fadeAnswer, FRAMING, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showPin, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -319,6 +319,17 @@ function place(tap) {
   }, LOCK);
 }
 
+function hold() {
+  if (!placed) return;
+  clearTimeout(locking);
+  locking = null;
+  holdPin();
+}
+
+function release() {
+  if (placed && !locking) place(placed);
+}
+
 function unplace() {
   clearTimeout(locking);
   locking = null;
@@ -399,7 +410,7 @@ function revealPoint(q, result) {
   show(marks);
   const end = pinning && result.distance > 0 && q.target.kind !== 'street' ? q.target.point : result.near;
   const inside = entry(q.target.geometry, result.tap, end);
-  const ms = pinning && !reducedMotion ? DRAW : 0;
+  const ms = pinning && !reducedMotion && result.score < MAX_SCORE ? DRAW : 0;
   showTap(result.tap, end, { ms, wait: ms && FRAMING * 0.6, step: (k) => fadeAnswer(k >= 1 ? 1 : inside < 1 ? Math.max(0, (k - inside) / (1 - inside)) : 0) });
   el('verdict').textContent = result.score === MAX_SCORE ? 'Mitt i prick' : `${formatDistance(result.distance)} bort`;
   el('explain').textContent = result.hit ? `Det där var ${result.hit.name}.` : '';
@@ -843,7 +854,12 @@ map.on('movestart', (e) => {
 
 map.on('moveend', () => { steering = false; });
 
-map.getContainer().addEventListener('pointerdown', () => { stopped = steering; }, true);
+map.getContainer().addEventListener('pointerdown', () => {
+  stopped = steering;
+  hold();
+}, true);
+map.getContainer().addEventListener('pointerup', release, true);
+map.getContainer().addEventListener('pointercancel', release, true);
 map.getContainer().addEventListener('touchstart', (e) => { if (e.touches.length > 1) unplace(); }, { capture: true, passive: true });
 
 map.on('mousemove', (e) => {

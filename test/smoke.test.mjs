@@ -98,7 +98,7 @@ test('the map can be answered from the keyboard', { skip }, async () => {
   await context.close();
 });
 
-test('with the pin flag a tap locks in after a moment, and moving the map takes it back', { skip }, async () => {
+test('with the pin flag a tap locks in after a moment, a held press waits, and moving the map takes it back', { skip }, async () => {
   const viewport = { width: 1280, height: 800 };
   const { page, context, errors } = await open(viewport, '/#flaggor=pin');
   assert.equal(await page.evaluate(() => location.hash), '');
@@ -119,6 +119,11 @@ test('with the pin flag a tap locks in after a moment, and moving the map takes 
   assert.ok(!(await page.isVisible('.pin')));
   assert.ok(await page.isHidden('#result'));
   await page.mouse.click(x, y);
+  await page.mouse.move(x - 150, y);
+  await page.mouse.down();
+  await page.waitForTimeout(1000);
+  assert.ok(await page.isHidden('#result'), 'a held press keeps the pin from locking in');
+  await page.mouse.up();
   await page.waitForSelector('#result:not([hidden])');
   assert.ok(!(await page.isVisible('.pin')));
   await page.reload();

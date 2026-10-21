@@ -478,6 +478,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 .pin .track { stroke: var(--halo); stroke-width: 6; opacity: .75; }
 .pin .ring { stroke: var(--ring); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transform: rotate(-90deg); animation: lock var(--lock) linear forwards; }
 .pin .dot { fill: var(--pin); stroke: var(--halo); stroke-width: 2; animation: land .16s ease-out; }
+.pin.held .ring { animation-play-state: paused; }
 @keyframes lock { to { stroke-dashoffset: 0; } }
 @keyframes land { from { transform: scale(.3); } }
 @media (prefers-reduced-motion: reduce) {
