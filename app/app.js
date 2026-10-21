@@ -283,7 +283,7 @@ function ask() {
     hide('choices');
   }
 
-  show(type.showing(q).map(({ item, named }) => ({ item, named, role: 'context' })));
+  show(type.showing(q).map(({ item, named, role = 'context' }) => ({ item, named, role })));
   const view = type.view(q);
   requestAnimationFrame(() => {
     if (view === 'home') frameHome(items);

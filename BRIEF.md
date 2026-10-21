@@ -36,11 +36,12 @@ Pointing is the most common. Per kind:
 - **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
   Afterwards: how far off you were, and what you actually tapped if it was
   something else.
-- **Vad ligger här?** Something is highlighted on the map; pick its name from a
-  list of nearby things of the same kind, never one that holds it or sits
+- **Vad ligger här?** Something is marked on the map in dashed green, unnamed;
+  pick its name from a list of nearby things of the same kind, never one that holds it or sits
   inside it.
 - **Direkt söder om.** "Vilket område ligger direkt söder om X?" Pick one of
-  four. X is highlighted; the decoys are its other neighbours and nearby areas,
+  four. X is outlined and named, and the area asked about is marked in dashed
+  green, unnamed; the decoys are its other neighbours and nearby areas,
   never one that also lies on that side. Asked for any of the four directions,
   only where exactly one area borders X on that side.
 - **Från A till B.** "Vilken gata går från A till B?" Pick one of four. A and

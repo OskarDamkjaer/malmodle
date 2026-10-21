@@ -43,9 +43,14 @@ export function setupLayers(mapInstance) {
     paint: { 'fill-color': roleColor(), 'fill-opacity': 0.22 },
   });
   map.addLayer({
-    id: 'focus-line', type: 'line', source: 'focus', filter: ['!', isPoint],
+    id: 'focus-line', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['!=', ['get', 'role'], 'ask']],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-color': roleColor(), 'line-width': ['case', isPolygon, 2.5, 6] },
+  });
+  map.addLayer({
+    id: 'focus-ask', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['==', ['get', 'role'], 'ask']],
+    layout: { 'line-join': 'round' },
+    paint: { 'line-color': COLOR.answer, 'line-width': ['case', isPolygon, 2.5, 6], 'line-dasharray': [1.5, 1.5] },
   });
   map.addLayer({
     id: 'tap-line', type: 'line', source: 'tap', filter: isLine,

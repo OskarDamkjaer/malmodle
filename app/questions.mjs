@@ -90,7 +90,7 @@ const identify = {
     return { target, options: shuffle([target, ...others], rng).map((it) => it.name) };
   },
   prompt: (q) => ({ title: 'Vad ligger här?', detail: q.target.label }),
-  showing: (q) => [{ item: q.target, named: false }],
+  showing: (q) => [{ item: q.target, named: false, role: 'ask' }],
   view: (q) => ({ items: [q.target], context: 1500 }),
   grade(q, choice, items) {
     const picked = items?.find((it) => it.name === choice);
@@ -129,8 +129,8 @@ const neighbour = {
     return null;
   },
   prompt: (q) => ({ title: `Vilket område ligger direkt ${q.side} om ${q.from.name}?`, detail: q.target.label }),
-  showing: (q) => [{ item: q.from, named: true }],
-  view: (q) => ({ items: [q.from], context: 1200 }),
+  showing: (q) => [{ item: q.from, named: true }, { item: q.target, named: false, role: 'ask' }],
+  view: (q) => ({ items: [q.from, q.target], context: 1200 }),
   grade(q, choice, items) {
     const picked = items?.find((it) => it.name === choice);
     const score = choice === q.target.name ? MAX_SCORE : nearScore(q.target, picked);
