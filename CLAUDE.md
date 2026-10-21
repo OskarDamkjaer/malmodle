@@ -82,6 +82,8 @@ browser. To add a question type, add it to `TYPES` and give it slots in
 - No version history in docs or code: describe what is, not what was.
 - UI text is Swedish.
 - Phone and desktop matter equally.
+- `main` takes changes only through a pull request whose Check passes, so
+  work on a branch and open one.
 - Commits are `Topic: a lowercase clause` with a prose body. The container's
   git identity is not the owner's, so commit with
   `-c user.name=… -c user.email=…` matching `git log`.
