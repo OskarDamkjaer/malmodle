@@ -236,7 +236,10 @@ function practise(kind) {
 
 function play(questions, answered = []) {
   stopFollowing();
+  cancelAnimationFrame(counting.get(el('endscore')));
   cheering = false;
+  scoreCounted = false;
+  chartSettled = null;
   stopConfetti();
   set = questions;
   results = answered;
@@ -485,13 +488,16 @@ function countUp(node, total, done) {
 
 const FULL = SET_SIZE * MAX_SCORE;
 let cheering = false;
-let counted = false;
+let scoreCounted = false;
+let chartSettled = null;
 let stopConfetti = () => {};
 
 function cheer() {
-  if (!cheering) return;
+  const crowd = el('end').dataset.crowd;
+  const chart = crowd === 'shown' && card?.ready();
+  const shown = chart ? chartSettled === FULL : scoreCounted && crowd !== 'asking';
+  if (!cheering || !shown || phase !== 'end' || 'mapview' in document.body.dataset) return;
   cheering = false;
-  if (phase !== 'end' || 'mapview' in document.body.dataset) return;
   try {
     const css = getComputedStyle(document.documentElement);
     const colors = [...Object.values(BAND_COLORS), ...['--accent', '--ink'].map((name) => css.getPropertyValue(name).trim())].filter(Boolean);
@@ -505,16 +511,11 @@ function cheer() {
   }
 }
 
-function scoreShown() {
-  const chart = el('end').dataset.crowd === 'shown' && card?.ready();
-  if (counted && el('end').dataset.crowd !== 'asking' && !chart) cheer();
-}
-
 function countScore(total) {
-  counted = false;
+  scoreCounted = false;
   countUp(el('endscore'), total, () => {
-    counted = true;
-    scoreShown();
+    scoreCounted = true;
+    cheer();
   });
 }
 
@@ -623,6 +624,7 @@ async function ownResult(day, id, scores) {
 async function compare() {
   hide('crowd');
   stopFollowing();
+  chartSettled = null;
   const turn = ++comparing;
   const end = el('end');
   delete end.dataset.crowd;
@@ -648,9 +650,13 @@ async function compare() {
     const tries = played(loadSaved(), key, set).slice(1);
     const show = (d, settled) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries, settled });
     reveal('crowd');
-    show(day, () => { if (you.total === FULL) cheer(); });
+    show(day, () => {
+      if (turn !== comparing) return;
+      chartSettled = you.total;
+      cheer();
+    });
     end.dataset.crowd = 'shown';
-    scoreShown();
+    cheer();
     if (poll) following = follow(poll, day, show);
   } catch {} finally {
     clearTimeout(slow);
@@ -861,7 +867,8 @@ function toggleMapView() {
   const on = !('mapview' in document.body.dataset);
   if (on) document.body.dataset.mapview = '';
   else delete document.body.dataset.mapview;
-  stopConfetti();
+  if (on) stopConfetti();
+  else cheer();
   el('endmap').textContent = on ? 'Visa resultatet' : 'Visa på kartan';
   closePlace();
   requestAnimationFrame(() => frameItems(results.map((r) => r.q.target), 300));
