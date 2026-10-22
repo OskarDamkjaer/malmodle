@@ -20,13 +20,11 @@ export function confetti(colors) {
 
   const pieces = Array.from({ length: PIECES }, (_, i) => {
     const left = i % 2 === 0;
-    const angle = (left ? -60 : -120) * (Math.PI / 180) + (Math.random() - 0.5) * 0.9;
-    const speed = h * (0.9 + Math.random() * 0.9);
     return {
       x: left ? 0 : w,
       y: h * 0.75,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
+      vx: (left ? 1 : -1) * w * (0.3 + Math.random() * 0.8),
+      vy: -h * (0.8 + Math.random() * 0.8),
       size: 6 + Math.random() * 6,
       spin: Math.random() * Math.PI,
       turn: (Math.random() - 0.5) * 12,
@@ -52,8 +50,8 @@ export function confetti(colors) {
         canvas.width = width;
         canvas.height = height;
       }
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, width, height);
       ctx.globalAlpha = Math.max(0, Math.min(1, (LIFE - age) / FADE));
       for (const p of pieces) {
         p.vx *= 1 - 1.6 * dt;
@@ -61,13 +59,12 @@ export function confetti(colors) {
         p.x += p.vx * dt;
         p.y += p.vy * dt;
         p.spin += p.turn * dt;
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.spin);
-        ctx.scale(1, Math.cos(p.flip + age / 120));
+        const cos = Math.cos(p.spin) * ratio;
+        const sin = Math.sin(p.spin) * ratio;
+        const tilt = Math.cos(p.flip + age / 120);
+        ctx.setTransform(cos, sin, -sin * tilt, cos * tilt, p.x * ratio, p.y * ratio);
         ctx.fillStyle = p.color;
         ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
-        ctx.restore();
       }
       frame = requestAnimationFrame(step);
     } catch (err) {

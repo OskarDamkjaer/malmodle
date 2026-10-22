@@ -506,7 +506,9 @@ function cheer() {
     const colors = [...Object.values(BAND_COLORS), ...['--accent', '--ink'].map((name) => css.getPropertyValue(name).trim())].filter(Boolean);
     import('./confetti.js')
       .then(({ confetti }) => {
-        if (turn === comparing && phase === 'end' && !('mapview' in document.body.dataset)) stopConfetti = confetti(colors);
+        if (turn !== comparing || phase !== 'end') return;
+        if ('mapview' in document.body.dataset) cheering = true;
+        else stopConfetti = confetti(colors);
       })
       .catch((err) => console.error('Konfetti', err));
   } catch (err) {
