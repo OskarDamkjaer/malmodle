@@ -63,7 +63,7 @@ async function invite(link) {
 
 let ids = 0;
 
-function chart({ onRefresh, onEarly, onRanked } = {}) {
+function chart({ onRefresh, onEarly } = {}) {
   const id = `crowd${ids++}`;
   const drawing = svg('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const defs = svg('defs');
@@ -287,7 +287,7 @@ function chart({ onRefresh, onEarly, onRanked } = {}) {
     }));
   };
 
-  const update = (next, { recent = 0, tries: played = [], ready = shown(next.players) } = {}) => {
+  const update = (next, { recent = 0, tries: played = [], ready = shown(next.players), settled } = {}) => {
     tries = played;
     crowd = ready ? next : null;
     waitingFor = ready ? null : { players: next.players, recent };
@@ -321,7 +321,7 @@ function chart({ onRefresh, onEarly, onRanked } = {}) {
     const first = !ranked;
     ranked = true;
     if (first) at = 0;
-    morph(columns(next, WIDTH), next.you.total / MAX_TOTAL, ...(first ? [1600, glide] : [700, ease]), onRanked);
+    morph(columns(next, WIDTH), next.you.total / MAX_TOTAL, first ? 1600 : undefined, first ? glide : undefined, settled);
   };
 
   const pause = (time) => {
@@ -331,17 +331,16 @@ function chart({ onRefresh, onEarly, onRanked } = {}) {
   };
 
   draw();
-  return { node: graph, update, pause };
+  return { node: graph, update, pause, ready: () => crowd !== null };
 }
 
-export function crowdCard({ onPractise, onRefresh, onRanked } = {}) {
+export function crowdCard({ onPractise, onRefresh } = {}) {
   const node = el('div', 'crowd');
   const top = el('div', 'standing');
   let early = false;
   let last = null;
   const graph = chart({
     onRefresh,
-    onRanked,
     onEarly: () => {
       early = true;
       if (last) update(...last);
@@ -350,12 +349,12 @@ export function crowdCard({ onPractise, onRefresh, onRanked } = {}) {
   const best = el('div', 'best');
   node.append(top, graph.node, best);
 
-  const update = (crowd, names, live = {}) => {
+  const update = (crowd, names, { settled, ...live } = {}) => {
     last = [crowd, names, live];
     const ready = shown(crowd.players, early);
     const said = ready ? standing(crowd) : null;
     top.replaceChildren(...(said ? [el('p', 'head', said.head), el('p', 'dek', said.dek)] : []));
-    graph.update(crowd, { ...live, ready });
+    graph.update(crowd, { ...live, ready, settled });
     const hl = ready ? highlight(crowd) : null;
     const strong = ready && !hl ? strongest(crowd) : null;
     const tip = ready && !hl && !strong && onPractise;
@@ -381,5 +380,5 @@ export function crowdCard({ onPractise, onRefresh, onRanked } = {}) {
     if (line.detail) best.append(el('p', 'detail', line.detail));
   };
 
-  return { node, update, pause: graph.pause };
+  return { node, update, pause: graph.pause, ready: graph.ready };
 }
