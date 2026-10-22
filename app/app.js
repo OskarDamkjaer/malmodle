@@ -236,6 +236,7 @@ function practise(kind) {
 
 function play(questions, answered = []) {
   stopFollowing();
+  comparing += 1;
   cancelAnimationFrame(counting.get(el('endscore')));
   cheering = false;
   scoreCounted = false;
@@ -497,6 +498,7 @@ function cheer() {
   const chart = crowd === 'shown' && card?.ready();
   const shown = chart ? chartSettled === FULL : scoreCounted && crowd !== 'asking';
   if (!cheering || !shown || phase !== 'end' || 'mapview' in document.body.dataset) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   cheering = false;
   try {
     const css = getComputedStyle(document.documentElement);
@@ -535,7 +537,6 @@ function finish() {
   el('sharecard').hidden = Boolean(practicing);
   el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
   el('kinds').hidden = !practicing;
-  countScore(total);
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
   renderSquares();
@@ -546,6 +547,7 @@ function finish() {
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
   offerInstall();
   compare();
+  countScore(total);
 
   reveal('end');
   el('end').scrollTop = 0;
