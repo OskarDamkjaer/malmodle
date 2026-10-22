@@ -11,11 +11,6 @@ test('every style defines the same colours', () => {
   for (const name of names) assert.deepEqual(shape(STYLES[name]), shape(STYLES[DEFAULT_STYLE]), name);
 });
 
-test('every style but the default has its own CSS', () => {
-  const css = readFileSync('app/app.css', 'utf8');
-  for (const name of names.filter((n) => n !== DEFAULT_STYLE)) assert.ok(css.includes(`[data-theme="${name}"]`), name);
-});
-
 test('every coloured basemap layer is recoloured by every style', { skip: existsSync(STYLE) ? false : `${STYLE} is missing` }, () => {
   const { layers } = JSON.parse(readFileSync(STYLE, 'utf8'));
   for (const name of names) {

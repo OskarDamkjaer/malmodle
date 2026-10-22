@@ -5,7 +5,6 @@ const CODE_FILES = [
   '/',
   '/app.css',
   '/app.js',
-  '/theme.js',
   '/palette.mjs',
   '/map.js',
   '/geo.mjs',

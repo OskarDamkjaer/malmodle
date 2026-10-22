@@ -1,4 +1,3 @@
-import { DEFAULT_STYLE, STYLES } from '/palette.mjs';
 import { dailySet, dateKey, random } from '/daily.mjs';
 import { NEAR_SCORE, TYPES } from '/questions.mjs';
 import { summarize, tally } from '/crowd.mjs';
@@ -145,10 +144,6 @@ function render() {
 
 const el = (tag, className, textContent = '') => Object.assign(document.createElement(tag), { className, textContent });
 
-const pick = document.getElementById('theme');
-for (const [name, style] of Object.entries(STYLES)) pick.append(new Option(style.label, name, false, name === DEFAULT_STYLE));
-pick.addEventListener('change', () => { document.documentElement.dataset.theme = pick.value; });
-document.documentElement.dataset.theme = pick.value;
 const { items } = await (await fetch('/data/quiz.json')).json();
 const today = new Date();
 days = Array.from({ length: 14 }, (_, d) => {

@@ -27,73 +27,9 @@
   --width: 560px;
   --attribution: 26px;
   --zoom: 144px;
-  --dot-radius: 0;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   color-scheme: light;
-}
-
-[data-theme="natt"] {
-  --dot-radius: 50%;
-  --bg: #12151a;
-  --panel: #1c2027;
-  --ink: #eceff3;
-  --ink-soft: #97a2b1;
-  --chip: #262b34;
-  --chip-hover: #2f3540;
-  --chip-ink: #eceff3;
-  --accent: #5fd3a5;
-  --accent-ink: #0b1a14;
-  --wrong: #ff7a59;
-  --dot: #343a45;
-  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 10px 30px rgb(0 0 0 / 45%);
-  --border: 1px solid #2a3039;
-  color-scheme: dark;
-}
-
-[data-theme="papper"] {
-  --dot-radius: 50%;
-  --bg: #f3eee7;
-  --panel: #fffdf9;
-  --ink: #201d19;
-  --ink-soft: #6d665e;
-  --chip: #f1ebe2;
-  --chip-hover: #e9e1d5;
-  --chip-ink: #201d19;
-  --accent: #1f6f5c;
-  --accent-ink: #ffffff;
-  --wrong: #b4442a;
-  --dot: #ddd4c7;
-  --shadow: 0 1px 2px rgb(32 29 25 / 10%), 0 8px 24px rgb(32 29 25 / 10%);
-  --border: 0 solid transparent;
-  --radius: 16px;
-  --radius-button: 999px;
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--font);
-  --display-weight: 700;
-  --display-tracking: -0.015em;
-}
-
-[data-theme="klar"] {
-  --dot-radius: 50%;
-  --bg: #f7f4ec;
-  --panel: #ffffff;
-  --ink: #1b1b1f;
-  --ink-soft: #6a6a75;
-  --chip: #eef1ff;
-  --chip-hover: #e2e7ff;
-  --chip-ink: #1b2a7a;
-  --accent: #2b59ff;
-  --accent-ink: #ffffff;
-  --wrong: #e8462f;
-  --dot: #dfe3f0;
-  --shadow: 0 2px 0 rgb(27 27 31 / 8%), 0 12px 28px rgb(43 89 255 / 14%);
-  --radius: 22px;
-  --radius-button: 16px;
-  --font: ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif;
-  --display-weight: 800;
-  --display-tracking: -0.02em;
-  --button-depth: 0 3px 0 rgb(27 27 31 / 14%);
 }
 
 * { box-sizing: border-box; }
@@ -168,7 +104,7 @@ button.primary:hover { filter: brightness(1.06); }
 
 #question { padding: 10px 16px 12px; pointer-events: none; }
 #dots { display: flex; gap: 5px; margin: 0; padding: 0; list-style: none; }
-#dots li { width: 9px; height: 9px; border-radius: var(--dot-radius); background: var(--dot); transition: background-color .2s ease, transform .2s ease; }
+#dots li { width: 9px; height: 9px; background: var(--dot); transition: background-color .2s ease, transform .2s ease; }
 #dots li[data-current] { background: var(--ink); transform: scale(1.25); }
 #dots li[data-band="green"] { background: var(--band-green); }
 #dots li[data-band="yellow"] { background: var(--band-yellow); }

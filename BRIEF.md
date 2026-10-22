@@ -104,13 +104,13 @@ never leaves the red band.
 
 ## Style
 
-Tidning is the style everyone starts in. A button under the zoom buttons opens
-a small menu on the map: the four styles, Tidning, Papper, Natt and Klar, with
-a swatch of each, and a link to report an error. On the end screen it also says
-that tapping a place tells you about it. A style changes colours, type and the
-basemap palette, never the game, and the browser remembers it. The old
-addresses `/papper/`, `/natt/` and `/klar/` pick that style and open the start
-page.
+The UI has one look, Tidning's. The map has several styles: a button under the
+zoom buttons opens a small menu with each map style and a swatch of it, and a
+link to report an error. On the end screen it also says that tapping a place
+tells you about it. A map style changes the basemap colours and the colours of
+the marks on it, never the game or the rest of the page, and the browser
+remembers it. Everyone starts in Tidning. Styles may differ in how easy the map
+is to read.
 
 ## Constraints
 

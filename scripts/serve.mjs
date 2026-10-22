@@ -134,10 +134,9 @@ createServer((req, res) => {
     return;
   }
 
-  const moved = MOVED.find((path) => path === url.pathname.replace(/\/?$/, '/'));
-  if (moved) {
+  if (MOVED.includes(url.pathname.replace(/\/?$/, '/'))) {
     res.writeHead(200, { 'content-type': MIME['.html'], 'cache-control': 'no-store' });
-    res.end(req.method === 'HEAD' ? undefined : movedPage(moved));
+    res.end(req.method === 'HEAD' ? undefined : movedPage);
     return;
   }
 

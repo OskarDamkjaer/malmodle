@@ -42,8 +42,6 @@ let painted = false;
 
 function useStyle(name) {
   styleName = name;
-  document.documentElement.dataset.theme = name;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', STYLES[name].themeColor);
   for (const button of el('styles').children) button.setAttribute('aria-pressed', String(button.dataset.style === name));
   if (painted) applyPalette(map, STYLES[name]);
 }

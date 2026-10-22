@@ -19,6 +19,7 @@ node scripts/serve.mjs --trickle 10    # and one more every 10 seconds
 made-up crowds, and `/dev/week.html` the coming days' sets on the map, with
 `?from=` and `?days=`. `serve.mjs` mounts `dev/` itself, so the site build leaves it out.
 `plans/crowd.md` holds the card's decisions and what is still open.
+`plans/styles.md` holds where the map styles stand and what to try next.
 
 Read the skip count, not just the failures. Tests that need `build/`, `data/`
 or a browser skip instead of failing, so a green run can be an empty one.
@@ -43,11 +44,10 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/crowd-view.js`: the comparison card on the end screen: the chart, its
   hover and keyboard reading, and the waiting and paused states.
 - `app/map.js`: map layers, hiding labels, framing.
-- `app/palette.mjs`: the styles' basemap palettes and answer colours, applied
-  at load and when the map menu switches style. Each style but Tidning has UI
-  colours in `app.css` under `[data-theme]`, which `theme.js` sets before the
-  page paints. `test/palette.test.mjs` checks every style recolours every
-  coloured basemap layer.
+- `app/palette.mjs`: the map styles, each a basemap palette and answer
+  colours, applied at load and when the map menu switches style. They colour
+  the map only; the UI colours are in `app.css`. `test/palette.test.mjs`
+  checks every style recolours every coloured basemap layer.
 - `app/app.js`: boot and the screens.
 - `app/flags.mjs`: feature flags, turned on with `#flaggor=` and kept in the
   browser. `CONTRIBUTING.md` has how they work and the ones there are.

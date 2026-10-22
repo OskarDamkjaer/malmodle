@@ -1,5 +1,3 @@
-import { DEFAULT_STYLE, STYLES, STYLE_KEY } from '../../app/palette.mjs';
-
 export const MOUNTS = [
   { url: '/', dir: 'app' },
   { url: '/style.json', file: 'build/style.json' },
@@ -7,14 +5,13 @@ export const MOUNTS = [
   { url: '/malmo.pmtiles', file: 'data/cache/malmo.pmtiles' },
 ];
 
-export const MOVED = Object.keys(STYLES).filter((name) => name !== DEFAULT_STYLE).map((name) => `/${name}/`);
+export const MOVED = ['/natt/', '/papper/', '/klar/'];
 
-export const movedPage = (url) => `<!doctype html>
+export const movedPage = `<!doctype html>
 <meta charset="utf-8">
 <title>Malmödle</title>
 <link rel="canonical" href="/">
-<script>try { localStorage.setItem('${STYLE_KEY}', '${url.replace(/\//g, '')}'); } catch {}
-location.replace('/' + location.search + location.hash);</script>
+<script>location.replace('/' + location.search + location.hash);</script>
 <meta http-equiv="refresh" content="0; url=/">
 `;
 

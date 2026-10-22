@@ -68,10 +68,9 @@ async function playThrough(page, viewport, count = 10) {
   return prompts;
 }
 
-test("a style's own address picks it and leads to the start page, keeping the hash", { skip }, async () => {
+test('a page of a style that is gone leads to the start page, keeping the hash', { skip }, async () => {
   const { page, context, errors } = await open({ width: 390, height: 844 }, '/natt/#x=1');
   assert.equal(await page.evaluate(() => location.pathname + location.hash), '/#x=1');
-  assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), 'natt');
   assert.deepEqual(errors, []);
   await context.close();
 });
@@ -319,26 +318,26 @@ test('a new version is taken before the first answer, and waits after one', { sk
 
 const background = (page) => page.evaluate(() => window.map.getPaintProperty('background', 'background-color'));
 
-test('the map starts in Tidning, and the menu switches the style and keeps it', { skip }, async () => {
+test("the map starts in Tidning, and the menu switches the map's style and keeps it", { skip }, async () => {
   for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 800 }]) {
     const { page, context, errors } = await open(viewport);
-    assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), DEFAULT_STYLE);
+    const panel = () => page.evaluate(() => getComputedStyle(document.getElementById('question')).backgroundColor);
+    const before = await panel();
     assert.equal(await background(page), STYLES[DEFAULT_STYLE].map.background);
     await page.click('#mapmenubutton');
     assert.ok(await page.isVisible('#report'));
     for (const name of Object.keys(STYLES)) {
       await page.click(`#styles [data-style="${name}"]`);
-      assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), name);
+      assert.equal(await page.locator(`#styles [data-style="${name}"]`).getAttribute('aria-pressed'), 'true');
       assert.equal(await background(page), STYLES[name].map.background, name);
       assert.equal(await page.evaluate(() => window.map.getPaintProperty('tap-point', 'circle-color')), STYLES[name].marks.tap, name);
+      assert.equal(await panel(), before, `${name} changes the UI`);
     }
     await page.keyboard.press('Escape');
     assert.ok(await page.isHidden('#mapmenupanel'));
     await page.reload();
     await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
-    const last = Object.keys(STYLES).at(-1);
-    assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), last);
-    assert.equal(await background(page), STYLES[last].map.background);
+    assert.equal(await background(page), STYLES[Object.keys(STYLES).at(-1)].map.background);
     assert.deepEqual(errors, []);
     await context.close();
   }

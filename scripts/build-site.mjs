@@ -33,7 +33,7 @@ for (const m of MOUNTS) {
 for (const url of MOVED) {
   const dest = join(tmp, url);
   mkdirSync(dest, { recursive: true });
-  writeFileSync(join(dest, 'index.html'), movedPage(url));
+  writeFileSync(join(dest, 'index.html'), movedPage);
 }
 
 const worker = join(tmp, 'sw.js');
