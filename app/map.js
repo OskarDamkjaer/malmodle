@@ -1,6 +1,6 @@
 import { Marker } from './vendor/maplibre-gl.mjs';
 import { around, bounds, contains, union } from './geo.mjs';
-import { PALETTE, paintFor } from './palette.mjs';
+import { DEFAULT_STYLE, STYLES, paintFor } from './palette.mjs';
 
 let COLOR = {};
 let HALO = '#ffffff';
@@ -20,20 +20,41 @@ const isPoint = ['==', ['geometry-type'], 'Point'];
 const fade = ['coalesce', ['feature-state', 'fade'], 1];
 const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
-export function applyPalette(mapInstance) {
+const markPaint = () => ({
+  'focus-fill': { 'fill-color': roleColor() },
+  'focus-line': { 'line-color': roleColor() },
+  'focus-ask': { 'line-color': COLOR.answer },
+  'tap-line': { 'line-color': COLOR.tap },
+  'scored-points': { 'circle-stroke-color': HALO },
+  'scored-labels': { 'text-color': COLOR.tap, 'text-halo-color': HALO },
+  'focus-circle': { 'circle-color': roleColor(), 'circle-stroke-color': HALO },
+  'tap-point': { 'circle-color': COLOR.tap, 'circle-stroke-color': HALO },
+  'focus-label': { 'text-color': roleColor(), 'text-halo-color': HALO },
+});
+
+export function applyPalette(mapInstance, style = STYLES[DEFAULT_STYLE]) {
   map = mapInstance;
-  COLOR = PALETTE.marks;
-  HALO = PALETTE.map.halo;
+  COLOR = style.marks;
+  HALO = style.map.halo;
+  const marks = markPaint();
   for (const layer of map.getStyle().layers) {
-    for (const [property, value] of Object.entries(paintFor(layer, PALETTE.map))) {
+    for (const [property, value] of Object.entries(marks[layer.id] ?? paintFor(layer, style.map))) {
       map.setPaintProperty(layer.id, property, value);
     }
   }
+  if (pin) paintPin(pin.getElement());
+}
+
+function paintPin(element) {
+  element.style.setProperty('--pin', COLOR.tap);
+  element.style.setProperty('--ring', COLOR.hit);
+  element.style.setProperty('--halo', HALO);
 }
 
 export function setupLayers(mapInstance) {
   map = mapInstance;
   labelLayers = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
+  const paint = markPaint();
 
   map.addSource('focus', { type: 'geojson', data: EMPTY, promoteId: 'role' });
   map.addSource('focus-labels', { type: 'geojson', data: EMPTY, promoteId: 'role' });
@@ -41,21 +62,21 @@ export function setupLayers(mapInstance) {
 
   map.addLayer({
     id: 'focus-fill', type: 'fill', source: 'focus', filter: isPolygon,
-    paint: { 'fill-color': roleColor(), 'fill-opacity': ['*', 0.22, fade] },
+    paint: { ...paint['focus-fill'], 'fill-opacity': ['*', 0.22, fade] },
   });
   map.addLayer({
     id: 'focus-line', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['!=', ['get', 'role'], 'ask']],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': roleColor(), 'line-width': ['case', isPolygon, 2.5, 6], 'line-opacity': fade },
+    paint: { ...paint['focus-line'], 'line-width': ['case', isPolygon, 2.5, 6], 'line-opacity': fade },
   });
   map.addLayer({
     id: 'focus-ask', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['==', ['get', 'role'], 'ask']],
     layout: { 'line-join': 'round' },
-    paint: { 'line-color': COLOR.answer, 'line-width': ['case', isPolygon, 2.5, 6], 'line-dasharray': [1.5, 1.5] },
+    paint: { ...paint['focus-ask'], 'line-width': ['case', isPolygon, 2.5, 6], 'line-dasharray': [1.5, 1.5] },
   });
   map.addLayer({
     id: 'tap-line', type: 'line', source: 'tap', filter: isLine,
-    paint: { 'line-color': COLOR.tap, 'line-width': 1.5, 'line-dasharray': [2, 2] },
+    paint: { ...paint['tap-line'], 'line-width': 1.5, 'line-dasharray': [2, 2] },
   });
 
   map.addSource('scored', { type: 'geojson', data: EMPTY });
@@ -80,7 +101,7 @@ export function setupLayers(mapInstance) {
   });
   addScored({
     id: 'scored-points', type: 'circle', source: 'scored-labels', filter: ['!=', ['get', 'kind'], 'area'],
-    paint: { 'circle-radius': 8, 'circle-color': ['get', 'color'], 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
+    paint: { ...paint['scored-points'], 'circle-radius': 8, 'circle-color': ['get', 'color'], 'circle-stroke-width': 2.5 },
   });
   addScored({
     id: 'scored-labels', type: 'symbol', source: 'scored-labels',
@@ -92,16 +113,16 @@ export function setupLayers(mapInstance) {
       'text-offset': ['case', ['==', ['get', 'kind'], 'area'], ['literal', [0, 0]], ['literal', [0, 0.9]]],
       'text-max-width': 9,
     },
-    paint: { 'text-color': COLOR.tap, 'text-halo-color': HALO, 'text-halo-width': 2 },
+    paint: { ...paint['scored-labels'], 'text-halo-width': 2 },
   });
 
   map.addLayer({
     id: 'focus-circle', type: 'circle', source: 'focus', filter: isPoint,
-    paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5, 'circle-opacity': fade, 'circle-stroke-opacity': fade },
+    paint: { ...paint['focus-circle'], 'circle-radius': 8, 'circle-stroke-width': 2.5, 'circle-opacity': fade, 'circle-stroke-opacity': fade },
   });
   map.addLayer({
     id: 'tap-point', type: 'circle', source: 'tap', filter: isPoint,
-    paint: { 'circle-radius': 6, 'circle-color': COLOR.tap, 'circle-stroke-color': HALO, 'circle-stroke-width': 2 },
+    paint: { ...paint['tap-point'], 'circle-radius': 6, 'circle-stroke-width': 2 },
   });
   map.addLayer({
     id: 'focus-label', type: 'symbol', source: 'focus-labels',
@@ -114,7 +135,7 @@ export function setupLayers(mapInstance) {
       'text-max-width': 10,
       'text-allow-overlap': true,
     },
-    paint: { 'text-color': roleColor(), 'text-halo-color': HALO, 'text-halo-width': 2, 'text-opacity': fade },
+    paint: { ...paint['focus-label'], 'text-halo-width': 2, 'text-opacity': fade },
   });
 }
 
@@ -210,9 +231,7 @@ export function showPin(tap, ms) {
   clearPin();
   const element = document.createElement('div');
   element.className = 'pin';
-  element.style.setProperty('--pin', COLOR.tap);
-  element.style.setProperty('--ring', COLOR.hit);
-  element.style.setProperty('--halo', HALO);
+  paintPin(element);
   element.style.setProperty('--lock', `${ms}ms`);
   element.innerHTML = '<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="track" cx="22" cy="22" r="16"/><circle class="ring" cx="22" cy="22" r="16" pathLength="100"/><circle class="dot" cx="22" cy="22" r="6"/></svg>';
   pin = new Marker({ element }).setLngLat(tap).addTo(map);

@@ -118,9 +118,10 @@ end screen polls. Setting up the bucket is in `plans/live.md`. Pushing to
 `main` builds and tests the site once, then migrates the database and deploys
 the Worker, and publishes the same build to GitHub Pages at malmoe.damk.eu
 (`.github/workflows/deploy.yml`). `node scripts/build-site.mjs` builds the
-same folder locally in `build/site`. Addresses the site no longer has, listed in `MOVED` in
-`scripts/lib/site.mjs`, get a page that sends the visitor to the start page
-with the same hash, since GitHub Pages cannot redirect.
+same folder locally in `build/site`. The styles' own addresses, listed in `MOVED` in
+`scripts/lib/site.mjs`, get a page that remembers the style and sends the
+visitor to the start page with the same hash, since GitHub Pages cannot
+redirect.
 
 A player gets a new build the next time they open the site. The service worker
 answers from the cache of the version the page started with, and fetches and

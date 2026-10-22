@@ -26,10 +26,74 @@
   --gap: 12px;
   --width: 560px;
   --attribution: 26px;
-  --zoom: 92px;
+  --zoom: 144px;
+  --dot-radius: 0;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   color-scheme: light;
+}
+
+[data-theme="natt"] {
+  --dot-radius: 50%;
+  --bg: #12151a;
+  --panel: #1c2027;
+  --ink: #eceff3;
+  --ink-soft: #97a2b1;
+  --chip: #262b34;
+  --chip-hover: #2f3540;
+  --chip-ink: #eceff3;
+  --accent: #5fd3a5;
+  --accent-ink: #0b1a14;
+  --wrong: #ff7a59;
+  --dot: #343a45;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 10px 30px rgb(0 0 0 / 45%);
+  --border: 1px solid #2a3039;
+  color-scheme: dark;
+}
+
+[data-theme="papper"] {
+  --dot-radius: 50%;
+  --bg: #f3eee7;
+  --panel: #fffdf9;
+  --ink: #201d19;
+  --ink-soft: #6d665e;
+  --chip: #f1ebe2;
+  --chip-hover: #e9e1d5;
+  --chip-ink: #201d19;
+  --accent: #1f6f5c;
+  --accent-ink: #ffffff;
+  --wrong: #b4442a;
+  --dot: #ddd4c7;
+  --shadow: 0 1px 2px rgb(32 29 25 / 10%), 0 8px 24px rgb(32 29 25 / 10%);
+  --border: 0 solid transparent;
+  --radius: 16px;
+  --radius-button: 999px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font);
+  --display-weight: 700;
+  --display-tracking: -0.015em;
+}
+
+[data-theme="klar"] {
+  --dot-radius: 50%;
+  --bg: #f7f4ec;
+  --panel: #ffffff;
+  --ink: #1b1b1f;
+  --ink-soft: #6a6a75;
+  --chip: #eef1ff;
+  --chip-hover: #e2e7ff;
+  --chip-ink: #1b2a7a;
+  --accent: #2b59ff;
+  --accent-ink: #ffffff;
+  --wrong: #e8462f;
+  --dot: #dfe3f0;
+  --shadow: 0 2px 0 rgb(27 27 31 / 8%), 0 12px 28px rgb(43 89 255 / 14%);
+  --radius: 22px;
+  --radius-button: 16px;
+  --font: ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif;
+  --display-weight: 800;
+  --display-tracking: -0.02em;
+  --button-depth: 0 3px 0 rgb(27 27 31 / 14%);
 }
 
 * { box-sizing: border-box; }
@@ -104,7 +168,7 @@ button.primary:hover { filter: brightness(1.06); }
 
 #question { padding: 10px 16px 12px; pointer-events: none; }
 #dots { display: flex; gap: 5px; margin: 0; padding: 0; list-style: none; }
-#dots li { width: 9px; height: 9px; background: var(--dot); transition: background-color .2s ease, transform .2s ease; }
+#dots li { width: 9px; height: 9px; border-radius: var(--dot-radius); background: var(--dot); transition: background-color .2s ease, transform .2s ease; }
 #dots li[data-current] { background: var(--ink); transform: scale(1.25); }
 #dots li[data-band="green"] { background: var(--band-green); }
 #dots li[data-band="yellow"] { background: var(--band-yellow); }
@@ -220,15 +284,6 @@ body[data-answered] #question { display: none; }
 .kinds button { min-height: 44px; padding: 8px 12px; font-size: 15px; }
 #practise::after { content: " ▾"; }
 #practise[aria-expanded="true"]::after { content: " ▴"; }
-#report { display: none; position: absolute; z-index: 6; right: calc(var(--gap) + 44px); bottom: calc(var(--safe-bottom) + var(--attribution) + 11px); padding: 4px 10px; font-size: 13px; color: var(--ink-soft); background: color-mix(in srgb, var(--panel) 85%, transparent); border-radius: var(--radius-button); }
-body[data-ended] #report { display: block; }
-#info:not([hidden]) ~ #report { display: none; }
-#maptip { display: none; position: absolute; z-index: 6; right: var(--gap); bottom: calc(var(--safe-bottom) + var(--attribution) + 6px); }
-body[data-ended] #maptip { display: block; }
-#info:not([hidden]) ~ #maptip { display: none; }
-#maptipbutton { width: 36px; min-height: 36px; padding: 0; border-radius: 50%; font: 600 italic 18px/1 var(--font-display); background: var(--panel); color: var(--ink); box-shadow: 0 1px 4px rgb(0 0 0 / 20%); }
-#maptiptext { display: none; position: absolute; right: 0; bottom: 44px; width: max-content; max-width: min(260px, calc(100vw - 2 * var(--gap))); padding: 8px 12px; font-size: 14px; line-height: 1.4; color: var(--ink); background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: 0 2px 8px rgb(0 0 0 / 15%); }
-#maptip:hover #maptiptext, #maptip:focus-within #maptiptext, #maptipbutton[aria-expanded="true"] + #maptiptext { display: block; }
 #endmap { width: 100%; font-weight: 600; }
 #endmap::after { content: " ↓"; }
 body[data-mapview] #endmap::after { content: " ↑"; }
@@ -364,7 +419,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 
 .maplibregl-ctrl-top-right { top: 50%; transform: translateY(-50%); }
 .maplibregl-ctrl-top-right .maplibregl-ctrl { margin: 0 var(--gap) 0 0; }
-.maplibregl-ctrl.maplibregl-ctrl-group { display: flex; flex-direction: column; overflow: hidden; background: var(--panel); border: var(--border); border-radius: min(var(--radius), 14px); box-shadow: var(--shadow); }
+.maplibregl-ctrl.maplibregl-ctrl-group, #mapmenu .maplibregl-ctrl-group { display: flex; flex-direction: column; overflow: hidden; background: var(--panel); border: var(--border); border-radius: min(var(--radius), 14px); box-shadow: var(--shadow); }
 .maplibregl-ctrl-group button { width: 44px; height: 44px; min-height: 0; padding: 0; color: var(--ink); background: none; border: 0; border-radius: 0; box-shadow: none; transition: background-color .15s ease; }
 .maplibregl-ctrl-group button + button { border-top: 1px solid var(--dot); }
 .maplibregl-ctrl-group button:not(:disabled):hover { background: var(--chip-hover); }
@@ -376,15 +431,25 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 .maplibregl-ctrl-group button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon { background: linear-gradient(currentColor, currentColor) center / 14px 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 14px no-repeat; }
 .maplibregl-ctrl-group button:disabled .maplibregl-ctrl-icon { opacity: .3; }
 
+#mapmenu { position: relative; margin-top: 8px; pointer-events: auto; }
+#mapmenu svg { display: block; width: 22px; height: 22px; margin: auto; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
+#mapmenubutton[aria-expanded="true"] { background: var(--chip-hover); }
+.maplibregl-ctrl-top-right:has(#mapmenupanel:not([hidden])) { z-index: 7; }
+#mapmenupanel { position: absolute; right: calc(100% + 8px); bottom: 0; width: 248px; max-width: calc(100vw - 2 * var(--gap) - 52px); padding: 12px; background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); animation: fade .15s ease-out; }
+#mapmenupanel .kicker { margin: 0 0 8px; font: 600 11px/1.2 var(--font); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+#styles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+#styles button { display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 8px; font-size: 14px; text-align: left; box-shadow: none; }
+#styles button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); font-weight: 600; }
+#styles .swatch { flex: 0 0 auto; width: 22px; height: 22px; border-radius: min(var(--radius), 6px); box-shadow: inset 0 0 0 1px rgb(0 0 0 / 18%); background: linear-gradient(135deg, var(--water) 0 32%, var(--ground) 32% 46%, var(--road) 46% 56%, var(--ground) 56% 70%, var(--green) 70%); }
+#maptip { display: none; margin: 12px 0 0; font-size: 14px; line-height: 1.4; }
+body[data-ended] #maptip { display: block; }
+#report { display: block; margin: 12px -12px -12px; padding: 10px 12px; font-size: 14px; color: var(--ink-soft); border-top: 1px solid var(--dot); }
+#report:hover { color: var(--ink); }
+
 @media (min-width: 760px) {
   #question { padding: 16px 22px 20px; }
   .maplibregl-ctrl-top-right { top: auto; bottom: calc(var(--safe-bottom) + var(--attribution) + var(--gap)); transform: none; }
-  body[data-ended] .maplibregl-ctrl-top-right { bottom: calc(var(--safe-bottom) + var(--attribution) + 52px); }
   #result, #choices { padding: 16px 18px; }
-}
-
-@media (max-width: 759px) {
-  body:not([data-mapview]) :is(#report, #maptip) { z-index: 4; }
 }
 
 @media (max-width: 759px) and (max-height: 720px) {
@@ -434,7 +499,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
     right: var(--gap);
     transform: none;
     width: 340px;
-    max-height: calc(100% - 2 * var(--gap) - var(--safe-top) - var(--attribution) - 52px - var(--zoom));
+    max-height: calc(100% - 2 * var(--gap) - var(--safe-top) - var(--attribution) - var(--zoom));
     overflow-y: auto;
     animation: slide .28s ease-out;
   }

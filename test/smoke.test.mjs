@@ -2,7 +2,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { existsSync, statSync, utimesSync } from 'node:fs';
-import { PALETTE } from '../app/palette.mjs';
+import { DEFAULT_STYLE, STYLES } from '../app/palette.mjs';
 import { SAVE_KEY, dateKey } from '../app/daily.mjs';
 import { chromium, launch } from './browser.mjs';
 
@@ -68,9 +68,10 @@ async function playThrough(page, viewport, count = 10) {
   return prompts;
 }
 
-test('a page of a style that is gone leads to the start page, keeping the hash', { skip }, async () => {
+test("a style's own address picks it and leads to the start page, keeping the hash", { skip }, async () => {
   const { page, context, errors } = await open({ width: 390, height: 844 }, '/natt/#x=1');
   assert.equal(await page.evaluate(() => location.pathname + location.hash), '/#x=1');
+  assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), 'natt');
   assert.deepEqual(errors, []);
   await context.close();
 });
@@ -316,9 +317,29 @@ test('a new version is taken before the first answer, and waits after one', { sk
   }
 });
 
-test('the palette is applied to the basemap', { skip }, async () => {
-  const { page, context, errors } = await open({ width: 390, height: 844 });
-  assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), PALETTE.map.background);
-  assert.deepEqual(errors, []);
-  await context.close();
+const background = (page) => page.evaluate(() => window.map.getPaintProperty('background', 'background-color'));
+
+test('the map starts in Tidning, and the menu switches the style and keeps it', { skip }, async () => {
+  for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 800 }]) {
+    const { page, context, errors } = await open(viewport);
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), DEFAULT_STYLE);
+    assert.equal(await background(page), STYLES[DEFAULT_STYLE].map.background);
+    await page.click('#mapmenubutton');
+    assert.ok(await page.isVisible('#report'));
+    for (const name of Object.keys(STYLES)) {
+      await page.click(`#styles [data-style="${name}"]`);
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), name);
+      assert.equal(await background(page), STYLES[name].map.background, name);
+      assert.equal(await page.evaluate(() => window.map.getPaintProperty('tap-point', 'circle-color')), STYLES[name].marks.tap, name);
+    }
+    await page.keyboard.press('Escape');
+    assert.ok(await page.isHidden('#mapmenupanel'));
+    await page.reload();
+    await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+    const last = Object.keys(STYLES).at(-1);
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), last);
+    assert.equal(await background(page), STYLES[last].map.background);
+    assert.deepEqual(errors, []);
+    await context.close();
+  }
 });

@@ -91,8 +91,8 @@ never leaves the red band.
   like other daily games. If the set is replayed, the latest result is shared.
 - A way to open the full labelled map for free practice. Tapping a thing says
   what it is; today's names are marked.
-- No memory between days. The browser keeps only today's daily round and a
-  random player id: a
+- No memory between days. The browser keeps only today's daily round, a
+  random player id and the chosen style: a
   reload resumes it at the next question, or returns to the end screen once it
   is finished. A replay in progress does not replace the finished result until
   it ends. Practice is not kept, and an earlier day's round is ignored and then
@@ -104,8 +104,13 @@ never leaves the red band.
 
 ## Style
 
-One style, Tidning, for everyone. There is no picker: reading this map is part
-of the challenge.
+Tidning is the style everyone starts in. A button under the zoom buttons opens
+a small menu on the map: the four styles, Tidning, Papper, Natt and Klar, with
+a swatch of each, and a link to report an error. On the end screen it also says
+that tapping a place tells you about it. A style changes colours, type and the
+basemap palette, never the game, and the browser remembers it. The old
+addresses `/papper/`, `/natt/` and `/klar/` pick that style and open the start
+page.
 
 ## Constraints
 

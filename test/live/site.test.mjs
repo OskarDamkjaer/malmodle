@@ -2,7 +2,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { PALETTE } from '../../app/palette.mjs';
+import { DEFAULT_STYLE, STYLES } from '../../app/palette.mjs';
 import { MOVED } from '../../scripts/lib/site.mjs';
 import { chromium, launch } from '../browser.mjs';
 
@@ -80,18 +80,20 @@ for (const site of SITES) {
     }));
   }
 
-  test(`the pages of styles that are gone on ${site} lead to the start page`, { skip }, again(async () => {
+  test(`a style's own address on ${site} picks it and leads to the start page`, { skip }, again(async () => {
     for (const path of MOVED) {
       const { page, context, errors } = await open(site, { width: 390, height: 844 }, path);
       assert.equal(new URL(page.url()).pathname, '/', path);
+      const name = path.replaceAll('/', '');
+      assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), STYLES[name].map.background, path);
       assert.deepEqual(errors, []);
       await context.close();
     }
   }));
 
-  test(`${site} paints the basemap with the palette`, { skip }, again(async () => {
+  test(`${site} paints the basemap in Tidning`, { skip }, again(async () => {
     const { page, context, errors } = await open(site, { width: 390, height: 844 }, '/');
-    assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), PALETTE.map.background);
+    assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), STYLES[DEFAULT_STYLE].map.background);
     assert.deepEqual(errors, []);
     await context.close();
   }));

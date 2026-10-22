@@ -5,6 +5,7 @@ import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize 
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import { FLAGS_KEY, readFlags } from './flags.mjs';
+import { STYLES, STYLE_KEY, styleNamed } from './palette.mjs';
 import {
   applyPalette, clear, clearPin, entry, holdPin, fadeAnswer, FRAMING, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showPin, showScored, showTap,
 } from './map.js';
@@ -31,6 +32,44 @@ const flags = (() => {
   return new Set(on);
 })();
 const pinning = flags.has('pin');
+
+let styleName = (() => {
+  let saved = null;
+  try { saved = localStorage.getItem(STYLE_KEY); } catch {}
+  return styleNamed(saved);
+})();
+let painted = false;
+
+function useStyle(name) {
+  styleName = name;
+  document.documentElement.dataset.theme = name;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', STYLES[name].themeColor);
+  for (const button of el('styles').children) button.setAttribute('aria-pressed', String(button.dataset.style === name));
+  if (painted) applyPalette(map, STYLES[name]);
+}
+
+function renderStyles() {
+  el('styles').replaceChildren(...Object.entries(STYLES).map(([name, style]) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.style = name;
+    const swatch = document.createElement('span');
+    swatch.className = 'swatch';
+    swatch.style.cssText = `--ground: ${style.map.background}; --water: ${style.map.water}; --green: ${style.map.green}; --road: ${style.map.major}`;
+    button.append(swatch, style.label);
+    button.addEventListener('click', () => {
+      try { localStorage.setItem(STYLE_KEY, name); } catch {}
+      useStyle(name);
+    });
+    return button;
+  }));
+}
+
+function toggleMenu(open = el('mapmenupanel').hidden) {
+  el('mapmenupanel').hidden = !open;
+  el('mapmenubutton').setAttribute('aria-expanded', String(open));
+  if (open) el('report').href = reportLink();
+}
 
 function fail(what, err) {
   console.error(what, err);
@@ -144,6 +183,9 @@ map.touchZoomRotate.disableRotation();
 map.keyboard.disableRotation();
 map.addControl(new AttributionControl({ compact: false }), 'bottom-right');
 map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+map.addControl({ onAdd: () => el('mapmenu'), onRemove: () => {} }, 'top-right');
+renderStyles();
+useStyle(styleName);
 window.map = map;
 
 let items = [];
@@ -502,7 +544,6 @@ function finish() {
   el('elsewhere').hidden = Boolean(practicing) || location.hostname === HOME;
   el('elsewherelink').href = `https://${HOME}/#runda=${carry({ key, set, results })}`;
   el('sharenative').hidden = !navigator.share;
-  el('report').href = reportLink();
   el('again').textContent = practicing ? 'Dagens omgång' : 'Spela igen';
   offerInstall();
   compare();
@@ -712,6 +753,7 @@ async function shareNative() {
 function reportLink() {
   const body = [
     `Datum: ${key}`,
+    `Stil: ${styleName}`,
     `Webbläsare: ${navigator.userAgent}`,
     '',
     'Vad blev fel?',
@@ -875,14 +917,17 @@ el('again').addEventListener('click', start);
 el('installbutton').addEventListener('click', install);
 el('infoclose').addEventListener('click', closePlace);
 el('endmap').addEventListener('click', toggleMapView);
-el('maptipbutton').addEventListener('click', (e) => {
-  const open = e.currentTarget.getAttribute('aria-expanded') !== 'true';
-  e.currentTarget.setAttribute('aria-expanded', String(open));
-});
+el('mapmenubutton').addEventListener('click', () => toggleMenu());
+document.addEventListener('pointerdown', (e) => {
+  if (!el('mapmenupanel').hidden && !el('mapmenu').contains(e.target)) toggleMenu(false);
+}, true);
 
 document.addEventListener('keydown', (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (phase === 'asking' && 'pointing' in document.body.dataset && document.activeElement === map.getCanvas() && (e.key === 'Enter' || e.key === ' ')) {
+  if (e.key === 'Escape' && !el('mapmenupanel').hidden) {
+    toggleMenu(false);
+    el('mapmenubutton').focus();
+  } else if (phase === 'asking' && 'pointing' in document.body.dataset && document.activeElement === map.getCanvas() && (e.key === 'Enter' || e.key === ' ')) {
     e.preventDefault();
     const canvas = map.getCanvas();
     const { lng, lat } = map.unproject([canvas.clientWidth / 2, canvas.clientHeight / 2]);
@@ -901,7 +946,8 @@ document.addEventListener('keydown', (e) => {
 
 map.on('load', async () => {
   try {
-    applyPalette(map);
+    applyPalette(map, STYLES[styleName]);
+    painted = true;
     items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
     byName = new globalThis.Map(items.map((it) => [it.name, it]));
     setupLayers(map);

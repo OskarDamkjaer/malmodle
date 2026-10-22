@@ -43,9 +43,11 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/crowd-view.js`: the comparison card on the end screen: the chart, its
   hover and keyboard reading, and the waiting and paused states.
 - `app/map.js`: map layers, hiding labels, framing.
-- `app/palette.mjs`: the basemap palette and the answer colours, applied at
-  load. The UI colours are in `app.css`. `test/palette.test.mjs` checks that
-  every coloured basemap layer is recoloured.
+- `app/palette.mjs`: the styles' basemap palettes and answer colours, applied
+  at load and when the map menu switches style. Each style but Tidning has UI
+  colours in `app.css` under `[data-theme]`, which `theme.js` sets before the
+  page paints. `test/palette.test.mjs` checks every style recolours every
+  coloured basemap layer.
 - `app/app.js`: boot and the screens.
 - `app/flags.mjs`: feature flags, turned on with `#flaggor=` and kept in the
   browser. `CONTRIBUTING.md` has how they work and the ones there are.

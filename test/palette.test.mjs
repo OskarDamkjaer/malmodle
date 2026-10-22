@@ -1,13 +1,27 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { PALETTE, paintFor } from '../app/palette.mjs';
+import { DEFAULT_STYLE, STYLES, paintFor } from '../app/palette.mjs';
 
 const STYLE = 'build/style.json';
-test('every coloured basemap layer is recoloured by the palette', { skip: existsSync(STYLE) ? false : `${STYLE} is missing` }, () => {
+const names = Object.keys(STYLES);
+
+test('every style defines the same colours', () => {
+  const shape = (s) => [Object.keys(s.map).sort(), Object.keys(s.marks).sort()];
+  for (const name of names) assert.deepEqual(shape(STYLES[name]), shape(STYLES[DEFAULT_STYLE]), name);
+});
+
+test('every style but the default has its own CSS', () => {
+  const css = readFileSync('app/app.css', 'utf8');
+  for (const name of names.filter((n) => n !== DEFAULT_STYLE)) assert.ok(css.includes(`[data-theme="${name}"]`), name);
+});
+
+test('every coloured basemap layer is recoloured by every style', { skip: existsSync(STYLE) ? false : `${STYLE} is missing` }, () => {
   const { layers } = JSON.parse(readFileSync(STYLE, 'utf8'));
-  for (const layer of layers) {
-    if (!['fill', 'line', 'background', 'symbol'].includes(layer.type)) continue;
-    assert.ok(Object.keys(paintFor(layer, PALETTE.map)).length, `the palette leaves ${layer.id} alone`);
+  for (const name of names) {
+    for (const layer of layers) {
+      if (!['fill', 'line', 'background', 'symbol'].includes(layer.type)) continue;
+      assert.ok(Object.keys(paintFor(layer, STYLES[name].map)).length, `${name} leaves ${layer.id} alone`);
+    }
   }
 });

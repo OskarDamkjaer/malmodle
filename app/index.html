@@ -20,6 +20,7 @@
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="stylesheet" href="/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/app.css">
+<script src="/theme.js"></script>
 </head>
 <body>
 <div id="map"></div>
@@ -88,11 +89,16 @@
   </div>
 </section>
 
-<a id="report" href="https://github.com/OskarDamkjaer/malmodle/issues/new" target="_blank" rel="noopener">Rapportera ett fel</a>
-
-<div id="maptip">
-  <button id="maptipbutton" type="button" aria-label="Om kartan" aria-describedby="maptiptext" aria-expanded="false">i</button>
-  <span id="maptiptext" role="tooltip">Tryck på en plats på kartan för att läsa om den.</span>
+<div id="mapmenu" class="maplibregl-ctrl">
+  <div class="maplibregl-ctrl-group">
+    <button id="mapmenubutton" type="button" aria-label="Kartinställningar" aria-expanded="false" aria-controls="mapmenupanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16 9 4.5 9-4.5"/></svg></button>
+  </div>
+  <div id="mapmenupanel" hidden>
+    <p id="styleslabel" class="kicker">Kartstil</p>
+    <div id="styles" role="group" aria-labelledby="styleslabel"></div>
+    <p id="maptip">Tryck på en plats på kartan för att läsa om den.</p>
+    <a id="report" href="https://github.com/OskarDamkjaer/malmodle/issues/new" target="_blank" rel="noopener">Rapportera ett fel</a>
+  </div>
 </div>
 
 <div id="boot">
