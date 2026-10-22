@@ -237,6 +237,7 @@ function practise(kind) {
 
 function play(questions, answered = []) {
   stopFollowing();
+  cheering = false;
   set = questions;
   results = answered;
   index = results.length;
@@ -456,8 +457,8 @@ function next() {
   if (phase !== 'answered') return;
   index += 1;
   if (index < set.length) { ask(); return; }
+  cheering = !reducedMotion && results.every((r) => r.result.score === MAX_SCORE);
   finish();
-  if (!reducedMotion && results.every((r) => r.result.score === MAX_SCORE)) confetti();
 }
 
 function outcome({ q, result }) {
@@ -469,16 +470,30 @@ function outcome({ q, result }) {
 
 const counting = new WeakMap();
 
-function countUp(node, total) {
+function countUp(node, total, done) {
   cancelAnimationFrame(counting.get(node));
-  if (reducedMotion) { node.textContent = String(total); return; }
+  if (reducedMotion) { node.textContent = String(total); done?.(); return; }
   const startAt = performance.now();
   const step = (now) => {
     const t = Math.min(1, (now - startAt) / 900);
     node.textContent = String(Math.round(total * (1 - (1 - t) ** 3)));
     if (t < 1) counting.set(node, requestAnimationFrame(step));
+    else done?.();
   };
   counting.set(node, requestAnimationFrame(step));
+}
+
+let cheering = false;
+
+function cheer() {
+  if (!cheering || phase !== 'end') return;
+  cheering = false;
+  confetti();
+}
+
+function scoreShown() {
+  const node = el('endscore');
+  if (node.textContent === String(set.length * MAX_SCORE) && el('end').dataset.crowd !== 'asking' && node.getClientRects().length) cheer();
 }
 
 function finish() {
@@ -497,7 +512,7 @@ function finish() {
   el('sharecard').hidden = Boolean(practicing);
   el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
   el('kinds').hidden = !practicing;
-  countUp(el('endscore'), total);
+  countUp(el('endscore'), total, scoreShown);
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
   renderSquares();
@@ -595,7 +610,7 @@ async function compare() {
   const slow = setTimeout(() => {
     if (end.dataset.crowd !== 'asking' || turn !== comparing) return;
     end.dataset.crowd = 'slow';
-    countUp(el('endscore'), sum(scores));
+    countUp(el('endscore'), sum(scores), scoreShown);
   }, PATIENCE);
   try {
     const reply = await ownResult(key, setId(set), scores);
@@ -605,6 +620,7 @@ async function compare() {
     card ??= crowdCard({
       onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); },
       onRefresh: () => following?.restart(),
+      onRanked: cheer,
     });
     el('crowd').replaceChildren(card.node);
     const names = set.map((q) => q.target.name);
@@ -613,10 +629,11 @@ async function compare() {
     reveal('crowd');
     show(day);
     end.dataset.crowd = 'shown';
+    scoreShown();
     if (poll) following = follow(poll, day, show);
   } catch {} finally {
     clearTimeout(slow);
-    if (turn === comparing && end.dataset.crowd === 'asking') countUp(el('endscore'), sum(scores));
+    if (turn === comparing && end.dataset.crowd === 'asking') countUp(el('endscore'), sum(scores), scoreShown);
     if (turn === comparing && ['asking', 'slow'].includes(end.dataset.crowd)) delete end.dataset.crowd;
   }
 }

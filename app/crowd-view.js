@@ -63,7 +63,7 @@ async function invite(link) {
 
 let ids = 0;
 
-function chart({ onRefresh, onEarly } = {}) {
+function chart({ onRefresh, onEarly, onRanked } = {}) {
   const id = `crowd${ids++}`;
   const drawing = svg('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const defs = svg('defs');
@@ -168,12 +168,13 @@ function chart({ onRefresh, onEarly } = {}) {
     bar.style.setProperty('--at', `${100 * at}%`);
   };
 
-  const morph = (toYs, toAt, duration = 700, curve = ease) => {
+  const morph = (toYs, toAt, duration = 700, curve = ease, done) => {
     cancelAnimationFrame(frame);
     if (still()) {
       ys = toYs;
       at = toAt;
       draw();
+      done?.();
       return;
     }
     const fromYs = ys.slice();
@@ -185,6 +186,7 @@ function chart({ onRefresh, onEarly } = {}) {
       at = fromAt + (toAt - fromAt) * t;
       draw();
       if (t < 1) frame = requestAnimationFrame(tick);
+      else done?.();
     };
     frame = requestAnimationFrame(tick);
   };
@@ -319,7 +321,7 @@ function chart({ onRefresh, onEarly } = {}) {
     const first = !ranked;
     ranked = true;
     if (first) at = 0;
-    morph(columns(next, WIDTH), next.you.total / MAX_TOTAL, ...(first ? [1600, glide] : []));
+    morph(columns(next, WIDTH), next.you.total / MAX_TOTAL, ...(first ? [1600, glide] : [700, ease]), onRanked);
   };
 
   const pause = (time) => {
@@ -332,13 +334,14 @@ function chart({ onRefresh, onEarly } = {}) {
   return { node: graph, update, pause };
 }
 
-export function crowdCard({ onPractise, onRefresh } = {}) {
+export function crowdCard({ onPractise, onRefresh, onRanked } = {}) {
   const node = el('div', 'crowd');
   const top = el('div', 'standing');
   let early = false;
   let last = null;
   const graph = chart({
     onRefresh,
+    onRanked,
     onEarly: () => {
       early = true;
       if (last) update(...last);
