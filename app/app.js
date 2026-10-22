@@ -500,12 +500,13 @@ function cheer() {
   if (!cheering || !shown || phase !== 'end' || 'mapview' in document.body.dataset) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   cheering = false;
+  const turn = comparing;
   try {
     const css = getComputedStyle(document.documentElement);
     const colors = [...Object.values(BAND_COLORS), ...['--accent', '--ink'].map((name) => css.getPropertyValue(name).trim())].filter(Boolean);
     import('./confetti.js')
       .then(({ confetti }) => {
-        if (phase === 'end' && !('mapview' in document.body.dataset)) stopConfetti = confetti(colors);
+        if (turn === comparing && phase === 'end' && !('mapview' in document.body.dataset)) stopConfetti = confetti(colors);
       })
       .catch((err) => console.error('Konfetti', err));
   } catch (err) {
