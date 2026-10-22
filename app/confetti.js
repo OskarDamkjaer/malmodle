@@ -35,10 +35,12 @@ export function confetti(colors) {
     };
   });
 
-  const start = performance.now();
-  let last = start;
+  let start = null;
+  let last = null;
   const step = (now) => {
     try {
+      start ??= now;
+      last ??= now;
       const age = now - start;
       if (age >= LIFE) { stop(); return; }
       const dt = Math.min(0.05, (now - last) / 1000);
