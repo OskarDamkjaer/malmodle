@@ -168,13 +168,21 @@ function chart({ onRefresh, onEarly } = {}) {
     bar.style.setProperty('--at', `${100 * at}%`);
   };
 
+  let settling = [];
+  const settle = () => {
+    const calls = settling;
+    settling = [];
+    for (const call of calls) call();
+  };
+
   const morph = (toYs, toAt, duration = 700, curve = ease, done) => {
     cancelAnimationFrame(frame);
+    if (done) settling.push(done);
     if (still()) {
       ys = toYs;
       at = toAt;
       draw();
-      done?.();
+      settle();
       return;
     }
     const fromYs = ys.slice();
@@ -186,7 +194,7 @@ function chart({ onRefresh, onEarly } = {}) {
       at = fromAt + (toAt - fromAt) * t;
       draw();
       if (t < 1) frame = requestAnimationFrame(tick);
-      else done?.();
+      else settle();
     };
     frame = requestAnimationFrame(tick);
   };
