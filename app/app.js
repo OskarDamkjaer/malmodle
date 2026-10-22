@@ -240,7 +240,7 @@ function play(questions, answered = []) {
   cancelAnimationFrame(counting.get(el('endscore')));
   cheering = false;
   scoreCounted = false;
-  chartSettled = null;
+  chartSettled = false;
   stopConfetti();
   set = questions;
   results = answered;
@@ -490,13 +490,13 @@ function countUp(node, total, done) {
 const FULL = SET_SIZE * MAX_SCORE;
 let cheering = false;
 let scoreCounted = false;
-let chartSettled = null;
+let chartSettled = false;
 let stopConfetti = () => {};
 
 function cheer() {
   const crowd = el('end').dataset.crowd;
   const chart = crowd === 'shown' && card?.ready();
-  const shown = chart ? chartSettled === FULL : scoreCounted && crowd !== 'asking';
+  const shown = chart ? chartSettled : scoreCounted && crowd !== 'asking';
   if (!cheering || !shown || phase !== 'end' || 'mapview' in document.body.dataset) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   cheering = false;
@@ -626,7 +626,7 @@ async function ownResult(day, id, scores) {
 async function compare() {
   hide('crowd');
   stopFollowing();
-  chartSettled = null;
+  chartSettled = false;
   const turn = ++comparing;
   const end = el('end');
   delete end.dataset.crowd;
@@ -652,7 +652,7 @@ async function compare() {
     const tries = played(loadSaved(), key, set).slice(1);
     const settled = () => {
       if (turn !== comparing) return;
-      chartSettled = you.total;
+      chartSettled = true;
       cheer();
     };
     const show = (d) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries, settled });

@@ -29,7 +29,7 @@ async function open(options = {}) {
 test('confetti draws at the size it is shown and removes itself', { skip }, async () => {
   const { page, context, errors } = await open();
   await page.evaluate(() => { window.stop = window.confetti(['#2e9e4f', '#c8102e']); });
-  await page.waitForTimeout(300);
+  await page.waitForFunction(() => document.querySelector('canvas.confetti')?.width > 300);
   const size = await page.evaluate(() => {
     const c = document.querySelector('canvas.confetti');
     return { width: c.width, height: c.height, shown: [c.clientWidth * 2, c.clientHeight * 2], hidden: c.getAttribute('aria-hidden') };
@@ -63,9 +63,7 @@ test('confetti stays away with reduced motion', { skip }, async () => {
 });
 
 test('a failing frame takes the confetti away and nothing else', { skip }, async () => {
-  const { page, context } = await open();
-  const errors = [];
-  page.on('pageerror', (e) => errors.push(String(e)));
+  const { page, context, errors } = await open();
   await page.evaluate(() => {
     window.confetti(['#2e9e4f']);
     CanvasRenderingContext2D.prototype.fillRect = () => { throw new Error('broken'); };
