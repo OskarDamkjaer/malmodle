@@ -1,7 +1,6 @@
 import { Map, AttributionControl, NavigationControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
-import { confetti } from './confetti.js';
 import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
@@ -238,6 +237,7 @@ function practise(kind) {
 function play(questions, answered = []) {
   stopFollowing();
   cheering = false;
+  stopConfetti();
   set = questions;
   results = answered;
   index = results.length;
@@ -457,7 +457,7 @@ function next() {
   if (phase !== 'answered') return;
   index += 1;
   if (index < set.length) { ask(); return; }
-  cheering = !reducedMotion && results.every((r) => r.result.score === MAX_SCORE);
+  cheering = sum(results.map((r) => r.result.score)) === FULL;
   finish();
 }
 
@@ -483,17 +483,39 @@ function countUp(node, total, done) {
   counting.set(node, requestAnimationFrame(step));
 }
 
+const FULL = SET_SIZE * MAX_SCORE;
 let cheering = false;
+let counted = false;
+let stopConfetti = () => {};
 
 function cheer() {
-  if (!cheering || phase !== 'end') return;
+  if (!cheering) return;
   cheering = false;
-  confetti();
+  if (phase !== 'end' || 'mapview' in document.body.dataset) return;
+  try {
+    const css = getComputedStyle(document.documentElement);
+    const colors = [...Object.values(BAND_COLORS), ...['--accent', '--ink'].map((name) => css.getPropertyValue(name).trim())].filter(Boolean);
+    import('./confetti.js')
+      .then(({ confetti }) => {
+        if (phase === 'end' && !('mapview' in document.body.dataset)) stopConfetti = confetti(colors);
+      })
+      .catch((err) => console.error('Konfetti', err));
+  } catch (err) {
+    console.error('Konfetti', err);
+  }
 }
 
 function scoreShown() {
-  const node = el('endscore');
-  if (node.textContent === String(set.length * MAX_SCORE) && el('end').dataset.crowd !== 'asking' && node.getClientRects().length) cheer();
+  const chart = el('end').dataset.crowd === 'shown' && card?.ready();
+  if (counted && el('end').dataset.crowd !== 'asking' && !chart) cheer();
+}
+
+function countScore(total) {
+  counted = false;
+  countUp(el('endscore'), total, () => {
+    counted = true;
+    scoreShown();
+  });
 }
 
 function finish() {
@@ -512,7 +534,7 @@ function finish() {
   el('sharecard').hidden = Boolean(practicing);
   el('practise').setAttribute('aria-expanded', String(Boolean(practicing)));
   el('kinds').hidden = !practicing;
-  countUp(el('endscore'), total, scoreShown);
+  countScore(total);
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
   renderSquares();
@@ -610,7 +632,7 @@ async function compare() {
   const slow = setTimeout(() => {
     if (end.dataset.crowd !== 'asking' || turn !== comparing) return;
     end.dataset.crowd = 'slow';
-    countUp(el('endscore'), sum(scores), scoreShown);
+    countScore(sum(scores));
   }, PATIENCE);
   try {
     const reply = await ownResult(key, setId(set), scores);
@@ -620,20 +642,19 @@ async function compare() {
     card ??= crowdCard({
       onPractise: () => { if (el('kinds').hidden) toggleKinds(); el('kinds').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); },
       onRefresh: () => following?.restart(),
-      onRanked: cheer,
     });
     el('crowd').replaceChildren(card.node);
     const names = set.map((q) => q.target.name);
     const tries = played(loadSaved(), key, set).slice(1);
-    const show = (d) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries });
+    const show = (d, settled) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries, settled });
     reveal('crowd');
-    show(day);
+    show(day, () => { if (you.total === FULL) cheer(); });
     end.dataset.crowd = 'shown';
     scoreShown();
     if (poll) following = follow(poll, day, show);
   } catch {} finally {
     clearTimeout(slow);
-    if (turn === comparing && end.dataset.crowd === 'asking') countUp(el('endscore'), sum(scores), scoreShown);
+    if (turn === comparing && end.dataset.crowd === 'asking') countScore(sum(scores));
     if (turn === comparing && ['asking', 'slow'].includes(end.dataset.crowd)) delete end.dataset.crowd;
   }
 }
@@ -840,6 +861,7 @@ function toggleMapView() {
   const on = !('mapview' in document.body.dataset);
   if (on) document.body.dataset.mapview = '';
   else delete document.body.dataset.mapview;
+  stopConfetti();
   el('endmap').textContent = on ? 'Visa resultatet' : 'Visa på kartan';
   closePlace();
   requestAnimationFrame(() => frameItems(results.map((r) => r.q.target), 300));
