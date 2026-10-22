@@ -648,13 +648,14 @@ async function compare() {
     el('crowd').replaceChildren(card.node);
     const names = set.map((q) => q.target.name);
     const tries = played(loadSaved(), key, set).slice(1);
-    const show = (d, settled) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries, settled });
-    reveal('crowd');
-    show(day, () => {
+    const settled = () => {
       if (turn !== comparing) return;
       chartSettled = you.total;
       cheer();
-    });
+    };
+    const show = (d) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries, settled });
+    reveal('crowd');
+    show(day);
     end.dataset.crowd = 'shown';
     cheer();
     if (poll) following = follow(poll, day, show);

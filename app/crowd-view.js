@@ -357,12 +357,12 @@ export function crowdCard({ onPractise, onRefresh } = {}) {
   const best = el('div', 'best');
   node.append(top, graph.node, best);
 
-  const update = (crowd, names, { settled, ...live } = {}) => {
+  const update = (crowd, names, live = {}) => {
     last = [crowd, names, live];
     const ready = shown(crowd.players, early);
     const said = ready ? standing(crowd) : null;
     top.replaceChildren(...(said ? [el('p', 'head', said.head), el('p', 'dek', said.dek)] : []));
-    graph.update(crowd, { ...live, ready, settled });
+    graph.update(crowd, { ...live, ready });
     const hl = ready ? highlight(crowd) : null;
     const strong = ready && !hl ? strongest(crowd) : null;
     const tip = ready && !hl && !strong && onPractise;
