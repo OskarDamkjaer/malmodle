@@ -1,15 +1,11 @@
-import { test, before, after } from 'node:test';
+import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { chromium, launch } from './browser.mjs';
 
 const ORIGIN = 'http://confetti.test';
-const skip = chromium ? false : 'playwright is not installed';
-let browser;
-
-before(async () => {
-  if (!skip) browser = await launch();
-});
+const browser = chromium ? await launch().catch(() => null) : null;
+const skip = !chromium ? 'playwright is not installed' : !browser ? 'no browser could be launched' : false;
 
 after(async () => {
   await browser?.close();
