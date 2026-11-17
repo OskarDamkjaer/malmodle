@@ -1,37 +1,62 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { MAX_SCORE, NEAR_SCORE, TYPES, distanceScore, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
+import { CENTRE, DISTANCE_FLOOR, MAX_SCORE, NEAR_SCORE, TYPES, distanceScore, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
+import { closest } from '../app/geo.mjs';
 import { band } from '../app/daily.mjs';
 import { fixture } from './fixture.mjs';
 
 const items = fixture();
 const byName = (name) => items.find((it) => it.name === name);
 
+const M = 111320;
+const out = (east, north) => [CENTRE[0] + east / (M * Math.cos((CENTRE[1] * Math.PI) / 180)), CENTRE[1] + north / M];
+const pin = (east, north) => ({ type: 'Point', coordinates: out(east, north) });
+const block = (east, north) => {
+  const [a, b] = [out(east - 50, north - 50), out(east + 50, north + 50)];
+  return { type: 'Polygon', coordinates: [[[a[0], a[1]], [b[0], a[1]], [b[0], b[1]], [a[0], b[1]], [a[0], a[1]]]] };
+};
+
 test('a tap on the target or within ten metres scores full marks', () => {
-  assert.equal(distanceScore(0), MAX_SCORE);
-  assert.equal(distanceScore(10), MAX_SCORE);
-  assert.ok(distanceScore(50) < MAX_SCORE);
+  const shape = block(0, 0);
+  assert.equal(distanceScore(0, shape), MAX_SCORE);
+  assert.equal(distanceScore(10, shape), MAX_SCORE);
+  assert.ok(distanceScore(50, shape) < MAX_SCORE);
 });
 
-test('a place known only by a point gets a wider grace', () => {
-  const point = { type: 'Point', coordinates: [13, 55.6] };
-  assert.equal(distanceScore(90, point), MAX_SCORE);
-  assert.ok(distanceScore(90) < MAX_SCORE);
-  assert.ok(distanceScore(150, point) < MAX_SCORE);
+test('a place known only by a point counts a tap on its block as a hit', () => {
+  assert.equal(distanceScore(240, pin(0, 0)), MAX_SCORE);
+  assert.ok(distanceScore(240, block(0, 0)) < MAX_SCORE);
+  assert.ok(distanceScore(300, pin(0, 0)) < MAX_SCORE);
+});
+
+test('the same miss costs less the further the target lies from the centre', () => {
+  const near = distanceScore(800, block(0, 600));
+  const far = distanceScore(800, block(0, -3000));
+  const farther = distanceScore(800, block(6000, 0));
+  assert.ok(near < far && far < farther);
+});
+
+test('a tap on the centre scores nothing for a target away from it', () => {
+  for (const east of [1500, 3000, 5000, 8000]) {
+    const target = block(east, 0);
+    assert.equal(distanceScore(closest(target, CENTRE).distance, target), 0);
+  }
 });
 
 test('the wrong end of town scores nothing', () => {
-  assert.equal(distanceScore(8000), 0);
+  assert.equal(distanceScore(8000, block(0, 0)), 0);
 });
 
-test('the score falls with distance and never goes below zero', () => {
-  let previous = MAX_SCORE;
-  for (let d = 0; d <= 20000; d += 250) {
-    const s = distanceScore(d);
-    assert.ok(s <= previous && s >= 0);
-    previous = s;
+test('the score falls with distance and drops from the floor straight to zero', () => {
+  for (const target of [block(0, 0), pin(2000, 0), block(0, -8000)]) {
+    let previous = MAX_SCORE;
+    for (let d = 0; d <= 30000; d += 50) {
+      const s = distanceScore(d, target);
+      assert.ok(s <= previous && (s === 0 || s >= DISTANCE_FLOOR));
+      previous = s;
+    }
+    assert.equal(previous, 0);
   }
-  assert.equal(distanceScore(20000), 0);
 });
 
 test('distances read as Swedish', () => {

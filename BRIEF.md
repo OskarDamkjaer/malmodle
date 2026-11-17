@@ -50,9 +50,16 @@ Pointing is the most common. Per kind:
   B are the squares, parks or buildings at the street's ends, or the areas
   they lie in; no decoy also joins them, and a pair belongs to one street.
 
-Every question scores 0–100. A day scores out of 1000. A wrong pick in "Vad
-ligger här?", "Direkt söder om" or "Från A till B" scores up to 35 by how close
-it lies to the answer, measured as the average distance from along the pick to
+Every question scores 0–100. A day scores out of 1000. A tap in "Var ligger
+X?" scores full marks inside the answer, or within 250 m of a place known only
+by a point, and falls away with the distance past that. How fast it falls
+grows with how far the answer lies from Stortorget: half that distance, and
+never under 400 m. So the same miss costs more in the centre, where people
+know the map well, than on the outskirts, and a tap on the centre scores
+nothing for an answer away from it. Below 15 a tap scores nothing.
+
+A wrong pick in "Vad ligger här?", "Direkt söder om" or "Från A till B" scores
+up to 35 by how close it lies to the answer, measured as the average distance from along the pick to
 the answer, and nothing below 5. A place a few dozen metres off scores near 30
 and one 300 m off a few points; an area that borders the answer about 17,
 in the centre or the outskirts. Areas and places with an outline are measured
