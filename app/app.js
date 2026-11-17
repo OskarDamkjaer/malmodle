@@ -4,9 +4,8 @@ import { crowdCard } from './crowd-view.js';
 import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
-import { FLAGS_KEY, readFlags } from './flags.mjs';
 import {
-  applyPalette, clear, clearPin, entry, holdPin, fadeAnswer, FRAMING, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showPin, showScored, showTap,
+  applyPalette, clear, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -18,19 +17,6 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wide = matchMedia('(min-width: 760px)');
 
 const HOME = 'malmodle.se';
-
-const flags = (() => {
-  let saved = null;
-  try { saved = localStorage.getItem(FLAGS_KEY); } catch {}
-  const { on, changed, hash } = readFlags(location.hash, saved);
-  if (changed) {
-    try { localStorage.setItem(FLAGS_KEY, JSON.stringify(on)); } catch {}
-    history.replaceState(null, '', location.pathname + location.search + (hash ? `#${hash}` : ''));
-  }
-  if (on.length) document.documentElement.dataset.flags = on.join(' ');
-  return new Set(on);
-})();
-const pinning = flags.has('pin');
 
 function fail(what, err) {
   console.error(what, err);
@@ -131,7 +117,6 @@ const map = new Map({
   bearing: 0,
   pitch: 0,
   dragRotate: false,
-  doubleClickZoom: !pinning,
   pitchWithRotate: false,
   touchPitch: false,
   rollEnabled: false,
@@ -155,13 +140,6 @@ let results = [];
 let phase = 'loading';
 let practicing = null;
 let aimed = false;
-const LOCK = 500;
-const DRAW = 400;
-let locking = null;
-let placed = null;
-const UNPLACE_REACH = 22;
-let steering = false;
-let stopped = false;
 
 const current = () => set[index];
 const typeOf = (q) => TYPES[q.type];
@@ -254,7 +232,6 @@ function ask() {
   const type = typeOf(q);
   const { title, detail } = type.prompt(q);
   phase = 'asking';
-  unplace();
   clear();
   renderDots();
   el('detail').textContent = detail ?? '';
@@ -306,35 +283,6 @@ async function clickedStreet(tap) {
   }
   const street = streetNear(lines, tap, reach);
   return street && (byName.get(street.name)?.kind === 'street' ? byName.get(street.name) : street);
-}
-
-function place(tap) {
-  clearTimeout(locking);
-  placed = tap;
-  showPin(tap, LOCK);
-  locking = setTimeout(() => {
-    locking = null;
-    placed = null;
-    answer(tap).finally(clearPin);
-  }, LOCK);
-}
-
-function hold() {
-  if (!placed) return;
-  clearTimeout(locking);
-  locking = null;
-  holdPin();
-}
-
-function release() {
-  if (placed && !locking) place(placed);
-}
-
-function unplace() {
-  clearTimeout(locking);
-  locking = null;
-  placed = null;
-  clearPin();
 }
 
 async function answer(value, keyed = false) {
@@ -408,13 +356,10 @@ function revealPoint(q, result) {
   const marks = [{ item: q.target, role: 'answer', named: true }];
   if (result.hit) marks.push({ item: result.hit, role: 'hit', named: true });
   show(marks);
-  const end = pinning && result.distance > 0 && q.target.kind !== 'street' ? q.target.point : result.near;
-  const inside = entry(q.target.geometry, result.tap, end);
-  const ms = pinning && !reducedMotion && result.score < MAX_SCORE ? DRAW : 0;
-  showTap(result.tap, end, { ms, wait: ms && FRAMING * 0.6, step: (k) => fadeAnswer(k >= 1 ? 1 : inside < 1 ? Math.max(0, (k - inside) / (1 - inside)) : 0) });
+  showTap(result.tap, result.near);
   el('verdict').textContent = result.score === MAX_SCORE ? 'Mitt i prick' : `${formatDistance(result.distance)} bort`;
   el('explain').textContent = result.hit ? `Det där var ${result.hit.name}.` : '';
-  requestAnimationFrame(() => frameReveal([q.target.geometry], [result.tap], pinning));
+  requestAnimationFrame(() => frameReveal([q.target.geometry], [result.tap]));
 }
 
 function revealChoice(q, result) {
@@ -448,7 +393,7 @@ function revealChoice(q, result) {
   }
 
   show(marks);
-  requestAnimationFrame(() => frameReveal(marks.map((m) => m.item.geometry), [], pinning));
+  requestAnimationFrame(() => frameReveal(marks.map((m) => m.item.geometry), []));
 }
 
 function next() {
@@ -833,11 +778,7 @@ function closePlace() {
 
 map.on('click', (e) => {
   if (phase === 'asking' && typeOf(current()).input === 'map') {
-    if (!pinning) return answer([e.lngLat.lng, e.lngLat.lat]);
-    if (steering || stopped) return;
-    const pin = placed && map.project(placed);
-    if (pin && Math.hypot(pin.x - e.point.x, pin.y - e.point.y) <= UNPLACE_REACH) unplace();
-    else place([e.lngLat.lng, e.lngLat.lat]);
+    answer([e.lngLat.lng, e.lngLat.lat]);
   } else if (phase === 'end') {
     const name = pickScored(e.point);
     const r = results.find((x) => x.q.target.name === name);
@@ -845,22 +786,6 @@ map.on('click', (e) => {
     else closePlace();
   }
 });
-
-map.on('movestart', (e) => {
-  if (!e.originalEvent) return;
-  steering = true;
-  unplace();
-});
-
-map.on('moveend', () => { steering = false; });
-
-map.getContainer().addEventListener('pointerdown', () => {
-  stopped = steering;
-  hold();
-}, true);
-map.getContainer().addEventListener('pointerup', release, true);
-map.getContainer().addEventListener('pointercancel', release, true);
-map.getContainer().addEventListener('touchstart', (e) => { if (e.touches.length > 1) unplace(); }, { capture: true, passive: true });
 
 map.on('mousemove', (e) => {
   if (phase !== 'end') return;
@@ -886,7 +811,6 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     const canvas = map.getCanvas();
     const { lng, lat } = map.unproject([canvas.clientWidth / 2, canvas.clientHeight / 2]);
-    unplace();
     answer([lng, lat], true);
   } else if (phase === 'asking' && /^[1-9]$/.test(e.key)) {
     const button = el('choices').children[Number(e.key) - 1];

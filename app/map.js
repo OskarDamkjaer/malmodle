@@ -1,5 +1,4 @@
-import { Marker } from './vendor/maplibre-gl.mjs';
-import { around, bounds, contains, union } from './geo.mjs';
+import { around, bounds, union } from './geo.mjs';
 import { PALETTE, paintFor } from './palette.mjs';
 
 let COLOR = {};
@@ -10,14 +9,11 @@ const EMPTY = { type: 'FeatureCollection', features: [] };
 const feature = (geometry, properties) => ({ type: 'Feature', geometry, properties });
 
 let map = null;
-let pin = null;
-let drawing = 0;
 let labelLayers = [];
 
 const isPolygon = ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]];
 const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineString']]];
 const isPoint = ['==', ['geometry-type'], 'Point'];
-const fade = ['coalesce', ['feature-state', 'fade'], 1];
 const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
 export function applyPalette(mapInstance) {
@@ -35,18 +31,18 @@ export function setupLayers(mapInstance) {
   map = mapInstance;
   labelLayers = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 
-  map.addSource('focus', { type: 'geojson', data: EMPTY, promoteId: 'role' });
-  map.addSource('focus-labels', { type: 'geojson', data: EMPTY, promoteId: 'role' });
+  map.addSource('focus', { type: 'geojson', data: EMPTY });
+  map.addSource('focus-labels', { type: 'geojson', data: EMPTY });
   map.addSource('tap', { type: 'geojson', data: EMPTY });
 
   map.addLayer({
     id: 'focus-fill', type: 'fill', source: 'focus', filter: isPolygon,
-    paint: { 'fill-color': roleColor(), 'fill-opacity': ['*', 0.22, fade] },
+    paint: { 'fill-color': roleColor(), 'fill-opacity': 0.22 },
   });
   map.addLayer({
     id: 'focus-line', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['!=', ['get', 'role'], 'ask']],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': roleColor(), 'line-width': ['case', isPolygon, 2.5, 6], 'line-opacity': fade },
+    paint: { 'line-color': roleColor(), 'line-width': ['case', isPolygon, 2.5, 6] },
   });
   map.addLayer({
     id: 'focus-ask', type: 'line', source: 'focus', filter: ['all', ['!', isPoint], ['==', ['get', 'role'], 'ask']],
@@ -97,7 +93,7 @@ export function setupLayers(mapInstance) {
 
   map.addLayer({
     id: 'focus-circle', type: 'circle', source: 'focus', filter: isPoint,
-    paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5, 'circle-opacity': fade, 'circle-stroke-opacity': fade },
+    paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
   });
   map.addLayer({
     id: 'tap-point', type: 'circle', source: 'tap', filter: isPoint,
@@ -114,7 +110,7 @@ export function setupLayers(mapInstance) {
       'text-max-width': 10,
       'text-allow-overlap': true,
     },
-    paint: { 'text-color': roleColor(), 'text-halo-color': HALO, 'text-halo-width': 2, 'text-opacity': fade },
+    paint: { 'text-color': roleColor(), 'text-halo-color': HALO, 'text-halo-width': 2 },
   });
 }
 
@@ -163,73 +159,15 @@ export function show(marks) {
   });
 }
 
-export function showTap(tap, near, { ms = 0, wait = 0, step } = {}) {
-  const run = ++drawing;
-  const line = near && (near[0] !== tap[0] || near[1] !== tap[1]);
-  const draw = (k) => {
-    const features = [feature({ type: 'Point', coordinates: tap }, {})];
-    if (line && k > 0) {
-      const end = [tap[0] + (near[0] - tap[0]) * k, tap[1] + (near[1] - tap[1]) * k];
-      features.unshift(feature({ type: 'LineString', coordinates: [tap, end] }, {}));
-    }
-    map.getSource('tap').setData({ type: 'FeatureCollection', features });
-  };
-  if (!line || !ms) {
-    draw(1);
-    step?.(1);
-    return;
+export function showTap(tap, near) {
+  const features = [feature({ type: 'Point', coordinates: tap }, {})];
+  if (near && (near[0] !== tap[0] || near[1] !== tap[1])) {
+    features.unshift(feature({ type: 'LineString', coordinates: [tap, near] }, {}));
   }
-  draw(0);
-  step?.(0);
-  const start = performance.now() + wait;
-  const frame = (now) => {
-    if (run !== drawing) return;
-    const t = Math.min(1, Math.max(0, (now - start) / ms));
-    const k = t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) ** 2;
-    draw(k);
-    step?.(k);
-    if (t < 1) requestAnimationFrame(frame);
-  };
-  requestAnimationFrame(frame);
-}
-
-export function entry(geometry, from, to) {
-  const steps = 100;
-  for (let i = 0; i <= steps; i++) {
-    const k = i / steps;
-    if (contains(geometry, [from[0] + (to[0] - from[0]) * k, from[1] + (to[1] - from[1]) * k])) return k;
-  }
-  return 1;
-}
-
-export function fadeAnswer(k) {
-  for (const source of ['focus', 'focus-labels']) map.setFeatureState({ source, id: 'answer' }, { fade: k });
-}
-
-export function showPin(tap, ms) {
-  clearPin();
-  const element = document.createElement('div');
-  element.className = 'pin';
-  element.style.setProperty('--pin', COLOR.tap);
-  element.style.setProperty('--ring', COLOR.hit);
-  element.style.setProperty('--halo', HALO);
-  element.style.setProperty('--lock', `${ms}ms`);
-  element.innerHTML = '<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="track" cx="22" cy="22" r="16"/><circle class="ring" cx="22" cy="22" r="16" pathLength="100"/><circle class="dot" cx="22" cy="22" r="6"/></svg>';
-  pin = new Marker({ element }).setLngLat(tap).addTo(map);
-}
-
-export function holdPin() {
-  pin?.getElement().classList.add('held');
-}
-
-export function clearPin() {
-  pin?.remove();
-  pin = null;
+  map.getSource('tap').setData({ type: 'FeatureCollection', features });
 }
 
 export function clear() {
-  drawing++;
-  fadeAnswer(1);
   map.getSource('focus').setData(EMPTY);
   map.getSource('focus-labels').setData(EMPTY);
   map.getSource('tap').setData(EMPTY);
@@ -266,19 +204,8 @@ function padding() {
   };
 }
 
-export const FRAMING = 500;
-const REVEAL_INSET = 40;
-
-function frame(box, { duration = FRAMING, maxZoom = 15.5, inset = 0 } = {}) {
-  const pad = padding();
-  const { clientWidth: w, clientHeight: h } = map.getContainer();
-  const across = Math.min(inset, (w - pad.left - pad.right) / 8);
-  const down = Math.min(inset, (h - pad.top - pad.bottom) / 8);
-  pad.left += across;
-  pad.right += across;
-  pad.top += down;
-  pad.bottom += down;
-  map.fitBounds(box, { padding: pad, maxZoom, duration });
+function frame(box, { duration = 500, maxZoom = 15.5 } = {}) {
+  map.fitBounds(box, { padding: padding(), maxZoom, duration });
 }
 
 export function frameItems(items, context, extra = []) {
@@ -302,10 +229,10 @@ export function frameHome(items) {
   frame([[quantile(lng, 0.1), quantile(lat, 0.1)], [quantile(lng, 0.9), quantile(lat, 0.9)]], { maxZoom: 13.5 });
 }
 
-export function frameReveal(geometries, points, roomy = false) {
+export function frameReveal(geometries, points) {
   let box = bounds(geometries);
   for (const p of points) box = union(box, around(p, 150));
-  frame(box, { maxZoom: 15, inset: roomy ? REVEAL_INSET : 0 });
+  frame(box, { maxZoom: 15 });
 }
 
 export function pickScored(point) {
