@@ -88,11 +88,11 @@ function rampColor(score) {
   return rgb(RAMP.at(-1)[1]);
 }
 
-function reach(score, geometry) {
+function reach(score, target) {
   let [lo, hi] = [0, 20000];
   while (hi - lo > 1) {
     const mid = (lo + hi) / 2;
-    if (distanceScore(mid, geometry) >= score) lo = mid; else hi = mid;
+    if (distanceScore(mid, target) >= score) lo = mid; else hi = mid;
   }
   return lo;
 }
@@ -125,7 +125,7 @@ function falloff(target) {
   if (falloffs.has(target.name)) return falloffs.get(target.name);
   const { geometry } = target;
   const [[w, s], [e, n]] = bounds([geometry]);
-  const spread = reach(1, geometry) + MARGIN;
+  const spread = reach(1, target) + MARGIN;
   const [[west, south]] = around([w, s], spread);
   const [, [east, north]] = around([e, n], spread);
   const spot = (i, j) => [west + ((east - west) * i) / GRID, north - ((north - south) * j) / GRID];
@@ -138,13 +138,13 @@ function falloff(target) {
     for (let i = 0; i <= GRID; i++) {
       const k = j * (GRID + 1) + i;
       field[k] = closest(geometry, spot(i, j)).distance;
-      const score = distanceScore(field[k], geometry);
+      const score = distanceScore(field[k], target);
       image.data.set([...rampColor(score), Math.round(255 * 0.5 * Math.min(1, Math.max(0, (score - 3) / 20)))], k * 4);
     }
   }
   ctx.putImageData(image, 0, 0);
   const features = LEVELS.flatMap((score) => {
-    const segments = contour(field, GRID, reach(score, geometry), spot);
+    const segments = contour(field, GRID, reach(score, target), spot);
     if (!segments.length) return [];
     const top = segments.flat().reduce((a, b) => (b[1] > a[1] ? b : a));
     return [
@@ -389,7 +389,7 @@ function card(q, key) {
     const scale = document.createElement('p');
     scale.className = 'meta';
     const from = t.geometry.type === 'Point' ? 'från punkten' : 'från kanten';
-    scale.textContent = `${LEVELS.map((s) => `${s} p inom ${formatDistance(reach(s, t.geometry))}`).join(' · ')} ${from}`;
+    scale.textContent = `${LEVELS.map((s) => `${s} p inom ${formatDistance(reach(s, t))}`).join(' · ')} ${from}`;
     box.append(scale);
   }
   box.hidden = false;
