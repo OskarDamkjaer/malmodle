@@ -68,7 +68,10 @@ for (const site of SITES) {
       for (let i = 0; i < 9; i++) {
         await page.waitForSelector('#question:not([hidden])');
         if (await page.isVisible('#choices')) await page.locator('#choices button').first().click();
-        else await page.mouse.click(viewport.width / 2, viewport.height / 2);
+        else {
+          await page.mouse.click(viewport.width / 2, viewport.height / 2);
+          await page.click('.pin .bubble .primary');
+        }
         await page.waitForSelector('#result:not([hidden])');
         assert.match(await page.textContent('#points'), /^\d+$/);
         await page.click('#next');

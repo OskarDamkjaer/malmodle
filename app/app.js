@@ -5,7 +5,7 @@ import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize 
 import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import {
-  applyPalette, clear, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, setupLayers, show, showScored, showTap,
+  applyPalette, clear, clearPin, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, pinAt, placePin, setupLayers, show, showScored, showTap,
 } from './map.js';
 
 const el = (id) => document.getElementById(id);
@@ -117,6 +117,7 @@ const map = new Map({
   bearing: 0,
   pitch: 0,
   dragRotate: false,
+  doubleClickZoom: false,
   pitchWithRotate: false,
   touchPitch: false,
   rollEnabled: false,
@@ -141,6 +142,11 @@ let results = [];
 let phase = 'loading';
 let practicing = null;
 let aimed = false;
+let holding = null;
+const HOLD = 400;
+const HOLD_QUIET = 200;
+const HOLD_SLOP = 8;
+const PIN_HINT = `${matchMedia('(pointer: coarse)').matches ? 'Tryck' : 'Klicka'} eller håll inne för att gissa`;
 
 const current = () => set[index];
 const typeOf = (q) => TYPES[q.type];
@@ -242,6 +248,8 @@ function ask() {
   reveal('question');
   if (type.input === 'map') document.body.dataset.pointing = '';
   else delete document.body.dataset.pointing;
+  stopHold();
+  hint(type.input === 'map' && index === 0);
   if (type.input === 'map' && aimed) map.getCanvas().focus({ preventScroll: true });
 
   const choices = el('choices');
@@ -264,6 +272,7 @@ function ask() {
   show(type.showing(q).map(({ item, named, role = 'context' }) => ({ item, named, role })));
   const view = type.view(q);
   requestAnimationFrame(() => {
+    if (pinAt()) return;
     if (view === 'home') frameHome(items);
     else frameItems(view.items, view.context);
   });
@@ -286,9 +295,58 @@ async function clickedStreet(tap) {
   return street && (byName.get(street.name)?.kind === 'street' ? byName.get(street.name) : street);
 }
 
+function hint(on) {
+  el('pinhint').textContent = PIN_HINT;
+  if (on) document.body.dataset.hinting = '';
+  else delete document.body.dataset.hinting;
+}
+
+function place(at) {
+  map.stop();
+  placePin(at, { guess: () => { const spot = pinAt(); if (spot) answer(spot); }, remove: unplace });
+  hint(false);
+}
+
+function unplace() {
+  clearPin();
+  hint(phase === 'asking' && index === 0);
+}
+
+function stopHold() {
+  if (!holding) return;
+  clearTimeout(holding.timer);
+  holding.ring.remove();
+  holding = null;
+}
+
+function startHold(e) {
+  stopHold();
+  const ring = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  ring.setAttribute('class', 'hold');
+  ring.setAttribute('viewBox', '0 0 64 64');
+  ring.setAttribute('aria-hidden', 'true');
+  ring.style.cssText = `left: ${e.clientX}px; top: ${e.clientY}px; --quiet: ${HOLD_QUIET}ms; --fill: ${HOLD - HOLD_QUIET}ms`;
+  ring.innerHTML = '<circle cx="32" cy="32" r="22" pathLength="100"/>';
+  document.body.append(ring);
+  const box = map.getContainer().getBoundingClientRect();
+  const point = [e.clientX - box.left, e.clientY - box.top];
+  holding = {
+    ring,
+    start: [e.clientX, e.clientY],
+    timer: setTimeout(() => {
+      const { lng, lat } = map.unproject(point);
+      stopHold();
+      answer([lng, lat]);
+    }, HOLD),
+  };
+}
+
 async function answer(value, keyed = false) {
   if (phase !== 'asking') return;
   phase = 'grading';
+  stopHold();
+  clearPin();
+  hint(false);
   playedHere = true;
   aimed = keyed;
   delete document.body.dataset.pointing;
@@ -779,7 +837,7 @@ function closePlace() {
 
 map.on('click', (e) => {
   if (phase === 'asking' && typeOf(current()).input === 'map') {
-    answer([e.lngLat.lng, e.lngLat.lat]);
+    place([e.lngLat.lng, e.lngLat.lat]);
   } else if (phase === 'end') {
     const name = pickScored(e.point);
     const r = results.find((x) => x.q.target.name === name);
@@ -787,6 +845,18 @@ map.on('click', (e) => {
     else closePlace();
   }
 });
+
+const surface = map.getCanvasContainer();
+surface.addEventListener('pointerdown', (e) => {
+  if (phase !== 'asking' || typeOf(current()).input !== 'map' || !e.isPrimary || e.target.closest('.pin')) return;
+  startHold(e);
+});
+surface.addEventListener('pointermove', (e) => {
+  if (holding && Math.hypot(e.clientX - holding.start[0], e.clientY - holding.start[1]) > HOLD_SLOP) stopHold();
+});
+for (const type of ['pointerup', 'pointercancel']) window.addEventListener(type, stopHold);
+surface.addEventListener('touchstart', (e) => { if (e.touches.length > 1) stopHold(); }, { passive: true });
+map.on('movestart', (e) => { if (e.originalEvent) stopHold(); });
 
 map.on('mousemove', (e) => {
   if (phase !== 'end') return;
@@ -812,7 +882,7 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     const canvas = map.getCanvas();
     const { lng, lat } = map.unproject([canvas.clientWidth / 2, canvas.clientHeight / 2]);
-    answer([lng, lat], true);
+    answer(pinAt() ?? [lng, lat], true);
   } else if (phase === 'asking' && /^[1-9]$/.test(e.key)) {
     const button = el('choices').children[Number(e.key) - 1];
     if (button && !el('choices').hidden) { e.preventDefault(); button.click(); }

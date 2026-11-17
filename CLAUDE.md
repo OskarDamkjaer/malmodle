@@ -42,7 +42,8 @@ osmium, Java and hosts the sandbox cannot reach.
   the end screen's comparison in words with every threshold it uses.
 - `app/crowd-view.js`: the comparison card on the end screen: the chart, its
   hover and keyboard reading, and the waiting and paused states.
-- `app/map.js`: map layers, hiding labels, framing.
+- `app/map.js`: map layers, hiding labels, framing, and the pin a guess is
+  set with.
 - `app/palette.mjs`: the basemap palette and the answer colours, applied at
   load. The UI colours are in `app.css`. `test/palette.test.mjs` checks that
   every coloured basemap layer is recoloured.

@@ -33,9 +33,13 @@ Pointing is the most common. Per kind:
 - Places: "Var ligger X?", with "Vad ligger här?" for about a quarter to a
   third of them.
 
-- **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
-  Afterwards: how far off you were, and what you actually tapped if it was
-  something else.
+- **Peka ut.** "Var ligger X?" A tap sets a pin with "Gissa" above it; a tap
+  elsewhere or a drag moves it, and ✕ takes it away. Holding the finger still
+  on the map guesses there at once, with a ring that shows only once the press
+  is clearly a hold. The first question of a round says so at the bottom. One
+  guess, no second try. Scored 0–100 on distance. Afterwards: the pin stays
+  where you guessed, how far off you were, and what you actually tapped if it
+  was something else.
 - **Vad ligger här?** Something is marked on the map in green, unnamed;
   pick its name from a list of nearby things of the same kind, never one that holds it or sits
   inside it. A place is offered among places of its own category, so a church
