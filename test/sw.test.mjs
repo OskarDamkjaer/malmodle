@@ -115,6 +115,15 @@ test('a worker never answers from the cache of another version', async () => {
   assert.equal(await sw.cachedText('/app.js', NEW), 'next code');
 });
 
+test('the local dev pages are left to the network, uncached', async () => {
+  const sw = worker();
+  await sw.seed({ '/dev/pin.js': 'old dev code' });
+  assert.equal(await sw.navigate('/dev/pin.js', 'script'), undefined);
+  assert.equal(await sw.navigate('/dev/pin.html'), undefined);
+  assert.equal(await sw.cachedText('/dev/pin.html'), undefined);
+  assert.deepEqual(sw.fetched, []);
+});
+
 test('a range of the cached map is answered with just those bytes', async () => {
   const sw = worker({ online: false });
   await sw.seed({ '/malmo.pmtiles': '0123456789' }, 'malmo-map-222222222222');
