@@ -32,8 +32,8 @@ after(async () => {
   server?.kill();
 });
 
-async function open(viewport, path = '/', saved) {
-  const context = await browser.newContext({ viewport, serviceWorkers: 'block', permissions: ['clipboard-read', 'clipboard-write'] });
+async function open(viewport, path = '/', saved, device = {}) {
+  const context = await browser.newContext({ viewport, ...device, serviceWorkers: 'block', permissions: ['clipboard-read', 'clipboard-write'] });
   if (saved !== undefined) await context.addInitScript(([k, v]) => localStorage.setItem(k, v), [SAVE_KEY, saved]);
   const page = await context.newPage();
   const errors = [];
@@ -50,6 +50,11 @@ const visibleText = (page) => page.evaluate(() => window.map.getStyle().layers
   .filter((l) => (window.map.getLayoutProperty(l.id, 'visibility') ?? 'visible') !== 'none')
   .map((l) => l.id));
 
+async function guess(page, x, y) {
+  await page.mouse.click(x, y);
+  await page.click('.pin .bubble .primary');
+}
+
 async function playThrough(page, viewport, count = 10) {
   const prompts = [];
   for (let i = 0; i < count; i++) {
@@ -59,7 +64,7 @@ async function playThrough(page, viewport, count = 10) {
     if (await page.isVisible('#choices')) {
       await page.locator('#choices button').first().click();
     } else {
-      await page.mouse.click(viewport.width / 2, viewport.height / 2);
+      await guess(page, viewport.width / 2, viewport.height / 2);
     }
     await page.waitForSelector('#result:not([hidden])');
     assert.match(await page.textContent('#points'), /^\d+$/);
@@ -74,6 +79,58 @@ test('a page of a style that is gone leads to the start page, keeping the hash',
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+for (const [name, viewport, touch] of [['desktop', { width: 1280, height: 800 }, false], ['phone', { width: 390, height: 844 }, true]]) {
+  test(`a tap sets a pin that is guessed from its bubble, and a held press answers at once, on ${name}`, { skip }, async () => {
+    const { page, context, errors } = await open(viewport, '/', undefined, touch ? { hasTouch: true, isMobile: true } : {});
+    const [x, y] = [viewport.width / 2, viewport.height / 2];
+    const tap = (px, py) => (touch ? page.touchscreen.tap(px, py) : page.mouse.click(px, py));
+    const press = (selector) => (touch ? page.locator(selector).tap() : page.click(selector));
+    const pins = () => page.locator('.pin:not(.guessed)').count();
+
+    assert.equal(await page.textContent('#pinhint'), `${touch ? 'Tryck' : 'Klicka'} eller håll inne för att gissa`);
+    assert.ok(await page.isVisible('#pinhint'));
+    await tap(x, y);
+    await page.waitForSelector('.pin .bubble');
+    assert.ok(await page.isHidden('#pinhint'));
+    await tap(x + 60, y + 40);
+    assert.equal(await pins(), 1);
+    await press('.pin .bubble [aria-label="Ta bort nålen"]');
+    assert.equal(await pins(), 0);
+    assert.ok(await page.isVisible('#pinhint'));
+    assert.ok(await page.isHidden('#result'));
+
+    await tap(x, y);
+    await press('.pin .bubble .primary');
+    await page.waitForSelector('#result:not([hidden])');
+    assert.equal(await pins(), 0);
+    assert.equal(await page.locator('.pin.guessed').count(), 1);
+    await press('#next');
+
+    for (let i = 0; i < 9 && await page.isVisible('#choices'); i++) {
+      await press('#choices button');
+      await page.waitForSelector('#result:not([hidden])');
+      await press('#next');
+      await page.waitForSelector('#question:not([hidden])');
+    }
+    assert.ok(await page.isHidden('#pinhint'), 'the hint is only on the first question');
+    if (touch) {
+      const cdp = await context.newCDPSession(page);
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
+      await page.waitForTimeout(600);
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    } else {
+      await page.mouse.move(x, y);
+      await page.mouse.down();
+      await page.waitForTimeout(600);
+      await page.mouse.up();
+    }
+    await page.waitForSelector('#result:not([hidden])');
+    assert.equal(await pins(), 0);
+    assert.deepEqual(errors, []);
+    await context.close();
+  });
+}
 
 test('the map can be answered from the keyboard', { skip }, async () => {
   const viewport = { width: 1280, height: 800 };
@@ -267,7 +324,7 @@ test('a new version is taken before the first answer, and waits after one', { sk
     assert.notEqual(now[0], first);
 
     if (await page.isVisible('#choices')) await page.locator('#choices button').first().click();
-    else await page.mouse.click(195, 422);
+    else await guess(page, 195, 422);
     await page.waitForSelector('#result:not([hidden])');
     release();
     await page.evaluate(() => navigator.serviceWorker.getRegistration().then((reg) => reg.update()));

@@ -1,3 +1,4 @@
+import { Marker } from './vendor/maplibre-gl.mjs';
 import { around, bounds, union } from './geo.mjs';
 import { PALETTE, paintFor } from './palette.mjs';
 
@@ -10,6 +11,8 @@ const feature = (geometry, properties) => ({ type: 'Feature', geometry, properti
 
 let map = null;
 let labelLayers = [];
+let pin = null;
+let guessed = null;
 
 const isPolygon = ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]];
 const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineString']]];
@@ -91,10 +94,6 @@ export function setupLayers(mapInstance) {
     paint: { 'circle-radius': 8, 'circle-color': roleColor(), 'circle-stroke-color': HALO, 'circle-stroke-width': 2.5 },
   });
   map.addLayer({
-    id: 'tap-point', type: 'circle', source: 'tap', filter: isPoint,
-    paint: { 'circle-radius': 6, 'circle-color': COLOR.tap, 'circle-stroke-color': HALO, 'circle-stroke-width': 2 },
-  });
-  map.addLayer({
     id: 'focus-label', type: 'symbol', source: 'focus-labels',
     layout: {
       'text-field': ['get', 'name'],
@@ -154,15 +153,70 @@ export function show(marks) {
   });
 }
 
-export function showTap(tap, near) {
-  const features = [feature({ type: 'Point', coordinates: tap }, {})];
-  if (near && (near[0] !== tap[0] || near[1] !== tap[1])) {
-    features.unshift(feature({ type: 'LineString', coordinates: [tap, near] }, {}));
+const DROP = '<svg viewBox="0 0 30 42" aria-hidden="true"><path d="M15 41C15 41 2 25 2 15a13 13 0 0 1 26 0c0 10-13 26-13 26z"/><circle cx="15" cy="15" r="5"/></svg>';
+
+function droppe() {
+  const element = document.createElement('div');
+  element.className = 'pin';
+  element.innerHTML = `<div class="drop">${DROP}</div>`;
+  return element;
+}
+
+function pinButton(label, className, run, name) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = className;
+  button.textContent = label;
+  if (name) button.setAttribute('aria-label', name);
+  for (const type of ['pointerdown', 'mousedown', 'touchstart']) button.addEventListener(type, (e) => e.stopPropagation(), { passive: true });
+  button.addEventListener('click', (e) => { e.stopPropagation(); run(); });
+  return button;
+}
+
+export function placePin(at, { guess, remove }) {
+  if (pin) {
+    pin.setLngLat(at);
+    const shape = pin.getElement().firstElementChild;
+    shape.classList.remove('drop');
+    void shape.offsetWidth;
+    shape.classList.add('drop');
+    return;
   }
+  const element = droppe();
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.append(pinButton('Gissa', 'primary', guess), pinButton('✕', '', remove, 'Ta bort nålen'));
+  element.append(bubble);
+  pin = new Marker({ element, anchor: 'bottom', draggable: true }).setLngLat(at).addTo(map);
+}
+
+export function pinAt() {
+  if (!pin) return null;
+  const { lng, lat } = pin.getLngLat();
+  return [lng, lat];
+}
+
+export function clearPin() {
+  pin?.remove();
+  pin = null;
+}
+
+export function showTap(tap, near) {
+  const features = near && (near[0] !== tap[0] || near[1] !== tap[1])
+    ? [feature({ type: 'LineString', coordinates: [tap, near] }, {})]
+    : [];
   map.getSource('tap').setData({ type: 'FeatureCollection', features });
+  guessed?.remove();
+  const element = droppe();
+  element.firstElementChild.classList.remove('drop');
+  element.classList.add('guessed');
+  guessed = new Marker({ element, anchor: 'bottom' }).setLngLat(tap).addTo(map);
 }
 
 export function clear() {
+  clearPin();
+  guessed?.remove();
+  guessed = null;
   map.getSource('focus').setData(EMPTY);
   map.getSource('focus-labels').setData(EMPTY);
   map.getSource('tap').setData(EMPTY);

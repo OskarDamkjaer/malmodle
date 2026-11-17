@@ -46,11 +46,14 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-#map { position: absolute; inset: 0; background: var(--bg); }
+#map { position: absolute; inset: 0; background: var(--bg); -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 #aim, #aimhint { display: none; position: absolute; pointer-events: none; }
 body[data-pointing]:has(.maplibregl-canvas:focus-visible) :is(#aim, #aimhint) { display: block; }
 #aim { z-index: 2; left: 50%; top: 50%; width: 32px; height: 32px; margin: -16px 0 0 -16px; background: linear-gradient(var(--ink), var(--ink)) center / 2px 100% no-repeat, linear-gradient(var(--ink), var(--ink)) center / 100% 2px no-repeat; filter: drop-shadow(0 0 1.5px var(--bg)) drop-shadow(0 0 1.5px var(--bg)); }
-#aimhint { z-index: 3; left: 50%; bottom: calc(var(--safe-bottom) + var(--attribution) + 12px); width: max-content; max-width: calc(100vw - 2 * var(--gap)); margin: 0; padding: 8px 12px; transform: translateX(-50%); font-size: 14px; line-height: 1.4; color: var(--ink); background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: 0 2px 8px rgb(0 0 0 / 15%); }
+#pinhint { display: none; position: absolute; pointer-events: none; }
+body[data-hinting] #pinhint { display: block; }
+body[data-pointing]:has(.maplibregl-canvas:focus-visible) #pinhint { display: none; }
+#aimhint, #pinhint { z-index: 3; left: 50%; bottom: calc(var(--safe-bottom) + var(--attribution) + 12px); width: max-content; max-width: calc(100vw - 2 * var(--gap)); margin: 0; padding: 8px 12px; transform: translateX(-50%); font-size: 14px; line-height: 1.4; color: var(--ink); background: var(--panel); border: var(--border); border-radius: var(--radius); box-shadow: 0 2px 8px rgb(0 0 0 / 15%); }
 
 [hidden] { display: none !important; }
 
@@ -467,6 +470,22 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
   from { opacity: 0; transform: translateX(14px); }
   to { opacity: 1; transform: none; }
 }
+
+.pin { cursor: grab; touch-action: none; }
+.pin svg { display: block; width: 30px; height: 42px; overflow: visible; filter: drop-shadow(0 1px 2px rgb(0 0 0 / 35%)); }
+.pin path { fill: var(--accent); stroke: var(--panel); stroke-width: 2; }
+.pin circle { fill: var(--panel); }
+.pin .drop { transform-origin: 50% 100%; animation: land .2s cubic-bezier(.3, 1.6, .5, 1); }
+.pin.guessed { cursor: default; pointer-events: none; }
+.pin .bubble { position: absolute; left: 50%; bottom: 54px; display: flex; gap: 6px; transform: translateX(-50%); white-space: nowrap; }
+.pin .bubble::after { content: ""; position: absolute; left: 50%; bottom: -8px; margin-left: -7px; border: 7px solid transparent; border-top-color: var(--ink); border-bottom: 0; }
+.pin .bubble button { min-height: 40px; padding: 4px 14px; font-size: 15px; box-shadow: 2px 2px 0 var(--ink); }
+@keyframes land { from { transform: scale(.4); opacity: .3; } }
+
+.hold { position: fixed; z-index: 4; width: 64px; height: 64px; margin: -32px 0 0 -32px; pointer-events: none; opacity: 0; animation: appear .12s var(--quiet) ease-out forwards; }
+.hold circle { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transform: rotate(-90deg); transform-origin: center; filter: drop-shadow(0 0 1.5px var(--bg)); animation: fill var(--fill) var(--quiet) linear forwards; }
+@keyframes appear { to { opacity: 1; } }
+@keyframes fill { to { stroke-dashoffset: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
