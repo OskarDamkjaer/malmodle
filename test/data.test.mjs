@@ -63,6 +63,18 @@ test('decoys are named apart from the game, and a church is asked among churches
   }
 });
 
+test('a choice question names a label only when every option carries it', { skip }, () => {
+  const LABEL = Object.fromEntries(items.filter((it) => it.category).map((it) => [it.category, it.label]));
+  const label = new Map([...decoys.map((d) => [d.name, LABEL[d.category]]), ...items.map((it) => [it.name, it.label])]);
+  for (let i = 0; i < 365; i++) {
+    for (const q of dailySet(items, dateKey(new Date(2027, 0, 1 + i)), decoys)) {
+      if (TYPES[q.type].input !== 'choice') continue;
+      const { detail } = TYPES[q.type].prompt(q);
+      if (detail) for (const name of q.options) assert.equal(label.get(name), detail, `${q.target.name}: ${name}`);
+    }
+  }
+});
+
 test('a year of daily sets can be built from the real data', { skip }, () => {
   for (let i = 0; i < 365; i++) {
     const set = dailySet(items, dateKey(new Date(2027, 0, 1 + i)));
