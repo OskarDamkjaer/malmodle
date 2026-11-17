@@ -36,13 +36,13 @@ Pointing is the most common. Per kind:
 - **Peka ut.** "Var ligger X?" One tap, no second try. Scored 0–100 on distance.
   Afterwards: how far off you were, and what you actually tapped if it was
   something else.
-- **Vad ligger här?** Something is marked on the map in dashed green, unnamed;
+- **Vad ligger här?** Something is marked on the map in green, unnamed;
   pick its name from a list of nearby things of the same kind, never one that holds it or sits
   inside it. A place is offered among places of its own category, so a church
   among churches, drawing on places from the long list the game does not ask
   about. Its category is named in the prompt only when every option shares it.
 - **Direkt söder om.** "Vilket område ligger direkt söder om X?" Pick one of
-  four. X is outlined and named, and the area asked about is marked in dashed
+  four. X is outlined and named, and the area asked about is marked in
   green, unnamed; the decoys are its other neighbours and nearby areas,
   never one that also lies on that side. Asked for any of the four directions,
   only where exactly one area borders X on that side.
