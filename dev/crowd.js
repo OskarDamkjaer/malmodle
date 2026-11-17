@@ -144,10 +144,10 @@ function render() {
 
 const el = (tag, className, textContent = '') => Object.assign(document.createElement(tag), { className, textContent });
 
-const { items } = await (await fetch('/data/quiz.json')).json();
+const { items, decoys = [] } = await (await fetch('/data/quiz.json')).json();
 const today = new Date();
 days = Array.from({ length: 14 }, (_, d) => {
   const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() + d);
-  return dailySet(items, dateKey(day));
+  return dailySet(items, dateKey(day), decoys);
 });
 render();

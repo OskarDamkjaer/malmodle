@@ -3,7 +3,7 @@ import { dirname } from 'node:path';
 import { bboxGap, bboxOf, distance, interiorPoint } from './lib/geo.mjs';
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
 import { neighbourhood } from './lib/adjacency.mjs';
-import { closest, contains } from '../app/geo.mjs';
+import { closest, contains, metersBetween } from '../app/geo.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -16,7 +16,7 @@ const STREET_LINK_M = 500;
 
 const json = async (f) => JSON.parse(await readFile(f, 'utf8'));
 
-const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, sourcesDoc, shapesDoc] = await Promise.all([
+const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, sourcesDoc, shapesDoc, longlist, bboxDoc] = await Promise.all([
   json('build/data/districts.geojson'),
   json('places/places.json'),
   json('learn/bridges.json'),
@@ -26,6 +26,8 @@ const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, core
   json('learn/core.json'),
   json('learn/sources.json'),
   json('data/cache/shapes.json'),
+  json('places/longlist.json'),
+  json('config/bbox.json'),
 ]);
 
 const problems = [];
@@ -337,10 +339,53 @@ const chosen = everything ? items : items.filter((it) => core.has(it.name));
 const kept = new Set(chosen.map((it) => it.name));
 const around = neighbourhood(items.filter((it) => it.kind === 'area'), kept);
 for (const it of chosen) if (around.has(it.name)) Object.assign(it, around.get(it.name));
-const out = { items: chosen };
+
+const DECOY_KINDS = {
+  kyrka: ['christian'],
+  scen: ['theatre', 'cinema', 'arts_centre', 'music_venue', 'events_venue', 'nightclub'],
+  krog: ['restaurant', 'pub', 'bar'],
+  kafe: ['cafe', 'ice_cream', 'confectionery', 'pastry', 'cafe;bar'],
+  byggnad: (kind) => kind !== 'church',
+};
+const DECOY_SKIP = new Set([
+  'Friskis & Svettis', 'Nudism beach', 'Ribersborgs hundbadplats', 'itrim', 'Improv!', 'Rusta', 'ÖoB', 'Tintin',
+]);
+const DECOY_SAME_M = 50;
+const DECOY_PER_PLACE = 10;
+
+const fits = (category, kind) => {
+  const rule = DECOY_KINDS[category];
+  return !rule || (typeof rule === 'function' ? rule(kind) : rule.includes(kind));
+};
+const { west, south, east, north } = bboxDoc.bbox;
+const taken = new Set(items.map((it) => it.name.toLowerCase()));
+const landmarks = items.filter((it) => it.kind === 'landmark');
+const pool = [];
+for (const [category, { places }] of Object.entries(longlist.categories)) {
+  if (!PLACE_LABEL[category]) continue;
+  for (const p of places) {
+    if (p.lat == null || p.inGame || DECOY_SKIP.has(p.name) || taken.has(p.name.toLowerCase()) || !fits(category, p.kind)) continue;
+    if (p.lon < west || p.lon > east || p.lat < south || p.lat > north) continue;
+    const point = roundCoords([p.lon, p.lat]);
+    if (landmarks.some((it) => it.category === category && metersBetween(it.point, point) < DECOY_SAME_M)) continue;
+    taken.add(p.name.toLowerCase());
+    pool.push({ name: p.name, category, point });
+  }
+}
+const decoys = new Set();
+for (const it of chosen.filter((x) => x.kind === 'landmark')) {
+  pool
+    .filter((d) => d.category === it.category && !contains(it.geometry, d.point))
+    .sort((a, b) => metersBetween(a.point, it.point) - metersBetween(b.point, it.point))
+    .slice(0, DECOY_PER_PLACE)
+    .forEach((d) => decoys.add(d));
+}
+
+const out = { items: chosen, decoys: [...decoys].sort((a, b) => (a.name < b.name ? -1 : 1)) };
 await mkdir(dirname(outFile), { recursive: true });
 await writeFile(outFile, JSON.stringify(out));
 
 const kinds = [...new Set(chosen.map((it) => it.kind))];
 console.log(`build-quiz → ${outFile} (${(JSON.stringify(out).length / 1024).toFixed(0)} KB)`);
 for (const kind of kinds) console.log(`  ${kind.padEnd(9)} ${chosen.filter((it) => it.kind === kind).length}`);
+console.log(`  ${'decoy'.padEnd(9)} ${decoys.size}`);

@@ -155,6 +155,24 @@ test('what is shown is not offered alongside a place that holds it or that it ho
   assert.ok(!offered(park).includes('Teatern'));
 });
 
+test('a place is offered among others of its category, with decoys from beyond the game, and named only when they all share it', () => {
+  const kyrka = (name, m) => ({ ...place(name, m), category: 'kyrka' });
+  const target = kyrka('Kyrkan', 0);
+  const items = [target, kyrka('Andra kyrkan', 900), ...[100, 200, 300].map((m) => ({ ...place(`Torg ${m}`, m), category: 'torg' }))];
+  const decoys = [400, 500].map((m) => ({ name: `Kapell ${m}`, category: 'kyrka', point: at(m, 0) }));
+  const q = TYPES.identify.build({ target, items, rng: () => 0.5, decoys });
+  assert.deepEqual(q.options.slice().sort(), ['Andra kyrkan', 'Kapell 400', 'Kapell 500', 'Kyrkan', 'Torg 100', 'Torg 200', 'Torg 300']);
+  assert.ok(q.mixed);
+  assert.equal(TYPES.identify.prompt(q).detail, undefined);
+  assert.ok(TYPES.identify.grade(q, 'Kapell 400', items).score < MAX_SCORE);
+  assert.equal(TYPES.identify.grade(q, 'Kyrkan', items).score, MAX_SCORE);
+  const many = [...decoys, ...[600, 650, 700, 800].map((m) => ({ name: `Kapell ${m}`, category: 'kyrka', point: at(m, 0) }))];
+  const alike = TYPES.identify.build({ target, items, rng: () => 0.5, decoys: many });
+  assert.ok(alike.options.every((o) => o === 'Kyrkan' || o.startsWith('Kapell') || o === 'Andra kyrkan'));
+  assert.ok(!alike.mixed);
+  assert.equal(TYPES.identify.prompt(alike).detail, target.label);
+});
+
 test('a street from A to B is named by what lies at its ends, and no decoy runs between them', () => {
   const target = byName('Gata 3');
   const q = TYPES.route.build({ target, items, rng: () => 0.3, avoid: new Set() });

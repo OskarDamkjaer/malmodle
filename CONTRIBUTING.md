@@ -37,6 +37,10 @@ rebuild it (below) or fetch a prebuilt copy with
 - `places/places.json`: the places the game asks about, by category, with their
   OpenStreetMap ids. `places/longlist.json` is the wider pool they came from,
   and `places/parked.json` holds art kept for a later picture question.
+  `build-quiz.mjs` takes the long list's places that the game does not ask
+  about as decoys for "Vad ligger här?", the ten nearest of each category
+  around every place it asks about, and keeps out the kinds and names in
+  `DECOY_KINDS` and `DECOY_SKIP`.
 - `config/bbox.json`: the part of the world the map covers.
 
 Everything is hand-edited. `build-quiz.mjs --all` builds every place rather than

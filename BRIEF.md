@@ -38,7 +38,9 @@ Pointing is the most common. Per kind:
   something else.
 - **Vad ligger här?** Something is marked on the map in dashed green, unnamed;
   pick its name from a list of nearby things of the same kind, never one that holds it or sits
-  inside it.
+  inside it. A place is offered among places of its own category, so a church
+  among churches, drawing on places from the long list the game does not ask
+  about. Its category is named in the prompt only when every option shares it.
 - **Direkt söder om.** "Vilket område ligger direkt söder om X?" Pick one of
   four. X is outlined and named, and the area asked about is marked in dashed
   green, unnamed; the decoys are its other neighbours and nearby areas,

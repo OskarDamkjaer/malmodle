@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { GROUP, PRACTICE, PRACTICE_SIZE, SHOWN_GAP, SPACED, dailySet, dateKey, laterKey, practiceSet } from '../app/daily.mjs';
 import { contains, distanceTo } from '../app/geo.mjs';
+import { TYPES } from '../app/questions.mjs';
 
 const QUIZ = 'build/data/quiz.json';
 const skip = existsSync(QUIZ) ? false : `${QUIZ} is missing; run node scripts/build-quiz.mjs`;
-const items = skip ? [] : JSON.parse(readFileSync(QUIZ, 'utf8')).items;
+const { items, decoys } = skip ? { items: [], decoys: [] } : JSON.parse(readFileSync(QUIZ, 'utf8'));
 const core = JSON.parse(readFileSync('learn/core.json', 'utf8')).core;
 
 test('the app gets exactly the names in core.json', { skip }, () => {
@@ -49,6 +50,17 @@ test('every item has a street view point near it', { skip }, () => {
 
 test('an area\'s street view point is inside it', { skip }, () => {
   for (const it of items.filter((x) => x.kind === 'area')) assert.ok(contains(it.geometry, it.streetview), it.name);
+});
+
+test('decoys are named apart from the game, and a church is asked among churches', { skip }, () => {
+  const names = new Set(items.map((it) => it.name.toLowerCase()));
+  for (const d of decoys) assert.ok(!names.has(d.name.toLowerCase()), d.name);
+  assert.equal(new Set(decoys.map((d) => d.name)).size, decoys.length);
+  const category = new Map([...decoys, ...items].map((it) => [it.name, it.category]));
+  for (const target of items.filter((it) => it.category === 'kyrka')) {
+    const q = TYPES.identify.build({ target, items, rng: Math.random, decoys });
+    for (const name of q.options) assert.equal(category.get(name), 'kyrka', `${target.name}: ${name}`);
+  }
 });
 
 test('a year of daily sets can be built from the real data', { skip }, () => {

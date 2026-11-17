@@ -79,21 +79,34 @@ const point = {
 
 const together = (a, b) => contains(a.geometry, b.point) || contains(b.geometry, a.point);
 
+const decoy = (d) => ({ ...d, kind: 'landmark', geometry: { type: 'Point', coordinates: d.point } });
+
 const identify = {
   input: 'choice',
-  build({ target, items, rng }) {
-    const others = items
-      .filter((it) => it.kind === target.kind && it.name !== target.name && !together(it, target))
-      .sort((a, b) => metersBetween(a.point, target.point) - metersBetween(b.point, target.point))
-      .slice(0, 7);
-    if (others.length < 3) return null;
-    return { target, options: shuffle([target, ...others], rng).map((it) => it.name) };
+  build({ target, items, rng, decoys = [] }) {
+    const nearest = (list) => list.sort((a, b) => metersBetween(a.point, target.point) - metersBetween(b.point, target.point));
+    const fits = (it) => it.kind === target.kind && it.name !== target.name && !together(it, target);
+    const kin = items.filter(fits);
+    if (kin.length < 3) return null;
+    const alike = (it) => !target.category || it.category === target.category;
+    const extra = target.kind === 'landmark' ? decoys.map(decoy).filter(fits) : [];
+    const others = [
+      ...nearest([...kin, ...extra].filter(alike)),
+      ...nearest(kin.filter((it) => !alike(it))),
+    ].slice(0, 7);
+    const used = others.filter((it) => extra.includes(it));
+    return {
+      target,
+      options: shuffle([target, ...others], rng).map((it) => it.name),
+      ...(used.length && { decoys: used }),
+      ...(!others.every(alike) && { mixed: true }),
+    };
   },
-  prompt: (q) => ({ title: 'Vad ligger här?', detail: q.target.label }),
+  prompt: (q) => ({ title: 'Vad ligger här?', detail: q.mixed ? undefined : q.target.label }),
   showing: (q) => [{ item: q.target, named: false, role: 'ask' }],
   view: (q) => ({ items: [q.target], context: 1500 }),
   grade(q, choice, items) {
-    const picked = items?.find((it) => it.name === choice);
+    const picked = q.decoys?.find((it) => it.name === choice) ?? items?.find((it) => it.name === choice);
     const score = choice === q.target.name ? MAX_SCORE : nearScore(q.target, picked);
     return { score, choice, answer: q.target.name };
   },
