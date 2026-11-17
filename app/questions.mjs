@@ -79,6 +79,8 @@ const point = {
 
 const together = (a, b) => contains(a.geometry, b.point) || contains(b.geometry, a.point);
 
+const sameLabel = (target) => (it) => (target.category ? it.category === target.category : it.label === target.label);
+
 const decoy = (d) => ({ ...d, kind: 'landmark', geometry: { type: 'Point', coordinates: d.point } });
 
 const identify = {
@@ -99,7 +101,7 @@ const identify = {
       target,
       options: shuffle([target, ...others], rng).map((it) => it.name),
       ...(used.length && { decoys: used }),
-      ...(!others.every(alike) && { mixed: true }),
+      ...(!others.every(sameLabel(target)) && { mixed: true }),
     };
   },
   prompt: (q) => ({ title: 'Vad ligger här?', detail: q.mixed ? undefined : q.target.label }),
@@ -200,9 +202,15 @@ const route = {
       .slice(0, 3);
     if (decoys.length < 3) return null;
     const [a, b] = rng() < 0.5 ? [from, to] : [to, from];
-    return { target, from: a, to: b, options: shuffle([target, ...decoys], rng).map((it) => it.name) };
+    return {
+      target,
+      from: a,
+      to: b,
+      options: shuffle([target, ...decoys], rng).map((it) => it.name),
+      ...(!decoys.every(sameLabel(target)) && { mixed: true }),
+    };
   },
-  prompt: (q) => ({ title: `Vilken gata går från ${q.from.name} till ${q.to.name}?`, detail: q.target.label }),
+  prompt: (q) => ({ title: `Vilken gata går från ${q.from.name} till ${q.to.name}?`, detail: q.mixed ? undefined : q.target.label }),
   showing: (q) => [{ item: q.from, named: true }, { item: q.to, named: true }],
   view: (q) => ({ items: [q.from, q.to], context: 400 }),
   grade(q, choice, items) {
