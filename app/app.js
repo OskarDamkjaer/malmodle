@@ -132,6 +132,7 @@ map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
 window.map = map;
 
 let items = [];
+let decoys = [];
 let byName = new globalThis.Map();
 let key = '';
 let set = [];
@@ -163,13 +164,13 @@ function renderDots() {
 function start() {
   key = dateKey();
   practicing = null;
-  play(dailySet(items, key));
+  play(dailySet(items, key, decoys));
 }
 
 function resume() {
   key = dateKey();
   practicing = null;
-  const questions = dailySet(items, key);
+  const questions = dailySet(items, key, decoys);
   const answered = recall(arrived(questions), key, questions);
   if (!answered.length) forget();
   try {
@@ -209,7 +210,7 @@ function save(finished) {
 function practise(kind) {
   key = dateKey();
   practicing = kind;
-  play(practiceSet(items, { key, category: kind.id, seed: Math.floor(Math.random() * 2 ** 32) }));
+  play(practiceSet(items, { key, category: kind.id, seed: Math.floor(Math.random() * 2 ** 32), decoys }));
 }
 
 function play(questions, answered = []) {
@@ -370,7 +371,7 @@ function revealChoice(q, result) {
 
   if (q.type === 'identify') {
     add(q.target, 'answer');
-    if (!right) add(byName.get(result.choice), 'hit');
+    if (!right) add(byName.get(result.choice) ?? q.decoys?.find((it) => it.name === result.choice), 'hit');
     el('explain').textContent = right ? `Det är ${q.target.name}.` : `Det är ${q.target.name}, inte ${result.choice}.`;
   } else if (q.type === 'route') {
     add(q.from, 'context');
@@ -826,7 +827,7 @@ document.addEventListener('keydown', (e) => {
 map.on('load', async () => {
   try {
     applyPalette(map);
-    items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
+    ({ items, decoys = [] } = await fetch('/data/quiz.json').then((r) => r.json()));
     byName = new globalThis.Map(items.map((it) => [it.name, it]));
     setupLayers(map);
   } catch (err) {

@@ -269,7 +269,7 @@ export function targetsOn(items, key) {
   return dealerFor(items)(key).targets.filter(Boolean);
 }
 
-export function dailySet(items, key) {
+export function dailySet(items, key, decoys = []) {
   const on = dealerFor(items);
   const { slots, targets } = on(key);
   const avoid = names(targets);
@@ -278,17 +278,17 @@ export function dailySet(items, key) {
       for (const it of [...targetsOn(items, laterKey(key, n)), ...targetsOn(items, laterKey(key, -n))]) avoid.add(it.name);
     }
   }
-  return assemble(slots, [...targets], items, random(hash(`malmo:${key}`)), avoid);
+  return assemble(slots, [...targets], items, random(hash(`malmo:${key}`)), avoid, decoys);
 }
 
-function assemble(slots, targets, items, rng, avoid) {
+function assemble(slots, targets, items, rng, avoid, decoys) {
   const questions = [];
   slots.forEach((slot, i) => {
     if (!targets[i]) return;
-    let q = TYPES[slot.type].build({ target: targets[i], items, rng, avoid });
+    let q = TYPES[slot.type].build({ target: targets[i], items, rng, avoid, decoys });
     for (let j = i + 1; !q && j < slots.length; j++) {
       if (slots[j].group !== slot.group || !targets[j]) continue;
-      q = TYPES[slot.type].build({ target: targets[j], items, rng, avoid });
+      q = TYPES[slot.type].build({ target: targets[j], items, rng, avoid, decoys });
       if (q) [targets[i], targets[j]] = [targets[j], targets[i]];
     }
     const type = q ? slot.type : 'point';
@@ -328,7 +328,7 @@ export function upcoming(items, key, days = SOON_DAYS) {
   return soon;
 }
 
-export function practiceSet(items, { key, category, seed }) {
+export function practiceSet(items, { key, category, seed, decoys = [] }) {
   const kind = PRACTICE.find((c) => c.id === category);
   const pool = items.filter(kind.has).sort((a, b) => (a.name < b.name ? -1 : 1));
   const soon = upcoming(items, key);
@@ -343,7 +343,7 @@ export function practiceSet(items, { key, category, seed }) {
   const half = Math.ceil(targets.length / 2);
   const mix = [...mixFor(kind.group, half, rng), ...mixFor(kind.group, targets.length - half, rng)];
   const slots = shuffle(mix, rng).map((type) => ({ group: kind.group, type }));
-  return assemble(slots, targets, items, rng, new Set(targets.map((it) => it.name)));
+  return assemble(slots, targets, items, rng, new Set(targets.map((it) => it.name)), decoys);
 }
 
 export function band(score) {

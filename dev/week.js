@@ -37,6 +37,7 @@ map.keyboard.disable();
 window.map = map;
 
 let items = [];
+let decoys = [];
 let byName = new globalThis.Map();
 let baseLabels = [];
 let rows = [];
@@ -46,7 +47,7 @@ await new Promise((resolve) => map.on('load', resolve));
 applyPalette(map);
 baseLabels = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 setupLayers(map);
-items = (await fetch('/data/quiz.json').then((r) => r.json())).items;
+({ items, decoys = [] } = await fetch('/data/quiz.json').then((r) => r.json()));
 
 for (const [layer, prop] of [['focus-fill', 'fill-color'], ['focus-line', 'line-color'], ['focus-circle', 'circle-color'], ['focus-label', 'text-color']]) {
   map.setPaintProperty(layer, prop, ['match', ['get', 'role'], 'close', BAND_COLORS.orange, map.getPaintProperty(layer, prop)]);
@@ -191,7 +192,10 @@ function frame(marks) {
   if (!camera) return;
   map.easeTo({ center: camera.center, zoom: Math.min(camera.zoom, map.getZoom()), duration: 400 });
 }
-byName = new globalThis.Map(items.map((it) => [it.name, it]));
+byName = new globalThis.Map([
+  ...decoys.map((d) => [d.name, { ...d, kind: 'landmark', geometry: { type: 'Point', coordinates: d.point } }]),
+  ...items.map((it) => [it.name, it]),
+]);
 
 function setLabels() {
   const visibility = el('labels').checked ? 'visible' : 'none';
@@ -208,7 +212,7 @@ function build() {
   history.replaceState(null, '', `?from=${from}&days=${count}`);
   const days = Array.from({ length: count }, (_, n) => {
     const key = laterKey(from, n);
-    return { key, set: dailySet(items, key) };
+    return { key, set: dailySet(items, key, decoys) };
   });
   const seen = new globalThis.Map();
   const onMap = new globalThis.Map();

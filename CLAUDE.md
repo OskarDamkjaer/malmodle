@@ -53,7 +53,8 @@ osmium, Java and hosts the sandbox cannot reach.
   the page is hidden, and then reloads; a reload resumes the saved day. Taking
 over from a worker without that handshake, it reloads the old pages itself. The
   build stamps its cache names, and `serve.mjs` stamps them per request.
-- `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`.
+- `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`, with
+  the long list's other places as `decoys` for "Vad ligger här?".
 - `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result
   against the day's set, which `sets.mjs` works out from `quiz.json`, stores
   it in D1 and answers with your first round and the day's numbers.

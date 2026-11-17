@@ -8,7 +8,7 @@ async function items(env, url) {
   if (!loaded.has(env.ASSETS)) {
     const loading = env.ASSETS.fetch(new Request(new URL(QUIZ, url)))
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`${QUIZ}: ${res.status}`))))
-      .then((quiz) => ({ items: quiz.items, sets: new Map() }));
+      .then((quiz) => ({ items: quiz.items, decoys: quiz.decoys ?? [], sets: new Map() }));
     loaded.set(env.ASSETS, loading);
     loading.catch(() => loaded.delete(env.ASSETS));
   }
@@ -19,7 +19,7 @@ export async function daySet(env, url, day) {
   try {
     const quiz = await items(env, url);
     if (!quiz) return null;
-    if (!quiz.sets.has(day)) quiz.sets.set(day, setId(dailySet(quiz.items, day)));
+    if (!quiz.sets.has(day)) quiz.sets.set(day, setId(dailySet(quiz.items, day, quiz.decoys)));
     return quiz.sets.get(day);
   } catch (err) {
     console.error('sets:', err);
