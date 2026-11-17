@@ -23,10 +23,10 @@ test('a tap on the target or within ten metres scores full marks', () => {
   assert.ok(distanceScore(50, shape) < MAX_SCORE);
 });
 
-test('a place known only by a point counts a tap on its block as a hit', () => {
-  assert.equal(distanceScore(240, pin(0, 0)), MAX_SCORE);
-  assert.ok(distanceScore(240, block(0, 0)) < MAX_SCORE);
-  assert.ok(distanceScore(300, pin(0, 0)) < MAX_SCORE);
+test('a place known only by a point counts a tap within a hundred metres as a hit', () => {
+  assert.equal(distanceScore(90, pin(0, 0)), MAX_SCORE);
+  assert.ok(distanceScore(90, block(0, 0)) < MAX_SCORE);
+  assert.ok(distanceScore(150, pin(0, 0)) < MAX_SCORE);
 });
 
 test('the same miss costs less the further the target lies from the centre', () => {
@@ -37,9 +37,10 @@ test('the same miss costs less the further the target lies from the centre', () 
 });
 
 test('a tap on the centre scores nothing for a target away from it', () => {
-  for (const east of [1500, 3000, 5000, 8000]) {
-    const target = block(east, 0);
-    assert.equal(distanceScore(closest(target, CENTRE).distance, target), 0);
+  for (const east of [900, 1500, 3000, 5000, 8000]) {
+    for (const target of [block(east, 0), pin(0, -east)]) {
+      assert.equal(distanceScore(closest(target, CENTRE).distance, target), 0);
+    }
   }
 });
 
