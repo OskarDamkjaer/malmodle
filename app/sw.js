@@ -116,7 +116,7 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== location.origin) return;
-  if (url.pathname.startsWith('/live/')) return;
+  if (url.pathname.startsWith('/live/') || url.pathname.startsWith('/dev/')) return;
 
   event.respondWith((async () => {
     const cache = await caches.open(url.pathname.endsWith('.pmtiles') ? MAP : CODE);
