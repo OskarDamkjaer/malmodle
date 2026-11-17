@@ -3,14 +3,24 @@ import { closest, contains, distanceTo, gap, meanDistance, metersBetween, offset
 export const MAX_SCORE = 100;
 export const NEAR_SCORE = 35;
 export const NEAR_FLOOR = 5;
+export const DISTANCE_FLOOR = 15;
 
-const GRACE = { shape: 10, point: 100 };
-const FALLOFF = 900;
+export const CENTRE = [12.99964, 55.60563];
+
+const GRACE = { shape: 10, point: 250 };
+const FALLOFF = { least: 400, share: 0.5 };
+const falloffs = new WeakMap();
+
+export function falloff(geometry) {
+  if (!falloffs.has(geometry)) falloffs.set(geometry, Math.max(FALLOFF.least, FALLOFF.share * distanceTo(geometry, CENTRE)));
+  return falloffs.get(geometry);
+}
 
 export function distanceScore(meters, geometry) {
-  const grace = geometry?.type === 'Point' ? GRACE.point : GRACE.shape;
+  const grace = geometry.type === 'Point' ? GRACE.point : GRACE.shape;
   const over = Math.max(0, meters - grace);
-  return Math.round(MAX_SCORE * Math.exp(-over / FALLOFF));
+  const score = MAX_SCORE * Math.exp(-over / falloff(geometry));
+  return score < DISTANCE_FLOOR ? 0 : Math.round(score);
 }
 
 export function formatDistance(meters) {

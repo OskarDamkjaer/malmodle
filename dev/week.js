@@ -55,7 +55,7 @@ for (const [layer, prop] of [['focus-fill', 'fill-color'], ['focus-line', 'line-
 
 const LEVELS = [75, 50, 25];
 const GRID = 240;
-const SPREAD = 3000;
+const MARGIN = 200;
 const RAMP = [[100, BAND_COLORS.green], [80, BAND_COLORS.yellow], [40, BAND_COLORS.orange], [0, BAND_COLORS.red]];
 const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 const NOTHING = { type: 'FeatureCollection', features: [] };
@@ -125,8 +125,9 @@ function falloff(target) {
   if (falloffs.has(target.name)) return falloffs.get(target.name);
   const { geometry } = target;
   const [[w, s], [e, n]] = bounds([geometry]);
-  const [[west, south]] = around([w, s], SPREAD);
-  const [, [east, north]] = around([e, n], SPREAD);
+  const spread = reach(1, geometry) + MARGIN;
+  const [[west, south]] = around([w, s], spread);
+  const [, [east, north]] = around([e, n], spread);
   const spot = (i, j) => [west + ((east - west) * i) / GRID, north - ((north - south) * j) / GRID];
   const field = new Float32Array((GRID + 1) ** 2);
   const canvas = document.createElement('canvas');
