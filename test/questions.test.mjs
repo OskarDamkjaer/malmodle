@@ -1,59 +1,51 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CENTRE, DISTANCE_FLOOR, MAX_SCORE, NEAR_SCORE, TYPES, distanceScore, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
-import { closest } from '../app/geo.mjs';
+import { MAX_SCORE, NEAR_SCORE, TYPES, distanceScore, falloff, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
 import { band } from '../app/daily.mjs';
 import { fixture } from './fixture.mjs';
 
 const items = fixture();
 const byName = (name) => items.find((it) => it.name === name);
 
-const M = 111320;
-const out = (east, north) => [CENTRE[0] + east / (M * Math.cos((CENTRE[1] * Math.PI) / 180)), CENTRE[1] + north / M];
-const pin = (east, north) => ({ type: 'Point', coordinates: out(east, north) });
-const block = (east, north) => {
-  const [a, b] = [out(east - 50, north - 50), out(east + 50, north + 50)];
-  return { type: 'Polygon', coordinates: [[[a[0], a[1]], [b[0], a[1]], [b[0], b[1]], [a[0], b[1]], [a[0], a[1]]]] };
-};
+const aSquare = { type: 'Polygon', coordinates: [[[13, 55.6], [13.001, 55.6], [13.001, 55.601], [13, 55.601], [13, 55.6]]] };
+const aDot = { type: 'Point', coordinates: [13, 55.6] };
+const anArea = { kind: 'area', geometry: aSquare };
+const aKrog = { kind: 'landmark', category: 'krog', geometry: aDot };
+const aPark = { kind: 'landmark', category: 'park', geometry: aSquare };
+const aStreet = { kind: 'street', geometry: { type: 'MultiLineString', coordinates: [[[13, 55.6], [13.01, 55.6]]] } };
 
 test('a tap on the target or within ten metres scores full marks', () => {
-  const shape = block(0, 0);
-  assert.equal(distanceScore(0, shape), MAX_SCORE);
-  assert.equal(distanceScore(10, shape), MAX_SCORE);
-  assert.ok(distanceScore(50, shape) < MAX_SCORE);
+  assert.equal(distanceScore(0, anArea), MAX_SCORE);
+  assert.equal(distanceScore(10, anArea), MAX_SCORE);
+  assert.ok(distanceScore(50, anArea) < MAX_SCORE);
 });
 
 test('a place known only by a point counts a tap within a hundred metres as a hit', () => {
-  assert.equal(distanceScore(90, pin(0, 0)), MAX_SCORE);
-  assert.ok(distanceScore(90, block(0, 0)) < MAX_SCORE);
-  assert.ok(distanceScore(150, pin(0, 0)) < MAX_SCORE);
+  assert.equal(distanceScore(90, aKrog), MAX_SCORE);
+  assert.ok(distanceScore(150, aKrog) < MAX_SCORE);
 });
 
-test('the same miss costs less the further the target lies from the centre', () => {
-  const near = distanceScore(800, block(0, 600));
-  const far = distanceScore(800, block(0, -3000));
-  const farther = distanceScore(800, block(6000, 0));
-  assert.ok(near < far && far < farther);
-});
-
-test('a tap on the centre scores nothing for a target away from it', () => {
-  for (const east of [900, 1500, 3000, 5000, 8000]) {
-    for (const target of [block(east, 0), pin(0, -east)]) {
-      assert.equal(distanceScore(closest(target, CENTRE).distance, target), 0);
-    }
-  }
+test('a miss costs most among restaurants and cafés, then streets, then the rest', () => {
+  assert.equal(falloff(aKrog), falloff({ ...aKrog, category: 'kafe' }));
+  assert.ok(falloff(aKrog) < falloff(aStreet));
+  assert.equal(falloff(aStreet), falloff({ kind: 'bridge', geometry: aSquare }));
+  assert.equal(falloff(aStreet), falloff({ ...aPark, category: 'museum' }));
+  assert.ok(falloff(aStreet) < falloff(anArea));
+  assert.equal(falloff(anArea), falloff(aPark));
+  assert.ok(distanceScore(400, aKrog) < distanceScore(310, aStreet));
+  assert.ok(distanceScore(310, aStreet) < distanceScore(310, anArea));
 });
 
 test('the wrong end of town scores nothing', () => {
-  assert.equal(distanceScore(8000, block(0, 0)), 0);
+  for (const target of [anArea, aKrog, aStreet]) assert.equal(distanceScore(8000, target), 0);
 });
 
-test('the score falls with distance and drops from the floor straight to zero', () => {
-  for (const target of [block(0, 0), pin(2000, 0), block(0, -8000)]) {
+test('the score falls with distance and never goes below zero', () => {
+  for (const target of [anArea, aKrog, aStreet, aPark]) {
     let previous = MAX_SCORE;
-    for (let d = 0; d <= 30000; d += 50) {
+    for (let d = 0; d <= 20000; d += 50) {
       const s = distanceScore(d, target);
-      assert.ok(s <= previous && (s === 0 || s >= DISTANCE_FLOOR));
+      assert.ok(s <= previous && s >= 0);
       previous = s;
     }
     assert.equal(previous, 0);

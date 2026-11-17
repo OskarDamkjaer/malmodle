@@ -3,28 +3,16 @@ import { closest, contains, distanceTo, gap, meanDistance, metersBetween, offset
 export const MAX_SCORE = 100;
 export const NEAR_SCORE = 35;
 export const NEAR_FLOOR = 5;
-export const DISTANCE_FLOOR = 15;
-
-export const CENTRE = [12.99964, 55.60563];
 
 const GRACE = { shape: 10, point: 100 };
-const FALLOFF = { least: 400, share: 0.5 };
-const falloffs = new WeakMap();
+export const FALLOFF = { krog: 500, kafe: 500, street: 700, bridge: 700, museum: 700, other: 900 };
 
-const graceOf = (geometry) => (geometry.type === 'Point' ? GRACE.point : GRACE.shape);
+export const falloff = (target) => FALLOFF[target.category] ?? FALLOFF[target.kind] ?? FALLOFF.other;
 
-export function falloff(geometry) {
-  if (!falloffs.has(geometry)) {
-    const past = Math.max(0, distanceTo(geometry, CENTRE) - graceOf(geometry));
-    falloffs.set(geometry, Math.max(FALLOFF.least, FALLOFF.share * past));
-  }
-  return falloffs.get(geometry);
-}
-
-export function distanceScore(meters, geometry) {
-  const over = Math.max(0, meters - graceOf(geometry));
-  const score = MAX_SCORE * Math.exp(-over / falloff(geometry));
-  return score < DISTANCE_FLOOR ? 0 : Math.round(score);
+export function distanceScore(meters, target) {
+  const grace = target.geometry.type === 'Point' ? GRACE.point : GRACE.shape;
+  const over = Math.max(0, meters - grace);
+  return Math.round(MAX_SCORE * Math.exp(-over / falloff(target)));
 }
 
 export function formatDistance(meters) {
@@ -80,7 +68,7 @@ const point = {
     const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
     if (street && street.name === q.target.name) return { score: MAX_SCORE, tap, near: tap, distance: 0, hit: null };
     const { distance, point: near } = closest(q.target.geometry, tap);
-    const score = distanceScore(distance, q.target.geometry);
+    const score = distanceScore(distance, q.target);
     return {
       score,
       tap,

@@ -19,7 +19,7 @@ export function rounds(questions, players, seed, shape = 'vanlig') {
       const good = Math.min(0.98, Math.max(0.02, ease[i] + skill));
       if (TYPES[q.type].input === 'choice') return rng() < good ? MAX_SCORE : rng() < 0.35 ? NEAR_SCORE : 0;
       const meters = 2500 * Math.exp(-3.2 * good) * Math.exp(0.9 * normal(rng));
-      return distanceScore(meters, q.target.geometry);
+      return distanceScore(meters, q.target);
     });
   }).sort((a, b) => sum(b) - sum(a));
 }
