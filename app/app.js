@@ -147,6 +147,8 @@ const HOLD = 400;
 const HOLD_QUIET = 200;
 const HOLD_SLOP = 8;
 const PIN_HINT = `${matchMedia('(pointer: coarse)').matches ? 'Tryck' : 'Klicka'} eller håll inne för att gissa`;
+const PIN_HEIGHT = 42;
+const PIN_ROOM = 12;
 
 const current = () => set[index];
 const typeOf = (q) => TYPES[q.type];
@@ -243,12 +245,13 @@ function ask() {
   renderDots();
   el('detail').textContent = detail ?? '';
   el('prompt').textContent = title;
-  hide('result', 'info');
+  hide('result', 'info', 'guess');
   delete document.body.dataset.answered;
   reveal('question');
   if (type.input === 'map') document.body.dataset.pointing = '';
   else delete document.body.dataset.pointing;
   stopHold();
+  delete el('result').dataset.still;
   hint(type.input === 'map' && index === 0);
   if (type.input === 'map' && aimed) map.getCanvas().focus({ preventScroll: true });
 
@@ -301,15 +304,29 @@ function hint(on) {
   else delete document.body.dataset.hinting;
 }
 
+function keepClear() {
+  const spot = pinAt();
+  if (!spot) return;
+  const { y } = map.project(spot);
+  const question = el('question');
+  const top = question.offsetTop + question.offsetHeight + PIN_HEIGHT + PIN_ROOM;
+  const bottom = el('guess').offsetTop - PIN_ROOM;
+  const shift = y > bottom ? y - bottom : y < top ? y - top : 0;
+  if (shift) map.panBy([0, shift], { duration: 250 });
+}
+
 function place(at) {
   map.stop();
-  placePin(at, { guess: () => { const spot = pinAt(); if (spot) answer(spot); }, remove: unplace });
+  placePin(at, keepClear);
   hint(false);
+  reveal('guess');
+  keepClear();
 }
 
 function unplace() {
   clearPin();
   hint(phase === 'asking' && index === 0);
+  hide('guess');
 }
 
 function stopHold() {
@@ -345,8 +362,10 @@ async function answer(value, keyed = false) {
   if (phase !== 'asking') return;
   phase = 'grading';
   stopHold();
+  if (!el('guess').hidden) el('result').dataset.still = '';
   clearPin();
   hint(false);
+  hide('guess');
   playedHere = true;
   aimed = keyed;
   delete document.body.dataset.pointing;
@@ -864,6 +883,8 @@ map.on('mousemove', (e) => {
 });
 
 el('next').addEventListener('click', next);
+el('guessbutton').addEventListener('click', () => answer(pinAt()));
+el('unpin').addEventListener('click', unplace);
 el('share').addEventListener('click', share);
 el('sharenative').addEventListener('click', shareNative);
 el('practise').addEventListener('click', toggleKinds);

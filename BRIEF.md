@@ -33,8 +33,10 @@ Pointing is the most common. Per kind:
 - Places: "Var ligger X?", with "Vad ligger här?" for about a quarter to a
   third of them.
 
-- **Peka ut.** "Var ligger X?" A tap sets a pin with "Gissa" above it; a tap
-  elsewhere or a drag moves it, and ✕ takes it away. Holding the finger still
+- **Peka ut.** "Var ligger X?" A tap sets a pin, and "Gissa" with ✕ beside it
+  comes up in a panel at the bottom, which the result and "Nästa" then replace
+  where it stands. A tap elsewhere or a drag moves the pin, ✕ takes it away, and a
+  pin set behind a panel brings the map along so it shows. Holding the finger still
   on the map guesses there at once, with a ring that shows only once the press
   is clearly a hold. The first question of a round says so at the bottom. One
   guess, no second try. Scored 0–100 on distance. Afterwards: the pin stays
@@ -74,6 +76,10 @@ never leaves the red band.
 ## The map
 
 - No labels on the map while a question is open. Pan and zoom are allowed.
+  On a phone the map is zoomed with two fingers, with no + and − buttons.
+- The panels stay where they are from question to result. On a desktop too
+  narrow for the place card beside them, they sit left of centre from the
+  start.
 - Always north-up.
 - From the keyboard, tabbing to the map shows a crosshair in its middle and a
   line on how to use it: arrows pan, + and − zoom, Enter answers at the

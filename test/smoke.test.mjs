@@ -52,7 +52,7 @@ const visibleText = (page) => page.evaluate(() => window.map.getStyle().layers
 
 async function guess(page, x, y) {
   await page.mouse.click(x, y);
-  await page.click('.pin .bubble .primary');
+  await page.click('#guessbutton');
 }
 
 async function playThrough(page, viewport, count = 10) {
@@ -81,28 +81,39 @@ test('a page of a style that is gone leads to the start page, keeping the hash',
 });
 
 for (const [name, viewport, touch] of [['desktop', { width: 1280, height: 800 }, false], ['phone', { width: 390, height: 844 }, true]]) {
-  test(`a tap sets a pin that is guessed from its bubble, and a held press answers at once, on ${name}`, { skip }, async () => {
+  test(`a tap sets a pin that is guessed from the panel at the bottom, and a held press answers at once, on ${name}`, { skip }, async () => {
     const { page, context, errors } = await open(viewport, '/', undefined, touch ? { hasTouch: true, isMobile: true } : {});
     const [x, y] = [viewport.width / 2, viewport.height / 2];
     const tap = (px, py) => (touch ? page.touchscreen.tap(px, py) : page.mouse.click(px, py));
     const press = (selector) => (touch ? page.locator(selector).tap() : page.click(selector));
     const pins = () => page.locator('.pin:not(.guessed)').count();
 
+    assert.equal(await page.isVisible('.maplibregl-ctrl-zoom-in'), !touch, 'zoom buttons only on desktop');
     assert.equal(await page.textContent('#pinhint'), `${touch ? 'Tryck' : 'Klicka'} eller håll inne för att gissa`);
     assert.ok(await page.isVisible('#pinhint'));
+    assert.ok(await page.isHidden('#guess'));
     await tap(x, y);
-    await page.waitForSelector('.pin .bubble');
+    await page.waitForSelector('#guess:not([hidden])');
     assert.ok(await page.isHidden('#pinhint'));
     await tap(x + 60, y + 40);
     assert.equal(await pins(), 1);
-    await press('.pin .bubble [aria-label="Ta bort nålen"]');
+    await press('#unpin');
     assert.equal(await pins(), 0);
+    assert.ok(await page.isHidden('#guess'));
     assert.ok(await page.isVisible('#pinhint'));
     assert.ok(await page.isHidden('#result'));
 
-    await tap(x, y);
-    await press('.pin .bubble .primary');
+    await tap(x, viewport.height - 50);
+    await page.waitForSelector('#guess:not([hidden])');
+    await page.waitForTimeout(500);
+    const pin = await page.locator('.pin').boundingBox();
+    const panel = await page.locator('#guess').boundingBox();
+    assert.ok(pin.y + pin.height <= panel.y, 'a pin set behind the panel brings the map along');
+    await press('#guessbutton');
     await page.waitForSelector('#result:not([hidden])');
+    const result = await page.locator('#result').boundingBox();
+    assert.deepEqual([result.x, result.width, result.y + result.height], [panel.x, panel.width, panel.y + panel.height], 'the result takes the place of the panel');
+    assert.ok(await page.isHidden('#guess'));
     assert.equal(await pins(), 0);
     assert.equal(await page.locator('.pin.guessed').count(), 1);
     await press('#next');

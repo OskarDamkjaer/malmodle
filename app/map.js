@@ -162,18 +162,7 @@ function droppe() {
   return element;
 }
 
-function pinButton(label, className, run, name) {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = className;
-  button.textContent = label;
-  if (name) button.setAttribute('aria-label', name);
-  for (const type of ['pointerdown', 'mousedown', 'touchstart']) button.addEventListener(type, (e) => e.stopPropagation(), { passive: true });
-  button.addEventListener('click', (e) => { e.stopPropagation(); run(); });
-  return button;
-}
-
-export function placePin(at, { guess, remove }) {
+export function placePin(at, moved) {
   if (pin) {
     pin.setLngLat(at);
     const shape = pin.getElement().firstElementChild;
@@ -182,12 +171,8 @@ export function placePin(at, { guess, remove }) {
     shape.classList.add('drop');
     return;
   }
-  const element = droppe();
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.append(pinButton('Gissa', 'primary', guess), pinButton('✕', '', remove, 'Ta bort nålen'));
-  element.append(bubble);
-  pin = new Marker({ element, anchor: 'bottom', draggable: true }).setLngLat(at).addTo(map);
+  pin = new Marker({ element: droppe(), anchor: 'bottom', draggable: true }).setLngLat(at).addTo(map);
+  pin.on('dragend', moved);
 }
 
 export function pinAt() {

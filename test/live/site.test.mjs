@@ -70,7 +70,7 @@ for (const site of SITES) {
         if (await page.isVisible('#choices')) await page.locator('#choices button').first().click();
         else {
           await page.mouse.click(viewport.width / 2, viewport.height / 2);
-          await page.click('.pin .bubble .primary');
+          await page.click('#guessbutton');
         }
         await page.waitForSelector('#result:not([hidden])');
         assert.match(await page.textContent('#points'), /^\d+$/);
