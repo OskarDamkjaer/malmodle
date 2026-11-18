@@ -20,7 +20,9 @@ jobs:
       CURL: curl --silent --show-error --retry 2 --retry-delay 10 --max-time 20
     steps:
       - name: The page answers
-        run: $CURL --fail "$SITE/" | grep -q 'Malmödle'
+        run: |
+          page=$($CURL --fail "$SITE/")
+          grep -q 'Malmödle' <<<"$page"
 
       - name: The quiz loads
         run: $CURL --fail "$SITE/data/quiz.json" | python3 -c 'import json, sys; assert json.load(sys.stdin)["items"]'
