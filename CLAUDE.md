@@ -16,8 +16,10 @@ node scripts/serve.mjs --trickle 10    # and one more every 10 seconds
 ```
 
 `/dev/crowd.html` on the local server shows the comparison card for many
-made-up crowds, and `/dev/week.html` the coming days' sets on the map, with
-`?from=` and `?days=`. `serve.mjs` mounts `dev/` itself, so the site build leaves it out.
+made-up crowds, `/dev/week.html` the coming days' sets on the map, with
+`?from=` and `?days=`, and `/dev/frame.html` the game at a phone, tablet or
+desktop size, with a button that starts the day over. `serve.mjs` mounts
+`dev/` itself, so the site build leaves it out.
 `plans/crowd.md` holds the card's decisions and what is still open.
 
 Read the skip count, not just the failures. Tests that need `build/`, `data/`

@@ -24,7 +24,9 @@ which draws the end screen's comparison for a few dozen made-up crowds, and one
 that fills up as you click, and <http://127.0.0.1:8080/dev/week.html>, which
 lays the coming days' sets out in a strip above the map, with each answer and
 its text, draws the options and the points a tap or a near option gives on
-the map, and flags what looks wrong. `dev/` is never part of the built site.
+the map, and flags what looks wrong. <http://127.0.0.1:8080/dev/frame.html>
+shows the game at a phone, tablet or desktop size, with a button that starts
+the day over. `dev/` is never part of the built site.
 
 `build-quiz.mjs` needs the map data in `build/data/` and `data/cache/`. Either
 rebuild it (below) or fetch a prebuilt copy with
