@@ -44,6 +44,8 @@ osmium, Java and hosts the sandbox cannot reach.
   the end screen's comparison in words with every threshold it uses.
 - `app/crowd-view.js`: the comparison card on the end screen: the chart, its
   hover and keyboard reading, and the waiting and paused states.
+- `app/confetti.js`: the confetti for a score of 1000, loaded only when it is
+  thrown.
 - `app/map.js`: map layers, hiding labels, framing, and the pin a guess is
   set with.
 - `app/palette.mjs`: the basemap palette and the answer colours, applied at
