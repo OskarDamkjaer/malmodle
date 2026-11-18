@@ -90,6 +90,10 @@ never leaves the red band.
 
 - An end screen with the score, today's names, how each went, and the
   descriptions. Descriptions are only shown here.
+- A round that scores 1000 ends in confetti, once 1000 is the number on
+  screen: the big score when it has counted up, or your line on the chart when
+  it has settled. A replay can earn it too. Returning to a finished day does
+  not, and with reduced motion there is none.
 - Beside the score, how the day went for everyone. A headline names your
   place when it is near the top (in the top quarter and the first ten, or in
   the top half percent), and otherwise which part of the field you landed in.
