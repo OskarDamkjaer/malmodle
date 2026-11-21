@@ -105,7 +105,8 @@ reaches it.
   `wrangler d1 execute`. Nothing lists them or says one has come in, and a
   row's `slots` and `notes` open in the builder only once packed into a link.
 - **Acting on suggestions.** A suggestion for the game means adding the name
-  to `learn/core.json`, and for a place on the long list curating it first.
+  to `learn/pending.json`, and for a place on the long list curating its
+  entry there. `plans/pending.md` says how a waiting name goes live.
   Nothing does that from what is sent in yet.
 - **Putting a day into the schedule.** The game's day is worked out from the
   date alone. Playing a made day on a date needs `daily.mjs` to take it in
