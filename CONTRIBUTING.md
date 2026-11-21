@@ -26,7 +26,21 @@ lays the coming days' sets out in a strip above the map, with each answer and
 its text, draws the options and the points a tap or a near option gives on
 the map, and flags what looks wrong. <http://127.0.0.1:8080/dev/frame.html>
 shows the game at a phone, tablet or desktop size, with a button that starts
-the day over. `dev/` is never part of the built site.
+the day over. <http://127.0.0.1:8080/dev/builder.html> makes a day by hand:
+pick each question's target and type, and the game builds the rest the way it
+always does. The map beside the questions shows everything in the data, what
+the game can ask and what it never does, a table says how the day compares
+with the days the game deals, and the day can be played through and
+kept as a link. Anything on the map can go into the day, which suggests it for
+the game, and anything can be marked as belonging in the game or not, or as
+looking wrong. A finished day of ten is sent to the Worker with the
+suggestions, the builder's name if they like, and the player id the game
+keeps in the same browser. The Worker stores it in the `handmade` table
+under the same player key as that browser's results, so who sent a day can
+be weighed against how they play. `serve.mjs` keeps its database in memory
+unless given `--db <file>`. It shows what lies outside Grunden after
+`node scripts/build-quiz.mjs --all --out build/data/quiz-all.json`. `dev/` is
+never part of the built site.
 
 `build-quiz.mjs` needs the map data in `build/data/` and `data/cache/`. Either
 rebuild it (below) or fetch a prebuilt copy with
@@ -35,14 +49,31 @@ rebuild it (below) or fetch a prebuilt copy with
 ## The data
 
 - `learn/core.json`: which places the app asks about.
-- `learn/`: bridges, streets, descriptions and sources.
+- `learn/pending.json`: what is on its way in, kept apart so nothing waiting
+  touches the files the game and the map are built from. `areas`, `streets`
+  and `bridges` list names the curated data already has, and `landmarks` holds
+  whole place entries, shaped like those in `places/places.json`. The build
+  checks every one, gives them to the day builder, and leaves them out of the
+  game, so descriptions can be written and fact-checked first. A name goes live
+  by moving into `core.json`, a place's entry into `places/places.json`, and
+  both under a date in `since`, a few days after the next deploy, so the days
+  already played, and today, stay as they were. A waiting place stays a decoy as before, since decoys follow only the
+  places the game asks. Once it goes live it leaves the decoys and adds its
+  own around it, which changes "Vad ligger här?" on days before its date, so
+  for now dates are for areas, streets and bridges.
+- `learn/`: bridges, streets, descriptions and sources, and `regions.json`,
+  the delområden in each of the ten stadsdelar. The build merges them into the
+  outlines a chain is asked within.
 - `places/places.json`: the places the game asks about, by category, with their
   OpenStreetMap ids. `places/longlist.json` is the wider pool they came from,
   and `places/parked.json` holds art kept for a later picture question.
   `build-quiz.mjs` takes the long list's places that the game does not ask
   about as decoys for "Vad ligger här?", the ten nearest of each category
   around every place it asks about, and keeps out the kinds and names in
-  `DECOY_KINDS` and `DECOY_SKIP`.
+  `DECOY_KINDS` and `DECOY_SKIP`. A chain lists its branches under
+  `branches`, each with `lat` and `lon`, in the order of its `osm` ids, and
+  says how it is asked under `asked` ("ett Systembolag"). Only branches inside
+  Malmö's stadsdelar belong there.
 - `config/bbox.json`: the part of the world the map covers.
 
 Everything is hand-edited. `build-quiz.mjs --all` builds every place rather than
@@ -59,6 +90,13 @@ an input opened through a computed path has to be written out somewhere in the
 script to count). Changing any of them rebuilds the map
 data on the next deploy, and `fetch-dev-assets.mjs` fetches the new release
 once it is published.
+
+Refresh the data every few months, and before asking people to build days.
+OpenStreetMap keeps changing, and the day builder tells people to add what is
+missing there. `node scripts/places-collect.mjs --refresh` fetches the long
+list anew; committing the changed `places/longlist.json` makes the next deploy
+rebuild the map data from a fresh OpenStreetMap extract. Locally,
+`build-basemap.sh` downloads a new extract once the one it has is a month old.
 
 ```
 scripts/build-basemap.sh             # OpenStreetMap → data/cache/malmo.pmtiles

@@ -1,0 +1,1113 @@
+{
+  "areas": [
+    "Norra Sofielund",
+    "Södra Sofielund",
+    "Norra Sorgenfri",
+    "Västra Sorgenfri",
+    "Östra Sorgenfri",
+    "Östra Söderkulla",
+    "Västra Söderkulla",
+    "Gamla Limhamn",
+    "Lindeborg",
+    "Oxie Kyrkby",
+    "Tygelsjö by",
+    "Annelund",
+    "Annetorp",
+    "Almvik",
+    "Bellevue",
+    "Bellevuegården",
+    "Elisedal",
+    "Eriksfält",
+    "Fosieby",
+    "Fredriksberg",
+    "Glostorp",
+    "Gröndal",
+    "Gullvik",
+    "Håkanstorp",
+    "Hindby",
+    "Höja",
+    "Jägersro Villastad",
+    "Kalkbrottet",
+    "Kastanjegården",
+    "Kristineberg",
+    "Kroksbäck",
+    "Kryddgården",
+    "Kvarnby",
+    "Lockarp",
+    "Lönngården",
+    "Örtagården",
+    "Rosenvång",
+    "Rostorp",
+    "Segevång",
+    "Skumparp",
+    "Södertorp",
+    "Södra Sallerup",
+    "Solbacken",
+    "Stenkällan",
+    "Toarp",
+    "Västervång"
+  ],
+  "streets": [
+    "Östergatan",
+    "Hamngatan",
+    "Mäster Johansgatan",
+    "Gibraltargatan",
+    "Storgatan",
+    "Östra Förstadsgatan",
+    "Exercisgatan",
+    "Celsiusgatan",
+    "Hornsgatan",
+    "Rådmansgatan",
+    "Spångatan",
+    "Södra Skolgatan",
+    "Norra Skolgatan",
+    "Kristianstadsgatan",
+    "Simrishamnsgatan",
+    "Spårvägsgatan",
+    "Industrigatan",
+    "Lönngatan",
+    "Västra Rönneholmsvägen",
+    "Fågelbacksgatan",
+    "Erik Dahlbergsgatan",
+    "Kronborgsvägen",
+    "Tessins väg",
+    "Ribersborgsvägen",
+    "Erikslustvägen",
+    "Västra Varvsgatan",
+    "Bellevuevägen",
+    "Geijersgatan",
+    "Ärtholmsvägen",
+    "Linnégatan",
+    "Kalkbrottsgatan",
+    "Strandgatan",
+    "Eriksfältsgatan",
+    "Munkhättegatan",
+    "Lindängsvägen",
+    "Axel Danielssons väg",
+    "Hyllie boulevard"
+  ],
+  "bridges": [
+    "Slussbron",
+    "Paulibron",
+    "Schougens bro",
+    "Morescobron",
+    "Älvsborgsbron",
+    "Styrmansbron",
+    "Neptunibron",
+    "Turbinbron",
+    "Varvsbron",
+    "Västerbron",
+    "Parkbron",
+    "Trädgårdsbron",
+    "Slottsmöllebron"
+  ],
+  "landmarks": [
+    {
+      "name": "Sankt Andreas kyrka",
+      "category": "kyrka",
+      "osm": [
+        "way/45706659"
+      ],
+      "lat": 55.59921,
+      "lon": 12.97128,
+      "why": "Church from 1959 in Ribersborg with its own Wikipedia article and about 1,100 page views a year.",
+      "description": "Kyrkobyggnad från 1959, ritad av Thorsten Roos och Bror Thornberg. Sedan 2014 församlingskyrka i Malmö S:t Petri församling.",
+      "source": "https://sv.wikipedia.org/wiki/Sankt_Andreas_kyrka%2C_Malm%C3%B6"
+    },
+    {
+      "name": "Sankt Matteus kyrka",
+      "category": "kyrka",
+      "osm": [
+        "way/82312304"
+      ],
+      "lat": 55.58902,
+      "lon": 13.02134,
+      "why": "Church from 1983 on Lantmannagatan in Annelund with its own Wikipedia article and about 1,000 page views a year.",
+      "description": "Kyrka från 1983, ritad av Sten Samuelson.",
+      "source": "https://www.wikidata.org/wiki/Q10661412"
+    },
+    {
+      "name": "Malmö Roddklubb",
+      "category": "idrott",
+      "osm": [
+        "node/7541789974"
+      ],
+      "lat": 55.60938,
+      "lon": 13.01316,
+      "why": "The city's rowing club, from 1884, on the canal.",
+      "description": "Roddklubb med båthus vid Slussplan, stiftad 1883. Roddarna har vunnit 29 Svenska mästerskap.",
+      "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_Roddklubb"
+    },
+    {
+      "name": "Kanotföreningen Öresund",
+      "category": "idrott",
+      "osm": [
+        "way/100076166"
+      ],
+      "lat": 55.60635,
+      "lon": 12.97787,
+      "why": "Canoe club by the water at Ribersborg."
+    },
+    {
+      "name": "Laserdome",
+      "category": "idrott",
+      "osm": [
+        "node/5207987704"
+      ],
+      "lat": 55.60686,
+      "lon": 13.02002,
+      "why": "Laser tag arena, a known place to go."
+    },
+    {
+      "name": "Gokart City Malmö",
+      "category": "idrott",
+      "osm": [
+        "way/1350495161"
+      ],
+      "lat": 55.58126,
+      "lon": 13.01802,
+      "why": "Indoor go-kart track in Södra Sofielund, a place people go for fun."
+    },
+    {
+      "name": "Bounce",
+      "category": "idrott",
+      "osm": [
+        "node/6018419968"
+      ],
+      "lat": 55.59688,
+      "lon": 13.09767,
+      "why": "Trampoline park in Toftanäs, a place people go for fun."
+    },
+    {
+      "name": "Kirsebergs torg",
+      "category": "torg",
+      "osm": [
+        "way/41111503,way/250771678,way/250771732"
+      ],
+      "lat": 55.60886,
+      "lon": 13.03621,
+      "why": "The square at the heart of Kirseberg, with a bus stop of its own name."
+    },
+    {
+      "name": "Nydalatorget",
+      "category": "torg",
+      "osm": [
+        "way/284963382"
+      ],
+      "lat": 55.57334,
+      "lon": 13.02027,
+      "why": "The local centre of Nydala, with a bus stop of its own name."
+    },
+    {
+      "name": "Almtorget",
+      "category": "torg",
+      "osm": [
+        "way/211413033"
+      ],
+      "lat": 55.57675,
+      "lon": 13.02328,
+      "why": "The local centre of Almhög, with a bus stop of its own name."
+    },
+    {
+      "name": "Persborgstorget",
+      "category": "torg",
+      "osm": [
+        "way/28761106"
+      ],
+      "lat": 55.58009,
+      "lon": 13.03173,
+      "why": "The square by Persborg station, with a bus stop of its own name."
+    },
+    {
+      "name": "Södra Fisketorget",
+      "category": "torg",
+      "osm": [
+        "relation/3840097"
+      ],
+      "lat": 55.59076,
+      "lon": 13.00593,
+      "why": "Square in the city centre with many places around it."
+    },
+    {
+      "name": "Posthusplatsen",
+      "category": "torg",
+      "osm": [
+        "way/159843185"
+      ],
+      "lat": 55.60985,
+      "lon": 12.9982,
+      "why": "The square by Centralen that most people pass, with many places around it."
+    },
+    {
+      "name": "Hovrättstorget",
+      "category": "torg",
+      "osm": [
+        "way/166514566,way/191082389,relation/2577881"
+      ],
+      "lat": 55.60669,
+      "lon": 12.99162,
+      "why": "Square in Västra Hamnen with many places around it."
+    },
+    {
+      "name": "Dockplatsen",
+      "category": "torg",
+      "osm": [
+        "relation/6964779"
+      ],
+      "lat": 55.6146,
+      "lon": 12.98981,
+      "why": "The square at the heart of Dockan in Västra Hamnen."
+    },
+    {
+      "name": "U3",
+      "category": "byggnad",
+      "osm": [
+        "way/933496567"
+      ],
+      "lat": 55.6051,
+      "lon": 12.98256,
+      "apart": "Teknikens och sjöfartens hus",
+      "why": "The submarine on land outside Teknikens och sjöfartens hus, about 6,600 Wikipedia page views a year. Teknikens och sjöfartens hus needs the same apart before this goes live.",
+      "description": "Svensk ubåt som sjösattes den 11 juni 1942. Hon finns bevarad vid Teknikens och sjöfartens hus i Malmö.",
+      "source": "https://sv.wikipedia.org/wiki/HMS_U3"
+    },
+    {
+      "name": "Länsresidenset",
+      "category": "byggnad",
+      "osm": [
+        "way/680764890"
+      ],
+      "lat": 55.60692,
+      "lon": 13.00101,
+      "apart": "Stortorget",
+      "why": "The county governor's residence from 1730 on Stortorget, about 2,100 Wikipedia page views a year.",
+      "description": "Vid Stortorget, med bostads- och representationslokaler för landshövdingen i Skåne län. Två sammanbyggda hus från slutet av 1500-talet.",
+      "source": "https://sv.wikipedia.org/wiki/Residenset_i_Malm%C3%B6"
+    },
+    {
+      "name": "Caroli kyrka",
+      "category": "byggnad",
+      "osm": [
+        "way/34732336"
+      ],
+      "lat": 55.60743,
+      "lon": 13.00667,
+      "apart": "Kv. Caroli",
+      "why": "Church from 1880 inside the Caroli block, about 1,900 Wikipedia page views a year. Kv. Caroli needs the same apart before this goes live.",
+      "description": "Stod färdig 1880 efter ritningar av Emil Viktor Langlet. Den avsakraliserades 2010 och används inte längre för gudstjänster.",
+      "source": "https://sv.wikipedia.org/wiki/Caroli_kyrka%2C_Malm%C3%B6"
+    },
+    {
+      "name": "Hotel Kramer",
+      "category": "byggnad",
+      "osm": [
+        "relation/446664"
+      ],
+      "lat": 55.60691,
+      "lon": 12.99944,
+      "apart": "Stortorget",
+      "why": "The hotel on Stortorget, about 1,400 Wikipedia page views a year.",
+      "description": "Hotell vid Stortorget i fransk nyrenässans, ritat av arkitekten Carl Ferdinand Rasmussen för makarna Kramer.",
+      "source": "https://sv.wikipedia.org/wiki/Hotell_Kramer"
+    },
+    {
+      "name": "Malmö Konserthus",
+      "category": "byggnad",
+      "osm": [
+        "way/289662618"
+      ],
+      "lat": 55.59928,
+      "lon": 13.00763,
+      "why": "The former concert hall, about 1,200 Wikipedia page views a year.",
+      "description": "Invigdes 1985, arkitekt var Sten Samuelson. Huset var hemmaarena för Malmö symfoniorkester.",
+      "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_konserthus"
+    },
+    {
+      "name": "Folkets hus",
+      "category": "byggnad",
+      "osm": [
+        "way/82445200"
+      ],
+      "lat": 55.59087,
+      "lon": 13.02112,
+      "why": "Malmö Folkets hus by Nobeltorget, about 1,100 Wikipedia page views a year.",
+      "description": "Funkisbyggnad ritad av Hans Westman och invigd i december 1947. Den ersatte ett Folkets Hus byggt 1893.",
+      "source": "https://sv.wikipedia.org/wiki/Folkets_hus%2C_Malm%C3%B6"
+    },
+    {
+      "name": "Fiskehoddorna",
+      "category": "handel",
+      "osm": [
+        "node/3786516975",
+        "way/453830331"
+      ],
+      "lat": 55.60521,
+      "lon": 12.98379,
+      "why": "The fishermen's huts by Malmöhus where fish is sold in the mornings, Tuesday to Saturday; one of Malmö Museer's buildings, with its own Wikipedia article.",
+      "description": "Kulturminnesmärkta marknadsstånd vid Malmöhus där det säljs fisk. De flyttades 1956 från Citadellkajen till Banérkajen.",
+      "source": "https://sv.wikipedia.org/wiki/Fiskehoddorna"
+    },
+    {
+      "name": "Cantin",
+      "category": "handel",
+      "osm": [
+        "way/1517146894"
+      ],
+      "lat": 55.61024,
+      "lon": 12.9896,
+      "why": "Street-food yard in Varvsstaden, about 3,000 m² of containers and food trucks with bars and a sauna, open May to September. First season 2026, so newer than the rest.",
+      "description": "Utomhuspark i Varvsstaden byggd med containerkök, foodtrucks och mobila lösningar.",
+      "source": "https://cantin.se/"
+    },
+    {
+      "name": "Mitt Möllan",
+      "category": "handel",
+      "osm": [
+        "node/2429958196"
+      ],
+      "lat": 55.58978,
+      "lon": 13.00871,
+      "why": "Food court and market hall on Claesgatan at Möllan, with craft, record and Christmas markets through the year.",
+      "description": "Galleri med butiker på Möllevången med fokus på pre-loved, lokal produktion och remake. I mitten finns en foodcourt.",
+      "source": "https://www.mittmollan.se/"
+    },
+    {
+      "name": "Spegeln",
+      "category": "scen",
+      "osm": [
+        "way/1091108912"
+      ],
+      "lat": 55.60548,
+      "lon": 13.00059,
+      "why": "Art-house cinema on Stortorget, a cinema since 1934 (first Alcazar) and Spegeln since 1998, with Cinemateket's film club; open in 2026 and about 940 Wikipedia views a year.",
+      "description": "Biograf vid Stortorget som öppnade 1934 under namnet Alcazar.",
+      "source": "https://sv.wikipedia.org/wiki/Spegeln%2C_Malm%C3%B6"
+    },
+    {
+      "name": "Etage",
+      "category": "scen",
+      "osm": [
+        "node/13433135707"
+      ],
+      "lat": 55.60587,
+      "lon": 13.00145,
+      "why": "The big multi-floor nightclub on Stortorget, running for about four decades. 60 m from Spegeln, on the same square.",
+      "description": "Nattklubb vid det stora torget.",
+      "source": "https://en.wikivoyage.org/wiki/Malmö"
+    },
+    {
+      "name": "Plan B",
+      "category": "scen",
+      "osm": [
+        "node/7246975485"
+      ],
+      "lat": 55.58394,
+      "lon": 13.02725,
+      "why": "Concert and club venue in Sofielund with three stages and an outdoor yard, booking concerts and club nights through 2026; about 1,500 Wikipedia views a year, more than Palladium or Victoriateatern.",
+      "description": "Klubb- och konsertlokal med plats för 900 besökare. Startades 2015 som svartklubb.",
+      "source": "https://sv.wikipedia.org/wiki/Plan_B_(konsertlokal)"
+    },
+    {
+      "name": "Blå Båten",
+      "category": "scen",
+      "osm": [
+        "way/1352062482"
+      ],
+      "lat": 55.6098,
+      "lon": 12.99641,
+      "why": "Party and culture boat from 1888, moored at Hjälmarekajen by Centralen since at least 2017. The photo-studio boat Tintin lies beside it."
+    },
+    {
+      "name": "Tanken",
+      "category": "scen",
+      "osm": [
+        "node/14152912301"
+      ],
+      "lat": 55.60152,
+      "lon": 12.97656,
+      "why": "Arts centre at Tessins väg 9B by Öresundsparken, checked in OSM in September 2026. Little trace online beyond an Instagram account; added on request."
+    },
+    {
+      "name": "Rådhuskällaren",
+      "category": "krog",
+      "osm": [
+        "node/444857255"
+      ],
+      "apart": "Stortorget",
+      "lat": 55.6063,
+      "lon": 13.0014,
+      "why": "Restaurant in the town hall's 1500s cellar vaults on Stortorget, opened the year after the city archive moved out in 1960; known for julbord and its fillet buffet. Marked keep in the review; its menu lists dishes from September 2026.",
+      "description": "Restaurang i gamla stenvalv. Knutkällaren är från år 1546.",
+      "source": "https://www.radhuskallaren.se/"
+    },
+    {
+      "name": "Kasai in the Sky",
+      "category": "krog",
+      "osm": [
+        "node/12162330413"
+      ],
+      "lat": 55.6119,
+      "lon": 12.99519,
+      "why": "Japanese rooftop restaurant and bar on the 14th floor of Story Hotel Studio by Universitetsholmen, part of Kasai Group; picked by the owner.",
+      "description": "Restaurang och bar med japansk fusionsmat på fjortonde våningen i Story Hotel Studio. Köket är delat i izakaya, robatagrill och sushi.",
+      "source": "https://www.therooftopguide.com/rooftop-bars-in-malmo/kasai-in-the-sky.html"
+    },
+    {
+      "name": "Slottsträdgårdens Kafé",
+      "category": "kafe",
+      "osm": [
+        "way/99835705"
+      ],
+      "lat": 55.60378,
+      "lon": 12.98921,
+      "why": "Garden café in Slottsträdgården between Kungsparken and Slottsparken, in the colony cottage donated to the garden's association in 1994; Tareq Taylor ran it from 2009. Marked keep in the review.",
+      "description": "Litet kafé i Slottsträdgården som drivs helt av volontärer.",
+      "source": "https://en.wikivoyage.org/wiki/Malmö"
+    },
+    {
+      "name": "Jord",
+      "category": "kafe",
+      "osm": [
+        "node/2266095947"
+      ],
+      "lat": 55.59511,
+      "lon": 13.01694,
+      "why": "Vegan café with coffee, smoothies and all-day brunch on the corner of Falsterbogatan, a block from Folkets Park; picked by the owner.",
+      "description": "Vegansk brunch- och cafémiljö som öppnade 2018. Fick Vegopriset 2022 av Djurens Rätt Malmö-Lund.",
+      "source": "https://www.jordmalmo.se/"
+    },
+    {
+      "name": "Mormors Bageri",
+      "category": "kafe",
+      "osm": [
+        "node/11763806803"
+      ],
+      "lat": 55.59626,
+      "lon": 13.00595,
+      "why": "Bakery café on Spångatan, open mornings; its only shop in Malmö. Picked by the owner. No source found that says more than that, so no description."
+    },
+    {
+      "name": "Atmosfär",
+      "category": "krog",
+      "osm": [
+        "node/4456630006"
+      ],
+      "lat": 55.59977,
+      "lon": 12.99615,
+      "why": "Bistro on Fersens väg by Magistratsparken, opened 1997. Thatsup's guide to Malmö's classic restaurants calls it an institution; also in Michelin and Wikivoyage."
+    },
+    {
+      "name": "Grand Italian",
+      "category": "krog",
+      "osm": [
+        "node/3470842010"
+      ],
+      "lat": 55.6073,
+      "lon": 12.99439,
+      "why": "Italian restaurant on the 25th floor of Clarion Hotel Malmö Live; press calls it a dining institution for generations. The osm id is the hotel, since the restaurant has no node of its own. It sits in the Malmö Live building, which has no apart group, so the two can come up on the same day."
+    },
+    {
+      "name": "Ruths",
+      "category": "krog",
+      "osm": [
+        "node/1947190977"
+      ],
+      "lat": 55.60616,
+      "lon": 12.99769,
+      "why": "Restaurant, deli and bakery on Mäster Johansgatan, in White Guide, Michelin and Visit Malmö; Time Out calls it an institution. On the site of Bastard, which closed in 2020.",
+      "description": "Restaurang vid Lilla torg som byggts om från Bastard. Bardisken i klarblått kakel har blivit ett signum.",
+      "source": "https://whiteguide.com"
+    },
+    {
+      "name": "Aster",
+      "category": "krog",
+      "osm": [
+        "node/9505901459"
+      ],
+      "lat": 55.61107,
+      "lon": 12.9897,
+      "why": "Restaurant in Varvsstaden, in White Guide and Michelin, ranked among Malmö's best by the guides. The one restaurant in the west harbour; opened around 2022.",
+      "description": "Restaurang i Varvsstaden, i en byggnad från 1917.",
+      "source": "https://whiteguide.com"
+    },
+    {
+      "name": "Gustavino",
+      "category": "krog",
+      "osm": [
+        "node/12867024197"
+      ],
+      "lat": 55.60677,
+      "lon": 13.00135,
+      "why": "Bar just north of Stortorget; asked for by the owner."
+    },
+    {
+      "name": "Lion Bar",
+      "category": "krog",
+      "osm": [
+        "node/11464017069"
+      ],
+      "lat": 55.60518,
+      "lon": 12.99799,
+      "why": "Bar at Lilla Torg; asked for by the owner.",
+      "description": "Bar i en pubkedja som startade i Stockholm under tidigt 1990-tal.",
+      "source": "https://lionbar.se/restauranger/lion-bar-malmo/"
+    },
+    {
+      "name": "Kappa Bar",
+      "category": "krog",
+      "osm": [
+        "node/12777860496"
+      ],
+      "lat": 55.60474,
+      "lon": 13.00378,
+      "why": "Bar near Gustav Adolfs torg; asked for by the owner. The OSM node was earlier named Nomi the Karakal."
+    },
+    {
+      "name": "Slice",
+      "category": "krog",
+      "osm": [
+        "node/12477950693"
+      ],
+      "lat": 55.60506,
+      "lon": 13.00436,
+      "why": "Pizza place in the centre, one branch in Malmö; asked for by the owner."
+    },
+    {
+      "name": "Vibliotek",
+      "category": "krog",
+      "osm": [
+        "way/1036504124"
+      ],
+      "lat": 55.60152,
+      "lon": 13.00123,
+      "why": "Wine bar on Södra Vallgatan 3; asked for by the owner. OSM has it as a building, not a bar.",
+      "description": "Spansk restaurang och tapasbar.",
+      "source": "https://www.vibliotek.se/"
+    },
+    {
+      "name": "LU",
+      "category": "krog",
+      "osm": [
+        "node/6850907828"
+      ],
+      "lat": 55.59942,
+      "lon": 12.99784,
+      "why": "Restaurant at Davidshallstorg 3; asked for by the owner."
+    },
+    {
+      "name": "Mikkeller Pop Up",
+      "category": "krog",
+      "osm": [
+        "way/1330518680"
+      ],
+      "apart": "Folkets Park",
+      "lat": 55.59353,
+      "lon": 13.01354,
+      "why": "Mikkeller's bar in Moriskans trädgård in Folkets Park; asked for by the owner. Shares the Folkets Park group, so it never comes up on the same day as the park or its stages."
+    },
+    {
+      "name": "Ava Vinbar",
+      "category": "krog",
+      "osm": [
+        "node/11179344479"
+      ],
+      "lat": 55.59353,
+      "lon": 13.01883,
+      "why": "Wine bar east of Folkets Park; asked for by the owner."
+    },
+    {
+      "name": "Vollmers",
+      "category": "krog",
+      "osm": [
+        "node/3357955290"
+      ],
+      "lat": 55.60466,
+      "lon": 12.99674,
+      "why": "Mats Vollmer's fine-dining restaurant on Tegelgårdsgatan, White Guide's Global Mästarklass and Michelin-starred.",
+      "description": "Restaurang öppnad 2011 av bröderna Ebbe och Mats Vollmer. Fick en stjärna i Guide Michelin 2015 och två 2017.",
+      "source": "https://sv.wikipedia.org/wiki/Vollmers"
+    },
+    {
+      "name": "Hygge",
+      "category": "krog",
+      "osm": [
+        "node/10130500627"
+      ],
+      "lat": 55.60184,
+      "lon": 12.97857,
+      "why": "Hygge Mat & Bar by Ribersborg; asked for by the owner. La Nonnina lies 30 m away.",
+      "description": "Restaurang med husmanskost och klassiker från Öresundsregionen.",
+      "source": "https://www.hyggemalmo.se/"
+    },
+    {
+      "name": "La Nonnina",
+      "category": "krog",
+      "osm": [
+        "node/9800695217"
+      ],
+      "lat": 55.60143,
+      "lon": 12.9778,
+      "why": "Italian restaurant by Ribersborg; asked for by the owner. Hygge lies 30 m away.",
+      "description": "Italiensk restaurang med pizza.",
+      "source": "https://www.openstreetmap.org/node/9800695217"
+    },
+    {
+      "name": "Mutantur",
+      "category": "krog",
+      "osm": [
+        "node/1239620654"
+      ],
+      "lat": 55.59847,
+      "lon": 12.99637,
+      "why": "Restaurant on Erik Dahlbergsgatan, in White Guide and Michelin; asked for by the owner.",
+      "description": "Restaurang som rör sig mellan fine och comfort dining, med barplatser längs det öppna köket.",
+      "source": "https://whiteguide.com"
+    },
+    {
+      "name": "Åhléns",
+      "category": "handel",
+      "osm": [
+        "node/2293729283"
+      ],
+      "lat": 55.60387,
+      "lon": 13.00108,
+      "why": "Åhléns City on Södergatan, the only Åhléns department store left in Malmö (the outlet is in Burlöv), so it is asked as one place.",
+      "description": "Varuhuskedja som grundades 1899 i Insjön.",
+      "source": "https://www.ahlens.se/varuhus/malmo-city"
+    },
+    {
+      "name": "Spoonery",
+      "category": "krog",
+      "asked": "en Spoonery",
+      "osm": [
+        "node/4102273492",
+        "way/52042017",
+        "node/9042549058",
+        "node/13666976701"
+      ],
+      "branches": [
+        {
+          "lat": 55.59684,
+          "lon": 13.01426
+        },
+        {
+          "lat": 55.60668,
+          "lon": 12.99705
+        },
+        {
+          "lat": 55.59725,
+          "lon": 12.97898
+        },
+        {
+          "lat": 55.56128,
+          "lon": 12.97632
+        }
+      ],
+      "why": "Soup and salad restaurants, asked for by the owner as a chain: any branch counts.",
+      "description": "Restaurang som främst gör soppor, grytor och surdegsbröd.",
+      "source": "https://www.spoonery.se/restaurang/hyllie/"
+    },
+    {
+      "name": "Boulebar",
+      "category": "krog",
+      "asked": "en Boulebar",
+      "osm": [
+        "node/578393372",
+        "node/3724579463"
+      ],
+      "branches": [
+        {
+          "lat": 55.59512,
+          "lon": 13.01326
+        },
+        {
+          "lat": 55.60852,
+          "lon": 13.00984
+        }
+      ],
+      "why": "Boule bar and restaurant, one in Folkets Park and one by Drottningtorget: any branch counts. Dropped from the research as a chain, back at the owner's request.",
+      "description": "Bar med boule inomhus. Kedjan finns på 13 platser i 6 städer och 3 länder.",
+      "source": "https://www.boulebar.se/bar-restaurang/drottningtorget-malmo"
+    },
+    {
+      "name": "Surfshack",
+      "category": "krog",
+      "asked": "en Surfshack",
+      "osm": [
+        "way/1091108930",
+        "way/233219302"
+      ],
+      "branches": [
+        {
+          "lat": 55.60678,
+          "lon": 12.99741
+        },
+        {
+          "lat": 55.60413,
+          "lon": 12.97944
+        }
+      ],
+      "why": "Burger diner, one in Gamla Väster and the Beach Diner by Ribersborg: any branch counts.",
+      "description": "Smashburgerrestaurang som öppnade i Malmö 2012.",
+      "source": "https://surfshacksmashburgers.com/"
+    },
+    {
+      "name": "McDonald's",
+      "category": "krog",
+      "asked": "en McDonald's",
+      "osm": [
+        "node/2408201658",
+        "node/253357180",
+        "node/493899996",
+        "node/514143378",
+        "node/6466666264",
+        "node/252108692"
+      ],
+      "branches": [
+        {
+          "lat": 55.59471,
+          "lon": 13.00302
+        },
+        {
+          "lat": 55.6087,
+          "lon": 13.0283
+        },
+        {
+          "lat": 55.58158,
+          "lon": 13.01217
+        },
+        {
+          "lat": 55.60943,
+          "lon": 12.99617
+        },
+        {
+          "lat": 55.56271,
+          "lon": 12.97642
+        },
+        {
+          "lat": 55.55059,
+          "lon": 13.03274
+        }
+      ],
+      "why": "Hamburger chain: any branch in Malmö counts.",
+      "description": "Hamburgerkedja med snabbmat.",
+      "source": "https://www.openstreetmap.org/node/2408201658"
+    },
+    {
+      "name": "Max",
+      "category": "krog",
+      "asked": "en Max",
+      "osm": [
+        "node/11791943025",
+        "node/1985855398",
+        "node/6439644393",
+        "way/1091108910",
+        "way/1322655300",
+        "way/191453709",
+        "way/910600253"
+      ],
+      "branches": [
+        {
+          "lat": 55.59707,
+          "lon": 13.00159
+        },
+        {
+          "lat": 55.56443,
+          "lon": 12.97218
+        },
+        {
+          "lat": 55.54793,
+          "lon": 13.03374
+        },
+        {
+          "lat": 55.60547,
+          "lon": 13.0001
+        },
+        {
+          "lat": 55.60868,
+          "lon": 13.02933
+        },
+        {
+          "lat": 55.57274,
+          "lon": 13.03836
+        },
+        {
+          "lat": 55.55077,
+          "lon": 12.98675
+        }
+      ],
+      "why": "Hamburger chain: any branch in Malmö counts.",
+      "description": "Burgerkedja vars första restaurang öppnades 1968 i Gällivare, då under namnet X-grillen.",
+      "source": "https://www.max.se/hitta-max/restauranger/malmo-7-midhem/"
+    },
+    {
+      "name": "Burger King",
+      "category": "krog",
+      "asked": "en Burger King",
+      "osm": [
+        "node/10753036591",
+        "node/1364768136",
+        "node/1668736096",
+        "node/2747390917",
+        "node/2859803581",
+        "node/429998727",
+        "node/444853562",
+        "node/444876188",
+        "node/6466677359",
+        "node/99235295",
+        "way/131695661",
+        "way/219714948",
+        "way/739711580"
+      ],
+      "branches": [
+        {
+          "lat": 55.58192,
+          "lon": 12.9306
+        },
+        {
+          "lat": 55.59579,
+          "lon": 13.00315
+        },
+        {
+          "lat": 55.59874,
+          "lon": 12.98517
+        },
+        {
+          "lat": 55.57047,
+          "lon": 13.05883
+        },
+        {
+          "lat": 55.56957,
+          "lon": 13.05474
+        },
+        {
+          "lat": 55.60888,
+          "lon": 13.00033
+        },
+        {
+          "lat": 55.60242,
+          "lon": 13.00192
+        },
+        {
+          "lat": 55.60625,
+          "lon": 13.02253
+        },
+        {
+          "lat": 55.55579,
+          "lon": 12.95343
+        },
+        {
+          "lat": 55.55344,
+          "lon": 12.99591
+        },
+        {
+          "lat": 55.57961,
+          "lon": 13.00197
+        },
+        {
+          "lat": 55.59623,
+          "lon": 13.06392
+        },
+        {
+          "lat": 55.55116,
+          "lon": 13.0355
+        }
+      ],
+      "why": "Hamburger chain: any branch in Malmö counts.",
+      "description": "Amerikansk hamburgerkedja. Den första svenska restaurangen öppnades i Malmö 1976.",
+      "source": "https://sv.wikipedia.org/wiki/Burger_King"
+    },
+    {
+      "name": "Espresso House",
+      "category": "kafe",
+      "asked": "ett Espresso House",
+      "osm": [
+        "node/10581639605",
+        "node/10754157934",
+        "node/10754158040",
+        "node/11011860705",
+        "node/11551988413",
+        "node/12106766501",
+        "node/12161689467",
+        "node/13387301367",
+        "node/1677336035",
+        "node/2293728923",
+        "node/3745046909",
+        "node/3777446768",
+        "node/4037719316",
+        "node/4237208425",
+        "node/444845100",
+        "node/444845105",
+        "node/9949588101",
+        "way/1091108904",
+        "node/13018634301"
+      ],
+      "branches": [
+        {
+          "lat": 55.55333,
+          "lon": 12.99352
+        },
+        {
+          "lat": 55.58038,
+          "lon": 13.00321
+        },
+        {
+          "lat": 55.56396,
+          "lon": 12.97415
+        },
+        {
+          "lat": 55.60322,
+          "lon": 13.00356
+        },
+        {
+          "lat": 55.5986,
+          "lon": 12.98461
+        },
+        {
+          "lat": 55.58138,
+          "lon": 13.00383
+        },
+        {
+          "lat": 55.59975,
+          "lon": 13.00122
+        },
+        {
+          "lat": 55.6146,
+          "lon": 12.99073
+        },
+        {
+          "lat": 55.60946,
+          "lon": 13.00042
+        },
+        {
+          "lat": 55.60454,
+          "lon": 13.00072
+        },
+        {
+          "lat": 55.6068,
+          "lon": 12.99981
+        },
+        {
+          "lat": 55.58192,
+          "lon": 12.93403
+        },
+        {
+          "lat": 55.606,
+          "lon": 13.02363
+        },
+        {
+          "lat": 55.59526,
+          "lon": 13.00129
+        },
+        {
+          "lat": 55.60872,
+          "lon": 12.99953
+        },
+        {
+          "lat": 55.61063,
+          "lon": 12.97299
+        },
+        {
+          "lat": 55.59728,
+          "lon": 13.00093
+        },
+        {
+          "lat": 55.60524,
+          "lon": 12.9993
+        },
+        {
+          "lat": 55.58764,
+          "lon": 13.00025
+        }
+      ],
+      "why": "Café chain with most branches in the centre, so mostly asked within a stadsdel: any branch counts.",
+      "description": "Kafékedja som öppnade sitt första kafé i Lund 1996.",
+      "source": "https://espressohouse.com/en/find-us/umas"
+    },
+    {
+      "name": "Systembolaget",
+      "category": "handel",
+      "asked": "ett Systembolag",
+      "osm": [
+        "node/11780290396",
+        "node/1179544348",
+        "node/1719418341",
+        "node/1985859033",
+        "node/2409312466",
+        "node/2747390839",
+        "node/2850243355",
+        "node/3051074420",
+        "node/786403828"
+      ],
+      "branches": [
+        {
+          "lat": 55.59842,
+          "lon": 12.98499
+        },
+        {
+          "lat": 55.60301,
+          "lon": 13.00463
+        },
+        {
+          "lat": 55.58148,
+          "lon": 12.93415
+        },
+        {
+          "lat": 55.56467,
+          "lon": 12.97267
+        },
+        {
+          "lat": 55.60762,
+          "lon": 13.0259
+        },
+        {
+          "lat": 55.56997,
+          "lon": 13.05715
+        },
+        {
+          "lat": 55.61133,
+          "lon": 12.98043
+        },
+        {
+          "lat": 55.59635,
+          "lon": 13.00262
+        },
+        {
+          "lat": 55.57952,
+          "lon": 13.00438
+        }
+      ],
+      "why": "The state alcohol shop: any branch in Malmö counts."
+    },
+    {
+      "name": "Clas Ohlson",
+      "category": "handel",
+      "asked": "en Clas Ohlson",
+      "osm": [
+        "node/10754157957",
+        "node/10756727726",
+        "node/2408541323",
+        "way/1036504115"
+      ],
+      "branches": [
+        {
+          "lat": 55.58257,
+          "lon": 13.00487
+        },
+        {
+          "lat": 55.56455,
+          "lon": 12.97399
+        },
+        {
+          "lat": 55.59516,
+          "lon": 13.00275
+        },
+        {
+          "lat": 55.60205,
+          "lon": 13.00076
+        }
+      ],
+      "why": "Hardware and home store: any branch in Malmö counts."
+    }
+  ]
+}

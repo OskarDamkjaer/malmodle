@@ -22,6 +22,9 @@ Get familiar with Malmö through a short daily quiz.
   bath house) are never asked on the same day.
 - Only names in Grunden (`learn/core.json`, as it is) are used by the app. The
   full curated data stays in the repo and in the build.
+- Grunden grows by date. A name waits as pending, out of the game, until its
+  description is checked, then joins with a date. Every day before that date
+  stays exactly as it was.
 - The set can be replayed. Replaying gives the same set, never a new one.
 
 ## Questions
@@ -42,6 +45,16 @@ Pointing is the most common. Per kind:
   guess, no second try. Scored 0–100 on distance. Afterwards: the pin stays
   where you guessed, how far off you were, and what you actually tapped if it
   was something else.
+- **Var ligger en X?** A chain, a place with several branches such as
+  Systembolaget or McDonald's, is pointed at like any place, and its nearest
+  branch counts. It is asked within one of the ten stadsdelar that holds one
+  to three of its branches, "Var ligger ett Systembolag i Hyllie?", outlined
+  and named on the map, and then only the branches inside it count. A chain
+  with up to four branches is asked across the city half the time instead,
+  and so is one that no stadsdel fits. Afterwards every branch that counted is
+  marked in green, with how many there are, and a pin at a branch outside the
+  stadsdel is told so. A chain is never asked or offered in "Vad ligger här?",
+  and never names the end of a street in "Från A till B".
 - **Vad ligger här?** Something is marked on the map in green, unnamed;
   pick its name from a list of nearby things of the same kind, never one that holds it or sits
   inside it. A place is offered among places of its own category, so a church

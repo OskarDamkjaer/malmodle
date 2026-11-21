@@ -36,6 +36,7 @@ async function main() {
   }
 
   const coreDoc = await json('learn/core.json');
+  const pendingDoc = await json('learn/pending.json');
   const counts = {};
   const tally = (kind, ok) => { counts[kind] ??= [0, 0]; counts[kind][ok ? 0 : 1]++; };
   const apply = (entry, name, field, verifiedField) => {
@@ -49,10 +50,11 @@ async function main() {
   };
 
   await rewrite('places/places.json', (doc) => { for (const p of doc.places) if (tried.has(p.name)) tally('places', apply(p, p.name, 'description')); });
+  await rewrite('learn/pending.json', (doc) => { for (const p of doc.landmarks) if (tried.has(p.name)) tally('places', apply(p, p.name, 'description')); });
   await rewrite('learn/streets.json', (doc) => { for (const s of doc.streets) if (tried.has(s.name)) tally('streets', apply(s, s.name, 'description', 'verified' in s)); });
   await rewrite('learn/bridges.json', (doc) => { for (const b of doc.bridges) if (tried.has(b.name)) tally('bridges', apply(b, b.name, 'description', 'verified' in b)); });
   await rewrite('learn/about.json', (doc) => {
-    const core = new Set(coreDoc.core.areas);
+    const core = new Set([...coreDoc.core.areas, ...pendingDoc.areas]);
     for (const name of tried) {
       if (!core.has(name)) continue;
       const e = passed.get(name);

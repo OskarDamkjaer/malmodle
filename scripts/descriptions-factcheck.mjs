@@ -60,6 +60,7 @@ async function main() {
   };
 
   await rewrite('places/places.json', (doc) => { doc.places.forEach(set('landmark')); });
+  await rewrite('learn/pending.json', (doc) => { doc.landmarks.forEach(set('landmark')); });
   await rewrite('learn/streets.json', (doc) => { doc.streets.forEach(set('street')); });
   await rewrite('learn/bridges.json', (doc) => { doc.bridges.forEach(set('bridge')); });
   await rewrite('learn/about.json', (doc) => {
