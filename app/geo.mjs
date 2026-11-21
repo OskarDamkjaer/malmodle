@@ -58,6 +58,11 @@ export function closest(geometry, point) {
   if (geometry.type === 'Point') {
     return { point: geometry.coordinates, distance: metersBetween(point, geometry.coordinates) };
   }
+  if (geometry.type === 'MultiPoint') {
+    return geometry.coordinates
+      .map((c) => ({ point: c, distance: metersBetween(point, c) }))
+      .reduce((a, b) => (b.distance < a.distance ? b : a));
+  }
   if (contains(geometry, point)) return { point, distance: 0 };
   let best = { point: null, distance: Infinity };
   for (const line of lines(geometry)) {
@@ -73,6 +78,7 @@ export const distanceTo = (geometry, point) => closest(geometry, point).distance
 
 export function along(geometry, count) {
   if (geometry.type === 'Point') return [geometry.coordinates];
+  if (geometry.type === 'MultiPoint') return geometry.coordinates;
   const segments = lines(geometry).flatMap((line) => line.slice(1).map((b, i) => [line[i], b, metersBetween(line[i], b)]));
   const total = segments.reduce((sum, [, , m]) => sum + m, 0);
   if (!total) return [lines(geometry)[0][0]];
@@ -104,7 +110,8 @@ function crosses(a, b, c, d) {
   return side(a, b, c) !== side(a, b, d) && side(c, d, a) !== side(c, d, b);
 }
 
-const vertices = (geometry) => (geometry.type === 'Point' ? [geometry.coordinates] : lines(geometry).flat());
+const vertices = (geometry) => (geometry.type === 'Point' ? [geometry.coordinates]
+  : geometry.type === 'MultiPoint' ? geometry.coordinates : lines(geometry).flat());
 
 export function gap(a, b) {
   for (const p of lines(a)) {

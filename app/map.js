@@ -16,7 +16,8 @@ let guessed = null;
 
 const isPolygon = ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]];
 const isLine = ['in', ['geometry-type'], ['literal', ['LineString', 'MultiLineString']]];
-const isPoint = ['==', ['geometry-type'], 'Point'];
+const isPoint = ['in', ['geometry-type'], ['literal', ['Point', 'MultiPoint']]];
+const spots = (item) => (item.geometry?.type === 'MultiPoint' ? item.geometry.coordinates : [item.point]);
 const roleColor = () => ['match', ['get', 'role'], 'context', COLOR.context, 'hit', COLOR.hit, COLOR.answer];
 
 export function applyPalette(mapInstance) {
@@ -130,7 +131,7 @@ export function showScored(marks) {
   });
   map.getSource('scored-labels').setData({
     type: 'FeatureCollection',
-    features: marks.map(({ item, color }) => feature({ type: 'Point', coordinates: item.point }, at(item, color))),
+    features: marks.flatMap(({ item, color }) => spots(item).map((c) => feature({ type: 'Point', coordinates: c }, at(item, color)))),
   });
   const visibility = marks.length ? 'visible' : 'none';
   for (const id of scoredLayers) map.setLayoutProperty(id, 'visibility', visibility);
@@ -149,7 +150,7 @@ export function show(marks) {
     type: 'FeatureCollection',
     features: marks
       .filter((m) => m.named)
-      .map(({ item, role }) => feature({ type: 'Point', coordinates: item.point }, { name: item.name, role })),
+      .flatMap(({ item, role }) => spots(item).map((c) => feature({ type: 'Point', coordinates: c }, { name: item.name, role }))),
   });
 }
 

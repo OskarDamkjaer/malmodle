@@ -67,3 +67,26 @@ test('the radius of a ring is how far its outline lies from the centre', () => {
   ]);
   assert.equal(Math.round(radius({ type: 'Polygon', coordinates: [ring] }, centre) / 10), 30);
 });
+
+test('a place in several spots is as far away as its nearest one', () => {
+  const spots = { type: 'MultiPoint', coordinates: [[13, 55.6], [13.01, 55.6]] };
+  const near = closest(spots, [13.009, 55.6]);
+  assert.deepEqual(near.point, [13.01, 55.6]);
+  assert.ok(Math.abs(near.distance - metersBetween([13.009, 55.6], [13.01, 55.6])) < 0.01);
+  assert.deepEqual(along(spots, 24), spots.coordinates);
+  assert.deepEqual(bounds([spots]), [[13, 55.6], [13.01, 55.6]]);
+});
+
+test('neighbouring areas merge into one outline without the border between them', async () => {
+  const { dissolve } = await import('../scripts/lib/geo.mjs');
+  const left = { type: 'Polygon', coordinates: [[[13, 55.6], [13.01, 55.6], [13.01, 55.61], [13, 55.61], [13, 55.6]]] };
+  const right = { type: 'Polygon', coordinates: [[[13.01, 55.6], [13.01, 55.61], [13.02, 55.61], [13.02, 55.6], [13.01, 55.6]]] };
+  const both = dissolve([left, right]);
+  assert.equal(both.type, 'Polygon');
+  assert.equal(both.coordinates.length, 1);
+  assert.ok(contains(both, [13.005, 55.605]) && contains(both, [13.015, 55.605]));
+  assert.ok(!contains(both, [13.025, 55.605]));
+  assert.equal(distanceTo(both, [13.01, 55.605]), 0);
+  const apart = dissolve([left, { type: 'Polygon', coordinates: [[[13.03, 55.6], [13.04, 55.6], [13.04, 55.61], [13.03, 55.61], [13.03, 55.6]]] }]);
+  assert.equal(apart.type, 'MultiPolygon');
+});

@@ -1,0 +1,58 @@
+{
+  "regions": {
+    "Centrum": [
+      "Davidshall", "Ellstorp", "Frihamnen", "Gamla Staden", "Inre Hamnen",
+      "Katrinelund", "Lugnet", "Malmö Hus", "Mellersta Hamnen", "Norra Hamnen",
+      "Norra Sorgenfri", "Oljehamnen", "Rådmansvången", "Rörsjöstaden",
+      "Slussen", "Spillepengen", "Värnhem", "Västra Hamnen", "Östervärn",
+      "Östra Hamnen"
+    ],
+    "Fosie": [
+      "Almhög", "Almvik", "Augustenborg", "Eriksfält", "Fosieby",
+      "Fosieby Industriområde", "Fredriksberg", "Gullvik", "Gullviksborg",
+      "Heleneholm", "Hermodsdal", "Hindby", "Kastanjegården", "Lindängen",
+      "Nydala", "Västra Söderkulla", "Östra Söderkulla"
+    ],
+    "Husie": [
+      "Almgården", "Elisedal", "Fortuna Hemgården", "Höja", "Jägersro",
+      "Jägersro Villastad", "Kvarnby", "Riseberga", "Stenkällan",
+      "Södra Sallerup", "Toftanäs", "Videdal", "Virentofta",
+      "Östra Skrävlinge"
+    ],
+    "Hyllie": [
+      "Bellevuegården", "Borgmästaregården", "Gröndal", "Holma", "Hyllievång",
+      "Kroksbäck", "Kroksbäcksparken", "Kulladal", "Lindeborg", "Lorensborg",
+      "Stadion", "Svågertorp", "Södertorp", "Ärtholmen"
+    ],
+    "Kirseberg": [
+      "Bulltofta", "Håkanstorp", "Johanneslust", "Kirsebergsstaden", "Rostorp",
+      "Sege Industriområde", "Segemölla", "Segevång", "Valdemarsro"
+    ],
+    "Limhamn-Bunkeflo": [
+      "Annetorp", "Bellevue", "Bunkeflostrand", "Djupadal", "Elinelund",
+      "Gamla Limhamn", "Hyllieby", "Kalkbrottet", "Klagshamn",
+      "Limhamns Hamnområde", "Naffentorp", "Nya Bellevue", "Rosenvång",
+      "Sibbarp", "Skumparp", "Tygelsjö by", "Tygelsjö Vång", "Vintrie",
+      "Västra Klagstorp"
+    ],
+    "Oxie": [
+      "Glostorp", "Kristineberg", "Kungshög", "Käglinge", "Lockarp",
+      "Oxie Kyrkby", "Oxievång", "Toarp"
+    ],
+    "Rosengård": [
+      "Apelgården", "Emilstorp", "Herrgården", "Kryddgården", "Persborg",
+      "Rosengård Centrum", "Törnrosen", "Västra Kattarp", "Örtagården",
+      "Östra Kyrkogården"
+    ],
+    "Södra Innerstaden": [
+      "Allmänna Sjukhuset", "Annelund", "Flensburg", "Lönngården",
+      "Möllevången", "Norra Sofielund", "Sofielunds Industriområde",
+      "Södervärn", "Södra Sofielund", "Västra Sorgenfri", "Östra Sorgenfri"
+    ],
+    "Västra Innerstaden": [
+      "Dammfri", "Fridhem", "Fågelbacken", "Hästhagen", "Kronborg",
+      "Kronprinsen", "Mellanheden", "Pildammsparken", "Ribersborg",
+      "Ribersborgsstranden", "Rönneholm", "Solbacken", "Teatern", "Västervång"
+    ]
+  }
+}

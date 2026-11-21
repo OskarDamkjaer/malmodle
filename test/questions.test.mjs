@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { MAX_SCORE, NEAR_SCORE, TYPES, distanceScore, falloff, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
+import { MAX_SCORE, NEAR_SCORE, TYPES, answerOf, distanceScore, falloff, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
+import { dailySet, laterKey, random } from '../app/daily.mjs';
 import { band } from '../app/daily.mjs';
 import { fixture } from './fixture.mjs';
 
@@ -230,4 +231,83 @@ test('every type can describe itself', () => {
     assert.ok(['map', 'choice'].includes(type.input), name);
     for (const fn of ['build', 'prompt', 'showing', 'view', 'grade']) assert.equal(typeof type[fn], 'function', `${name}.${fn}`);
   }
+});
+
+const box = (name, west, east) => ({
+  name,
+  point: at((west + east) / 2, 0),
+  geometry: { type: 'Polygon', coordinates: [[at(west, -1000), at(east, -1000), at(east, 1000), at(west, 1000), at(west, -1000)]] },
+});
+const chain = (spots, regions) => ({
+  name: 'Kedjan', kind: 'landmark', category: 'krog', label: 'Krog', asked: 'en Kedjan',
+  point: at(spots[0], 0),
+  geometry: { type: 'MultiPoint', coordinates: spots.map((m) => at(m, 0)) },
+  ...(regions && { regions }),
+});
+
+test('a place in several spots is found at whichever one lies nearest', () => {
+  const target = chain([0, 3000]);
+  const r = TYPES.point.grade({ target }, at(2950, 0), [target]);
+  assert.equal(r.score, MAX_SCORE);
+  assert.deepEqual(r.near, at(3000, 0));
+  assert.equal(Math.round(TYPES.point.grade({ target }, at(1500, 0), [target]).distance), 1500);
+  assert.equal(TYPES.point.prompt({ target }).title, 'Var ligger en Kedjan?');
+});
+
+test('asked within an area, only the spots inside it count, and a tap at one outside says so', () => {
+  const west = box('Väst', -1000, 1000);
+  const target = chain([0, 3000], [west]);
+  const q = { target, region: west };
+  assert.equal(TYPES.point.prompt(q).title, 'Var ligger en Kedjan i Väst?');
+  assert.deepEqual(answerOf(q).coordinates, [at(0, 0)]);
+  const r = TYPES.point.grade(q, at(3000, 0), [target]);
+  assert.ok(r.score < MAX_SCORE);
+  assert.equal(Math.round(r.distance), 3000);
+  assert.equal(r.outside, true);
+  assert.equal(TYPES.point.grade(q, at(0, 0), [target]).outside, undefined);
+  assert.deepEqual(TYPES.point.showing(q), [{ item: west, named: true }]);
+});
+
+test('a place in many spots is always asked within an area, one in a few sometimes across the city', () => {
+  const west = box('Väst', -1000, 1000);
+  const many = chain([0, 3000, 6000, 9000, 12000], [west]);
+  const few = chain([0, 3000], [west]);
+  const asked = (target) => Array.from({ length: 40 }, (_, i) => TYPES.point.build({ target, own: () => random(i + 1) }).region?.name);
+  assert.ok(asked(many).every((name) => name === 'Väst'));
+  assert.ok(asked(few).includes('Väst') && asked(few).includes(undefined));
+  assert.equal(TYPES.point.build({ target: chain([0, 3000]), own: () => random(1) }).region, undefined);
+  assert.equal(TYPES.point.build({ target: many }).region, undefined);
+});
+
+test('a place in several spots is never asked or offered in "Vad ligger här?"', () => {
+  const target = chain([0, 3000]);
+  assert.equal(TYPES.identify.build({ target, items: [target, ...items], rng: random(1) }), null);
+  const single = byName('Plats 1');
+  const q = TYPES.identify.build({ target: single, items: [{ ...target, point: single.point }, ...items], rng: random(1) });
+  assert.ok(!q.options.includes('Kedjan'));
+});
+
+test('a place that becomes a chain draws its own luck, so the rest of its day stays as it was', () => {
+  const base = fixture();
+  let key = '2026-11-01';
+  const pointedAt = (k) => dailySet(base, k).find((q) => q.type === 'point' && q.target.kind === 'landmark');
+  while (!pointedAt(key)) key = laterKey(key, 1);
+  const { target } = pointedAt(key);
+  const [x, y] = target.point;
+  const region = { name: 'Runt', point: target.point, geometry: { type: 'Polygon', coordinates: [[[x - 0.01, y - 0.01], [x + 0.01, y - 0.01], [x + 0.01, y + 0.01], [x - 0.01, y + 0.01], [x - 0.01, y - 0.01]]] } };
+  const spots = { type: 'MultiPoint', coordinates: [target.point, [x + 0.1, y]] };
+  const chained = base.map((it) => (it.name === target.name ? { ...it, geometry: spots, regions: [region] } : it));
+  const plain = (q) => [q.type, q.target.name, q.from?.name, q.to?.name, q.side, q.options?.join()];
+  let regions = 0;
+  for (let n = 0; n < 60; n++) {
+    const k = laterKey(key, n);
+    const before = dailySet(base, k);
+    const after = dailySet(chained, k);
+    regions += after.filter((q) => q.region).length;
+    if (before.some((q) => q.type === 'identify' && q.target.name === target.name)) continue;
+    before.forEach((q, i) => {
+      if (!q.options?.includes(target.name)) assert.deepEqual(plain(after[i]), plain(q), k);
+    });
+  }
+  assert.ok(regions > 0);
 });
