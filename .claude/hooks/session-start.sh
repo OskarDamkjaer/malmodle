@@ -16,6 +16,7 @@ fi
 if node scripts/fetch-dev-assets.mjs; then
   node scripts/fetch-app-assets.mjs || echo "session-start: could not fetch app assets" >&2
   node scripts/build-quiz.mjs || echo "session-start: could not build the quiz data" >&2
+  node scripts/build-quiz.mjs --all --out build/data/quiz-all.json >/dev/null || echo "session-start: could not build the builder's data" >&2
 else
   echo "session-start: could not fetch dev assets; data-dependent tests will skip" >&2
 fi
