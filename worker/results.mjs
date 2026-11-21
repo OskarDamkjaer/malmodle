@@ -4,7 +4,7 @@ import { claimingFor, dayFile, fileUrl, write } from './live.mjs';
 import { daySet } from './sets.mjs';
 
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
-const PLAYER = /^[0-9a-f]{32}$/;
+export const PLAYER = /^[0-9a-f]{32}$/;
 const SET = /^[0-9a-f]{1,8}$/;
 
 const isScore = (n) => Number.isInteger(n) && n >= 0 && n <= MAX_SCORE;
@@ -29,7 +29,7 @@ export async function playerKey(secret) {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-const json = (body, status = 200) => new Response(JSON.stringify(body), {
+export const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
 });
