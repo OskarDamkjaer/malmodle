@@ -187,8 +187,8 @@ async function main() {
   const only = process.argv.includes('--only') ? new Set(process.argv[process.argv.indexOf('--only') + 1].split(',').map((s) => s.trim())) : null;
   await mkdir(CACHE, { recursive: true });
   await mkdir(OUT, { recursive: true });
-  const [core, places, sources, intros, overpass, voyageSv, voyageEn, konst, wg] = await Promise.all([
-    json('learn/core.json'), json('places/places.json'), json('learn/sources.json'), json('data/cache/places/wikipedia-intros.json'),
+  const [core, pending, places, sources, intros, overpass, voyageSv, voyageEn, konst, wg] = await Promise.all([
+    json('learn/core.json'), json('learn/pending.json'), json('places/places.json'), json('learn/sources.json'), json('data/cache/places/wikipedia-intros.json'),
     json('data/cache/places/overpass.json'), json('data/cache/places/wikivoyage-sv.json'), json('data/cache/places/wikivoyage-en.json'),
     json('data/cache/places/malmo-konst.geojson'), json('data/cache/places/whiteguide.json'),
   ]);
@@ -198,9 +198,9 @@ async function main() {
     for (const r of [...(doc.core ?? []), ...(doc.everything ?? [])]) if (r.why) research.set(r.name, r.why);
   }
   const osm = new Map(overpass.elements.map((e) => [`${e.type}/${e.id}`, e.tags ?? {}]));
-  const placeByName = new Map(places.places.map((p) => [p.name, p]));
+  const placeByName = new Map([...places.places, ...pending.landmarks].map((p) => [p.name, p]));
   const kinds = { areas: 'area', streets: 'street', bridges: 'bridge', landmarks: 'landmark' };
-  const targets = Object.entries(core.core).flatMap(([k, names]) => names.map((name) => ({ name, kind: kinds[k] })));
+  const targets = [...Object.entries(core.core), ...Object.entries(pending).map(([k, list]) => [k, list.map((e) => (typeof e === 'string' ? e : e.name))])].flatMap(([k, names]) => names.map((name) => ({ name, kind: kinds[k] })));
 
   let thin = 0;
   for (const { name, kind } of targets) {

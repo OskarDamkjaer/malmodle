@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { bboxGap, bboxOf, distance, interiorPoint } from './lib/geo.mjs';
+import { bboxGap, bboxOf, dissolve, distance, interiorPoint } from './lib/geo.mjs';
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
 import { neighbourhood } from './lib/adjacency.mjs';
 import { closest, contains, metersBetween } from '../app/geo.mjs';
@@ -16,7 +16,7 @@ const STREET_LINK_M = 500;
 
 const json = async (f) => JSON.parse(await readFile(f, 'utf8'));
 
-const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, sourcesDoc, shapesDoc, longlist, bboxDoc] = await Promise.all([
+const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, pendingDoc, sourcesDoc, shapesDoc, longlist, bboxDoc, regionsDoc] = await Promise.all([
   json('build/data/districts.geojson'),
   json('places/places.json'),
   json('learn/bridges.json'),
@@ -24,10 +24,12 @@ const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, core
   json('learn/about.json'),
   json('data/cache/streets.json'),
   json('learn/core.json'),
+  json('learn/pending.json'),
   json('learn/sources.json'),
   json('data/cache/shapes.json'),
   json('places/longlist.json'),
   json('config/bbox.json'),
+  json('learn/regions.json'),
 ]);
 
 const problems = [];
@@ -70,9 +72,9 @@ function segmentDistance(p, a, b) {
   return Math.hypot(px - t * bx, py - t * by);
 }
 
-function simplifyPolygonal(geometry) {
+function simplifyPolygonal(geometry, tolerance = 4) {
   const ring = (r) => {
-    const s = simplifyLine(r, 4);
+    const s = simplifyLine(r, tolerance);
     return s.length >= 4 ? s : r;
   };
   if (geometry.type === 'Polygon') return { type: 'Polygon', coordinates: roundCoords(geometry.coordinates.map(ring)) };
@@ -113,7 +115,34 @@ const PLACE_LABEL = {
 
 const districtByName = new Map(delomraden.map((f) => [f.properties.name, f]));
 
+const REGION_SIMPLIFY_M = 20;
+const REGION_MOST = 3;
+
+const regions = Object.entries(regionsDoc.regions).map(([name, members]) => {
+  const parts = members.map((m) => districtByName.get(m)?.geometry);
+  members.filter((m, i) => !parts[i]).forEach((m) => fail(`regions.json: ${name} has no delområde ${m}`));
+  const outline = dissolve(parts.filter(Boolean));
+  return { name, point: roundCoords(interiorPoint(outline)), geometry: simplifyPolygonal(outline, REGION_SIMPLIFY_M) };
+});
+
+function branchGeometry(p) {
+  const spots = p.branches.map((b) => roundCoords([b.lon, b.lat]));
+  if (spots.length < 2) fail(`${p.name}: a place with branches needs at least two`);
+  const spread = (c) => spots.reduce((sum, o) => sum + metersBetween(c, o), 0);
+  const point = spots.reduce((a, b) => (spread(b) < spread(a) ? b : a));
+  return { geometry: { type: 'MultiPoint', coordinates: spots }, point };
+}
+
+function regionsFor(geometry) {
+  const within = regions.filter((r) => {
+    const n = geometry.coordinates.filter((c) => contains(r.geometry, c)).length;
+    return n >= 1 && n <= REGION_MOST;
+  });
+  return within.length ? { regions: within } : {};
+}
+
 function placeGeometry(p) {
+  if (p.branches) return branchGeometry(p);
   if (p.district) {
     const f = districtByName.get(p.district);
     if (!f) { fail(`${p.name}: no district ${p.district}`); return null; }
@@ -129,7 +158,8 @@ function placeGeometry(p) {
   return { geometry: shapeOr('place', p.name, point), point };
 }
 
-const landmarkItems = placesDoc.places.map((p) => {
+const curated = new Set(placesDoc.places.map((p) => p.name));
+const landmarkItems = [...placesDoc.places, ...pendingDoc.landmarks].map((p) => {
   if (!PLACE_LABEL[p.category]) fail(`${p.name}: unknown category ${p.category}`);
   const where = placeGeometry(p);
   if (!where) return null;
@@ -142,6 +172,7 @@ const landmarkItems = placesDoc.places.map((p) => {
     ...(p.asked && { asked: p.asked }),
     point: roundCoords(where.point),
     geometry: where.geometry,
+    ...(where.geometry.type === 'MultiPoint' && regionsFor(where.geometry)),
     about: p.description ?? null,
     source: p.source ?? null,
   };
@@ -254,6 +285,29 @@ for (const [section, names] of Object.entries(coreDoc.core)) {
   }
 }
 
+if (coreDoc.pending) fail('core.json: pending belongs in learn/pending.json');
+for (const [section, entries] of Object.entries(pendingDoc)) {
+  const kind = CORE_KIND[section];
+  if (!kind) { fail(`pending.json: unknown section ${section}`); continue; }
+  for (const entry of entries) {
+    const name = section === 'landmarks' ? entry.name : entry;
+    if (section === 'landmarks' && curated.has(name)) fail(`pending.json: ${name} is already in places.json`);
+    const it = byName.get(name);
+    if (!it) { fail(`pending.json: ${name} is not in the data`); continue; }
+    if (it.kind !== kind) fail(`pending.json: ${name} is listed under ${section} but is a ${it.kind}`);
+    if (core.has(name)) fail(`pending.json: ${name} is both in core and pending`);
+  }
+}
+
+for (const [day, names] of Object.entries(coreDoc.since ?? {})) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) fail(`core.json: since ${day} is not a date`);
+  for (const name of names) {
+    if (!core.has(name)) { fail(`core.json: ${name} has a since date but is not in core`); continue; }
+    if (byName.get(name).since) fail(`core.json: ${name} has two since dates`);
+    byName.get(name).since = day;
+  }
+}
+
 for (const it of items) {
   if (!it.point || !Number.isFinite(it.point[0])) fail(`${it.name}: no point`);
   if (!it.geometry) fail(`${it.name}: no geometry`);
@@ -358,13 +412,16 @@ const fits = (category, kind) => {
   return !rule || (typeof rule === 'function' ? rule(kind) : rule.includes(kind));
 };
 const { west, south, east, north } = bboxDoc.bbox;
-const taken = new Set(items.map((it) => it.name.toLowerCase()));
-const landmarks = items.filter((it) => it.kind === 'landmark');
+const asks = (it) => everything || it.kind !== 'landmark' || core.has(it.name);
+const live = new Set([...items.filter(asks), ...areaItems, ...bridgeItems, ...streetItems].map((it) => it.name));
+const taken = new Set([...live].map((name) => name.toLowerCase()));
+const landmarks = items.filter((it) => it.kind === 'landmark' && asks(it));
+const waiting = new Set(items.filter((it) => !asks(it)).map((it) => it.name));
 const pool = [];
 for (const [category, { places }] of Object.entries(longlist.categories)) {
   if (!PLACE_LABEL[category]) continue;
   for (const p of places) {
-    if (p.lat == null || p.inGame || DECOY_SKIP.has(p.name) || taken.has(p.name.toLowerCase()) || !fits(category, p.kind)) continue;
+    if (p.lat == null || (p.inGame && !waiting.has(p.inGame)) || DECOY_SKIP.has(p.name) || taken.has(p.name.toLowerCase()) || !fits(category, p.kind)) continue;
     if (p.lon < west || p.lon > east || p.lat < south || p.lat > north) continue;
     const point = roundCoords([p.lon, p.lat]);
     if (landmarks.some((it) => it.category === category && metersBetween(it.point, point) < DECOY_SAME_M)) continue;

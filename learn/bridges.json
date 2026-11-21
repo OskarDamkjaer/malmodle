@@ -117,9 +117,9 @@
       "lat": 55.6073,
       "lon": 12.99611,
       "osm": ["way/394897894"],
-      "description": null,
-      "source": null,
-      "verified": false
+      "description": "Bro över Västra Hamnkanalen vid Älvsborgsbastionen. Den första bron byggdes 1967, den andra och bredare började byggas 2012.",
+      "source": "https://sv.wikipedia.org/wiki/%C3%84lvsborgsbron%2C_Malm%C3%B6",
+      "verified": true
     },
     {
       "name": "Styrmansbron",

@@ -6,6 +6,10 @@ import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
 
 const items = fixture();
+const JOINS = laterKey(SPACED, 40);
+const joining = new Set(['Område 5-0', 'Område 5-1', 'Område 5-2', 'Område 5-3', 'Område 5-4', 'Område 5-5', 'Gata 11']);
+const grown = fixture().map((it) => (joining.has(it.name) ? { ...it, since: JOINS } : it));
+const full = (set) => JSON.stringify(set.map((q) => [q.type, q.target.name, q.options, q.from?.name, q.to?.name, q.side]));
 const days = Array.from({ length: 60 }, (_, i) => dateKey(new Date(2027, 0, 1 + i)));
 
 test('the date key is the local calendar day', () => {
@@ -44,20 +48,49 @@ test('the days before the spaced deal keep the sets they were played with', () =
   assert.equal(laterKey(played.at(-1)[0], 1), SPACED);
 });
 
-test('a target waits before it is asked again, from the spaced deal on', () => {
+test('a target waits before it is asked again, from the spaced deal on and across a day items join', () => {
   const wait = { area: 5, street: 3, place: 2 };
-  const last = new Map();
-  for (let n = 0; n < 120; n++) {
-    for (const q of dailySet(items, laterKey(SPACED, n))) {
-      const since = n - (last.get(q.target.name) ?? -Infinity);
-      assert.ok(since >= wait[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
-      last.set(q.target.name, n);
+  for (const list of [items, grown]) {
+    const last = new Map();
+    for (let n = 0; n < 120; n++) {
+      for (const q of dailySet(list, laterKey(SPACED, n))) {
+        const since = n - (last.get(q.target.name) ?? -Infinity);
+        assert.ok(since >= wait[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
+        last.set(q.target.name, n);
+      }
     }
   }
 });
 
-test('what a question names on the map is not asked days before or after', () => {
-  const sets = Array.from({ length: 60 }, (_, n) => dailySet(items, laterKey(SPACED, n)));
+test('items that join on a date leave every day before it as it was', () => {
+  const without = fixture().filter((it) => !joining.has(it.name));
+  for (let day = '2026-10-10'; day < JOINS; day = laterKey(day, 1)) {
+    assert.equal(full(dailySet(grown, day)), full(dailySet(without, day)), day);
+  }
+  for (let seed = 0; seed < 20; seed++) {
+    for (const q of practiceSet(grown, { key: laterKey(JOINS, -1), category: 'area', seed })) {
+      for (const name of [q.target.name, ...(q.options ?? [])]) assert.ok(!joining.has(name), name);
+    }
+  }
+});
+
+test('items that join on a date are all asked in the first round after it, among the ones already there', () => {
+  const asked = new Set();
+  for (let n = 0; n < 12; n++) {
+    const areas = dailySet(grown, laterKey(JOINS, n)).filter((q) => q.target.kind === 'area').map((q) => q.target.name);
+    assert.ok(areas.some((name) => !joining.has(name)), `only new areas on ${laterKey(JOINS, n)}`);
+    for (const name of areas) asked.add(name);
+  }
+  for (let n = 0; n < 40; n++) for (const q of dailySet(grown, laterKey(JOINS, n))) asked.add(q.target.name);
+  for (const name of joining) assert.ok(asked.has(name), name);
+});
+
+test('what a question names on the map is not asked days before or after, also across a day items join', () => {
+  for (const list of [items, grown]) checkShown(list);
+});
+
+function checkShown(list) {
+  const sets = Array.from({ length: 60 }, (_, n) => dailySet(list, laterKey(SPACED, n)));
   sets.forEach((set, n) => {
     for (const q of set) {
       for (const shown of [q.from, q.to].filter(Boolean)) {
@@ -67,7 +100,7 @@ test('what a question names on the map is not asked days before or after', () =>
       }
     }
   });
-});
+}
 
 test('different days give different sets', () => {
   const firsts = new Set(days.map((d) => dailySet(items, d).map((q) => q.target.name).join()));

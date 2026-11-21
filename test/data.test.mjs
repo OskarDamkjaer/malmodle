@@ -15,6 +15,25 @@ test('the app gets exactly the names in core.json', { skip }, () => {
   assert.deepEqual(items.map((it) => it.name).sort(), expected);
 });
 
+test('no pending name reaches the app', { skip }, () => {
+  const pending = new Set(Object.values(JSON.parse(readFileSync('learn/pending.json', 'utf8'))).flat().map((e) => (typeof e === 'string' ? e : e.name)));
+  assert.ok(pending.size > 0);
+  assert.equal(JSON.parse(readFileSync('learn/core.json', 'utf8')).pending, undefined);
+  assert.deepEqual(items.filter((it) => pending.has(it.name)).map((it) => it.name), []);
+});
+
+test('a name with a since date joins after the spaced deal began, and is in core.json', { skip }, () => {
+  const since = JSON.parse(readFileSync('learn/core.json', 'utf8')).since ?? {};
+  const listed = new Set(Object.values(core).flat());
+  for (const [day, names] of Object.entries(since)) {
+    assert.ok(day > SPACED, day);
+    for (const name of names) {
+      assert.ok(listed.has(name), name);
+      assert.equal(items.find((it) => it.name === name).since, day, name);
+    }
+  }
+});
+
 test('every kind in core.json is in the app', { skip }, () => {
   const KIND = { areas: 'area', streets: 'street', bridges: 'bridge', landmarks: 'landmark' };
   for (const [section, names] of Object.entries(core)) {

@@ -17,11 +17,12 @@ is known for. No marketing words, no opinions, no "Malmös bästa".
 
 ## Scope
 
-Everything in `learn/core.json`:
+Everything in `learn/core.json` and `learn/pending.json`:
 
 | Kind | Where the text goes | Field |
 | --- | --- | --- |
 | Places | `places/places.json` | `description`, `source` |
+| Waiting places | `learn/pending.json` | `landmarks[].description`, `source` |
 | Areas | `learn/about.json` | `areas[name].text`, `source` |
 | Streets | `learn/streets.json` | `description`, `source` |
 | Bridges | `learn/bridges.json` | `description`, `source` |
