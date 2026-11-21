@@ -5,7 +5,13 @@ export const MOUNTS = [
   { url: '/malmo.pmtiles', file: 'data/cache/malmo.pmtiles' },
 ];
 
-export const MOVED = ['/natt/', '/papper/', '/klar/'];
+export const DEV_MOUNTS = [
+  { url: '/dev/', dir: 'dev' },
+  { url: '/dev/data/all.json', file: 'build/data/quiz-all.json' },
+  { url: '/dev/data/longlist.json', file: 'places/longlist.json' },
+];
+
+export const MOVED =['/natt/', '/papper/', '/klar/'];
 
 export const movedPage = `<!doctype html>
 <meta charset="utf-8">

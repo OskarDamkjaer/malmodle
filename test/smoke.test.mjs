@@ -6,7 +6,7 @@ import { PALETTE } from '../app/palette.mjs';
 import { SAVE_KEY, dateKey } from '../app/daily.mjs';
 import { chromium, launch } from './browser.mjs';
 
-const NEEDED = ['build/style.json', 'build/data/quiz.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
+const NEEDED = ['build/style.json', 'build/data/quiz.json', 'build/data/quiz-all.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
 process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS = '1';
 const missing = NEEDED.filter((p) => !existsSync(p));
 const skip = !chromium ? 'playwright is not installed'
@@ -178,7 +178,7 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     const prompts = await playThrough(page, viewport);
 
     await page.waitForSelector('#end:not([hidden])');
-    assert.equal(await page.evaluate(() => window.map.getSource('scored-labels').serialize().data.features.length), 10);
+    assert.equal(await page.evaluate(() => new Set(window.map.getSource('scored-labels').serialize().data.features.map((f) => f.properties.name)).size), 10);
     assert.match(await page.textContent('#endverdict'), /imorgon\.$/);
     assert.match(await page.textContent('#endscore'), /^\d+$/);
     assert.equal(await page.textContent('#endmax'), 'av 1000');
@@ -354,4 +354,97 @@ test('the palette is applied to the basemap', { skip }, async () => {
   assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), PALETTE.map.background);
   assert.deepEqual(errors, []);
   await context.close();
+});
+
+test('a day can be built by hand, changed, undone, kept over a reload, and take what the game never asks', { skip }, async () => {
+  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error' && !m.text().includes('404')) errors.push(m.text()); });
+  try {
+    await page.goto(new globalThis.URL('/dev/builder.html', URL).href);
+    await page.waitForFunction(() => window.map?.loaded() && document.querySelector('#filters button'), null, { timeout: 60000 });
+    for (const name of ['Möllevången', 'Folkets Park']) {
+      await page.fill('#search', name);
+      await page.keyboard.press('Enter');
+    }
+    assert.deepEqual(await page.locator('#questions .title').allTextContents(), ['Möllevången', 'Folkets Park']);
+    assert.equal(await page.locator('#nextn').textContent(), '3');
+    assert.equal(await page.locator('#rest li').count(), 7);
+    await page.click('#questions li:nth-child(2) .types button:has-text("Vad ligger här?")');
+    assert.match(await page.locator('#questions li:nth-child(2) .meta').textContent(), /^Vad ligger här\?/);
+    assert.equal(await page.locator('#questions li:nth-child(2) .options li').count(), 8);
+    assert.equal(await page.locator('#lead .off').count(), 0);
+    assert.equal(await page.locator('#lead').textContent(), 'Första frågan är alltid att peka ut ett område. Fördelningen brukar se ut så här:');
+    await page.keyboard.press('Meta+z');
+    assert.match(await page.locator('#questions li:nth-child(2) .meta').textContent(), /^Peka ut/);
+    await page.reload();
+    await page.waitForSelector('#questions li:nth-child(2)');
+    assert.equal(await page.locator('#questions li').count(), 2);
+    await page.fill('#search', 'Möllevångstorget');
+    assert.equal(await page.locator('#results li').first().locator('.tag').count(), 0);
+    await page.fill('#search', 'Espresso House');
+    assert.equal(await page.locator('#results li').first().locator('.tag').textContent(), 'inte i spelet än');
+    await page.keyboard.press('Enter');
+    assert.deepEqual(await page.locator('#questions li:nth-child(3) .flag').allTextContents(), ['finns inte i spelet än']);
+    assert.match(await page.locator('#questions li:nth-child(3) .edit').textContent(), /ställen?a? räknas/);
+    assert.ok(await page.locator('#questions li:nth-child(3) .types button:has-text("Vad ligger här?")').isDisabled());
+    assert.ok(await page.evaluate(() => window.map.getSource('atlas-points').serialize().data.features.filter((f) => f.properties.name === 'Espresso House').length > 1));
+    assert.match(await page.locator('#notes li').first().textContent(), /Ta med i spelet · Espresso House · fråga 3/);
+    assert.ok(await page.locator('#sendopen').isDisabled());
+    assert.equal(await page.locator('#sendopen').textContent(), 'Skicka in · 3/10');
+    assert.deepEqual(errors, []);
+  } finally {
+    await context.close();
+  }
+});
+
+test('a finished day is sent to the Worker once, under the player the game knows', { skip }, async () => {
+  const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, serviceWorkers: 'block' });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error' && !m.text().includes('404')) errors.push(m.text()); });
+  const button = page.locator('#sendopen');
+  try {
+    await page.goto(new globalThis.URL('/dev/builder.html', URL).href);
+    await page.waitForFunction(() => window.map?.loaded(), null, { timeout: 60000 });
+    const code = await page.evaluate(async () => {
+      const { pack } = await import('/dev/handmade.mjs');
+      const { items } = await (await fetch('/data/quiz.json')).json();
+      return pack({ slots: items.filter((it) => it.kind === 'area').slice(0, 10).map((it) => ({ target: it.name, type: 'point', seed: 1 })) });
+    });
+    await page.goto(new globalThis.URL(`/dev/builder.html#dag=${code}`, URL).href);
+    await page.reload();
+    await page.waitForSelector('#questions li:nth-child(10)', { timeout: 60000 });
+    assert.equal(await button.textContent(), 'Skicka in');
+    assert.ok(await page.locator('#adder').isHidden());
+    assert.equal(await page.locator('#rest li').count(), 0);
+    await button.click();
+    await page.fill('#credit', 'Kim');
+    const [request, response] = await Promise.all([
+      page.waitForRequest('**/api/handmade'),
+      page.waitForResponse('**/api/handmade'),
+      page.click('#submit'),
+    ]);
+    assert.equal(response.status(), 200);
+    await page.waitForFunction(() => document.querySelector('#sendstate').dataset.state === 'ok');
+    assert.equal(await page.textContent('#sendstate'), 'Tack! Dagen är inskickad.');
+    assert.equal(request.postDataJSON().player, await page.evaluate(() => localStorage.getItem('malmodle-player')));
+    assert.equal(request.postDataJSON().name, 'Kim');
+    assert.equal(request.postDataJSON().slots.length, 10);
+    await page.click('#sendclose');
+    assert.equal(await button.textContent(), 'Inskickad ✓');
+    assert.ok(await button.isDisabled());
+    await page.reload();
+    await page.waitForSelector('#questions li:nth-child(10)', { timeout: 60000 });
+    assert.equal(await button.textContent(), 'Inskickad ✓');
+    await page.click('#questions li:nth-child(1) .tools button[aria-label="Flytta fråga 1 ner"]');
+    assert.equal(await button.textContent(), 'Skicka in');
+    assert.ok(await button.isEnabled());
+    assert.deepEqual(errors, []);
+  } finally {
+    await context.close();
+  }
 });

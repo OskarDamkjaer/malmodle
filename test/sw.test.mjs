@@ -40,11 +40,12 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
   const skipped = [];
   const reloaded = [];
   const windows = [{ url: `${ORIGIN}/`, navigate: async (url) => { reloaded.push(url); } }];
+  const pagesById = { game: { url: `${ORIGIN}/` }, builder: { url: `${ORIGIN}/dev/builder.html` } };
   const self = {
     addEventListener: (type, fn) => { listeners[type] = fn; },
     registration: { active: active ? {} : null },
     skipWaiting: async () => { skipped.push(true); },
-    clients: { claim: async () => {}, matchAll: async () => windows },
+    clients: { claim: async () => {}, matchAll: async () => windows, get: async (id) => pagesById[id] },
   };
   vm.runInNewContext(source(code), { self, caches, fetch, Response, Blob, URL, Headers, console, Promise, location: new URL(ORIGIN) });
 
@@ -66,7 +67,7 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
       const cache = await open(name);
       for (const [path, body] of Object.entries(entries)) await cache.put(path, new Response(body));
     },
-    navigate: (path, mode = 'navigate', headers = {}) => dispatch('fetch', { request: { method: 'GET', mode, url: ORIGIN + path, headers: new Headers(headers) } }),
+    navigate: (path, mode = 'navigate', headers = {}, clientId = '') => dispatch('fetch', { clientId, request: { method: 'GET', mode, url: ORIGIN + path, headers: new Headers(headers) } }),
     async cachedText(path, name = code) {
       return (await (await open(name)).match(path))?.text();
     },
@@ -122,6 +123,14 @@ test('the local dev pages are left to the network, uncached', async () => {
   assert.equal(await sw.navigate('/dev/pin.html'), undefined);
   assert.equal(await sw.cachedText('/dev/pin.html'), undefined);
   assert.deepEqual(sw.fetched, []);
+});
+
+test('what a dev page loads of the game comes from the network, and the cache is left as it was', async () => {
+  const sw = worker({ pages: { '/daily.mjs': 'new code' } });
+  await sw.seed({ '/daily.mjs': 'old code' });
+  assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'builder')).text(), 'new code');
+  assert.equal(await sw.cachedText('/daily.mjs'), 'old code');
+  assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'game')).text(), 'old code');
 });
 
 test('a range of the cached map is answered with just those bytes', async () => {

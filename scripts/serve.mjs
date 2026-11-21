@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { createHash } from 'node:crypto';
 import { createReadStream, statSync, existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, normalize, extname, join } from 'node:path';
-import { MIME, MOUNTS, MOVED, movedPage } from './lib/site.mjs';
+import { DEV_MOUNTS, MIME, MOUNTS, MOVED, movedPage } from './lib/site.mjs';
 import { stampWorker } from './lib/stamp.mjs';
 import { localD1 } from './lib/d1.mjs';
 import { localR2 } from './lib/r2.mjs';
@@ -63,7 +63,7 @@ async function api(req, res, url) {
   console.log(`${reply.status} ${req.method} ${url.pathname}`);
 }
 
-const mounts = [...MOUNTS, { url: '/dev/', dir: 'dev' }]
+const mounts = [...MOUNTS, ...DEV_MOUNTS]
   .map((m) => ({ ...m, base: m.url.replace(/\/+$/, '') }))
   .sort((a, b) => b.base.length - a.base.length);
 

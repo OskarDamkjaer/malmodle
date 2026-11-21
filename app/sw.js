@@ -112,6 +112,12 @@ self.addEventListener('message', (event) => {
   })());
 });
 
+async function fromDev(event) {
+  if (!event.clientId) return false;
+  const client = await self.clients.get(event.clientId);
+  return Boolean(client && new URL(client.url).pathname.startsWith('/dev/'));
+}
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
@@ -120,6 +126,7 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/live/') || url.pathname.startsWith('/dev/')) return;
 
   event.respondWith((async () => {
+    if (await fromDev(event)) return fetch(request);
     const cache = await caches.open(url.pathname.endsWith('.pmtiles') ? MAP : CODE);
     const hit = await cache.match(request, { ignoreSearch: true });
     if (hit) return ranged(request, hit);
