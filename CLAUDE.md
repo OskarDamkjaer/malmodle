@@ -26,6 +26,8 @@ with suggested changes to what the game asks.
 `scripts/lib/site.mjs`), so the site build leaves them out.
 `plans/handmade.md` holds the builder's decisions and what is still open.
 `plans/crowd.md` holds the card's decisions and what is still open.
+`plans/pending.md` holds what waits to join the game, how it was chosen, and
+what has to happen before it goes live.
 `plans/streets.md` holds how streets are chosen and what is still open.
 
 Read the skip count, not just the failures. Tests that need `build/`, `data/`
