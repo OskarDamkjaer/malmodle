@@ -9,8 +9,16 @@ export const FALLOFF = { krog: 500, kafe: 500, street: 700, bridge: 700, museum:
 
 export const falloff = (target) => FALLOFF[target.category] ?? FALLOFF[target.kind] ?? FALLOFF.other;
 
+export const several = (it) => it.geometry?.type === 'MultiPoint';
+
+export function answerOf(q) {
+  if (!q.region) return q.target.geometry;
+  const coordinates = q.target.geometry.coordinates.filter((c) => contains(q.region.geometry, c));
+  return { type: 'MultiPoint', coordinates };
+}
+
 export function distanceScore(meters, target) {
-  const grace = target.geometry.type === 'Point' ? GRACE.point : GRACE.shape;
+  const grace = target.geometry.type.endsWith('Point') ? GRACE.point : GRACE.shape;
   const over = Math.max(0, meters - grace);
   return Math.round(MAX_SCORE * Math.exp(-over / falloff(target)));
 }
@@ -58,23 +66,37 @@ function shuffle(list, rng) {
   return out;
 }
 
+const CITY_MOST = 4;
+
 const point = {
   input: 'map',
-  build: ({ target }) => ({ target }),
-  prompt: (q) => ({ title: `Var ligger ${q.target.asked ?? q.target.name}?`, detail: q.target.label }),
-  showing: () => [],
-  view: () => 'home',
+  build({ target, rng, own }) {
+    const draw = own ? own(target.name) : rng;
+    const regions = several(target) && draw ? target.regions ?? [] : [];
+    if (!regions.length) return { target };
+    if (target.geometry.coordinates.length <= CITY_MOST && draw() < 0.5) return { target };
+    return { target, region: regions[Math.floor(draw() * regions.length)] };
+  },
+  prompt(q) {
+    const name = q.target.asked ?? q.target.name;
+    return { title: q.region ? `Var ligger ${name} i ${q.region.name}?` : `Var ligger ${name}?`, detail: q.target.label };
+  },
+  showing: (q) => (q.region ? [{ item: q.region, named: true }] : []),
+  view: (q) => (q.region ? { items: [q.region], context: 300 } : 'home'),
   grade(q, tap, items, street) {
     const hit = street === undefined ? tappedOn(items, tap, q.target.kind) : street;
     if (street && street.name === q.target.name) return { score: MAX_SCORE, tap, near: tap, distance: 0, hit: null };
-    const { distance, point: near } = closest(q.target.geometry, tap);
+    const { distance, point: near } = closest(answerOf(q), tap);
     const score = distanceScore(distance, q.target);
+    const anywhere = q.region && closest(q.target.geometry, tap);
+    const outside = anywhere && score < MAX_SCORE && anywhere.distance <= REACH.landmark && !contains(q.region.geometry, anywhere.point);
     return {
       score,
       tap,
       near,
       distance,
       hit: hit && hit.name !== q.target.name && score < MAX_SCORE ? hit : null,
+      ...(outside && { outside: true }),
     };
   },
 };
@@ -88,8 +110,9 @@ const decoy = (d) => ({ ...d, kind: 'landmark', geometry: { type: 'Point', coord
 const identify = {
   input: 'choice',
   build({ target, items, rng, decoys = [] }) {
+    if (several(target)) return null;
     const nearest = (list) => list.sort((a, b) => metersBetween(a.point, target.point) - metersBetween(b.point, target.point));
-    const fits = (it) => it.kind === target.kind && it.name !== target.name && !together(it, target);
+    const fits = (it) => it.kind === target.kind && it.name !== target.name && !several(it) && !together(it, target);
     const kin = items.filter(fits);
     if (kin.length < 3) return null;
     const alike = (it) => !target.category || it.category === target.category;
@@ -176,7 +199,7 @@ function ends(geometry) {
 function landmarkAt(end, items, avoid) {
   const rank = (it) => END_RANK.indexOf(it.category);
   const near = items
-    .filter((it) => it.kind === 'landmark' && rank(it) >= 0 && !avoid.has(it.name))
+    .filter((it) => it.kind === 'landmark' && rank(it) >= 0 && !several(it) && !avoid.has(it.name))
     .map((it) => ({ it, d: distanceTo(it.geometry, end) }))
     .filter((x) => x.d <= END_REACH)
     .sort((a, b) => rank(a.it) - rank(b.it) || a.d - b.d)[0];

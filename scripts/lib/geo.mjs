@@ -160,6 +160,62 @@ export function clusterByGap(boxes, gapM) {
   return [...groups.values()];
 }
 
+function signedArea(ring) {
+  let a2 = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) a2 += ring[j][0] * ring[i][1] - ring[i][0] * ring[j][1];
+  return a2 / 2;
+}
+
+export function dissolve(geometries) {
+  const key = ([x, y]) => `${x.toFixed(7)},${y.toFixed(7)}`;
+  const edges = new Map();
+  for (const g of geometries) {
+    for (const rings of g.type === 'Polygon' ? [g.coordinates] : g.coordinates) {
+      rings.forEach((ring, i) => {
+        const outer = i === 0;
+        const r = (signedArea(ring) > 0) === outer ? ring : [...ring].reverse();
+        for (let k = 1; k < r.length; k++) {
+          const a = key(r[k - 1]);
+          const b = key(r[k]);
+          if (a === b) continue;
+          if (edges.has(`${b}>${a}`)) edges.delete(`${b}>${a}`);
+          else edges.set(`${a}>${b}`, [r[k - 1], r[k]]);
+        }
+      });
+    }
+  }
+  const out = new Map();
+  for (const [a, b] of edges.values()) {
+    if (!out.has(key(a))) out.set(key(a), { from: a, to: [] });
+    out.get(key(a)).to.push(b);
+  }
+  const rings = [];
+  while (out.size) {
+    const [start, { from }] = out.entries().next().value;
+    const ring = [from];
+    let at = start;
+    while (out.has(at)) {
+      const step = out.get(at);
+      const b = step.to.pop();
+      if (!step.to.length) out.delete(at);
+      ring.push(b);
+      at = key(b);
+      if (at === start) break;
+    }
+    if (at === start && ring.length >= 4) rings.push(ring);
+  }
+  const outers = rings.filter((r) => signedArea(r) > 0).map((r) => [r]);
+  for (const hole of rings.filter((r) => signedArea(r) < 0)) {
+    const [x, y] = hole[0];
+    const home = outers
+      .filter(([o]) => crossings(o, x, y))
+      .sort((a, b) => signedArea(a[0]) - signedArea(b[0]))[0];
+    home?.push(hole);
+  }
+  if (outers.length === 1) return { type: 'Polygon', coordinates: outers[0] };
+  return { type: 'MultiPolygon', coordinates: outers };
+}
+
 export function roundPoint([x, y]) {
   return [Number(x.toFixed(5)), Number(y.toFixed(5))];
 }

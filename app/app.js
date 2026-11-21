@@ -2,7 +2,7 @@ import { Map, AttributionControl, NavigationControl, addProtocol } from './vendo
 import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
-import { TYPES, formatDistance, MAX_SCORE } from './questions.mjs';
+import { TYPES, answerOf, formatDistance, several, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import {
   applyPalette, clear, clearPin, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, pinAt, placePin, setupLayers, show, showScored, showTap,
@@ -437,13 +437,21 @@ function showInfo(item, played) {
 }
 
 function revealPoint(q, result) {
-  const marks = [{ item: q.target, role: 'answer', named: true }];
+  const marks = q.region ? [{ item: q.region, role: 'context', named: true }] : [];
+  marks.push({ item: { ...q.target, geometry: answerOf(q) }, role: 'answer', named: true });
   if (result.hit) marks.push({ item: result.hit, role: 'hit', named: true });
   show(marks);
   showTap(result.tap, result.near);
   el('verdict').textContent = result.score === MAX_SCORE ? 'Mitt i prick' : `${formatDistance(result.distance)} bort`;
-  el('explain').textContent = result.hit ? `Det där var ${result.hit.name}.` : '';
-  requestAnimationFrame(() => frameReveal([q.target.geometry], [result.tap]));
+  el('explain').textContent = result.hit ? `Det där var ${result.hit.name}.` : several(q.target) ? branches(q, result) : '';
+  const shown = q.region ? [q.region.geometry] : several(q.target) ? [] : [q.target.geometry];
+  requestAnimationFrame(() => frameReveal(shown, several(q.target) ? [result.tap, result.near] : [result.tap]));
+}
+
+function branches(q, result) {
+  const count = answerOf(q).coordinates.length;
+  const text = `${q.target.name} finns på ${count === 1 ? 'ett ställe' : `${count} ställen`} i ${q.region?.name ?? 'Malmö'}.`;
+  return result.outside ? `${text} Den du pekade ut ligger utanför ${q.region.name}.` : text;
 }
 
 function revealChoice(q, result) {
