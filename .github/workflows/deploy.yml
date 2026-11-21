@@ -109,6 +109,9 @@ jobs:
       - name: Build the quiz data
         run: node scripts/build-quiz.mjs
 
+      - name: Build the day builder's data
+        run: node scripts/build-quiz.mjs --all --out build/data/quiz-all.json
+
       - name: Install the tools
         run: npm ci --no-fund --no-audit
 

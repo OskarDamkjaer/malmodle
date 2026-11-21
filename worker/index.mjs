@@ -1,10 +1,12 @@
 import { postResult } from './results.mjs';
+import { postHandmade } from './handmade.mjs';
 import { catchUp } from './live.mjs';
 
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname === '/api/result') return postResult(request, env, ctx);
+    if (pathname === '/api/handmade') return postHandmade(request, env);
     if (pathname.startsWith('/api/')) return new Response('Not found', { status: 404 });
     return env.ASSETS.fetch(request);
   },
