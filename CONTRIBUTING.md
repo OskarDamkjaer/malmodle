@@ -93,6 +93,14 @@ rebuild it (below) or fetch a prebuilt copy with
   `since`, `changes` or `days.json` falls on or before the last. Run
   `node scripts/played.mjs` before dating anything, so the days up to today
   are pinned.
+- `learn/sources.json`: a link for a name whose entry has none, and
+  `unlinked`, the names shown without "Läs mer". A link stays only when the
+  page is about exactly that thing: its own Swedish Wikipedia article, its
+  page on malmo.se, or the place's own site. A page about a neighbour, a
+  list, a guide or one that cannot be fetched means no link. English
+  Wikipedia will do where there is no Swedish article. A place without a
+  link gets one to Google Maps instead, and a street, area or bridge none.
+  The entry keeps its `source`, which says where the description came from.
 - `learn/`: bridges, streets, descriptions and sources, and `regions.json`,
   the delområden in each of the ten stadsdelar. The build merges them into the
   outlines a chain is asked within.

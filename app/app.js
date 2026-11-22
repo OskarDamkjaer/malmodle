@@ -2,7 +2,7 @@ import { Map, AttributionControl, NavigationControl, addProtocol } from './vendo
 import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, inPlay, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { BUILDER_KEY, POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize, unlockedText, unlocks } from './crowd.mjs';
-import { TYPES, answerOf, formatDistance, several, MAX_SCORE } from './questions.mjs';
+import { TYPES, answerOf, formatDistance, readMore, several, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import {
   applyPalette, clear, clearPin, frameHome, frameItems, frameReveal, glowScored, hideLabels, pickScored, pinAt, placePin, setupLayers, show, showScored, showTap,
@@ -420,8 +420,12 @@ function showInfo(item, played) {
     pill.dataset.band = band(played.result.score);
     el('infooutcome').textContent = outcome(played);
   }
-  el('infosource').hidden = !item.source;
-  if (item.source) el('infosource').href = item.source;
+  const more = readMore(item);
+  el('infosource').hidden = !more;
+  if (more) {
+    el('infosource').textContent = more.text;
+    el('infosource').href = more.href;
+  }
   const [lng, lat] = item.streetview ?? item.point;
   el('infostreet').href = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
 

@@ -525,7 +525,7 @@
    "lon": 13.00379,
    "why": "The city theatre's main house, the Hippodromen circus building on Kalendegatan, known to everyone as Hipp.",
    "description": "Stadens talscen, med Hipp som huvudscen.",
-   "source": "https://www.malmostadsteater.se/about-malmo-stadsteater"
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_Stadsteater"
   },
   {
    "name": "Moriska Paviljongen",
@@ -650,7 +650,7 @@
    "lon": 12.99931,
    "why": "Klas Anshelm's 1975 hall on S:t Johannesgatan, about 200,000 visitors a year, one of the best-known art venues in the city. OSM tags it amenity=arts_centre, so it was filed under scen. It is already in the game.",
    "description": "Klas Anshelms byggnad från 1975, en av Europas största utställningshallar för samtidskonst. Dagsljuset faller in genom 550 takfönster.",
-   "source": "https://malmokonsthall.se/en/architecture/"
+   "source": "https://malmokonsthall.se/arkitektur/"
   },
   {
    "name": "Panora",
@@ -721,7 +721,7 @@
    "lon": 12.98287,
    "why": "The technology and maritime museum opposite Malmöhus, the classic school-trip museum. The tram and bus stop is still called Tekniska museet.",
    "description": "Teknik- och sjöfartsmuseum, med ubåten U3 uppdragen på land.",
-   "source": "https://www.lonelyplanet.com/sweden/skane/malmo/attractions/teknikens-och-sjoefartens-hus/a/poi-sig/1581639/360797"
+   "source": "https://sv.wikipedia.org/wiki/Teknikens_och_sj%C3%B6fartens_hus"
   },
   {
    "name": "Moderna Museet Malmö",
@@ -1042,7 +1042,7 @@
    "lon": 12.97346,
    "why": "Malmö's largest shopping centre at Hyllie, one of the biggest in Scandinavia, with a striking facade by Wingårdh.",
    "description": "Köpcentrum från 2012, ritat av Wingårdhs, med en böljande entré i bärnstensfärgat glas.",
-   "source": "https://www.dezeen.com/2013/09/27/emporia-shopping-centre-in-malmo-by-wingardhs/amp/"
+   "source": "https://sv.wikipedia.org/wiki/Emporia,_Malm%C3%B6"
   },
   {
    "name": "Mobilia",
@@ -1433,7 +1433,7 @@
    "lon": 13.00742,
    "why": "French-style patisserie on Östergatan run by David Fernandes since 2003, listed among Malmö's classic konditorier.",
    "description": "Konditori i kvarteret Sankt Gertrud, öppnat 2003 av David Fernandes.",
-   "source": "http://www.patisseriedavid.se/"
+   "source": "https://www.patisseriedavid.se/"
   },
   {
    "name": "Atrium",
@@ -1605,7 +1605,7 @@
    "lon": 12.99542,
    "why": "",
    "description": "Universitetets bibliotek och lärarutbildning, invigt 2005.",
-   "source": "https://fojab.se/en/project/lararhogskolan-orkanen/"
+   "source": "https://sv.wikipedia.org/wiki/Orkanen_(byggnad)"
   },
   {
    "name": "IKEA Malmö",

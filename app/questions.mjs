@@ -246,3 +246,9 @@ const route = {
 };
 
 export const TYPES = { point, identify, neighbour, route };
+
+export function readMore(item) {
+  if (item.source) return { text: 'Läs mer', href: item.source };
+  if (item.kind !== 'landmark') return null;
+  return { text: 'Google Maps', href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${item.name}, Malmö`)}` };
+}
