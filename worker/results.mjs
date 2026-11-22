@@ -1,5 +1,6 @@
 import { MAX_SCORE } from '../app/questions.mjs';
-import { SET_SIZE } from '../app/daily.mjs';
+import { SET_SIZE, laterKey } from '../app/daily.mjs';
+import { UNLOCK } from '../app/crowd.mjs';
 import { claimingFor, dayFile, fileUrl, write } from './live.mjs';
 import { daySet } from './sets.mjs';
 
@@ -47,11 +48,13 @@ export async function postResult(request, env, ctx, now = Date.now()) {
   const known = result.set === await daySet(env, request.url, result.day);
   const player = await playerKey(result.player);
   const total = result.scores.reduce((a, b) => a + b, 0);
+  const lately = Array.from({ length: UNLOCK.streak }, (_, n) => laterKey(result.day, -n));
   const replies = await db.batch([
     db.prepare(`INSERT INTO results (day, player, set_id, total, scores, at) SELECT ?1, ?2, ?3, ?4, ?5, ?6
       WHERE ?7 OR EXISTS (SELECT 1 FROM days WHERE day = ?1 AND set_id = ?3) ON CONFLICT DO NOTHING`)
       .bind(result.day, player, result.set, total, JSON.stringify(result.scores), now, known ? 1 : 0),
     db.prepare('SELECT set_id, total, scores, at FROM results WHERE day = ? AND player = ?').bind(result.day, player),
+    db.prepare(`SELECT day FROM results WHERE player = ?1 AND day IN (${lately.map((_, n) => `?${n + 2}`).join(', ')})`).bind(player, ...lately),
     ...(env.LIVE ? [claimingFor(db, result.day, player, now)] : []),
     db.prepare(`SELECT players, totals, questions, finished FROM days
       WHERE day = ?1 AND set_id = (SELECT set_id FROM results WHERE day = ?1 AND player = ?2)`).bind(result.day, player),
@@ -59,7 +62,9 @@ export async function postResult(request, env, ctx, now = Date.now()) {
   const [mine] = replies[1].results;
   if (!mine) return json({ error: 'set' }, 409);
   const set = mine.set_id;
-  const claimed = env.LIVE && replies[2].results.length > 0;
+  const days = new Set(replies[2].results.map((r) => r.day));
+  const streak = lately.findIndex((d) => !days.has(d));
+  const claimed = env.LIVE && replies[3].results.length > 0;
   const [row] = replies.at(-1).results;
   const day = dayFile(result.day, set, row);
   if (claimed) {
@@ -68,7 +73,7 @@ export async function postResult(request, env, ctx, now = Date.now()) {
     else await writing;
   }
   return json({
-    you: { total: mine.total, scores: JSON.parse(mine.scores), at: mine.at },
+    you: { total: mine.total, scores: JSON.parse(mine.scores), at: mine.at, streak: streak < 0 ? lately.length : streak },
     day,
     poll: fileUrl(env, result.day, set),
   });

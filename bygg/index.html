@@ -24,6 +24,12 @@
   #sendopen:disabled { opacity: 1; color: var(--ink-soft); border-color: var(--dot); background: linear-gradient(to right, #f4dade var(--done, 0%), #fff var(--done, 0%)); }
   #tally { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; margin: -4px 0 8px; color: var(--ink-soft); }
   #tally:empty { display: none; }
+  #narrow { display: none; }
+  @media (max-width: 759px) {
+    #narrow:not([hidden]) { position: fixed; inset: 0; z-index: 10; display: grid; place-content: center; gap: 14px; padding: 24px; background: var(--bg); text-align: center; font-size: 17px; line-height: 1.45; }
+    #narrow h1 { margin: 0; }
+    #narrow p { margin: 0; max-width: 30ch; }
+  }
   #tally button { min-height: 0; padding: 0; border: none; background: none; color: var(--wrong); text-decoration: underline; font-size: inherit; }
   .actions { display: flex; flex-wrap: wrap; gap: 6px; }
   .actions .spacer { flex: 1; }
@@ -178,6 +184,11 @@
 </style>
 </head>
 <body>
+<div id="narrow">
+  <h1>Bygg en dag</h1>
+  <p>Byggaren behöver en större skärm. Öppna malmodle.se/bygg på en dator.</p>
+  <button id="narrowanyway" type="button">Visa ändå</button>
+</div>
 <aside id="side">
   <header>
     <div class="top">
@@ -241,6 +252,6 @@
   <p class="small">Med dagen följer ett slumpat id som den här webbläsaren också spelar med.</p>
 </dialog>
 <script src="/vendor/pmtiles.js"></script>
-<script type="module" src="/dev/builder.js"></script>
+<script type="module" src="/bygg/builder.js"></script>
 </body>
 </html>

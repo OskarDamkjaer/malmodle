@@ -40,7 +40,7 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
   const skipped = [];
   const reloaded = [];
   const windows = [{ url: `${ORIGIN}/`, navigate: async (url) => { reloaded.push(url); } }];
-  const pagesById = { game: { url: `${ORIGIN}/` }, builder: { url: `${ORIGIN}/dev/builder.html` } };
+  const pagesById = { game: { url: `${ORIGIN}/` }, builder: { url: `${ORIGIN}/bygg/` }, week: { url: `${ORIGIN}/dev/week.html` } };
   const self = {
     addEventListener: (type, fn) => { listeners[type] = fn; },
     registration: { active: active ? {} : null },
@@ -116,19 +116,22 @@ test('a worker never answers from the cache of another version', async () => {
   assert.equal(await sw.cachedText('/app.js', NEW), 'next code');
 });
 
-test('the local dev pages are left to the network, uncached', async () => {
+test('the local dev pages and the day builder are left to the network, uncached', async () => {
   const sw = worker();
   await sw.seed({ '/dev/pin.js': 'old dev code' });
   assert.equal(await sw.navigate('/dev/pin.js', 'script'), undefined);
   assert.equal(await sw.navigate('/dev/pin.html'), undefined);
   assert.equal(await sw.cachedText('/dev/pin.html'), undefined);
+  assert.equal(await sw.navigate('/bygg/'), undefined);
+  assert.equal(await sw.navigate('/bygg/builder.js', 'script'), undefined);
   assert.deepEqual(sw.fetched, []);
 });
 
-test('what a dev page loads of the game comes from the network, and the cache is left as it was', async () => {
+test('what a dev page or the builder loads of the game comes from the network, and the cache is left as it was', async () => {
   const sw = worker({ pages: { '/daily.mjs': 'new code' } });
   await sw.seed({ '/daily.mjs': 'old code' });
   assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'builder')).text(), 'new code');
+  assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'week')).text(), 'new code');
   assert.equal(await sw.cachedText('/daily.mjs'), 'old code');
   assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'game')).text(), 'old code');
 });

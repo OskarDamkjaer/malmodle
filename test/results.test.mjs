@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import { parseResult, playerKey, postResult } from '../worker/results.mjs';
 import { catchUp, fileKey } from '../worker/live.mjs';
 import { localR2 } from '../scripts/lib/r2.mjs';
-import { FEWEST_TO_RANK, summarize, tally } from '../app/crowd.mjs';
+import { FEWEST_TO_RANK, UNLOCK, summarize, tally } from '../app/crowd.mjs';
 import { localD1 } from '../scripts/lib/d1.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import worker from '../worker/index.mjs';
-import { dailySet, setId } from '../app/daily.mjs';
+import { dailySet, laterKey, setId } from '../app/daily.mjs';
 import { fixture } from './fixture.mjs';
 
 const NOW = Date.parse('2026-10-13T12:00:00Z');
@@ -215,6 +215,24 @@ function counted(db) {
     db: { prepare: (sql) => wrap(db.prepare(sql)), batch: (statements) => { batches++; return db.batch(statements); } },
   };
 }
+
+test('a result answers with how many days in a row the player has played, counted as far as the unlock', async () => {
+  fresh();
+  const today = new Date().toISOString().slice(0, 10);
+  const earlier = async (n, days) => {
+    const player = await playerKey(secret(n));
+    for (const d of days) {
+      await env.DB.prepare('INSERT INTO results (day, player, set_id, total, scores, at) VALUES (?, ?, ?, ?, ?, ?)')
+        .bind(laterKey(today, -d), player, 'a', 0, '[]', 0).run();
+    }
+  };
+  const played = { ...good, day: today, set: setFor(today) };
+  assert.equal((await (await post(played)).json()).you.streak, 1);
+  await earlier(2, [1, 2, 3, 5]);
+  assert.equal((await (await post({ ...played, player: secret(2) })).json()).you.streak, 4);
+  await earlier(3, Array.from({ length: UNLOCK.streak + 5 }, (_, d) => d + 1));
+  assert.equal((await (await post({ ...played, player: secret(3) })).json()).you.streak, UNLOCK.streak);
+});
 
 test('a post asks the database once', async () => {
   for (const live of [true, false]) {

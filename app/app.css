@@ -120,6 +120,19 @@ button.primary:hover { filter: brightness(1.06); }
   text-transform: uppercase;
   color: var(--ink-soft);
 }
+#byline {
+  position: absolute;
+  top: 100%;
+  left: 14px;
+  margin: 0;
+  padding: 3px 10px 4px;
+  background: var(--panel);
+  border: var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  font-size: 13px;
+  color: var(--ink-soft);
+}
 #prompt {
   margin: 8px 0 0;
   font-size: clamp(20px, 2.2vw + 12px, 26px);
@@ -205,6 +218,13 @@ body[data-answered] #question { display: none; }
 .total span { font-size: 16px; color: var(--ink-soft); }
 #endverdict { margin: 8px 0 0; font-size: 18px; font-family: var(--font-display); }
 #elsewhere { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); }
+#endby { margin: 8px 0 0; font-size: 15px; color: var(--ink-soft); }
+#builder { margin: 14px 0 0; text-align: center; font-size: 15px; color: var(--ink-soft); }
+#builder[data-fresh] { padding: 10px 12px; border-radius: var(--radius); background: #fbf3dc; color: var(--ink); }
+#builderwhy:not(:empty) { display: block; margin-bottom: 4px; font-weight: 600; }
+#builderlink { color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+#builderlink::after { content: " →"; }
+#builder .phone { display: none; }
 #elsewherelink { color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 #elsewherelink:hover { text-decoration-thickness: 2.5px; }
 .round { margin: 28px 0 0; padding: 12px 0 0; border-top: var(--rule); }
@@ -242,7 +262,7 @@ body[data-ended] #maptip { display: block; }
 #endmap::after { content: " ↓"; }
 body[data-mapview] #endmap::after { content: " ↑"; }
 body[data-mapview] #end .sheet > :not(header):not(#endmap) { display: none; }
-body[data-mapview] #endverdict, body[data-mapview] #elsewhere { display: none; }
+body[data-mapview] #endverdict, body[data-mapview] #elsewhere, body[data-mapview] #endby { display: none; }
 #end[data-crowd] #endverdict, #end[data-crowd] #elsewhere { display: none; }
 body:not([data-mapview]) #end[data-crowd="asking"] .total { visibility: hidden; }
 body:not([data-mapview]) #end:has(#crowd:not([hidden]) .graph:not([data-waiting])) .total { display: none; }
@@ -393,6 +413,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 }
 
 @media (max-width: 759px) {
+  #builder .phone { display: block; margin-top: 2px; font-size: 13px; }
   body:not([data-mapview]) :is(#report, #maptip) { z-index: 4; }
   .maplibregl-ctrl-top-right { display: none; }
 }

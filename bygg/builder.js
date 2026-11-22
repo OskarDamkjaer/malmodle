@@ -3,8 +3,8 @@ import { BAND_COLORS, SET_SIZE } from '/daily.mjs';
 import { MAX_SCORE, TYPES, answerOf, formatDistance, several } from '/questions.mjs';
 import { around, bounds, metersBetween, union } from '/geo.mjs';
 import { applyPalette, clear, setupLayers, show, showTap } from '/map.js';
-import { LEVELS, reach } from '/dev/falloff.js';
-import { GROUP_NAMES, LIMITS, TYPE_NAMES, WHAT, another, assemble, flags, pack, proposals, ready, sending, typical, unpack } from '/dev/handmade.mjs';
+import { LEVELS, reach } from '/bygg/falloff.js';
+import { GROUP_NAMES, LIMITS, TYPE_NAMES, WHAT, another, assemble, flags, pack, proposals, ready, sending, typical, unpack } from '/bygg/handmade.mjs';
 
 const el = (id) => document.getElementById(id);
 
@@ -56,7 +56,7 @@ const SEARCH_KINDS = [['all', 'Alla'], ...Object.entries(KINDS)];
 
 const load = (url) => fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 const [quiz, all, longlist, style] = await Promise.all([
-  load('/data/quiz.json'), load('/dev/data/all.json'), load('/dev/data/longlist.json'), load('/style.json'),
+  load('/data/quiz.json'), load('/bygg/data/all.json'), load('/bygg/data/longlist.json'), load('/style.json'),
 ]);
 
 const items = quiz.items;
@@ -1229,3 +1229,4 @@ selected = slots.length ? 0 : -1;
 applyView();
 render();
 if (selected >= 0) frame(marksFor(entries[selected]));
+el('narrowanyway').addEventListener('click', () => { el('narrow').hidden = true; });

@@ -1,5 +1,5 @@
-import { DECKS, GROUP, MIXES, SET_SIZE, SPLITS, random } from '/daily.mjs';
-import { TYPES, several } from '/questions.mjs';
+import { DECKS, GROUP, MIXES, SET_SIZE, SPLITS, makeQuestion as make } from '/daily.mjs';
+import { several } from '/questions.mjs';
 
 export const TYPE_NAMES = { point: 'Peka ut', identify: 'Vad ligger här?', neighbour: 'Direkt … om', route: 'Från A till B' };
 export const GROUP_NAMES = { area: ['område', 'områden'], street: ['gata', 'gator'], place: ['plats', 'platser'] };
@@ -22,8 +22,6 @@ const TAKEN = {
   neighbour: 'Området den skulle utgå från frågas redan i dagen.',
   route: 'Det vid gatans ändar frågas redan i dagen.',
 };
-
-const make = (type, seed, item, items, decoys, avoid) => TYPES[type].build({ target: item, items, rng: random(seed), avoid, decoys, own: () => random(seed) });
 
 function why(type, seed, item, items, decoys) {
   if (type === 'identify' && several(item)) return CHAIN;

@@ -3,12 +3,13 @@ export const MOUNTS = [
   { url: '/style.json', file: 'build/style.json' },
   { url: '/data/quiz.json', file: 'build/data/quiz.json' },
   { url: '/malmo.pmtiles', file: 'data/cache/malmo.pmtiles' },
+  { url: '/bygg/', dir: 'bygg' },
+  { url: '/bygg/data/all.json', file: 'build/data/quiz-all.json' },
+  { url: '/bygg/data/longlist.json', file: 'places/longlist.json' },
 ];
 
 export const DEV_MOUNTS = [
   { url: '/dev/', dir: 'dev' },
-  { url: '/dev/data/all.json', file: 'build/data/quiz-all.json' },
-  { url: '/dev/data/longlist.json', file: 'places/longlist.json' },
 ];
 
 export const MOVED =['/natt/', '/papper/', '/klar/'];
