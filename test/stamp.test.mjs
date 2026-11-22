@@ -5,17 +5,20 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { codeHash, mapHash, stampWorker } from '../scripts/lib/stamp.mjs';
 
-test('the code cache is named after every built file but the worker and the map', () => {
+test('the code cache is named after every built file but the worker, the map and the builder', () => {
   const dir = mkdtempSync(join(tmpdir(), 'stamp-'));
   mkdirSync(join(dir, 'data'));
+  mkdirSync(join(dir, 'bygg'));
   writeFileSync(join(dir, 'app.js'), 'a');
   writeFileSync(join(dir, 'data', 'quiz.json'), '{}');
   writeFileSync(join(dir, 'sw.js'), 'x');
   writeFileSync(join(dir, 'malmo.pmtiles'), 'm');
+  writeFileSync(join(dir, 'bygg', 'builder.js'), 'b');
   const first = codeHash(dir);
   assert.match(first, /^[0-9a-f]{12}$/);
   writeFileSync(join(dir, 'sw.js'), 'y');
   writeFileSync(join(dir, 'malmo.pmtiles'), 'n');
+  writeFileSync(join(dir, 'bygg', 'builder.js'), 'c');
   assert.equal(codeHash(dir), first);
   writeFileSync(join(dir, 'data', 'quiz.json'), '{"items":[]}');
   assert.notEqual(codeHash(dir), first);

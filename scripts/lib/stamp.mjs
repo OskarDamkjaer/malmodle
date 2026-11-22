@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
 const UNHASHED = new Set(['sw.js', 'malmo.pmtiles']);
+const APART = /^bygg\//;
 const CODE = "const CODE = 'malmo-code';";
 const MAP = "const MAP = 'malmo-map';";
 
@@ -16,7 +17,7 @@ function files(dir) {
 export function codeHash(dir) {
   const hash = createHash('sha256');
   for (const file of files(dir).map((p) => relative(dir, p).split(sep).join('/')).sort()) {
-    if (UNHASHED.has(file)) continue;
+    if (UNHASHED.has(file) || APART.test(file)) continue;
     hash.update(`${file}\0`).update(readFileSync(join(dir, file))).update('\0');
   }
   return hash.digest('hex').slice(0, 12);

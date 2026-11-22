@@ -3,7 +3,7 @@ import { BAND_COLORS, GROUP, SHOWN_GAP, dailySet, dateKey, issue, laterKey } fro
 import { TYPES, formatDistance } from '/questions.mjs';
 import { bounds } from '/geo.mjs';
 import { applyPalette, setupLayers, show } from '/map.js';
-import { LEVELS, addFalloff, reach } from '/dev/falloff.js';
+import { LEVELS, addFalloff, reach } from '/bygg/falloff.js';
 
 const el = (id) => document.getElementById(id);
 
@@ -39,6 +39,7 @@ window.map = map;
 
 let items = [];
 let decoys = [];
+let made;
 let byName = new globalThis.Map();
 let baseLabels = [];
 let rows = [];
@@ -48,7 +49,7 @@ await new Promise((resolve) => map.on('load', resolve));
 applyPalette(map);
 baseLabels = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 setupLayers(map);
-({ items, decoys = [] } = await fetch('/data/quiz.json').then((r) => r.json()));
+({ items, decoys = [], made } = await fetch('/data/quiz.json').then((r) => r.json()));
 
 for (const [layer, prop] of [['focus-fill', 'fill-color'], ['focus-line', 'line-color'], ['focus-circle', 'circle-color'], ['focus-label', 'text-color']]) {
   map.setPaintProperty(layer, prop, ['match', ['get', 'role'], 'close', BAND_COLORS.orange, map.getPaintProperty(layer, prop)]);
@@ -104,7 +105,7 @@ function build() {
   history.replaceState(null, '', `?from=${from}&days=${count}`);
   const days = Array.from({ length: count }, (_, n) => {
     const key = laterKey(from, n);
-    return { key, set: dailySet(items, key, decoys) };
+    return { key, set: dailySet(items, key, decoys, made) };
   });
   const seen = new globalThis.Map();
   const onMap = new globalThis.Map();
@@ -122,7 +123,8 @@ function build() {
     const section = document.createElement('section');
     section.className = 'day';
     const h = document.createElement('h2');
-    h.textContent = `${dayName(key)} · nr ${issue(key)}`;
+    const maker = made?.[key];
+    h.textContent = [`${dayName(key)} · nr ${issue(key)}`, maker && `gjord av ${maker.by ?? 'en spelare'}`].filter(Boolean).join(' · ');
     const groups = {};
     const types = {};
     for (const q of set) {

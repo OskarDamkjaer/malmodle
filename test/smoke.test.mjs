@@ -1,9 +1,11 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { existsSync, statSync, utimesSync } from 'node:fs';
+import { existsSync, readFileSync, statSync, utimesSync } from 'node:fs';
 import { PALETTE } from '../app/palette.mjs';
-import { SAVE_KEY, dateKey } from '../app/daily.mjs';
+import { SAVE_KEY, dailySet, dateKey } from '../app/daily.mjs';
+import { TYPES } from '../app/questions.mjs';
+import { unlockedText } from '../app/crowd.mjs';
 import { chromium, launch } from './browser.mjs';
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'build/data/quiz-all.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
@@ -356,6 +358,43 @@ test('the palette is applied to the basemap', { skip }, async () => {
   await context.close();
 });
 
+test('a day made by hand names its maker, and a full score unlocks the day builder', { skip }, async () => {
+  const quiz = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
+  const key = dateKey();
+  const slots = dailySet(quiz.items, key, quiz.decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: i + 1 }));
+  const made = { [key]: { by: 'Kim', slots } };
+  const set = dailySet(quiz.items, key, quiz.decoys, made);
+  const finished = (score) => JSON.stringify({
+    version: 1, key, targets: set.map((q) => q.target.name),
+    done: set.map((q) => (TYPES[q.type].input === 'map' ? { score, distance: score === 100 ? 0 : 900 } : { score, choice: score === 100 ? q.target.name : 'fel' })),
+  });
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
+  await context.route('**/data/quiz.json', (route) => route.fulfill({ json: { ...quiz, made } }));
+  await context.route('**/api/**', (route) => route.abort());
+  const page = await context.newPage();
+  const end = async (score) => {
+    await page.evaluate(([k, v]) => localStorage.setItem(k, v), [SAVE_KEY, finished(score)]);
+    await page.reload();
+    await page.waitForSelector('#end:not([hidden])', { timeout: 60000 });
+  };
+  try {
+    await page.goto(URL);
+    await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+    assert.equal(await page.textContent('#byline'), 'Dagens frågor av Kim');
+    assert.ok(await page.locator('#byline').isVisible());
+    await end(0);
+    assert.equal(await page.textContent('#endby'), 'Dagens frågor av Kim.');
+    assert.ok(await page.locator('#builder').isHidden());
+    await end(100);
+    assert.ok(await page.locator('#builder').isVisible());
+    assert.equal(await page.textContent('#builderwhy'), unlockedText('perfect'));
+    assert.equal(await page.getAttribute('#builderlink', 'href'), '/bygg/');
+    assert.ok(await page.locator('#builder .phone').isVisible());
+  } finally {
+    await context.close();
+  }
+});
+
 test('a day can be built by hand, changed, undone, kept over a reload, and take what the game never asks', { skip }, async () => {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await context.newPage();
@@ -363,7 +402,7 @@ test('a day can be built by hand, changed, undone, kept over a reload, and take 
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error' && !m.text().includes('404')) errors.push(m.text()); });
   try {
-    await page.goto(new globalThis.URL('/dev/builder.html', URL).href);
+    await page.goto(new globalThis.URL('/bygg/', URL).href);
     await page.waitForFunction(() => window.map?.loaded() && document.querySelector('#filters button'), null, { timeout: 60000 });
     for (const name of ['Möllevången', 'Folkets Park']) {
       await page.fill('#search', name);
@@ -408,14 +447,14 @@ test('a finished day is sent to the Worker once, under the player the game knows
   page.on('console', (m) => { if (m.type() === 'error' && !m.text().includes('404')) errors.push(m.text()); });
   const button = page.locator('#sendopen');
   try {
-    await page.goto(new globalThis.URL('/dev/builder.html', URL).href);
+    await page.goto(new globalThis.URL('/bygg/', URL).href);
     await page.waitForFunction(() => window.map?.loaded(), null, { timeout: 60000 });
     const code = await page.evaluate(async () => {
-      const { pack } = await import('/dev/handmade.mjs');
+      const { pack } = await import('/bygg/handmade.mjs');
       const { items } = await (await fetch('/data/quiz.json')).json();
       return pack({ slots: items.filter((it) => it.kind === 'area').slice(0, 10).map((it) => ({ target: it.name, type: 'point', seed: 1 })) });
     });
-    await page.goto(new globalThis.URL(`/dev/builder.html#dag=${code}`, URL).href);
+    await page.goto(new globalThis.URL(`/bygg/#dag=${code}`, URL).href);
     await page.reload();
     await page.waitForSelector('#questions li:nth-child(10)', { timeout: 60000 });
     assert.equal(await button.textContent(), 'Skicka in');

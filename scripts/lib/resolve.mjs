@@ -1,6 +1,6 @@
-import { DEV_MOUNTS, MOUNTS } from '../scripts/lib/site.mjs';
+import { DEV_MOUNTS, MOUNTS } from './site.mjs';
 
-const root = new URL('../', import.meta.url);
+const root = new URL('../../', import.meta.url);
 const dirs = [...MOUNTS, ...DEV_MOUNTS].filter((m) => m.dir).sort((a, b) => b.url.length - a.url.length);
 const served = dirs.map((m) => new URL(`${m.dir}/`, root).href);
 

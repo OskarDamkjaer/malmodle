@@ -38,6 +38,8 @@ const CODE_FILES = [
 
 const MAP_FILES = ['/malmo.pmtiles'];
 const STEADY = 'malmo-steady';
+const PAGES_APART = ['/dev/', '/bygg/'];
+const apart = (path) => PAGES_APART.some((prefix) => path.startsWith(prefix));
 
 async function fillCache(name, urls) {
   const cache = await caches.open(name);
@@ -115,7 +117,7 @@ self.addEventListener('message', (event) => {
 async function fromDev(event) {
   if (!event.clientId) return false;
   const client = await self.clients.get(event.clientId);
-  return Boolean(client && new URL(client.url).pathname.startsWith('/dev/'));
+  return Boolean(client && apart(new URL(client.url).pathname));
 }
 
 self.addEventListener('fetch', (event) => {
@@ -123,7 +125,7 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== location.origin) return;
-  if (url.pathname.startsWith('/live/') || url.pathname.startsWith('/dev/')) return;
+  if (url.pathname.startsWith('/live/') || apart(url.pathname)) return;
 
   event.respondWith((async () => {
     if (await fromDev(event)) return fetch(request);

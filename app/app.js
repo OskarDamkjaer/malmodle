@@ -1,7 +1,7 @@
 import { Map, AttributionControl, NavigationControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
-import { POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize } from './crowd.mjs';
+import { BUILDER_KEY, POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize, unlockedText, unlocks } from './crowd.mjs';
 import { TYPES, answerOf, formatDistance, several, MAX_SCORE } from './questions.mjs';
 import { namedLines, streetNear, tileAt } from './tiles.mjs';
 import {
@@ -133,7 +133,9 @@ map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
 window.map = map;
 
 let items = [];
+let today = [];
 let decoys = [];
+let made;
 let byName = new globalThis.Map();
 let key = '';
 let set = [];
@@ -169,16 +171,22 @@ function renderDots() {
   dots.setAttribute('aria-label', `Fråga ${index + 1} av ${set.length}`);
 }
 
-function start() {
+function setKey() {
   key = dateKey();
+  today = onDay(items, key);
+  byName = new globalThis.Map(today.map((it) => [it.name, it]));
+}
+
+function start() {
+  setKey();
   practicing = null;
-  play(dailySet(items, key, decoys));
+  play(dailySet(items, key, decoys, made));
 }
 
 function resume() {
-  key = dateKey();
+  setKey();
   practicing = null;
-  const questions = dailySet(items, key, decoys);
+  const questions = dailySet(items, key, decoys, made);
   const answered = recall(arrived(questions), key, questions);
   if (!answered.length) forget();
   try {
@@ -216,9 +224,9 @@ function save(finished) {
 }
 
 function practise(kind) {
-  key = dateKey();
+  setKey();
   practicing = kind;
-  play(practiceSet(items, { key, category: kind.id, seed: Math.floor(Math.random() * 2 ** 32), decoys }));
+  play(practiceSet(items, { key, category: kind.id, seed: Math.floor(Math.random() * 2 ** 32), decoys, made }));
 }
 
 function play(questions, answered = []) {
@@ -251,6 +259,9 @@ function ask() {
   renderDots();
   el('detail').textContent = detail ?? '';
   el('prompt').textContent = title;
+  const maker = index === 0 && !practicing && made?.[key];
+  el('byline').hidden = !maker;
+  if (maker) el('byline').textContent = credit(maker);
   hide('result', 'info', 'guess');
   delete document.body.dataset.answered;
   reveal('question');
@@ -282,7 +293,7 @@ function ask() {
   const view = type.view(q);
   requestAnimationFrame(() => {
     if (pinAt()) return;
-    if (view === 'home') frameHome(items);
+    if (view === 'home') frameHome(today);
     else frameItems(view.items, view.context);
   });
 }
@@ -378,7 +389,7 @@ async function answer(value, keyed = false) {
   const q = current();
   const type = typeOf(q);
   const street = type.input === 'map' && q.target.kind === 'street' ? await clickedStreet(value).catch(() => undefined) : undefined;
-  const result = type.grade(q, value, items, street);
+  const result = type.grade(q, value, today, street);
   results.push({ q, result });
   save(false);
   phase = 'answered';
@@ -573,6 +584,11 @@ function finish() {
   el('kinds').hidden = !practicing;
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
+  const maker = !practicing && made?.[key];
+  el('endby').hidden = !maker;
+  if (maker) el('endby').textContent = `${credit(maker)}.`;
+  if (!practicing) unlock(unlocks({ total }));
+  renderBuilder();
   renderSquares();
   el('elsewhere').hidden = Boolean(practicing) || location.hostname === HOME;
   el('elsewherelink').href = `https://${HOME}/#runda=${carry({ key, set, results })}`;
@@ -587,6 +603,26 @@ function finish() {
   el('end').scrollTop = 0;
   spreadOut();
   el(practicing ? 'again' : 'share').focus({ preventScroll: true });
+}
+
+const credit = (maker) => `Dagens frågor av ${maker.by ?? 'en spelare'}`;
+
+function unlocked() {
+  try { return JSON.parse(localStorage.getItem(BUILDER_KEY)); } catch { return null; }
+}
+
+function unlock(why) {
+  if (!why || unlocked()) return;
+  try { localStorage.setItem(BUILDER_KEY, JSON.stringify({ why, day: key })); } catch {}
+  renderBuilder();
+}
+
+function renderBuilder() {
+  const got = unlocked();
+  const fresh = got?.day === key;
+  el('builder').hidden = !got;
+  el('builder').toggleAttribute('data-fresh', fresh);
+  el('builderwhy').textContent = fresh ? unlockedText(got.why) : '';
 }
 
 const PLAYER_KEY = 'malmodle-player';
@@ -689,7 +725,11 @@ async function compare() {
       chartSettled = true;
       cheer();
     };
-    const show = (d) => card.update(summarize(d, you), names, { recent: recentOthers(d, you, Date.now()), tries, settled });
+    const show = (d) => {
+      const crowd = summarize(d, you);
+      unlock(unlocks({ total: you.total, streak: you.streak, crowd }));
+      card.update(crowd, names, { recent: recentOthers(d, you, Date.now()), tries, settled });
+    };
     reveal('crowd');
     show(day);
     end.dataset.crowd = 'shown';
@@ -980,8 +1020,7 @@ document.addEventListener('keydown', (e) => {
 map.on('load', async () => {
   try {
     applyPalette(map);
-    ({ items, decoys = [] } = await fetch('/data/quiz.json').then((r) => r.json()));
-    byName = new globalThis.Map(items.map((it) => [it.name, it]));
+    ({ items, decoys = [], made } = await fetch('/data/quiz.json').then((r) => r.json()));
     setupLayers(map);
   } catch (err) {
     fail('Frågorna kunde inte laddas', err);

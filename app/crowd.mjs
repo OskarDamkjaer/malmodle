@@ -25,6 +25,9 @@ export const POLL = [[5 * MINUTE, 20 * SECOND], [10 * MINUTE, MINUTE], [20 * MIN
 export const RETRY = 3 * SECOND;
 export const POSTED_KEY = 'malmodle-posted';
 
+export const UNLOCK = { streak: 15, total: MAX_TOTAL, top: 0.01, players: 100 };
+export const BUILDER_KEY = 'malmodle-builder';
+
 const NBSP = ' ';
 const BEST = ['Bäst', 'Näst bäst', 'Tredje bäst', 'Fjärde bäst', 'Femte bäst', 'Sjätte bäst', 'Sjunde bäst', 'Åttonde bäst', 'Nionde bäst', 'Tionde bäst'];
 const ORDINAL = ['första', 'andra', 'tredje', 'fjärde', 'femte', 'sjätte', 'sjunde', 'åttonde', 'nionde', 'tionde'];
@@ -93,8 +96,22 @@ export function posted(raw, day, set) {
   const { total, scores, at } = raw.you ?? {};
   if (!Array.isArray(scores) || scores.length !== SET_SIZE || !scores.every(isScore)) return null;
   if (total !== scores.reduce((a, b) => a + b, 0) || !Number.isFinite(at)) return null;
-  return { you: { total, scores, at }, poll: raw.poll, players: raw.players };
+  const streak = Number.isInteger(raw.you.streak) && raw.you.streak >= 0 ? { streak: raw.you.streak } : {};
+  return { you: { total, scores, at, ...streak }, poll: raw.poll, players: raw.players };
 }
+
+export function unlocks({ total, streak = 0, crowd = null }) {
+  if (total >= UNLOCK.total) return 'perfect';
+  if (streak >= UNLOCK.streak) return 'streak';
+  if (crowd && crowd.players >= UNLOCK.players && (crowd.you.above + 1) / crowd.players <= UNLOCK.top) return 'top';
+  return null;
+}
+
+export const unlockedText = (why) => `Upplåst idag, för ${{
+  perfect: `${count(UNLOCK.total)} poäng`,
+  streak: `${say(UNLOCK.streak)} dagar i rad`,
+  top: 'en plats bland den bästa procenten',
+}[why]}.`;
 
 export const counted = (saved, file) => Number.isInteger(file?.players) && file.players >= saved.players;
 

@@ -3,18 +3,30 @@
 How the builder is meant to work, and what is still open. It is for people
 outside the project: they build a day of ten, suggest changes to what the
 game asks about, and send both in. The questions, what a usual day looks
-like and what is sent live in `dev/handmade.mjs`, the page in `dev/builder.js`, and
-`/dev/builder.html` on the local server shows it. A day made here is never
-played by anyone: the game deals its own day, and nothing the builder does
-reaches it.
+like and what is sent live in `bygg/handmade.mjs`, the page in
+`bygg/builder.js`, and it is served at `/bygg/`, on malmodle.se as on the
+local server. Nothing the builder does reaches the game until the owner picks
+a day that was sent in and gives it a date.
 
 ## Decisions
 
 - **Written for people outside the project.** The page speaks of what things
   are in the game, never of files, formats or the project's own names for
   its data.
-- **Desktop first.** Questions on the left, the map on the right. Phones come
-  once people other than the owner build days.
+- **Hosted, and earned.** The page is part of the site at malmodle.se/bygg.
+  The end screen links to it once the player has a full 1000, has played
+  fifteen days in a row, or is in the top percent of a day with at least a
+  hundred players (`UNLOCK` in `app/crowd.mjs`). The browser remembers it,
+  and on the day it happens the link sits in a highlight that says why. The
+  streak comes back with each posted result, from at most fifteen rows read
+  by key. Anyone with the address can still use the page.
+  It loads the game's own modules, the site's `quiz.json` and its own copy of
+  everything in the data. The offline worker leaves it to the network, and
+  its files are left out of the name of the game's code cache, so a change to
+  the builder never sends players a new version.
+- **Desktop only.** Questions on the left, the map on the right. A narrow
+  screen gets a note to open the page on a computer, with "Visa ändå", and the
+  end screen's link says the same on a phone.
 - **Nothing is generated.** A day starts empty and every question is picked.
   There is no "start from the day the game would deal".
 - **Target and type, the rest from the game.** Each question is a target, a
@@ -87,36 +99,42 @@ reaches it.
   can be held against how the one who sent it plays. Every day sent is kept,
   up to `PER_DAY` a day per player. The page says when a day has gone in, and
   keeps saying so until something in it changes.
+- **Anyone may send.** The Worker takes a day from any player, up to
+  `PER_DAY` a day, and what is no good is deleted from `handmade` in D1.
+- **Read and scheduled from the command line.** `scripts/handmade.mjs` lists
+  the days sent in, newest first, with the sender's name, how many days they
+  have played, their remark and suggestions, and a link that opens the day in
+  the builder. `take <id>` gives one a date, the first from a week ahead that
+  fits or the one given, and writes it into `learn/days.json`.
+- **A made day is played as made.** On its date the game builds each question
+  from its target, type and seed the way the builder does, with the items in
+  play that day, and keeps from the map what the three days before it ask.
+  "Dagens frågor av …" hangs under the first question's card, with the name
+  the sender gave or "en spelare" without one, and the end screen says it
+  again. The days before it keep their deal,
+  and every deck is dealt anew from the day after, with what was asked lately
+  at the back, so its targets wait like any other and the dealt targets it
+  replaced come soon.
+- **A date has to fit.** Its targets must all be in the game by then, every
+  question must build with its type, none of its targets may be asked within
+  a week (an area) or two (a street or place) before it, and what it shows on
+  the map may not be asked within three days of it, or the other way round.
+  `scripts/lib/made.mjs` checks this for `take`, and the data tests check it
+  over a year for every made day in `learn/days.json`.
 - **The link is the day.** The address holds the target, type and seed of
   each question and the suggestions, so a link gives someone else exactly the
   same day, and the browser keeps the latest draft with the name and note.
 
 ## Open
 
-- **Builders other than the owner.** The page only runs on the local server.
-  Invited people need it hosted. How the credit shows on the end screen is
-  not decided.
-- **Who may send.** The player key is kept so a day can be held to a streak
-  or a high score before it is taken. Which, and whether the page should say
-  so or stop someone before they build, is not decided. A player is a
-  browser: someone who plays on the phone and builds on a computer is two
-  players, and a new id resets the limit per day.
-- **Reading what is sent.** The days are rows in `handmade` in D1, read with
-  `wrangler d1 execute`. Nothing lists them or says one has come in, and a
-  row's `slots` and `notes` open in the builder only once packed into a link.
 - **Acting on suggestions.** A suggestion for the game means adding the name
   to `learn/pending.json`, and for a place on the long list curating its
   entry there. `plans/pending.md` says how a waiting name goes live.
-  Nothing does that from what is sent in yet.
-- **Putting a day into the schedule.** The game's day is worked out from the
-  date alone. Playing a made day on a date needs `daily.mjs` to take it in
-  place of the dealt one, the Worker's `sets.mjs` to agree, and a decision on
-  what happens to the decks around it, which would otherwise deal the same
-  targets a few days later.
+  Nothing does that from what is sent in yet, and a made day with a target
+  outside the game cannot be scheduled until that target is in `core.json`.
+- **Knowing a day came in.** `scripts/handmade.mjs` lists what is there.
+  Nothing says when something new arrives.
 - **Keeping the data current.** People are sent to OpenStreetMap to add what
-  is missing, which reaches the builder only when the data is refreshed;
-  `CONTRIBUTING.md` says how. How often is not decided.
-- **Days around it.** A made day is checked on its own. The game also keeps
-  what a day names on the map from being asked within `SHOWN_GAP` days, and
-  spaces each deck so a target waits most of a round. Neither is checked
-  until a made day has a date.
+  is missing, which reaches the builder only when the data is refreshed.
+  `CONTRIBUTING.md` says every few months and before asking people to build
+  days, so the next refresh belongs before the first invitations.

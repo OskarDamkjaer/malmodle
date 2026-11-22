@@ -6,8 +6,8 @@ import { DECKS, GROUP, SPLITS, dailySet, laterKey, plan, random } from '../app/d
 import { fixture } from './fixture.mjs';
 import { parseHandmade } from '../worker/handmade.mjs';
 
-register('./site.mjs', import.meta.url);
-const { LIMITS, TYPES_FOR, another, assemble, flags, pack, proposals, ready, sending, typical, unpack } = await import('../dev/handmade.mjs');
+register('../scripts/lib/resolve.mjs', import.meta.url);
+const { LIMITS, TYPES_FOR, another, assemble, flags, pack, proposals, ready, sending, typical, unpack } = await import('../bygg/handmade.mjs');
 
 const QUIZ = 'build/data/quiz.json';
 const skip = existsSync(QUIZ) ? false : `${QUIZ} is missing; run node scripts/build-quiz.mjs`;

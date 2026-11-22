@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   BINS, EXACT_BELOW, aside, beatenText, belowText, columns, countBelow, counted, field, highlight, highlightText,
   pausedText, place, pollDelay, posted, rankLabel, recentOthers, shown, standing, strongest, strongestText, summarize, tally, waiting,
+  UNLOCK, unlockedText, unlocks,
 } from '../app/crowd.mjs';
 import { SET_SIZE } from '../app/daily.mjs';
 
@@ -176,6 +177,8 @@ test('a remembered post is used only for the same day and set, and only while it
   const you = { total: scores.reduce((a, b) => a + b, 0), scores, at: 1760000000000 };
   const saved = { day: '2026-10-18', set: 'ab12', you, poll: 'https://data.malmodle.se/2026-10-18/ab12.json', players: 4 };
   assert.deepEqual(posted(saved, '2026-10-18', 'ab12'), { you, poll: saved.poll, players: 4 });
+  assert.equal(posted({ ...saved, you: { ...you, streak: 6 } }, '2026-10-18', 'ab12').you.streak, 6);
+  assert.equal(posted({ ...saved, you: { ...you, streak: 'många' } }, '2026-10-18', 'ab12').you.streak, undefined);
   assert.equal(posted(saved, '2026-10-19', 'ab12'), null);
   assert.equal(posted(saved, '2026-10-18', 'cd34'), null);
   for (const broken of [
@@ -183,6 +186,20 @@ test('a remembered post is used only for the same day and set, and only while it
     { ...saved, you: null }, { ...saved, you: { ...you, total: you.total + 1 } }, { ...saved, you: { ...you, scores: scores.slice(1) } },
     { ...saved, you: { ...you, scores: scores.map(() => 101) } }, { ...saved, you: { ...you, at: 'igår' } },
   ]) assert.equal(posted(broken, '2026-10-18', 'ab12'), null, JSON.stringify(broken));
+});
+
+test('the day builder unlocks with a full score, fifteen days in a row, or the top percent of at least a hundred', () => {
+  const crowd = (players, above) => ({ players, you: { above } });
+  assert.equal(unlocks({ total: UNLOCK.total }), 'perfect');
+  assert.equal(unlocks({ total: UNLOCK.total - 10 }), null);
+  assert.equal(unlocks({ total: 500, streak: UNLOCK.streak }), 'streak');
+  assert.equal(unlocks({ total: 500, streak: UNLOCK.streak - 1 }), null);
+  assert.equal(unlocks({ total: 900, crowd: crowd(100, 0) }), 'top');
+  assert.equal(unlocks({ total: 900, crowd: crowd(100, 1) }), null);
+  assert.equal(unlocks({ total: 900, crowd: crowd(99, 0) }), null);
+  assert.equal(unlocks({ total: 900, crowd: crowd(1000, 9) }), 'top');
+  assert.equal(unlocks({ total: 900, crowd: crowd(1000, 10) }), null);
+  for (const why of ['perfect', 'streak', 'top']) assert.match(unlockedText(why), /^Upplåst idag, för .+\.$/);
 });
 
 test('the day file counts you once it has at least as many players as your post saw', () => {
