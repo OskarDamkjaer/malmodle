@@ -401,6 +401,7 @@ test('a day can be built by hand, changed, undone, kept over a reload, and take 
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error' && !m.text().includes('404')) errors.push(m.text()); });
+  page.on('request', (r) => { if (r.headers().range) errors.push(`asked for a part of ${r.url()}, which the live site answers with all of it`); });
   try {
     await page.goto(new globalThis.URL('/bygg/', URL).href);
     await page.waitForFunction(() => window.map?.loaded() && document.querySelector('#filters button'), null, { timeout: 60000 });
