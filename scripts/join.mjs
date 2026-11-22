@@ -3,14 +3,15 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { DECKS, dailySet, dateKey, laterKey, setId, targetsOn } from '../app/daily.mjs';
-import { coreWritten, move, pendingWritten, pick, undescribed } from './lib/join.mjs';
+import { coreWritten, move, pendingWritten, pick, placesWritten, undescribed } from './lib/join.mjs';
 import { LEAD, SOONEST } from './lib/made.mjs';
 import { PLAYED, pin, pinned } from './lib/played.mjs';
 
 const CORE = 'learn/core.json';
 const PENDING = 'learn/pending.json';
+const PLACES = 'places/places.json';
 const AHEAD = 60;
-const USAGE = 'usage: node scripts/join.mjs [areas] [streets] [bridges] [--names "A, B"] [--on YYYY-MM-DD] [--dry]';
+const USAGE = 'usage: node scripts/join.mjs [areas] [streets] [bridges] [landmarks] [--names "A, B"] [--on YYYY-MM-DD] [--dry]';
 
 const args = process.argv.slice(2);
 const option = (k) => { const i = args.indexOf(k); return i < 0 ? null : args.splice(i, 2)[1] ?? ''; };
@@ -53,14 +54,20 @@ function run() {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || laterKey(day, 0) !== day) throw new Error(`${day} is not a date`);
   if (day < soonest) throw new Error(`${day} is too soon: a browser still on the old version would deal the old set, so the first date is ${soonest}`);
 
-  const missing = undescribed(picked, { about: read('learn/about.json'), streets: read('learn/streets.json'), bridges: read('learn/bridges.json') });
+  const missing = undescribed(picked, { about: read('learn/about.json'), streets: read('learn/streets.json'), bridges: read('learn/bridges.json'), pending: pendingDoc });
   if (missing.length) throw new Error(missing.join('\n'));
 
-  const moved = move(coreDoc, pendingDoc, picked, day);
-  const files = { [CORE]: coreWritten(moved.core), [PENDING]: pendingWritten(moved.pending), [PLAYED]: pinned(days) };
+  const moved = move({ core: coreDoc, pending: pendingDoc, places: read(PLACES) }, picked, day);
+  const files = {
+    [CORE]: coreWritten(moved.core),
+    [PENDING]: pendingWritten(moved.pending),
+    ...(picked.landmarks && { [PLACES]: placesWritten(moved.places) }),
+    [PLAYED]: pinned(days),
+  };
   writeFileSync(join(dir, 'core.json'), files[CORE]);
   writeFileSync(join(dir, 'pending.json'), files[PENDING]);
-  const after = build('after.json', '--core', join(dir, 'core.json'), '--pending', join(dir, 'pending.json'));
+  writeFileSync(join(dir, 'places.json'), placesWritten(moved.places));
+  const after = build('after.json', '--core', join(dir, 'core.json'), '--pending', join(dir, 'pending.json'), '--places', join(dir, 'places.json'));
 
   const changed = Object.entries(days).filter(([d, id]) => setId(dailySet(after.items, d, after.decoys, after.made)) !== id).map(([d]) => d);
   if (changed.length) throw new Error(`these days already played would change: ${changed.join(', ')}`);
@@ -101,6 +108,7 @@ function run() {
   node scripts/build-quiz.mjs --all --out build/data/quiz-all.json
   node --test 'test/*.test.mjs'
   commit, open a pull request, and merge it by ${laterKey(day, -SOONEST)}, ${SOONEST} days before ${day}`);
+  if (picked.landmarks) console.log(`  ${PLACES} is an input of the map data, so the Check fails at the fetch until a release for the new inputs is published (CONTRIBUTING.md)`);
 }
 
 try {

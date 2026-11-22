@@ -1,5 +1,5 @@
 import { Map, addProtocol } from '/vendor/maplibre-gl.mjs';
-import { BAND_COLORS, SET_SIZE } from '/daily.mjs';
+import { BAND_COLORS, SET_SIZE, lasting, settled } from '/daily.mjs';
 import { MAX_SCORE, TYPES, answerOf, formatDistance, several } from '/questions.mjs';
 import { around, bounds, metersBetween, union } from '/geo.mjs';
 import { applyPalette, clear, setupLayers, show, showTap } from '/map.js';
@@ -59,10 +59,13 @@ const [quiz, all, longlist, style] = await Promise.all([
   load('/data/quiz.json'), load('/bygg/data/all.json'), load('/bygg/data/longlist.json'), load('/style.json'),
 ]);
 
-const items = quiz.items;
-const decoys = quiz.decoys ?? [];
+const inCore = new Set(quiz.items.map((it) => it.name));
+const listed = settled([...quiz.items, ...(all?.items ?? []).filter((it) => !inCore.has(it.name))]);
+const items = listed.filter((it) => inCore.has(it.name));
+const decoys = lasting(quiz.decoys ?? []);
 const core = new globalThis.Map(items.map((it) => [it.name, it]));
-const others = (all?.items ?? []).filter((it) => !core.has(it.name));
+const others = listed.filter((it) => !inCore.has(it.name));
+const tied = new Set((all?.items ?? []).flatMap((it) => it.osm ?? []));
 const known = new globalThis.Map([...others.map((it) => [it.name, { it, tier: 'out' }]), ...items.map((it) => [it.name, { it, tier: 'core' }])]);
 const decoyItems = new globalThis.Map(decoys.map((d) => [d.name, { ...d, kind: 'landmark', geometry: { type: 'Point', coordinates: d.point } }]));
 
@@ -76,7 +79,7 @@ for (const [cat, { label, places }] of Object.entries(longlist?.categories ?? {}
   for (const p of places) {
     const name = p.name.toLowerCase();
     const point = [p.lon, p.lat];
-    if (p.inGame || p.lat == null || curated.has(name)) continue;
+    if (p.inGame || p.lat == null || curated.has(name) || (p.osm ?? '').split(',').some((id) => tied.has(id))) continue;
     if ((placed.get(name) ?? []).some((at) => metersBetween(at, point) < SAME_PLACE)) continue;
     placed.set(name, [...(placed.get(name) ?? []), point]);
     pool.push({ name: p.name, cat, point, tier: 'long', decoy: 0 });

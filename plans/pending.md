@@ -51,33 +51,53 @@ what some places are called:
 - **Västerbron, Paulibron, Turbinbron and Slussbron** rest on what Ljungberg
   says of how they were named in 1938, which is all that is written of them.
 
-## Before it goes live
+## What the build does for them
 
-Areas, streets and bridges can go: their descriptions are fact-checked.
-Places need two changes to the build first:
+The descriptions are fact-checked, and the build keeps a new place from
+touching the days before its date:
 
-- **Decoys by date.** A place that joins the game leaves the decoys of "Vad
-  ligger här?" and adds its own around it, which changes that question on
-  days before its date. The decoys need dates the way the deal has them.
-- **Apart from a live place.** U3 must not come on the same day as Teknikens
-  och sjöfartens hus, nor Caroli kyrka as Kv. Caroli. Neither live place has
-  an `apart`, and giving it one changes days already dealt. A new place should
-  be able to name a live place as its partner without touching it.
-- **Länsresidenset** is "Länsresidenset Malmö" on the long list. That entry
-  has to be tied to it, or it stays a decoy beside itself. Södra Fisktorget
-  and Mikkeller Moriskans Trädgård have the same gap, though their entries
-  share their category and spot, which already keeps them out of the decoys;
-  the builder shows them as a second dot beside the place.
-- **A live place that changes** goes under `changes` in its entry in
-  `places/places.json` with a date, as Konditori Katarina will
-  (`plans/chains.md`). That covers a new text or a move, but not `apart`, so
-  it does not settle U3 and Caroli kyrka above.
+- **Decoys by date.** A place that joins leaves the decoys of "Vad ligger
+  här?" and brings its own. The build works the decoys out again on each date
+  a place joins or changes, and a decoy that comes or leaves on one carries
+  it as `since` or `until`, so every day before keeps the decoys it had
+  (`scripts/build-quiz.mjs`, `decoysOn` in `app/daily.mjs`).
+- **Apart from a live place.** U3 names Teknikens och sjöfartens hus, Caroli
+  kyrka names Kv. Caroli and Grand Italian names Malmö Live, and none of the
+  three has an `apart`. A place named by another joins its group on the day
+  both are asked (`grouped`), so the live place keeps every day it had.
+  Rådhuskällaren, Mikkeller Moriskans Trädgård and Grand Italian are krogar
+  in a group, and a krog in a group is dealt from the place deck, which keeps
+  a group apart; the krogar's own deck knows nothing of the places.
+- **Tied by id.** Länsresidenset is "Länsresidenset Malmö" on the long list,
+  Södra Fisktorget "Södra Fisketorget", and the chains' branches go by other
+  names. A place that joins on a date, or still waits, is tied to the long
+  list's entries by its OpenStreetMap ids, so they leave the decoys on its
+  date, and the builder shows it once rather than with a second dot.
+
+`node scripts/join.mjs landmarks --on 2026-12-06 --dry` joins all 59: 22 to
+the krogar's deck and 37 to the places', with every day already played
+keeping its set and every day until the date asking what it does now, decoys
+included. Joined, no group shares a day over the two years the data test
+deals.
+
+## What is left
+
+- **A date**, the owner's to choose, as for the areas. All 59 on one date
+  deal both place decks anew that day; `plans/release.md` has whether to
+  spread a batch.
+- **The map data.** `places/places.json` is an input of it: moved there, the
+  places get their outlines from OpenStreetMap, and the Check fails at the
+  fetch until a release for the new inputs is published (`CONTRIBUTING.md`).
+- **Konditori Katarina** goes under `changes` (`plans/chains.md`), in the
+  same pull request or one of its own.
+- **The builder's browser test** looks up Espresso House as a chain not yet
+  in the game (`test/smoke.test.mjs`). Once every place has joined, nothing
+  waits, and it needs another example or another premise.
 
 ## Going live
 
-Areas, streets and bridges go live with `node scripts/join.mjs`, which moves
-them from `learn/pending.json` into `learn/core.json` under a date in
-`since`; `plans/release.md` has how and why. Places wait for the two changes
-above, and then their entries move into `places/places.json`. The build fails
-if `core.json` has a `pending` section, and a test fails if a waiting name
-reaches `quiz.json`.
+Areas, streets, bridges and places go live with `node scripts/join.mjs`,
+which moves them from `learn/pending.json` into `learn/core.json` under a
+date in `since`, and a place's entry to the end of `places/places.json`;
+`plans/release.md` has how and why. The build fails if `core.json` has a
+`pending` section, and a test fails if a waiting name reaches `quiz.json`.

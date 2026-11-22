@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { GROUP, LAUNCH, PRACTICE, PRACTICE_SIZE, SHOWN_GAP, SPACED, dailySet, dateKey, laterKey, practiceSet, setId } from '../app/daily.mjs';
+import { GROUP, LAUNCH, PRACTICE, PRACTICE_SIZE, SHOWN_GAP, SPACED, dailySet, dateKey, decoysOn, lasting, laterKey, practiceSet, setId } from '../app/daily.mjs';
 import { contains, distanceTo } from '../app/geo.mjs';
 import { TYPES } from '../app/questions.mjs';
 import { WAIT } from '../scripts/lib/made.mjs';
@@ -112,14 +112,32 @@ test('an area\'s street view point is inside it', { skip }, () => {
   for (const it of items.filter((x) => x.kind === 'area')) assert.ok(contains(it.geometry, it.streetview), it.name);
 });
 
-test('decoys are named apart from the game, and a church is asked among churches', { skip }, () => {
-  const names = new Set(items.map((it) => it.name.toLowerCase()));
-  for (const d of decoys) assert.ok(!names.has(d.name.toLowerCase()), d.name);
-  assert.equal(new Set(decoys.map((d) => d.name)).size, decoys.length);
-  const category = new Map([...decoys, ...items].map((it) => [it.name, it.category]));
+test('a decoy is named apart from what the game asks while it is offered, and a church is asked among churches', { skip }, () => {
+  const joins = new Map(items.map((it) => [it.name.toLowerCase(), it.since ?? '']));
+  for (const d of decoys) {
+    const since = joins.get(d.name.toLowerCase());
+    assert.ok(since === undefined || (since !== '' && d.until !== undefined && d.until <= since), d.name);
+  }
+  for (const day of [LAUNCH, ...new Set(decoys.flatMap((d) => [d.since, d.until]).filter(Boolean))]) {
+    const names = decoysOn(decoys, day).map((d) => d.name);
+    assert.equal(new Set(names).size, names.length, day);
+  }
+  const settled = lasting(decoys);
+  const category = new Map([...settled, ...items].map((it) => [it.name, it.category]));
   for (const target of items.filter((it) => it.category === 'kyrka')) {
-    const q = TYPES.identify.build({ target, items, rng: Math.random, decoys });
+    const q = TYPES.identify.build({ target, items, rng: Math.random, decoys: settled });
     for (const name of q.options) assert.equal(category.get(name), 'kyrka', `${target.name}: ${name}`);
+  }
+});
+
+test('over two years, a place is never asked on the same day as the place it names as its partner', { skip }, () => {
+  const groupOf = new Map();
+  for (const it of items) if (it.apart) for (const name of [it.name, it.apart]) groupOf.set(name, it.apart);
+  for (let n = 0; n < 730; n++) {
+    const day = laterKey(LAUNCH, n);
+    if (made?.[day]) continue;
+    const groups = dailySet(items, day, [], made).map((q) => groupOf.get(q.target.name)).filter(Boolean);
+    assert.equal(new Set(groups).size, groups.length, day);
   }
 });
 

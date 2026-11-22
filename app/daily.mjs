@@ -18,11 +18,13 @@ export const SPACED = '2026-10-21';
 
 export const GROUP = { area: 'area', street: 'street', landmark: 'place', bridge: 'place' };
 
+const food = (it) => it.kind === 'landmark' && it.category === 'krog' && !it.apart;
+
 export const DECKS = {
   area: (it) => it.kind === 'area',
   street: (it) => it.kind === 'street',
-  food: (it) => it.kind === 'landmark' && it.category === 'krog',
-  place: (it) => GROUP[it.kind] === 'place' && it.category !== 'krog',
+  food,
+  place: (it) => GROUP[it.kind] === 'place' && !food(it),
 };
 
 const FOOD_SHARE = 0.2;
@@ -223,6 +225,17 @@ export function asOf(it, key) {
 
 export const onDay = (items, key) => items.map((it) => asOf(it, key));
 
+export function grouped(items) {
+  const groups = new Set(items.map((it) => it.apart).filter(Boolean));
+  return items.map((it) => (!it.apart && groups.has(it.name) ? { ...it, apart: it.name } : it));
+}
+
+export const decoysOn = (decoys, key) => decoys.filter((d) => (!d.since || d.since <= key) && (!d.until || key < d.until));
+
+export const lasting = (decoys) => decoys.filter((d) => !d.until);
+
+export const settled = (items) => grouped(items.map((it) => asOf(it, it.changes?.at(-1).on)));
+
 function spread(old, fresh) {
   const out = [];
   let f = 0;
@@ -262,7 +275,7 @@ function dealer(items, made) {
     const turn = turnOf(key);
     const id = `${era}|${turn}`;
     if (!pools.has(id)) {
-      const list = onDay(era ? inPlay(items, era) : items.filter((it) => !it.since), turn);
+      const list = grouped(onDay(era ? inPlay(items, era) : items.filter((it) => !it.since), turn));
       pools.set(id, { list, byName: new Map(list.map((it) => [it.name, it])) });
     }
     return pools.get(id);
@@ -355,7 +368,8 @@ export function targetsOn(items, key, made = NONE) {
 export function dailySet(items, key, decoys = [], made = NONE) {
   const { on, pool, ahead, madeOn } = dealerFor(items, made);
   const { slots, targets } = on(key);
-  if (madeOn(key)) return madeSet(madeOn(key).slots, pool(key), decoys);
+  const today = decoysOn(decoys, key);
+  if (madeOn(key)) return madeSet(madeOn(key).slots, pool(key), today);
   const avoid = names(targets);
   if (key >= SPACED) {
     for (let n = 1; n <= SHOWN_GAP; n++) {
@@ -364,7 +378,7 @@ export function dailySet(items, key, decoys = [], made = NONE) {
     }
   }
   const own = (name) => random(hash(`malmo:${key}:${name}`));
-  return assemble(slots, [...targets], pool(key), random(hash(`malmo:${key}`)), avoid, decoys, own);
+  return assemble(slots, [...targets], pool(key), random(hash(`malmo:${key}`)), avoid, today, own);
 }
 
 function assemble(slots, targets, items, rng, avoid, decoys, own) {
@@ -431,7 +445,7 @@ export function practiceSet(all, { key, category, seed, decoys = [], made = NONE
   const mix = [...mixFor(kind.group, half, rng), ...mixFor(kind.group, targets.length - half, rng)];
   const slots = shuffle(mix, rng).map((type) => ({ group: kind.group, type }));
   const own = (name) => random(hash(`practice:${seed}:${name}`));
-  return assemble(slots, targets, items, rng, new Set(targets.map((it) => it.name)), decoys, own);
+  return assemble(slots, targets, items, rng, new Set(targets.map((it) => it.name)), decoysOn(decoys, key), own);
 }
 
 export function band(score) {
