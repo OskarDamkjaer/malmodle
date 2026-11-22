@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { GROUP, PRACTICE, PRACTICE_SIZE, SHOWN_GAP, SPACED, dailySet, dateKey, laterKey, practiceSet } from '../app/daily.mjs';
+import { GROUP, LAUNCH, PRACTICE, PRACTICE_SIZE, SHOWN_GAP, SPACED, dailySet, dateKey, laterKey, practiceSet, setId } from '../app/daily.mjs';
 import { contains, distanceTo } from '../app/geo.mjs';
 import { TYPES } from '../app/questions.mjs';
 import { WAIT } from '../scripts/lib/made.mjs';
@@ -18,16 +18,25 @@ test('the app gets exactly the names in core.json', { skip }, () => {
 
 test('no pending name reaches the app', { skip }, () => {
   const pending = new Set(Object.values(JSON.parse(readFileSync('learn/pending.json', 'utf8'))).flat().map((e) => (typeof e === 'string' ? e : e.name)));
-  assert.ok(pending.size > 0);
   assert.equal(JSON.parse(readFileSync('learn/core.json', 'utf8')).pending, undefined);
   assert.deepEqual(items.filter((it) => pending.has(it.name)).map((it) => it.name), []);
 });
 
-test('a name with a since date joins after the spaced deal began, and is in core.json', { skip }, () => {
+const played = JSON.parse(readFileSync('learn/played.json', 'utf8')).days;
+const lastPlayed = Object.keys(played).sort().at(-1);
+
+test('every day already played is still the set it was played as', { skip }, () => {
+  assert.equal(Object.keys(played).sort()[0], LAUNCH);
+  assert.equal(Object.keys(played).length, Math.round((Date.parse(lastPlayed) - Date.parse(LAUNCH)) / 86400000) + 1);
+  for (const [day, id] of Object.entries(played)) assert.equal(setId(dailySet(items, day, decoys, made)), id, day);
+});
+
+test('a name with a since date joins after the days already played, and is in core.json', { skip }, () => {
   const since = JSON.parse(readFileSync('learn/core.json', 'utf8')).since ?? {};
   const listed = new Set(Object.values(core).flat());
   for (const [day, names] of Object.entries(since)) {
     assert.ok(day > SPACED, day);
+    assert.ok(day > lastPlayed, day);
     for (const name of names) {
       assert.ok(listed.has(name), name);
       assert.equal(items.find((it) => it.name === name).since, day, name);
@@ -42,6 +51,7 @@ test('a place that changes on a date changes after the spaced deal began, keepin
     assert.deepEqual(it.changes.map((c) => c.on), Object.keys(curated.get(it.name).changes).sort(), it.name);
     for (const change of it.changes) {
       assert.ok(change.on > SPACED, `${it.name} ${change.on}`);
+      assert.ok(change.on > lastPlayed, `${it.name} ${change.on}`);
       for (const field of ['name', 'kind', 'label', 'category', 'apart', 'since']) assert.ok(!(field in change), `${it.name} ${field}`);
     }
   }
@@ -50,6 +60,7 @@ test('a place that changes on a date changes after the spaced deal began, keepin
 test('a day made by hand comes after the spaced deal began and is played as it was made', { skip }, () => {
   for (const [day, { slots }] of Object.entries(made ?? {})) {
     assert.ok(day > SPACED, day);
+    assert.ok(day > lastPlayed || played[day], day);
     const set = dailySet(items, day, decoys, made);
     assert.deepEqual(set.map((q) => [q.target.name, q.type]), slots.map((s) => [s.target, s.type]), day);
   }

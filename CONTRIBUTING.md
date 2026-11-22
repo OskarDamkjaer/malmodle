@@ -88,6 +88,11 @@ rebuild it (below) or fetch a prebuilt copy with
   places the game asks. Once it goes live it leaves the decoys and adds its
   own around it, which changes "Vad ligger här?" on days before its date, so
   for now dates are for areas, streets and bridges.
+- `learn/played.json`: the set id of every day already played. A test deals
+  each of them from the built data and fails if one differs, and if a date in
+  `since`, `changes` or `days.json` falls on or before the last. Run
+  `node scripts/played.mjs` before dating anything, so the days up to today
+  are pinned.
 - `learn/`: bridges, streets, descriptions and sources, and `regions.json`,
   the delområden in each of the ten stadsdelar. The build merges them into the
   outlines a chain is asked within.
