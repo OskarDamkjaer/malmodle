@@ -64,6 +64,11 @@ function run() {
 
   const changed = Object.entries(days).filter(([d, id]) => setId(dailySet(after.items, d, after.decoys, after.made)) !== id).map(([d]) => d);
   if (changed.length) throw new Error(`these days already played would change: ${changed.join(', ')}`);
+  const asked = (quiz, d) => JSON.stringify(dailySet(quiz.items, d, quiz.decoys, quiz.made)
+    .map((q) => [q.type, q.target.name, q.side, q.from?.name, q.to?.name, q.region?.name, q.options?.map((o) => o.name ?? o)]));
+  const sooner = [];
+  for (let d = today; d < day; d = laterKey(d, 1)) if (asked(before, d) !== asked(after, d)) sooner.push(d);
+  if (sooner.length) throw new Error(`these days before ${day} would ask something else: ${sooner.join(', ')}`);
 
   const ahead = Math.round((Date.parse(day) - Date.parse(today)) / 86400000);
   console.log(`\n${joining.size} names join on ${day}, in ${ahead} days:`);
@@ -73,7 +78,7 @@ function run() {
     if (fresh) console.log(`  ${deck.padEnd(7)} ${String(fresh).padStart(3)} new, ${live.filter(has).length} in the deck`);
   }
   const keys = Object.keys(days).sort();
-  console.log(`\nThe ${keys.length} days played, ${keys[0]} to ${keys.at(-1)}, keep their sets.`);
+  console.log(`\nThe ${keys.length} days played, ${keys[0]} to ${keys.at(-1)}, keep their sets, and every day until ${day} asks what it would have.`);
 
   const first = new Map();
   for (let n = 0; n < AHEAD; n++) {

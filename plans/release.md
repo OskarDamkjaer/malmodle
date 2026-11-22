@@ -57,7 +57,8 @@ In order, stopping at the first thing that is wrong:
    shape, `core.json` wrapped at 79 columns, and a test reads and writes both
    untouched files and gets the same bytes.
 6. Build the quiz from the moved files, through `--core` and `--pending`, to
-   a temporary folder. Stop if a pinned day's set id changes. Print how many
+   a temporary folder. Stop if a pinned day's set id changes, or if a day from today
+   until the date asks anything else than it does now. Print how many
    names join each deck, that every pinned day keeps its set, the first date
    each new name is asked over the 60 days from the date, and the names not
    asked within those 60.
