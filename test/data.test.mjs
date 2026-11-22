@@ -66,6 +66,15 @@ test('a day made by hand comes after the spaced deal began and is played as it w
   }
 });
 
+test('a name without a link has none, and every link is a web address', { skip }, () => {
+  const { unlinked } = JSON.parse(readFileSync('learn/sources.json', 'utf8'));
+  assert.deepEqual(unlinked, [...new Set(unlinked)].sort());
+  for (const it of items) {
+    if (unlinked.includes(it.name)) assert.equal(it.source, null, it.name);
+    else if (it.source !== null) assert.match(it.source, /^https:\/\/[^\s]+$/, it.name);
+  }
+});
+
 test('every kind in core.json is in the app', { skip }, () => {
   const KIND = { areas: 'area', streets: 'street', bridges: 'bridge', landmarks: 'landmark' };
   for (const [section, names] of Object.entries(core)) {

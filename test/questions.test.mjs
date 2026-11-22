@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { MAX_SCORE, NEAR_SCORE, TYPES, answerOf, distanceScore, falloff, formatDistance, nearScore, tappedOn } from '../app/questions.mjs';
+import { MAX_SCORE, NEAR_SCORE, TYPES, answerOf, distanceScore, falloff, formatDistance, nearScore, readMore, tappedOn } from '../app/questions.mjs';
 import { dailySet, laterKey, random } from '../app/daily.mjs';
 import { band } from '../app/daily.mjs';
 import { fixture } from './fixture.mjs';
@@ -310,4 +310,12 @@ test('a place that becomes a chain draws its own luck, so the rest of its day st
     });
   }
   assert.ok(regions > 0);
+});
+
+test('a place without a page of its own links to Google Maps, and a street or an area to nothing', () => {
+  assert.deepEqual(readMore({ name: 'Kaféet', kind: 'landmark', source: 'https://example.org/' }), { text: 'Läs mer', href: 'https://example.org/' });
+  assert.deepEqual(readMore({ name: 'Söderberg & Sara', kind: 'landmark', source: null }), { text: 'Google Maps', href: 'https://www.google.com/maps/search/?api=1&query=S%C3%B6derberg%20%26%20Sara%2C%20Malm%C3%B6' });
+  assert.equal(readMore({ name: 'Gata 3', kind: 'street', source: null }), null);
+  assert.equal(readMore({ name: 'Område 1', kind: 'area' }), null);
+  assert.equal(readMore({ name: 'Bron', kind: 'bridge', source: null }), null);
 });

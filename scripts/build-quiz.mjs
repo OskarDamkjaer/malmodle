@@ -295,7 +295,12 @@ for (const it of [...areaItems, ...landmarkItems, ...bridgeItems, ...streetItems
 const items = [...byName.values()];
 
 const sources = sourcesDoc.sources ?? {};
-for (const it of items) if (!it.source && sources[it.name]) it.source = sources[it.name];
+const unlinked = new Set(sourcesDoc.unlinked ?? []);
+for (const name of unlinked) if (!byName.has(name)) fail(`sources.json: ${name} is unlinked but is not in the data`);
+for (const it of items) {
+  if (unlinked.has(it.name)) it.source = null;
+  else if (!it.source && sources[it.name]) it.source = sources[it.name];
+}
 
 const CORE_KIND = { areas: 'area', streets: 'street', bridges: 'bridge', landmarks: 'landmark' };
 const core = new Set();
@@ -438,7 +443,8 @@ for (const [name, list] of versions) {
   const it = byName.get(name);
   if (it?.kind !== 'landmark' || !list.length) continue;
   it.changes = list.map(({ on, item }) => {
-    if (!item.source && sources[name]) item.source = sources[name];
+    if (unlinked.has(name)) item.source = null;
+    else if (!item.source && sources[name]) item.source = sources[name];
     item.point = onShape(item.geometry, item.point);
     item.streetview = roundCoords(streetviewPoint(item) ?? item.point);
     changed.push({ name, item });
