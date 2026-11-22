@@ -40,7 +40,7 @@
       "lat": 55.60919,
       "lon": 13.01275,
       "osm": ["way/394896506"],
-      "description": "Bro över kanalen vid Slussen, i östra änden av Norra Vallgatan. Området har fått namn efter en sluss som förband en kanal från Sege å med hamnkanalen.",
+      "description": "Ny bro när den 1938 fick namn efter Slussplan, dit den leder från Norra Vallgatan. Platsen heter så efter en sluss som förband Sege å med stadens kanaler.",
       "source": "https://sv.wikipedia.org/wiki/Slussplan,_Malm%C3%B6",
       "verified": true
     },
@@ -84,8 +84,8 @@
       "lat": 55.60397,
       "lon": 13.01069,
       "osm": ["way/394896503"],
-      "description": "Vägbro i tre spann över kanalen, med brobana i spännbetong.",
-      "source": "https://structurae.net/en/structures/paulibron",
+      "description": "Bro över kanalen mellan Norregatan i Gamla staden och Rörsjöstaden. Namnet var redan i bruk när staden fastställde det 1938.",
+      "source": "https://slaegtsbibliotek.dk/2025/947337.pdf#page=355",
       "verified": true
     },
     {
@@ -106,7 +106,7 @@
       "lat": 55.60096,
       "lon": 12.99941,
       "osm": ["way/394897888"],
-      "description": "Bro över kanalen vid Torggatan. Den danska firman Moresco bekostade här en gångbro av järn inför utställningen 1896, som i början av 1930-talet byggdes om till trafikbro.",
+      "description": "Den danska modefirman Moresco lät bygga en gångbro av järn här inför utställningen 1896. I början av 1930-talet byggdes den om till trafikbro.",
       "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Gator-broar-och-vagar/Morescobron.html",
       "verified": true
     },
@@ -117,7 +117,7 @@
       "lat": 55.6073,
       "lon": 12.99611,
       "osm": ["way/394897894"],
-      "description": "Bro över Västra Hamnkanalen vid Älvsborgsbastionen. Den första bron byggdes 1967, den andra och bredare började byggas 2012.",
+      "description": "Bro över Västra Hamnkanalen vid Älvsborgsbastionen. Den första bron, från 1967, ersattes på 2010-talet av en ny och bredare.",
       "source": "https://sv.wikipedia.org/wiki/%C3%84lvsborgsbron%2C_Malm%C3%B6",
       "verified": true
     },
@@ -128,7 +128,7 @@
       "lat": 55.60935,
       "lon": 12.99093,
       "osm": ["way/1214029121"],
-      "description": "Bro för gående, cyklister och kollektivtrafik över Södra Varvsbassängen, invigd 2025. Ritad av Kjellander Sjöberg i röd betong.",
+      "description": "Bro i röd betong för gående, cyklister och kollektivtrafik över Södra Varvsbassängen. Ritad av Kjellander Sjöberg och invigd 2025.",
       "source": "https://malmo.se/Stadsutveckling/Det-har-ar-pa-gang-i-Malmo/Styrmansbron.html",
       "verified": true
     },
@@ -150,8 +150,8 @@
       "lat": 55.6039,
       "lon": 12.98209,
       "osm": ["way/1210745419"],
-      "description": "Bro över Turbinkanalen, en av tre broar över kanalen som ska ersättas av fem nya när Citadellsstaden byggs.",
-      "source": "https://malmo.se/Stadsutveckling/Stadsutvecklingsomraden/Citadellsstaden.html",
+      "description": "Bro på Malmöhusvägen över Turbinkanalen, namngiven 1938.",
+      "source": "https://slaegtsbibliotek.dk/2025/947337.pdf#page=358",
       "verified": true
     },
     {
@@ -172,8 +172,8 @@
       "lat": 55.60488,
       "lon": 12.98051,
       "osm": ["way/1210745420"],
-      "description": "Bro över kanalen intill pumpstationen Turbinen.",
-      "source": "https://malmo.se/Aktuellt/Artiklar-Malmo-stad/2026-05-05-Avloppsvatten-kan-orsaka-stark-lukt.html",
+      "description": "Bro över kanalen intill pumpstationen Turbinen. Stadsingenjören föreslog 1938 namnet Peterstorpsbron, men stadsfullmäktige valde Västerbron.",
+      "source": "https://slaegtsbibliotek.dk/2025/947337.pdf#page=358",
       "verified": true
     },
     {
