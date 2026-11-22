@@ -26,21 +26,48 @@ lays the coming days' sets out in a strip above the map, with each answer and
 its text, draws the options and the points a tap or a near option gives on
 the map, and flags what looks wrong. <http://127.0.0.1:8080/dev/frame.html>
 shows the game at a phone, tablet or desktop size, with a button that starts
-the day over. <http://127.0.0.1:8080/dev/builder.html> makes a day by hand:
-pick each question's target and type, and the game builds the rest the way it
-always does. The map beside the questions shows everything in the data, what
+the day over. `dev/` is never part of the built site.
+
+<http://127.0.0.1:8080/bygg/> is the day builder, which the site also serves at
+malmodle.se/bygg. The end screen links to it once the player has unlocked it,
+with a full score, fifteen days in a row, or a place in the top percent of a
+day with at least a hundred players (`UNLOCK` in `app/crowd.mjs`), and says
+why on the day it happens. A narrow screen is asked to open it on a computer.
+It makes a day by hand: pick each
+question's target and type, and the game builds the rest the way it always
+does. The map beside the questions shows everything in the data, what
 the game can ask and what it never does, a table says how the day compares
 with the days the game deals, and the day can be played through and
 kept as a link. Anything on the map can go into the day, which suggests it for
 the game, and anything can be marked as belonging in the game or not, or as
 looking wrong. A finished day of ten is sent to the Worker with the
 suggestions, the builder's name if they like, and the player id the game
-keeps in the same browser. The Worker stores it in the `handmade` table
-under the same player key as that browser's results, so who sent a day can
-be weighed against how they play. `serve.mjs` keeps its database in memory
-unless given `--db <file>`. It shows what lies outside Grunden after
-`node scripts/build-quiz.mjs --all --out build/data/quiz-all.json`. `dev/` is
-never part of the built site.
+keeps in the same browser. The Worker stores it in the `handmade` table under
+the same player key as that browser's results, and a day that is no good is
+deleted there. The builder's data is
+`node scripts/build-quiz.mjs --all --out build/data/quiz-all.json`, which the
+site build needs too. The builder stays out of the offline worker and out of
+the name of the game's code cache, so changing it never sends players a new
+version.
+
+```
+node scripts/handmade.mjs                   # the days sent in, newest first, each with a link to it in the builder
+node scripts/handmade.mjs take 12           # play day 12 on the first date from a week ahead that fits
+node scripts/handmade.mjs take 12 2027-01-05  # or on that date, if it fits
+node scripts/handmade.mjs --db file.db      # the same from serve.mjs's database instead of D1
+```
+
+Reading D1 goes through `wrangler`, so it needs a login to the Cloudflare
+account. A day can be played once its targets are all in `core.json` by that
+date. A date fits when the day builds with the types it was made with, none of
+its targets has been asked within a week (an area) or two (a street or a
+place) before it, and what it shows on the map is not asked within three days
+of it, or the other way round. `take` writes it into `learn/days.json` under
+that date with the builder's name, and the game plays it in place of the day
+it would deal, says on the end screen who made it, and deals every deck anew
+from the next day, with what was asked lately at the back. The first question
+and the end screen name who made it. Commit it a week
+or more ahead, like a date in `since`.
 
 `build-quiz.mjs` needs the map data in `build/data/` and `data/cache/`. Either
 rebuild it (below) or fetch a prebuilt copy with
@@ -73,7 +100,14 @@ rebuild it (below) or fetch a prebuilt copy with
   `DECOY_KINDS` and `DECOY_SKIP`. A chain lists its branches under
   `branches`, each with `lat` and `lon`, in the order of its `osm` ids, and
   says how it is asked under `asked` ("ett Systembolag"). Only branches inside
-  Malmö's stadsdelar belong there.
+  Malmö's stadsdelar belong there. A place the game already asks can change
+  on a date: `changes` maps a date to the fields that change then, among
+  `asked`, `osm`, `lat`, `lon`, `branches`, `district`, `description` and
+  `source`, with `null` to drop one. Every day before the date sees the place
+  as it was, and the deal carries on as if nothing changed; what decides how a
+  place is dealt, its name, category and `apart`, cannot change.
+- `learn/days.json`: days made by hand, under the date they are played, with
+  the name to credit and each question's target, type and seed.
 - `config/bbox.json`: the part of the world the map covers.
 
 Everything is hand-edited. `build-quiz.mjs --all` builds every place rather than

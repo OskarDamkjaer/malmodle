@@ -14,16 +14,20 @@ node scripts/build-quiz.mjs --all --out build/data/quiz-all.json  # and everythi
 node scripts/serve.mjs                 # http://127.0.0.1:8080, with the API
 node scripts/serve.mjs --fake 200      # and 200 made-up players today
 node scripts/serve.mjs --trickle 10    # and one more every 10 seconds
+node scripts/handmade.mjs              # the days sent in from the builder, from D1
+node scripts/handmade.mjs take 12      # play one on the first date that fits
 ```
 
 `/dev/crowd.html` on the local server shows the comparison card for many
 made-up crowds, `/dev/week.html` the coming days' sets on the map, with
 `?from=` and `?days=`, `/dev/frame.html` the game at a phone, tablet or
-desktop size, with a button that starts the day over, and `/dev/builder.html`
-a day made by hand on a map of everything in the data, core or not, sent in
-with suggested changes to what the game asks.
-`serve.mjs` mounts `dev/` and the builder's data itself (`DEV_MOUNTS` in
-`scripts/lib/site.mjs`), so the site build leaves them out.
+desktop size, with a button that starts the day over. `/bygg/` is the day
+builder, also on the live site, linked from the end screen once a player has
+unlocked it: a day made by hand on
+a map of everything in the data, core or not, sent in with suggested changes
+to what the game asks. `serve.mjs` mounts `dev/` itself (`DEV_MOUNTS` in
+`scripts/lib/site.mjs`), so the site build leaves it out. `bygg/` is in the
+site, but outside the offline worker and the name of the code cache.
 `plans/handmade.md` holds the builder's decisions and what is still open.
 `plans/crowd.md` holds the card's decisions and what is still open.
 `plans/pending.md` holds what waits to join the game, how it was chosen, and
@@ -53,9 +57,16 @@ osmium, Java and hosts the sandbox cannot reach.
   the rest and what was asked lately at the back. Decks that gain nothing carry on.
   Names and places in `learn/pending.json` are checked by the build, shown in the
   builder and kept out of `quiz.json` until they move into `core.json` with a date.
+  A place in `places/places.json` can change on a date under `changes`: every
+  day before it sees the place as it was, and the deal carries on.
+  A day made by hand, under its date in `learn/days.json`, is played in place
+  of the dealt one, built from its targets, types and seeds the way the builder
+  builds them, and every deck is dealt anew the day after it, with what was
+  asked lately at the back. `scripts/lib/made.mjs` checks a date fits it.
 - `app/geo.mjs`: distances and containment.
 - `app/crowd.mjs`: your view of the day's numbers, the polling schedule, and
-  the end screen's comparison in words with every threshold it uses.
+  the end screen's comparison in words with every threshold it uses, and
+  what unlocks the day builder (`UNLOCK`).
 - `app/crowd-view.js`: the comparison card on the end screen: the chart, its
   hover and keyboard reading, and the waiting and paused states.
 - `app/confetti.js`: the confetti for a score of 1000, loaded only when it is
@@ -76,7 +87,8 @@ over from a worker without that handshake, it reloads the old pages itself. The
   the long list's other places as `decoys` for "Vad ligger här?".
 - `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result
   against the day's set, which `sets.mjs` works out from `quiz.json`, stores
-  it in D1 and answers with your first round and the day's numbers.
+  it in D1 and answers with your first round, how many days in a row you have
+  played, and the day's numbers.
   `live.mjs` writes the day's numbers to R2 for polling, from a post or the
   cron. `handmade.mjs` stores a day sent from the builder under the same
   player key as the sender's results, a few a day per player.
@@ -87,10 +99,10 @@ over from a worker without that handshake, it reloads the old pages itself. The
   cost.
 
 `questions.mjs`, `daily.mjs`, `crowd.mjs` and `geo.mjs` are pure and tested without a
-browser, and so is `dev/handmade.mjs`, the builder's questions, what a usual
+browser, and so is `bygg/handmade.mjs`, the builder's questions, what a usual
 day looks like, and what it sends:
-`test/site.mjs` resolves the site's absolute imports the way `serve.mjs` mounts
-them. To add a question type, add it to `TYPES` and give it slots in
+`scripts/lib/resolve.mjs` resolves the site's absolute imports the way
+`serve.mjs` mounts them. To add a question type, add it to `TYPES` and give it slots in
 `plan` in `daily.mjs`.
 
 ## Conventions
