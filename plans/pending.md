@@ -74,8 +74,8 @@ touching the days before its date:
   list's entries by its OpenStreetMap ids, so they leave the decoys on its
   date, and the builder shows it once rather than with a second dot.
 
-`node scripts/join.mjs landmarks --on 2026-12-06 --dry` joins all 59: 22 to
-the krogar's deck and 37 to the places', with every day already played
+`node scripts/join.mjs landmarks --on 2026-12-06 --dry` joins all 59: 21 to
+the krogar's deck and 38 to the places', with every day already played
 keeping its set and every day until the date asking what it does now, decoys
 included. Joined, no group shares a day over the two years the data test
 deals.
