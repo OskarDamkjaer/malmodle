@@ -74,25 +74,19 @@ touching the days before its date:
   list's entries by its OpenStreetMap ids, so they leave the decoys on its
   date, and the builder shows it once rather than with a second dot.
 
-`node scripts/join.mjs landmarks --on 2026-12-06 --dry` joins all 59: 21 to
-the krogar's deck and 38 to the places', with every day already played
-keeping its set and every day until the date asking what it does now, decoys
-included. Joined, no group shares a day over the two years the data test
-deals.
+The 59 places join on 2026-12-06, moved by `node scripts/join.mjs landmarks
+--on 2026-12-06`: 21 to the krogar's deck and 38 to the places', with every
+day already played keeping its set and every day until the date asking what
+it did, decoys included. No group shares a day over the two years the data
+test deals.
 
 ## What is left
 
-- **A date**, the owner's to choose, as for the areas. All 59 on one date
-  deal both place decks anew that day; `plans/release.md` has whether to
-  spread a batch.
 - **The map data.** `places/places.json` is an input of it: moved there, the
   places get their outlines from OpenStreetMap, and the Check fails at the
   fetch until a release for the new inputs is published (`CONTRIBUTING.md`).
-- **Konditori Katarina** goes under `changes` (`plans/chains.md`), in the
-  same pull request or one of its own.
-- **The builder's browser test** looks up Espresso House as a chain not yet
-  in the game (`test/smoke.test.mjs`). Once every place has joined, nothing
-  waits, and it needs another example or another premise.
+- **Konditori Katarina** goes under `changes` (`plans/chains.md`), in a pull
+  request of its own.
 
 ## Going live
 

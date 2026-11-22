@@ -98,7 +98,20 @@
       "Mässingshornet", "Rex", "Fregatten", "Sankt Markus Vinkällare",
       "Spillepengen", "Sege å", "Ön", "Malmö Latinskola", "Pauliskolan",
       "Malmö Borgarskola", "S:t Petri skola", "Family Pub", "Pivo", "Elysée",
-      "Drumbar"
+      "Drumbar", "Sankt Andreas kyrka", "Sankt Matteus kyrka",
+      "Malmö Roddklubb", "Kanotföreningen Öresund", "Laserdome",
+      "Gokart City Malmö", "Kirsebergs torg", "Nydalatorget", "Almtorget",
+      "Persborgstorget", "Södra Fisktorget", "Posthusplatsen",
+      "Hovrättstorget", "Dockplatsen", "U3", "Länsresidenset", "Caroli kyrka",
+      "Hotel Kramer", "Malmö Konserthus", "Folkets hus", "Fiskehoddorna",
+      "Cantin", "Mitt Möllan", "Spegeln", "Etage", "Plan B", "Blå Båten",
+      "Tanken", "Rådhuskällaren", "Kasai in the Sky", "Slottsträdgårdens Kafé",
+      "Jord", "Mormors Bageri", "Atmosfär", "Grand Italian", "Ruths", "Aster",
+      "Gustavino", "Lion Bar", "Kappa Bar", "Slice", "Vibliotek", "LU",
+      "Mikkeller Moriskans Trädgård", "Ava Vinbar", "Vollmers", "Hygge",
+      "La Nonnina", "Mutantur", "Åhléns", "Spoonery", "Boulebar", "Surfshack",
+      "McDonald's", "Max", "Burger King", "Espresso House", "Systembolaget",
+      "Clas Ohlson"
     ]
   },
   "since": {
@@ -127,6 +140,22 @@
       "Morescobron", "Älvsborgsbron", "Styrmansbron", "Neptunibron",
       "Turbinbron", "Västerbron", "Parkbron", "Trädgårdsbron",
       "Slottsmöllebron"
+    ],
+    "2026-12-06": [
+      "Sankt Andreas kyrka", "Sankt Matteus kyrka", "Malmö Roddklubb",
+      "Kanotföreningen Öresund", "Laserdome", "Gokart City Malmö",
+      "Kirsebergs torg", "Nydalatorget", "Almtorget", "Persborgstorget",
+      "Södra Fisktorget", "Posthusplatsen", "Hovrättstorget", "Dockplatsen",
+      "U3", "Länsresidenset", "Caroli kyrka", "Hotel Kramer",
+      "Malmö Konserthus", "Folkets hus", "Fiskehoddorna", "Cantin",
+      "Mitt Möllan", "Spegeln", "Etage", "Plan B", "Blå Båten", "Tanken",
+      "Rådhuskällaren", "Kasai in the Sky", "Slottsträdgårdens Kafé", "Jord",
+      "Mormors Bageri", "Atmosfär", "Grand Italian", "Ruths", "Aster",
+      "Gustavino", "Lion Bar", "Kappa Bar", "Slice", "Vibliotek", "LU",
+      "Mikkeller Moriskans Trädgård", "Ava Vinbar", "Vollmers", "Hygge",
+      "La Nonnina", "Mutantur", "Åhléns", "Spoonery", "Boulebar", "Surfshack",
+      "McDonald's", "Max", "Burger King", "Espresso House", "Systembolaget",
+      "Clas Ohlson"
     ]
   }
 }
