@@ -153,9 +153,10 @@ const future = [];
 
 const protocol = new pmtiles.Protocol();
 addProtocol('pmtiles', protocol.tile);
+const archive = await fetch('/malmo.pmtiles').then((r) => (r.ok ? r.blob() : Promise.reject(new Error(`malmo.pmtiles: ${r.status}`))));
+protocol.add(new pmtiles.PMTiles(new pmtiles.FileSource(new File([archive], 'malmo.pmtiles'))));
 style.sprite = location.origin + style.sprite;
 style.glyphs = location.origin + style.glyphs;
-style.sources.openmaptiles.url = `pmtiles://${location.origin}/malmo.pmtiles`;
 
 const map = new Map({
   container: 'buildmap',

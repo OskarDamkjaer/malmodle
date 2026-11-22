@@ -113,6 +113,29 @@ for (const site of SITES) {
     await context.close();
   }));
 
+  test(`the day builder on ${site} loads its map and adds a question`, { skip }, again(async () => {
+    const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, serviceWorkers: 'block' });
+    const page = await context.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(String(e)));
+    page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+    page.on('request', (r) => { if (r.method() === 'POST' && own(site, r.url())) errors.push(`posted to ${r.url()}`); });
+    page.on('response', (r) => { if (own(site, r.url()) && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
+    await page.goto(new URL('/bygg/', site).href);
+    await page.waitForFunction(() => window.map?.loaded() && document.querySelector('#filters button'), null, { timeout: 60000 });
+    await page.fill('#search', 'Möllevången');
+    await page.keyboard.press('Enter');
+    assert.deepEqual(await page.locator('#questions .title').allTextContents(), ['Möllevången']);
+    assert.deepEqual(errors, []);
+    await context.close();
+  }));
+
+  test(`the day builder's API on ${site} turns away a broken day`, { skip: new URL(site).hostname !== 'malmodle.se' && 'no API here' }, again(async () => {
+    const res = await fetch(`${site}/api/handmade`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' });
+    assert.equal(res.status, 400);
+    assert.match(await res.text(), /"invalid"/);
+  }));
+
   test(`the results API on ${site} turns away a broken result`, { skip: new URL(site).hostname !== 'malmodle.se' && 'no API here' }, again(async () => {
     const res = await fetch(`${site}/api/result`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' });
     assert.equal(res.status, 400);
