@@ -139,7 +139,8 @@ node scripts/join.mjs areas --dry                    # say what would happen, wr
 missing or not `verified`, and a date less than `SOONEST` days ahead
 (`scripts/lib/made.mjs`). It moves the names to the end of their section in
 `learn/core.json` and under the date in `since`, builds the quiz from that,
-and stops if a day already played would change. It says how many names join
+and stops if a day already played would change, or a day between today and
+the date would ask something else. It says how many names join
 each deck and when each is first asked over the 60 days from the date. Then
 rebuild the quiz, run the tests, and merge the pull request at least
 `SOONEST` days before the date.
