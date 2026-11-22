@@ -4,10 +4,11 @@ import { existsSync, readFileSync } from 'node:fs';
 import { GROUP, PRACTICE, PRACTICE_SIZE, SHOWN_GAP, SPACED, dailySet, dateKey, laterKey, practiceSet } from '../app/daily.mjs';
 import { contains, distanceTo } from '../app/geo.mjs';
 import { TYPES } from '../app/questions.mjs';
+import { WAIT } from '../scripts/lib/made.mjs';
 
 const QUIZ = 'build/data/quiz.json';
 const skip = existsSync(QUIZ) ? false : `${QUIZ} is missing; run node scripts/build-quiz.mjs`;
-const { items, decoys } = skip ? { items: [], decoys: [] } : JSON.parse(readFileSync(QUIZ, 'utf8'));
+const { items, decoys, made } = skip ? { items: [], decoys: [] } : JSON.parse(readFileSync(QUIZ, 'utf8'));
 const core = JSON.parse(readFileSync('learn/core.json', 'utf8')).core;
 
 test('the app gets exactly the names in core.json', { skip }, () => {
@@ -31,6 +32,26 @@ test('a name with a since date joins after the spaced deal began, and is in core
       assert.ok(listed.has(name), name);
       assert.equal(items.find((it) => it.name === name).since, day, name);
     }
+  }
+});
+
+test('a place that changes on a date changes after the spaced deal began, keeping its kind and category', { skip }, () => {
+  const curated = new Map(JSON.parse(readFileSync('places/places.json', 'utf8')).places.map((p) => [p.name, p]));
+  for (const it of items.filter((x) => x.changes)) {
+    assert.equal(it.kind, 'landmark', it.name);
+    assert.deepEqual(it.changes.map((c) => c.on), Object.keys(curated.get(it.name).changes).sort(), it.name);
+    for (const change of it.changes) {
+      assert.ok(change.on > SPACED, `${it.name} ${change.on}`);
+      for (const field of ['name', 'kind', 'label', 'category', 'apart', 'since']) assert.ok(!(field in change), `${it.name} ${field}`);
+    }
+  }
+});
+
+test('a day made by hand comes after the spaced deal began and is played as it was made', { skip }, () => {
+  for (const [day, { slots }] of Object.entries(made ?? {})) {
+    assert.ok(day > SPACED, day);
+    const set = dailySet(items, day, decoys, made);
+    assert.deepEqual(set.map((q) => [q.target.name, q.type]), slots.map((s) => [s.target, s.type]), day);
   }
 });
 
@@ -108,19 +129,18 @@ test('a year of daily sets can be built from the real data', { skip }, () => {
 });
 
 test('over a year, an area waits a week before it is asked again, a street or place two', { skip }, () => {
-  const wait = { area: 7, street: 14, place: 14 };
   const last = new Map();
   for (let n = 0; n < 365; n++) {
-    for (const q of dailySet(items, laterKey(SPACED, n))) {
+    for (const q of dailySet(items, laterKey(SPACED, n), [], made)) {
       const since = n - (last.get(q.target.name) ?? -Infinity);
-      assert.ok(since >= wait[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
+      assert.ok(since >= WAIT[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
       last.set(q.target.name, n);
     }
   }
 });
 
 test('over a year, what a question names on the map is not asked days around it', { skip }, () => {
-  const sets = Array.from({ length: 365 }, (_, n) => dailySet(items, laterKey(SPACED, n)));
+  const sets = Array.from({ length: 365 }, (_, n) => dailySet(items, laterKey(SPACED, n), [], made));
   const asked = new Map();
   sets.forEach((set, n) => set.forEach((q) => asked.set(q.target.name, [...(asked.get(q.target.name) ?? []), n])));
   sets.forEach((set, n) => {

@@ -4,6 +4,8 @@ import { bboxGap, bboxOf, dissolve, distance, interiorPoint } from './lib/geo.mj
 import { layerFeatures, tiles } from './lib/pmtiles.mjs';
 import { neighbourhood } from './lib/adjacency.mjs';
 import { closest, contains, metersBetween } from '../app/geo.mjs';
+import { SET_SIZE } from '../app/daily.mjs';
+import { TYPES } from '../app/questions.mjs';
 
 const args = process.argv.slice(2);
 const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
@@ -16,7 +18,7 @@ const STREET_LINK_M = 500;
 
 const json = async (f) => JSON.parse(await readFile(f, 'utf8'));
 
-const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, pendingDoc, sourcesDoc, shapesDoc, longlist, bboxDoc, regionsDoc] = await Promise.all([
+const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, pendingDoc, sourcesDoc, shapesDoc, longlist, bboxDoc, regionsDoc, daysDoc] = await Promise.all([
   json('build/data/districts.geojson'),
   json('places/places.json'),
   json('learn/bridges.json'),
@@ -30,6 +32,7 @@ const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, core
   json('places/longlist.json'),
   json('config/bbox.json'),
   json('learn/regions.json'),
+  json('learn/days.json'),
 ]);
 
 const problems = [];
@@ -158,8 +161,31 @@ function placeGeometry(p) {
   return { geometry: shapeOr('place', p.name, point), point };
 }
 
+const DATE = /^\d{4}-\d{2}-\d{2}$/;
+const CHANGEABLE = new Set(['asked', 'osm', 'lat', 'lon', 'branches', 'district', 'description', 'source']);
+const VARIES = ['asked', 'point', 'geometry', 'regions', 'about', 'source', 'streetview'];
+
 const curated = new Set(placesDoc.places.map((p) => p.name));
+const versions = new Map();
+
+function versionsOf(p) {
+  if (!curated.has(p.name)) { fail(`pending.json: ${p.name} is not live yet, so change it instead of dating it`); return []; }
+  let entry = p;
+  return Object.entries(p.changes).sort(([a], [b]) => (a < b ? -1 : 1)).map(([on, change]) => {
+    if (!DATE.test(on)) fail(`${p.name}: change ${on} is not a date`);
+    for (const field of Object.keys(change)) if (!CHANGEABLE.has(field)) fail(`${p.name}: ${field} cannot change on a date`);
+    entry = Object.fromEntries(Object.entries({ ...entry, ...change }).filter(([, v]) => v !== null));
+    return { on, item: placeItem(entry) };
+  }).filter((v) => v.item);
+}
+
 const landmarkItems = [...placesDoc.places, ...pendingDoc.landmarks].map((p) => {
+  const it = placeItem(p);
+  if (it && p.changes) versions.set(p.name, versionsOf(p));
+  return it;
+}).filter(Boolean);
+
+function placeItem(p) {
   if (!PLACE_LABEL[p.category]) fail(`${p.name}: unknown category ${p.category}`);
   const where = placeGeometry(p);
   if (!where) return null;
@@ -176,7 +202,7 @@ const landmarkItems = [...placesDoc.places, ...pendingDoc.landmarks].map((p) => 
     about: p.description ?? null,
     source: p.source ?? null,
   };
-}).filter(Boolean);
+}
 
 const bridgeItems = bridgesDoc.bridges.map((b) => {
   if (b.lat == null || b.lon == null) fail(`${b.name}: bridge without coordinates`);
@@ -300,12 +326,33 @@ for (const [section, entries] of Object.entries(pendingDoc)) {
 }
 
 for (const [day, names] of Object.entries(coreDoc.since ?? {})) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) fail(`core.json: since ${day} is not a date`);
+  if (!DATE.test(day)) fail(`core.json: since ${day} is not a date`);
   for (const name of names) {
     if (!core.has(name)) { fail(`core.json: ${name} has a since date but is not in core`); continue; }
     if (byName.get(name).since) fail(`core.json: ${name} has two since dates`);
     byName.get(name).since = day;
   }
+}
+
+const BY_MOST = 80;
+const made = {};
+for (const [day, { by = null, slots, ...rest }] of Object.entries(daysDoc.days)) {
+  const where = `days.json: ${day}`;
+  if (!DATE.test(day)) fail(`${where} is not a date`);
+  for (const field of Object.keys(rest)) fail(`${where} has an unknown field ${field}`);
+  if (by !== null && (typeof by !== 'string' || !by.trim() || by.length > BY_MOST)) fail(`${where} has no usable name to credit`);
+  if (!Array.isArray(slots) || slots.length !== SET_SIZE) { fail(`${where} needs ${SET_SIZE} questions`); continue; }
+  const seen = new Set();
+  for (const { target, type, seed } of slots) {
+    const it = byName.get(target);
+    if (!core.has(target)) fail(`${where}: ${target} is not in core.json`);
+    else if (it.since && it.since > day) fail(`${where}: ${target} joins only on ${it.since}`);
+    if (seen.has(target)) fail(`${where}: ${target} is asked twice`);
+    seen.add(target);
+    if (!Object.hasOwn(TYPES, type)) fail(`${where}: ${type} is not a question type`);
+    if (!Number.isSafeInteger(seed)) fail(`${where}: ${target} has no seed`);
+  }
+  made[day] = { by, slots: slots.map(({ target, type, seed }) => ({ target, type, seed })) };
 }
 
 for (const it of items) {
@@ -383,6 +430,20 @@ function streetviewPoint(it) {
 
 for (const it of items) if (it.point && it.geometry) it.streetview = roundCoords(streetviewPoint(it) ?? it.point);
 
+const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+const changed = [];
+for (const [name, list] of versions) {
+  const it = byName.get(name);
+  if (it?.kind !== 'landmark' || !list.length) continue;
+  it.changes = list.map(({ on, item }) => {
+    if (!item.source && sources[name]) item.source = sources[name];
+    item.point = onShape(item.geometry, item.point);
+    item.streetview = roundCoords(streetviewPoint(item) ?? item.point);
+    changed.push({ name, item });
+    return { on, ...Object.fromEntries(VARIES.filter((k) => !same(item[k], it[k])).map((k) => [k, item[k] ?? null])) };
+  });
+}
+
 if (problems.length) {
   console.error(`build-quiz: ${problems.length} problem(s)`);
   for (const p of problems) console.error(`  - ${p}`);
@@ -430,7 +491,8 @@ for (const [category, { places }] of Object.entries(longlist.categories)) {
   }
 }
 const decoys = new Set();
-for (const it of chosen.filter((x) => x.kind === 'landmark')) {
+const later = changed.filter((v) => kept.has(v.name) && v.item.geometry.type !== 'MultiPoint').map((v) => v.item);
+for (const it of [...chosen.filter((x) => x.kind === 'landmark'), ...later]) {
   pool
     .filter((d) => d.category === it.category && !contains(it.geometry, d.point))
     .sort((a, b) => metersBetween(a.point, it.point) - metersBetween(b.point, it.point))
@@ -438,7 +500,7 @@ for (const it of chosen.filter((x) => x.kind === 'landmark')) {
     .forEach((d) => decoys.add(d));
 }
 
-const out = { items: chosen, decoys: [...decoys].sort((a, b) => (a.name < b.name ? -1 : 1)) };
+const out = { items: chosen, decoys: [...decoys].sort((a, b) => (a.name < b.name ? -1 : 1)), ...(Object.keys(made).length && { made }) };
 await mkdir(dirname(outFile), { recursive: true });
 await writeFile(outFile, JSON.stringify(out));
 
@@ -446,3 +508,4 @@ const kinds = [...new Set(chosen.map((it) => it.kind))];
 console.log(`build-quiz → ${outFile} (${(JSON.stringify(out).length / 1024).toFixed(0)} KB)`);
 for (const kind of kinds) console.log(`  ${kind.padEnd(9)} ${chosen.filter((it) => it.kind === kind).length}`);
 console.log(`  ${'decoy'.padEnd(9)} ${decoys.size}`);
+if (out.made) console.log(`  ${'made'.padEnd(9)} ${Object.keys(made).length}`);

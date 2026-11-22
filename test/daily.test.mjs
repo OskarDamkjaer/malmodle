@@ -8,6 +8,7 @@ import { fixture } from './fixture.mjs';
 const items = fixture();
 const JOINS = laterKey(SPACED, 40);
 const joining = new Set(['Område 5-0', 'Område 5-1', 'Område 5-2', 'Område 5-3', 'Område 5-4', 'Område 5-5', 'Gata 11']);
+const WAIT = { area: 5, street: 3, place: 2 };
 const grown = fixture().map((it) => (joining.has(it.name) ? { ...it, since: JOINS } : it));
 const full = (set) => JSON.stringify(set.map((q) => [q.type, q.target.name, q.options, q.from?.name, q.to?.name, q.side]));
 const days = Array.from({ length: 60 }, (_, i) => dateKey(new Date(2027, 0, 1 + i)));
@@ -49,13 +50,12 @@ test('the days before the spaced deal keep the sets they were played with', () =
 });
 
 test('a target waits before it is asked again, from the spaced deal on and across a day items join', () => {
-  const wait = { area: 5, street: 3, place: 2 };
   for (const list of [items, grown]) {
     const last = new Map();
     for (let n = 0; n < 120; n++) {
       for (const q of dailySet(list, laterKey(SPACED, n))) {
         const since = n - (last.get(q.target.name) ?? -Infinity);
-        assert.ok(since >= wait[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
+        assert.ok(since >= WAIT[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
         last.set(q.target.name, n);
       }
     }
@@ -85,12 +85,76 @@ test('items that join on a date are all asked in the first round after it, among
   for (const name of joining) assert.ok(asked.has(name), name);
 });
 
+const TURNS = laterKey(SPACED, 30);
+const branches = [[12.957, 55.586], [12.99, 55.6], [12.96, 55.575]];
+const built = fixture().map((it) => (it.kind === 'landmark' ? { ...it, category: 'byggnad' } : it));
+const turned = built.map((it) => (it.name === 'Plats 5' ? {
+  ...it,
+  changes: [{ on: TURNS, asked: 'en Plats 5', point: branches[0], geometry: { type: 'MultiPoint', coordinates: branches } }],
+} : it));
+
+test('a place that changes on a date leaves every day before it as it was, and the deal as it was', () => {
+  const names = (set) => set.map((q) => q.target.name).sort().join();
+  let asked = 0;
+  for (let day = '2026-10-10'; day < laterKey(TURNS, 60); day = laterKey(day, 1)) {
+    if (day < TURNS) assert.equal(full(dailySet(turned, day)), full(dailySet(built, day)), day);
+    else assert.equal(names(dailySet(turned, day)), names(dailySet(built, day)), day);
+    for (const q of dailySet(turned, day).filter((x) => x.target.name === 'Plats 5')) {
+      assert.equal(q.target.asked, day < TURNS ? undefined : 'en Plats 5', day);
+      assert.equal(q.target.geometry.type, day < TURNS ? 'Point' : 'MultiPoint', day);
+      if (day >= TURNS) asked++;
+    }
+  }
+  assert.ok(asked > 0);
+  for (const [key, type] of [[laterKey(TURNS, -1), 'Point'], [TURNS, 'MultiPoint']]) {
+    for (let seed = 0; seed < 20; seed++) {
+      const q = practiceSet(turned, { key, category: 'byggnad', seed }).find((x) => x.target.name === 'Plats 5');
+      if (q) assert.equal(q.target.geometry.type, type, key);
+    }
+  }
+});
+
+const MADE_ON = laterKey(SPACED, 45);
+const lately = (group) => new Set(Array.from({ length: Math.max(WAIT[group], SHOWN_GAP) }, (_, n) => dailySet(items, laterKey(MADE_ON, -1 - n))).flat()
+  .flatMap((q) => [q.target, q.from, q.to]).filter((it) => it && GROUP[it.kind] === group).map((it) => it.name));
+const free = (kind) => items.filter((it) => it.kind === kind && !lately(GROUP[kind]).has(it.name)).map((it) => it.name);
+const madeSlots = [
+  ...free('area').slice(0, 4).map((target, i) => [target, ['point', 'identify', 'neighbour', 'point'][i]]),
+  ...free('street').slice(0, 2).map((target, i) => [target, ['point', 'identify'][i]]),
+  ...free('landmark').slice(0, 3).map((target, i) => [target, ['point', 'identify', 'point'][i]]),
+  [free('bridge')[0], 'point'],
+].map(([target, type], i) => ({ target, type, seed: 100 + i }));
+const made = { [MADE_ON]: { by: 'Anna', slots: madeSlots } };
+
+test('a day made by hand is played as it was made, and the days before it keep their deal', () => {
+  const set = dailySet(items, MADE_ON, [], made);
+  assert.deepEqual(set.map((q) => [q.target.name, q.type]), madeSlots.map((s) => [s.target, s.type]));
+  assert.equal(full(dailySet(items, MADE_ON, [], made)), full(set));
+  const names = (s) => s.map((q) => q.target.name).join();
+  for (let day = '2026-10-10'; day < MADE_ON; day = laterKey(day, 1)) {
+    if (day < laterKey(MADE_ON, -SHOWN_GAP)) assert.equal(full(dailySet(items, day, [], made)), full(dailySet(items, day)), day);
+    else assert.equal(names(dailySet(items, day, [], made)), names(dailySet(items, day)), day);
+  }
+});
+
+test('after a day made by hand, its targets wait like any other, and what it shows is not asked around it', () => {
+  const last = new Map();
+  for (let n = 0; n < 120; n++) {
+    for (const q of dailySet(items, laterKey(SPACED, n), [], made)) {
+      const since = n - (last.get(q.target.name) ?? -Infinity);
+      assert.ok(since >= WAIT[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
+      last.set(q.target.name, n);
+    }
+  }
+  checkShown(items, made);
+});
+
 test('what a question names on the map is not asked days before or after, also across a day items join', () => {
   for (const list of [items, grown]) checkShown(list);
 });
 
-function checkShown(list) {
-  const sets = Array.from({ length: 60 }, (_, n) => dailySet(list, laterKey(SPACED, n)));
+function checkShown(list, made) {
+  const sets = Array.from({ length: 60 }, (_, n) => dailySet(list, laterKey(SPACED, n), [], made));
   sets.forEach((set, n) => {
     for (const q of set) {
       for (const shown of [q.from, q.to].filter(Boolean)) {

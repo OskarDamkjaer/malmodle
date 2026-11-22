@@ -28,9 +28,9 @@ const env = { DB: db, LIVE: localR2(), LIVE_URL: '/live', ASSETS: assets };
 const ctx = { waitUntil: (promise) => promise.catch((err) => console.error(err)) };
 
 function fakePlayers() {
-  const { items } = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
+  const { items, decoys, made } = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
   const key = dateKey();
-  const set = dailySet(items, key);
+  const set = dailySet(items, key, decoys, made);
   const rng = random(set.length);
   const ease = set.map(() => 0.15 + rng() * 0.8);
   let p = 0;
