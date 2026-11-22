@@ -237,9 +237,9 @@ export const NONE = Object.freeze({});
 
 export const makeQuestion = (type, seed, target, items, decoys, avoid) => TYPES[type].build({ target, items, rng: random(seed), avoid, decoys, own: () => random(seed) });
 
-function madeSet(slots, items, decoys, near) {
+function madeSet(slots, items, decoys) {
   const byName = new Map(items.map((it) => [it.name, it]));
-  const avoid = new Set([...near, ...slots.map((s) => s.target)]);
+  const avoid = new Set(slots.map((s) => s.target));
   return slots.filter((s) => byName.has(s.target)).map(({ target, type, seed }) => {
     const it = byName.get(target);
     const q = makeQuestion(type, seed, it, items, decoys, avoid);
@@ -333,7 +333,7 @@ function dealer(items, made) {
   function spaced(key) {
     return era(eraOf(key)).deal(key);
   }
-  const ahead = (from, key) => (eraOf(from) === eraOf(key) ? on(key) : era(eraOf(from)).deal(key)).targets.filter(Boolean);
+  const ahead = (from, key) => (eraOf(from) === eraOf(key) && !madeOn(key) ? on(key) : era(eraOf(from)).deal(key)).targets.filter(Boolean);
   return { on, pool, ahead, madeOn };
 }
 
@@ -355,11 +355,7 @@ export function targetsOn(items, key, made = NONE) {
 export function dailySet(items, key, decoys = [], made = NONE) {
   const { on, pool, ahead, madeOn } = dealerFor(items, made);
   const { slots, targets } = on(key);
-  if (madeOn(key)) {
-    const before = new Set();
-    for (let n = 1; n <= SHOWN_GAP; n++) for (const it of targetsOn(items, laterKey(key, -n), made)) before.add(it.name);
-    return madeSet(madeOn(key).slots, pool(key), decoys, before);
-  }
+  if (madeOn(key)) return madeSet(madeOn(key).slots, pool(key), decoys);
   const avoid = names(targets);
   if (key >= SPACED) {
     for (let n = 1; n <= SHOWN_GAP; n++) {

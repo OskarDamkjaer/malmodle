@@ -1,4 +1,4 @@
-import { GROUP, SHOWN_GAP, dailySet, laterKey } from '../../app/daily.mjs';
+import { GROUP, dailySet, laterKey } from '../../app/daily.mjs';
 
 export const WAIT = { area: 7, street: 14, place: 14 };
 export const LEAD = 7;
@@ -28,13 +28,6 @@ export function problems(quiz, day, entry) {
       last.set(q.target.name, key);
     }
   }
-  days.forEach(([key, questions], n) => {
-    for (const shown of questions.flatMap((q) => [q.from, q.to]).filter(Boolean)) {
-      for (const [other, those] of days.slice(Math.max(0, n - SHOWN_GAP), n + SHOWN_GAP + 1)) {
-        if (those.some((q) => q.target.name === shown.name)) found.push(`${shown.name} is on the map on ${key} and asked on ${other}`);
-      }
-    }
-  });
   return [...new Set(found)];
 }
 

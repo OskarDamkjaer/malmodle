@@ -111,18 +111,20 @@ a day that was sent in and gives it a date.
   the builder. `take <id>` gives one a date, the first from a week ahead that
   fits or the one given, and writes it into `learn/days.json`.
 - **A made day is played as made.** On its date the game builds each question
-  from its target, type and seed the way the builder does, with the items in
-  play that day, and keeps from the map what the three days before it ask.
+  from its target, type and seed the way the builder does, keeping from the
+  map only what the day itself asks, so it is the day its maker saw whatever
+  the days around it ask or show.
   "Dagens frågor av …" hangs under the first question's card, with the name
   the sender gave or "en spelare" without one, and the end screen says it
-  again. The days before it keep their deal,
+  again. The days before it are dealt and built as if it were not there,
   and every deck is dealt anew from the day after, with what was asked lately
   at the back, so its targets wait like any other and the dealt targets it
   replaced come soon.
 - **A date has to fit.** Its targets must all be in the game by then, every
   question must build with its type, none of its targets may be asked within
-  a week (an area) or two (a street or place) before it, and what it shows on
-  the map may not be asked within three days of it, or the other way round.
+  a week (an area) or two (a street or place) before it, and the game must ask each
+  question as the builder showed it. What a made day shows on the map may be
+  asked on the days around it: its maker's choices win over that rule.
   `scripts/lib/made.mjs` checks this for `take`, and the data tests check it
   over a year for every made day in `learn/days.json`.
 - **The link is the day.** The address holds the target, type and seed of
@@ -136,17 +138,10 @@ a day that was sent in and gives it a date.
   entry there. `plans/pending.md` says how a waiting name goes live.
   Nothing does that from what is sent in yet, and a made day with a target
   outside the game cannot be scheduled until that target is in `core.json`.
-- **The days before a made day.** The three days before it steer what they
-  show on the map around its targets, so a made day that arrives fewer than
-  four days ahead can change a day already played. `take` refuses a date
-  closer than `LEAD`, which covers it only if the commit is deployed in time.
-  Dealing those days from the deal alone, as the day before a `since` date
-  is, would remove the dependence.
-- **The preview is not always the day.** The builder builds each question
-  from every item and avoids only the day's own targets. The game builds it
-  from what is in play on the date and also avoids the three days before, so
-  a route can start somewhere else and a neighbour question can ask another
-  side. `problems` catches a changed type, not a changed question.
+- **The preview against a dated change.** The builder builds from every
+  item as it is today. A target that changes on a date before the day is
+  played, or a neighbour that has not joined by then, gives another question,
+  and `take` then refuses the date and names the questions.
 - **Opened from an older version of the game.** A browser whose offline
   worker predates the builder serves it the old `daily.mjs`, and the page
   fails until the game has updated.
