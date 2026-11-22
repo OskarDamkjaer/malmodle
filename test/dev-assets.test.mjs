@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { PIPELINE, devAssetsTag, sources } from '../scripts/lib/dev-assets.mjs';
+import { PIPELINE, PROSE, devAssetsTag, read, sources } from '../scripts/lib/dev-assets.mjs';
 
 test('the map data release covers every step of the deploy that builds it', () => {
   const workflow = readFileSync('.github/workflows/deploy.yml', 'utf8');
@@ -20,6 +20,19 @@ test('the map data release is named after what the pipeline reads', () => {
   }
   assert.ok(!read.some((file) => /^(data|build)\//.test(file)));
   assert.match(devAssetsTag(), /^dev-assets-[0-9a-f]{12}$/);
+});
+
+test('a new description or link leaves the map data release as it is, and a new shape does not', () => {
+  const place = { name: 'Kaféet', osm: ['node/1'], lat: 55.6, lon: 13, description: 'Ett kafé.', source: 'https://example.org', verified: true, why: 'Known.' };
+  const doc = (p) => JSON.stringify({ places: [p] }, null, 1);
+  assert.equal(read('places.json', doc({ ...place, description: 'Ett annat kafé.', source: null, verified: false, why: '' })), read('places.json', doc(place)));
+  assert.notEqual(read('places.json', doc({ ...place, osm: ['node/2'] })), read('places.json', doc(place)));
+  assert.notEqual(read('places.json', doc({ ...place, lat: 55.7 })), read('places.json', doc(place)));
+  assert.equal(read('build.mjs', 'const description = 1;'), 'const description = 1;');
+  for (const script of PIPELINE.filter((p) => p.endsWith('.mjs'))) {
+    const text = readFileSync(script, 'utf8');
+    for (const field of PROSE) assert.doesNotMatch(text, new RegExp(`\\b${field}\\b`), `${script} reads ${field}`);
+  }
 });
 
 test('the fetch and the deploy use the same release name', () => {
