@@ -46,12 +46,12 @@
       "verified": true
     },
     "Kroksbäck": {
-      "text": "Höghusområdet byggdes i mitten av 1960-talet som ett av de första områdena inom ramen för miljonprogrammet. Namnet kommer från en gård som tagit namn efter en bäck.",
-      "source": "https://sv.wikipedia.org/wiki/Kroksb%C3%A4ck",
+      "text": "Radhus och villor väster om Lorensborgsgatan. Öster om den ligger flerbostadshus i tre och åtta våningar från 1960-talet, bland de första inom miljonprogrammet, med försänkta gator och gångbroar.",
+      "source": "http://www.bebyggelseregistret.raa.se/bbr2/miljo/visaHelaBeskrivningen.raa?miljoId=21200000000266",
       "verified": true
     },
     "Fosieby": {
-      "text": "Malmös minst befolkade delområde. Sedan 1898 finns här en järnvägsstation, men sedan 1973 stannar inga tåg där.",
+      "text": "Kyrkbyn i Fosie socken, där marken mest tas upp av Fosie kyrka, kyrkogården och Fosie trafikplats. Stationen vid Kontinentalbanan öppnade 1898, men persontrafiken upphörde 1973.",
       "source": "https://sv.wikipedia.org/wiki/Fosieby",
       "verified": true
     },
@@ -301,7 +301,7 @@
       "verified": true
     },
     "Elisedal": {
-      "text": "Industriområde norr om Ystadvägen, där gatorna har hästnamn som Galoppgatan och Ridspögatan. I norr ligger träningsanläggningar för Jägersro travbana.",
+      "text": "Industriområde norr om Ystadvägen, med hästanknutna gatunamn som Galoppgatan och Ridspögatan. I norr ligger träningsanläggningar för Jägersro travbana.",
       "source": "https://sv.wikipedia.org/wiki/Elisedal",
       "verified": true
     },
@@ -316,7 +316,7 @@
       "verified": true
     },
     "Gamla Limhamn": {
-      "text": "Limhamn har rötter som egen ort sedan 1500-talet, tidigt knuten till kalkhantering. Från 1820-talet ett fiskeläge, som under sent 1800-tal blev ett industrisamhälle.",
+      "text": "Blandad bebyggelse med många gathus från slutet av 1800-talet, då fiskeläget växte till ett industrisamhälle. Här ligger Limhamns torg.",
       "source": "https://sv.wikipedia.org/wiki/Limhamn",
       "verified": true
     },
@@ -346,8 +346,8 @@
       "verified": true
     },
     "Höja": {
-      "text": "Småhus och flerfamiljshus, mest Riksbyggens föreningar Gula, Röda och Vita Höja. Här ligger Malmös högsta naturliga punkt.",
-      "source": "https://sv.wikipedia.org/wiki/H%C3%B6ja",
+      "text": "Riksbyggens bostadsrätter från 1966–1968, med sex niovåningshus på en höjd, Vita Höja, och trevånings lamellhus i gult tegel, Gula Höja.",
+      "source": "http://www.bebyggelseregistret.raa.se/bbr2/miljo/visaHelaBeskrivningen.raa?miljoId=21200000001349",
       "verified": true
     },
     "Jägersro Villastad": {
@@ -356,8 +356,8 @@
       "verified": true
     },
     "Kalkbrottet": {
-      "text": "Ett av norra Europas största dagbrott, 1 300 meter långt och 65 meter djupt. I kalkstenen finns fossil av koraller, krokodiler och hajtänder.",
-      "source": "https://sv.wikipedia.org/wiki/Limhamns_kalkbrott",
+      "text": "Dagbrott för kalksten, invigt 1866, 1 300 meter långt och 65 meter djupt. Brytningen upphörde 1994 och sedan 2011 är det naturreservat. I kalkstenen finns fossil av krokodiler och hajtänder.",
+      "source": "https://www.lansstyrelsen.se/skane/besoksmal/naturreservat/malmo/limhamns-kalkbrott.html",
       "verified": true
     },
     "Kastanjegården": {
@@ -367,7 +367,7 @@
     },
     "Kristineberg": {
       "text": "Egen tätort mellan 1965 och 2005, som 2010 växte samman med Oxie. Ändhållplats för busslinje 1.",
-      "source": "https://sv.wikipedia.org/wiki/Kristineberg%2C_Malm%C3%B6_kommun",
+      "source": "https://sv.wikipedia.org/wiki/Kristineberg,_Malm%C3%B6_kommun",
       "verified": true
     },
     "Kryddgården": {
@@ -381,13 +381,13 @@
       "verified": true
     },
     "Lindeborg": {
-      "text": "Mest flerfamiljshus från 1970-talet, ett av de sista höghusområdena i miljonprogrammet. Uppkallat efter gården Lindeborg, som förr låg här.",
+      "text": "Mest flerfamiljshus från 1970-talet, ett av de sista höghusområdena som byggdes i Malmö inom miljonprogrammet. Uppkallat efter gården Lindeborg, som förr låg här.",
       "source": "https://sv.wikipedia.org/wiki/Lindeborg",
       "verified": true
     },
     "Lockarp": {
-      "text": "Kyrkbyn i Lockarps socken, söder om Yttre ringvägen. Norr om ringvägen ligger Coca-Cola-fabriken.",
-      "source": "https://sv.wikipedia.org/wiki/Lockarp",
+      "text": "Kyrkbyn i Lockarps socken, söder om Yttre ringvägen. Kyrkan har medeltida anor men byggdes om helt på 1880-talet och används inte längre.",
+      "source": "https://www.svenskakyrkan.se/malmo/lockarpskyrka",
       "verified": true
     },
     "Lönngården": {
@@ -396,12 +396,12 @@
       "verified": true
     },
     "Norra Sofielund": {
-      "text": "Ett av tre delområden i Sofielund, med Södra Sofielund och industriområdet. Sofielund hörde till Västra Skrävlinge landskommun före 1911.",
+      "text": "Norr om Lönngatan, mest flerbostadshus byggda mellan 1910 och 1938. Här ligger Nobeltorget och Sofielundsskolan, och 2026 började arbetet med Sveriges första barnstadsdel.",
       "source": "https://sv.wikipedia.org/wiki/Sofielund%2C_Malm%C3%B6",
       "verified": true
     },
     "Södra Sofielund": {
-      "text": "Ett av tre delområden i Sofielund, med Norra Sofielund och industriområdet. Sofielund hörde till Västra Skrävlinge landskommun före 1911.",
+      "text": "Söder om Lönngatan, den del av Sofielund som byggdes först. Här ligger Seved, Gamla Sofielund med omkring 120 gathus från sekelskiftet 1900 och Pripps gamla bryggeri.",
       "source": "https://sv.wikipedia.org/wiki/Sofielund%2C_Malm%C3%B6",
       "verified": true
     },
@@ -416,13 +416,13 @@
       "verified": true
     },
     "Västra Sorgenfri": {
-      "text": "Bostäder från början av 1900-talet och Sankt Pauli kyrkogårdar. Här ligger Konsthögskolan och Malmös första lamellhus, från 1927.",
+      "text": "Bostäder från första halvan av 1900-talet och Sankt Pauli kyrkogårdar, med Malmös första lamellhus från 1927. Namnet kommer från Sorgenfrigården.",
       "source": "https://sv.wikipedia.org/wiki/V%C3%A4stra_Sorgenfri",
       "verified": true
     },
     "Örtagården": {
-      "text": "Flerfamiljshus byggda 1967, ägda av MKB och Rosengård Fastighets AB.",
-      "source": "https://sv.wikipedia.org/wiki/%C3%96rtag%C3%A5rden%2C_Malm%C3%B6",
+      "text": "Flerfamiljshus från 1967, med elva skivhus i åtta våningar kring en oval grönyta och lamellhus i tre våningar kring gårdar.",
+      "source": "https://sv.wikipedia.org/wiki/%C3%96rtag%C3%A5rden,_Malm%C3%B6",
       "verified": true
     },
     "Östra Söderkulla": {
@@ -431,7 +431,7 @@
       "verified": true
     },
     "Västra Söderkulla": {
-      "text": "Munkhättegatan delar Söderkulla i två, och detta är den västra delen. Flerfamiljshus från 1960-talet och Söderkullaskolan med omkring 1700 elever.",
+      "text": "Munkhättegatan delar Söderkulla i två, och detta är den västra delen. Flerfamiljshus med bostadsrätter från 1960-talet och grundskolan Söderkullaskolan.",
       "source": "https://sv.wikipedia.org/wiki/S%C3%B6derkulla",
       "verified": true
     },
@@ -451,8 +451,8 @@
       "verified": true
     },
     "Segevång": {
-      "text": "Söder om Stockholmsvägen, med Segevångsbadet, ett hotell och golfbanan för Malmö Burlöv Golfklubb.",
-      "source": "https://sv.wikipedia.org/wiki/Segev%C3%A5ng",
+      "text": "Flerbostadshus från omkring 1960 kring en ögonformad grönyta, med nio niovåningshus i en båge och ett nästan 500 meter långt bågformat hus mot Lundavägen. I söder ligger Sege park.",
+      "source": "http://www.bebyggelseregistret.raa.se/bbr2/miljo/visaHelaBeskrivningen.raa?miljoId=21200000000242",
       "verified": true
     },
     "Skumparp": {
@@ -467,17 +467,17 @@
     },
     "Solbacken": {
       "text": "Ett av Malmös mest centralt belägna villa- och radhusområden, med sekelskiftsvillor i jugend längs Bellevuevägen. Området hette förr Vångkarlevången.",
-      "source": "https://sv.wikipedia.org/wiki/Solbacken%2C_Malm%C3%B6",
+      "source": "https://sv.wikipedia.org/wiki/Solbacken,_Malm%C3%B6",
       "verified": true
     },
     "Stenkällan": {
-      "text": "Flerfamiljshus från 1960-talet i öster och villor i norr och öster. Här ligger Jägersro brandstation och ändhållplatsen för busslinje 5.",
-      "source": "https://sv.wikipedia.org/wiki/Stenk%C3%A4llan",
+      "text": "Riksbyggens bostadsrätter i två och tre våningar i rött tegel från 1966–1967, kallade Röda Höja, samt egnahem och villor. Här ligger Jägersro brandstation och ändhållplatsen för busslinje 5.",
+      "source": "http://www.bebyggelseregistret.raa.se/bbr2/miljo/visaHelaBeskrivningen.raa?miljoId=21200000001359",
       "verified": true
     },
     "Toarp": {
       "text": "Tidigare egen tätort, som vid 2015 års avgränsning hade vuxit samman med Oxie.",
-      "source": "https://sv.wikipedia.org/wiki/Toarp%2C_Malm%C3%B6_kommun",
+      "source": "https://sv.wikipedia.org/wiki/Toarp,_Malm%C3%B6_kommun",
       "verified": true
     },
     "Tygelsjö by": {
@@ -486,7 +486,7 @@
       "verified": true
     },
     "Västervång": {
-      "text": "Stora villor, många från 1940-talet. Kallas med Fridhem och Bellevue för Bellevue sjösida. Söder om Köpenhamnsvägen ligger radhusen i Friluftsstaden, uppförda åren 1942-44.",
+      "text": "Stora villor, många från 1940-talet, och södra delen av radhusområdet Friluftstaden, vars första del invigdes 1944. Kallas med Fridhem och Bellevue för Bellevue sjösida.",
       "source": "https://sv.wikipedia.org/wiki/V%C3%A4sterv%C3%A5ng",
       "verified": true
     }
