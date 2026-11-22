@@ -1,5 +1,5 @@
 import { Map, AttributionControl, NavigationControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, inPlay, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { BUILDER_KEY, POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize, unlockedText, unlocks } from './crowd.mjs';
 import { TYPES, answerOf, formatDistance, several, MAX_SCORE } from './questions.mjs';
@@ -173,7 +173,7 @@ function renderDots() {
 
 function setKey() {
   key = dateKey();
-  today = onDay(items, key);
+  today = onDay(inPlay(items, key), key);
   byName = new globalThis.Map(today.map((it) => [it.name, it]));
 }
 

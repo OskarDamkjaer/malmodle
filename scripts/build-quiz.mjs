@@ -330,17 +330,19 @@ for (const [day, names] of Object.entries(coreDoc.since ?? {})) {
   for (const name of names) {
     if (!core.has(name)) { fail(`core.json: ${name} has a since date but is not in core`); continue; }
     if (byName.get(name).since) fail(`core.json: ${name} has two since dates`);
+    if (byName.get(name).kind === 'landmark') fail(`core.json: ${name} is a place, and a place cannot join on a date until the decoys follow dates`);
     byName.get(name).since = day;
   }
 }
 
 const BY_MOST = 80;
+const UNSEEN = /[\u0000-\u001f\u007f-\u009f\u061c\u200b-\u200f\u2028-\u202e\u2060-\u2069\ufeff]/;
 const made = {};
 for (const [day, { by = null, slots, ...rest }] of Object.entries(daysDoc.days)) {
   const where = `days.json: ${day}`;
   if (!DATE.test(day)) fail(`${where} is not a date`);
   for (const field of Object.keys(rest)) fail(`${where} has an unknown field ${field}`);
-  if (by !== null && (typeof by !== 'string' || !by.trim() || by.length > BY_MOST)) fail(`${where} has no usable name to credit`);
+  if (by !== null && (typeof by !== 'string' || !by.trim() || by.length > BY_MOST || UNSEEN.test(by))) fail(`${where} has no usable name to credit`);
   if (!Array.isArray(slots) || slots.length !== SET_SIZE) { fail(`${where} needs ${SET_SIZE} questions`); continue; }
   const seen = new Set();
   for (const { target, type, seed } of slots) {

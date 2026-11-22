@@ -16,6 +16,7 @@ node scripts/serve.mjs --fake 200      # and 200 made-up players today
 node scripts/serve.mjs --trickle 10    # and one more every 10 seconds
 node scripts/handmade.mjs              # the days sent in from the builder, from D1
 node scripts/handmade.mjs take 12      # play one on the first date that fits
+node scripts/played.mjs                # pin the days played so far in learn/played.json
 ```
 
 `/dev/crowd.html` on the local server shows the comparison card for many
@@ -63,6 +64,9 @@ osmium, Java and hosts the sandbox cannot reach.
   of the dealt one, built from its targets, types and seeds the way the builder
   builds them, and every deck is dealt anew the day after it, with what was
   asked lately at the back. `scripts/lib/made.mjs` checks a date fits it.
+  `learn/played.json` pins the set of every day already played, and a test
+  fails if the data or the deal changes one, or dates anything on or before
+  the last of them.
 - `app/geo.mjs`: distances and containment.
 - `app/crowd.mjs`: your view of the day's numbers, the polling schedule, and
   the end screen's comparison in words with every threshold it uses, and
@@ -91,7 +95,8 @@ over from a worker without that handshake, it reloads the old pages itself. The
   played, and the day's numbers.
   `live.mjs` writes the day's numbers to R2 for polling, from a post or the
   cron. `handmade.mjs` stores a day sent from the builder under the same
-  player key as the sender's results, a few a day per player.
+  player key as the sender's results, a few a day per player and a few
+  hundred a day in all.
   `migrations/` is the schema, whose trigger keeps the running count,
   which `scripts/lib/d1.mjs` also loads into `node:sqlite` for `serve.mjs`
   and the tests; `scripts/lib/r2.mjs` stands in for the bucket. Deployed by
