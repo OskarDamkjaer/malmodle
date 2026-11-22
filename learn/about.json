@@ -46,17 +46,17 @@
       "verified": true
     },
     "Kroksbäck": {
-      "text": "Radhus och villor väster om Lorensborgsgatan. Öster om den ligger flerbostadshus i tre och åtta våningar från 1960-talet, bland de första inom miljonprogrammet, med försänkta gator och gångbroar.",
-      "source": "http://www.bebyggelseregistret.raa.se/bbr2/miljo/visaHelaBeskrivningen.raa?miljoId=21200000000266",
+      "text": "Radhus och villor väster om Lorensborgsgatan. Höghusen öster om den byggdes i mitten av 1960-talet, bland de första i miljonprogrammet, och mellan dem går ingen biltrafik.",
+      "source": "https://sv.wikipedia.org/wiki/Kroksb%C3%A4ck",
       "verified": true
     },
     "Fosieby": {
-      "text": "Kyrkbyn i Fosie socken, där marken mest tas upp av Fosie kyrka, kyrkogården och Fosie trafikplats. Stationen vid Kontinentalbanan öppnade 1898, men persontrafiken upphörde 1973.",
+      "text": "Kyrkbyn i Fosie socken, i dag mest Fosie kyrka, kyrkogården och Fosie trafikplats. Stationen vid Kontinentalbanan hade persontrafik 1898–1973.",
       "source": "https://sv.wikipedia.org/wiki/Fosieby",
       "verified": true
     },
     "Bellevue": {
-      "text": "Bostadsområde i Limhamn-Bunkeflo med stora villor som byggts under hela 1900-talet. Namnet kommer från Bellevuegården.",
+      "text": "Stora villor från hela 1900-talet. Marken hörde till landstället Bellevue innan området började bebyggas.",
       "source": "https://sv.wikipedia.org/wiki/Bellevue%2C_Malm%C3%B6",
       "verified": true
     },
@@ -301,12 +301,12 @@
       "verified": true
     },
     "Elisedal": {
-      "text": "Industriområde norr om Ystadvägen, med hästanknutna gatunamn som Galoppgatan och Ridspögatan. I norr ligger träningsanläggningar för Jägersro travbana.",
+      "text": "Industriområde norr om Ystadvägen, där gatorna har namn från hästsporten, som Galoppgatan och Ridspögatan.",
       "source": "https://sv.wikipedia.org/wiki/Elisedal",
       "verified": true
     },
     "Eriksfält": {
-      "text": "Villor och radhus, många från början av 1900-talet, där tomterna började säljas 1909. Heliga Trefaldighetskyrkan ligger vid Eriksfältsgatan.",
+      "text": "Villor och radhus, många från början av 1900-talet. Tomterna började säljas 1909, och vid Eriksfältsgatan ligger Heliga Trefaldighetskyrkan.",
       "source": "https://sv.wikipedia.org/wiki/Eriksf%C3%A4lt",
       "verified": true
     },
@@ -317,7 +317,7 @@
     },
     "Gamla Limhamn": {
       "text": "Blandad bebyggelse med många gathus från slutet av 1800-talet, då fiskeläget växte till ett industrisamhälle. Här ligger Limhamns torg.",
-      "source": "https://sv.wikipedia.org/wiki/Limhamn",
+      "source": "https://sv.wikipedia.org/wiki/Limhamn#Gamla_Limhamn",
       "verified": true
     },
     "Glostorp": {
@@ -341,7 +341,7 @@
       "verified": true
     },
     "Hindby": {
-      "text": "En av Fosie sockens två byar innan Fosie kom till Malmö 1931. Området är blandat, med flerfamiljshus vid Persborg, företag längs Cypressvägen och villor, många från 1940-talet.",
+      "text": "En av Fosie sockens två byar innan Fosie kom till Malmö 1931. Blandad bebyggelse med flerfamiljshus vid Persborg, företag längs Cypressvägen och villor, många från 1940-talet.",
       "source": "https://sv.wikipedia.org/wiki/Hindby",
       "verified": true
     },
@@ -356,17 +356,17 @@
       "verified": true
     },
     "Kalkbrottet": {
-      "text": "Dagbrott för kalksten, invigt 1866, 1 300 meter långt och 65 meter djupt. Brytningen upphörde 1994 och sedan 2011 är det naturreservat. I kalkstenen finns fossil av krokodiler och hajtänder.",
-      "source": "https://www.lansstyrelsen.se/skane/besoksmal/naturreservat/malmo/limhamns-kalkbrott.html",
+      "text": "Området kring Limhamns kalkbrott, som var i drift från 1866 till 1994. Runt brottet har nya bostadsområden vuxit fram.",
+      "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Stadsdelar-och-omraden/Kalkbrottet.html",
       "verified": true
     },
     "Kastanjegården": {
-      "text": "Villor från 1970-talet söder om Agnesfridsvägen. Delen mot järnvägen är reserverad för industrier. Ändhållplats för busslinje 2.",
+      "text": "Villor från 1970-talet söder om Agnesfridsvägen. Delen mot järnvägen är reserverad för industrier.",
       "source": "https://sv.wikipedia.org/wiki/Kastanjeg%C3%A5rden",
       "verified": true
     },
     "Kristineberg": {
-      "text": "Egen tätort mellan 1965 och 2005, som 2010 växte samman med Oxie. Ändhållplats för busslinje 1.",
+      "text": "Mest villor och radhus, många från 1970-talet. Egen tätort mellan 1965 och 2005, innan bebyggelsen växte samman med Oxie.",
       "source": "https://sv.wikipedia.org/wiki/Kristineberg,_Malm%C3%B6_kommun",
       "verified": true
     },
@@ -381,13 +381,13 @@
       "verified": true
     },
     "Lindeborg": {
-      "text": "Mest flerfamiljshus från 1970-talet, ett av de sista höghusområdena som byggdes i Malmö inom miljonprogrammet. Uppkallat efter gården Lindeborg, som förr låg här.",
+      "text": "Ett av de sista höghusområdena i Malmö inom miljonprogrammet, mest flerfamiljshus från 1970-talet. Namnet kommer från gården Lindeborg, som låg här.",
       "source": "https://sv.wikipedia.org/wiki/Lindeborg",
       "verified": true
     },
     "Lockarp": {
-      "text": "Kyrkbyn i Lockarps socken, söder om Yttre ringvägen. Kyrkan har medeltida anor men byggdes om helt på 1880-talet och används inte längre.",
-      "source": "https://www.svenskakyrkan.se/malmo/lockarpskyrka",
+      "text": "Kyrkbyn i Lockarps socken, söder om Yttre ringvägen. Kyrkan har medeltida anor men byggdes om helt på 1880-talet.",
+      "source": "https://sv.wikipedia.org/wiki/Lockarp",
       "verified": true
     },
     "Lönngården": {
@@ -396,17 +396,17 @@
       "verified": true
     },
     "Norra Sofielund": {
-      "text": "Norr om Lönngatan, mest flerbostadshus byggda mellan 1910 och 1938. Här ligger Nobeltorget och Sofielundsskolan, och 2026 började arbetet med Sveriges första barnstadsdel.",
-      "source": "https://sv.wikipedia.org/wiki/Sofielund%2C_Malm%C3%B6",
+      "text": "Mest flerbostadshus från 1910–1938, med Nobeltorget längst i norr. 2025 beslöt staden att göra området till Sveriges första barnstadsdel.",
+      "source": "https://sv.wikipedia.org/wiki/Sofielund%2C_Malm%C3%B6#Norra_Sofielund",
       "verified": true
     },
     "Södra Sofielund": {
-      "text": "Söder om Lönngatan, den del av Sofielund som byggdes först. Här ligger Seved, Gamla Sofielund med omkring 120 gathus från sekelskiftet 1900 och Pripps gamla bryggeri.",
-      "source": "https://sv.wikipedia.org/wiki/Sofielund%2C_Malm%C3%B6",
+      "text": "Den del av Sofielund som byggdes först, söder om Lönngatan. Här ligger Seved, Pripps gamla bryggeri och Gamla Sofielund med omkring 120 gathus från sekelskiftet 1900.",
+      "source": "https://sv.wikipedia.org/wiki/Sofielund%2C_Malm%C3%B6#S%C3%B6dra_Sofielund",
       "verified": true
     },
     "Norra Sorgenfri": {
-      "text": "Kallades förr Sorgenfri industriområde. Här har Addo, Sydkraft och Gasverket funnits, och området är tänkt att bli en del av innerstaden.",
+      "text": "Kallades förr Sorgenfri industriområde, och här har Addo, Sydkraft och Gasverket funnits. Ett planprogram från 2008 föreslog 2 500 nya bostäder.",
       "source": "https://sv.wikipedia.org/wiki/Norra_Sorgenfri",
       "verified": true
     },
@@ -426,12 +426,12 @@
       "verified": true
     },
     "Östra Söderkulla": {
-      "text": "Munkhättegatan delar Söderkulla i två, och detta är den östra delen. Flerfamiljshus med bostadsrätter från 1960-talet.",
+      "text": "Delen av Söderkulla öster om Munkhättegatan. Flerfamiljshus med bostadsrätter, byggda på 1960-talet.",
       "source": "https://sv.wikipedia.org/wiki/S%C3%B6derkulla",
       "verified": true
     },
     "Västra Söderkulla": {
-      "text": "Munkhättegatan delar Söderkulla i två, och detta är den västra delen. Flerfamiljshus med bostadsrätter från 1960-talet och grundskolan Söderkullaskolan.",
+      "text": "Delen av Söderkulla väster om Munkhättegatan. Flerfamiljshus med bostadsrätter från 1960-talet och grundskolan Söderkullaskolan.",
       "source": "https://sv.wikipedia.org/wiki/S%C3%B6derkulla",
       "verified": true
     },
@@ -451,8 +451,8 @@
       "verified": true
     },
     "Segevång": {
-      "text": "Flerbostadshus från omkring 1960 kring en ögonformad grönyta, med nio niovåningshus i en båge och ett nästan 500 meter långt bågformat hus mot Lundavägen. I söder ligger Sege park.",
-      "source": "http://www.bebyggelseregistret.raa.se/bbr2/miljo/visaHelaBeskrivningen.raa?miljoId=21200000000242",
+      "text": "Flerbostadshus från omkring 1960, placerade kring en oval grönyta så att de ovanifrån bildar ett öga. Kvarteren heter Ögonlocket och Ögonfransen.",
+      "source": "https://sv.wikipedia.org/wiki/Segev%C3%A5ng",
       "verified": true
     },
     "Skumparp": {
@@ -471,7 +471,7 @@
       "verified": true
     },
     "Stenkällan": {
-      "text": "Riksbyggens bostadsrätter i två och tre våningar i rött tegel från 1966–1967, kallade Röda Höja, samt egnahem och villor. Här ligger Jägersro brandstation och ändhållplatsen för busslinje 5.",
+      "text": "Riksbyggens bostadsrätter i rött tegel från 1966–1967, kallade Röda Höja, samt egnahem och villor. Här ligger Jägersro brandstation.",
       "source": "http://www.bebyggelseregistret.raa.se/bbr2/miljo/visaHelaBeskrivningen.raa?miljoId=21200000001359",
       "verified": true
     },
@@ -486,7 +486,7 @@
       "verified": true
     },
     "Västervång": {
-      "text": "Stora villor, många från 1940-talet, och södra delen av radhusområdet Friluftstaden, vars första del invigdes 1944. Kallas med Fridhem och Bellevue för Bellevue sjösida.",
+      "text": "Stora villor, många från 1940-talet, och södra delen av radhusområdet Friluftsstaden. Räknas med Fridhem och Bellevue till Bellevue sjösida.",
       "source": "https://sv.wikipedia.org/wiki/V%C3%A4sterv%C3%A5ng",
       "verified": true
     }

@@ -146,7 +146,7 @@
       "lat": 55.60635,
       "lon": 12.97787,
       "why": "Canoe club by the water at Ribersborg.",
-      "description": "Kanotförening med havskajakpaddling som huvudinriktning, med kurser för nybörjare och vana paddlare. Har i flera år arrangerat Tjäröfestivalen.",
+      "description": "Kanotförening inriktad på havskajakpaddling, med kurser för nybörjare och vana paddlare. Har i flera år arrangerat Tjäröfestivalen.",
       "source": "https://kforesund.se/"
     },
     {
@@ -159,7 +159,7 @@
       "lon": 13.02002,
       "why": "Laser tag arena, a known place to go.",
       "description": "Lasergamehall som också har Prison Island, där lag tar sig an utmaningar i 40 celler.",
-      "source": "http://malmo.laserdome.se/"
+      "source": "https://malmo.laserdome.se/"
     },
     {
       "name": "Gokart City Malmö",
@@ -171,7 +171,7 @@
       "lon": 13.01802,
       "why": "Indoor go-kart track in Södra Sofielund, a place people go for fun.",
       "description": "Gokarthall inomhus med lopp för grupper, barnkalas och körskola för barn. Samma företag har en bana i Helsingborg.",
-      "source": "http://www.gokartcity.club/"
+      "source": "https://www.gokartcity.club/"
     },
     {
       "name": "Kirsebergs torg",
@@ -218,7 +218,7 @@
       "lat": 55.58009,
       "lon": 13.03173,
       "why": "The square by Persborg station, with a bus stop of its own name.",
-      "description": "Torg i Persborg, ett bostadsområde från 1950-talet, avskilt från områdets övriga bebyggelse. Östra Grevie folkhögskola har sin skola i Malmö vid torget.",
+      "description": "Torget i Persborg, avskilt från bostadsområdets övriga bebyggelse från 1950-talet. Här har Östra Grevie folkhögskola sin skola i Malmö.",
       "source": "https://sv.wikipedia.org/wiki/Persborg"
     },
     {
@@ -305,7 +305,7 @@
       "lon": 13.00667,
       "apart": "Kv. Caroli",
       "why": "Church from 1880 inside the Caroli block, about 1,900 Wikipedia page views a year. Kv. Caroli needs the same apart before this goes live.",
-      "description": "Kyrkobyggnad som stod färdig 1880 efter ritningar av Emil Viktor Langlet. Den avsakraliserades 2010 och hyrs sedan 2026 av frikyrkan C3 Church Malmö.",
+      "description": "Kyrkobyggnad som stod färdig 1880 efter ritningar av Emil Viktor Langlet. Den avsakraliserades 2010 och hyrdes 2026 ut till frikyrkan C3 Church Malmö.",
       "source": "https://sv.wikipedia.org/wiki/Caroli_kyrka,_Malm%C3%B6"
     },
     {
@@ -427,8 +427,8 @@
       "lat": 55.6098,
       "lon": 12.99641,
       "why": "Party and culture boat from 1888, moored at Hjälmarekajen by Centralen since at least 2017. The photo-studio boat Tintin lies beside it.",
-      "description": "Flytande scen och festlokal i ett holländskt lastfartyg från 1888, med konserter och ståupp.",
-      "source": "https://www.citypolarna.se/guide.php?id=370"
+      "description": "Flytande festlokal och kulturscen i ett holländskt flodfartyg från 1888, som kom till Malmö 1997.",
+      "source": "https://www.blabaten.com/om-oss"
     },
     {
       "name": "Tanken",
@@ -500,8 +500,8 @@
       "lat": 55.59626,
       "lon": 13.00595,
       "why": "Bakery café on Spångatan, open mornings; its only shop in Malmö. Picked by the owner. No source found that says more than that, so no description.",
-      "description": "Bageri och kafé som drivs av Lundaföretaget Mormors Bageri, med bröd, bakverk och tårtor som prinsesstårta.",
-      "source": "https://www.allabolag.se/what/Mormors%20Bageri"
+      "description": "Bageri och kafé från familjeföretaget Mormors Bageri, som startade i Lund 1995. Varje butik bakar sina egna bakverk.",
+      "source": "https://mormors.se/om-oss-32080140"
     },
     {
       "name": "Atmosfär",
@@ -512,7 +512,7 @@
       "lat": 55.59977,
       "lon": 12.99615,
       "why": "Bistro on Fersens väg by Magistratsparken, opened 1997. Thatsup's guide to Malmö's classic restaurants calls it an institution; also in Michelin and Wikivoyage.",
-      "description": "Restaurang med svensk mat och en stor inglasad uteservering, under samma ledning sedan 1997. Den finns med i Michelinguiden.",
+      "description": "Restaurang med svensk mat och en stor inglasad uteservering, under samma ledning sedan 1997.",
       "source": "https://atmosfar.com/"
     },
     {
@@ -633,7 +633,7 @@
       "lat": 55.59353,
       "lon": 13.01354,
       "why": "Mikkeller's bar in Moriskans trädgård in Folkets Park; asked for by the owner. Shares the Folkets Park group, so it never comes up on the same day as the park or its stages.",
-      "description": "Ölträdgård som danska mikrobryggeriet Mikkeller har vid Moriska paviljongen i Folkets park, öppen på sommaren. Serverar grillmat som burgare och rökt brisket.",
+      "description": "Ölträdgård som danska mikrobryggeriet Mikkeller har vid Moriska paviljongen i Folkets park, öppen på sommaren.",
       "source": "https://mikkeller.com/locations/mikkeller-pop-up-moriskans-tradgard"
     },
     {
@@ -737,7 +737,7 @@
         }
       ],
       "why": "Soup and salad restaurants, asked for by the owner as a chain: any branch counts.",
-      "description": "Kedja med fyra restauranger i Malmö som främst gör soppor, grytor och surdegsbröd, lagat från grunden.",
+      "description": "Restaurangkedja i Malmö som främst gör soppor, grytor och surdegsbröd, lagat från grunden.",
       "source": "https://www.spoonery.se/"
     },
     {
@@ -759,8 +759,8 @@
         }
       ],
       "why": "Boule bar and restaurant, one in Folkets Park and one by Drottningtorget: any branch counts. Dropped from the research as a chain, back at the owner's request.",
-      "description": "Bar med boule inomhus. Kedjan finns på 13 platser i 6 städer och 3 länder.",
-      "source": "https://www.boulebar.se/om-boulebar"
+      "description": "Bar med boule inomhus, i en kedja med barer i flera länder.",
+      "source": "https://www.boulebar.se/om-oss"
     },
     {
       "name": "Surfshack",

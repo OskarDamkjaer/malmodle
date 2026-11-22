@@ -48,8 +48,8 @@ what some places are called:
   museum, as Malmö Konsthall is, and not a stage.
 - **Hotel Kramer** keeps its name, the building's and its Wikipedia article's.
   Scandic runs it as Scandic Kramer.
-- **Västerbron** has one short sentence, the only thing a page says about
-  it.
+- **Västerbron, Paulibron, Turbinbron and Slussbron** rest on what Ljungberg
+  says of how they were named in 1938, which is all that is written of them.
 
 ## Before it goes live
 
