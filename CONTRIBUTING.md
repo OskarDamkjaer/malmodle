@@ -126,9 +126,13 @@ everything these steps read: the scripts below, the modules they import, and
 the files they open, such as `places/places.json` and `config/bbox.json`
 (`scripts/lib/dev-assets.mjs` finds them by the paths written in the scripts, so
 an input opened through a computed path has to be written out somewhere in the
-script to count). Changing any of them rebuilds the map
+script to count). A JSON file counts without its `description`, `source`,
+`verified` and `why`, which the steps never read, so a new text or link
+rebuilds nothing. Changing anything else rebuilds the map
 data on the next deploy, and `fetch-dev-assets.mjs` fetches the new release
-once it is published.
+once it is published. Until then the Check of a pull request that changes an
+input fails at the fetch: when the change cannot alter what the steps build,
+publish the current release's files under the new name.
 
 Refresh the data every few months, and before asking people to build days.
 OpenStreetMap keeps changing, and the day builder tells people to add what is

@@ -26,8 +26,15 @@ export function sources() {
   return [...seen].sort();
 }
 
+export const PROSE = ['description', 'source', 'verified', 'why'];
+
+export function read(file, text = readFileSync(file, 'utf8')) {
+  if (!file.endsWith('.json')) return text;
+  return JSON.stringify(JSON.parse(text), (key, value) => (PROSE.includes(key) ? undefined : value));
+}
+
 export function devAssetsTag() {
   const hash = createHash('sha256');
-  for (const file of sources()) hash.update(`${file}\0`).update(readFileSync(file)).update('\0');
+  for (const file of sources()) hash.update(`${file}\0`).update(read(file)).update('\0');
   return `dev-assets-${hash.digest('hex').slice(0, 12)}`;
 }
