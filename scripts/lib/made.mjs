@@ -2,6 +2,7 @@ import { GROUP, dailySet, laterKey } from '../../app/daily.mjs';
 
 export const WAIT = { area: 7, street: 14, place: 14 };
 export const LEAD = 7;
+export const SOONEST = 3;
 const AFTER = 60;
 
 const gapOf = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);

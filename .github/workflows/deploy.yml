@@ -112,6 +112,14 @@ jobs:
       - name: Build the day builder's data
         run: node scripts/build-quiz.mjs --all --out build/data/quiz-all.json
 
+      - name: Check new dates against the last push
+        if: github.event_name == 'push'
+        run: |
+          git fetch --no-tags --depth=1 origin "$BEFORE"
+          node scripts/check-dates.mjs --base "$BEFORE"
+        env:
+          BEFORE: ${{ github.event.before }}
+
       - name: Install the tools
         run: npm ci --no-fund --no-audit
 

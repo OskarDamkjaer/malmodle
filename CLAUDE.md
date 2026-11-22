@@ -17,6 +17,9 @@ node scripts/serve.mjs --trickle 10    # and one more every 10 seconds
 node scripts/handmade.mjs              # the days sent in from the builder, from D1
 node scripts/handmade.mjs take 12      # play one on the first date that fits
 node scripts/played.mjs                # pin the days played so far in learn/played.json
+node scripts/join.mjs areas --dry      # what joining the waiting areas a week from now would do
+node scripts/join.mjs areas            # and do it: pending.json to core.json, under a date in since
+node scripts/check-dates.mjs           # the Check's test that no new date is too close
 ```
 
 `/dev/crowd.html` on the local server shows the comparison card for many
@@ -34,7 +37,7 @@ site, but outside the offline worker and the name of the code cache.
 `plans/pending.md` holds what waits to join the game, how it was chosen, and
 what has to happen before it goes live.
 `plans/streets.md` holds how streets are chosen and what is still open.
-`plans/release.md` holds how a batch of waiting names is to be released.
+`plans/release.md` holds how a batch of waiting names is released.
 
 Read the skip count, not just the failures. Tests that need `build/`, `data/`
 or a browser skip instead of failing, so a green run can be an empty one.
@@ -66,7 +69,8 @@ osmium, Java and hosts the sandbox cannot reach.
   builds them, and every deck is dealt anew the day after it, with what was
   asked lately at the back. It keeps from the map only what it asks itself,
   and the days before it are dealt and built as if it were not there.
-  `scripts/lib/made.mjs` checks a date fits it.
+  `scripts/lib/made.mjs` checks a date fits it, and `scripts/lib/dates.mjs`
+  that a date new since `main` is `SOONEST` days ahead or more.
   `learn/played.json` pins the set of every day already played, and a test
   fails if the data or the deal changes one, or dates anything on or before
   the last of them.

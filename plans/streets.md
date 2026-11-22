@@ -78,9 +78,9 @@ street was named.
 
 ## Going live
 
-A street joins by moving from `streets` in `learn/pending.json` to `core.streets` and under a
-date in `since`, a few days after the deploy that carries it. No date is
-needed while it waits.
+A street joins with `node scripts/join.mjs streets`, which moves it from
+`streets` in `learn/pending.json` to `core.streets` and under a date in
+`since` (`plans/release.md`). No date is needed while it waits.
 
 ## Open
 

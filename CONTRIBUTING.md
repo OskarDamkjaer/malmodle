@@ -82,17 +82,16 @@ rebuild it (below) or fetch a prebuilt copy with
   whole place entries, shaped like those in `places/places.json`. The build
   checks every one, gives them to the day builder, and leaves them out of the
   game, so descriptions can be written and fact-checked first. A name goes live
-  by moving into `core.json`, a place's entry into `places/places.json`, and
-  both under a date in `since`, a few days after the next deploy, so the days
-  already played, and today, stay as they were. A waiting place stays a decoy as before, since decoys follow only the
-  places the game asks. Once it goes live it leaves the decoys and adds its
-  own around it, which changes "Vad ligger här?" on days before its date, so
-  for now dates are for areas, streets and bridges.
+  with `scripts/join.mjs`, below. A waiting place stays a decoy as before,
+  since decoys follow only the places the game asks. Once it goes live it
+  leaves the decoys and adds its own around it, which changes "Vad ligger
+  här?" on days before its date, so for now only areas, streets and bridges
+  can join on a date.
 - `learn/played.json`: the set id of every day already played. A test deals
   each of them from the built data and fails if one differs, and if a date in
-  `since`, `changes` or `days.json` falls on or before the last. Run
-  `node scripts/played.mjs` before dating anything, so the days up to today
-  are pinned.
+  `since`, `changes` or `days.json` falls on or before the last.
+  `join.mjs` pins the days up to today before it dates anything, and
+  `node scripts/played.mjs` does it on its own.
 - `learn/sources.json`: a link for a name whose entry has none, and
   `unlinked`, the names shown without "Läs mer". A link stays only when the
   page is about exactly that thing: its own Swedish Wikipedia article, its
@@ -125,6 +124,34 @@ rebuild it (below) or fetch a prebuilt copy with
 
 Everything is hand-edited. `build-quiz.mjs --all` builds every place rather than
 only the ones in `core.json`.
+
+## Going live
+
+```
+node scripts/join.mjs areas streets bridges          # every waiting name of those kinds, a week from today
+node scripts/join.mjs streets --on 2026-12-08        # on that date, if it is far enough ahead
+node scripts/join.mjs --names "Kroksbäck, Hamngatan" # only these
+node scripts/join.mjs areas --dry                    # say what would happen, write nothing
+```
+
+`join.mjs` pins the days played up to today, picks the names from
+`learn/pending.json`, and refuses a place, a name whose description is
+missing or not `verified`, and a date less than `SOONEST` days ahead
+(`scripts/lib/made.mjs`). It moves the names to the end of their section in
+`learn/core.json` and under the date in `since`, builds the quiz from that,
+and stops if a day already played would change. It says how many names join
+each deck and when each is first asked over the 60 days from the date. Then
+rebuild the quiz, run the tests, and merge the pull request at least
+`SOONEST` days before the date.
+
+The Check runs `node scripts/check-dates.mjs`, which compares the dates in
+`since`, in places' `changes` and in `learn/days.json` with `main`. A date
+that is new, changed or removed fails if it is less than `SOONEST` days away
+or on or before the last day in `learn/played.json`, and so does a pin that
+ends more than `SOONEST` days back. The deploy runs it against what `main`
+was before the push, so a pull request that sat after its Check passed is
+stopped before anything is live, and the fix is to move the date. Run it by
+hand with `--base` for another commit to compare with.
 
 ## Rebuilding the map data
 

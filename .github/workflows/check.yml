@@ -46,6 +46,11 @@ jobs:
       - name: Build the day builder's data
         run: node scripts/build-quiz.mjs --all --out build/data/quiz-all.json
 
+      - name: Check new dates against main
+        run: |
+          git fetch --no-tags --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          node scripts/check-dates.mjs --base origin/main
+
       - name: Install the tools
         run: npm ci --no-fund --no-audit
 
