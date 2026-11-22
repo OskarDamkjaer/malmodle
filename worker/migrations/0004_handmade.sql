@@ -9,3 +9,4 @@ CREATE TABLE IF NOT EXISTS handmade (
 );
 
 CREATE INDEX IF NOT EXISTS handmade_by_player ON handmade (player, at);
+CREATE INDEX IF NOT EXISTS handmade_by_at ON handmade (at);

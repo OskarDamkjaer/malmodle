@@ -100,7 +100,11 @@ a day that was sent in and gives it a date.
   up to `PER_DAY` a day per player. The page says when a day has gone in, and
   keeps saying so until something in it changes.
 - **Anyone may send.** The Worker takes a day from any player, up to
-  `PER_DAY` a day, and what is no good is deleted from `handmade` in D1.
+  `PER_DAY` a day and `ALL_DAY` from everyone together, since a player id is
+  made up by the browser. A post is at most `LONGEST` bytes with
+  `LIMITS.notes` suggestions, and text with characters that do not show is
+  refused, so a name reads the same in the terminal as on the end screen.
+  What is no good is deleted from `handmade` in D1.
 - **Read and scheduled from the command line.** `scripts/handmade.mjs` lists
   the days sent in, newest first, with the sender's name, how many days they
   have played, their remark and suggestions, and a link that opens the day in
@@ -132,6 +136,20 @@ a day that was sent in and gives it a date.
   entry there. `plans/pending.md` says how a waiting name goes live.
   Nothing does that from what is sent in yet, and a made day with a target
   outside the game cannot be scheduled until that target is in `core.json`.
+- **The days before a made day.** The three days before it steer what they
+  show on the map around its targets, so a made day that arrives fewer than
+  four days ahead can change a day already played. `take` refuses a date
+  closer than `LEAD`, which covers it only if the commit is deployed in time.
+  Dealing those days from the deal alone, as the day before a `since` date
+  is, would remove the dependence.
+- **The preview is not always the day.** The builder builds each question
+  from every item and avoids only the day's own targets. The game builds it
+  from what is in play on the date and also avoids the three days before, so
+  a route can start somewhere else and a neighbour question can ask another
+  side. `problems` catches a changed type, not a changed question.
+- **Opened from an older version of the game.** A browser whose offline
+  worker predates the builder serves it the old `daily.mjs`, and the page
+  fails until the game has updated.
 - **Knowing a day came in.** `scripts/handmade.mjs` lists what is there.
   Nothing says when something new arrives.
 - **Keeping the data current.** People are sent to OpenStreetMap to add what

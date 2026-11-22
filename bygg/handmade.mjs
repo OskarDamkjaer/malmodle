@@ -121,7 +121,7 @@ export function proposals(entries, notes = []) {
 
 export const ready = (entries) => entries.length === SET_SIZE && entries.every((e) => e.q);
 
-export const LIMITS = { note: 500, name: 80, remark: 1500 };
+export const LIMITS = { note: 500, name: 80, remark: 1500, notes: 100 };
 
 export function sending({ slots, entries, notes = [], name = '', remark = '', player }) {
   return {
@@ -148,7 +148,7 @@ export function pack({ slots, notes = [] }) {
 export function unpack(code) {
   try {
     const { q, n = [] } = JSON.parse(decode(code));
-    if (!Array.isArray(q) || !Array.isArray(n)) return null;
+    if (!Array.isArray(q) || !Array.isArray(n) || q.length > SET_SIZE || n.length > LIMITS.notes) return null;
     const slots = q.map(([target, type, seed, at]) => (typeof target === 'string' && typeof type === 'string' && Number.isInteger(seed) && isAt(at)
       ? { target, type, seed, ...(at && { at }) } : null));
     const notes = n.map(([target, what, text, at]) => (typeof target === 'string' && Object.hasOwn(WHAT, what) && typeof text === 'string' && isAt(at)
