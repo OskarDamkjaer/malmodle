@@ -17,9 +17,9 @@ const flag = (k) => { const i = args.indexOf(k); return i >= 0 ? args.splice(i, 
 const file = flag('--db');
 const [command, id, on] = args;
 
-const SELECT = `SELECT h.id, h.at, h.name, h.remark, h.slots, h.notes,
-  (SELECT count(*) FROM results r WHERE r.player = h.player) AS played
-  FROM handmade h`;
+const SELECT = `SELECT h.id, h.at, h.name, h.remark, h.slots, h.notes, coalesce(p.played, 0) AS played
+  FROM handmade h LEFT JOIN (SELECT player, count(*) AS played FROM results
+    WHERE player IN (SELECT player FROM handmade) GROUP BY player) p USING (player)`;
 
 async function query(sql) {
   if (file) return (await localD1(file).prepare(sql).all()).results;
@@ -28,15 +28,16 @@ async function query(sql) {
 }
 
 const parse = (row) => ({ ...row, slots: JSON.parse(row.slots), notes: JSON.parse(row.notes) });
+const plain = (text) => String(text).replace(/[\u0000-\u001f\u007f-\u009f\u061c\u200b-\u200f\u2028-\u202e\u2060-\u2069\ufeff]/g, ' ');
 const when = (at) => new Date(at).toLocaleString('sv-SE', { dateStyle: 'short', timeStyle: 'short' });
 
 async function list() {
   const rows = (await query(`${SELECT} ORDER BY h.id DESC`)).map(parse);
   if (!rows.length) console.log('No days have been sent in.');
   for (const row of rows) {
-    console.log(`#${row.id}  ${when(row.at)}  ${row.name || '(no name)'}  played ${row.played} days`);
-    if (row.remark) console.log(`  "${row.remark}"`);
-    for (const n of row.notes) console.log(`  ${WHAT[n.what]}: ${n.target}${n.text ? `: ${n.text}` : ''}`);
+    console.log(`#${row.id}  ${when(row.at)}  ${plain(row.name) || '(no name)'}  played ${row.played} days`);
+    if (row.remark) console.log(`  "${plain(row.remark)}"`);
+    for (const n of row.notes) console.log(`  ${WHAT[n.what]}: ${plain(n.target)}${n.text ? `: ${plain(n.text)}` : ''}`);
     console.log(`  ${SITE}/bygg/#dag=${pack(row)}\n`);
   }
 }
@@ -46,10 +47,13 @@ async function take() {
   const [row] = (await query(`${SELECT} WHERE h.id = ${Number(id)}`)).map(parse);
   if (!row) throw new Error(`no day #${id}`);
   const quiz = JSON.parse(readFileSync(QUIZ, 'utf8'));
+  if (row.name !== plain(row.name)) throw new Error(`#${row.id} has a name with characters that do not show`);
   const entry = { by: row.name || null, slots: row.slots.map(({ target, type, seed }) => ({ target, type, seed })) };
   const outside = row.slots.filter((s) => s.at || !quiz.items.some((it) => it.name === s.target)).map((s) => s.target);
   if (outside.length) throw new Error(`not in the game yet: ${outside.join(', ')}. Add them to core.json first.`);
-  const day = on ?? firstFit(quiz, entry, laterKey(dateKey(), LEAD));
+  const soonest = laterKey(dateKey(), LEAD);
+  if (on && !(/^\d{4}-\d{2}-\d{2}$/.test(on) && on >= soonest)) throw new Error(`${on} is too soon: a made day changes the days around it, so the first date is ${soonest}`);
+  const day = on ?? firstFit(quiz, entry, soonest);
   if (!day) throw new Error('no date in the next four months fits; try one by hand to see why');
   const found = problems(quiz, day, entry);
   if (found.length) throw new Error(`${day} does not fit:\n  ${found.join('\n  ')}`);

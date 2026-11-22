@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { LIMITS, LONGEST, PER_DAY, parseHandmade, postHandmade } from '../worker/handmade.mjs';
+import { ALL_DAY, LIMITS, LONGEST, PER_DAY, parseHandmade, postHandmade } from '../worker/handmade.mjs';
 import { playerKey } from '../worker/results.mjs';
 import { localD1 } from '../scripts/lib/d1.mjs';
 import { dailySet, setId } from '../app/daily.mjs';
@@ -29,6 +29,7 @@ test('a day sent in is a player, ten questions, the suggestions, a name and a re
   assert.deepEqual(parseHandmade({ ...good, name: undefined, remark: undefined }), { ...good, name: '', remark: '' });
   const extra = { ...good, slots: good.slots.map((s) => ({ ...s, q: 'built' })) };
   assert.deepEqual(parseHandmade(extra).slots, good.slots);
+  assert.equal(parseHandmade({ ...good, remark: 'En rad.\nEn till.' }).remark, 'En rad.\nEn till.');
   for (const bad of [
     { ...good, player: 'short' },
     { ...good, player: undefined },
@@ -47,6 +48,13 @@ test('a day sent in is a player, ten questions, the suggestions, a name and a re
     { ...good, name: 'x'.repeat(LIMITS.name + 1) },
     { ...good, remark: 'x'.repeat(LIMITS.remark + 1) },
     { ...good, name: 7 },
+    { ...good, name: 'Kim\u001b[8m' },
+    { ...good, name: 'Kim\u202e' },
+    { ...good, name: 'Kim\nKim' },
+    { ...good, remark: 'Hej\u001b]52;c;eA==\u0007' },
+    { ...good, slots: [{ ...slot(0), target: 'Område\u200b 0' }, ...good.slots.slice(1)] },
+    { ...good, notes: [{ target: 'Gata 3', what: 'fix', text: '\u001b[2K\rbra' }] },
+    { ...good, notes: Array.from({ length: LIMITS.notes + 1 }, () => ({ target: 'Gata 3', what: 'fix', text: '' })) },
     null,
   ]) assert.equal(parseHandmade(bad), null, JSON.stringify(bad)?.slice(0, 200));
 });
@@ -84,6 +92,7 @@ test('what is not a day is refused, and nothing is stored', async () => {
   assert.equal((await post('{')).status, 400);
   assert.equal((await post({ ...good, slots: [] })).status, 400);
   assert.equal((await post({ ...good, remark: 'x'.repeat(LONGEST) })).status, 413);
+  assert.equal((await post({ ...good, notes: Array.from({ length: LIMITS.notes }, () => ({ target: 'Gata 3', what: 'fix', text: 'å'.repeat(LIMITS.note) })) })).status, 413);
   assert.deepEqual(await rows(), []);
 });
 
@@ -96,4 +105,11 @@ test('a player can send a few days a day, and more once a day has passed', async
   assert.equal((await post({ ...good, player: secret(2) }, NOW + PER_DAY)).status, 200);
   assert.equal((await post(good, NOW + 86400000)).status, 200);
   assert.equal((await rows()).length, PER_DAY + 2);
+});
+
+test('all players together can send only so many days a day', async () => {
+  fresh();
+  for (let n = 0; n < ALL_DAY; n++) assert.equal((await post({ ...good, player: secret(n + 1) }, NOW + n)).status, 200);
+  assert.equal((await post({ ...good, player: secret(ALL_DAY + 1) }, NOW + ALL_DAY)).status, 429);
+  assert.equal((await post({ ...good, player: secret(ALL_DAY + 1) }, NOW + 86400000 + ALL_DAY)).status, 200);
 });
