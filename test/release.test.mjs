@@ -3,16 +3,18 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { LAUNCH, laterKey } from '../app/daily.mjs';
 import { dateProblems, newDates } from '../scripts/lib/dates.mjs';
-import { coreWritten, move, pendingWritten, pick, undescribed } from '../scripts/lib/join.mjs';
+import { coreWritten, move, pendingWritten, pick, placesWritten, undescribed } from '../scripts/lib/join.mjs';
 import { SOONEST } from '../scripts/lib/made.mjs';
 import { pin } from '../scripts/lib/played.mjs';
 import { fixture } from './fixture.mjs';
 
-test('core.json and pending.json are written back byte for byte', () => {
+test('core.json, pending.json and places.json are written back byte for byte', () => {
   const core = readFileSync('learn/core.json', 'utf8');
   const pending = readFileSync('learn/pending.json', 'utf8');
+  const places = readFileSync('places/places.json', 'utf8');
   assert.equal(coreWritten(JSON.parse(core)), core);
   assert.equal(pendingWritten(JSON.parse(pending)), pending);
+  assert.equal(placesWritten(JSON.parse(places)), places);
 });
 
 test('a dated core.json wraps its names under since as it wraps them under core', () => {
@@ -28,18 +30,18 @@ const pending = {
   areas: ['Kroksbäck', 'Höja'],
   streets: ['Hamngatan', 'Östergatan'],
   bridges: ['Slussbron'],
-  landmarks: [{ name: 'U3', category: 'byggnad' }],
+  landmarks: [{ name: 'U3', category: 'byggnad', apart: 'Teknikens och sjöfartens hus' }, { name: 'Tanken', category: 'museum' }],
 };
 
 test('sections and names are picked in the order they wait', () => {
   assert.deepEqual(pick(pending, ['streets', 'areas'], []), { areas: ['Kroksbäck', 'Höja'], streets: ['Hamngatan', 'Östergatan'] });
   assert.deepEqual(pick(pending, [], ['Östergatan', 'Slussbron', 'Kroksbäck']), { areas: ['Kroksbäck'], streets: ['Östergatan'], bridges: ['Slussbron'] });
   assert.deepEqual(pick(pending, ['bridges'], ['Slussbron', 'Höja']), { areas: ['Höja'], bridges: ['Slussbron'] });
+  assert.deepEqual(pick(pending, ['landmarks'], []), { landmarks: ['U3', 'Tanken'] });
+  assert.deepEqual(pick(pending, [], ['Tanken', 'Höja']), { areas: ['Höja'], landmarks: ['Tanken'] });
 });
 
-test('places, names not waiting, unknown sections and an empty pick are refused', () => {
-  assert.throws(() => pick(pending, ['landmarks'], []), /decoys follow dates/);
-  assert.throws(() => pick(pending, [], ['U3']), /U3 is a place/);
+test('names not waiting, unknown sections and an empty pick are refused', () => {
   assert.throws(() => pick(pending, [], ['Lugnet']), /Lugnet is not waiting/);
   assert.throws(() => pick(pending, ['parks'], []), /parks is not a section/);
   assert.throws(() => pick(pending, [], []), /name the sections/);
@@ -60,16 +62,34 @@ test('a name joins only with a verified description', () => {
   ]);
 });
 
+test('a place joins with a description, which it keeps in its own entry', () => {
+  const docs = { pending: { landmarks: [{ name: 'U3', description: 'En ubåt.' }, { name: 'Tanken', description: null }] } };
+  assert.deepEqual(undescribed({ landmarks: ['U3', 'Tanken'] }, docs), ['Tanken has no description in learn/pending.json']);
+});
+
 test('a batch leaves pending.json for the end of its section in core.json and its date in since', () => {
   const core = { core: { areas: ['Lugnet'], streets: ['Adelgatan'], bridges: [] }, since: { '2027-02-01': ['Gamla'], '2027-01-05': ['Annelund'] } };
-  const moved = move(core, pending, { areas: ['Höja'], streets: ['Hamngatan'] }, '2027-01-05');
+  const moved = move({ core, pending }, { areas: ['Höja'], streets: ['Hamngatan'] }, '2027-01-05');
   assert.deepEqual(moved.core, {
     core: { areas: ['Lugnet', 'Höja'], streets: ['Adelgatan', 'Hamngatan'], bridges: [] },
     since: { '2027-01-05': ['Annelund', 'Höja', 'Hamngatan'], '2027-02-01': ['Gamla'] },
   });
   assert.deepEqual(Object.keys(moved.core.since), ['2027-01-05', '2027-02-01']);
   assert.deepEqual(moved.pending, { ...pending, areas: ['Kroksbäck'], streets: ['Östergatan'] });
-  assert.deepEqual(move({ core: { bridges: ['Ön'] } }, pending, { bridges: ['Slussbron'] }, '2027-03-01').core, { core: { bridges: ['Ön', 'Slussbron'] }, since: { '2027-03-01': ['Slussbron'] } });
+  assert.deepEqual(move({ core: { core: { bridges: ['Ön'] } }, pending }, { bridges: ['Slussbron'] }, '2027-03-01').core, { core: { bridges: ['Ön', 'Slussbron'] }, since: { '2027-03-01': ['Slussbron'] } });
+});
+
+test('a place leaves pending.json whole for the end of places.json, and its name for core.json and since', () => {
+  const core = { core: { areas: ['Lugnet'], landmarks: ['Stortorget'] } };
+  const places = { places: [{ name: 'Stortorget', category: 'torg' }] };
+  const moved = move({ core, pending, places }, { areas: ['Höja'], landmarks: ['U3'] }, '2027-01-05');
+  assert.deepEqual(moved.places, { places: [{ name: 'Stortorget', category: 'torg' }, pending.landmarks[0]] });
+  assert.deepEqual(moved.pending.landmarks, [pending.landmarks[1]]);
+  assert.deepEqual(moved.core, {
+    core: { areas: ['Lugnet', 'Höja'], landmarks: ['Stortorget', 'U3'] },
+    since: { '2027-01-05': ['Höja', 'U3'] },
+  });
+  assert.equal(move({ core, pending, places }, { areas: ['Höja'] }, '2027-01-05').places, places);
 });
 
 test('pinning keeps the days already pinned and adds the rest through today', () => {

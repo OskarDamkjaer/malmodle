@@ -25,8 +25,9 @@ and nothing a player notices except new questions.
   `learn/days.json` falls on or before the last pinned day
   (`test/data.test.mjs`). `node scripts/played.mjs` pins up to today, through
   `scripts/lib/played.mjs`.
-- The build refuses a place under `since`, since the decoys of "Vad ligger
-  här?" do not follow dates yet (`scripts/build-quiz.mjs`).
+- The decoys of "Vad ligger här?" follow the dates too, so a place joins on
+  a date like any name and the days before keep their decoys
+  (`scripts/build-quiz.mjs`).
 - A description or a link can change without rebuilding the map data
   (`scripts/lib/dev-assets.mjs`).
 
@@ -34,7 +35,7 @@ and nothing a player notices except new questions.
 
 ```
 node scripts/join.mjs areas streets bridges        # every waiting name of those kinds, in 7 days
-node scripts/join.mjs streets --on 2026-12-08      # on that date, if it is far enough ahead
+node scripts/join.mjs landmarks --on 2026-12-08    # every waiting place, on that date, if it is far enough ahead
 node scripts/join.mjs --names "Kroksbäck, Hamngatan"   # only these
 node scripts/join.mjs areas --dry                  # say what would happen, write nothing
 ```
@@ -44,8 +45,7 @@ In order, stopping at the first thing that is wrong:
 1. Build the quiz from the data as it is, and pin the days played up to
    today with it.
 2. Pick the names: the given sections of `learn/pending.json`, `--names`, or
-   both. `landmarks`, or a place by name, is refused with the reason the
-   build gives.
+   both.
 3. Pick the date: `--on`, or today plus `LEAD`. Refuse one closer than
    `SOONEST` days. Both are in `scripts/lib/made.mjs`, beside the made days'
    use of `LEAD`: `LEAD = 7`, `SOONEST = 3`.
@@ -53,18 +53,22 @@ In order, stopping at the first thing that is wrong:
    `verified`, where `plans/descriptions.md` says each kind keeps them.
 5. Move the names: out of their section in `pending.json`, onto the end of
    the same section in `core.json`, and under the date in `since`, after any
-   names already there. `scripts/lib/join.mjs` writes each file in its own
-   shape, `core.json` wrapped at 79 columns, and a test reads and writes both
-   untouched files and gets the same bytes.
-6. Build the quiz from the moved files, through `--core` and `--pending`, to
-   a temporary folder. Stop if a pinned day's set id changes, or if a day from today
-   until the date asks anything else than it does now. Print how many
+   names already there. A place's whole entry goes to the end of
+   `places/places.json`. `scripts/lib/join.mjs` writes each file in its own
+   shape, `core.json` wrapped at 79 columns, and a test reads and writes the
+   three untouched files and gets the same bytes.
+6. Build the quiz from the moved files, through `--core`, `--pending` and
+   `--places`, to a temporary folder. Stop if a pinned day's set id changes,
+   or if a day from today until the date asks anything else than it does
+   now, its options included. Print how many
    names join each deck, that every pinned day keeps its set, the first date
    each new name is asked over the 60 days from the date, and the names not
    asked within those 60.
-7. Write `core.json`, `pending.json` and `played.json`, unless `--dry`, and
-   say what is left to do: rebuild, run the tests, commit, open a pull
-   request, and merge it at least `SOONEST` days before the date.
+7. Write `core.json`, `pending.json`, `places.json` if a place moved, and
+   `played.json`, unless `--dry`, and say what is left to do: rebuild, run
+   the tests, commit, open a pull request, and merge it at least `SOONEST`
+   days before the date, and for places, that the map data needs a release
+   for its new inputs.
 
 ## The date check
 
@@ -100,9 +104,6 @@ not fail on its own dates.
 
 ## Not covered
 
-- **Places.** They need decoys that follow dates and a way for a new place
-  to be kept apart from a live one (`plans/pending.md`). Each changes the
-  deal's inputs and is its own plan.
 - **Konditori Katarina as a chain** (`plans/chains.md`). It goes under
   `changes`, which the date check covers, but `join.mjs` does not write it.
 - **Refreshing the map data.** A scheduled workflow that rebuilds from fresh

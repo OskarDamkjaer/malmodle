@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { register } from 'node:module';
 import { existsSync, readFileSync } from 'node:fs';
-import { DECKS, GROUP, SPLITS, dailySet, laterKey, plan, random } from '../app/daily.mjs';
+import { DECKS, GROUP, SPLITS, dailySet, lasting, laterKey, plan, random, settled } from '../app/daily.mjs';
 import { fixture } from './fixture.mjs';
 import { parseHandmade } from '../worker/handmade.mjs';
 
@@ -217,7 +217,7 @@ test('the game asks a day made by hand exactly as the builder showed it, and lea
     const from = laterKey('2027-01-01', n * 3);
     const day = laterKey(from, 9);
     const slots = dailySet(real, from, decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: n * 10 + i }));
-    const seen = assemble(slots, real, decoys);
+    const seen = assemble(slots, settled(real), lasting(decoys));
     if (!ready(seen)) continue;
     const made = { [day]: { by: null, slots } };
     assert.equal(show(dailySet(real, day, decoys, made)), show(seen.map((e) => e.q)), day);

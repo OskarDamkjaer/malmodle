@@ -18,14 +18,24 @@ nearest branch counts. How it is asked is in `BRIEF.md`; the data shape in
   day as it was. A test pins this.
 - Only branches inside Malmö's stadsdelar are listed.
 - Åhléns has one department store left in Malmö, so it is a single place.
+- A chain brings no decoys of its own, since "Vad ligger här?" never asks
+  one, and its branches leave the decoys by their OpenStreetMap ids. The 50 m
+  rule that keeps a single place's other entries out would take in a
+  branch's neighbours: around the Espresso House and Burger King branches it
+  would drop other cafés and food-court stalls.
+- Grand Italian is on the 25th floor of the Malmö Live hotel, so it names
+  Malmö Live as its partner (`apart`). Malmö Live joins the group on the day
+  Grand Italian is asked, and a krog in a group is dealt from the place deck,
+  so the two never come on the same day.
 
 ## Open
 
 - Konditori Katarina should be a chain instead of "det ursprungliga Konditori
   Katarina": asked as "ett Konditori Katarina" at its six branches,
   Sallerupsvägen (the original), Triangeln, Stora Nygatan, Hamngatan, Hyllie
-  and Limhamn. It is live, so the switch waits for a date, a few days after
-  the deploy that carries it. Its entry in `places/places.json` then gains:
+  and Limhamn. It is live, so the switch waits for a date, at least
+  `SOONEST` days after the deploy that carries it. Its entry in
+  `places/places.json` then gains:
 
   ```json
   "changes": {
@@ -47,7 +57,11 @@ nearest branch counts. How it is asked is in `BRIEF.md`; the data shape in
   }
   ```
 
-- Grand Italian is on the 25th floor of the Malmö Live hotel. Keeping the two
-  off the same day needs an `apart` group on Malmö Live, which is live.
+  With it, every day before the date is as it was, and after it only the
+  days that ask Konditori Katarina change. The builder shows a place in its
+  last version, so a day made by hand after the date asks it as the builder
+  showed it. The change counts as an input of the map data, though
+  `build-shapes.mjs` reads only a place's own `osm`, so on its own it needs
+  only the current release published under the new name (`CONTRIBUTING.md`).
 - More chains that fit: Lidl, Willys, Coop, H&M, Lindex, Stadium, Apoteket,
   Joe & The Juice. 7-Eleven and Pressbyrån sit almost all in Centrum.

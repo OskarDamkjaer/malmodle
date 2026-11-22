@@ -19,6 +19,7 @@ node scripts/handmade.mjs take 12      # play one on the first date that fits
 node scripts/played.mjs                # pin the days played so far in learn/played.json
 node scripts/join.mjs areas --dry      # what joining the waiting areas a week from now would do
 node scripts/join.mjs areas            # and do it: pending.json to core.json, under a date in since
+node scripts/join.mjs landmarks --dry  # the same for places, whose entries move to places/places.json
 node scripts/check-dates.mjs           # the Check's test that no new date is too close
 ```
 
@@ -61,7 +62,14 @@ osmium, Java and hosts the sandbox cannot reach.
   the deck it joins is dealt anew from then, with the new names spread among
   the rest and what was asked lately at the back. Decks that gain nothing carry on.
   Names and places in `learn/pending.json` are checked by the build, shown in the
-  builder and kept out of `quiz.json` until they move into `core.json` with a date.
+  builder and kept out of `quiz.json` until they move into `core.json` with a date,
+  a place's entry into `places/places.json`.
+  A place whose `apart` names another place is in that place's group from the
+  day both are in play (`grouped`), so a new place can belong with a live one
+  without changing it, and a krog in a group is dealt from the place deck, where
+  the deck keeps a group apart. A decoy carries the dates it is offered
+  between (`decoysOn`). The builder shows everything as it ends up: each place
+  in its last version and group (`settled`), and the decoys that stay (`lasting`).
   A place in `places/places.json` can change on a date under `changes`: every
   day before it sees the place as it was, and the deal carries on.
   A day made by hand, under its date in `learn/days.json`, is played in place
@@ -95,7 +103,9 @@ osmium, Java and hosts the sandbox cannot reach.
 over from a worker without that handshake, it reloads the old pages itself. The
   build stamps its cache names, and `serve.mjs` stamps them per request.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`, with
-  the long list's other places as `decoys` for "Vad ligger här?".
+  the long list's other places as `decoys` for "Vad ligger här?", worked out
+  again on each date a place joins or changes, so a decoy leaves on the day
+  the place it is joins and the days before keep theirs.
 - `worker/`: the Cloudflare Worker. `results.mjs` checks a posted result
   against the day's set, which `sets.mjs` works out from `quiz.json`, stores
   it in D1 and answers with your first round, how many days in a row you have

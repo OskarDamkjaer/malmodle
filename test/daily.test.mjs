@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SHOWN_GAP, SOON_DAYS, SOON_SHARE, SPACED, SPLITS, dailySet, setId, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SHOWN_GAP, SOON_DAYS, SOON_SHARE, SPACED, SPLITS, dailySet, decoysOn, lasting, setId, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -112,6 +112,74 @@ test('a place that changes on a date leaves every day before it as it was, and t
       if (q) assert.equal(q.target.geometry.type, type, key);
     }
   }
+});
+
+const beside = (name, east) => {
+  const { point } = items.find((it) => it.name === name);
+  const p = [point[0] + east, point[1]];
+  return { point: p, geometry: { type: 'Point', coordinates: p } };
+};
+const partners = [
+  { name: 'Ubåten', kind: 'landmark', label: 'Sevärdhet', apart: 'Plats 5', ...beside('Plats 5', 0.002), since: JOINS },
+  { name: 'Krogen', kind: 'landmark', label: 'Krog', category: 'krog', apart: 'Plats 7', ...beside('Plats 7', 0.002), since: JOINS },
+];
+const paired = [...fixture(), ...partners];
+
+test('a place that names a live place as its partner leaves every day before it as it was', () => {
+  for (let day = '2026-10-10'; day < JOINS; day = laterKey(day, 1)) {
+    assert.equal(full(dailySet(paired, day)), full(dailySet(items, day)), day);
+  }
+});
+
+test('from its date, a place is never asked on the same day as the live place it names, which joins its group', () => {
+  const asked = new Set();
+  for (let n = 0; n < 200; n++) {
+    const day = laterKey(JOINS, n);
+    const set = dailySet(paired, day);
+    const names = set.map((q) => q.target.name);
+    assert.ok(!(names.includes('Ubåten') && names.includes('Plats 5')), day);
+    assert.ok(!(names.includes('Krogen') && names.includes('Plats 7')), day);
+    for (const q of set.filter((x) => x.target.name === 'Plats 5')) assert.equal(q.target.apart, 'Plats 5', day);
+    names.forEach((name) => asked.add(name));
+  }
+  for (const name of ['Ubåten', 'Krogen', 'Plats 5', 'Plats 7']) assert.ok(asked.has(name), name);
+  for (let n = 1; n <= 60; n++) {
+    for (const q of dailySet(paired, laterKey(JOINS, -n)).filter((x) => x.target.name === 'Plats 5')) assert.equal(q.target.apart, undefined);
+  }
+});
+
+test('a krog that belongs with a place is dealt with the places, so the deck keeps the two apart', () => {
+  const [, krogen] = partners;
+  assert.equal(DECKS.food(krogen), false);
+  assert.equal(DECKS.place(krogen), true);
+  assert.equal(DECKS.food({ ...krogen, apart: undefined }), true);
+});
+
+const dated = items.filter((it) => it.kind === 'landmark').flatMap((it) => [
+  { name: `Förr ${it.name}`, category: 'byggnad', ...beside(it.name, 0.001), until: JOINS },
+  { name: `Sedan ${it.name}`, category: 'byggnad', ...beside(it.name, -0.001), since: JOINS },
+  { name: `Alltid ${it.name}`, category: 'byggnad', ...beside(it.name, 0.0015) },
+]).map(({ geometry, ...d }) => d);
+const undated = (d) => { const { since, until, ...rest } = d; return rest; };
+
+test('a decoy is offered from the day it comes until the day it leaves', () => {
+  assert.deepEqual(decoysOn(dated, laterKey(JOINS, -1)).map((d) => d.name.split(' ')[0]).sort(), [...Array(16).fill('Alltid'), ...Array(16).fill('Förr')]);
+  assert.deepEqual(decoysOn(dated, JOINS).map((d) => d.name.split(' ')[0]).sort(), [...Array(16).fill('Alltid'), ...Array(16).fill('Sedan')]);
+  assert.deepEqual(lasting(dated).map((d) => d.name.split(' ')[0]).sort(), [...Array(16).fill('Alltid'), ...Array(16).fill('Sedan')]);
+  const before = dated.filter((d) => !d.since).map(undated);
+  const after = dated.filter((d) => !d.until).map(undated);
+  const offered = new Set();
+  for (let n = -60; n < 60; n++) {
+    const day = laterKey(JOINS, n);
+    const set = dailySet(built, day, dated);
+    assert.equal(full(set), full(dailySet(built, day, n < 0 ? before : after)), day);
+    for (const q of set) for (const name of q.options ?? []) offered.add(`${n < 0 ? 'before' : 'after'} ${name.split(' ')[0]}`);
+    for (const q of practiceSet(built, { key: day, category: 'byggnad', seed: n + 100, decoys: dated })) {
+      for (const name of q.options ?? []) assert.ok(!name.startsWith(n < 0 ? 'Sedan' : 'Förr'), `${day}: ${name}`);
+    }
+  }
+  assert.ok(offered.has('before Förr') && offered.has('after Sedan'), [...offered].join());
+  assert.ok(!offered.has('before Sedan') && !offered.has('after Förr'), [...offered].join());
 });
 
 const MADE_ON = laterKey(SPACED, 45);

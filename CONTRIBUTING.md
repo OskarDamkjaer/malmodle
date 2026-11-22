@@ -82,11 +82,10 @@ rebuild it (below) or fetch a prebuilt copy with
   whole place entries, shaped like those in `places/places.json`. The build
   checks every one, gives them to the day builder, and leaves them out of the
   game, so descriptions can be written and fact-checked first. A name goes live
-  with `scripts/join.mjs`, below. A waiting place stays a decoy as before,
-  since decoys follow only the places the game asks. Once it goes live it
-  leaves the decoys and adds its own around it, which changes "Vad ligger
-  här?" on days before its date, so for now only areas, streets and bridges
-  can join on a date.
+  with `scripts/join.mjs`, below, and a place's entry moves to
+  `places/places.json`. Until its date, the long list's entry for a waiting
+  place can be a decoy; from it, the place is asked instead and brings decoys
+  of its own, and the days before keep theirs.
 - `learn/played.json`: the set id of every day already played. A test deals
   each of them from the built data and fails if one differs, and if a date in
   `since`, `changes` or `days.json` falls on or before the last.
@@ -109,10 +108,24 @@ rebuild it (below) or fetch a prebuilt copy with
   `build-quiz.mjs` takes the long list's places that the game does not ask
   about as decoys for "Vad ligger här?", the ten nearest of each category
   around every place it asks about, and keeps out the kinds and names in
-  `DECOY_KINDS` and `DECOY_SKIP`. A chain lists its branches under
-  `branches`, each with `lat` and `lon`, in the order of its `osm` ids, and
-  says how it is asked under `asked` ("ett Systembolag"). Only branches inside
-  Malmö's stadsdelar belong there. A place the game already asks can change
+  `DECOY_KINDS` and `DECOY_SKIP`. An entry is no decoy while the place it is
+  can be asked: tied to it by `inGame`, by name, or by the same category within
+  50 m, and, for a place that joins or changes on a date or still waits, by a
+  shared OpenStreetMap id. The places live without a date keep the decoys
+  their days were played with. A chain, which "Vad ligger här?" never asks,
+  brings no decoys, and its branches are tied by id alone, since 50 m around a
+  branch takes in its neighbours in a mall. The decoys are worked out again on
+  each date a place joins or changes, and a decoy that comes or leaves on one
+  carries it as `since` or `until`, so each day is offered its own.
+  `apart` names the place a place belongs with, and two places with the same
+  `apart`, or one and the place it names, never come on the same day. A new
+  place can name a live place that has no `apart`: that place joins the group
+  on the day both are asked, so naming it changes no day before. The place
+  named cannot be in another group or be a krog, and a krog in a group is
+  dealt from the place deck, which keeps a group apart. A chain lists its
+  branches under `branches`, each with `lat` and `lon`, in the order of its
+  `osm` ids, and says how it is asked under `asked` ("ett Systembolag"). Only
+  branches inside Malmö's stadsdelar belong there. A place the game already asks can change
   on a date: `changes` maps a date to the fields that change then, among
   `asked`, `osm`, `lat`, `lon`, `branches`, `district`, `description` and
   `source`, with `null` to drop one. Every day before the date sees the place
@@ -129,21 +142,25 @@ only the ones in `core.json`.
 
 ```
 node scripts/join.mjs areas streets bridges          # every waiting name of those kinds, a week from today
-node scripts/join.mjs streets --on 2026-12-08        # on that date, if it is far enough ahead
+node scripts/join.mjs landmarks --on 2026-12-08      # every waiting place, on that date, if it is far enough ahead
 node scripts/join.mjs --names "Kroksbäck, Hamngatan" # only these
 node scripts/join.mjs areas --dry                    # say what would happen, write nothing
 ```
 
 `join.mjs` pins the days played up to today, picks the names from
-`learn/pending.json`, and refuses a place, a name whose description is
-missing or not `verified`, and a date less than `SOONEST` days ahead
+`learn/pending.json`, and refuses a name without a description, an area,
+street or bridge whose description is not `verified` (a place keeps no such
+mark, `plans/descriptions.md`), and a date less than `SOONEST` days ahead
 (`scripts/lib/made.mjs`). It moves the names to the end of their section in
-`learn/core.json` and under the date in `since`, builds the quiz from that,
-and stops if a day already played would change, or a day between today and
-the date would ask something else. It says how many names join
-each deck and when each is first asked over the 60 days from the date. Then
+`learn/core.json` and under the date in `since`, and a place's whole entry to
+the end of `places/places.json`, builds the quiz from that, and stops if a
+day already played would change, or a day between today and the date would
+ask something else, its decoys included. It says how many names join each
+deck and when each is first asked over the 60 days from the date. Then
 rebuild the quiz, run the tests, and merge the pull request at least
-`SOONEST` days before the date.
+`SOONEST` days before the date. `places/places.json` is an input of the map
+data, so the Check of a pull request that moves places fails at the fetch
+until a release for the new inputs is published (below).
 
 The Check runs `node scripts/check-dates.mjs`, which compares the dates in
 `since`, in places' `changes` and in `learn/days.json` with `main`. A date

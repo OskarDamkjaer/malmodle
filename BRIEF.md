@@ -19,7 +19,9 @@ Get familiar with Malmö through a short daily quiz.
   the round, so everything comes up once per round before anything repeats.
   Restaurants have their own deck, dealt a little less than one a day.
 - Places that sit together (a park and the theatre inside it, a beach and its
-  bath house) are never asked on the same day.
+  bath house) are never asked on the same day. A restaurant that sits with
+  another place is dealt with the places, and a new place can sit with one
+  already in the game without changing any day before it joins.
 - Only names in Grunden (`learn/core.json`, as it is) are used by the app. The
   full curated data stays in the repo and in the build.
 - Grunden grows by date. A name waits as pending, out of the game, until its

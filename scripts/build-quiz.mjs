@@ -14,6 +14,7 @@ const archive = arg('--pmtiles', 'data/cache/malmo.pmtiles');
 const everything = args.includes('--all');
 const coreFile = arg('--core', 'learn/core.json');
 const pendingFile = arg('--pending', 'learn/pending.json');
+const placesFile = arg('--places', 'places/places.json');
 
 const STREET_ZOOM = 14;
 const STREET_LINK_M = 500;
@@ -22,7 +23,7 @@ const json = async (f) => JSON.parse(await readFile(f, 'utf8'));
 
 const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, coreDoc, pendingDoc, sourcesDoc, shapesDoc, longlist, bboxDoc, regionsDoc, daysDoc] = await Promise.all([
   json('build/data/districts.geojson'),
-  json('places/places.json'),
+  json(placesFile),
   json('learn/bridges.json'),
   json('learn/streets.json'),
   json('learn/about.json'),
@@ -177,15 +178,25 @@ function versionsOf(p) {
     if (!DATE.test(on)) fail(`${p.name}: change ${on} is not a date`);
     for (const field of Object.keys(change)) if (!CHANGEABLE.has(field)) fail(`${p.name}: ${field} cannot change on a date`);
     entry = Object.fromEntries(Object.entries({ ...entry, ...change }).filter(([, v]) => v !== null));
-    return { on, item: placeItem(entry) };
+    return { on, item: placeItem(entry), osm: entry.osm ?? [] };
   }).filter((v) => v.item);
 }
 
-const landmarkItems = [...placesDoc.places, ...pendingDoc.landmarks].map((p) => {
+const allPlaces = [...placesDoc.places, ...pendingDoc.landmarks];
+const placeByName = new Map(allPlaces.map((p) => [p.name, p]));
+
+const landmarkItems = allPlaces.map((p) => {
   const it = placeItem(p);
   if (it && p.changes) versions.set(p.name, versionsOf(p));
   return it;
 }).filter(Boolean);
+
+for (const p of allPlaces.filter((x) => x.apart)) {
+  const partner = placeByName.get(p.apart);
+  if (!partner) fail(`${p.name}: apart names ${p.apart}, which is not a place`);
+  else if (partner.apart && partner.apart !== partner.name) fail(`${p.name}: apart names ${p.apart}, which belongs with ${partner.apart}`);
+  else if (partner.category === 'krog') fail(`${p.name}: apart names ${p.apart}, a krog, which is dealt with the krogar and not with the places that belong with it`);
+}
 
 function placeItem(p) {
   if (!PLACE_LABEL[p.category]) fail(`${p.name}: unknown category ${p.category}`);
@@ -198,6 +209,7 @@ function placeItem(p) {
     category: p.category,
     ...(p.apart && { apart: p.apart }),
     ...(p.asked && { asked: p.asked }),
+    ...(everything && { osm: p.osm }),
     point: roundCoords(where.point),
     geometry: where.geometry,
     ...(where.geometry.type === 'MultiPoint' && regionsFor(where.geometry)),
@@ -337,7 +349,6 @@ for (const [day, names] of Object.entries(coreDoc.since ?? {})) {
   for (const name of names) {
     if (!core.has(name)) { fail(`core.json: ${name} has a since date but is not in core`); continue; }
     if (byName.get(name).since) fail(`core.json: ${name} has two since dates`);
-    if (byName.get(name).kind === 'landmark') fail(`core.json: ${name} is a place, and a place cannot join on a date until the decoys follow dates`);
     byName.get(name).since = day;
   }
 }
@@ -440,7 +451,6 @@ function streetviewPoint(it) {
 for (const it of items) if (it.point && it.geometry) it.streetview = roundCoords(streetviewPoint(it) ?? it.point);
 
 const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
-const changed = [];
 for (const [name, list] of versions) {
   const it = byName.get(name);
   if (it?.kind !== 'landmark' || !list.length) continue;
@@ -449,7 +459,6 @@ for (const [name, list] of versions) {
     else if (!item.source && sources[name]) item.source = sources[name];
     item.point = onShape(item.geometry, item.point);
     item.streetview = roundCoords(streetviewPoint(item) ?? item.point);
-    changed.push({ name, item });
     return { on, ...Object.fromEntries(VARIES.filter((k) => !same(item[k], it[k])).map((k) => [k, item[k] ?? null])) };
   });
 }
@@ -484,38 +493,75 @@ const fits = (category, kind) => {
 };
 const { west, south, east, north } = bboxDoc.bbox;
 const asks = (it) => everything || it.kind !== 'landmark' || core.has(it.name);
-const live = new Set([...items.filter(asks), ...areaItems, ...bridgeItems, ...streetItems].map((it) => it.name));
-const taken = new Set([...live].map((name) => name.toLowerCase()));
-const landmarks = items.filter((it) => it.kind === 'landmark' && asks(it));
-const waiting = new Set(items.filter((it) => !asks(it)).map((it) => it.name));
-const pool = [];
-for (const [category, { places }] of Object.entries(longlist.categories)) {
-  if (!PLACE_LABEL[category]) continue;
-  for (const p of places) {
-    if (p.lat == null || (p.inGame && !waiting.has(p.inGame)) || DECOY_SKIP.has(p.name) || taken.has(p.name.toLowerCase()) || !fits(category, p.kind)) continue;
-    if (p.lon < west || p.lon > east || p.lat < south || p.lat > north) continue;
-    const point = roundCoords([p.lon, p.lat]);
-    if (landmarks.some((it) => it.category === category && metersBetween(it.point, point) < DECOY_SAME_M)) continue;
-    taken.add(p.name.toLowerCase());
-    pool.push({ name: p.name, category, point });
-  }
-}
-const decoys = new Set();
-const later = changed.filter((v) => kept.has(v.name) && v.item.geometry.type !== 'MultiPoint').map((v) => v.item);
-for (const it of [...chosen.filter((x) => x.kind === 'landmark'), ...later]) {
-  pool
-    .filter((d) => d.category === it.category && !contains(it.geometry, d.point))
-    .sort((a, b) => metersBetween(a.point, it.point) - metersBetween(b.point, it.point))
-    .slice(0, DECOY_PER_PLACE)
-    .forEach((d) => decoys.add(d));
+const named = [...areaItems, ...bridgeItems, ...streetItems].map((it) => it.name);
+const asked = items.filter((it) => it.kind === 'landmark' && asks(it));
+const several = (it) => it.geometry.type === 'MultiPoint';
+const osmIds = (p) => p.osm?.split(',') ?? [];
+
+function placesOn(day) {
+  return asked.filter((it) => !it.since || it.since <= day).map((it) => {
+    const version = (versions.get(it.name) ?? []).findLast((v) => v.on <= day);
+    return { it: version?.item ?? it, osm: version?.osm ?? placeByName.get(it.name).osm ?? [], ties: Boolean(it.since || version || !curated.has(it.name)) };
+  });
 }
 
-const out = { items: chosen, decoys: [...decoys].sort((a, b) => (a.name < b.name ? -1 : 1)), ...(Object.keys(made).length && { made }) };
+function decoysAt(day) {
+  const live = placesOn(day);
+  const playing = new Set(live.map(({ it }) => it.name));
+  const waiting = new Set(items.filter((it) => it.kind === 'landmark' && !playing.has(it.name)).map((it) => it.name));
+  const taken = new Set([...playing, ...named].map((name) => name.toLowerCase()));
+  const tied = new Set(live.filter((p) => p.ties).flatMap((p) => p.osm));
+  const pool = [];
+  for (const [category, { places }] of Object.entries(longlist.categories)) {
+    if (!PLACE_LABEL[category]) continue;
+    for (const p of places) {
+      if (p.lat == null || (p.inGame && !waiting.has(p.inGame)) || DECOY_SKIP.has(p.name) || taken.has(p.name.toLowerCase()) || !fits(category, p.kind)) continue;
+      if (p.lon < west || p.lon > east || p.lat < south || p.lat > north) continue;
+      if (osmIds(p).some((id) => tied.has(id))) continue;
+      const point = roundCoords([p.lon, p.lat]);
+      if (live.some(({ it }) => !several(it) && it.category === category && metersBetween(it.point, point) < DECOY_SAME_M)) continue;
+      taken.add(p.name.toLowerCase());
+      pool.push({ name: p.name, category, point });
+    }
+  }
+  const picked = new Set();
+  for (const { it } of live.filter((p) => !several(p.it))) {
+    pool
+      .filter((d) => d.category === it.category && !contains(it.geometry, d.point))
+      .sort((a, b) => metersBetween(a.point, it.point) - metersBetween(b.point, it.point))
+      .slice(0, DECOY_PER_PLACE)
+      .forEach((d) => picked.add(d));
+  }
+  return picked;
+}
+
+const turns = ['', ...new Set(asked.flatMap((it) => [it.since, ...(versions.get(it.name) ?? []).map((v) => v.on)]).filter(Boolean).sort())];
+const spans = new Map();
+turns.forEach((day, n) => {
+  for (const d of decoysAt(day)) {
+    const key = JSON.stringify(d);
+    if (!spans.has(key)) spans.set(key, { d, on: [] });
+    spans.get(key).on.push(n);
+  }
+});
+const decoys = [];
+for (const { d, on } of spans.values()) {
+  on.forEach((n, i) => {
+    if (i > 0 && on[i - 1] === n - 1) return;
+    let last = n;
+    while (on.includes(last + 1)) last++;
+    decoys.push({ ...d, ...(n > 0 && { since: turns[n] }), ...(last + 1 < turns.length && { until: turns[last + 1] }) });
+  });
+}
+const order = (d) => `${d.name}\u0000${d.since ?? ''}`;
+decoys.sort((a, b) => (order(a) < order(b) ? -1 : 1));
+
+const out = { items: chosen, decoys, ...(Object.keys(made).length && { made }) };
 await mkdir(dirname(outFile), { recursive: true });
 await writeFile(outFile, JSON.stringify(out));
 
 const kinds = [...new Set(chosen.map((it) => it.kind))];
 console.log(`build-quiz → ${outFile} (${(JSON.stringify(out).length / 1024).toFixed(0)} KB)`);
 for (const kind of kinds) console.log(`  ${kind.padEnd(9)} ${chosen.filter((it) => it.kind === kind).length}`);
-console.log(`  ${'decoy'.padEnd(9)} ${decoys.size}`);
+console.log(`  ${'decoy'.padEnd(9)} ${decoys.length}${turns.length > 1 ? `, over ${turns.length - 1} date${turns.length > 2 ? 's' : ''}` : ''}`);
 if (out.made) console.log(`  ${'made'.padEnd(9)} ${Object.keys(made).length}`);
