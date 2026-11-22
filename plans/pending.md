@@ -75,8 +75,9 @@ Places need two changes to the build first:
 
 ## Going live
 
-A batch moves from `learn/pending.json` into `learn/core.json`, a place's
-entry into `places/places.json`, and the names go under a date in `since` a
-few days after the deploy that carries them. The build fails if `core.json`
-has a `pending` section, and a test fails if a waiting name reaches
-`quiz.json`.
+Areas, streets and bridges go live with `node scripts/join.mjs`, which moves
+them from `learn/pending.json` into `learn/core.json` under a date in
+`since`; `plans/release.md` has how and why. Places wait for the two changes
+above, and then their entries move into `places/places.json`. The build fails
+if `core.json` has a `pending` section, and a test fails if a waiting name
+reaches `quiz.json`.

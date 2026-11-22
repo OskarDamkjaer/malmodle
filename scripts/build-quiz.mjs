@@ -12,6 +12,8 @@ const arg = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] :
 const outFile = arg('--out', 'build/data/quiz.json');
 const archive = arg('--pmtiles', 'data/cache/malmo.pmtiles');
 const everything = args.includes('--all');
+const coreFile = arg('--core', 'learn/core.json');
+const pendingFile = arg('--pending', 'learn/pending.json');
 
 const STREET_ZOOM = 14;
 const STREET_LINK_M = 500;
@@ -25,8 +27,8 @@ const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, core
   json('learn/streets.json'),
   json('learn/about.json'),
   json('data/cache/streets.json'),
-  json('learn/core.json'),
-  json('learn/pending.json'),
+  json(coreFile),
+  json(pendingFile),
   json('learn/sources.json'),
   json('data/cache/shapes.json'),
   json('places/longlist.json'),
