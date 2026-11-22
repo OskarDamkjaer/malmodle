@@ -10,7 +10,17 @@
       "Augustenborg", "Persborg", "Kulladal", "Holma", "Nydala", "Videdal",
       "Hermodsdal", "Almgården", "Hyllievång", "Lindängen", "Bulltofta",
       "Svågertorp", "Toftanäs", "Vintrie", "Käglinge", "Bunkeflostrand",
-      "Klagshamn"
+      "Klagshamn",
+      "Norra Sofielund", "Södra Sofielund", "Norra Sorgenfri",
+      "Västra Sorgenfri", "Östra Sorgenfri", "Östra Söderkulla",
+      "Västra Söderkulla", "Gamla Limhamn", "Lindeborg", "Oxie Kyrkby",
+      "Tygelsjö by", "Annelund", "Annetorp", "Almvik", "Bellevue",
+      "Bellevuegården", "Elisedal", "Eriksfält", "Fosieby", "Fredriksberg",
+      "Glostorp", "Gröndal", "Gullvik", "Håkanstorp", "Hindby", "Höja",
+      "Jägersro Villastad", "Kalkbrottet", "Kastanjegården", "Kristineberg",
+      "Kroksbäck", "Kryddgården", "Kvarnby", "Lockarp", "Lönngården",
+      "Örtagården", "Rosenvång", "Rostorp", "Segevång", "Skumparp", "Södertorp",
+      "Södra Sallerup", "Solbacken", "Stenkällan", "Toarp", "Västervång"
     ],
     "streets": [
       "Adelgatan", "Skomakaregatan", "Kalendegatan", "Södergatan",
@@ -27,11 +37,24 @@
       "Limhamnsvägen", "Amiralsgatan", "Per Albin Hanssons väg",
       "Inre Ringvägen", "Lorensborgsgatan", "Sallerupsvägen", "Pildammsvägen",
       "Annetorpsvägen", "Trelleborgsvägen", "Agnesfridsvägen", "Jägersrovägen",
-      "Ystadvägen", "Yttre Ringvägen"
+      "Ystadvägen", "Yttre Ringvägen",
+      "Östergatan", "Hamngatan", "Mäster Johansgatan", "Gibraltargatan",
+      "Storgatan", "Östra Förstadsgatan", "Exercisgatan", "Celsiusgatan",
+      "Hornsgatan", "Rådmansgatan", "Spångatan", "Södra Skolgatan",
+      "Norra Skolgatan", "Kristianstadsgatan", "Simrishamnsgatan",
+      "Spårvägsgatan", "Industrigatan", "Lönngatan", "Västra Rönneholmsvägen",
+      "Fågelbacksgatan", "Erik Dahlbergsgatan", "Kronborgsvägen", "Tessins väg",
+      "Ribersborgsvägen", "Erikslustvägen", "Västra Varvsgatan",
+      "Bellevuevägen", "Geijersgatan", "Ärtholmsvägen", "Linnégatan",
+      "Kalkbrottsgatan", "Strandgatan", "Eriksfältsgatan", "Munkhättegatan",
+      "Lindängsvägen", "Axel Danielssons väg", "Hyllie boulevard"
     ],
     "bridges": [
       "Skeppsbron", "Petribron", "Suellsbron", "Slottsbron",
-      "Universitetsbron", "Öresundsbron"
+      "Universitetsbron", "Öresundsbron",
+      "Slussbron", "Paulibron", "Schougens bro", "Morescobron", "Älvsborgsbron",
+      "Styrmansbron", "Neptunibron", "Turbinbron", "Västerbron", "Parkbron",
+      "Trädgårdsbron", "Slottsmöllebron"
     ],
     "landmarks": [
       "Stortorget", "Lilla Torg", "Gustav Adolfs torg", "Möllevångstorget",
@@ -76,6 +99,33 @@
       "Spillepengen", "Sege å", "Ön", "Malmö Latinskola", "Pauliskolan",
       "Malmö Borgarskola", "S:t Petri skola", "Family Pub", "Pivo", "Elysée",
       "Drumbar"
+    ]
+  },
+  "since": {
+    "2026-12-01": [
+      "Norra Sofielund", "Södra Sofielund", "Norra Sorgenfri",
+      "Västra Sorgenfri", "Östra Sorgenfri", "Östra Söderkulla",
+      "Västra Söderkulla", "Gamla Limhamn", "Lindeborg", "Oxie Kyrkby",
+      "Tygelsjö by", "Annelund", "Annetorp", "Almvik", "Bellevue",
+      "Bellevuegården", "Elisedal", "Eriksfält", "Fosieby", "Fredriksberg",
+      "Glostorp", "Gröndal", "Gullvik", "Håkanstorp", "Hindby", "Höja",
+      "Jägersro Villastad", "Kalkbrottet", "Kastanjegården", "Kristineberg",
+      "Kroksbäck", "Kryddgården", "Kvarnby", "Lockarp", "Lönngården",
+      "Örtagården", "Rosenvång", "Rostorp", "Segevång", "Skumparp", "Södertorp",
+      "Södra Sallerup", "Solbacken", "Stenkällan", "Toarp", "Västervång",
+      "Östergatan", "Hamngatan", "Mäster Johansgatan", "Gibraltargatan",
+      "Storgatan", "Östra Förstadsgatan", "Exercisgatan", "Celsiusgatan",
+      "Hornsgatan", "Rådmansgatan", "Spångatan", "Södra Skolgatan",
+      "Norra Skolgatan", "Kristianstadsgatan", "Simrishamnsgatan",
+      "Spårvägsgatan", "Industrigatan", "Lönngatan", "Västra Rönneholmsvägen",
+      "Fågelbacksgatan", "Erik Dahlbergsgatan", "Kronborgsvägen", "Tessins väg",
+      "Ribersborgsvägen", "Erikslustvägen", "Västra Varvsgatan",
+      "Bellevuevägen", "Geijersgatan", "Ärtholmsvägen", "Linnégatan",
+      "Kalkbrottsgatan", "Strandgatan", "Eriksfältsgatan", "Munkhättegatan",
+      "Lindängsvägen", "Axel Danielssons väg", "Hyllie boulevard", "Slussbron",
+      "Paulibron", "Schougens bro", "Morescobron", "Älvsborgsbron",
+      "Styrmansbron", "Neptunibron", "Turbinbron", "Västerbron", "Parkbron",
+      "Trädgårdsbron", "Slottsmöllebron"
     ]
   }
 }

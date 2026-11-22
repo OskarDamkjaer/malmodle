@@ -70,22 +70,20 @@ osmium and a short script:
 
 ## Descriptions
 
-17 of the pending streets have a Swedish Wikipedia article. Their drafts are
-in `places/descriptions/streets-new.json` and pass
-`scripts/descriptions-check.mjs`. The other 20 have none and are `null`, for
-the web fact-check to write. Östergatan's only article is Carolikvarteren's,
-so its draft is about the block beside it.
+Every street that joins has a text, fact-checked on the web. 17 have a
+Swedish Wikipedia article. For the rest the main source is Leif Ljungberg,
+*Gatunamnen i Malmö* (1960, published by Malmö stad), digitised at
+<https://slaegtsbibliotek.dk/2025/947337.pdf>, for when and after what a
+street was named.
 
 ## Going live
 
 A street joins by moving from `streets` in `learn/pending.json` to `core.streets` and under a
 date in `since`, a few days after the deploy that carries it. No date is
-needed while it waits.
+needed while it waits. The 37 above join on 2026-12-01.
 
 ## Open
 
-- The independent read of the 17 drafts, and the web fact-check that also
-  writes the 20 missing.
 - Hyllie boulevard crosses only Annetorpsvägen and Pildammsvägen.
   Hyllievångsvägen would give it a neighbour.
 - Page views on Swedish Wikipedia would be an independent check of the pick,
