@@ -34,6 +34,7 @@ site, but outside the offline worker and the name of the code cache.
 `plans/pending.md` holds what waits to join the game, how it was chosen, and
 what has to happen before it goes live.
 `plans/streets.md` holds how streets are chosen and what is still open.
+`plans/release.md` holds how a batch of waiting names is to be released.
 
 Read the skip count, not just the failures. Tests that need `build/`, `data/`
 or a browser skip instead of failing, so a green run can be an empty one.
