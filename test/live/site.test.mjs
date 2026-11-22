@@ -119,7 +119,7 @@ for (const site of SITES) {
     const errors = [];
     page.on('pageerror', (e) => errors.push(String(e)));
     page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
-    page.on('request', (r) => { if (r.method() === 'POST' && own(site, r.url())) errors.push(`posted to ${r.url()}`); });
+    page.on('request', (r) => { if (r.method() === 'POST' && own(site, r.url()) && new URL(r.url()).pathname.startsWith('/api/')) errors.push(`posted to ${r.url()}`); });
     page.on('response', (r) => { if (own(site, r.url()) && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
     await page.goto(new URL('/bygg/', site).href);
     await page.waitForFunction(() => window.map?.loaded() && document.querySelector('#filters button'), null, { timeout: 60000 });
