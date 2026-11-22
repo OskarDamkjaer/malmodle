@@ -191,6 +191,13 @@ const landmarkItems = allPlaces.map((p) => {
   return it;
 }).filter(Boolean);
 
+const OSM_ID = /^(node|way|relation)\/\d+$/;
+for (const p of allPlaces) {
+  for (const id of [p.osm, ...Object.values(p.changes ?? {}).map((c) => c.osm)].flat().filter(Boolean)) {
+    if (!OSM_ID.test(id)) fail(`${p.name}: ${id} is not an OpenStreetMap id`);
+  }
+}
+
 for (const p of allPlaces.filter((x) => x.apart)) {
   const partner = placeByName.get(p.apart);
   if (!partner) fail(`${p.name}: apart names ${p.apart}, which is not a place`);
