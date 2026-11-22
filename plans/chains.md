@@ -30,38 +30,5 @@ nearest branch counts. How it is asked is in `BRIEF.md`; the data shape in
 
 ## Open
 
-- Konditori Katarina should be a chain instead of "det ursprungliga Konditori
-  Katarina": asked as "ett Konditori Katarina" at its six branches,
-  Sallerupsvägen (the original), Triangeln, Stora Nygatan, Hamngatan, Hyllie
-  and Limhamn. It is live, so the switch waits for a date, at least
-  `SOONEST` days after the deploy that carries it. Its entry in
-  `places/places.json` then gains:
-
-  ```json
-  "changes": {
-    "YYYY-MM-DD": {
-      "asked": "ett Konditori Katarina",
-      "osm": ["node/2405585968", "node/3051074368", "node/3361577188", "way/1091108929", "node/13667033601", "node/8735620819"],
-      "lat": null,
-      "lon": null,
-      "branches": [
-        { "lat": 55.60038, "lon": 13.04065 },
-        { "lat": 55.59718, "lon": 13.00136 },
-        { "lat": 55.60379, "lon": 13.00433 },
-        { "lat": 55.60712, "lon": 13.00013 },
-        { "lat": 55.56459, "lon": 12.97243 },
-        { "lat": 55.57388, "lon": 12.9338 }
-      ],
-      "description": "Konditorikedja som började på Sallerupsvägen 1959 och har drivits av samma familj sedan 1968. Den första filialen öppnade 2004 på Stora Nygatan."
-    }
-  }
-  ```
-
-  With it, every day before the date is as it was, and after it only the
-  days that ask Konditori Katarina change. The builder shows a place in its
-  last version, so a day made by hand after the date asks it as the builder
-  showed it. The change counts as an input of the map data, though
-  `build-shapes.mjs` reads only a place's own `osm`, so on its own it needs
-  only the current release published under the new name (`CONTRIBUTING.md`).
 - More chains that fit: Lidl, Willys, Coop, H&M, Lindex, Stadium, Apoteket,
   Joe & The Juice. 7-Eleven and Pressbyrån sit almost all in Centrum.

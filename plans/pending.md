@@ -85,8 +85,6 @@ test deals.
 - **The map data.** `places/places.json` is an input of it: moved there, the
   places get their outlines from OpenStreetMap, and the Check fails at the
   fetch until a release for the new inputs is published (`CONTRIBUTING.md`).
-- **Konditori Katarina** goes under `changes` (`plans/chains.md`), in a pull
-  request of its own.
 
 ## Going live
 
