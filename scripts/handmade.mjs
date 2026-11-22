@@ -1,12 +1,12 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { register } from 'node:module';
-import { dateKey, laterKey } from '../app/daily.mjs';
+import { dailySet, dateKey, laterKey } from '../app/daily.mjs';
 import { localD1 } from './lib/d1.mjs';
 import { LEAD, firstFit, problems, written } from './lib/made.mjs';
 
 register('./lib/resolve.mjs', import.meta.url);
-const { WHAT, pack } = await import('../bygg/handmade.mjs');
+const { WHAT, assemble, pack, variant } = await import('../bygg/handmade.mjs');
 
 const SITE = 'https://malmodle.se';
 const DAYS = 'learn/days.json';
@@ -57,6 +57,10 @@ async function take() {
   if (!day) throw new Error('no date in the next four months fits; try one by hand to see why');
   const found = problems(quiz, day, entry);
   if (found.length) throw new Error(`${day} does not fit:\n  ${found.join('\n  ')}`);
+  const seen = assemble(entry.slots, quiz.items, quiz.decoys);
+  const played = dailySet(quiz.items, day, quiz.decoys, { ...(quiz.made ?? {}), [day]: entry });
+  const changed = seen.filter((e, n) => !e.q || !played[n] || e.q.type !== played[n].type || variant(e.q) !== variant(played[n])).map((e) => e.target);
+  if (changed.length) throw new Error(`${day} would not ask these as the builder showed them: ${changed.join(', ')}`);
   const doc = JSON.parse(readFileSync(DAYS, 'utf8'));
   doc.days[day] = entry;
   writeFileSync(DAYS, written(doc));

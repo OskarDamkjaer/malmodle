@@ -152,9 +152,11 @@ test('over a year, an area waits a week before it is asked again, a street or pl
 
 test('over a year, what a question names on the map is not asked days around it', { skip }, () => {
   const sets = Array.from({ length: 365 }, (_, n) => dailySet(items, laterKey(SPACED, n), [], made));
+  const byHand = (n) => Boolean(made?.[laterKey(SPACED, n)]);
   const asked = new Map();
-  sets.forEach((set, n) => set.forEach((q) => asked.set(q.target.name, [...(asked.get(q.target.name) ?? []), n])));
+  sets.forEach((set, n) => byHand(n) || set.forEach((q) => asked.set(q.target.name, [...(asked.get(q.target.name) ?? []), n])));
   sets.forEach((set, n) => {
+    if (byHand(n)) return;
     for (const q of set) {
       for (const shown of [q.from, q.to].filter(Boolean)) {
         const near = (asked.get(shown.name) ?? []).filter((m) => Math.abs(m - n) <= SHOWN_GAP);

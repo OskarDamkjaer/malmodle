@@ -54,7 +54,7 @@ export function assemble(slots, items, decoys = [], find = () => null) {
   });
 }
 
-const variant = (q) => [q.region?.name, q.from?.name, q.side, q.to?.name, ...[...(q.options ?? [])].sort()].join('|');
+export const variant = (q) => [q.region?.name, q.from?.name, q.side, q.to?.name, ...[...(q.options ?? [])].sort()].join('|');
 
 export function another(entry, items, decoys = []) {
   if (!entry.q) return null;

@@ -209,3 +209,23 @@ test('a day and its suggestions survive a link, and a broken link gives nothing'
   assert.equal(unpack(pack({ slots: [] }).slice(0, 1)), null);
   assert.equal(unpack(pack({ slots: [], notes: [{ target: 'Ö', what: 'toString', text: '' }] })), null);
 });
+
+test('the game asks a day made by hand exactly as the builder showed it, and leaves every day before it alone', { skip }, () => {
+  const show = (set) => JSON.stringify(set);
+  let compared = 0;
+  for (let n = 0; n < 40; n++) {
+    const from = laterKey('2027-01-01', n * 3);
+    const day = laterKey(from, 9);
+    const slots = dailySet(real, from, decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: n * 10 + i }));
+    const seen = assemble(slots, real, decoys);
+    if (!ready(seen)) continue;
+    const made = { [day]: { by: null, slots } };
+    assert.equal(show(dailySet(real, day, decoys, made)), show(seen.map((e) => e.q)), day);
+    for (let back = 1; back <= 7; back++) {
+      const before = laterKey(day, -back);
+      assert.equal(show(dailySet(real, before, decoys, made)), show(dailySet(real, before, decoys)), before);
+    }
+    compared++;
+  }
+  assert.ok(compared >= 10, `${compared} days compared`);
+});

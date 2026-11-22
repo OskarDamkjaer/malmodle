@@ -61,8 +61,8 @@ Reading D1 goes through `wrangler`, so it needs a login to the Cloudflare
 account. A day can be played once its targets are all in `core.json` by that
 date. A date fits when the day builds with the types it was made with, none of
 its targets has been asked within a week (an area) or two (a street or a
-place) before it, and what it shows on the map is not asked within three days
-of it, or the other way round. `take` writes it into `learn/days.json` under
+place) before it, and the game asks each question as the builder showed it.
+What it shows on the map may be asked on the days around it. `take` writes it into `learn/days.json` under
 that date with the builder's name, and the game plays it in place of the day
 it would deal, says on the end screen who made it, and deals every deck anew
 from the next day, with what was asked lately at the back. The first question

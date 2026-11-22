@@ -63,7 +63,9 @@ osmium, Java and hosts the sandbox cannot reach.
   A day made by hand, under its date in `learn/days.json`, is played in place
   of the dealt one, built from its targets, types and seeds the way the builder
   builds them, and every deck is dealt anew the day after it, with what was
-  asked lately at the back. `scripts/lib/made.mjs` checks a date fits it.
+  asked lately at the back. It keeps from the map only what it asks itself,
+  and the days before it are dealt and built as if it were not there.
+  `scripts/lib/made.mjs` checks a date fits it.
   `learn/played.json` pins the set of every day already played, and a test
   fails if the data or the deal changes one, or dates anything on or before
   the last of them.

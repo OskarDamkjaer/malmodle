@@ -130,14 +130,17 @@ test('a day made by hand is played as it was made, and the days before it keep t
   const set = dailySet(items, MADE_ON, [], made);
   assert.deepEqual(set.map((q) => [q.target.name, q.type]), madeSlots.map((s) => [s.target, s.type]));
   assert.equal(full(dailySet(items, MADE_ON, [], made)), full(set));
-  const names = (s) => s.map((q) => q.target.name).join();
   for (let day = '2026-10-10'; day < MADE_ON; day = laterKey(day, 1)) {
-    if (day < laterKey(MADE_ON, -SHOWN_GAP)) assert.equal(full(dailySet(items, day, [], made)), full(dailySet(items, day)), day);
-    else assert.equal(names(dailySet(items, day, [], made)), names(dailySet(items, day)), day);
+    assert.equal(full(dailySet(items, day, [], made)), full(dailySet(items, day)), day);
   }
 });
 
-test('after a day made by hand, its targets wait like any other, and what it shows is not asked around it', () => {
+test('a day made by hand is the same on any date, whatever is asked around it', () => {
+  const on = (day) => full(dailySet(items, day, [], { [day]: made[MADE_ON] }));
+  for (let n = 1; n <= 30; n++) assert.equal(on(laterKey(MADE_ON, n)), on(MADE_ON), laterKey(MADE_ON, n));
+});
+
+test('after a day made by hand, its targets wait like any other, and the days around it keep what they show apart', () => {
   const last = new Map();
   for (let n = 0; n < 120; n++) {
     for (const q of dailySet(items, laterKey(SPACED, n), [], made)) {
@@ -146,19 +149,22 @@ test('after a day made by hand, its targets wait like any other, and what it sho
       last.set(q.target.name, n);
     }
   }
-  checkShown(items, made);
+  checkShown(items, made, MADE_ON);
 });
 
 test('what a question names on the map is not asked days before or after, also across a day items join', () => {
   for (const list of [items, grown]) checkShown(list);
 });
 
-function checkShown(list, made) {
+function checkShown(list, made, madeOn) {
   const sets = Array.from({ length: 60 }, (_, n) => dailySet(list, laterKey(SPACED, n), [], made));
+  const byHand = madeOn ? Math.round((Date.parse(madeOn) - Date.parse(SPACED)) / 86400000) : -1;
   sets.forEach((set, n) => {
+    if (n === byHand) return;
     for (const q of set) {
       for (const shown of [q.from, q.to].filter(Boolean)) {
         for (let m = Math.max(0, n - SHOWN_GAP); m <= Math.min(sets.length - 1, n + SHOWN_GAP); m++) {
+          if (m === byHand) continue;
           assert.ok(!sets[m].some((x) => x.target.name === shown.name), `${shown.name} shown ${n}, asked ${m}`);
         }
       }
