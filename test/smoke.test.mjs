@@ -425,15 +425,19 @@ test('a day can be built by hand, changed, undone, kept over a reload, and take 
     await page.fill('#search', 'Möllevångstorget');
     assert.equal(await page.locator('#results li').first().locator('.tag').count(), 0);
     await page.fill('#search', 'Espresso House');
-    assert.equal(await page.locator('#results li').first().locator('.tag').textContent(), 'inte i spelet än');
+    assert.equal(await page.locator('#results li').first().locator('.tag').count(), 0);
     await page.keyboard.press('Enter');
-    assert.deepEqual(await page.locator('#questions li:nth-child(3) .flag').allTextContents(), ['finns inte i spelet än']);
+    assert.deepEqual(await page.locator('#questions li:nth-child(3) .flag').allTextContents(), []);
     assert.match(await page.locator('#questions li:nth-child(3) .edit').textContent(), /ställen?a? räknas/);
     assert.ok(await page.locator('#questions li:nth-child(3) .types button:has-text("Vad ligger här?")').isDisabled());
     assert.ok(await page.evaluate(() => window.map.getSource('atlas-points').serialize().data.features.filter((f) => f.properties.name === 'Espresso House').length > 1));
-    assert.match(await page.locator('#notes li').first().textContent(), /Ta med i spelet · Espresso House · fråga 3/);
+    await page.fill('#search', 'Valdemarsro');
+    assert.equal(await page.locator('#results li').first().locator('.tag').textContent(), 'inte i spelet än');
+    await page.keyboard.press('Enter');
+    assert.deepEqual(await page.locator('#questions li:nth-child(4) .flag').allTextContents(), ['finns inte i spelet än']);
+    assert.match(await page.locator('#notes li').first().textContent(), /Ta med i spelet · Valdemarsro · fråga 4/);
     assert.ok(await page.locator('#sendopen').isDisabled());
-    assert.equal(await page.locator('#sendopen').textContent(), 'Skicka in · 3/10');
+    assert.equal(await page.locator('#sendopen').textContent(), 'Skicka in · 4/10');
     assert.deepEqual(errors, []);
   } finally {
     await context.close();
