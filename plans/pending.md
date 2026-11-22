@@ -80,12 +80,6 @@ day already played keeping its set and every day until the date asking what
 it did, decoys included. No group shares a day over the two years the data
 test deals.
 
-## What is left
-
-- **The map data.** `places/places.json` is an input of it: moved there, the
-  places get their outlines from OpenStreetMap, and the Check fails at the
-  fetch until a release for the new inputs is published (`CONTRIBUTING.md`).
-
 ## Going live
 
 Areas, streets, bridges and places go live with `node scripts/join.mjs`,
