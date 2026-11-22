@@ -180,7 +180,7 @@
       "lat": 55.6051,
       "lon": 12.98256,
       "apart": "Teknikens och sjöfartens hus",
-      "why": "The submarine on land outside Teknikens och sjöfartens hus, about 6,600 Wikipedia page views a year. Teknikens och sjöfartens hus needs the same apart before this goes live.",
+      "why": "The submarine on land outside Teknikens och sjöfartens hus, about 6,600 Wikipedia page views a year.",
       "description": "Svensk ubåt som sjösattes den 11 juni 1942. Hon finns bevarad vid Teknikens och sjöfartens hus i Malmö.",
       "source": "https://sv.wikipedia.org/wiki/HMS_U3"
     },
@@ -206,7 +206,7 @@
       "lat": 55.60743,
       "lon": 13.00667,
       "apart": "Kv. Caroli",
-      "why": "Church from 1880 inside the Caroli block, about 1,900 Wikipedia page views a year. Kv. Caroli needs the same apart before this goes live.",
+      "why": "Church from 1880 inside the Caroli block, about 1,900 Wikipedia page views a year.",
       "description": "Kyrkobyggnad som stod färdig 1880 efter ritningar av Emil Viktor Langlet. Den avsakraliserades 2010 och hyrdes 2026 ut till frikyrkan C3 Church Malmö.",
       "source": "https://sv.wikipedia.org/wiki/Caroli_kyrka,_Malm%C3%B6"
     },
@@ -425,7 +425,8 @@
       ],
       "lat": 55.6073,
       "lon": 12.99439,
-      "why": "Italian restaurant on the 25th floor of Clarion Hotel Malmö Live; press calls it a dining institution for generations. The osm id is the hotel, since the restaurant has no node of its own. It sits in the Malmö Live building, which has no apart group, so the two can come up on the same day.",
+      "apart": "Malmö Live",
+      "why": "Italian restaurant on the 25th floor of Clarion Hotel Malmö Live; press calls it a dining institution for generations. The osm id is the hotel, since the restaurant has no node of its own. It sits in the Malmö Live building, so the two are kept apart.",
       "description": "Italiensk restaurang och skybar på våning 25, högst upp i Clarion Hotel Malmö Live.",
       "source": "https://strawberryhotels.com/restaurant/sweden/malmo/grand-italian"
     },
