@@ -80,7 +80,7 @@ street was named.
 
 A street joins by moving from `streets` in `learn/pending.json` to `core.streets` and under a
 date in `since`, a few days after the deploy that carries it. No date is
-needed while it waits. The 37 above join on 2026-12-01.
+needed while it waits.
 
 ## Open
 

@@ -5,9 +5,6 @@ day builder shows it, and `quiz.json` leaves it out, so nothing here changes
 a live day. This plan records how each part was chosen, how far its
 descriptions have come, and what has to happen before it goes live.
 
-The areas, streets and bridges below join the game on 2026-12-01, under
-`since` in `learn/core.json`. What waits now is the places.
-
 ## How it was chosen
 
 - **Areas (46).** The game asked 46 of the 129 delområden. Added: every
@@ -51,11 +48,12 @@ what some places are called:
   museum, as Malmö Konsthall is, and not a stage.
 - **Hotel Kramer** keeps its name, the building's and its Wikipedia article's.
   Scandic runs it as Scandic Kramer.
-- **Västerbron** went live with one short sentence, the only thing a page
-  says about it.
+- **Västerbron** has one short sentence, the only thing a page says about
+  it.
 
 ## Before it goes live
 
+Areas, streets and bridges can go: their descriptions are fact-checked.
 Places need two changes to the build first:
 
 - **Decoys by date.** A place that joins the game leaves the decoys of "Vad
@@ -71,9 +69,9 @@ Places need two changes to the build first:
   share their category and spot, which already keeps them out of the decoys;
   the builder shows them as a second dot beside the place.
 - **A live place that changes** goes under `changes` in its entry in
-  `places/places.json` with a date, as Konditori Katarina does. That covers a
-  new text or a move, but not `apart`, so it does not settle U3 and Caroli
-  kyrka above.
+  `places/places.json` with a date, as Konditori Katarina will
+  (`plans/chains.md`). That covers a new text or a move, but not `apart`, so
+  it does not settle U3 and Caroli kyrka above.
 
 ## Going live
 
