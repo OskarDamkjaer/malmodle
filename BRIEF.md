@@ -24,7 +24,16 @@ Get familiar with Malmö through a short daily quiz.
   full curated data stays in the repo and in the build.
 - Grunden grows by date. A name waits as pending, out of the game, until its
   description is checked, then joins with a date. Every day before that date
-  stays exactly as it was.
+  stays exactly as it was. A place in the game can change on a date the same
+  way, such as an original café that becomes its chain.
+- Some days are made by hand. A player builds a day of ten on
+  malmodle.se/bygg and sends it in, and the owner gives it a date where its
+  targets have not been asked lately. It is played in place of the dealt day,
+  the first question and the end screen name who made it, and the decks are
+  dealt anew after it so its targets wait like any other.
+- The end screen links to the builder once a player has earned it: a full
+  1000, fifteen days in a row, or the top percent of a day with at least a
+  hundred players. The day it happens, the link says why.
 - The set can be replayed. Replaying gives the same set, never a new one.
 
 ## Questions
