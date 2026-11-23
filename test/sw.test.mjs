@@ -9,7 +9,9 @@ const OLD = 'malmo-code-000000000000';
 const NEW = 'malmo-code-111111111111';
 const source = (code) => stampWorker(readFileSync('app/sw.js', 'utf8'), code.replace('malmo-code-', ''), '222222222222');
 
-function worker({ code = OLD, online = true, full = false, active = false, pages = {}, store = new Map() } = {}) {
+const PAGES = { game: '/', builder: '/bygg/', week: '/dev/week.html' };
+
+function worker({ code = OLD, online = true, full = false, active = false, pages = {}, open: opened = ['game'], store = new Map() } = {}) {
   const keyOf = (req) => new URL(typeof req === 'string' ? req : req.url, ORIGIN).pathname;
   const open = async (name) => {
     if (!store.has(name)) store.set(name, new Map());
@@ -39,13 +41,12 @@ function worker({ code = OLD, online = true, full = false, active = false, pages
   const listeners = {};
   const skipped = [];
   const reloaded = [];
-  const windows = [{ url: `${ORIGIN}/`, navigate: async (url) => { reloaded.push(url); } }];
-  const pagesById = { game: { url: `${ORIGIN}/` }, builder: { url: `${ORIGIN}/bygg/` }, week: { url: `${ORIGIN}/dev/week.html` } };
+  const windows = opened.map((id) => ({ id, url: ORIGIN + PAGES[id], navigate: async (url) => { reloaded.push(url); } }));
   const self = {
     addEventListener: (type, fn) => { listeners[type] = fn; },
     registration: { active: active ? {} : null },
     skipWaiting: async () => { skipped.push(true); },
-    clients: { claim: async () => {}, matchAll: async () => windows, get: async (id) => pagesById[id] },
+    clients: { claim: async () => {}, matchAll: async () => windows, get: () => new Promise(() => {}) },
   };
   vm.runInNewContext(source(code), { self, caches, fetch, Response, Blob, URL, Headers, console, Promise, location: new URL(ORIGIN) });
 
@@ -128,12 +129,18 @@ test('the local dev pages and the day builder are left to the network, uncached'
 });
 
 test('what a dev page or the builder loads of the game comes from the network, and the cache is left as it was', async () => {
-  const sw = worker({ pages: { '/daily.mjs': 'new code' } });
+  const sw = worker({ pages: { '/daily.mjs': 'new code' }, open: ['game', 'builder', 'week'] });
   await sw.seed({ '/daily.mjs': 'old code' });
   assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'builder')).text(), 'new code');
   assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'week')).text(), 'new code');
   assert.equal(await sw.cachedText('/daily.mjs'), 'old code');
   assert.equal(await (await sw.navigate('/daily.mjs', 'cors', {}, 'game')).text(), 'old code');
+});
+
+test('a request from a worker that is still starting is answered without waiting for it', async () => {
+  const sw = worker();
+  await sw.seed({ '/vendor/maplibre-gl-shared.mjs': 'old code' });
+  assert.equal(await (await sw.navigate('/vendor/maplibre-gl-shared.mjs', 'cors', {}, 'starting')).text(), 'old code');
 });
 
 test('a range of the cached map is answered with just those bytes', async () => {
