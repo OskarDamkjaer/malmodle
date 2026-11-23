@@ -213,11 +213,18 @@ Tests that need built data or a browser skip when those are missing. The browser
 is driven by `playwright-core` from `npm install`, using its own Chromium or
 else the installed Chrome.
 
+`test/browsers.test.mjs` starts the day in Chromium, Firefox and WebKit, on a
+first visit and on one the offline worker answers. Firefox and WebKit come
+from `npx playwright-core install firefox webkit`, or Firefox from the one
+installed, or the one `FIREFOX` points at. An engine that is not there skips.
+Firefox has no WebGL without a display, so on a machine without one run the
+tests as `HEADED=1 xvfb-run -a node --test 'test/*.test.mjs'`, as the Check does.
+
 The deploy runs the first set before it releases anything, and stops if a
 single test skips. Once both sites are out, it runs the second set against
 them: it waits until each serves the build just released, answers all but the
 last question on phone and desktop, boots every style, opens the site offline
-after one visit, and checks the API turns away a broken result. It never
+after one visit, starts the day in Firefox and WebKit, and checks the API turns away a broken result. It never
 finishes a day, so it never posts a result or counts as a player; posting is
 covered by the browser tests before the release, against the same Worker code
 on SQLite. Each check gets a second try in a fresh browser, so a passing blip on

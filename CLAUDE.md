@@ -45,7 +45,8 @@ or a browser skip instead of failing, so a green run can be an empty one.
 
 In a web session `.claude/hooks/session-start.sh` builds the style, fetches the
 prebuilt map data and app assets, and builds `quiz.json` and `quiz-all.json`, so nothing should
-skip. Do not run the heavy pipeline there (`build-basemap.sh`,
+skip but Firefox and WebKit in `test/browsers.test.mjs`, which the sandbox
+cannot download and the Check runs. Do not run the heavy pipeline there (`build-basemap.sh`,
 `build-districts.mjs`, `build-streets.mjs`, `build-shapes.mjs`): it needs
 osmium, Java and hosts the sandbox cannot reach.
 

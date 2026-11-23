@@ -123,14 +123,19 @@ jobs:
       - name: Install the tools
         run: npm ci --no-fund --no-audit
 
+      - name: Install Firefox and WebKit
+        run: npx playwright-core install --with-deps firefox webkit
+
       - name: Test
         shell: bash
         run: |
-          node --test --test-reporter=tap 'test/*.test.mjs' | tee test.log
+          xvfb-run -a node --test --test-reporter=tap 'test/*.test.mjs' | tee test.log
           if grep '# SKIP' test.log; then
             echo '::error::tests skipped before a release'
             exit 1
           fi
+        env:
+          HEADED: '1'
 
       - name: Assemble the site
         run: node scripts/build-site.mjs
@@ -209,16 +214,20 @@ jobs:
       - name: Install the tools
         run: npm ci --no-fund --no-audit
 
+      - name: Install Firefox and WebKit
+        run: npx playwright-core install --with-deps firefox webkit
+
       - name: Check the live sites
         shell: bash
         run: |
-          node --test --test-reporter=tap 'test/live/*.test.mjs' | tee live.log
+          xvfb-run -a node --test --test-reporter=tap 'test/live/*.test.mjs' | tee live.log
           if grep '# SKIP' live.log | grep -v '# SKIP no API here'; then
             echo '::error::live checks skipped'
             exit 1
           fi
         env:
           SITES: https://malmodle.se https://malmoe.damk.eu
+          HEADED: '1'
           BUILD: build/site
 
   pages:
