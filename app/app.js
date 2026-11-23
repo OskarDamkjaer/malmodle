@@ -17,8 +17,41 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wide = matchMedia('(min-width: 760px)');
 
 const HOME = 'malmodle.se';
+const STUCK = 20000;
+const RESCUED_KEY = 'malmodle-rescued';
+const workers = 'serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname)) ? navigator.serviceWorker : null;
+const controlled = Boolean(workers?.controller);
+let watch;
+
+function rescued() {
+  try { return Boolean(sessionStorage.getItem(RESCUED_KEY)); } catch { return true; }
+}
+
+async function rescue() {
+  if (!workers.controller || rescued()) return;
+  try { sessionStorage.setItem(RESCUED_KEY, '1'); } catch { return; }
+  console.warn('boot: stuck with the offline worker, starting over without it');
+  try {
+    for (const reg of await workers.getRegistrations()) await reg.unregister();
+    for (const key of await caches.keys()) if (!key.startsWith('malmo-map')) await caches.delete(key);
+  } catch (err) {
+    console.warn('boot:', err);
+  }
+  location.reload();
+}
+
+function stir() {
+  clearTimeout(watch);
+  if (workers) watch = setTimeout(rescue, STUCK);
+}
+
+function settled() {
+  clearTimeout(watch);
+  try { sessionStorage.removeItem(RESCUED_KEY); } catch {}
+}
 
 function fail(what, err) {
+  clearTimeout(watch);
   console.error(what, err);
   boot.classList.add('failed');
   boot.classList.remove('done');
@@ -26,6 +59,7 @@ function fail(what, err) {
 }
 
 function progress(fraction) {
+  stir();
   el('bootbar').style.transform = `scaleX(${Math.max(0.04, Math.min(1, fraction))})`;
 }
 
@@ -52,8 +86,7 @@ if (!document.createElement('canvas').getContext('webgl2')) {
   throw err;
 }
 
-const workers = 'serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname)) ? navigator.serviceWorker : null;
-const controlled = Boolean(workers?.controller);
+stir();
 let playedHere = false;
 let stale = false;
 
@@ -1033,6 +1066,7 @@ map.on('load', async () => {
   progress(1);
   renderKinds();
   resume();
+  settled();
   setTimeout(() => {
     boot.classList.add('done');
     setTimeout(splashGone, reducedMotion ? 0 : 450);

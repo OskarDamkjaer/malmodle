@@ -351,6 +351,34 @@ test('a new version is taken before the first answer, and waits after one', { sk
   }
 });
 
+test('a start that is stuck with the offline worker starts over without it, once', { skip }, async () => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await context.addInitScript(() => {
+    const real = window.fetch;
+    window.fetch = (url, ...rest) => (String(url).endsWith('/data/quiz.json') && performance.getEntriesByType('navigation')[0].type === 'reload' && !sessionStorage.getItem('malmodle-rescued')
+      ? new Promise(() => {})
+      : real(url, ...rest));
+  });
+  const page = await context.newPage();
+  const warned = [];
+  page.on('console', (m) => { if (m.type() === 'warning' && m.text().startsWith('boot:')) warned.push(m.text()); });
+  let loads = 0;
+  page.on('load', () => { loads += 1; });
+
+  await page.goto(URL);
+  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 30000 });
+
+  loads = 0;
+  await page.reload();
+  await until(() => loads >= 2, 'the stuck page to start over');
+  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  assert.equal(warned.length, 1);
+  assert.equal(await page.evaluate(() => sessionStorage.getItem('malmodle-rescued')), null);
+  assert.equal(loads, 2);
+  await context.close();
+});
+
 test('the palette is applied to the basemap', { skip }, async () => {
   const { page, context, errors } = await open({ width: 390, height: 844 });
   assert.equal(await page.evaluate(() => window.map.getPaintProperty('background', 'background-color')), PALETTE.map.background);

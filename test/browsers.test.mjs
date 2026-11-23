@@ -1,7 +1,7 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, statSync, utimesSync } from 'node:fs';
 import { ENGINES, chromium } from './browser.mjs';
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs'];
@@ -36,18 +36,37 @@ for (const [name, launch] of Object.entries(ENGINES)) {
   if (!unready) browsers[name] = await launch().catch(() => null);
   const skip = unready || (!browsers[name] && `no ${name} could be launched`);
 
-  test(`the day starts in ${name}, on a first visit and on one the offline worker answers`, { skip }, async () => {
+  test(`the day starts in ${name}, on a first visit, on one the offline worker answers, and on one after a release`, { skip }, async () => {
+    const touched = 'app/palette.mjs';
+    const { atime, mtime } = statSync(touched);
     const context = await browsers[name].newContext({ viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', (e) => errors.push(String(e)));
-    await page.goto(URL);
-    await started(page, 'the first visit');
-    await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 60000 });
-    await page.reload();
-    await started(page, 'a visit the offline worker answers');
-    assert.ok(await page.evaluate(() => Boolean(navigator.serviceWorker.controller)));
-    assert.deepEqual(errors, []);
-    await context.close();
+    const version = () => page.evaluate(async () => (await caches.keys()).filter((k) => k.startsWith('malmo-code-')).join());
+    try {
+      await page.goto(URL);
+      await started(page, 'the first visit');
+      await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 60000 });
+      await page.reload();
+      await started(page, 'a visit the offline worker answers');
+      assert.ok(await page.evaluate(() => Boolean(navigator.serviceWorker.controller)));
+      const first = await version();
+
+      utimesSync(touched, atime, new Date());
+      await page.reload();
+      const deadline = Date.now() + 60000;
+      let now = first;
+      while (now === first || now.includes(',') || !now) {
+        if (Date.now() > deadline) assert.fail(`the release was not taken; the code cache is "${now}", and was "${first}"`);
+        await new Promise((r) => setTimeout(r, 250));
+        now = await version().catch(() => first);
+      }
+      await started(page, 'the visit after a release');
+      assert.deepEqual(errors, []);
+    } finally {
+      utimesSync(touched, atime, mtime);
+      await context.close();
+    }
   });
 }

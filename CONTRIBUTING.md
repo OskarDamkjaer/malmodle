@@ -214,7 +214,7 @@ is driven by `playwright-core` from `npm install`, using its own Chromium or
 else the installed Chrome.
 
 `test/browsers.test.mjs` starts the day in Chromium, Firefox and WebKit, on a
-first visit and on one the offline worker answers. Firefox and WebKit come
+first visit, on one the offline worker answers, and on one after a release. Firefox and WebKit come
 from `npx playwright-core install firefox webkit`, or Firefox from the one
 installed, or the one `FIREFOX` points at. An engine that is not there skips.
 Firefox has no WebGL without a display, so on a machine without one run the
