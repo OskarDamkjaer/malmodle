@@ -116,8 +116,8 @@ self.addEventListener('message', (event) => {
 
 async function fromDev(event) {
   if (!event.clientId) return false;
-  const client = await self.clients.get(event.clientId);
-  return Boolean(client && apart(new URL(client.url).pathname));
+  const pages = await self.clients.matchAll({ type: 'window' });
+  return pages.some((page) => page.id === event.clientId && apart(new URL(page.url).pathname));
 }
 
 self.addEventListener('fetch', (event) => {
