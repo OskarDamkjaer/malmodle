@@ -110,7 +110,8 @@ a day that was sent in and gives it a date.
   scheduled ahead, with how many days each sender has played, looked up by
   key so `results` is never scanned, and suggests a date for each: the first
   Friday from a week ahead that fits, a week or more from every other made
-  day, so each Friday can have one. A date given to `take` can be any day.
+  day, so each Friday can have one, and not next to another day by the same
+  sender while a day by someone else waits. A date given to `take` can be any day.
   `/dev/review.html` shows them with the name as players will see it, the
   remark, the suggestions, the questions with the builder's flags, what is
   unusual about the day, links to it in the builder and among the days

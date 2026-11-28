@@ -31,17 +31,27 @@ export function fitTogether(quiz, picks, check = problems) {
   return found;
 }
 
-export function schedule(quiz, entries, from, { apart = APART, weekday = WEEKDAY, check = problems, tries = 120 } = {}) {
+export function schedule(quiz, entries, from, { apart = APART, weekday = WEEKDAY, check = problems, tries = 120, who = () => null } = {}) {
   let made = quiz.made ?? {};
+  const dates = entries.map(() => null);
+  const left = new Set(entries.keys());
   const near = (day) => Object.keys(made).some((other) => Math.abs(gapOf(other, day)) < Math.max(1, apart));
-  return entries.map((entry) => {
-    for (let n = 0, day = from; n < tries; n++, day = laterKey(day, 1)) {
-      if (weekdayOf(day) !== weekday || near(day) || check({ ...quiz, made }, day, entry).length) continue;
-      made = { ...made, [day]: entry };
-      return day;
-    }
-    return null;
-  });
+  const beside = (day) => {
+    const days = Object.keys(made).sort();
+    return [days.findLast((other) => other < day), days.find((other) => other > day)].filter(Boolean).map((other) => who(made[other], other));
+  };
+  for (let n = 0, day = from; n < tries && left.size; n++, day = laterKey(day, 1)) {
+    if (weekdayOf(day) !== weekday || near(day)) continue;
+    const others = beside(day);
+    const again = (i) => who(entries[i], day) !== null && others.includes(who(entries[i], day));
+    const fitting = [...left].filter((i) => !check({ ...quiz, made }, day, entries[i]).length);
+    const pick = fitting.find((i) => !again(i)) ?? ([...left].every(again) ? fitting[0] : undefined);
+    if (pick === undefined) continue;
+    made = { ...made, [day]: entries[pick] };
+    dates[pick] = day;
+    left.delete(pick);
+  }
+  return dates;
 }
 
 export function written(doc) {

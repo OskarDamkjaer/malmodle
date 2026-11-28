@@ -23,6 +23,15 @@ test('days scheduled together each fit, on a Friday, apart from each other and f
   assert.deepEqual(fitTogether(quiz, dates.map((day, n) => ({ day, entry: entries[n], label: `#${n}` }))), []);
 });
 
+test('one sender does not get two made days in a row while another sender waits', { skip }, () => {
+  const entries = [40, 50, 60, 70].map((n, i) => ({ ...entryFrom(laterKey(FROM, n)), sent: i + 1 }));
+  const sender = new Map([[1, 'a'], [2, 'a'], [3, 'a'], [4, 'b']]);
+  const dates = schedule(quiz, entries, FROM, { who: (entry) => sender.get(entry.sent) ?? null });
+  assert.ok(dates.every(Boolean), String(dates));
+  const order = entries.map((entry, n) => [dates[n], sender.get(entry.sent)]).sort(([a], [b]) => (a < b ? -1 : 1)).map(([, s]) => s);
+  assert.deepEqual(order, ['a', 'b', 'a', 'a']);
+});
+
 test('days are suggested on Fridays a week apart, and two days on one date do not fit together', { skip }, () => {
   const a = entryFrom(laterKey(FROM, 40));
   const b = entryFrom(laterKey(FROM, 70));
