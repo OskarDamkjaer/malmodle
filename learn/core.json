@@ -112,10 +112,10 @@
       "Mikkeller Moriskans Trädgård", "Ava Vinbar", "Vollmers", "Hygge",
       "La Nonnina", "Mutantur", "Åhléns", "Spoonery", "Boulebar", "Surfshack",
       "McDonald's", "Max", "Burger King", "Espresso House", "Systembolaget",
-      "Clas Ohlson", "Kampen – sport- och kulturcenter",
-      "Hästhagens Idrottsplats", "Betaniakyrkan", "Nakenbadet",
-      "Spårvägstorget", "Enskifteshagen", "Stadshuset", "Sachi Sushi",
-      "Teaterparken"
+      "Clas Ohlson", "St. Jakobs Stenugnsbageri",
+      "Kampen – sport- och kulturcenter", "Hästhagens Idrottsplats",
+      "Betaniakyrkan", "Nakenbadet", "Spårvägstorget", "Enskifteshagen",
+      "Stadshuset", "Sachi Sushi", "Teaterparken"
     ]
   },
   "since": {
@@ -165,7 +165,7 @@
       "Mikkeller Moriskans Trädgård", "Ava Vinbar", "Vollmers", "Hygge",
       "La Nonnina", "Mutantur", "Åhléns", "Spoonery", "Boulebar", "Surfshack",
       "McDonald's", "Max", "Burger King", "Espresso House", "Systembolaget",
-      "Clas Ohlson"
+      "Clas Ohlson", "St. Jakobs Stenugnsbageri"
     ]
   }
 }
