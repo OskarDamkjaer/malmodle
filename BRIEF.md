@@ -31,8 +31,10 @@ Get familiar with Malmö through a short daily quiz.
 - Some days are made by hand. A player builds a day of ten on
   malmodle.se/bygg and sends it in, and the owner gives it a date where its
   targets have not been asked lately. It is played in place of the dealt day,
-  the first question and the end screen name who made it, and the decks are
-  dealt anew after it so its targets wait like any other.
+  a card before the first question calls it a Gästfredag (a Gästdag on
+  another weekday) and thanks who sent it in, the end screen names them
+  again, and the decks are dealt anew after it so its targets wait like any
+  other.
 - The end screen links to the builder once a player has earned it: a full
   1000, fifteen days in a row, or the top percent of a day with at least a
   hundred players. The day it happens, the link says why.

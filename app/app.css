@@ -120,20 +120,10 @@ button.primary:hover { filter: brightness(1.06); }
   text-transform: uppercase;
   color: var(--ink-soft);
 }
-#byline {
-  position: absolute;
-  top: 100%;
-  left: 14px;
-  margin: 0;
-  padding: 3px 10px 4px;
-  background: var(--panel);
-  border: var(--border);
-  border-top: none;
-  border-radius: 0 0 var(--radius) var(--radius);
-  font-size: 13px;
-  color: var(--ink-soft);
-}
-#prompt {
+#guest { padding: 12px 16px 14px; }
+#guest p { margin: 6px 0 0; font-size: 15px; line-height: 1.4; color: var(--ink-soft); overflow-wrap: anywhere; }
+#guestby { font-weight: 600; color: var(--ink); }
+#prompt, #guest h1 {
   margin: 8px 0 0;
   font-size: clamp(20px, 2.2vw + 12px, 26px);
   font-weight: var(--display-weight);
@@ -141,6 +131,7 @@ button.primary:hover { filter: brightness(1.06); }
   letter-spacing: var(--display-tracking);
   text-wrap: balance;
 }
+#guest h1 { margin: 0; }
 
 #choices {
   display: grid;
@@ -161,8 +152,8 @@ button.primary:hover { filter: brightness(1.06); }
 #next { width: 100%; margin-top: 12px; }
 #result[data-still] { animation: none; }
 
-#guess { display: flex; gap: 8px; padding: 14px 18px; }
-#guessbutton { flex: 1; }
+#guess, #start { display: flex; gap: 8px; padding: 14px 18px; }
+#guessbutton, #begin { flex: 1; }
 #unpin { flex: none; width: 46px; padding: 0; font-size: 18px; }
 
 #info {
@@ -218,7 +209,7 @@ body[data-answered] #question { display: none; }
 .total span { font-size: 16px; color: var(--ink-soft); }
 #endverdict { margin: 8px 0 0; font-size: 18px; font-family: var(--font-display); }
 #elsewhere { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); }
-#endby { margin: 8px 0 0; font-size: 15px; color: var(--ink-soft); }
+#endby { margin: 8px 0 0; font-size: 15px; font-style: italic; color: var(--ink-soft); }
 #builder { margin: 14px 0 0; text-align: center; font-size: 15px; color: var(--ink-soft); }
 #builder[data-fresh] { padding: 10px 12px; border-radius: var(--radius); background: #fbf3dc; color: var(--ink); }
 #builderwhy:not(:empty) { display: block; margin-bottom: 4px; font-weight: 600; }
@@ -406,10 +397,10 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 .maplibregl-ctrl-group button:disabled .maplibregl-ctrl-icon { opacity: .3; }
 
 @media (min-width: 760px) {
-  #question { padding: 16px 22px 20px; }
+  #question, #guest { padding: 16px 22px 20px; }
   .maplibregl-ctrl-top-right { top: auto; bottom: calc(var(--safe-bottom) + var(--attribution) + var(--gap)); transform: none; }
   body[data-ended] .maplibregl-ctrl-top-right { bottom: calc(var(--safe-bottom) + var(--attribution) + 52px); }
-  #result, #choices, #guess { padding: 16px 18px; }
+  #result, #choices, #guess, #start { padding: 16px 18px; }
 }
 
 @media (max-width: 759px) {
@@ -438,8 +429,8 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
   #points { font-size: 26px; }
   #explain { margin-top: 2px; font-size: 14px; }
   #next { margin-top: 6px; min-height: 40px; }
-  #guess { padding: 8px 14px; }
-  #guess button { min-height: 40px; }
+  #guess, #start { padding: 8px 14px; }
+  :is(#guess, #start) button { min-height: 40px; }
   #info { grid-template-columns: 1fr; padding: 8px 14px; }
   #infophoto { display: none; }
   #infoname { font-size: 16px; }
@@ -496,7 +487,7 @@ body[data-ended] #info { z-index: 6; top: auto; bottom: calc(var(--safe-bottom) 
 }
 
 @media (min-width: 1000px) and (max-width: 1299px) {
-  #question, #choices, #guess, #result, #pinhint, #aimhint { left: calc((100% - 340px - var(--gap)) / 2); }
+  #question, #guest, #start, #choices, #guess, #result, #pinhint, #aimhint { left: calc((100% - 340px - var(--gap)) / 2); }
 }
 
 @keyframes slide {

@@ -127,11 +127,15 @@ a day that was sent in and gives it a date.
   from its target, type and seed the way the builder does, keeping from the
   map only what the day itself asks, so it is the day its maker saw whatever
   the days around it ask or show.
-  "Dagens frågor av …" hangs under the first question's card, with the name
-  the sender gave or "en spelare" without one, and the end screen says it
-  again. The days before it are dealt and built as if it were not there,
-  and every deck is dealt anew from the day after, with what was asked lately
-  at the back, so its targets wait like any other and the dealt targets it
+  Before the first question a card says "Gästfredag!", or "Gästdag!" on
+  another weekday, and "Tack till … som skickat in dagens frågor.", with the
+  name the sender gave or "en spelare" without one, and the day starts from
+  "Börja" at the bottom. A tab that has asked one of the day's questions does
+  not show it again, so a reload or "Spela igen" goes straight to them. The
+  questions look like any other day's, and the end screen says "Inskickat
+  av …" under the date. The days before it are dealt and built as if it were
+  not there, and every deck is dealt anew from the day after, with what was
+  asked lately at the back, so its targets wait like any other and the dealt targets it
   replaced come soon.
 - **A date has to fit.** Its targets must all be in the game by then, a place
   picked from the long list counting once the game has one of that name

@@ -12,6 +12,12 @@ export async function launch() {
   }
 }
 
+export async function underway(page, options) {
+  await page.waitForSelector(':is(#question, #guest):not([hidden])', options);
+  if (await page.isVisible('#guest')) await page.click('#begin');
+  await page.waitForSelector('#question:not([hidden])', options);
+}
+
 const FIREFOX = ['/usr/bin/firefox', '/snap/bin/firefox', '/Applications/Firefox.app/Contents/MacOS/firefox'];
 const headless = !process.env.HEADED;
 

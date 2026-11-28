@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { PALETTE } from '../../app/palette.mjs';
 import { MOVED } from '../../scripts/lib/site.mjs';
-import { ENGINES, chromium, launch } from '../browser.mjs';
+import { ENGINES, chromium, launch, underway } from '../browser.mjs';
 
 const SITES = (process.env.SITES ?? 'https://malmodle.se').split(/\s+/).filter(Boolean);
 const BUILD = process.env.BUILD;
@@ -48,7 +48,7 @@ async function open(site, viewport, path = '/', { workers = 'block' } = {}) {
   page.on('response', (r) => { if (own(site, r.url()) && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
   await page.goto(new URL(path, site).href);
   await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
-  await page.waitForSelector('#question:not([hidden])');
+  await underway(page);
   return { page, context, errors };
 }
 
@@ -71,7 +71,7 @@ for (const site of SITES) {
     test(`all but the last question can be answered on ${site} on ${name}`, { skip }, again(async () => {
       const { page, context, errors } = await open(site, viewport);
       for (let i = 0; i < 9; i++) {
-        await page.waitForSelector('#question:not([hidden])');
+        await underway(page);
         if (await page.isVisible('#choices')) await page.locator('#choices button').first().click();
         else {
           await page.mouse.click(viewport.width / 2, viewport.height / 2);
@@ -81,7 +81,7 @@ for (const site of SITES) {
         assert.match(await page.textContent('#points'), /^\d+$/);
         await page.click('#next');
       }
-      await page.waitForSelector('#question:not([hidden])');
+      await underway(page);
       assert.equal(await page.locator('#dots li[data-band]').count(), 9);
       assert.deepEqual(errors, []);
       await context.close();
@@ -112,7 +112,7 @@ for (const site of SITES) {
     errors.length = 0;
     await page.reload();
     const offline = () => errors.filter((e) => !/ERR_INTERNET_DISCONNECTED|net::/.test(e));
-    const booted = await page.waitForSelector('#question:not([hidden])', { timeout: 60000 }).then(() => true, () => false);
+    const booted = await underway(page, { timeout: 60000 }).then(() => true, () => false);
     if (!booted) assert.fail(`no question offline; boot says "${await page.textContent('#bootmsg')}"; errors: ${offline().join(' | ') || 'none'}`);
     assert.deepEqual(offline(), []);
     await context.close();
@@ -127,7 +127,7 @@ for (const site of SITES) {
       for (const visit of ['the first visit', 'a visit the offline worker answers']) {
         if (visit === 'the first visit') await page.goto(site);
         else await page.reload();
-        const up = await page.waitForSelector('#question:not([hidden])', { timeout: 60000 }).then(() => true, () => false);
+        const up = await underway(page, { timeout: 60000 }).then(() => true, () => false);
         if (!up) assert.fail(`no question on ${visit}; boot says "${await page.textContent('#bootmsg')}"`);
         await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 60000 });
       }
