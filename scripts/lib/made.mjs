@@ -9,9 +9,15 @@ export const WEEKDAY = 5;
 const gapOf = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
 export const weekdayOf = (day) => new Date(`${day}T00:00:00Z`).getUTCDay();
 
+export const askedOf = (entry) => entry.slots.map((s) => s.target).sort().join('\n');
+
+export const twinOf = (made, entry, day) => Object.keys(made ?? {}).find((other) => other !== day && askedOf(made[other]) === askedOf(entry)) ?? null;
+
 export function problems(quiz, day, entry) {
   const found = [];
   if (quiz.made?.[day]) found.push(`${day} already has a day made by hand`);
+  const twin = twinOf(quiz.made, entry, day);
+  if (twin) found.push(`it asks what the day on ${twin} asks`);
   const set = dailySet(quiz.items, day, quiz.decoys, { ...(quiz.made ?? {}), [day]: entry });
   for (const slot of entry.slots) {
     const q = set.find((x) => x.target.name === slot.target);

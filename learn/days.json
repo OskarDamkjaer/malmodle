@@ -80,22 +80,6 @@
         { "target": "Kryddgården", "type": "point", "seed": 1 }
       ]
     },
-    "2027-01-15": {
-      "by": "André",
-      "sent": 5,
-      "slots": [
-        { "target": "Kampen – sport- och kulturcenter", "type": "identify", "seed": 1 },
-        { "target": "Almhög", "type": "point", "seed": 1 },
-        { "target": "Tygelsjö by", "type": "point", "seed": 1 },
-        { "target": "Mitt Möllan", "type": "point", "seed": 1 },
-        { "target": "Hästhagens Idrottsplats", "type": "point", "seed": 1 },
-        { "target": "Södra Sallerup", "type": "point", "seed": 1 },
-        { "target": "Betaniakyrkan", "type": "point", "seed": 1 },
-        { "target": "Industrigatan", "type": "point", "seed": 1 },
-        { "target": "Nakenbadet", "type": "point", "seed": 1 },
-        { "target": "Spårvägstorget", "type": "point", "seed": 1 }
-      ]
-    },
     "2027-01-22": {
       "by": null,
       "sent": 7,
@@ -129,7 +113,7 @@
       ]
     },
     "2027-02-05": {
-      "by": "E hilter",
+      "by": null,
       "sent": 9,
       "slots": [
         { "target": "Tygelsjö by", "type": "point", "seed": 1 },

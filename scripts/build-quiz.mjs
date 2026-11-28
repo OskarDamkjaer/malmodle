@@ -388,6 +388,12 @@ for (const [day, { by = null, title = null, sent = null, slots, ...rest }] of Ob
   }
   made[day] = { by, ...(title && { title }), slots: slots.map(({ target, type, seed }) => ({ target, type, seed })) };
 }
+const askedOn = new Map();
+for (const [day, { slots }] of Object.entries(made)) {
+  const asked = slots.map((s) => s.target).sort().join('\n');
+  if (askedOn.has(asked)) fail(`days.json: ${day} asks what ${askedOn.get(asked)} asks`);
+  else askedOn.set(asked, day);
+}
 
 for (const it of items) {
   if (!it.point || !Number.isFinite(it.point[0])) fail(`${it.name}: no point`);

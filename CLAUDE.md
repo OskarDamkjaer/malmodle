@@ -81,11 +81,13 @@ osmium, Java and hosts the sandbox cannot reach.
   day before it sees the place as it was, and the deal carries on.
   A day made by hand, under its date in `learn/days.json`, is played in place
   of the dealt one, credited to `by` and called its `title` when it has one,
-  built from its targets, types and seeds the way the builder builds them, and every deck is dealt anew the day after it, with what was
+  built from its targets, types and seeds the way the builder builds them,
+  with each answer in a place of its own among the choices that day, and every deck is dealt anew the day after it, with what was
   asked lately at the back. It keeps from the map only what it asks itself,
   and the days before it are dealt and built as if it were not there.
   It is a Gästfredag on a Friday and a Gästdag on any other day (`guestDay`).
-  `scripts/lib/made.mjs` checks a date fits it, and `scripts/lib/dates.mjs`
+  `scripts/lib/made.mjs` checks a date fits it and that no other made day
+  asks the same targets, and `scripts/lib/dates.mjs`
   that a date new since `main` is `SOONEST` days ahead or more.
   `learn/played.json` pins the set of every day already played, and a test
   fails if the data or the deal changes one, or dates anything on or before
