@@ -2938,6 +2938,114 @@
    "why": "Hardware and home store: any branch in Malmö counts.",
    "description": "Kedja som säljer varor inom bygg, el, fritid, hem och multimedia. Startade 1918 som cykelverkstad och postorderföretag i Dalarna, med huvudkontor i Insjön.",
    "source": "https://sv.wikipedia.org/wiki/Clas_Ohlson"
+  },
+  {
+   "name": "Kampen – sport- och kulturcenter",
+   "category": "idrott",
+   "osm": [
+    "node/12118885220"
+   ],
+   "lat": 55.58721,
+   "lon": 13.02389,
+   "why": "Urban sports and culture centre in Sofielund, home of the city's climbing centre. Asked for in days #4 and #5 sent in from the builder.",
+   "description": "Urbant sport- och kulturcenter i Sofielunds industriområde, invigt 2017. Här finns klättring, parkour, roller derby och Fritidsbanken, som lånar ut sport- och fritidsutrustning.",
+   "source": "https://www.mynewsdesk.com/se/malmo/pressreleases/nu-inviger-vi-fritidsbanken-och-det-urbana-sport-och-kulturcentret-kampen-2237310"
+  },
+  {
+   "name": "Hästhagens Idrottsplats",
+   "category": "idrott",
+   "osm": [
+    "way/149060037"
+   ],
+   "lat": 55.59763,
+   "lon": 12.98751,
+   "why": "Sports ground by Kronprinsen with its own Wikipedia article. Asked for in days #4 and #5 sent in from the builder.",
+   "description": "Idrottsplats vid Kronprinsen med fotbollsplan, löparbanor och läktare. Den kom till på 1970-talet, där det tidigare låg kolonilotter.",
+   "source": "https://sv.wikipedia.org/wiki/H%C3%A4sthagens_IP"
+  },
+  {
+   "name": "Betaniakyrkan",
+   "category": "kyrka",
+   "osm": [
+    "way/77954072"
+   ],
+   "lat": 55.59929,
+   "lon": 13.01032,
+   "why": "Church from 1894 by S:t Pauli kyrka. Asked for in days #4 and #5 sent in from the builder.",
+   "description": "Kyrka byggd 1894 för Betania Missionsförening, som har funnits i Malmö sedan 1882 och är ansluten till EFS.",
+   "source": "https://www.betaniakyrkan.com/"
+  },
+  {
+   "name": "Nakenbadet",
+   "category": "bad",
+   "osm": [
+    "way/1510992694"
+   ],
+   "lat": 55.59757,
+   "lon": 12.94033,
+   "why": "The city's naturist bath at pier 10 on Ribersborgsstranden. Asked for in days #4 and #5 sent in from the builder.",
+   "description": "Badplatsen vid brygga 10 på Ribersborgsstranden, närmast Lagunens småbåtshamn, för den som vill bada utan kläder. Området är markerat med vitmålade stenar.",
+   "source": "https://malmo.se/Uppleva-och-gora/Bada-och-simma/Strander-och-badplatser/Nakenbad.html"
+  },
+  {
+   "name": "Spårvägstorget",
+   "category": "torg",
+   "osm": [
+    "way/1183773456"
+   ],
+   "lat": 55.60062,
+   "lon": 13.02404,
+   "why": "Square from 2022 in the Spårvägen block of Norra Sorgenfri. Asked for in days #4 and #5 sent in from the builder.",
+   "description": "Torg i kvarteret Spårvägen i Norra Sorgenfri, invigt 2022 när industriområdet byggdes om till bostäder. Intill ligger Bussparken och Båghallarna.",
+   "source": "https://malmo.se/Aktuellt/Artiklar-Malmo-stad/2025-05-07-Kvarteret-Sparvagen-i-Sorgenfri-ar-nu-klart.html"
+  },
+  {
+   "name": "Enskifteshagen",
+   "category": "park",
+   "osm": [
+    "way/82312457"
+   ],
+   "lat": 55.58884,
+   "lon": 13.0237,
+   "why": "Park in Annelund where Malmö Sommarscen plays. Asked for in day #7 sent in from the builder.",
+   "description": "Öppet grönområde mellan Lantmannagatan och Norra Grängesbergsgatan, med stora gräsytor, lekplats och skateramp. En av Malmö Sommarscens spelplatser.",
+   "source": "https://malmo.se/Malmo-Sommarscen/Vara-spelplatser/Enskifteshagen.html"
+  },
+  {
+   "name": "Stadshuset",
+   "category": "byggnad",
+   "osm": [
+    "way/35596150"
+   ],
+   "lat": 55.59762,
+   "lon": 13.00792,
+   "why": "The city hall from 1985 on Föreningsgatan, with its own Wikipedia article. Asked for in day #7 sent in from the builder.",
+   "description": "Uppfört 1983–85 efter ritningar av Sten Samuelson. Rymmer huvuddelen av Malmö stads förvaltning.",
+   "source": "https://sv.wikipedia.org/wiki/Malm%C3%B6_stadshus"
+  },
+  {
+   "name": "Sachi Sushi",
+   "category": "krog",
+   "osm": [
+    "node/444883889"
+   ],
+   "lat": 55.60701,
+   "lon": 13.01828,
+   "why": "Sushi restaurant on Östra Förstadsgatan, on the map since 2009. Asked for in day #7 sent in from the builder.",
+   "description": "Sushirestaurang på Östra Förstadsgatan.",
+   "source": "https://wolt.com/sv/swe/malmo/restaurant/sachi-sushi"
+  },
+  {
+   "name": "Teaterparken",
+   "category": "park",
+   "osm": [
+    "way/37949923"
+   ],
+   "lat": 55.59657,
+   "lon": 12.99519,
+   "why": "The park behind Malmö Opera. Asked for in day #8 sent in from the builder.",
+   "description": "Parken bakom Malmö Opera, där Intiman och teaterns kontorsbyggnader ligger insmugna bakom grönskan.",
+   "source": "https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Platser-och-byggnader/Byggnader-A-O/Stadsteatern-Malmo-Opera.html"
   }
  ]
 }

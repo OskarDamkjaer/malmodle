@@ -29,6 +29,15 @@ descriptions have come, and what has to happen before it goes live.
 - **Buildings (6).** Over 1,000 page views a year, without the stations,
   whose names are also areas. Hippodromen is left out: it is the building
   Malmö Stadsteater plays in.
+- **Asked for by players (14).** Every name a day sent in from the builder
+  asked that the game did not: the areas Ärtholmen, Virentofta, Almhög and
+  Valdemarsro, the street Vattenverksvägen, and nine places from the long
+  list, under its names and OpenStreetMap ids: Kampen – sport- och
+  kulturcenter, Hästhagens Idrottsplats, Betaniakyrkan, Nakenbadet,
+  Spårvägstorget, Enskifteshagen, Stadshuset, Sachi Sushi and Teaterparken.
+  A day can be played once its names are in the game, so they join first, on
+  2026-12-05. Each description is written from its Wikipedia article, the
+  city's page or the place's own, which is its link.
 - **Streets, shops, cafés, restaurants and chains.** `plans/streets.md` and
   `plans/chains.md`.
 
