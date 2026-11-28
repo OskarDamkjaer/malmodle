@@ -19,7 +19,7 @@ node scripts/handmade.mjs review
 
 It reads every row of `handmade` and looks up each sender's played days by
 key, never scanning `results`. It rebuilds the quiz data, suggests a date
-for each waiting day (the first that fits from a week ahead, at least
+for each waiting day (the first Friday that fits from a week ahead, at least
 `APART` days from every other made day), prints them, and writes
 `build/review.json`. Days already in `learn/days.json` (by `sent`) are left
 out.
@@ -59,7 +59,7 @@ node scripts/handmade.mjs take <id>[@YYYY-MM-DD] ...
 `take` pins the played days, checks every date together, and writes
 nothing unless all of them fit and no played day or day before the first
 date changes. If it refuses one, report why and offer another date or
-leaving that day out. A day without a date gets the first that fits.
+leaving that day out. A day without a date gets the first Friday that fits.
 
 Then:
 

@@ -48,7 +48,7 @@ function start() {
 
   const behind = Math.round((Date.now() - Date.parse(`${review.today}T00:00:00`)) / 86400000);
   fill(el('summary'),
-    `${plural(review.days.length, 'dag väntar', 'dagar väntar')} · hämtade ${dayName(review.today)} · första möjliga datum ${dayName(review.soonest)} · förslagen ligger minst ${review.apart} dagar isär från varandra och från dagarna som redan är inlagda.`,
+    `${plural(review.days.length, 'dag väntar', 'dagar väntar')} · hämtade ${dayName(review.today)} · första möjliga datum ${dayName(review.soonest)} · förslagen är fredagar, minst ${review.apart} dagar från varandra och från dagarna som redan är inlagda.`,
     behind >= 1 ? make('span', { className: 'warn', textContent: ` Hämtat för ${plural(behind, 'dag', 'dagar')} sedan: kör review igen.` }) : null,
     review.scheduled.length ? make('br') : null,
     review.scheduled.length ? `Redan inlagda: ${review.scheduled.map((s) => `${dayName(s.day)}, ${s.by ?? 'en spelare'}${s.sent ? ` (#${s.sent})` : ''}`).join(' · ')}` : null,

@@ -4,8 +4,10 @@ export const WAIT = { area: 7, street: 14, place: 14 };
 export const LEAD = 7;
 export const SOONEST = 3;
 export const APART = 7;
+export const WEEKDAY = 5;
 
 const gapOf = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
+export const weekdayOf = (day) => new Date(`${day}T00:00:00Z`).getUTCDay();
 
 export function problems(quiz, day, entry) {
   const found = [];
@@ -29,12 +31,12 @@ export function fitTogether(quiz, picks, check = problems) {
   return found;
 }
 
-export function schedule(quiz, entries, from, { apart = APART, check = problems, tries = 120 } = {}) {
+export function schedule(quiz, entries, from, { apart = APART, weekday = WEEKDAY, check = problems, tries = 120 } = {}) {
   let made = quiz.made ?? {};
   const near = (day) => Object.keys(made).some((other) => Math.abs(gapOf(other, day)) < Math.max(1, apart));
   return entries.map((entry) => {
     for (let n = 0, day = from; n < tries; n++, day = laterKey(day, 1)) {
-      if (near(day) || check({ ...quiz, made }, day, entry).length) continue;
+      if (weekdayOf(day) !== weekday || near(day) || check({ ...quiz, made }, day, entry).length) continue;
       made = { ...made, [day]: entry };
       return day;
     }
