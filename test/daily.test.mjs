@@ -203,9 +203,23 @@ test('a day made by hand is played as it was made, and the days before it keep t
   }
 });
 
-test('a day made by hand is the same on any date, whatever is asked around it', () => {
-  const on = (day) => full(dailySet(items, day, [], { [day]: made[MADE_ON] }));
+const unordered = (set) => set.map((q) => (q.options ? { ...q, options: [...q.options].sort() } : q));
+
+test('a day made by hand asks the same on any date, whatever is asked around it', () => {
+  const on = (day) => full(unordered(dailySet(items, day, [], { [day]: made[MADE_ON] })));
   for (let n = 1; n <= 30; n++) assert.equal(on(laterKey(MADE_ON, n)), on(MADE_ON), laterKey(MADE_ON, n));
+});
+
+test('a day made by hand orders its choices by its date and each target, so the answer does not keep one place', () => {
+  const slots = madeSlots.map((s) => ({ ...s, type: 'identify', seed: 1 }));
+  const places = new Set();
+  for (let n = 0; n < 30; n++) {
+    const day = laterKey(MADE_ON, n);
+    const set = dailySet(items, day, [], { [day]: { by: null, slots } }).filter((q) => q.options);
+    assert.deepEqual(set, dailySet(items, day, [], { [day]: { by: null, slots } }).filter((q) => q.options));
+    for (const q of set) places.add(q.options.indexOf(q.target.name));
+  }
+  assert.ok(places.size >= 4, `the answer took ${places.size} places`);
 });
 
 test('after a day made by hand, its targets wait like any other, and the days around it keep what they show apart', () => {

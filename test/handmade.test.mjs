@@ -212,8 +212,8 @@ test('a day and its suggestions survive a link, and a broken link gives nothing'
   assert.equal(unpack(pack({ slots: [], notes: [{ target: 'Ö', what: 'toString', text: '' }] })), null);
 });
 
-test('the game asks a day made by hand exactly as the builder showed it, and leaves every day before it alone', { skip }, () => {
-  const show = (set) => JSON.stringify(set);
+test('the game asks a day made by hand as the builder showed it, with the choices in its own order, and leaves every day before it alone', { skip }, () => {
+  const show = (set) => JSON.stringify(set.map((q) => (q.options ? { ...q, options: [...q.options].sort() } : q)));
   let compared = 0;
   for (let n = 0; n < 40; n++) {
     const from = laterKey('2027-01-01', n * 3);

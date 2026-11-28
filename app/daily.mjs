@@ -250,13 +250,14 @@ export const NONE = Object.freeze({});
 
 export const makeQuestion = (type, seed, target, items, decoys, avoid) => TYPES[type].build({ target, items, rng: random(seed), avoid, decoys, own: () => random(seed) });
 
-function madeSet(slots, items, decoys) {
+function madeSet(key, slots, items, decoys) {
   const byName = new Map(items.map((it) => [it.name, it]));
   const avoid = new Set(slots.map((s) => s.target));
   return slots.filter((s) => byName.has(s.target)).map(({ target, type, seed }) => {
     const it = byName.get(target);
     const q = makeQuestion(type, seed, it, items, decoys, avoid);
     const built = q ? { type, ...q } : { type: 'point', ...TYPES.point.build({ target: it, own: () => random(seed) }) };
+    if (built.options) built.options = shuffle(built.options, random(hash(`${key}:${target}`)));
     for (const shown of [built.from, built.to]) if (shown) avoid.add(shown.name);
     return built;
   });
@@ -369,7 +370,7 @@ export function dailySet(items, key, decoys = [], made = NONE) {
   const { on, pool, ahead, madeOn } = dealerFor(items, made);
   const { slots, targets } = on(key);
   const today = decoysOn(decoys, key);
-  if (madeOn(key)) return madeSet(madeOn(key).slots, pool(key), today);
+  if (madeOn(key)) return madeSet(key, madeOn(key).slots, pool(key), today);
   const avoid = names(targets);
   if (key >= SPACED) {
     for (let n = 1; n <= SHOWN_GAP; n++) {
