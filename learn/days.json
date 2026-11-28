@@ -1,3 +1,148 @@
 {
-  "days": {}
+  "days": {
+    "2026-12-11": {
+      "by": "Xtremeswede",
+      "sent": 1,
+      "slots": [
+        { "target": "Eriksfält", "type": "point", "seed": 1 },
+        { "target": "Fridhemstorget", "type": "point", "seed": 1 },
+        { "target": "Annetorpsvägen", "type": "point", "seed": 1 },
+        { "target": "Ava Vinbar", "type": "identify", "seed": 1 },
+        { "target": "Styrmansbron", "type": "point", "seed": 1 },
+        { "target": "Segevång", "type": "identify", "seed": 1 },
+        { "target": "Ärtholmsvägen", "type": "point", "seed": 1 },
+        { "target": "Stenkällan", "type": "point", "seed": 1 },
+        { "target": "Östra Rönneholmsvägen", "type": "identify", "seed": 1 },
+        { "target": "Kristineberg", "type": "identify", "seed": 1 }
+      ]
+    },
+    "2026-12-18": {
+      "by": "Ola",
+      "sent": 2,
+      "slots": [
+        { "target": "Kulladal", "type": "point", "seed": 1 },
+        { "target": "Suellsbron", "type": "point", "seed": 1 },
+        { "target": "Ärtholmen", "type": "point", "seed": 1 },
+        { "target": "Drottningtorget", "type": "point", "seed": 1 },
+        { "target": "Fiskehoddorna", "type": "point", "seed": 1 },
+        { "target": "Lantmannagatan", "type": "identify", "seed": 1 },
+        { "target": "Slottsmöllebron", "type": "identify", "seed": 1 },
+        { "target": "Fridhem", "type": "point", "seed": 1 },
+        { "target": "Virentofta", "type": "point", "seed": 1 },
+        { "target": "Bergsgatan", "type": "point", "seed": 1 }
+      ]
+    },
+    "2026-12-25": {
+      "by": "Hannes",
+      "sent": 3,
+      "slots": [
+        { "target": "Kulladal", "type": "point", "seed": 1 },
+        { "target": "Turbinbron", "type": "point", "seed": 1 },
+        { "target": "Blå Båten", "type": "identify", "seed": 1 },
+        { "target": "Tessins väg", "type": "point", "seed": 1 },
+        { "target": "Panora", "type": "point", "seed": 1 },
+        { "target": "Dalaplan", "type": "point", "seed": 1 },
+        { "target": "Limhamns Fiskrökeri", "type": "point", "seed": 1 },
+        { "target": "Kungsparken", "type": "point", "seed": 1 },
+        { "target": "Mellanheden", "type": "point", "seed": 1 },
+        { "target": "Eriksfält", "type": "identify", "seed": 1 }
+      ]
+    },
+    "2027-01-01": {
+      "by": "André",
+      "sent": 4,
+      "slots": [
+        { "target": "Kampen – sport- och kulturcenter", "type": "identify", "seed": 1 },
+        { "target": "Almhög", "type": "point", "seed": 1 },
+        { "target": "Tygelsjö by", "type": "point", "seed": 1 },
+        { "target": "Mitt Möllan", "type": "point", "seed": 1 },
+        { "target": "Hästhagens Idrottsplats", "type": "point", "seed": 1 },
+        { "target": "Södra Sallerup", "type": "point", "seed": 1 },
+        { "target": "Betaniakyrkan", "type": "point", "seed": 1 },
+        { "target": "Industrigatan", "type": "point", "seed": 1 },
+        { "target": "Nakenbadet", "type": "point", "seed": 1 },
+        { "target": "Spårvägstorget", "type": "point", "seed": 1 }
+      ]
+    },
+    "2027-01-08": {
+      "by": "Jonna Restin Peace",
+      "sent": 6,
+      "slots": [
+        { "target": "Östra Sorgenfri", "type": "point", "seed": 1 },
+        { "target": "Kalendegatan", "type": "point", "seed": 1 },
+        { "target": "Aster", "type": "identify", "seed": 1 },
+        { "target": "Bulltofta", "type": "identify", "seed": 1 },
+        { "target": "Geijersgatan", "type": "identify", "seed": 1 },
+        { "target": "Blå Båten", "type": "point", "seed": 1 },
+        { "target": "Gustavino", "type": "identify", "seed": 1 },
+        { "target": "Kaffebaren på Möllan", "type": "point", "seed": 1 },
+        { "target": "Simrishamnsgatan", "type": "route", "seed": 1 },
+        { "target": "Kryddgården", "type": "point", "seed": 1 }
+      ]
+    },
+    "2027-01-15": {
+      "by": "André",
+      "sent": 5,
+      "slots": [
+        { "target": "Kampen – sport- och kulturcenter", "type": "identify", "seed": 1 },
+        { "target": "Almhög", "type": "point", "seed": 1 },
+        { "target": "Tygelsjö by", "type": "point", "seed": 1 },
+        { "target": "Mitt Möllan", "type": "point", "seed": 1 },
+        { "target": "Hästhagens Idrottsplats", "type": "point", "seed": 1 },
+        { "target": "Södra Sallerup", "type": "point", "seed": 1 },
+        { "target": "Betaniakyrkan", "type": "point", "seed": 1 },
+        { "target": "Industrigatan", "type": "point", "seed": 1 },
+        { "target": "Nakenbadet", "type": "point", "seed": 1 },
+        { "target": "Spårvägstorget", "type": "point", "seed": 1 }
+      ]
+    },
+    "2027-01-22": {
+      "by": null,
+      "sent": 7,
+      "slots": [
+        { "target": "Vattenverksvägen", "type": "point", "seed": 1 },
+        { "target": "Enskifteshagen", "type": "point", "seed": 1 },
+        { "target": "Paddy's", "type": "identify", "seed": 1 },
+        { "target": "Stadshuset", "type": "point", "seed": 1 },
+        { "target": "Sachi Sushi", "type": "identify", "seed": 1 },
+        { "target": "Celsiusgatan", "type": "point", "seed": 1 },
+        { "target": "Djäknegatan", "type": "point", "seed": 1 },
+        { "target": "Exercisgatan", "type": "point", "seed": 1 },
+        { "target": "Södra Sofielund", "type": "point", "seed": 1 },
+        { "target": "Valdemarsro", "type": "point", "seed": 1 }
+      ]
+    },
+    "2027-01-29": {
+      "by": null,
+      "sent": 8,
+      "slots": [
+        { "target": "Segevång", "type": "point", "seed": 1 },
+        { "target": "Mutantur", "type": "point", "seed": 1 },
+        { "target": "Malmö Idrottsplats", "type": "point", "seed": 1 },
+        { "target": "Bulltofta rekreationsområde", "type": "point", "seed": 1 },
+        { "target": "Aster", "type": "point", "seed": 1 },
+        { "target": "Neptunibron", "type": "point", "seed": 1 },
+        { "target": "Fiskehoddorna", "type": "point", "seed": 1 },
+        { "target": "Teaterparken", "type": "point", "seed": 1 },
+        { "target": "Mässingshornet", "type": "point", "seed": 1 },
+        { "target": "Limhamns kalkbrott", "type": "point", "seed": 1 }
+      ]
+    },
+    "2027-02-05": {
+      "by": "E hilter",
+      "sent": 9,
+      "slots": [
+        { "target": "Tygelsjö by", "type": "point", "seed": 1 },
+        { "target": "Håkanstorp", "type": "point", "seed": 1 },
+        { "target": "Älvsborgsbron", "type": "point", "seed": 1 },
+        { "target": "Family Pub", "type": "point", "seed": 1 },
+        { "target": "Per Albin Hanssons väg", "type": "point", "seed": 1 },
+        { "target": "Gamla Limhamn", "type": "point", "seed": 1 },
+        { "target": "Lönngatan", "type": "point", "seed": 1 },
+        { "target": "Inkonst", "type": "point", "seed": 1 },
+        { "target": "Saltimporten", "type": "point", "seed": 1 },
+        { "target": "Blå Båten", "type": "point", "seed": 1 }
+      ]
+    }
+  }
 }
