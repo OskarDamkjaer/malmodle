@@ -459,11 +459,11 @@ test('a day can be built by hand, changed, undone, kept over a reload, and take 
     assert.match(await page.locator('#questions li:nth-child(3) .edit').textContent(), /ställen?a? räknas/);
     assert.ok(await page.locator('#questions li:nth-child(3) .types button:has-text("Vad ligger här?")').isDisabled());
     assert.ok(await page.evaluate(() => window.map.getSource('atlas-points').serialize().data.features.filter((f) => f.properties.name === 'Espresso House').length > 1));
-    await page.fill('#search', 'Valdemarsro');
+    await page.fill('#search', 'Riseberga');
     assert.equal(await page.locator('#results li').first().locator('.tag').textContent(), 'inte i spelet än');
     await page.keyboard.press('Enter');
     assert.deepEqual(await page.locator('#questions li:nth-child(4) .flag').allTextContents(), ['finns inte i spelet än']);
-    assert.match(await page.locator('#notes li').first().textContent(), /Ta med i spelet · Valdemarsro · fråga 4/);
+    assert.match(await page.locator('#notes li').first().textContent(), /Ta med i spelet · Riseberga · fråga 4/);
     assert.ok(await page.locator('#sendopen').isDisabled());
     assert.equal(await page.locator('#sendopen').textContent(), 'Skicka in · 4/10');
     assert.deepEqual(errors, []);
