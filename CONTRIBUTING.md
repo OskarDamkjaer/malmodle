@@ -44,26 +44,37 @@ looking wrong. A finished day of ten is sent to the Worker with the
 suggestions, the builder's name if they like, and the player id the game
 keeps in the same browser. The Worker stores it in the `handmade` table under
 the same player key as that browser's results, and a day that is no good is
-deleted there. The builder's data is
+left there and declined in `learn/declined.json`. The builder's data is
 `node scripts/build-quiz.mjs --all --out build/data/quiz-all.json`, which the
 site build needs too. The builder stays out of the offline worker and out of
 the name of the game's code cache, so changing it never sends players a new
 version.
 
 ```
-node scripts/handmade.mjs                   # the days sent in, newest first, each with a link to it in the builder
-node scripts/handmade.mjs take 12           # play day 12 on the first date from a week ahead that fits
-node scripts/handmade.mjs take 12 2027-01-05  # or on that date, if it fits
-node scripts/handmade.mjs --db file.db      # the same from serve.mjs's database instead of D1
+node scripts/handmade.mjs review            # the days waiting, each with a suggested date, into build/review.json
+node scripts/handmade.mjs take 12 14        # play days 12 and 14 on the first dates that fit
+node scripts/handmade.mjs take 12@2027-01-05  # or on that date, if it fits
+node scripts/handmade.mjs decline 13        # leave day 13 out from now on
+node scripts/handmade.mjs review --db file.db  # the same from serve.mjs's database instead of D1
 ```
 
 Reading D1 goes through `wrangler`, so it needs a login to the Cloudflare
 account. A day can be played once its targets are all in `core.json` by that
-date. A date fits when the day builds with the types it was made with, none of
-its targets has been asked within a week (an area) or two (a street or a
-place) before it, and the game asks each question as the builder showed it.
-What it shows on the map may be asked on the days around it. `take` writes it into `learn/days.json` under
-that date with the builder's name, and the game plays it in place of the day
+date. A date fits when no other made day has it, the day builds with the
+types it was made with, and the game asks each question as the builder
+showed it. What it asks or shows may also be asked on the days around it.
+
+`review` suggests a date for each waiting day, in the order they were sent,
+each at least a week from every other made day, and writes them with
+everything else about the day to `build/review.json`, which
+`/dev/review.html` on the local server shows. There each day is taken,
+left waiting or declined, and the page gives the commands. Nothing writes
+to D1: a declined day's number goes into `learn/declined.json`. `take` checks all
+its days together the way `join.mjs` checks a batch: it pins the days
+played, and writes nothing if a played day or a day before the first date
+would change. It writes each day into `learn/days.json` under
+its date with the builder's name and its number as `sent`, so `review`
+leaves it out from then on, as it does the declined, and the game plays it in place of the day
 it would deal, says on the end screen who made it, and deals every deck anew
 from the next day, with what was asked lately at the back. The first question
 and the end screen name who made it. Commit it a week

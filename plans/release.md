@@ -107,8 +107,6 @@ not fail on its own dates.
 - **Refreshing the map data.** A scheduled workflow that rebuilds from fresh
   OpenStreetMap data, runs the tests against the pin and opens a pull
   request. Shapes move and scores with them; sets do not.
-- **`handmade.mjs take`.** It already refuses a date closer than `LEAD`. It
-  could call the pin first, as `join.mjs` does.
 
 ## The first use
 

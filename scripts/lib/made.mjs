@@ -1,42 +1,45 @@
-import { GROUP, dailySet, laterKey } from '../../app/daily.mjs';
+import { dailySet, laterKey } from '../../app/daily.mjs';
 
 export const WAIT = { area: 7, street: 14, place: 14 };
 export const LEAD = 7;
 export const SOONEST = 3;
-const AFTER = 60;
+export const APART = 7;
 
 const gapOf = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
 
 export function problems(quiz, day, entry) {
-  const made = { ...(quiz.made ?? {}), [day]: entry };
   const found = [];
   if (quiz.made?.[day]) found.push(`${day} already has a day made by hand`);
-  const set = dailySet(quiz.items, day, quiz.decoys, made);
+  const set = dailySet(quiz.items, day, quiz.decoys, { ...(quiz.made ?? {}), [day]: entry });
   for (const slot of entry.slots) {
     const q = set.find((x) => x.target.name === slot.target);
     if (!q) found.push(`${slot.target} is not in the game on ${day}`);
     else if (q.type !== slot.type) found.push(`${slot.target} cannot be asked as ${slot.type} on ${day}`);
   }
-  const days = [];
-  for (let key = laterKey(day, -Math.max(...Object.values(WAIT))); key <= laterKey(day, AFTER); key = laterKey(key, 1)) {
-    days.push([key, dailySet(quiz.items, key, quiz.decoys, made)]);
-  }
-  const last = new Map();
-  for (const [key, questions] of days) {
-    for (const q of questions) {
-      const before = last.get(q.target.name);
-      if (before && gapOf(before, key) < WAIT[GROUP[q.target.kind]]) found.push(`${q.target.name} is asked on ${before} and again on ${key}`);
-      last.set(q.target.name, key);
-    }
-  }
-  return [...new Set(found)];
+  return found;
 }
 
-export function firstFit(quiz, entry, from, tries = 120) {
-  for (let n = 0, day = from; n < tries; n++, day = laterKey(day, 1)) {
-    if (!quiz.made?.[day] && !problems(quiz, day, entry).length) return day;
+export function fitTogether(quiz, picks, check = problems) {
+  let made = quiz.made ?? {};
+  const found = [];
+  for (const { day, entry, label } of [...picks].sort((a, b) => (a.day < b.day ? -1 : a.day > b.day ? 1 : 0))) {
+    for (const problem of check({ ...quiz, made }, day, entry)) found.push(`${label}: ${problem}`);
+    made = { ...made, [day]: entry };
   }
-  return null;
+  return found;
+}
+
+export function schedule(quiz, entries, from, { apart = APART, check = problems, tries = 120 } = {}) {
+  let made = quiz.made ?? {};
+  const near = (day) => Object.keys(made).some((other) => Math.abs(gapOf(other, day)) < Math.max(1, apart));
+  return entries.map((entry) => {
+    for (let n = 0, day = from; n < tries; n++, day = laterKey(day, 1)) {
+      if (near(day) || check({ ...quiz, made }, day, entry).length) continue;
+      made = { ...made, [day]: entry };
+      return day;
+    }
+    return null;
+  });
 }
 
 export function written(doc) {

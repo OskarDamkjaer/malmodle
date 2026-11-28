@@ -15,6 +15,7 @@ const everything = args.includes('--all');
 const coreFile = arg('--core', 'learn/core.json');
 const pendingFile = arg('--pending', 'learn/pending.json');
 const placesFile = arg('--places', 'places/places.json');
+const daysFile = arg('--days', 'learn/days.json');
 
 const STREET_ZOOM = 14;
 const STREET_LINK_M = 500;
@@ -35,7 +36,7 @@ const [districts, placesDoc, bridgesDoc, streetsDoc, aboutDoc, streetIndex, core
   json('places/longlist.json'),
   json('config/bbox.json'),
   json('learn/regions.json'),
-  json('learn/days.json'),
+  json(daysFile),
 ]);
 
 const problems = [];
@@ -363,11 +364,15 @@ for (const [day, names] of Object.entries(coreDoc.since ?? {})) {
 const BY_MOST = 80;
 const UNSEEN = /[\u0000-\u001f\u007f-\u009f\u061c\u200b-\u200f\u2028-\u202e\u2060-\u2069\ufeff]/;
 const made = {};
-for (const [day, { by = null, slots, ...rest }] of Object.entries(daysDoc.days)) {
+const sentOn = new Map();
+for (const [day, { by = null, sent = null, slots, ...rest }] of Object.entries(daysDoc.days)) {
   const where = `days.json: ${day}`;
   if (!DATE.test(day)) fail(`${where} is not a date`);
   for (const field of Object.keys(rest)) fail(`${where} has an unknown field ${field}`);
   if (by !== null && (typeof by !== 'string' || !by.trim() || by.length > BY_MOST || UNSEEN.test(by))) fail(`${where} has no usable name to credit`);
+  if (sent !== null && !(Number.isSafeInteger(sent) && sent > 0)) fail(`${where} has no usable number for the day sent in`);
+  else if (sent !== null && sentOn.has(sent)) fail(`${where} is day ${sent} sent in, which is also played on ${sentOn.get(sent)}`);
+  if (sent !== null) sentOn.set(sent, day);
   if (!Array.isArray(slots) || slots.length !== SET_SIZE) { fail(`${where} needs ${SET_SIZE} questions`); continue; }
   const seen = new Set();
   for (const { target, type, seed } of slots) {

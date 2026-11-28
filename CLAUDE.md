@@ -14,8 +14,9 @@ node scripts/build-quiz.mjs --all --out build/data/quiz-all.json  # and everythi
 node scripts/serve.mjs                 # http://127.0.0.1:8080, with the API
 node scripts/serve.mjs --fake 200      # and 200 made-up players today
 node scripts/serve.mjs --trickle 10    # and one more every 10 seconds
-node scripts/handmade.mjs              # the days sent in from the builder, from D1
-node scripts/handmade.mjs take 12      # play one on the first date that fits
+node scripts/handmade.mjs review       # the days sent in from the builder, from D1, each with a date that fits
+node scripts/handmade.mjs take 12@2026-12-05 14  # play them, on that date or the first that fits
+node scripts/handmade.mjs decline 13   # leave one out from now on, in learn/declined.json
 node scripts/played.mjs                # pin the days played so far in learn/played.json
 node scripts/join.mjs areas --dry      # what joining the waiting areas a week from now would do
 node scripts/join.mjs areas            # and do it: pending.json to core.json, under a date in since
@@ -26,7 +27,11 @@ node scripts/check-dates.mjs           # the Check's test that no new date is to
 `/dev/crowd.html` on the local server shows the comparison card for many
 made-up crowds, `/dev/week.html` the coming days' sets on the map, with
 `?from=` and `?days=`, `/dev/frame.html` the game at a phone, tablet or
-desktop size, with a button that starts the day over. `/bygg/` is the day
+desktop size, with a button that starts the day over, `/dev/review.html`
+the days sent in, from `build/review.json`, with a date for each and the
+commands that take or decline the ones chosen. `/dev/week.html` tries such a
+day with `?dag=<date>.<link code>`. The `review-days` skill in
+`.claude/skills/` walks through a review to a pull request. `/bygg/` is the day
 builder, also on the live site, linked from the end screen once a player has
 unlocked it: a day made by hand on
 a map of everything in the data, core or not, sent in with suggested changes
