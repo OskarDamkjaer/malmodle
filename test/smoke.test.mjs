@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync, statSync, utimesSync } from 'node:fs';
 import { PALETTE } from '../app/palette.mjs';
-import { SAVE_KEY, dailySet, dateKey } from '../app/daily.mjs';
+import { SAVE_KEY, dailySet, dateKey, guestDay, laterKey } from '../app/daily.mjs';
 import { TYPES } from '../app/questions.mjs';
 import { unlockedText } from '../app/crowd.mjs';
 import { chromium, launch } from './browser.mjs';
@@ -384,11 +384,10 @@ test('the palette is applied to the basemap', { skip }, async () => {
   await context.close();
 });
 
-test('a day made by hand names its maker, and a full score unlocks the day builder', { skip }, async () => {
-  const quiz = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
+const slotsOn = (quiz, day) => dailySet(quiz.items, day, quiz.decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: i + 1 }));
+
+async function openMade(quiz, made) {
   const key = dateKey();
-  const slots = dailySet(quiz.items, key, quiz.decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: i + 1 }));
-  const made = { [key]: { by: 'Kim', slots } };
   const set = dailySet(quiz.items, key, quiz.decoys, made);
   const finished = (score) => JSON.stringify({
     version: 1, key, targets: set.map((q) => q.target.name),
@@ -403,19 +402,66 @@ test('a day made by hand names its maker, and a full score unlocks the day build
     await page.reload();
     await page.waitForSelector('#end:not([hidden])', { timeout: 60000 });
   };
+  const tinted = () => page.evaluate(() => document.body.hasAttribute('data-made'));
+  await page.goto(URL);
+  await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
+  await page.waitForSelector('#question:not([hidden])');
+  return { page, context, end, tinted };
+}
+
+test('a day made by hand is tinted throughout, names itself and its maker, and a full score unlocks the day builder', { skip }, async () => {
+  const quiz = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
+  const key = dateKey();
+  const { page, context, end, tinted } = await openMade(quiz, { [key]: { by: 'Kim', slots: slotsOn(quiz, key) } });
+  const paper = () => page.$eval('#question', (q) => getComputedStyle(q).backgroundColor);
   try {
-    await page.goto(URL);
-    await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
-    assert.equal(await page.textContent('#byline'), 'Dagens frågor av Kim');
+    assert.ok(await tinted());
+    assert.equal(await page.textContent('#byline'), `${guestDay(key)} · Dagens frågor av Kim`);
     assert.ok(await page.locator('#byline').isVisible());
+    const made = await paper();
+    await playThrough(page, { width: 390, height: 844 }, 1);
+    await page.waitForSelector('#question:not([hidden])');
+    assert.ok(await tinted());
+    assert.ok(await page.locator('#byline').isHidden());
     await end(0);
-    assert.equal(await page.textContent('#endby'), 'Dagens frågor av Kim.');
+    assert.ok(await tinted());
+    assert.equal(await page.textContent('#endby'), `${guestDay(key)} · Dagens frågor av Kim.`);
+    assert.ok(await page.locator('#endby').isVisible());
+    assert.ok(await page.locator('#endnext').isHidden());
     assert.ok(await page.locator('#builder').isHidden());
     await end(100);
     assert.ok(await page.locator('#builder').isVisible());
     assert.equal(await page.textContent('#builderwhy'), unlockedText('perfect'));
     assert.equal(await page.getAttribute('#builderlink', 'href'), '/bygg/');
     assert.ok(await page.locator('#builder .phone').isVisible());
+    await page.click('#practise');
+    await page.locator('#kinds button').first().click();
+    await page.waitForSelector('#question:not([hidden])');
+    assert.ok(!await tinted());
+    assert.ok(await page.locator('#byline').isHidden());
+    assert.notEqual(await paper(), made);
+  } finally {
+    await context.close();
+  }
+});
+
+test('an ordinary day is not tinted, and its end screen says a Gästfredag is coming', { skip }, async () => {
+  const quiz = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
+  const key = dateKey();
+  const days = [1, 2, 3, 4, 5, 6, 7].find((n) => guestDay(laterKey(key, n)) === 'Gästfredag');
+  const friday = laterKey(key, days);
+  const { page, context, end, tinted } = await openMade(quiz, { [friday]: { by: 'Kim', slots: slotsOn(quiz, friday) } });
+  try {
+    assert.ok(!await tinted());
+    assert.ok(await page.locator('#byline').isHidden());
+    await end(0);
+    assert.ok(!await tinted());
+    assert.ok(await page.locator('#endby').isHidden());
+    if (days === 7) assert.ok(await page.locator('#endnext').isHidden());
+    else {
+      assert.equal(await page.textContent('#endnext'), `${days === 1 ? 'I morgon' : 'På fredag'} är det Gästfredag, med frågor av Kim.`);
+      assert.ok(await page.locator('#endnext').isVisible());
+    }
   } finally {
     await context.close();
   }

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SHOWN_GAP, SOON_DAYS, SOON_SHARE, SPACED, SPLITS, dailySet, decoysOn, lasting, setId, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SHOWN_GAP, SOON_DAYS, SOON_SHARE, SPACED, SPLITS, comingGuest, dailySet, decoysOn, guestDay, lasting, setId, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -218,6 +218,23 @@ test('after a day made by hand, its targets wait like any other, and the days ar
     }
   }
   checkShown(items, made, MADE_ON);
+});
+
+test('a day made by hand is a Gästfredag on a Friday and a Gästdag on any other day', () => {
+  assert.equal(guestDay('2026-12-04'), 'Gästfredag');
+  assert.equal(guestDay('2027-01-01'), 'Gästfredag');
+  for (let n = 1; n < 7; n++) assert.equal(guestDay(laterKey('2026-12-04', n)), 'Gästdag');
+});
+
+test('the days before a Friday made by hand know it is coming, and how soon', () => {
+  const friday = { '2026-12-04': { by: 'Anna', slots: [] } };
+  assert.deepEqual(comingGuest('2026-11-28', friday), { days: 6, by: 'Anna', slots: [] });
+  assert.equal(comingGuest('2026-12-03', friday).days, 1);
+  assert.equal(comingGuest('2026-12-04', friday), null);
+  assert.equal(comingGuest('2026-11-27', friday), null);
+  assert.equal(comingGuest('2026-12-05', friday), null);
+  assert.equal(comingGuest('2026-11-28', { '2026-12-01': { by: 'Anna', slots: [] } }), null);
+  assert.equal(comingGuest('2026-11-28'), null);
 });
 
 test('what a question names on the map is not asked days before or after, also across a day items join', () => {

@@ -84,6 +84,8 @@ osmium, Java and hosts the sandbox cannot reach.
   builds them, and every deck is dealt anew the day after it, with what was
   asked lately at the back. It keeps from the map only what it asks itself,
   and the days before it are dealt and built as if it were not there.
+  It is a Gästfredag on a Friday and a Gästdag on any other day (`guestDay`),
+  and `comingGuest` finds one on the Friday ahead.
   `scripts/lib/made.mjs` checks a date fits it, and `scripts/lib/dates.mjs`
   that a date new since `main` is `SOONEST` days ahead or more.
   `learn/played.json` pins the set of every day already played, and a test
@@ -100,7 +102,8 @@ osmium, Java and hosts the sandbox cannot reach.
 - `app/map.js`: map layers, hiding labels, framing, and the pin a guess is
   set with.
 - `app/palette.mjs`: the basemap palette and the answer colours, applied at
-  load. The UI colours are in `app.css`. `test/palette.test.mjs` checks that
+  load. The UI colours are in `app.css`, with the tint of a day made by hand
+  (`--guest`). `test/palette.test.mjs` checks that
   every coloured basemap layer is recoloured.
 - `app/app.js`: boot and the screens.
 - `app/sw.js`: the offline worker. Each version answers only from its own

@@ -1,5 +1,5 @@
 import { Map, AttributionControl, NavigationControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, inPlay, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, comingGuest, dailySet, dateKey, guestDay, inPlay, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { BUILDER_KEY, POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize, unlockedText, unlocks } from './crowd.mjs';
 import { TYPES, answerOf, formatDistance, readMore, several, MAX_SCORE } from './questions.mjs';
@@ -276,6 +276,7 @@ function play(questions, answered = []) {
   hide('end', 'result', 'info');
   delete document.body.dataset.ended;
   delete document.body.dataset.mapview;
+  document.body.toggleAttribute('data-made', Boolean(!practicing && made?.[key]));
   el('endmap').textContent = 'Visa på kartan';
   hideLabels();
   showScored([]);
@@ -292,9 +293,7 @@ function ask() {
   renderDots();
   el('detail').textContent = detail ?? '';
   el('prompt').textContent = title;
-  const maker = index === 0 && !practicing && made?.[key];
-  el('byline').hidden = !maker;
-  if (maker) el('byline').textContent = credit(maker);
+  byline(el('byline'), index === 0 && !practicing && made?.[key]);
   hide('result', 'info', 'guess');
   delete document.body.dataset.answered;
   reveal('question');
@@ -622,8 +621,14 @@ function finish() {
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
   const maker = !practicing && made?.[key];
-  el('endby').hidden = !maker;
-  if (maker) el('endby').textContent = `${credit(maker)}.`;
+  byline(el('endby'), maker);
+  const coming = !practicing && !maker && comingGuest(key, made);
+  el('endnext').hidden = !coming;
+  if (coming) {
+    const [when, , who] = el('endnext').children;
+    when.textContent = coming.days === 1 ? 'I morgon' : 'På fredag';
+    who.textContent = makerName(coming);
+  }
   if (!practicing) unlock(unlocks({ total }));
   renderBuilder();
   renderSquares();
@@ -642,7 +647,15 @@ function finish() {
   el(practicing ? 'again' : 'share').focus({ preventScroll: true });
 }
 
-const credit = (maker) => `Dagens frågor av ${maker.by ?? 'en spelare'}`;
+const makerName = (maker) => maker.by ?? 'en spelare';
+
+function byline(node, maker) {
+  node.hidden = !maker;
+  if (!maker) return;
+  const [day, who] = node.children;
+  day.textContent = guestDay(key);
+  who.textContent = makerName(maker);
+}
 
 function unlocked() {
   try { return JSON.parse(localStorage.getItem(BUILDER_KEY)); } catch { return null; }

@@ -422,6 +422,17 @@ export function laterKey(key, days) {
   return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
 }
 
+const FRIDAY = 5;
+const weekday = (key) => new Date(`${key}T00:00Z`).getUTCDay();
+
+export const guestDay = (key) => (weekday(key) === FRIDAY ? 'Gästfredag' : 'Gästdag');
+
+export function comingGuest(key, made = NONE) {
+  const days = (FRIDAY - weekday(key) + 7) % 7;
+  const maker = days && made[laterKey(key, days)];
+  return maker ? { days, ...maker } : null;
+}
+
 export function upcoming(items, key, days = SOON_DAYS, made = NONE) {
   const soon = new Map();
   for (let n = days; n >= 1; n--) for (const it of targetsOn(items, laterKey(key, n), made)) soon.set(it.name, n);

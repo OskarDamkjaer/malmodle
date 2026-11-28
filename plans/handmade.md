@@ -127,12 +127,21 @@ a day that was sent in and gives it a date.
   from its target, type and seed the way the builder does, keeping from the
   map only what the day itself asks, so it is the day its maker saw whatever
   the days around it ask or show.
-  "Dagens frågor av …" hangs under the first question's card, with the name
-  the sender gave or "en spelare" without one, and the end screen says it
-  again. The days before it are dealt and built as if it were not there,
+  The days before it are dealt and built as if it were not there,
   and every deck is dealt anew from the day after, with what was asked lately
   at the back, so its targets wait like any other and the dealt targets it
   replaced come soon.
+- **A Gästfredag.** Made days go on Fridays, one a week, so players learn to
+  expect one under one name. The day is tinted blue (`--guest` and
+  `--guest-paper` in `app.css`), apart from the red that means wrong and
+  from the answer colours: the question card's paper and shadow on all ten
+  questions, and the end screen. "Gästfredag · Dagens frågor av …" hangs
+  under the first question's card, with the name the sender gave or "en
+  spelare" without one, and the end screen says it again. A made day on
+  another weekday is a Gästdag, so nothing says Friday when it is not one.
+  A practice round on the day is not tinted. The end screen of the six days
+  before a made Friday says "På fredag är det Gästfredag, med frågor av …",
+  or "I morgon" on the Thursday.
 - **A date has to fit.** Its targets must all be in the game by then, a place
   picked from the long list counting once the game has one of that name
   within 50 metres of it, every
