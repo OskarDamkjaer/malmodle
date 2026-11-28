@@ -44,6 +44,8 @@ async function query(sql) {
 }
 
 const parse = (row) => ({ ...row, slots: JSON.parse(row.slots), notes: JSON.parse(row.notes) });
+const senders = async () => new Map((await query('SELECT id, player FROM handmade')).map((row) => [row.id, row.player]));
+const whoIn = (doc, sender) => (entry, day) => sender.get(entry.sent ?? doc.days[day]?.sent) ?? null;
 const sentIn = async (where = '') => (await query(`SELECT id, at, player, name, remark, slots, notes FROM handmade ${where} ORDER BY id`)).map(parse);
 
 async function playedBy(players) {
@@ -100,7 +102,8 @@ async function review() {
   const rows = all.filter((row) => !declined.has(row.id) && (!taken.has(row.id) || coming(row)));
   const played = await playedBy(rows.map((row) => row.player));
   const ready = rows.filter((row) => !taken.has(row.id) && !blockers(quiz, row).length);
-  const dates = schedule(quiz, ready.map(entryOf), soonest, { check: fits });
+  const who = whoIn(doc, new Map(all.map((row) => [row.id, row.player])));
+  const dates = schedule(quiz, ready.map(entryOf), soonest, { check: fits, who });
   const dateOf = new Map([...ready.map((row, n) => [row.id, dates[n]]), ...rows.filter(coming).map((row) => [row.id, taken.get(row.id)])]);
 
   const days = rows.map((row) => {
@@ -185,7 +188,7 @@ async function take() {
     if (unfit.length) throw new Error(unfit.join('\n'));
     const undated = picks.filter((p) => !p.day);
     const withDated = { ...before, made: { ...(before.made ?? {}), ...Object.fromEntries(dated.map((d) => [d.day, d.entry])) } };
-    const dates = schedule(withDated, undated.map((p) => entryOf(rows.get(p.id))), soonest, { check: fits });
+    const dates = schedule(withDated, undated.map((p) => entryOf(rows.get(p.id))), soonest, { check: fits, who: whoIn(doc, await senders()) });
     const lost = undated.filter((p, n) => !dates[n]);
     if (lost.length) throw new Error(`no date in the next four months fits ${lost.map((p) => `#${p.id}`).join(', ')}; try one by hand to see why`);
     const placed = [...dated, ...undated.map((p, n) => ({ day: dates[n], entry: entryOf(rows.get(p.id)), label: `#${p.id}` }))]

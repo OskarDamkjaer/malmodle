@@ -66,7 +66,8 @@ types it was made with, and the game asks each question as the builder
 showed it. What it asks or shows may also be asked on the days around it.
 
 `review` suggests a Friday for each waiting day, in the order they were sent,
-each at least a week from every other made day, and writes them with
+each at least a week from every other made day and not next to another by
+the same sender while someone else's waits, and writes them with
 everything else about the day to `build/review.json`, which
 `/dev/review.html` on the local server shows, to look over. A day already
 scheduled ahead is there too, as it stands in `learn/days.json`, where its

@@ -51,7 +51,8 @@ node scripts/handmade.mjs take all
 ```
 
 Each day gets the first free Friday that fits, a week ahead or more, in
-the order they were sent. A day that cannot be played yet is left waiting
+the order they were sent, except that one sender does not get two Fridays
+in a row while someone else's day waits. A day that cannot be played yet is left waiting
 and named. `take` pins the played days and writes nothing if a played day
 or a day before the first date would change.
 
