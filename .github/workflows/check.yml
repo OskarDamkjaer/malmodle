@@ -54,14 +54,19 @@ jobs:
       - name: Install the tools
         run: npm ci --no-fund --no-audit
 
+      - name: Install Firefox and WebKit
+        run: npx playwright-core install --with-deps firefox webkit
+
       - name: Test
         shell: bash
         run: |
-          node --test --test-reporter=tap 'test/*.test.mjs' | tee test.log
+          xvfb-run -a node --test --test-reporter=tap 'test/*.test.mjs' | tee test.log
           if grep '# SKIP' test.log; then
             echo '::error::tests skipped'
             exit 1
           fi
+        env:
+          HEADED: '1'
 
       - name: Assemble the site
         run: node scripts/build-site.mjs

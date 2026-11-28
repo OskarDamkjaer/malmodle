@@ -4,12 +4,16 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { PALETTE } from '../../app/palette.mjs';
 import { MOVED } from '../../scripts/lib/site.mjs';
-import { chromium, launch } from '../browser.mjs';
+import { ENGINES, chromium, launch } from '../browser.mjs';
 
 const SITES = (process.env.SITES ?? 'https://malmodle.se').split(/\s+/).filter(Boolean);
 const BUILD = process.env.BUILD;
 const WAIT = 10 * 60 * 1000;
 const skip = chromium ? false : 'playwright is not installed';
+
+const OTHERS = ['firefox', 'webkit'];
+const others = {};
+for (const name of OTHERS) others[name] = skip ? null : await ENGINES[name]().catch(() => null);
 
 let browser;
 
@@ -19,6 +23,7 @@ before(async () => {
 
 after(async () => {
   await browser?.close();
+  for (const other of Object.values(others)) await other?.close();
 });
 
 const again = (fn) => async (t) => {
@@ -38,7 +43,7 @@ async function open(site, viewport, path = '/', { workers = 'block' } = {}) {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
-  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(`${m.text()} ${m.location().url}`.trim()); });
   page.on('request', (r) => { if (r.method() === 'POST' && own(site, r.url()) && new URL(r.url()).pathname.startsWith('/api/')) errors.push(`posted to ${r.url()}`); });
   page.on('response', (r) => { if (own(site, r.url()) && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
   await page.goto(new URL(path, site).href);
@@ -113,12 +118,30 @@ for (const site of SITES) {
     await context.close();
   }));
 
+  for (const name of OTHERS) {
+    test(`${site} starts in ${name}, on a first visit and on one the offline worker answers`, { skip: skip || (!others[name] && `no ${name} could be launched`) }, again(async () => {
+      const context = await others[name].newContext({ viewport: { width: 390, height: 844 } });
+      const page = await context.newPage();
+      const errors = [];
+      page.on('pageerror', (e) => errors.push(String(e)));
+      for (const visit of ['the first visit', 'a visit the offline worker answers']) {
+        if (visit === 'the first visit') await page.goto(site);
+        else await page.reload();
+        const up = await page.waitForSelector('#question:not([hidden])', { timeout: 60000 }).then(() => true, () => false);
+        if (!up) assert.fail(`no question on ${visit}; boot says "${await page.textContent('#bootmsg')}"`);
+        await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 60000 });
+      }
+      assert.deepEqual(errors, []);
+      await context.close();
+    }));
+  }
+
   test(`the day builder on ${site} loads its map and adds a question`, { skip }, again(async () => {
     const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, serviceWorkers: 'block' });
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', (e) => errors.push(String(e)));
-    page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+    page.on('console', (m) => { if (m.type() === 'error') errors.push(`${m.text()} ${m.location().url}`.trim()); });
     page.on('request', (r) => { if (r.method() === 'POST' && own(site, r.url()) && new URL(r.url()).pathname.startsWith('/api/')) errors.push(`posted to ${r.url()}`); });
     page.on('response', (r) => { if (own(site, r.url()) && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
     await page.goto(new URL('/bygg/', site).href);

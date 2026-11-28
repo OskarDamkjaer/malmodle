@@ -45,7 +45,8 @@ or a browser skip instead of failing, so a green run can be an empty one.
 
 In a web session `.claude/hooks/session-start.sh` builds the style, fetches the
 prebuilt map data and app assets, and builds `quiz.json` and `quiz-all.json`, so nothing should
-skip. Do not run the heavy pipeline there (`build-basemap.sh`,
+skip but Firefox and WebKit in `test/browsers.test.mjs`, which the sandbox
+cannot download and the Check runs. Do not run the heavy pipeline there (`build-basemap.sh`,
 `build-districts.mjs`, `build-streets.mjs`, `build-shapes.mjs`): it needs
 osmium, Java and hosts the sandbox cannot reach.
 
@@ -100,7 +101,11 @@ osmium, Java and hosts the sandbox cannot reach.
   cache, so a page never mixes versions. A new one waits until the page asks
   for it, which `app.js` does before the first answer of a page load or while
   the page is hidden, and then reloads; a reload resumes the saved day. Taking
-over from a worker without that handshake, it reloads the old pages itself. The
+over from a worker without that handshake, it reloads the old pages itself. A
+  start that makes no progress for `STUCK` milliseconds on a page the worker
+  answers drops the worker and the code caches and reloads, once per tab, since
+  a worker that leaves a request unanswered also keeps the next one from taking
+  over. The
   build stamps its cache names, and `serve.mjs` stamps them per request.
 - `scripts/build-quiz.mjs`: curated data plus map data into `quiz.json`, with
   the long list's other places as `decoys` for "Vad ligger här?", worked out
