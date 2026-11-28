@@ -189,7 +189,7 @@ function chart({ onRefresh, onEarly } = {}) {
     const fromAt = at;
     const start = performance.now();
     const tick = (now) => {
-      const t = curve(Math.min(1, (now - start) / duration));
+      const t = curve(Math.min(1, Math.max(0, (now - start) / duration)));
       ys = fromYs.map((v, i) => v + (toYs[i] - v) * t);
       at = fromAt + (toAt - fromAt) * t;
       draw();

@@ -7,6 +7,10 @@ fi
 
 cd "${CLAUDE_PROJECT_DIR:-$(dirname "$0")/../..}"
 
+if [ -n "${HTTPS_PROXY:-}${https_proxy:-}" ]; then
+  export NODE_USE_ENV_PROXY=1
+fi
+
 npm ci --no-fund --no-audit >/dev/null 2>&1 || echo "session-start: could not install the tools; browser tests will skip" >&2
 
 if [ ! -f build/style.json ]; then
