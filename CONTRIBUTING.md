@@ -52,7 +52,7 @@ version.
 
 ```
 node scripts/handmade.mjs review            # the days waiting, each with a suggested date, into build/review.json
-node scripts/handmade.mjs take 12 14        # play days 12 and 14 on the first dates that fit
+node scripts/handmade.mjs take 12 14        # play days 12 and 14 on the first Fridays that fit
 node scripts/handmade.mjs take 12@2027-01-05  # or on that date, if it fits
 node scripts/handmade.mjs decline 13        # leave day 13 out from now on
 node scripts/handmade.mjs review --db file.db  # the same from serve.mjs's database instead of D1
@@ -64,7 +64,7 @@ date. A date fits when no other made day has it, the day builds with the
 types it was made with, and the game asks each question as the builder
 showed it. What it asks or shows may also be asked on the days around it.
 
-`review` suggests a date for each waiting day, in the order they were sent,
+`review` suggests a Friday for each waiting day, in the order they were sent,
 each at least a week from every other made day, and writes them with
 everything else about the day to `build/review.json`, which
 `/dev/review.html` on the local server shows. There each day is taken,

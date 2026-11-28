@@ -14,8 +14,8 @@ node scripts/build-quiz.mjs --all --out build/data/quiz-all.json  # and everythi
 node scripts/serve.mjs                 # http://127.0.0.1:8080, with the API
 node scripts/serve.mjs --fake 200      # and 200 made-up players today
 node scripts/serve.mjs --trickle 10    # and one more every 10 seconds
-node scripts/handmade.mjs review       # the days sent in from the builder, from D1, each with a date that fits
-node scripts/handmade.mjs take 12@2026-12-05 14  # play them, on that date or the first that fits
+node scripts/handmade.mjs review       # the days sent in from the builder, from D1, each with a Friday that fits
+node scripts/handmade.mjs take 12@2026-12-05 14  # play them, on that date or the first Friday that fits
 node scripts/handmade.mjs decline 13   # leave one out from now on, in learn/declined.json
 node scripts/played.mjs                # pin the days played so far in learn/played.json
 node scripts/join.mjs areas --dry      # what joining the waiting areas a week from now would do

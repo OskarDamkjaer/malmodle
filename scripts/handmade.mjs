@@ -4,6 +4,7 @@ import { register } from 'node:module';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { LAUNCH, dailySet, dateKey, lasting, laterKey, settled } from '../app/daily.mjs';
+import { metersBetween } from '../app/geo.mjs';
 import { localD1 } from './lib/d1.mjs';
 import { APART, LEAD, SOONEST, fitTogether, problems, schedule, written } from './lib/made.mjs';
 import { PLAYED, pin, pinned } from './lib/played.mjs';
@@ -18,6 +19,7 @@ const DECLINED = 'learn/declined.json';
 const QUIZ = 'build/data/quiz.json';
 const ALL = 'build/data/quiz-all.json';
 const REVIEW = 'build/review.json';
+const SAME_PLACE = 50;
 const USAGE = 'usage: node scripts/handmade.mjs [review | take <id>[@YYYY-MM-DD] ... | decline <id> ...] [--db file.db]';
 
 const args = process.argv.slice(2);
@@ -57,8 +59,12 @@ const entryOf = (row) => ({ by: row.name || null, sent: row.id, slots: row.slots
 const declinedIn = () => new Set(read(DECLINED).declined);
 const takenIn = (doc) => new Map(Object.entries(doc.days).filter(([, entry]) => entry.sent).map(([day, entry]) => [entry.sent, day]));
 const outsideOf = (quiz, row) => {
-  const inGame = new Set(quiz.items.map((it) => it.name));
-  return row.slots.filter((s) => s.at || !inGame.has(s.target)).map((s) => s.target);
+  const inGame = new Map(settled(quiz.items).map((it) => [it.name, it]));
+  const there = ({ target, at }) => {
+    const it = inGame.get(target);
+    return Boolean(it) && (!at || metersBetween(it.point, at) < SAME_PLACE);
+  };
+  return row.slots.filter((s) => !there(s)).map((s) => s.target);
 };
 
 function blockers(quiz, row) {
