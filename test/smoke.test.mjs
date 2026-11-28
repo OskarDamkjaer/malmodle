@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync, statSync, utimesSync } from 'node:fs';
 import { PALETTE } from '../app/palette.mjs';
-import { SAVE_KEY, dailySet, dateKey, laterKey } from '../app/daily.mjs';
+import { SAVE_KEY, dailySet, dateKey, guestDay, laterKey } from '../app/daily.mjs';
 import { TYPES } from '../app/questions.mjs';
 import { BUILDER_KEY, unlockedText } from '../app/crowd.mjs';
-import { chromium, launch } from './browser.mjs';
+import { chromium, launch, underway } from './browser.mjs';
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'build/data/quiz-all.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
 process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS = '1';
@@ -43,7 +43,7 @@ async function open(viewport, path = '/', saved, device = {}) {
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   await page.goto(new globalThis.URL(path, URL).href);
   await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
-  await page.waitForSelector('#question:not([hidden])');
+  await underway(page);
   return { page, context, errors };
 }
 
@@ -60,7 +60,7 @@ async function guess(page, x, y) {
 async function playThrough(page, viewport, count = 10) {
   const prompts = [];
   for (let i = 0; i < count; i++) {
-    await page.waitForSelector('#question:not([hidden])');
+    await underway(page);
     prompts.push(await page.textContent('#prompt'));
     assert.deepEqual(await visibleText(page), [], 'a label is visible during a question');
     if (await page.isVisible('#choices')) {
@@ -124,7 +124,7 @@ for (const [name, viewport, touch] of [['desktop', { width: 1280, height: 800 },
       await press('#choices button');
       await page.waitForSelector('#result:not([hidden])');
       await press('#next');
-      await page.waitForSelector('#question:not([hidden])');
+      await underway(page);
     }
     assert.ok(await page.isHidden('#pinhint'), 'the hint is only on the first question');
     if (touch) {
@@ -149,7 +149,7 @@ test('the map can be answered from the keyboard', { skip }, async () => {
   const viewport = { width: 1280, height: 800 };
   const { page, context, errors } = await open(viewport);
   for (let i = 0; i < 10; i++) {
-    await page.waitForSelector('#question:not([hidden])');
+    await underway(page);
     if (await page.isVisible('#choices')) {
       await page.keyboard.press('1');
     } else {
@@ -207,7 +207,7 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     assert.equal(asked[0], 'post');
     asked.length = 0;
     await page.click('#again');
-    await page.waitForSelector('#question:not([hidden])');
+    await underway(page);
     assert.equal(await page.textContent('#prompt'), prompts[0]);
     await playThrough(page, viewport);
 
@@ -217,7 +217,7 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     await page.click('#practise');
     assert.equal(await page.locator('#kinds button').count(), 9);
     await page.locator('#kinds button').nth(2).click();
-    await page.waitForSelector('#question:not([hidden])');
+    await underway(page);
     assert.equal(await page.locator('#dots li').count(), 10);
     await playThrough(page, viewport);
     await page.waitForSelector('#end:not([hidden])');
@@ -237,7 +237,7 @@ test('a reload returns to the same place in the day', { skip }, async () => {
 
   await page.reload();
   await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
-  await page.waitForSelector('#question:not([hidden])');
+  await underway(page);
   assert.equal(await page.textContent('#prompt'), next);
   assert.equal(await page.locator('#dots li[data-band]').count(), 3);
 
@@ -286,12 +286,12 @@ test('the map is downloaded once and then comes from the service worker', { skip
   });
 
   await page.goto(URL);
-  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  await underway(page, { timeout: 60000 });
   await page.waitForFunction(async () => navigator.serviceWorker.controller
     && Number((await caches.match('/malmo.pmtiles'))?.headers.get('Content-Length')) > 0, null, { timeout: 30000 });
 
   await page.reload();
-  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  await underway(page, { timeout: 60000 });
   assert.equal(downloads, 1);
 
   assert.deepEqual(errors, []);
@@ -320,7 +320,7 @@ test('a new version is taken before the first answer, and waits after one', { sk
   const version = () => page.evaluate(async () => (await caches.keys()).filter((k) => k.startsWith('malmo-code-')));
   try {
     await page.goto(URL);
-    await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+    await underway(page, { timeout: 60000 });
     await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 30000 });
     const [first] = await version();
 
@@ -329,7 +329,7 @@ test('a new version is taken before the first answer, and waits after one', { sk
     await page.reload();
     await until(() => loads >= 2, 'the page to reload into the new version');
     await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
-    await page.waitForSelector('#question:not([hidden])');
+    await underway(page);
     const now = await version();
     assert.equal(now.length, 1);
     assert.notEqual(now[0], first);
@@ -364,13 +364,13 @@ test('a start that is stuck with the offline worker starts over without it, once
   page.on('load', () => { loads += 1; });
 
   await page.goto(URL);
-  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  await underway(page, { timeout: 60000 });
   await page.waitForFunction(() => navigator.serviceWorker.controller, null, { timeout: 30000 });
 
   loads = 0;
   await page.reload();
   await until(() => loads >= 2, 'the stuck page to start over');
-  await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
+  await underway(page, { timeout: 60000 });
   assert.equal(warned.length, 1);
   assert.equal(await page.evaluate(() => sessionStorage.getItem('malmodle-rescued')), null);
   assert.equal(loads, 2);
@@ -384,7 +384,7 @@ test('the palette is applied to the basemap', { skip }, async () => {
   await context.close();
 });
 
-test('a day made by hand names itself and its maker, and a full score shows the day builder that day only', { skip }, async () => {
+test('a day made by hand thanks its maker by its title before the first question, once, and a full score shows the day builder that day only', { skip }, async () => {
   const quiz = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
   const key = dateKey();
   const slots = dailySet(quiz.items, key, quiz.decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: i + 1 }));
@@ -405,11 +405,18 @@ test('a day made by hand names itself and its maker, and a full score shows the 
   };
   try {
     await page.goto(URL);
+    await page.waitForSelector('#guest:not([hidden])', { timeout: 60000 });
+    assert.ok(await page.locator('#question').isHidden());
+    assert.equal(await page.textContent('#guest h1'), `${guestDay(key)}!`);
+    assert.equal(await page.textContent('#guest p'), 'Tack till Kim som skickat in ”Broarnas dag”.');
+    await page.click('#begin');
+    assert.ok(await page.locator('#guest').isHidden());
+    assert.ok(await page.locator('#start').isHidden());
+    assert.ok(await page.locator('#question').isVisible());
+    await page.reload();
     await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
-    assert.equal(await page.textContent('#byline'), '”Broarnas dag” av Kim');
-    assert.ok(await page.locator('#byline').isVisible());
     await end(0);
-    assert.equal(await page.textContent('#endby'), '”Broarnas dag” av Kim.');
+    assert.equal(await page.textContent('#endby'), '”Broarnas dag”, inskickat av Kim.');
     assert.ok(await page.locator('#builder').isHidden());
     await end(100);
     assert.ok(await page.locator('#builder').isVisible());

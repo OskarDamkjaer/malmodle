@@ -422,6 +422,10 @@ export function laterKey(key, days) {
   return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
 }
 
+const FRIDAY = 5;
+
+export const guestDay = (key) => (new Date(`${key}T00:00Z`).getUTCDay() === FRIDAY ? 'Gästfredag' : 'Gästdag');
+
 export function upcoming(items, key, days = SOON_DAYS, made = NONE) {
   const soon = new Map();
   for (let n = days; n >= 1; n--) for (const it of targetsOn(items, laterKey(key, n), made)) soon.set(it.name, n);

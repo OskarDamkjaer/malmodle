@@ -1,5 +1,5 @@
 import { Map, AttributionControl, NavigationControl, addProtocol } from './vendor/maplibre-gl.mjs';
-import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, inPlay, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
+import { BAND_COLORS, PRACTICE, SAVE_KEY, SET_SIZE, band, dailySet, dateKey, guestDay, inPlay, onDay, practiceSet, recall, remember, setId, shareText, carry, arrive, verdict, issue, played } from './daily.mjs';
 import { crowdCard } from './crowd-view.js';
 import { BUILDER_KEY, POSTED_KEY, RETRY, counted, pollDelay, posted, recentOthers, summarize, unlockedText, unlocks } from './crowd.mjs';
 import { TYPES, answerOf, formatDistance, readMore, several, MAX_SCORE } from './questions.mjs';
@@ -19,6 +19,7 @@ const wide = matchMedia('(min-width: 760px)');
 const HOME = 'malmodle.se';
 const STUCK = 20000;
 const RESCUED_KEY = 'malmodle-rescued';
+const GREETED_KEY = 'malmodle-greeted';
 const workers = 'serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname)) ? navigator.serviceWorker : null;
 const controlled = Boolean(workers?.controller);
 let watch;
@@ -273,14 +274,42 @@ function play(questions, answered = []) {
   set = questions;
   results = answered;
   index = results.length;
-  hide('end', 'result', 'info');
+  hide('end', 'result', 'info', 'guest', 'start');
   delete document.body.dataset.ended;
   delete document.body.dataset.mapview;
   el('endmap').textContent = 'Visa på kartan';
   hideLabels();
   showScored([]);
-  if (index < set.length) ask();
-  else finish();
+  if (index === set.length) finish();
+  else if (!index && maker() && !greeted()) greet();
+  else ask();
+}
+
+const maker = () => (!practicing && made?.[key]) || null;
+const makerName = () => maker().by ?? 'en spelare';
+
+function greeted() {
+  try { return sessionStorage.getItem(GREETED_KEY) === key; } catch { return false; }
+}
+
+function greet() {
+  phase = 'greeting';
+  clear();
+  hide('question', 'choices', 'guess');
+  delete document.body.dataset.answered;
+  delete document.body.dataset.pointing;
+  hint(false);
+  el('guestday').textContent = guestDay(key);
+  el('guestby').textContent = makerName();
+  el('guestwhat').textContent = maker().title ? `”${maker().title}”` : 'dagens frågor';
+  reveal('guest', 'start');
+  el('begin').focus({ preventScroll: true });
+  requestAnimationFrame(() => frameHome(today));
+}
+
+function begin() {
+  hide('guest', 'start');
+  ask();
 }
 
 function ask() {
@@ -288,13 +317,11 @@ function ask() {
   const type = typeOf(q);
   const { title, detail } = type.prompt(q);
   phase = 'asking';
+  if (maker()) try { sessionStorage.setItem(GREETED_KEY, key); } catch {}
   clear();
   renderDots();
   el('detail').textContent = detail ?? '';
   el('prompt').textContent = title;
-  const maker = index === 0 && !practicing && made?.[key];
-  el('byline').hidden = !maker;
-  if (maker) el('byline').textContent = credit(maker);
   hide('result', 'info', 'guess');
   delete document.body.dataset.answered;
   reveal('question');
@@ -621,9 +648,8 @@ function finish() {
   el('kinds').hidden = !practicing;
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
-  const maker = !practicing && made?.[key];
-  el('endby').hidden = !maker;
-  if (maker) el('endby').textContent = `${credit(maker)}.`;
+  el('endby').hidden = !maker();
+  if (maker()) el('endby').textContent = maker().title ? `”${maker().title}”, inskickat av ${makerName()}.` : `Inskickat av ${makerName()}.`;
   if (!practicing) unlock(unlocks({ total }));
   renderBuilder();
   renderSquares();
@@ -641,8 +667,6 @@ function finish() {
   spreadOut();
   el(practicing ? 'again' : 'share').focus({ preventScroll: true });
 }
-
-const credit = (maker) => `${maker.title ? `”${maker.title}”` : 'Dagens frågor'} av ${maker.by ?? 'en spelare'}`;
 
 function unlocked() {
   try { return JSON.parse(localStorage.getItem(BUILDER_KEY)); } catch { return null; }
@@ -1021,6 +1045,7 @@ map.on('mousemove', (e) => {
 });
 
 el('next').addEventListener('click', next);
+el('begin').addEventListener('click', begin);
 el('guessbutton').addEventListener('click', () => answer(pinAt()));
 el('unpin').addEventListener('click', unplace);
 el('share').addEventListener('click', share);

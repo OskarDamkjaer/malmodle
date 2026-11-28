@@ -2,7 +2,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { existsSync, statSync, utimesSync } from 'node:fs';
-import { ENGINES, chromium } from './browser.mjs';
+import { ENGINES, chromium, underway } from './browser.mjs';
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs'];
 const missing = NEEDED.filter((p) => !existsSync(p));
@@ -34,7 +34,7 @@ function soon(promise, what) {
 }
 
 async function started(page, visit) {
-  const up = await page.waitForSelector('#question:not([hidden])', { timeout: 60000 }).then(() => true, () => false);
+  const up = await underway(page, { timeout: 60000 }).then(() => true, () => false);
   if (!up) assert.fail(`no question on ${visit}; boot says "${await page.textContent('#bootmsg')}"`);
 }
 
