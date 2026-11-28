@@ -29,10 +29,10 @@ shows the game at a phone, tablet or desktop size, with a button that starts
 the day over. `dev/` is never part of the built site.
 
 <http://127.0.0.1:8080/bygg/> is the day builder, which the site also serves at
-malmodle.se/bygg. The end screen links to it once the player has unlocked it,
-with a full score, fifteen days in a row, or a place in the top percent of a
+malmodle.se/bygg. The end screen links to it under the score on a day the player earns it,
+with a full score, fifteen days in a row and every tenth after, or a place in the top percent of a
 day with at least a hundred players (`UNLOCK` in `app/crowd.mjs`), and says
-why on the day it happens. A narrow screen is asked to open it on a computer.
+why. The next day the link is gone. A narrow screen is asked to open it on a computer.
 It makes a day by hand: pick each
 question's target and type, and the game builds the rest the way it always
 does. The map beside the questions shows everything in the data, what

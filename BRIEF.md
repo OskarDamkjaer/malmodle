@@ -33,9 +33,10 @@ Get familiar with Malmö through a short daily quiz.
   targets have not been asked lately. It is played in place of the dealt day,
   the first question and the end screen name who made it, and the decks are
   dealt anew after it so its targets wait like any other.
-- The end screen links to the builder once a player has earned it: a full
-  1000, fifteen days in a row, or the top percent of a day with at least a
-  hundred players. The day it happens, the link says why.
+- The end screen links to the builder on a day a player earns it: a full
+  1000, fifteen days in a row and every tenth after, or the top percent of a
+  day with at least a hundred players. That day the link says why, under the
+  score, and the next day it is gone.
 - The set can be replayed. Replaying gives the same set, never a new one.
 
 ## Questions

@@ -362,14 +362,16 @@ for (const [day, names] of Object.entries(coreDoc.since ?? {})) {
 }
 
 const BY_MOST = 80;
+const TITLE_MOST = 60;
 const UNSEEN = /[\u0000-\u001f\u007f-\u009f\u061c\u200b-\u200f\u2028-\u202e\u2060-\u2069\ufeff]/;
 const made = {};
 const sentOn = new Map();
-for (const [day, { by = null, sent = null, slots, ...rest }] of Object.entries(daysDoc.days)) {
+for (const [day, { by = null, title = null, sent = null, slots, ...rest }] of Object.entries(daysDoc.days)) {
   const where = `days.json: ${day}`;
   if (!DATE.test(day)) fail(`${where} is not a date`);
   for (const field of Object.keys(rest)) fail(`${where} has an unknown field ${field}`);
   if (by !== null && (typeof by !== 'string' || !by.trim() || by.length > BY_MOST || UNSEEN.test(by))) fail(`${where} has no usable name to credit`);
+  if (title !== null && (typeof title !== 'string' || !title.trim() || title.length > TITLE_MOST || UNSEEN.test(title))) fail(`${where} has no usable title`);
   if (sent !== null && !(Number.isSafeInteger(sent) && sent > 0)) fail(`${where} has no usable number for the day sent in`);
   else if (sent !== null && sentOn.has(sent)) fail(`${where} is day ${sent} sent in, which is also played on ${sentOn.get(sent)}`);
   if (sent !== null) sentOn.set(sent, day);
@@ -384,7 +386,7 @@ for (const [day, { by = null, sent = null, slots, ...rest }] of Object.entries(d
     if (!Object.hasOwn(TYPES, type)) fail(`${where}: ${type} is not a question type`);
     if (!Number.isSafeInteger(seed)) fail(`${where}: ${target} has no seed`);
   }
-  made[day] = { by, slots: slots.map(({ target, type, seed }) => ({ target, type, seed })) };
+  made[day] = { by, ...(title && { title }), slots: slots.map(({ target, type, seed }) => ({ target, type, seed })) };
 }
 
 for (const it of items) {

@@ -642,24 +642,23 @@ function finish() {
   el(practicing ? 'again' : 'share').focus({ preventScroll: true });
 }
 
-const credit = (maker) => `Dagens frågor av ${maker.by ?? 'en spelare'}`;
+const credit = (maker) => `${maker.title ? `”${maker.title}”` : 'Dagens frågor'} av ${maker.by ?? 'en spelare'}`;
 
 function unlocked() {
   try { return JSON.parse(localStorage.getItem(BUILDER_KEY)); } catch { return null; }
 }
 
-function unlock(why) {
-  if (!why || unlocked()) return;
-  try { localStorage.setItem(BUILDER_KEY, JSON.stringify({ why, day: key })); } catch {}
+function unlock(why, streak) {
+  if (!why || unlocked()?.day === key) return;
+  try { localStorage.setItem(BUILDER_KEY, JSON.stringify({ why, day: key, ...(why === 'streak' && { streak }) })); } catch {}
   renderBuilder();
 }
 
 function renderBuilder() {
   const got = unlocked();
-  const fresh = got?.day === key;
-  el('builder').hidden = !got;
-  el('builder').toggleAttribute('data-fresh', fresh);
-  el('builderwhy').textContent = fresh ? unlockedText(got.why) : '';
+  const today = !practicing && got?.day === key;
+  el('builder').hidden = !today;
+  el('builderwhy').textContent = today ? unlockedText(got.why, got.streak) : '';
 }
 
 const PLAYER_KEY = 'malmodle-player';
@@ -764,7 +763,7 @@ async function compare() {
     };
     const show = (d) => {
       const crowd = summarize(d, you);
-      unlock(unlocks({ total: you.total, streak: you.streak, crowd }));
+      unlock(unlocks({ total: you.total, streak: you.streak, crowd }), you.streak);
       card.update(crowd, names, { recent: recentOthers(d, you, Date.now()), tries, settled });
     };
     reveal('crowd');

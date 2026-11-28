@@ -138,6 +138,7 @@ let view = loadView();
 let slots = [];
 let notes = [];
 let credit = '';
+let dayTitle = '';
 let remark = '';
 let outcome = null;
 let sessionPlayer;
@@ -766,7 +767,7 @@ function select(i, { moveMap = true } = {}) {
 
 function save() {
   const sent = outcome?.state === 'sent' ? outcome.draft : undefined;
-  try { localStorage.setItem(DRAFT, JSON.stringify({ day: pack({ slots, notes }), credit, remark, sent })); } catch {}
+  try { localStorage.setItem(DRAFT, JSON.stringify({ day: pack({ slots, notes }), credit, title: dayTitle, remark, sent })); } catch {}
   history.replaceState(null, '', slots.length || notes.length ? `#dag=${pack({ slots, notes })}` : location.pathname);
 }
 
@@ -774,6 +775,7 @@ function restore() {
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem(DRAFT)); } catch {}
   credit = typeof saved?.credit === 'string' ? saved.credit : '';
+  dayTitle = typeof saved?.title === 'string' ? saved.title : '';
   remark = typeof saved?.remark === 'string' ? saved.remark : '';
   outcome = typeof saved?.sent === 'string' ? { draft: saved.sent, state: 'sent' } : null;
   const code = new URLSearchParams(location.hash.slice(1)).get('dag');
@@ -933,7 +935,7 @@ function playerId() {
   }
 }
 
-const draft = (player) => JSON.stringify(sending({ slots, entries, notes, name: credit, remark, player }));
+const draft = (player) => JSON.stringify(sending({ slots, entries, notes, name: credit, title: dayTitle, remark, player }));
 
 async function send() {
   if (!ready(entries) || outcome?.state === 'sending') return;
@@ -1167,9 +1169,10 @@ search.addEventListener('keydown', (e) => {
 
 el('cancelswap').addEventListener('click', cancelSwap);
 el('credit').addEventListener('input', (e) => { credit = e.target.value; save(); renderSend(); });
+el('daytitle').addEventListener('input', (e) => { dayTitle = e.target.value; save(); renderSend(); });
 el('remark').addEventListener('input', (e) => { remark = e.target.value; save(); renderSend(); });
 el('submit').addEventListener('click', send);
-el('sendopen').addEventListener('click', () => { renderSend(); el('sendbox').showModal(); el('credit').focus(); });
+el('sendopen').addEventListener('click', () => { renderSend(); el('sendbox').showModal(); el('daytitle').focus(); });
 el('sendclose').addEventListener('click', () => el('sendbox').close());
 el('guide').addEventListener('toggle', () => { try { localStorage.setItem(GUIDE_KEY, el('guide').open ? 'open' : 'closed'); } catch {} });
 el('keyshelp').addEventListener('click', toggleKeys);
@@ -1225,8 +1228,10 @@ heads[3].dataset.tip = TYPE_TIPS.identify;
 heads[4].dataset.tip = `Direkt … om: ${TYPE_TIPS.neighbour}\nFrån A till B: ${TYPE_TIPS.route}`;
 heads[4].classList.add('tip-end');
 el('credit').maxLength = LIMITS.name;
+el('daytitle').maxLength = LIMITS.title;
 el('remark').maxLength = LIMITS.remark;
 el('credit').value = credit;
+el('daytitle').value = dayTitle;
 el('remark').value = remark;
 updateOsm();
 selected = slots.length ? 0 : -1;

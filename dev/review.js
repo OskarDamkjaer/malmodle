@@ -60,7 +60,7 @@ function start() {
 
     const why = [];
     if (d.outside.length) why.push(`Kan inte tas med än: ${d.outside.join(', ')} finns inte i spelet.`);
-    if (d.hidden) why.push('Kan inte tas med: namnet har tecken som inte syns.');
+    if (d.hidden) why.push('Kan inte tas med: namnet eller titeln har tecken som inte syns.');
     if (!why.length && !d.date) why.push('Inget datum de närmaste fyra månaderna passar.');
 
     const state = d.taken ? `Inlagd: ${dayName(d.date)}${d.edited ? ', ändrad sedan den skickades in' : ''}` : d.date ? `Förslag: ${dayName(d.date)}` : 'Väntar';
@@ -70,7 +70,7 @@ function start() {
     const root = make('article', { className: 'day' },
       make('div', { className: 'head' },
         make('span', { className: 'id', textContent: `#${d.id}` }),
-        make('h2', { textContent: `Dagens frågor av ${d.name || 'en spelare'}` }),
+        make('h2', { textContent: `${d.title ? `”${d.title}”` : 'Dagens frågor'} av ${d.name || 'en spelare'}` }),
       ),
       make('p', { className: 'meta', textContent: [`skickad ${sentAt(d.at)}`, `har spelat ${plural(d.played, 'dag', 'dagar')}`, d.same.length && `samma spelare som ${d.same.map((id) => `#${id}`).join(', ')}`].filter(Boolean).join(' · ') }),
       d.remark ? make('p', { className: 'remark', textContent: d.remark }) : null,

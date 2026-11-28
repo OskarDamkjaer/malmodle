@@ -33,8 +33,8 @@ the days sent in, waiting or scheduled ahead, from `build/review.json`, each
 with its date, to look over. `/dev/week.html` tries such a
 day with `?dag=<date>.<link code>`. The `review-days` skill in
 `.claude/skills/` takes them to a pull request and changes what the owner asks. `/bygg/` is the day
-builder, also on the live site, linked from the end screen once a player has
-unlocked it: a day made by hand on
+builder, also on the live site, linked from the end screen on a day a player
+earns it: a day made by hand on
 a map of everything in the data, core or not, sent in with suggested changes
 to what the game asks. `serve.mjs` mounts `dev/` itself (`DEV_MOUNTS` in
 `scripts/lib/site.mjs`), so the site build leaves it out. `bygg/` is in the
@@ -80,7 +80,7 @@ osmium, Java and hosts the sandbox cannot reach.
   A place in `places/places.json` can change on a date under `changes`: every
   day before it sees the place as it was, and the deal carries on.
   A day made by hand, under its date in `learn/days.json`, is played in place
-  of the dealt one, built from its targets, types and seeds the way the builder
+  of the dealt one, credited to `by` and called its `title` when it has one, built from its targets, types and seeds the way the builder
   builds them, and every deck is dealt anew the day after it, with what was
   asked lately at the back. It keeps from the map only what it asks itself,
   and the days before it are dealt and built as if it were not there.

@@ -46,7 +46,7 @@ async function query(sql) {
 const parse = (row) => ({ ...row, slots: JSON.parse(row.slots), notes: JSON.parse(row.notes) });
 const senders = async () => new Map((await query('SELECT id, player FROM handmade')).map((row) => [row.id, row.player]));
 const whoIn = (doc, sender) => (entry, day) => sender.get(entry.sent ?? doc.days[day]?.sent) ?? null;
-const sentIn = async (where = '') => (await query(`SELECT id, at, player, name, remark, slots, notes FROM handmade ${where} ORDER BY id`)).map(parse);
+const sentIn = async (where = '') => (await query(`SELECT id, at, player, name, title, remark, slots, notes FROM handmade ${where} ORDER BY id`)).map(parse);
 
 async function playedBy(players) {
   const keys = [...new Set(players)].filter((key) => /^[0-9a-f]+$/.test(key));
@@ -57,7 +57,7 @@ async function playedBy(players) {
   return new Map(rows.map((row) => [row.player, row.played]));
 }
 
-const entryOf = (row) => ({ by: row.name || null, sent: row.id, slots: row.slots.map(({ target, type, seed }) => ({ target, type, seed })) });
+const entryOf = (row) => ({ by: row.name || null, ...(row.title && { title: row.title }), sent: row.id, slots: row.slots.map(({ target, type, seed }) => ({ target, type, seed })) });
 const declinedIn = () => new Set(read(DECLINED).declined);
 const takenIn = (doc) => new Map(Object.entries(doc.days).filter(([, entry]) => entry.sent).map(([day, entry]) => [entry.sent, day]));
 const outsideOf = (quiz, row) => {
@@ -73,6 +73,7 @@ function blockers(quiz, row) {
   const outside = outsideOf(quiz, row);
   return [
     ...(row.name !== plain(row.name) ? ['the name has characters that do not show'] : []),
+    ...(row.title !== plain(row.title) ? ['the title has characters that do not show'] : []),
     ...(outside.length ? [`not in the game yet: ${outside.join(', ')}; they join through learn/pending.json and scripts/join.mjs first`] : []),
   ];
 }
@@ -108,22 +109,22 @@ async function review() {
 
   const days = rows.map((row) => {
     const entry = coming(row) ? doc.days[taken.get(row.id)] : null;
-    const shown = entry ? { ...row, name: entry.by ?? '', slots: entry.slots } : row;
+    const shown = entry ? { ...row, name: entry.by ?? '', title: entry.title ?? '', slots: entry.slots } : row;
     return {
-      id: row.id, at: row.at, name: shown.name, remark: row.remark, slots: shown.slots, notes: row.notes, pack: pack(shown),
+      id: row.id, at: row.at, name: shown.name, title: shown.title, remark: row.remark, slots: shown.slots, notes: row.notes, pack: pack(shown),
       played: played.get(row.player) ?? 0,
       same: rows.filter((other) => other.player === row.player && other.id !== row.id).map((other) => other.id),
-      outside: entry ? [] : outsideOf(quiz, row), hidden: shown.name !== plain(shown.name), date: dateOf.get(row.id) ?? null,
-      taken: Boolean(entry), edited: Boolean(entry) && JSON.stringify(entryOf(row)) !== JSON.stringify({ by: entry.by ?? null, sent: entry.sent, slots: entry.slots }),
+      outside: entry ? [] : outsideOf(quiz, row), hidden: shown.name !== plain(shown.name) || shown.title !== plain(shown.title), date: dateOf.get(row.id) ?? null,
+      taken: Boolean(entry), edited: Boolean(entry) && JSON.stringify(entryOf(row)) !== JSON.stringify({ by: entry.by ?? null, ...(entry.title && { title: entry.title }), sent: entry.sent, slots: entry.slots }),
     };
   }).sort((a, b) => (a.date ?? '9').localeCompare(b.date ?? '9') || a.id - b.id);
-  const scheduled = Object.entries(doc.days).map(([day, entry]) => ({ day, by: entry.by ?? null, sent: entry.sent ?? null }));
+  const scheduled = Object.entries(doc.days).map(([day, entry]) => ({ day, by: entry.by ?? null, title: entry.title ?? null, sent: entry.sent ?? null }));
   writeFileSync(REVIEW, `${JSON.stringify({ today, soonest, apart: APART, scheduled, days }, null, 2)}\n`);
 
   if (!days.length) console.log('No days are waiting.');
   const rowOf = new Map(rows.map((row) => [row.id, row]));
   for (const day of days) {
-    console.log(`#${day.id}  ${when(day.at)}  ${plain(day.name) || '(no name)'}  played ${day.played} days${day.same.length ? `  same player as ${day.same.map((id) => `#${id}`).join(', ')}` : ''}`);
+    console.log(`#${day.id}  ${when(day.at)}  ${plain(day.name) || '(no name)'}${day.title ? `  "${plain(day.title)}"` : ''}  played ${day.played} days${day.same.length ? `  same player as ${day.same.map((id) => `#${id}`).join(', ')}` : ''}`);
     if (day.remark) console.log(`  "${plain(day.remark)}"`);
     for (const note of day.notes) console.log(`  ${WHAT[note.what]}: ${plain(note.target)}${note.text ? `: ${plain(note.text)}` : ''}`);
     const blocked = day.taken ? [] : blockers(quiz, rowOf.get(day.id));
@@ -210,7 +211,7 @@ async function take() {
     buildQuiz(QUIZ);
     buildQuiz(ALL, '--all');
 
-    for (const { day, entry, label } of placed) console.log(`${label} by ${entry.by ?? 'an unnamed player'} is played on ${weekday(day)} ${day}.`);
+    for (const { day, entry, label } of placed) console.log(`${label}${entry.title ? ` "${entry.title}"` : ''} by ${entry.by ?? 'an unnamed player'} is played on ${weekday(day)} ${day}.`);
     const keys = Object.keys(pins).sort();
     console.log(`\nThe ${keys.length} days played, ${keys[0]} to ${keys.at(-1)}, keep their sets, and every day until ${first} asks what it would have.`);
     console.log(`Written: ${DAYS}, ${PLAYED}. Rebuilt: ${QUIZ}, ${ALL}.`);

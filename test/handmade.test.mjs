@@ -169,17 +169,18 @@ test('a day can be sent in once it has ten questions that all build', () => {
   assert.equal(ready(assemble(ten, items)), true);
 });
 
-test('what is sent in is the day, every suggestion with the ones the day makes, the name and the player', () => {
+test('what is sent in is the day, every suggestion with the ones the day makes, the name, the title and the player', () => {
   const cafe = { name: 'Kaféet', kind: 'landmark', category: 'kafe', label: 'Kafé', point: [12.97, 55.585], geometry: { type: 'Point', coordinates: [12.97, 55.585] } };
   const find = (s) => (s.target === cafe.name ? cafe : null);
   const slots = [...items.filter((it) => it.kind === 'area').slice(0, 9).map((it) => slot(it.name)), { ...slot(cafe.name, 'identify', 3), at: cafe.point }];
   const entries = assemble(slots, items, [], find);
   const notes = [{ target: 'Gata 3', what: 'remove', text: ' Ingen vet var den är. ' }];
   const player = 'a'.repeat(32);
-  const sent = sending({ slots, entries, notes, name: ' Kim ', remark: 'Tack!\n', player });
+  const sent = sending({ slots, entries, notes, name: ' Kim ', title: ' Broarnas dag ', remark: 'Tack!\n', player });
   assert.deepEqual(sent.slots.at(-1), { target: 'Kaféet', type: 'identify', seed: 3, at: cafe.point });
   assert.deepEqual(sent.notes, [{ target: 'Kaféet', what: 'add', text: '', at: cafe.point }, { target: 'Gata 3', what: 'remove', text: 'Ingen vet var den är.' }]);
   assert.equal(sent.name, 'Kim');
+  assert.equal(sent.title, 'Broarnas dag');
   assert.equal(sent.remark, 'Tack!');
   assert.equal(sent.player, player);
   assert.deepEqual(parseHandmade(JSON.parse(JSON.stringify(sent))), sent);
@@ -192,6 +193,7 @@ test('the Worker takes the longest the builder lets anyone write', () => {
     entries: assemble(slots, items),
     notes: [{ target: 'Gata 3', what: 'fix', text: 'å'.repeat(LIMITS.note) }],
     name: 'å'.repeat(LIMITS.name),
+    title: 'å'.repeat(LIMITS.title),
     remark: 'å'.repeat(LIMITS.remark),
     player: 'a'.repeat(32),
   });

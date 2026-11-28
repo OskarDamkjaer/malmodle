@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync, statSync, utimesSync } from 'node:fs';
 import { PALETTE } from '../app/palette.mjs';
-import { SAVE_KEY, dailySet, dateKey } from '../app/daily.mjs';
+import { SAVE_KEY, dailySet, dateKey, laterKey } from '../app/daily.mjs';
 import { TYPES } from '../app/questions.mjs';
-import { unlockedText } from '../app/crowd.mjs';
+import { BUILDER_KEY, unlockedText } from '../app/crowd.mjs';
 import { chromium, launch } from './browser.mjs';
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'build/data/quiz-all.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
@@ -384,11 +384,11 @@ test('the palette is applied to the basemap', { skip }, async () => {
   await context.close();
 });
 
-test('a day made by hand names its maker, and a full score unlocks the day builder', { skip }, async () => {
+test('a day made by hand names itself and its maker, and a full score shows the day builder that day only', { skip }, async () => {
   const quiz = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
   const key = dateKey();
   const slots = dailySet(quiz.items, key, quiz.decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: i + 1 }));
-  const made = { [key]: { by: 'Kim', slots } };
+  const made = { [key]: { by: 'Kim', title: 'Broarnas dag', slots } };
   const set = dailySet(quiz.items, key, quiz.decoys, made);
   const finished = (score) => JSON.stringify({
     version: 1, key, targets: set.map((q) => q.target.name),
@@ -406,16 +406,20 @@ test('a day made by hand names its maker, and a full score unlocks the day build
   try {
     await page.goto(URL);
     await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
-    assert.equal(await page.textContent('#byline'), 'Dagens frågor av Kim');
+    assert.equal(await page.textContent('#byline'), '”Broarnas dag” av Kim');
     assert.ok(await page.locator('#byline').isVisible());
     await end(0);
-    assert.equal(await page.textContent('#endby'), 'Dagens frågor av Kim.');
+    assert.equal(await page.textContent('#endby'), '”Broarnas dag” av Kim.');
     assert.ok(await page.locator('#builder').isHidden());
     await end(100);
     assert.ok(await page.locator('#builder').isVisible());
     assert.equal(await page.textContent('#builderwhy'), unlockedText('perfect'));
     assert.equal(await page.getAttribute('#builderlink', 'href'), '/bygg/');
     assert.ok(await page.locator('#builder .phone').isVisible());
+    assert.ok(await page.evaluate(() => document.querySelector('#builder').compareDocumentPosition(document.querySelector('#share')) & Node.DOCUMENT_POSITION_FOLLOWING));
+    await page.evaluate(([k, day]) => localStorage.setItem(k, JSON.stringify({ why: 'perfect', day })), [BUILDER_KEY, laterKey(key, -1)]);
+    await end(0);
+    assert.ok(await page.locator('#builder').isHidden());
   } finally {
     await context.close();
   }

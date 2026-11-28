@@ -15,11 +15,12 @@ a day that was sent in and gives it a date.
   its data.
 - **Hosted, and earned.** The page is part of the site at malmodle.se/bygg.
   The end screen links to it once the player has a full 1000, has played
-  fifteen days in a row, or is in the top percent of a day with at least a
-  hundred players (`UNLOCK` in `app/crowd.mjs`). The browser remembers it,
-  and on the day it happens the link sits in a highlight that says why. The
-  streak comes back with each posted result, from at most fifteen rows read
-  by key. Anyone with the address can still use the page.
+  fifteen days in a row or every tenth after that, or is in the top percent of a day with at least a
+  hundred players (`UNLOCK` in `app/crowd.mjs`). The link is shown only on
+  the day that happens, in a highlight under the score and the comparison
+  that says why, and is gone the next day until it is earned again. The
+  streak comes back with each posted result, counted back a day at a time by
+  key until the first day not played. Anyone with the address can still use the page.
   It loads the game's own modules, the site's `quiz.json` and its own copy of
   everything in the data. The offline worker leaves it to the network, and
   its files are left out of the name of the game's code cache, so a change to
@@ -66,7 +67,7 @@ a day that was sent in and gives it a date.
   since it is about what the map lacks.
 - **Sending is one button.** "Skicka in" sits in the header, fills as the day
   does and opens only once the day has ten questions that build. It opens a
-  dialog with the name and the note, and afterwards says "Inskickad" until
+  dialog with what the day is called, the name and the note, and afterwards says "Inskickad" until
   something in the day changes.
 - **The whole data on the map, named by what it is in the game.** "Kan
   frågas" is Grunden. "Frågas aldrig" is the rest of the curated areas,
