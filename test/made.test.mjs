@@ -41,3 +41,15 @@ test('days are suggested on Fridays a week apart, and two days on one date do no
   assert.match(twice.join('\n'), /#2: .* already has a day made by hand/);
   assert.deepEqual(problems(quiz, laterKey(first, 1), a), []);
 });
+
+test('a day that asks what another made day asks does not fit, in any order, and is not scheduled', { skip }, () => {
+  const a = entryFrom(laterKey(FROM, 40));
+  const again = { ...a, slots: [...a.slots].reverse() };
+  const [first] = schedule(quiz, [a], FROM);
+  const withA = { ...quiz, made: { ...(quiz.made ?? {}), [first]: a } };
+  assert.match(problems(withA, laterKey(first, 14), again).join('\n'), new RegExp(`asks what the day on ${first} asks`));
+  assert.deepEqual(schedule(withA, [again], FROM), [null]);
+  const both = fitTogether(quiz, [{ day: first, entry: a, label: '#1' }, { day: laterKey(first, 14), entry: again, label: '#2' }]);
+  assert.match(both.join('\n'), /#2: it asks what/);
+  for (const [day, entry] of Object.entries(quiz.made ?? {})) assert.deepEqual(problems(quiz, day, entry).filter((p) => /asks what/.test(p)), [], day);
+});

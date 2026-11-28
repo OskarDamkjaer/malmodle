@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { LAUNCH, dailySet, dateKey, lasting, laterKey, settled } from '../app/daily.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { localD1 } from './lib/d1.mjs';
-import { APART, LEAD, SOONEST, fitTogether, problems, schedule, written } from './lib/made.mjs';
+import { APART, LEAD, SOONEST, askedOf, fitTogether, problems, schedule, written } from './lib/made.mjs';
 import { PLAYED, pin, pinned } from './lib/played.mjs';
 import { buildQuiz, untouched } from './lib/rebuild.mjs';
 
@@ -181,6 +181,16 @@ async function take() {
     if (blocked.length && !all) throw new Error(blocked.join('\n'));
     for (const line of blocked) console.log(`left waiting, ${line}`);
     picks = picks.filter(({ id }) => !blockers(before, rows.get(id)).length);
+    const asked = new Map(Object.entries(before.made ?? {}).map(([day, entry]) => [askedOf(entry), day]));
+    const twins = [];
+    picks = picks.filter(({ id }) => {
+      const key = askedOf(entryOf(rows.get(id)));
+      if (asked.has(key)) return !twins.push(`#${id}: it asks what ${asked.get(key)} asks; decline it with node scripts/handmade.mjs decline ${id}`);
+      asked.set(key, `#${id}`);
+      return true;
+    });
+    if (twins.length && !all) throw new Error(twins.join('\n'));
+    for (const line of twins) console.log(`left waiting, ${line}`);
     if (!picks.length) return console.log('No day waiting can be played yet.');
     const pins = pin(before, read(PLAYED).days, today);
 
