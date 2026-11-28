@@ -166,10 +166,12 @@ test('a year of daily sets can be built from the real data', { skip }, () => {
   }
 });
 
-test('over a year, an area waits a week before it is asked again, a street or place two', { skip }, () => {
+test('over a year, an area waits a week before it is asked again, a street or place two, except around a day made by hand', { skip }, () => {
   const last = new Map();
   for (let n = 0; n < 365; n++) {
-    for (const q of dailySet(items, laterKey(SPACED, n), [], made)) {
+    const key = laterKey(SPACED, n);
+    if (made?.[key]) continue;
+    for (const q of dailySet(items, key, [], made)) {
       const since = n - (last.get(q.target.name) ?? -Infinity);
       assert.ok(since >= WAIT[GROUP[q.target.kind]], `${q.target.name} again after ${since} days`);
       last.set(q.target.name, n);

@@ -1,11 +1,11 @@
-import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { DECKS, dailySet, dateKey, laterKey, setId, targetsOn } from '../app/daily.mjs';
+import { DECKS, dateKey, laterKey, targetsOn } from '../app/daily.mjs';
 import { coreWritten, move, pendingWritten, pick, placesWritten, undescribed } from './lib/join.mjs';
 import { LEAD, SOONEST } from './lib/made.mjs';
 import { PLAYED, pin, pinned } from './lib/played.mjs';
+import { buildQuiz, untouched } from './lib/rebuild.mjs';
 
 const CORE = 'learn/core.json';
 const PENDING = 'learn/pending.json';
@@ -23,15 +23,7 @@ const sections = args.filter((a) => a !== '--dry');
 const read = (file) => JSON.parse(readFileSync(file, 'utf8'));
 const dir = mkdtempSync(join(tmpdir(), 'malmodle-join-'));
 
-function build(name, ...extra) {
-  const out = join(dir, name);
-  try {
-    execFileSync(process.execPath, ['scripts/build-quiz.mjs', '--out', out, ...extra], { stdio: 'pipe' });
-  } catch (err) {
-    throw new Error(`the quiz does not build:\n${String(err.stderr).trim()}`);
-  }
-  return read(out);
-}
+const build = (name, ...extra) => buildQuiz(join(dir, name), ...extra);
 
 function run() {
   const unknown = sections.filter((a) => a.startsWith('-'));
@@ -69,13 +61,7 @@ function run() {
   writeFileSync(join(dir, 'places.json'), placesWritten(moved.places));
   const after = build('after.json', '--core', join(dir, 'core.json'), '--pending', join(dir, 'pending.json'), '--places', join(dir, 'places.json'));
 
-  const changed = Object.entries(days).filter(([d, id]) => setId(dailySet(after.items, d, after.decoys, after.made)) !== id).map(([d]) => d);
-  if (changed.length) throw new Error(`these days already played would change: ${changed.join(', ')}`);
-  const asked = (quiz, d) => JSON.stringify(dailySet(quiz.items, d, quiz.decoys, quiz.made)
-    .map((q) => [q.type, q.target.name, q.side, q.from?.name, q.to?.name, q.region?.name, q.options?.map((o) => o.name ?? o)]));
-  const sooner = [];
-  for (let d = today; d < day; d = laterKey(d, 1)) if (asked(before, d) !== asked(after, d)) sooner.push(d);
-  if (sooner.length) throw new Error(`these days before ${day} would ask something else: ${sooner.join(', ')}`);
+  untouched(before, after, days, today, day);
 
   const ahead = Math.round((Date.parse(day) - Date.parse(today)) / 86400000);
   console.log(`\n${joining.size} names join on ${day}, in ${ahead} days:`);

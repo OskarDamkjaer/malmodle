@@ -4,12 +4,15 @@ import { TYPES, formatDistance } from '/questions.mjs';
 import { bounds } from '/geo.mjs';
 import { applyPalette, setupLayers, show } from '/map.js';
 import { LEVELS, addFalloff, reach } from '/bygg/falloff.js';
+import { unpack } from '/bygg/handmade.mjs';
 
 const el = (id) => document.getElementById(id);
 
 const params = new URLSearchParams(location.search);
 el('from').value = params.get('from') ?? dateKey();
 el('count').value = params.get('days') ?? 8;
+const trying = params.getAll('dag');
+const tried = new globalThis.Map(trying.map((t) => [t.slice(0, 10), unpack(t.slice(11))]).filter(([, day]) => day));
 
 const TYPE_NAMES = { point: 'Peka', identify: 'Vad ligger här', neighbour: 'Granne', route: 'Gata mellan' };
 const GROUP_NAMES = { area: 'områden', street: 'gator', place: 'platser' };
@@ -50,6 +53,7 @@ applyPalette(map);
 baseLabels = map.getStyle().layers.filter((l) => l.type === 'symbol').map((l) => l.id);
 setupLayers(map);
 ({ items, decoys = [], made } = await fetch('/data/quiz.json').then((r) => r.json()));
+if (tried.size) made = { ...made, ...Object.fromEntries([...tried].map(([key, { slots }]) => [key, { by: null, slots }])) };
 
 for (const [layer, prop] of [['focus-fill', 'fill-color'], ['focus-line', 'line-color'], ['focus-circle', 'circle-color'], ['focus-label', 'text-color']]) {
   map.setPaintProperty(layer, prop, ['match', ['get', 'role'], 'close', BAND_COLORS.orange, map.getPaintProperty(layer, prop)]);
@@ -102,7 +106,7 @@ function mentions(q) {
 function build() {
   const from = el('from').value || dateKey();
   const count = Math.max(1, Math.min(60, Number(el('count').value) || 8));
-  history.replaceState(null, '', `?from=${from}&days=${count}`);
+  history.replaceState(null, '', `?${new URLSearchParams([['from', from], ['days', count], ...trying.map((t) => ['dag', t])])}`);
   const days = Array.from({ length: count }, (_, n) => {
     const key = laterKey(from, n);
     return { key, set: dailySet(items, key, decoys, made) };
@@ -124,7 +128,7 @@ function build() {
     section.className = 'day';
     const h = document.createElement('h2');
     const maker = made?.[key];
-    h.textContent = [`${dayName(key)} · nr ${issue(key)}`, maker && `gjord av ${maker.by ?? 'en spelare'}`].filter(Boolean).join(' · ');
+    h.textContent = [`${dayName(key)} · nr ${issue(key)}`, maker && (tried.has(key) ? 'inskickad, på prov' : `gjord av ${maker.by ?? 'en spelare'}`)].filter(Boolean).join(' · ');
     const groups = {};
     const types = {};
     for (const q of set) {

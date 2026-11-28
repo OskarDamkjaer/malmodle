@@ -10,6 +10,7 @@ export const MOUNTS = [
 
 export const DEV_MOUNTS = [
   { url: '/dev/', dir: 'dev' },
+  { url: '/dev/data/review.json', file: 'build/review.json' },
 ];
 
 export const MOVED =['/natt/', '/papper/', '/klar/'];

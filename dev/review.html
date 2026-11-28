@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inskickade dagar</title>
+<link rel="stylesheet" href="/app.css">
+<style>
+  body { margin: 0; padding: 0 16px 260px; font-size: 15px; line-height: 1.45; background: var(--bg); }
+  main, header.top { max-width: 920px; margin: 0 auto; }
+  header.top { padding: 22px 0 8px; }
+  h1 { margin: 0 0 4px; font: 700 28px/1.15 var(--font-display); }
+  h2 { margin: 0; font: 700 20px/1.25 var(--font-display); }
+  .soft { color: var(--ink-soft); }
+  .warn { color: var(--wrong); }
+  button { min-height: 32px; padding: 4px 12px; font-size: 14px; }
+  button[aria-pressed="true"] { background: var(--ink); color: var(--panel); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  a { color: inherit; }
+
+  .day { margin: 14px 0; padding: 14px 16px 12px; background: var(--panel); border: var(--border); border-radius: var(--radius); }
+  .day[data-choice="take"] { box-shadow: var(--shadow); }
+  .day[data-choice="decline"] { opacity: 0.6; }
+  .day > .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .day > .head .id { font: 700 20px/1 var(--font-display); color: var(--ink-soft); }
+  .meta { margin: 2px 0 0; font-size: 13px; color: var(--ink-soft); }
+  .remark { margin: 10px 0 0; padding: 6px 10px; border-left: 3px solid var(--dot); white-space: pre-wrap; }
+  .notes { margin: 8px 0 0; padding: 0 0 0 18px; font-size: 14px; }
+  .blocked { margin: 10px 0 0; font-weight: 600; }
+
+  ol.qs { columns: 2 300px; column-gap: 24px; margin: 12px 0 0; padding: 0 0 0 24px; }
+  ol.qs li { break-inside: avoid; padding: 2px 0; }
+  ol.qs .type { font-size: 13px; color: var(--ink-soft); }
+  .chip { display: inline-block; margin-left: 4px; font-size: 11px; padding: 0 6px; border: 1px solid currentColor; border-radius: 9px; vertical-align: 1px; }
+  .chip.warn { color: var(--wrong); }
+  .chip.note { color: var(--ink-soft); }
+  .usual { margin: 8px 0 0; font-size: 13px; }
+
+  .decide { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 12px; padding-top: 10px; border-top: var(--rule); }
+  .choices { display: flex; gap: 4px; }
+  .decide label { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+  .decide input[type="date"] { font: inherit; padding: 3px 6px; }
+  .decide .state { font-size: 13px; }
+  .decide .links { display: flex; gap: 12px; margin-left: auto; font-size: 14px; }
+
+  footer { position: fixed; left: 0; right: 0; bottom: 0; z-index: 2; padding: 10px 16px 14px; background: var(--panel); border-top: var(--border); }
+  footer > div { max-width: 920px; margin: 0 auto; }
+  footer .tally { margin: 0 0 6px; font-size: 14px; }
+  .command { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
+  .command code { flex: 1; overflow-x: auto; padding: 6px 8px; font-size: 13px; white-space: nowrap; background: var(--bg); border: var(--rule); }
+  footer .hint { margin: 6px 0 0; font-size: 12px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Inskickade dagar</h1>
+  <p id="summary" class="soft"></p>
+</header>
+<main id="days"></main>
+<footer><div>
+  <p id="tally" class="tally"></p>
+  <div id="commands"></div>
+  <p class="hint">Kör kommandona i projektet. <code>take</code> prövar alla datum igen, tillsammans, och skriver ingenting om något inte går ihop. <code>decline</code> skriver numren i learn/declined.json; ingenting i D1 ändras.</p>
+</div></footer>
+<script type="module" src="/dev/review.js"></script>
+</body>
+</html>

@@ -104,12 +104,21 @@ a day that was sent in and gives it a date.
   made up by the browser. A post is at most `LONGEST` bytes with
   `LIMITS.notes` suggestions, and text with characters that do not show is
   refused, so a name reads the same in the terminal as on the end screen.
-  What is no good is deleted from `handmade` in D1.
-- **Read and scheduled from the command line.** `scripts/handmade.mjs` lists
-  the days sent in, newest first, with the sender's name, how many days they
-  have played, their remark and suggestions, and a link that opens the day in
-  the builder. `take <id>` gives one a date, the first from a week ahead that
-  fits or the one given, and writes it into `learn/days.json`.
+  What is no good is declined in `learn/declined.json`; `handmade` keeps it.
+- **Reviewed on a page, scheduled from the command line.**
+  `scripts/handmade.mjs review` reads the days sent in that are not yet in
+  `learn/days.json`, with how many days each sender has played, looked up by
+  key so `results` is never scanned, and suggests a date for each: the first
+  from a week ahead that fits, a week or more from every other made day.
+  `/dev/review.html` shows them with the name as players will see it, the
+  remark, the suggestions, the questions with the builder's flags, what is
+  unusual about the day, links to it in the builder and among the days
+  around its date, and Ta med, Vänta and Avböj. It gives the commands:
+  `take <id>[@date] …` checks the days together, pins the days played and
+  writes them into `learn/days.json` with their number as `sent`; `decline`
+  writes numbers into `learn/declined.json`. Neither writes to D1, so
+  `handmade` keeps everything ever sent. The `review-days` skill walks through it to
+  a pull request.
 - **A made day is played as made.** On its date the game builds each question
   from its target, type and seed the way the builder does, keeping from the
   map only what the day itself asks, so it is the day its maker saw whatever
@@ -121,12 +130,13 @@ a day that was sent in and gives it a date.
   at the back, so its targets wait like any other and the dealt targets it
   replaced come soon.
 - **A date has to fit.** Its targets must all be in the game by then, every
-  question must build with its type, none of its targets may be asked within
-  a week (an area) or two (a street or place) before it, and the game must ask each
-  question as the builder showed it. What a made day shows on the map may be
-  asked on the days around it: its maker's choices win over that rule.
-  `scripts/lib/made.mjs` checks this for `take`, and the data tests check it
-  over a year for every made day in `learn/days.json`.
+  question must build with its type, no other made day may have the date,
+  and the game must ask each question as the builder showed it. What a made
+  day asks or shows may also be asked on the days around it: the waits
+  between questions hold among the days the game deals, and a made day's
+  choices win over them. `scripts/lib/made.mjs` checks this for `take`, and
+  the data tests check the waits over a year around every made day in
+  `learn/days.json`.
 - **The link is the day.** The address holds the target, type and seed of
   each question and the suggestions, so a link gives someone else exactly the
   same day, and the browser keeps the latest draft with the name and note.
