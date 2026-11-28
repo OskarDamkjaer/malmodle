@@ -15,6 +15,7 @@ const good = {
   slots: [...Array.from({ length: 9 }, (_, n) => slot(n)), { target: 'Kaféet', type: 'identify', seed: 4, at: [12.97, 55.585] }],
   notes: [{ target: 'Kaféet', what: 'add', text: '', at: [12.97, 55.585] }, { target: 'Gata 3', what: 'fix', text: 'Gränsen är fel.' }],
   name: 'Kim',
+  title: 'Broarnas dag',
   remark: '',
 };
 
@@ -23,10 +24,10 @@ const fresh = () => { env = { DB: localD1() }; };
 const post = (body, now = NOW, method = 'POST') => postHandmade(new Request('http://x/api/handmade', { method, body: method === 'POST' ? (typeof body === 'string' ? body : JSON.stringify(body)) : undefined }), env, now);
 const rows = () => env.DB.prepare('SELECT * FROM handmade ORDER BY id').all().then((r) => r.results);
 
-test('a day sent in is a player, ten questions, the suggestions, a name and a remark', () => {
+test('a day sent in is a player, ten questions, the suggestions, a name, a title and a remark', () => {
   assert.deepEqual(parseHandmade(good), good);
-  assert.deepEqual(parseHandmade({ ...good, name: ' Kim ', remark: ' Hej ' }), { ...good, name: 'Kim', remark: 'Hej' });
-  assert.deepEqual(parseHandmade({ ...good, name: undefined, remark: undefined }), { ...good, name: '', remark: '' });
+  assert.deepEqual(parseHandmade({ ...good, name: ' Kim ', title: ' Broar ', remark: ' Hej ' }), { ...good, name: 'Kim', title: 'Broar', remark: 'Hej' });
+  assert.deepEqual(parseHandmade({ ...good, name: undefined, title: undefined, remark: undefined }), { ...good, name: '', title: '', remark: '' });
   const extra = { ...good, slots: good.slots.map((s) => ({ ...s, q: 'built' })) };
   assert.deepEqual(parseHandmade(extra).slots, good.slots);
   assert.equal(parseHandmade({ ...good, remark: 'En rad.\nEn till.' }).remark, 'En rad.\nEn till.');
@@ -48,6 +49,9 @@ test('a day sent in is a player, ten questions, the suggestions, a name and a re
     { ...good, name: 'x'.repeat(LIMITS.name + 1) },
     { ...good, remark: 'x'.repeat(LIMITS.remark + 1) },
     { ...good, name: 7 },
+    { ...good, title: 'x'.repeat(LIMITS.title + 1) },
+    { ...good, title: 'Broar\nBroar' },
+    { ...good, title: 'Broar\u202e' },
     { ...good, name: 'Kim\u001b[8m' },
     { ...good, name: 'Kim\u202e' },
     { ...good, name: 'Kim\nKim' },
@@ -68,6 +72,7 @@ test('a day sent in is stored under the player key, never the secret', async () 
   assert.equal(row.player, await playerKey(secret(1)));
   assert.equal(row.at, NOW);
   assert.equal(row.name, 'Kim');
+  assert.equal(row.title, 'Broarnas dag');
   assert.deepEqual(JSON.parse(row.slots), good.slots);
   assert.deepEqual(JSON.parse(row.notes), good.notes);
   assert.ok(!JSON.stringify(row).includes(secret(1)));

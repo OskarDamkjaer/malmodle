@@ -33,11 +33,12 @@ Get familiar with Malmö through a short daily quiz.
   targets have not been asked lately. It is played in place of the dealt day,
   a card before the first question calls it a Gästfredag (a Gästdag on
   another weekday) and thanks who sent it in, the end screen names them
-  again, and the decks are dealt anew after it so its targets wait like any
-  other.
-- The end screen links to the builder once a player has earned it: a full
-  1000, fifteen days in a row, or the top percent of a day with at least a
-  hundred players. The day it happens, the link says why.
+  again, both with the day's title when it has one, and the decks are dealt
+  anew after it so its targets wait like any other.
+- The end screen links to the builder on a day a player earns it: a full
+  1000, fifteen days in a row and every tenth after, or the top percent of a
+  day with at least a hundred players. That day the link says why, under the
+  score, and the next day it is gone.
 - The set can be replayed. Replaying gives the same set, never a new one.
 
 ## Questions

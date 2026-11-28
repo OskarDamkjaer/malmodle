@@ -301,6 +301,7 @@ function greet() {
   hint(false);
   el('guestday').textContent = guestDay(key);
   el('guestby').textContent = makerName();
+  el('guestwhat').textContent = maker().title ? `”${maker().title}”` : 'dagens frågor';
   reveal('guest', 'start');
   el('begin').focus({ preventScroll: true });
   requestAnimationFrame(() => frameHome(today));
@@ -648,7 +649,7 @@ function finish() {
   el('endmax').textContent = `av ${max}`;
   el('endverdict').textContent = verdict(total, max, !practicing);
   el('endby').hidden = !maker();
-  if (maker()) el('endby').textContent = `Inskickat av ${makerName()}.`;
+  if (maker()) el('endby').textContent = maker().title ? `”${maker().title}”, inskickat av ${makerName()}.` : `Inskickat av ${makerName()}.`;
   if (!practicing) unlock(unlocks({ total }));
   renderBuilder();
   renderSquares();
@@ -671,18 +672,17 @@ function unlocked() {
   try { return JSON.parse(localStorage.getItem(BUILDER_KEY)); } catch { return null; }
 }
 
-function unlock(why) {
-  if (!why || unlocked()) return;
-  try { localStorage.setItem(BUILDER_KEY, JSON.stringify({ why, day: key })); } catch {}
+function unlock(why, streak) {
+  if (!why || unlocked()?.day === key) return;
+  try { localStorage.setItem(BUILDER_KEY, JSON.stringify({ why, day: key, ...(why === 'streak' && { streak }) })); } catch {}
   renderBuilder();
 }
 
 function renderBuilder() {
   const got = unlocked();
-  const fresh = got?.day === key;
-  el('builder').hidden = !got;
-  el('builder').toggleAttribute('data-fresh', fresh);
-  el('builderwhy').textContent = fresh ? unlockedText(got.why) : '';
+  const today = !practicing && got?.day === key;
+  el('builder').hidden = !today;
+  el('builderwhy').textContent = today ? unlockedText(got.why, got.streak) : '';
 }
 
 const PLAYER_KEY = 'malmodle-player';
@@ -787,7 +787,7 @@ async function compare() {
     };
     const show = (d) => {
       const crowd = summarize(d, you);
-      unlock(unlocks({ total: you.total, streak: you.streak, crowd }));
+      unlock(unlocks({ total: you.total, streak: you.streak, crowd }), you.streak);
       card.update(crowd, names, { recent: recentOthers(d, you, Date.now()), tries, settled });
     };
     reveal('crowd');

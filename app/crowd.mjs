@@ -25,7 +25,7 @@ export const POLL = [[5 * MINUTE, 20 * SECOND], [10 * MINUTE, MINUTE], [20 * MIN
 export const RETRY = 3 * SECOND;
 export const POSTED_KEY = 'malmodle-posted';
 
-export const UNLOCK = { streak: 15, total: MAX_TOTAL, top: 0.01, players: 100 };
+export const UNLOCK = { streak: 15, again: 10, total: MAX_TOTAL, top: 0.01, players: 100 };
 export const BUILDER_KEY = 'malmodle-builder';
 
 const NBSP = ' ';
@@ -102,15 +102,15 @@ export function posted(raw, day, set) {
 
 export function unlocks({ total, streak = 0, crowd = null }) {
   if (total >= UNLOCK.total) return 'perfect';
-  if (streak >= UNLOCK.streak) return 'streak';
+  if (streak >= UNLOCK.streak && (streak - UNLOCK.streak) % UNLOCK.again === 0) return 'streak';
   if (crowd && crowd.players >= UNLOCK.players && (crowd.you.above + 1) / crowd.players <= UNLOCK.top) return 'top';
   return null;
 }
 
-export const unlockedText = (why) => `Upplåst idag, för ${{
-  perfect: `${count(UNLOCK.total)} poäng`,
-  streak: `${say(UNLOCK.streak)} dagar i rad`,
-  top: 'en plats bland den bästa procenten',
+export const unlockedText = (why, streak = UNLOCK.streak) => `Upplåst idag, eftersom du ${{
+  perfect: `fick ${count(UNLOCK.total)} poäng`,
+  streak: `har spelat ${say(streak)} dagar i rad`,
+  top: 'är bland den bästa procenten',
 }[why]}.`;
 
 export const counted = (saved, file) => Number.isInteger(file?.players) && file.players >= saved.players;

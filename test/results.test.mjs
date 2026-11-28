@@ -216,7 +216,7 @@ function counted(db) {
   };
 }
 
-test('a result answers with how many days in a row the player has played, counted as far as the unlock', async () => {
+test('a result answers with how many days in a row the player has played, counted past the unlock', async () => {
   fresh();
   const today = new Date().toISOString().slice(0, 10);
   const earlier = async (n, days) => {
@@ -231,7 +231,7 @@ test('a result answers with how many days in a row the player has played, counte
   await earlier(2, [1, 2, 3, 5]);
   assert.equal((await (await post({ ...played, player: secret(2) })).json()).you.streak, 4);
   await earlier(3, Array.from({ length: UNLOCK.streak + 5 }, (_, d) => d + 1));
-  assert.equal((await (await post({ ...played, player: secret(3) })).json()).you.streak, UNLOCK.streak);
+  assert.equal((await (await post({ ...played, player: secret(3) })).json()).you.streak, UNLOCK.streak + 6);
 });
 
 test('a post asks the database once', async () => {

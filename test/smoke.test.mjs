@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync, statSync, utimesSync } from 'node:fs';
 import { PALETTE } from '../app/palette.mjs';
-import { SAVE_KEY, dailySet, dateKey, guestDay } from '../app/daily.mjs';
+import { SAVE_KEY, dailySet, dateKey, guestDay, laterKey } from '../app/daily.mjs';
 import { TYPES } from '../app/questions.mjs';
-import { unlockedText } from '../app/crowd.mjs';
+import { BUILDER_KEY, unlockedText } from '../app/crowd.mjs';
 import { chromium, launch, underway } from './browser.mjs';
 
 const NEEDED = ['build/style.json', 'build/data/quiz.json', 'build/data/quiz-all.json', 'data/cache/malmo.pmtiles', 'app/vendor/maplibre-gl.mjs', 'app/glyphs', 'app/sprite'];
@@ -384,11 +384,11 @@ test('the palette is applied to the basemap', { skip }, async () => {
   await context.close();
 });
 
-test('a day made by hand thanks its maker before the first question, once, and a full score unlocks the day builder', { skip }, async () => {
+test('a day made by hand thanks its maker by its title before the first question, once, and a full score shows the day builder that day only', { skip }, async () => {
   const quiz = JSON.parse(readFileSync('build/data/quiz.json', 'utf8'));
   const key = dateKey();
   const slots = dailySet(quiz.items, key, quiz.decoys).map((q, i) => ({ target: q.target.name, type: q.type, seed: i + 1 }));
-  const made = { [key]: { by: 'Kim', slots } };
+  const made = { [key]: { by: 'Kim', title: 'Broarnas dag', slots } };
   const set = dailySet(quiz.items, key, quiz.decoys, made);
   const finished = (score) => JSON.stringify({
     version: 1, key, targets: set.map((q) => q.target.name),
@@ -408,7 +408,7 @@ test('a day made by hand thanks its maker before the first question, once, and a
     await page.waitForSelector('#guest:not([hidden])', { timeout: 60000 });
     assert.ok(await page.locator('#question').isHidden());
     assert.equal(await page.textContent('#guest h1'), `${guestDay(key)}!`);
-    assert.equal(await page.textContent('#guest p'), 'Tack till Kim som skickat in dagens frågor.');
+    assert.equal(await page.textContent('#guest p'), 'Tack till Kim som skickat in ”Broarnas dag”.');
     await page.click('#begin');
     assert.ok(await page.locator('#guest').isHidden());
     assert.ok(await page.locator('#start').isHidden());
@@ -416,13 +416,17 @@ test('a day made by hand thanks its maker before the first question, once, and a
     await page.reload();
     await page.waitForSelector('#question:not([hidden])', { timeout: 60000 });
     await end(0);
-    assert.equal(await page.textContent('#endby'), 'Inskickat av Kim.');
+    assert.equal(await page.textContent('#endby'), '”Broarnas dag”, inskickat av Kim.');
     assert.ok(await page.locator('#builder').isHidden());
     await end(100);
     assert.ok(await page.locator('#builder').isVisible());
     assert.equal(await page.textContent('#builderwhy'), unlockedText('perfect'));
     assert.equal(await page.getAttribute('#builderlink', 'href'), '/bygg/');
     assert.ok(await page.locator('#builder .phone').isVisible());
+    assert.ok(await page.evaluate(() => document.querySelector('#builder').compareDocumentPosition(document.querySelector('#share')) & Node.DOCUMENT_POSITION_FOLLOWING));
+    await page.evaluate(([k, day]) => localStorage.setItem(k, JSON.stringify({ why: 'perfect', day })), [BUILDER_KEY, laterKey(key, -1)]);
+    await end(0);
+    assert.ok(await page.locator('#builder').isHidden());
   } finally {
     await context.close();
   }

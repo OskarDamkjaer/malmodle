@@ -94,6 +94,8 @@ They answer in words. Each change is an edit to the branch, then
   type it cannot be asked as, and `/dev/week.html?from=<date>` shows the
   day as it will be played.
 - **Another name, or none:** change `by`, or set it to `null`.
+- **Another title, or none:** change `title`, or remove it. The game names
+  it on the card before the first question and on the end screen.
 - **Not this day:** remove its entry from `learn/days.json` and run
   `node scripts/handmade.mjs decline <id>`, which lists it in
   `learn/declined.json` so it does not come back.

@@ -188,18 +188,23 @@ test('a remembered post is used only for the same day and set, and only while it
   ]) assert.equal(posted(broken, '2026-10-18', 'ab12'), null, JSON.stringify(broken));
 });
 
-test('the day builder unlocks with a full score, fifteen days in a row, or the top percent of at least a hundred', () => {
+test('the day builder unlocks with a full score, fifteen days in a row and every tenth after, or the top percent of at least a hundred', () => {
   const crowd = (players, above) => ({ players, you: { above } });
   assert.equal(unlocks({ total: UNLOCK.total }), 'perfect');
   assert.equal(unlocks({ total: UNLOCK.total - 10 }), null);
   assert.equal(unlocks({ total: 500, streak: UNLOCK.streak }), 'streak');
   assert.equal(unlocks({ total: 500, streak: UNLOCK.streak - 1 }), null);
+  assert.equal(unlocks({ total: 500, streak: UNLOCK.streak + 1 }), null);
+  assert.equal(unlocks({ total: 500, streak: UNLOCK.streak + UNLOCK.again }), 'streak');
+  assert.equal(unlocks({ total: 500, streak: UNLOCK.streak + 3 * UNLOCK.again }), 'streak');
+  assert.equal(unlockedText('streak', 25), 'Upplåst idag, eftersom du har spelat 25 dagar i rad.');
+  assert.equal(unlockedText('streak'), 'Upplåst idag, eftersom du har spelat 15 dagar i rad.');
   assert.equal(unlocks({ total: 900, crowd: crowd(100, 0) }), 'top');
   assert.equal(unlocks({ total: 900, crowd: crowd(100, 1) }), null);
   assert.equal(unlocks({ total: 900, crowd: crowd(99, 0) }), null);
   assert.equal(unlocks({ total: 900, crowd: crowd(1000, 9) }), 'top');
   assert.equal(unlocks({ total: 900, crowd: crowd(1000, 10) }), null);
-  for (const why of ['perfect', 'streak', 'top']) assert.match(unlockedText(why), /^Upplåst idag, för .+\.$/);
+  for (const why of ['perfect', 'streak', 'top']) assert.match(unlockedText(why), /^Upplåst idag, eftersom du .+\.$/);
 });
 
 test('the day file counts you once it has at least as many players as your post saw', () => {

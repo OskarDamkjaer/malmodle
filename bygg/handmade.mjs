@@ -121,14 +121,15 @@ export function proposals(entries, notes = []) {
 
 export const ready = (entries) => entries.length === SET_SIZE && entries.every((e) => e.q);
 
-export const LIMITS = { note: 500, name: 80, remark: 1500, notes: 100 };
+export const LIMITS = { note: 500, name: 80, title: 60, remark: 1500, notes: 100 };
 
-export function sending({ slots, entries, notes = [], name = '', remark = '', player }) {
+export function sending({ slots, entries, notes = [], name = '', title = '', remark = '', player }) {
   return {
     player,
     slots: slots.map(({ target, type, seed, at }) => ({ target, type, seed, ...(at && { at }) })),
     notes: proposals(entries, notes).map(({ target, what, text, at }) => ({ target, what, text: text.trim(), ...(at && { at }) })),
     name: name.trim(),
+    title: title.trim(),
     remark: remark.trim(),
   };
 }

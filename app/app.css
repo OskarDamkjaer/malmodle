@@ -210,10 +210,11 @@ body[data-answered] #question { display: none; }
 #endverdict { margin: 8px 0 0; font-size: 18px; font-family: var(--font-display); }
 #elsewhere { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); }
 #endby { margin: 8px 0 0; font-size: 15px; font-style: italic; color: var(--ink-soft); }
-#builder { margin: 14px 0 0; text-align: center; font-size: 15px; color: var(--ink-soft); }
-#builder[data-fresh] { padding: 10px 12px; border-radius: var(--radius); background: #fbf3dc; color: var(--ink); }
-#builderwhy:not(:empty) { display: block; margin-bottom: 4px; font-weight: 600; }
-#builderlink { color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+#builder { position: relative; margin: 26px 4px 4px 0; padding: 18px 14px 13px; border: var(--border); border-radius: var(--radius); background: #fde9a6; box-shadow: var(--shadow); text-align: center; font-size: 15px; animation: land .45s cubic-bezier(.2, 1.4, .4, 1) .3s backwards; }
+#builder::before { content: "Din tur!"; position: absolute; top: -11px; left: 12px; padding: 4px 9px 3px; background: var(--accent); color: var(--accent-ink); font: 700 11px/1.2 var(--font); letter-spacing: .12em; text-transform: uppercase; transform: rotate(-4deg); }
+#builderwhy { display: block; margin-bottom: 6px; font: var(--display-weight) 17px/1.25 var(--font-display); text-wrap: balance; }
+#builderlink { color: var(--ink); font-weight: 700; font-size: 16px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+#builderlink:hover { color: var(--accent); }
 #builderlink::after { content: " →"; }
 #builder .phone { display: none; }
 #elsewherelink { color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }

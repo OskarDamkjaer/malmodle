@@ -128,7 +128,7 @@ function build() {
     section.className = 'day';
     const h = document.createElement('h2');
     const maker = made?.[key];
-    h.textContent = [`${dayName(key)} · nr ${issue(key)}`, maker && (tried.has(key) ? 'inskickad, på prov' : `gjord av ${maker.by ?? 'en spelare'}`)].filter(Boolean).join(' · ');
+    h.textContent = [`${dayName(key)} · nr ${issue(key)}`, maker && (tried.has(key) ? 'inskickad, på prov' : `${maker.title ? `”${maker.title}” ` : ''}gjord av ${maker.by ?? 'en spelare'}`)].filter(Boolean).join(' · ');
     const groups = {};
     const types = {};
     for (const q of set) {
