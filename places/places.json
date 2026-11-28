@@ -2938,6 +2938,43 @@
    "why": "Hardware and home store: any branch in Malmö counts.",
    "description": "Kedja som säljer varor inom bygg, el, fritid, hem och multimedia. Startade 1918 som cykelverkstad och postorderföretag i Dalarna, med huvudkontor i Insjön.",
    "source": "https://sv.wikipedia.org/wiki/Clas_Ohlson"
+  },
+  {
+   "name": "St. Jakobs Stenugnsbageri",
+   "category": "kafe",
+   "asked": "ett St. Jakobs Stenugnsbageri",
+   "osm": [
+    "node/4496973302",
+    "node/8072027420",
+    "node/8727674519",
+    "node/9042549059",
+    "node/9949635593"
+   ],
+   "branches": [
+    {
+     "lat": 55.60796,
+     "lon": 12.99129
+    },
+    {
+     "lat": 55.6101,
+     "lon": 12.99997
+    },
+    {
+     "lat": 55.59103,
+     "lon": 12.92933
+    },
+    {
+     "lat": 55.59754,
+     "lon": 12.97921
+    },
+    {
+     "lat": 55.59943,
+     "lon": 13.00092
+    }
+   ],
+   "why": "Bakery cafés, asked for by the owner as a chain: any branch counts. Malmö Saluhall, Glasvasen behind the central station, Limhamns Sjöstad, Skvadronsgatan and Södra Förstadsgatan; the kiosk inside the central station, 45 m from Glasvasen, and St. Jakobs Glass are left out.",
+   "description": "Bagerikedja med kaféer i Malmö och Lund, grundad av Mattias Mårtensson.",
+   "source": "https://whiteguide.com/se/sv/cafes/8543-"
   }
  ]
 }
