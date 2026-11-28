@@ -193,12 +193,10 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     assert.equal([...shared.split('\n')[2]].length, 10);
 
     await page.waitForTimeout(800);
-    const spot = await page.evaluate(() => {
-      const [first] = window.map.getSource('scored-labels').serialize().data.features;
-      const { x, y } = window.map.project(first.geometry.coordinates);
-      return { x, y, name: first.properties.name };
-    });
     await page.evaluate(() => { document.querySelector('#end .sheet').style.visibility = 'hidden'; });
+    const spot = await page.evaluate(() => window.map.getSource('scored-labels').serialize().data.features
+      .map((f) => ({ ...window.map.project(f.geometry.coordinates), name: f.properties.name }))
+      .find(({ x, y }) => document.elementFromPoint(x, y) === window.map.getCanvas()));
     await page.mouse.click(spot.x, spot.y);
     await page.evaluate(() => { document.querySelector('#end .sheet').style.visibility = ''; });
     await page.waitForSelector('#info:not([hidden])');
