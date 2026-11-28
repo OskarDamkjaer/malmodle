@@ -19,13 +19,18 @@ const URL = `http://127.0.0.1:${PORT}/`;
 let server;
 let browser;
 
-before(async () => {
-  if (skip) return;
-  server = spawn(process.execPath, ['scripts/serve.mjs', '--port', String(PORT)], { stdio: 'ignore' });
+async function serve(port, ...args) {
+  const child = spawn(process.execPath, ['scripts/serve.mjs', '--port', String(port), ...args], { stdio: 'ignore' });
   for (let i = 0; i < 50; i++) {
-    try { if ((await fetch(URL)).ok) break; } catch {}
+    try { if ((await fetch(`http://127.0.0.1:${port}/`)).ok) break; } catch {}
     await new Promise((r) => setTimeout(r, 100));
   }
+  return child;
+}
+
+before(async () => {
+  if (skip) return;
+  server = await serve(PORT);
   browser = await launch();
 });
 
@@ -228,6 +233,30 @@ for (const [name, viewport] of [['phone', { width: 390, height: 844 }], ['deskto
     await context.close();
   });
 }
+
+test('the end screen compares you with a crowd without an error', { skip }, async () => {
+  const port = PORT + 1000;
+  const crowded = await serve(port, '--fake', '200');
+  const viewport = { width: 390, height: 844 };
+  const context = await browser.newContext({ viewport, serviceWorkers: 'block' });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  try {
+    await page.goto(`http://127.0.0.1:${port}/`);
+    await page.waitForSelector('#boot.done', { state: 'attached', timeout: 60000 });
+    await playThrough(page, viewport);
+    await page.waitForSelector('#crowd .graph:not([data-waiting])');
+    await page.waitForTimeout(2000);
+    assert.match(await page.textContent('#crowd .mine'), /^\d+$/);
+    assert.equal(await page.textContent('#crowd .mine'), await page.textContent('#endscore'));
+    assert.deepEqual(errors, []);
+  } finally {
+    await context.close();
+    crowded.kill();
+  }
+});
 
 test('a reload returns to the same place in the day', { skip }, async () => {
   const viewport = { width: 390, height: 844 };
