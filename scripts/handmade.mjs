@@ -20,7 +20,7 @@ const QUIZ = 'build/data/quiz.json';
 const ALL = 'build/data/quiz-all.json';
 const REVIEW = 'build/review.json';
 const SAME_PLACE = 50;
-const USAGE = 'usage: node scripts/handmade.mjs [review | take <id>[@YYYY-MM-DD] ... | decline <id> ...] [--db file.db]';
+const USAGE = 'usage: node scripts/handmade.mjs [review | take all | take <id>[@YYYY-MM-DD] ... | decline <id> ...] [--db file.db]';
 
 const args = process.argv.slice(2);
 const flag = (k) => { const i = args.indexOf(k); return i >= 0 ? args.splice(i, 2)[1] : null; };
@@ -94,30 +94,38 @@ async function review() {
   const taken = takenIn(doc);
   const all = await sentIn();
   const declined = declinedIn();
-  const rows = all.filter((row) => !taken.has(row.id) && !declined.has(row.id));
-  const played = await playedBy(rows.map((row) => row.player));
   const today = dateKey();
   const soonest = laterKey(today, LEAD);
-  const ready = rows.filter((row) => !blockers(quiz, row).length);
+  const coming = (row) => taken.get(row.id) > today;
+  const rows = all.filter((row) => !declined.has(row.id) && (!taken.has(row.id) || coming(row)));
+  const played = await playedBy(rows.map((row) => row.player));
+  const ready = rows.filter((row) => !taken.has(row.id) && !blockers(quiz, row).length);
   const dates = schedule(quiz, ready.map(entryOf), soonest, { check: fits });
-  const dateOf = new Map(ready.map((row, n) => [row.id, dates[n]]));
+  const dateOf = new Map([...ready.map((row, n) => [row.id, dates[n]]), ...rows.filter(coming).map((row) => [row.id, taken.get(row.id)])]);
 
-  const days = rows.map((row) => ({
-    id: row.id, at: row.at, name: row.name, remark: row.remark, slots: row.slots, notes: row.notes, pack: pack(row),
-    played: played.get(row.player) ?? 0,
-    same: rows.filter((other) => other.player === row.player && other.id !== row.id).map((other) => other.id),
-    outside: outsideOf(quiz, row), hidden: row.name !== plain(row.name), date: dateOf.get(row.id) ?? null,
-  }));
+  const days = rows.map((row) => {
+    const entry = coming(row) ? doc.days[taken.get(row.id)] : null;
+    const shown = entry ? { ...row, name: entry.by ?? '', slots: entry.slots } : row;
+    return {
+      id: row.id, at: row.at, name: shown.name, remark: row.remark, slots: shown.slots, notes: row.notes, pack: pack(shown),
+      played: played.get(row.player) ?? 0,
+      same: rows.filter((other) => other.player === row.player && other.id !== row.id).map((other) => other.id),
+      outside: entry ? [] : outsideOf(quiz, row), hidden: shown.name !== plain(shown.name), date: dateOf.get(row.id) ?? null,
+      taken: Boolean(entry), edited: Boolean(entry) && JSON.stringify(entryOf(row)) !== JSON.stringify({ by: entry.by ?? null, sent: entry.sent, slots: entry.slots }),
+    };
+  }).sort((a, b) => (a.date ?? '9').localeCompare(b.date ?? '9') || a.id - b.id);
   const scheduled = Object.entries(doc.days).map(([day, entry]) => ({ day, by: entry.by ?? null, sent: entry.sent ?? null }));
   writeFileSync(REVIEW, `${JSON.stringify({ today, soonest, apart: APART, scheduled, days }, null, 2)}\n`);
 
   if (!days.length) console.log('No days are waiting.');
-  for (const [n, day] of days.entries()) {
+  const rowOf = new Map(rows.map((row) => [row.id, row]));
+  for (const day of days) {
     console.log(`#${day.id}  ${when(day.at)}  ${plain(day.name) || '(no name)'}  played ${day.played} days${day.same.length ? `  same player as ${day.same.map((id) => `#${id}`).join(', ')}` : ''}`);
     if (day.remark) console.log(`  "${plain(day.remark)}"`);
     for (const note of day.notes) console.log(`  ${WHAT[note.what]}: ${plain(note.target)}${note.text ? `: ${plain(note.text)}` : ''}`);
-    const blocked = blockers(quiz, rows[n]);
-    if (day.date) console.log(`  suggested: ${weekday(day.date)} ${day.date}`);
+    const blocked = day.taken ? [] : blockers(quiz, rowOf.get(day.id));
+    if (day.taken) console.log(`  played on: ${weekday(day.date)} ${day.date}${day.edited ? ', changed since it was sent' : ''}`);
+    else if (day.date) console.log(`  suggested: ${weekday(day.date)} ${day.date}`);
     else console.log(`  no date: ${blocked.join('; ') || 'nothing in the next four months fits; try a date with take <id>@YYYY-MM-DD to see why'}`);
     console.log();
   }
@@ -138,8 +146,16 @@ function picked() {
   return picks;
 }
 
+async function waiting() {
+  const taken = takenIn(read(DAYS));
+  const declined = declinedIn();
+  return (await sentIn()).filter((row) => !taken.has(row.id) && !declined.has(row.id)).map((row) => ({ id: row.id, day: null }));
+}
+
 async function take() {
-  const picks = picked();
+  const all = rest.length === 1 && rest[0] === 'all';
+  let picks = all ? await waiting() : picked();
+  if (!picks.length) return console.log('No days are waiting.');
   const today = dateKey();
   const soonest = laterKey(today, LEAD);
   for (const { id, day } of picks) {
@@ -158,7 +174,10 @@ async function take() {
   try {
     const before = buildQuiz(join(dir, 'before.json'));
     const blocked = picks.flatMap(({ id }) => blockers(before, rows.get(id)).map((b) => `#${id}: ${b}`));
-    if (blocked.length) throw new Error(blocked.join('\n'));
+    if (blocked.length && !all) throw new Error(blocked.join('\n'));
+    for (const line of blocked) console.log(`left waiting, ${line}`);
+    picks = picks.filter(({ id }) => !blockers(before, rows.get(id)).length);
+    if (!picks.length) return console.log('No day waiting can be played yet.');
     const pins = pin(before, read(PLAYED).days, today);
 
     const dated = picks.filter((p) => p.day).map((p) => ({ day: p.day, entry: entryOf(rows.get(p.id)), label: `#${p.id}` }));

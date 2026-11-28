@@ -1,7 +1,6 @@
 import { lasting, laterKey, settled } from '/daily.mjs';
 import { FOOD_MOST, GROUP_NAMES, TYPE_NAMES, WHAT, assemble, flags, typical } from '/bygg/handmade.mjs';
 
-const KEY = 'malmodle-review';
 const el = (id) => document.getElementById(id);
 const make = (tag, props = {}, ...children) => {
   const node = Object.assign(document.createElement(tag), props);
@@ -36,22 +35,12 @@ function start() {
   const others = new Map(settled((all?.items ?? []).filter((it) => !inGame.has(it.name))).map((it) => [it.name, it]));
   const find = ({ target, at }) => (at ? null : others.get(target) ?? null);
 
-  const saved = JSON.parse(localStorage.getItem(KEY) ?? '{}');
-  const blocked = (d) => d.outside.length > 0 || d.hidden;
-  const state = new Map(review.days.map((d) => {
-    const s = saved[d.id] ?? {};
-    const date = s.date && s.date !== s.was ? s.date : d.date ?? '';
-    const choice = blocked(d) && s.choice === 'take' ? 'wait' : s.choice ?? 'wait';
-    return [d.id, { choice, date, was: d.date ?? '' }];
-  }));
-  const save = () => localStorage.setItem(KEY, JSON.stringify(Object.fromEntries(state)));
+  const tried = review.days.filter((d) => d.date && !d.taken).map((d) => ['dag', `${d.date}.${d.pack}`]);
 
   const behind = Math.round((Date.now() - Date.parse(`${review.today}T00:00:00`)) / 86400000);
   fill(el('summary'),
-    `${plural(review.days.length, 'dag väntar', 'dagar väntar')} · hämtade ${dayName(review.today)} · första möjliga datum ${dayName(review.soonest)} · förslagen är fredagar, minst ${review.apart} dagar från varandra och från dagarna som redan är inlagda.`,
+    `${plural(review.days.filter((d) => !d.taken).length, 'dag väntar', 'dagar väntar')} · ${plural(review.days.filter((d) => d.taken).length, 'är inlagd', 'är inlagda')} · hämtade ${dayName(review.today)} · varje dag får första lediga fredag från ${dayName(review.soonest)}`,
     behind >= 1 ? make('span', { className: 'warn', textContent: ` Hämtat för ${plural(behind, 'dag', 'dagar')} sedan: kör review igen.` }) : null,
-    review.scheduled.length ? make('br') : null,
-    review.scheduled.length ? `Redan inlagda: ${review.scheduled.map((s) => `${dayName(s.day)}, ${s.by ?? 'en spelare'}${s.sent ? ` (#${s.sent})` : ''}`).join(' · ')}` : null,
   );
 
   const cards = review.days.map((d) => {
@@ -72,26 +61,10 @@ function start() {
     const why = [];
     if (d.outside.length) why.push(`Kan inte tas med än: ${d.outside.join(', ')} finns inte i spelet.`);
     if (d.hidden) why.push('Kan inte tas med: namnet har tecken som inte syns.');
-    if (!why.length && !d.date) why.push('Inget datum de närmaste fyra månaderna passar. Välj ett själv, så säger take varför.');
+    if (!why.length && !d.date) why.push('Inget datum de närmaste fyra månaderna passar.');
 
-    const buttons = [['take', 'Ta med'], ['wait', 'Vänta'], ['decline', 'Avböj']].map(([choice, text]) => {
-      const button = make('button', { type: 'button', textContent: text, disabled: choice === 'take' && blocked(d) });
-      button.dataset.choice = choice;
-      button.addEventListener('click', () => {
-        state.get(d.id).choice = choice;
-        save();
-        refresh();
-      });
-      return button;
-    });
-    const date = make('input', { type: 'date', value: state.get(d.id).date, min: review.soonest, disabled: blocked(d) });
-    date.addEventListener('change', () => {
-      state.get(d.id).date = date.value;
-      save();
-      refresh();
-    });
-    const note = make('span', { className: 'state soft' });
-    const week = make('a', { textContent: 'Dagarna runt', target: '_blank' });
+    const state = d.taken ? `Inlagd: ${dayName(d.date)}${d.edited ? ', ändrad sedan den skickades in' : ''}` : d.date ? `Förslag: ${dayName(d.date)}` : 'Väntar';
+    const week = d.date ? make('a', { textContent: 'Dagarna runt', target: '_blank', href: `/dev/week.html?${new URLSearchParams([['from', laterKey(d.date, -3)], ['days', 10], ...tried])}` }) : null;
     const builder = make('a', { textContent: 'Öppna i byggaren', href: `/bygg/#dag=${d.pack}`, target: '_blank' });
 
     const root = make('article', { className: 'day' },
@@ -107,62 +80,15 @@ function start() {
       make('p', { className: 'usual soft', textContent: odd.length ? `Ovanligt: ${odd.join(' · ')}.` : 'Som en vanlig dag.' }),
       ...why.map((text) => make('p', { className: 'blocked warn', textContent: text })),
       make('div', { className: 'decide' },
-        make('div', { className: 'choices' }, ...buttons),
-        make('label', {}, 'Datum', date),
-        note,
+        make('strong', { textContent: state }),
         make('span', { className: 'links' }, builder, week),
       ),
     );
-    return { d, root, buttons, date, note, week };
+    root.dataset.choice = d.taken ? 'take' : 'wait';
+    return root;
   });
-  el('days').replaceChildren(...cards.map((c) => c.root));
-
-  function refresh() {
-    const taking = cards.filter((c) => state.get(c.d.id).choice === 'take');
-    for (const c of cards) {
-      const s = state.get(c.d.id);
-      c.root.dataset.choice = s.choice;
-      for (const b of c.buttons) b.setAttribute('aria-pressed', String(b.dataset.choice === s.choice));
-      c.note.textContent = !s.date ? 'take väljer ett datum' : s.date === c.d.date ? `förslag, ${dayName(s.date)}` : `eget datum, ${dayName(s.date)}`;
-      c.note.classList.toggle('warn', Boolean(s.date && s.date < review.soonest));
-      const shown = s.date || c.d.date;
-      c.week.hidden = !shown;
-      if (shown) {
-        const tried = [...taking.filter((t) => t !== c && state.get(t.d.id).date).map((t) => [state.get(t.d.id).date, t.d.pack]), [shown, c.d.pack]];
-        c.week.href = `/dev/week.html?${new URLSearchParams([['from', laterKey(shown, -3)], ['days', 10], ...tried.map(([day, pack]) => ['dag', `${day}.${pack}`])])}`;
-      }
-    }
-
-    const count = (choice) => cards.filter((c) => state.get(c.d.id).choice === choice).length;
-    const dates = taking.map((c) => state.get(c.d.id).date).filter(Boolean);
-    const twice = [...new Set(dates.filter((day, n) => dates.indexOf(day) !== n))];
-    const early = dates.filter((day) => day < review.soonest);
-    fill(el('tally'),
-      `Ta med ${count('take')} · Vänta ${count('wait')} · Avböj ${count('decline')}`,
-      twice.length ? make('span', { className: 'warn', textContent: ` · två dagar på ${twice.map(dayName).join(', ')}` }) : null,
-      early.length ? make('span', { className: 'warn', textContent: ` · före ${dayName(review.soonest)} går inte` }) : null,
-    );
-
-    const take = taking.map((c) => (state.get(c.d.id).date ? `${c.d.id}@${state.get(c.d.id).date}` : `${c.d.id}`));
-    const decline = cards.filter((c) => state.get(c.d.id).choice === 'decline').map((c) => c.d.id);
-    const lines = [
-      take.length && [`node scripts/handmade.mjs take ${take.join(' ')}`, null],
-      decline.length && [`node scripts/handmade.mjs decline ${decline.join(' ')}`, null],
-    ].filter(Boolean);
-    el('commands').replaceChildren(...(lines.length ? lines.map(([text, warning]) => {
-      const copy = make('button', { type: 'button', textContent: 'Kopiera' });
-      copy.addEventListener('click', () => navigator.clipboard.writeText(text).then(() => {
-        copy.textContent = 'Kopierat';
-        setTimeout(() => { copy.textContent = 'Kopiera'; }, 1500);
-      }));
-      return make('div', { className: 'command' }, make('code', { textContent: text }), warning ? make('span', { className: 'soft', textContent: warning }) : null, copy);
-    }) : [make('p', { className: 'soft', textContent: 'Välj Ta med eller Avböj för en dag, så står kommandot här.' })]));
-  }
-  refresh();
+  el('days').replaceChildren(...cards);
 }
 
 if (review && quiz) start();
-else {
-  el('summary').textContent = 'Kör node scripts/handmade.mjs review först, och ladda om sidan.';
-  document.querySelector('footer').hidden = true;
-}
+else el('summary').textContent = 'Kör node scripts/handmade.mjs review först, och ladda om sidan.';

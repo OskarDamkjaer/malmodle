@@ -52,7 +52,8 @@ version.
 
 ```
 node scripts/handmade.mjs review            # the days waiting, each with a suggested date, into build/review.json
-node scripts/handmade.mjs take 12 14        # play days 12 and 14 on the first Fridays that fit
+node scripts/handmade.mjs take all          # play every waiting day that can be, each on the first free Friday that fits
+node scripts/handmade.mjs take 12 14        # or only days 12 and 14
 node scripts/handmade.mjs take 12@2027-01-05  # or on that date, if it fits
 node scripts/handmade.mjs decline 13        # leave day 13 out from now on
 node scripts/handmade.mjs review --db file.db  # the same from serve.mjs's database instead of D1
@@ -67,8 +68,9 @@ showed it. What it asks or shows may also be asked on the days around it.
 `review` suggests a Friday for each waiting day, in the order they were sent,
 each at least a week from every other made day, and writes them with
 everything else about the day to `build/review.json`, which
-`/dev/review.html` on the local server shows. There each day is taken,
-left waiting or declined, and the page gives the commands. Nothing writes
+`/dev/review.html` on the local server shows, to look over. A day already
+scheduled ahead is there too, as it stands in `learn/days.json`, where its
+date, its name or a question can be changed by hand. Nothing writes
 to D1: a declined day's number goes into `learn/declined.json`. `take` checks all
 its days together the way `join.mjs` checks a batch: it pins the days
 played, and writes nothing if a played day or a day before the first date
