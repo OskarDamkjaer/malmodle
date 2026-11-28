@@ -105,17 +105,19 @@ a day that was sent in and gives it a date.
   `LIMITS.notes` suggestions, and text with characters that do not show is
   refused, so a name reads the same in the terminal as on the end screen.
   What is no good is declined in `learn/declined.json`; `handmade` keeps it.
-- **Reviewed on a page, scheduled from the command line.**
-  `scripts/handmade.mjs review` reads the days sent in that are not yet in
-  `learn/days.json`, with how many days each sender has played, looked up by
+- **Scheduled from the command line, looked over on a page.**
+  `scripts/handmade.mjs review` reads the days sent in that wait or are
+  scheduled ahead, with how many days each sender has played, looked up by
   key so `results` is never scanned, and suggests a date for each: the first
   Friday from a week ahead that fits, a week or more from every other made
   day, so each Friday can have one. A date given to `take` can be any day.
   `/dev/review.html` shows them with the name as players will see it, the
   remark, the suggestions, the questions with the builder's flags, what is
   unusual about the day, links to it in the builder and among the days
-  around its date, and Ta med, Vänta and Avböj. It gives the commands:
-  `take <id>[@date] …` checks the days together, pins the days played and
+  around its date. It chooses nothing: the owner looks, and says what to
+  change. A scheduled day is shown as it stands in `learn/days.json`, so a
+  date, a name or a question changed there by hand shows too.
+  `take all`, or `take <id>[@date] …`, checks the days together, pins the days played and
   writes them into `learn/days.json` with their number as `sent`; `decline`
   writes numbers into `learn/declined.json`. Neither writes to D1, so
   `handmade` keeps everything ever sent. The `review-days` skill walks through it to
