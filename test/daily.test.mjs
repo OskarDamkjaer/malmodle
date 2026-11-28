@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SHOWN_GAP, SOON_DAYS, SOON_SHARE, SPACED, SPLITS, dailySet, decoysOn, lasting, setId, dateKey, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
+import { DECKS, GROUP, PRACTICE, PRACTICE_SIZE, SET_SIZE, SHOWN_GAP, SOON_DAYS, SOON_SHARE, SPACED, SPLITS, dailySet, decoysOn, lasting, setId, dateKey, guestDay, hash, laterKey, plan, practiceSet, random, recall, remember, shareText, carry, arrive, square, upcoming, issue, played } from '../app/daily.mjs';
 import { MAX_SCORE, TYPES } from '../app/questions.mjs';
 import { metersBetween } from '../app/geo.mjs';
 import { fixture } from './fixture.mjs';
@@ -547,4 +547,10 @@ test('only the parts that parse are kept', () => {
   }
   const replay = stored(remember({ ...done, done: [null] }, { key, set, results: [answer(set[0], 0)], finished: false }));
   assert.equal(replay.done, undefined);
+});
+
+test('a day made by hand is a Gästfredag on a Friday and a Gästdag on any other day', () => {
+  assert.equal(guestDay('2026-12-11'), 'Gästfredag');
+  assert.equal(guestDay('2026-12-10'), 'Gästdag');
+  assert.equal(guestDay('2026-12-12'), 'Gästdag');
 });
