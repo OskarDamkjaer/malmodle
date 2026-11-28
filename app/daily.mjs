@@ -253,14 +253,25 @@ export const makeQuestion = (type, seed, target, items, decoys, avoid) => TYPES[
 function madeSet(key, slots, items, decoys) {
   const byName = new Map(items.map((it) => [it.name, it]));
   const avoid = new Set(slots.map((s) => s.target));
-  return slots.filter((s) => byName.has(s.target)).map(({ target, type, seed }) => {
+  const set = slots.filter((s) => byName.has(s.target)).map(({ target, type, seed }) => {
     const it = byName.get(target);
     const q = makeQuestion(type, seed, it, items, decoys, avoid);
     const built = q ? { type, ...q } : { type: 'point', ...TYPES.point.build({ target: it, own: () => random(seed) }) };
-    if (built.options) built.options = shuffle(built.options, random(hash(`${key}:${target}`)));
     for (const shown of [built.from, built.to]) if (shown) avoid.add(shown.name);
     return built;
   });
+  const most = Math.max(0, ...set.map((q) => q.options?.length ?? 0));
+  const places = shuffle([...Array(most).keys()], random(hash(key)));
+  const taken = new Set();
+  for (const q of set) {
+    if (!q.options) continue;
+    const fits = places.filter((p) => p < q.options.length);
+    const at = fits.find((p) => !taken.has(p)) ?? fits[0];
+    taken.add(at);
+    const rest = shuffle(q.options.filter((name) => name !== q.target.name), random(hash(`${key}:${q.target.name}`)));
+    q.options = [...rest.slice(0, at), q.target.name, ...rest.slice(at)];
+  }
+  return set;
 }
 
 function dealer(items, made) {

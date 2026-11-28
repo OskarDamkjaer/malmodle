@@ -82,7 +82,7 @@ osmium, Java and hosts the sandbox cannot reach.
   A day made by hand, under its date in `learn/days.json`, is played in place
   of the dealt one, credited to `by` and called its `title` when it has one,
   built from its targets, types and seeds the way the builder builds them,
-  with its choices in an order of its date and each target, and every deck is dealt anew the day after it, with what was
+  with each answer in a place of its own among the choices that day, and every deck is dealt anew the day after it, with what was
   asked lately at the back. It keeps from the map only what it asks itself,
   and the days before it are dealt and built as if it were not there.
   It is a Gästfredag on a Friday and a Gästdag on any other day (`guestDay`).
